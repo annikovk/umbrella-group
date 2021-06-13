@@ -22,7 +22,7 @@
     endwhile; // end of the loop.
     $posts = get_post_by_ids($ids);
 
-    if (!is_tag()) echo umbrella_draw_filter_tabs($tags_ids, $posts);
+    //if (!is_tag()) echo umbrella_draw_filter_tabs($tags_ids, $posts);
     umbrella_draw_tiles($posts, 'blogposts');
 
 

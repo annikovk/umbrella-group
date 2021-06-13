@@ -134,6 +134,7 @@ function add_custom_fonts()
 add_action('wp_enqueue_scripts', 'add_custom_fonts');
 
 require get_theme_file_path() . '/includes/custom_post_types/client.php';
+require get_theme_file_path() . '/includes/custom_post_types/akcii.php';
 require get_theme_file_path() . '/includes/draw_header_with_breadcrumbs.php';
 require get_theme_file_path() . '/includes/about_subheader.php';
 
@@ -220,107 +221,7 @@ function umbrella_draw_tiles($posts, $type)
 
 
         ?>
-        <style>
-            /** cases **/
-            .cases-tile {
-                height: 281px;
-                cursor: pointer;
-            }
-
-            @media screen and (max-width: 849px) {
-                .cases-tile {
-                / / height: 170 px;
-                }
-            }
-
-            .cases-tile:hover .cases-item-header {
-                color: #ec1d23;
-            }
-
-            .cases-tile:hover .case-item-date-and-tag {
-                opacity: 0;
-                bottom: 20%;
-                -webkit-transition: all 0.3s; /* Safari prior 6.1 */
-                transition: all 0.3s;
-            }
-
-            .cases-tile:hover .cases-excerpt {
-                opacity: 1;
-                bottom: 10%;
-                -webkit-transition: all 0.3s; /* Safari prior 6.1 */
-                transition: all 0.3s;
-            }
-
-            .cases-tile:hover .cases-item-image img {
-                -webkit-filter: unset;
-                filter: unset;
-            }
-
-            .cases-item-image img {
-                height: 100%;
-                vertical-align: top;
-                -webkit-filter: grayscale(100%);
-                filter: grayscale(100%);
-                object-fit: cover;
-            }
-
-            .cases-item-image {
-                border: 2px solid #f1f1f1;
-                position: absolute;
-                height: 100%;
-                width: 100%;
-                text-align: right;
-                right: 0;
-            }
-
-            .cases-item-image::after {
-                display: block;
-                position: absolute;
-                background-image: linear-gradient(to left, rgba(255, 255, 255, 0) 0%, #fff 60%);
-                top: 0;
-                height: 100%;
-                width: 85%;
-                content: '';
-
-            }
-
-            .case-item-date-and-tag {
-                font-size: 0.8em;
-                position: absolute;
-                left: 25px;
-                bottom: 10%;
-                font-weight: 300;
-                color: #b2b2b2;
-                -webkit-transition: all 0.3s; /* Safari prior 6.1 */
-                transition: all 0.3s;
-            }
-
-            .cases-excerpt {
-                opacity: 0;
-                bottom: 0%;
-                font-size: 0.8em;
-                line-height: 1.5em;
-                position: absolute;
-                width: 60%;
-                left: 25px;
-                -webkit-transition: all 0.3s; /* Safari prior 6.1 */
-                transition: all 0.3s;
-
-            }
-
-            .cases-item-header {
-                padding-top: 22px;
-                padding-left: 25px;
-                max-width: 60%;
-                position: relative;
-                font-size: 18px;
-                font-weight: 600;
-                line-height: 1.45;
-
-            }
-
-
-        </style>
+        <link href="/wp-content/themes/umbrella-group/css/cases-tiles.css" type="text/css" rel="stylesheet"/>
         <?php
     } elseif ($type == 'clients') {
         foreach ($posts as $post) {

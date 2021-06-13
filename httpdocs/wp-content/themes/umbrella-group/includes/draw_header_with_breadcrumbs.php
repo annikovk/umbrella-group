@@ -41,7 +41,10 @@ function get_breadcrumbs()
 
         $breadcrumb .= '<a href="' . $home . '">' . $name . '</a> ' . $delimiter . ' ';
 
-        if (is_category()) {
+        if (is_post_type_archive('akcii')){
+            $breadcrumb .= get_post_type_object(get_post_type())->label;
+        }
+        elseif (is_category()) {
             global $wp_query;
             $cat_obj = $wp_query->get_queried_object();
             $thisCat = $cat_obj->term_id;
@@ -49,9 +52,8 @@ function get_breadcrumbs()
             $parentCat = get_category($thisCat->parent);
             $breadcrumb .= '<a href="'.get_permalink( get_option( 'page_for_posts' ) ).'">'.'Блог</a> '.$delimiter.' ';
             if ($thisCat->parent != 0) echo(get_category_parents($parentCat, TRUE, ' ' . $delimiter . ' ')) ;
-
             $breadcrumb .= $currentBefore . '';
-            single_cat_title();
+            $breadcrumb .= umbrella_get_the_title();
             $breadcrumb .= '' . $currentAfter;
 
         } elseif (is_day()) {
@@ -126,9 +128,6 @@ function get_breadcrumbs()
             $breadcrumb .= __('Page') . ' ' . get_query_var('paged');
             if (is_category() || is_day() || is_month() || is_year() || is_search() || is_tag() || is_author()) $breadcrumb .= ')';
         }
-
-
-
     } elseif (is_home()){
         $breadcrumb .= '<a href="' . $home . '">' . $name . '</a> ' . $delimiter . ' ';
         $breadcrumb .= get_the_title( get_option('page_for_posts', true) );
@@ -142,11 +141,14 @@ function umbrella_get_the_title()
     if (is_category()) {
         return ''.single_cat_title('',false).'';
     } elseif (is_tag()){
-        echo '#'.single_tag_title("", false);
-
+        return '#'.single_tag_title("", false);
     } elseif (is_home()){
         return get_the_title( get_option('page_for_posts', true) );
-    } else return get_the_title();
+    } elseif (is_post_type_archive() && get_post_type_object(get_post_type())->name == "akcii") {
+        return get_post_type_object(get_post_type())->label;
+    } else {
+        return get_the_title();
+    }
 
 }
 
@@ -161,7 +163,9 @@ function umbrella_get_post_type($delimiter) {
         case "post":
             $post_link='/blog/';
             return '<a href="' .$post_link.'">Блог</a> ' . $delimiter . ' ';
-
+        case "akcii":
+            $post_link='/akcii/';
+            return '<a href="' .$post_link.'">Акции</a> ' . $delimiter . ' ';
     }
      //return $post_name . ' ' . $delimiter . ' ';
 

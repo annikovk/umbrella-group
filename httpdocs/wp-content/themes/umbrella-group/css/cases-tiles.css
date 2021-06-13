@@ -1,0 +1,105 @@
+/** cases **/
+.cases-tile {
+    height: 281px;
+    cursor: pointer;
+}
+
+.cases-tile a {
+    color: #1a1a1a;
+}
+
+@media screen and (max-width: 849px) {
+    .cases-tile {
+    / / height: 170 px;
+    }
+}
+
+.cases-tile:hover .cases-item-header,.cases-tile:hover .cases-excerpt,.cases-tile:hover .case-item-date-and-tag  {
+    color: #ec1d23;
+}
+
+/*.cases-tile .cases-excerpt {*/
+/*    opacity: 1;*/
+/*    bottom: 20%;*/
+/*    -webkit-transition: all 0.3s; !* Safari prior 6.1 *!*/
+/*    transition: all 0.3s;*/
+/*}*/
+
+.cases-tile:hover .cases-item-image img {
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%);
+}
+.cases-item-image img {
+    height: 100%;
+    vertical-align: top;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    object-fit: cover;
+    opacity: 0.3;
+}
+
+.cases-item-image {
+    border: 2px solid #f1f1f1;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    text-align: right;
+    right: 0;
+}
+
+.cases-item-image::after {
+    display: block;
+    position: absolute;
+    background-image: linear-gradient(to left, rgba(255, 255, 255, 0) 0%, #fff 60%);
+    top: 0;
+    height: 100%;
+    width: 85%;
+    content: '';
+
+}
+
+.case-item-date-and-tag {
+    font-size: 0.8em;
+    position: absolute;
+    left: 25px;
+    bottom: 10%;
+    font-weight: 300;
+    color: #1a1a1a;
+    -webkit-transition: all 0.3s; /* Safari prior 6.1 */
+    transition: all 0.3s;
+}
+
+.cases-excerpt {
+    padding-top: 16px;
+    position: absolute;
+    font-weight: normal;
+    /*opacity: 0;*/
+    font-size: 0.8em;
+    line-height: 1.5em;
+    /*bottom: 0%;*/
+    /*position: absolute;*/
+    left: 25px;
+    width: 60%;
+    -webkit-transition: all 0.3s; /* Safari prior 6.1 */
+    transition: all 0.3s;
+
+}
+
+.tile-akcii .cases-item-header {
+    font-family: "PT Serif", sans-serif;
+    max-width: unset;
+    font-size: 28px;
+}
+.cases-item-header {
+    padding-top: 22px;
+    padding-left: 25px;
+    max-width: 60%;
+    position: relative;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.45;
+    min-height: 100px;
+    -webkit-transition: all 0.3s; /* Safari prior 6.1 */
+    transition: all 0.3s;
+}
+

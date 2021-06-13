@@ -1,0 +1,48 @@
+div.akcii-price-new {
+    color: #ec1c23;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+div.akcii-price-old {
+    text-decoration: line-through;
+    font-size: 24px;
+}
+
+.akciya-card {
+    border: 2px solid #f1f1f1;;
+    padding: 20px !important;
+}
+
+ul.akciya-ooo-list a {
+    color: #1a1a1a;
+}
+
+#blog-side-contact-form.footer-form .cf7-footer-input {
+    width: 100%;
+    margin-top: 44px;
+}
+
+#blog-side-contact-form.footer-form .cf7-submit-button input {
+    width: 100%;
+}
+
+#blog-side-contact-form.footer-form .cf7-submit-button input:hover {
+    background-color: #ec1c23;
+    box-shadow: unset;
+}
+
+#blog-side-contact-form.footer-form .cf7-legal-notice {
+    width: 100%;
+}
+
+#blog-side-contact-form.footer-form {
+    width: 100%;
+    position: relative;
+    margin-top: 50px;
+    height: 100%;
+    padding: 40px;
+    border: solid 2px #f9f9f9;
+    /* border-color: red; */
+    box-shadow: unset;
+}
