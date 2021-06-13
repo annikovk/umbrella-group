@@ -1,0 +1,170 @@
+.akciya-block.prices {
+    width: 100%;
+    height: 340px;
+    position: relative;
+}
+.akciya-block.full{
+    width: 100%;
+    height: 416px;
+    position: relative;
+}
+.akciya-block.half{
+    position: relative;
+    max-width: 587px;
+    height: 480px;
+}
+
+.akciya-block .background img {
+    height: 100%;
+    vertical-align: top;
+    object-fit: cover;
+}
+.akciya-block .background {
+    border: 2px solid #f1f1f1;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    text-align: right;
+    right: 0;
+}
+
+.akciya-block.half .background::after {
+    background-image: linear-gradient(to top, rgba(46, 79, 117, 0.7) 0%, #2e4f75 50%);
+}
+.akciya-block .background::after {
+    display: block;
+    position: absolute;
+    background-image: linear-gradient(to left, rgba(46, 79, 117, 0.7) 0%, #2e4f75 60%);
+    top: 0;
+    height: 100%;
+    width: 100%;
+    content: '';
+}
+.akciya-block .inner-block{
+    position: absolute;
+    /*width: 100%;*/
+    /*height: 100%;*/
+    top: 28px;
+    bottom: 24px;
+    left: 24px;
+    right: 28px;
+    border: 1px solid white;
+}
+.akciya-block .inner-block.half{
+    top: 22px;
+    bottom: 22px;
+    left: 22px;
+    right: 22px;
+}
+.akciya-block .inner-block.prices{
+    top: 22px;
+    bottom: 22px;
+    left: 22px;
+    right: 22px;
+}
+.akciya-block .inner-block.half .inner-label {
+    font-size: 18px;
+}
+.akciya-block .inner-block.prices .inner-label {
+    font-size: 18px;
+    left: 66px;
+}
+.akciya-block .inner-label{
+    position: absolute;
+    text-transform: uppercase;
+    font-size: 24px;
+    line-height: 24px;
+    color: white;
+    top:-12px;
+    left:120px;
+    padding-right: 24px;
+    padding-left: 24px;
+    background-color: #2e4f75;
+    font-weight: bold;
+    width: auto;
+    height: auto;
+}
+.akciya-block .inner-block.prices .inner-text {
+    padding-top: 34px;
+    padding-left: 90px;
+}
+.akciya-block .inner-block.half .inner-text {
+    padding-top: 80px;
+    padding-left: 48px;
+}
+.akciya-block .inner-block .inner-text {
+    padding-left: 140px;
+    padding-top: 78px;
+}
+.akciya-block .inner-icon img{
+    height: 100%;
+    width: 100%;
+}
+.akciya-block .inner-block.prices .inner-icon {
+    top: 60px;
+    width: 120px;
+    height: 120px;
+    left: -60px;
+}
+.akciya-block .inner-block.half .inner-icon {
+    top:-44px;
+    width: 88px;
+    height: 88px;
+    left: 32px;
+}
+.akciya-block .inner-icon {
+    position: absolute;
+    text-transform: uppercase;
+    font-size: 24px;
+    line-height: 24px;
+    color: white;
+    top:90px;
+    left: -90px;
+    font-weight: bold;
+    width: 180px;
+    height: 180px;
+}
+.akciya-block .inner-block.half .excerpt {
+    max-width: 100%;
+}
+.akciya-block .excerpt {
+    max-width: 60%;
+    padding-top: 20px;
+    color: white;
+}
+.akciya-block .date{
+    padding-right: 48px;
+}
+.akciya-block .inner-block.half .date{
+    padding-right: unset;
+    padding-bottom: 48px;
+}
+.akciya-block .inner-block.prices .date-and-button{
+    padding-top: 16px;
+}
+.akciya-block .inner-block.half .date-and-button{
+    padding-top: 8px;
+    flex-direction: column;
+}
+.akciya-block .date-and-button{
+    display: flex;
+    padding-top: 32px;
+    color: white;
+    font-weight: bold;
+    align-items:baseline;
+}
+
+.akciya-block .inner-block.half .title{
+    font-size: 28px;
+    max-width: 100%;
+}
+.akciya-block .inner-block .title {
+    font-family: "PT Serif", sans-serif;
+    color: white;
+    max-width: 60%;
+    position: relative;
+    font-size: 32px;
+    font-weight: 600;
+    -webkit-transition: all 0.3s; /* Safari prior 6.1 */
+    transition: all 0.3s;
+}

@@ -137,6 +137,7 @@ require get_theme_file_path() . '/includes/custom_post_types/client.php';
 require get_theme_file_path() . '/includes/custom_post_types/akcii.php';
 require get_theme_file_path() . '/includes/draw_header_with_breadcrumbs.php';
 require get_theme_file_path() . '/includes/about_subheader.php';
+require get_theme_file_path() . '/template-parts/shortcodes/akcii.php';
 
 
 function umbrella_draw_tiles($posts, $type)
