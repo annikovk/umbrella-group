@@ -1,0 +1,108 @@
+<link href="/wp-content/themes/umbrella-group/includes/webinar/style.css" type="text/css" rel="stylesheet"/>
+<div class="webinar-container">
+
+    <div class="frm-register-participant-error"></div>
+    <form id="frm-register-participant">
+        <div class="form-heading"></div>
+        <div class="form-row">
+            <div>
+                <input class="form-input" type="text" name="surname" placeholder="Фамилия"/>
+                <div class="error-description">Фамилия не может быть пустой</div>
+                <input class="form-input" type="text" name="name" placeholder="Имя"/>
+                <div class="error-description">Имя не может быть пустым</div>
+                <input class="form-input" type="text" name="patronymic" placeholder="Отчество"/>
+            </div>
+            <div class="form-row-phone">
+                <div class="checkable-field">
+                    <input type="tel" id="frm-register-participant-number"
+                           class="form-input form-input-phone" placeholder="Телефон" inputmode="tel" name="number">
+                    <div class="error-description">Введите свой номер телефона</div>
+                </div>
+                <div>
+                    <input type="button" class="btnSubmit btnSubmit-phone" value="Отправить код" onClick="sendOTP();">
+                </div>
+            </div>
+            <div class="form-row-verification-code">
+                <div>
+                    <input data-inputmask="'mask': '999999'" type="text" class="form-input form-input-verification-code"
+                           id="frm-register-verification-code" placeholder="">
+                    <div class="error-description">Введите шестизначный код из смс</div>
+                </div>
+                <div>
+                    <input type="button" class="btnSubmit btnSubmit-verification-code" value="Проверить код"
+                           onClick="verifyOTP();">
+                </div>
+            </div>
+            <div class="checkable-field">
+                <input class="form-input" type="text" name="email" placeholder="E-mail"/>
+                <div class="error-description">Введите электронную почту</div>
+            </div>
+            <div class="company-fields">
+                <input class="form-input" type="text" name="company_name" placeholder="Название компании"/>
+                <div class="error-description">Введите название вашей компании (10 или 12 цифр)</div>
+                <input class="form-input" type="text" name="inn" placeholder="ИНН"/>
+                <div class="error-description">Введите ИНН вашей компании</div>
+            </div>
+            <a href="/learning/financial-literacy-improvement/instructions/" target="_blank"><input type="button" class="btnSubmit" value="Заполнить заявку" onClick="openAplicationForm();"/></a>
+            <input class="form-input required" type="checkbox" name="accept-terms"/><span style="font-size: 16px">Я согласен с <a href="/politika-konfidentsialnosti/" target="_blank">условиями обработки персональных данных</a></span><br/>
+            <input class="form-input required" type="checkbox" name="download-application-form"/><span style="font-size: 16px">Я скачал заявку для заполнения по <a href="/wp-content/uploads/zayavka_na_seminar_18feb.docx">ссылке</a></span><br/>
+            <input class="form-input required" type="checkbox" name="read-instructions"/><span style="font-size: 16px">Я прочел инструкцию к заявке по <a href="/learning/financial-literacy-improvement/instructions/" target="_blank">ссылке</a></span><br/>
+            <input type="button" class="btnSubmit btnSubmit-form" value="Зарегистрироваться" onClick="submitRegistrationForm();">
+            <input style="display: none;" type="text" name="webinar_title" value="_title_" disabled/>
+            <input style="display: none;" type="text" name="webinar_date" value="_date_" disabled/>
+            <input style="display: none;" type="text" name="webinar_link" value="_link_" disabled/>
+        </div>
+        <div class="form-response">
+            <p>Спасибо за регистрацию!</p>
+            <p>Информацию об интенсиве Вы можете посмотреть на <a href="_link_">странице пресс-релиза</a></p>
+            <p>Мы так же продублировали ссылку на вашу почту, чтобы вы смогли ознакомиться с ней позже.</p>
+        </div>
+    </form>
+</div>
+<script src="/wp-content/themes/umbrella-group/includes/webinar/verification.js"></script>
+<script src="/wp-content/themes/umbrella-group/includes/webinar/jquery.inputmask.min.js"></script>
+<script>
+    function openAplicationForm(){
+        debugger;
+        jQuery("input[name='download-application-form']").prop("checked", true);
+        jQuery("input[name='read-instructions']").prop("checked", true);
+    }
+    jQuery(document).ready(function () {
+        var btn = jQuery(".btnSubmit-form");
+        btn.prop("disabled", true);
+        btn.css("background-color", "gray");
+        jQuery("#frm-register-participant input[type='checkbox'].required").change(function () {
+            var checkboxes = jQuery("#frm-register-participant input[type='checkbox'].required");
+            if (checkboxes.is(":not(:checked)")) {
+                btn.prop("disabled", true);
+                btn.css("background-color", "gray");
+            } else {
+                btn.prop("disabled", false);
+                btn.css("background-color", "#1a1a1a");
+            }
+        });
+        var verification_code = jQuery("#frm-register-participant .form-input-verification-code");
+        var btnSubmitNumber = jQuery(".btnSubmit-phone");
+        var number = jQuery("#frm-register-participant input[name='number']");
+        var email = jQuery("#frm-register-participant input[name='email']");
+        var inn = jQuery("#frm-register-participant input[name='inn']");
+        verification_code.inputmask({mask: "999999", showMaskOnFocus: false, showMaskOnHover: false});
+        number.inputmask({mask: "+7 (999) 999-99-99", showMaskOnFocus: false, showMaskOnHover: false});
+        email.inputmask({alias: "email", showMaskOnFocus: false, showMaskOnHover: false});
+        inn.inputmask({mask: "9{10,12}", showMaskOnFocus: false, showMaskOnHover: false});
+
+        verification_code.keypress(function (){
+            btnSubmitNumber.hide();
+            number.parent().css('width','100%');
+            btnSubmitNumber.parent().css('width','0%');
+            if (verification_code.inputmask("isComplete")) {
+                verifyOTP();
+            }
+            // alert("keyup");
+        })
+
+
+
+
+    });
+</script>

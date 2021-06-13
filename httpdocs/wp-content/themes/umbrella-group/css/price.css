@@ -1,0 +1,138 @@
+.price-content h2.price-header {
+    padding-top: 86px;
+}
+#side-menu {
+    list-style: none;
+}
+.accordion-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.accordion-title .accordion-subtitle {
+    padding-right: 16px;
+    min-width: 20%;
+    max-width: 40%;
+    text-align: right;
+}
+.price-navigation li.active a {
+    border-bottom: 3px solid red;
+    color: #333;
+}
+
+.price-navigation a:active {
+    border-bottom: 2px solid red;
+}
+.price-navigation>.col-inner {
+    position: sticky;
+    top: 300px;
+}
+.price-navigation li>a {
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.price-navigation {
+    margin: 40px 0 0 -22px;
+}
+.price-navigation li+li {
+    border: unset;
+}
+
+.price-content table {
+    font-size: 14px;
+}
+.accordion-inner a.button {
+    width: 156px;
+}
+
+.accordion-item {
+    position: relative;
+}
+.accordion .toggle {
+    left: unset;
+    top: unset;
+    /*display: flex;*/
+    position: absolute;
+    bottom: 24px;
+    padding: 0;
+    margin: 0;
+    right: 0px;
+    font-size: 1.3em;
+    /*height: 100%;*/
+}
+.accordion .active .toggle {
+    bottom:8px;
+    top: unset;
+}
+.accordion .toggle.is-open {
+    color: #ec1b24;
+    transform: rotate(
+            -180deg
+    );
+}
+.accordion .toggle:hover {
+    color: #ec1b24;
+}
+
+@media screen and (max-width: 849px) {
+    .price-content h2.price-header {
+        padding-top: 56px;
+    }
+    .accordion .toggle {
+        bottom: 8px;
+    }
+    .accordion .active .toggle {
+        bottom:8px;
+        top: unset;
+    }
+
+    .row .section {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    header.entry-header{
+        padding-bottom: 10px !important;
+    }
+    .accordion-title-title {
+        min-width: 100%;
+        font-size: 18px;
+    }
+
+    .accordion-title{
+        flex-wrap: wrap;
+    }
+    .accordion-title .accordion-subtitle {
+        font-size: 18px;
+        padding-right: unset;
+        padding-top: 16px;
+        min-width: 100%;
+        text-align: left;
+        font-weight: bolder;
+
+    }
+    .price-navigation {
+        margin: 0;
+    }
+
+    #side-menu a {
+        text-decoration: underline;
+        color: #333;
+    }
+    .price-navigation #side-menu li.active a {
+        text-decoration: unset;
+        border-bottom: 3px solid red;
+        color: #333;
+    }
+
+    .accordion-title, .accordion-title.active {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .accordion-inner {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+}

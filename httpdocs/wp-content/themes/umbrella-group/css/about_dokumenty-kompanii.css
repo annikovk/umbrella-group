@@ -1,0 +1,41 @@
+.documents-tiles:hover {
+    color: #ec1c23;
+}
+.documents-tiles img {
+    height: 281px;
+    object-fit: contain;
+}
+.documents-tiles {
+    display: flex;
+    cursor: pointer;
+}
+.documents-image {
+    overflow: hidden;
+}
+.document-title {
+    position: absolute;
+    top: 12px;
+    font-weight: bold;
+}
+.document-description {
+    padding-left: 24px;
+    display: block;
+}
+.document-date {
+    position: absolute;
+    bottom: 12px;
+}
+@media screen and (max-width: 849px) {
+    .documents-tiles img {
+        height: 140px;
+    }
+    .document-description {
+        padding-left: 6px;
+    }
+    .document-title {
+        top: 6px;
+    }
+    .document-date {
+        bottom: 6px;
+    }
+}
