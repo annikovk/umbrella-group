@@ -18,12 +18,7 @@ if(flatsome_option('pages_template') != 'default') {
 
         <?php
         global $post;     // if outside the loop
-
         $page_id  = get_queried_object_id(); // Get current page id
-
-
-
-
         $page =  get_queried_object();
         $parentID = $page->post_parent; // Get current page parent id
         $args = array(
@@ -34,7 +29,7 @@ if(flatsome_option('pages_template') != 'default') {
         $parentParentPages = get_pages($args);
         $parentParentPagesID = $parentParentPages[0]->post_parent;
 
-        if (!in_array($parentID, array(26, 28, 32, 30, 34)) && !in_array($parentParentPagesID, array(26, 28, 32, 30, 34))) {
+        if (!in_array($parentID, array(26, 28, 32, 30, 34)) && !in_array($parentParentPagesID, array(26, 28, 32, 30, 34)) && (!is_front_page() || is_paged())) {
             echo umbrella_draw_header_with_breadcrumbs();
         } ?>
 

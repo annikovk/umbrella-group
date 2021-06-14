@@ -3,6 +3,7 @@
     --additiona-seo-color: #2e4f75;
     --secondary-color: #ec1c23;
 }
+
 .cat_img-block {
     display: flex;
 }
@@ -64,6 +65,23 @@ body {
     font-family: Inter, sans-serif;
     font-size: 18px;
     font-weight: 400;
+}
+
+.umbrella-header-and-breadcrumbs .header {
+    text-rendering: optimizeLegibility;
+    font-weight: 600;
+    font-size: 40px;
+    padding-top: 8px;
+}
+
+.umbrella-header-and-breadcrumbs .breadcrumbs {
+    font-weight: 300;
+}
+
+.umbrella-header-and-breadcrumbs {
+    padding-top: 42px;
+    padding-bottom: 30px;
+    max-width: 1240px;
 }
 
 .header-main .header-nav.nav > li > a {
@@ -502,7 +520,6 @@ p.feedback-subheader-right a {
 }
 
 
-
 .accordion-title span {
     display: table-cell;
     width: 40%;
@@ -595,6 +612,7 @@ div.header-phone-top-right a, div.header-mail-top-right > a {
     position: relative;
     display: inline-block;
 }
+
 #umbrella-menu-button {
     cursor: pointer;
     position: absolute;
@@ -613,6 +631,7 @@ div.header-phone-top-right a, div.header-mail-top-right > a {
     background-size: 0% 100%;
     transition: background-size .2s, color .2s;
 }
+
 #umbrella-menu-button:hover {
     background-size: 100% 100%;
 }
@@ -672,17 +691,19 @@ div.wpcf7-validation-errors:before {
     margin: 0;
 }
 
-@media screen and (min-width: 540px){
+@media screen and (min-width: 540px) {
     footer .wpcf7-form {
         width: 384px;
         margin-top: 0px;
         margin-bottom: -80px;
         height: 468px;
     }
+
     .footer-form {
         position: absolute;
     }
 }
+
 .footer-form {
     padding-top: 56px;
     height: 528px;
@@ -820,6 +841,7 @@ p.footer-sub-text {
     line-height: 1.45em;
     color: #b2b2b2;
 }
+
 .title-p2 {
     font-weight: 300;
     line-height: 0.5em;
@@ -831,11 +853,13 @@ p.footer-sub-text {
 button[type="submit"], .button.wc-forward:not(.checkout):not(.checkout-button), .button.submit-button, .button.primary:not(.is-outline), input[type='submit']:not(.is-form), .slider-nav-circle .flickity-prev-next-button:hover .arrow, .button.primary:not(.is-outline), input[type='submit'].primary, input[type='submit'].primary, input[type='reset'].button, input[type='button'].primary, .badge-inner {
     background-color: var(--secondary-color);
 }
+
 .white.button.is-outline, input[type='submit'].is-outline, input[type='reset'].is-outline, input[type='button'].is-outline {
     /*box-shadow: 0 0 0 2px currentColor inset;*/
     /*border: unset;*/
     background-color: transparent;
 }
+
 .huge-div {
     max-width: 1310px;
     margin: 0px auto;
@@ -843,19 +867,23 @@ button[type="submit"], .button.wc-forward:not(.checkout):not(.checkout-button), 
     text-align: center;
     margin-top: 40px;
 }
+
 .micro-div {
     margin: 10px;
     display: inline-grid;
     width: 160px;
 }
+
 .content-img {
     max-width: none;
     width: 65px;
     margin-left: 47px;
 }
+
 .moonwalk {
     margin-top: -13px;
 }
+
 .moonwalk-p {
     margin-top: -35px;
 }
@@ -863,6 +891,7 @@ button[type="submit"], .button.wc-forward:not(.checkout):not(.checkout-button), 
 .div-for-arrow {
     display: inline-grid;
 }
+
 .arrows {
     max-width: none;
     width: 40px;
