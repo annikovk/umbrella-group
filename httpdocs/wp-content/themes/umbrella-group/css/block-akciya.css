@@ -42,8 +42,6 @@
 }
 .akciya-block .inner-block{
     position: absolute;
-    /*width: 100%;*/
-    /*height: 100%;*/
     top: 28px;
     bottom: 24px;
     left: 24px;
@@ -167,4 +165,56 @@
     font-weight: 600;
     -webkit-transition: all 0.3s; /* Safari prior 6.1 */
     transition: all 0.3s;
+}
+@media screen and (max-width: 849px) {
+    .akciya-block .background::after {
+        background-image: linear-gradient(to top, rgba(46, 79, 117, 0.7) 0%, #2e4f75 50%);
+    }
+    .akciya-block .inner-icon {
+        height: 0;
+        top:-44px;
+        width: 88px;
+        left: 32px;
+    }
+    .akciya-block .inner-block .inner-text {
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-top: 24px;
+    }
+    .akciya-block .inner-block .title{
+        font-size: 28px;
+        max-width: 100%;
+    }
+    .akciya-block .excerpt {
+        max-width: 100%;
+        font-size: 18px;
+    }
+    .akciya-block .inner-block{
+        position: relative;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border: unset;
+    }
+    .akciya-block.full{
+        height: unset;
+    }
+    .akciya-block .inner-label{
+        font-size: 18px;
+        position: relative;
+        top:0;
+        background-color: unset;
+        padding-top: 64px;
+    }
+    .akciya-block .date-and-button .button{
+        margin-top: 50px;
+        margin-bottom: 70px;
+        width: 100%;
+
+    }
+    .akciya-block .date-and-button {
+        flex-direction: column;
+        padding-top: 8px;
+    }
 }
