@@ -8,20 +8,24 @@
     .feedback-image {
         position: unset;
     }
+
     h2 {
         font-size: 34px;
         line-height: 1.25;
     }
+
     h1 {
         font-size: 34px;
         line-height: 1.25;
     }
+
     .feedback-subheader-right {
         display: contents;
         white-space: nowrap;
         text-align: right;
         width: 20%
     }
+
     .nav-dark .nav > li.html {
         width: 100%
     }
@@ -66,15 +70,24 @@
         line-height: 24px;
         color: #1a1a1a;
     }
+
     footer .wpcf7-form {
         margin-bottom: 0px;
     }
+
     #footer .row {
         margin-left: unset;
         margin-right: unset;
     }
-    div.table-wrapper{
-        overflow-x:auto;
+
+    div.table-wrapper {
+        overflow-x: auto;
         width: 98%;
+    }
+
+    .header-cutsom-contact p a, .header-cutsom-contact p {
+        line-height: 32px;
+        color: #1a1a1a;
+        font-weight: bold;
     }
 }
