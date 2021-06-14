@@ -4,7 +4,7 @@
     <div class="row row-main">
         <div class="large-12 col">
             <div class="col-inner">
-                <?php umbrella_draw_header_with_breadcrumbs();?>
+                <?php echo umbrella_draw_header_with_breadcrumbs();?>
                 <?php if ( have_posts() ) :
                     get_template_part( 'template-parts/posts/archive','2-col');
 

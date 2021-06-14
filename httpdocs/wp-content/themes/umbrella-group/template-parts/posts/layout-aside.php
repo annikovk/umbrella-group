@@ -12,7 +12,7 @@
 			get_template_part( 'template-parts/posts/single');
 			comments_template();
 		} else{
-            umbrella_draw_header_with_breadcrumbs();
+            echo umbrella_draw_header_with_breadcrumbs();
 
 			get_template_part( 'template-parts/posts/archive', flatsome_option('blog_style') );
 		}

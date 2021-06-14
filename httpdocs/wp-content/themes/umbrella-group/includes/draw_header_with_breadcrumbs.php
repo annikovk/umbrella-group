@@ -9,21 +9,25 @@ add_shortcode('print_breadcrumbs', 'print_breadcrumbs_shortcode');
 
 function umbrella_draw_header_with_breadcrumbs()
 {
-    if (get_theme_mod('default_title', 0) && (!is_front_page() || is_paged())) { ?>
+    if (get_theme_mod('default_title', 0) && (!is_front_page() || is_paged())) {
+        $breadcrumbs = get_breadcrumbs();
+        $title = umbrella_get_the_title();
+        $html=<<<EOHTML
         <header class="entry-header">
             <div class="page-header-wrapper">
                 <div class="page-title light simple-title">
                     <div class="page-title-inner container align-bottom">
-                        <?php echo get_breadcrumbs(); ?>
+                        $breadcrumbs
                         <div class="title-wrapper flex-col text-left medium-text-center">
-                            <h1 class="entry-title mb-0"><?php echo umbrella_get_the_title(); ?></h1>
+                            <h1 class="entry-title mb-0">$title</h1>
                         </div>
                     </div><!-- flex-row -->
                 </div><!-- .page-title -->
             </div>
         </header><!-- .entry-header -->
-
-    <?php }
+        EOHTML;
+        return $html;
+     }
 }
 
 function get_breadcrumbs()

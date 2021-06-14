@@ -1,5 +1,5 @@
 <?php
-umbrella_draw_header_with_breadcrumbs();
+echo umbrella_draw_header_with_breadcrumbs();
 
 $single_post = is_singular( 'post' );
 if ( $single_post && get_theme_mod( 'blog_single_header_meta', 1 ) ) : ?>

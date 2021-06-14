@@ -35,7 +35,7 @@ if(flatsome_option('pages_template') != 'default') {
         $parentParentPagesID = $parentParentPages[0]->post_parent;
 
         if (!in_array($parentID, array(26, 28, 32, 30, 34)) && !in_array($parentParentPagesID, array(26, 28, 32, 30, 34))) {
-            umbrella_draw_header_with_breadcrumbs();
+            echo umbrella_draw_header_with_breadcrumbs();
         } ?>
 
         <?php while (have_posts()) : the_post(); ?>
