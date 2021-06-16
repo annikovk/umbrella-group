@@ -129,7 +129,34 @@
     font-weight: bold;
 }
 @media screen and (max-width: 849px) {
-
+    .su_welcome_banner_ratings_icon_box > * {
+        max-width: 90%;
+    }
+    .su_welcome_banner_ratings_icon_box{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding-top: 50px;
+    }
+    .su_welcome_screen_ratings{
+        width: 100%;
+        padding-top: 20px;
+        background-color: #eeeeee;
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 70px;
+    }
+    .su_welcome_banner_ratings_icon{
+        width: 80%;
+        padding-bottom: 20px;
+    }
+    .su_welcome_banner_ratings_icon img{
+    }
+    .su_welcome_banner_ratings_header{
+        font-weight: bold;
+    }
     .su_welcome_banner_overlay_top {
         flex-direction: column;
     }
@@ -179,6 +206,7 @@
     }
     .su_welcome_banner_overlay_top .advantage-block-icon {
         margin-right: 8px;
+        min-width: 20px;
         width: unset;
         margin-bottom:unset ;
     }

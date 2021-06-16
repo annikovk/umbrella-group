@@ -120,6 +120,8 @@ class SU_welcome_screen
         $button = $this->get_button();
         $phone_text = $this->get_phone_text();
         $specialist_text = $this->get_specialist_text();
+        $rating1 = $this->get_ratings(1);
+        $rating2 = $this->get_ratings(2);
         $html = <<<EOHTML
         <div class="su_welcome_screen">
             <div class="su_welcome_banner">
@@ -155,10 +157,58 @@ class SU_welcome_screen
                         <div class="hide-for-medium">$button</div>
                     </div>
             </div>
+            <div class="su_welcome_screen_ratings show-for-medium">
+                <div class="su_welcome_banner_ratings_icon_box">
+                    <div class="su_welcome_banner_ratings_icon"> $rating1[0] </div>
+                    <div class="su_welcome_banner_ratings_header"> $rating1[1] </div>
+                    <div class="su_welcome_banner_ratings_subheader"> $rating1[2] </div>
+                </div>
+                <div class="su_welcome_banner_ratings_icon_box">
+                    <div class="su_welcome_banner_ratings_icon">$rating2[0]</div>
+                    <div class="su_welcome_banner_ratings_header">$rating2[1]</div>
+                    <div class="su_welcome_banner_ratings_subheader">$rating2[2]</div>
+                </div>
+            </div>
         </div>
         EOHTML;
         $html .= $this->css;
         return $html;
+    }
+
+    private function get_ratings($i)
+    {
+        $icon = '';
+        $header = '';
+        $subheader = '';
+        switch ($i) {
+            case 1:
+                $icon = 10007;
+                $header = '2 место рейтинга консалтинговых агенств Сибири, 2009-2013';
+                break;
+            case 2:
+                if (strpos($_SERVER['REQUEST_URI'], "services/audit") !== false) {
+                    $header = 'Финалист конкурса';
+                    $icon = 1861;
+                    $subheader = '«Комплексное предоставление услуг в сфере консалтинга»';
+                } else if (strpos($_SERVER['REQUEST_URI'], "/services/bukhgalterskie-uslugi") !== false) {
+                    $header = '2 место в отрасли «Налоговое право»';
+                    $icon = '/wp-content/uploads/2019/10/laurel-2.svg';
+                    $subheader = 'Деловой Квартал, Новосибирск, 2019';
+                } else if (strpos($_SERVER['REQUEST_URI'], "/services/licensing") !== false) {
+                    $header = '1 место в отрасли «Корпоративное право»';
+                    $icon = 10008;
+                    $subheader = 'рейтинг «Делового квартала», Новосибирск, 2019';
+                } else if (strpos($_SERVER['REQUEST_URI'], "/services/services-le") !== false) {
+                    $header = '1 место рейтинга юридических компаний';
+                    $icon = 10008;
+                    $subheader = 'Новосибирск, pravo.ru, 2020';
+                } else {
+                    $header = '1 место в отрасли «Корпоративное право»';
+                    $icon = 10008;
+                    $subheader = 'рейтинг «Делового квартала», Новосибирск, 2019';
+                }
+        }
+        return ['<img src="' . wp_get_attachment_image_src($icon, 'full')[0] . '"  />', $header, $subheader];
     }
 
 }
