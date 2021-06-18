@@ -1,5 +1,7 @@
 .su_welcome_screen_conditions_subheader{
+    padding-top: 8px;
     font-size: 32px;
+    line-height: 32px;
     font-weight: 700;
     font-family: "PT Serif", sans-serif;
 }

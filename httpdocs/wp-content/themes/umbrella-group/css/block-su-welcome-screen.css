@@ -124,7 +124,7 @@
 .su_welcome_banner_overlay_bottom .button span {
     font-size: 18px;
 }
-.su_welcome_banner_overlay_bottom_phone {
+.su_welcome_banner_overlay_bottom_phone a{
     color: rgba(237, 29, 35, 1);
     font-weight: bold;
 }

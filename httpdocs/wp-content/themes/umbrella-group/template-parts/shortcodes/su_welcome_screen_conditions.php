@@ -66,7 +66,7 @@ class SU_welcome_screen_conditions
 
 
         return <<<EOHTML
-               [row col_style="solid" class="su_welcome_screen_conditions"]
+               [row col_style="divided" class="su_welcome_screen_conditions"]
                 $columns
                [/row]
                $this->css

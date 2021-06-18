@@ -14,7 +14,7 @@ class SU_welcome_screen
     private $third_advantage;
     private $button_type;
     private $button_variants = ['free_consulting', 'price_calc', 'ask_question'];
-    private $phone;
+    private $phone='73833731717';
     private $phone_text;
     private $specialist_text;
 
@@ -32,7 +32,7 @@ class SU_welcome_screen
         $this->fill_variable('first_advantage', $this->first_advantage, false, 'Первое преимущество', '<strong>Бесплатная</strong> консультация онлайн');
         $this->fill_variable('second_advantage', $this->second_advantage, true, 'Второе преимущество', '\'Риски застрахованы на сумму более 50 млн рублей.\'');
         $this->fill_variable('third_advantage', $this->third_advantage, true, 'Третье преимущество', '\'Подадим документы за 7 дней\'');
-        $this->fill_variable('phone', $this->phone, true, 'Телефон', '73832021582');
+        $this->fill_variable('phone', $this->phone, false, 'Телефон', '73832021582');
         if (!(strlen($this->phone) == 11 && intval($this->phone, 10) > 70000000000)) {
             $this->err .= "<li> Формат телефона задан неверно. Используйте следующий формат: <span id='codebox'>73832021582</span></li>";
         }
@@ -93,7 +93,7 @@ class SU_welcome_screen
             substr($this->phone, 7, 2),
             substr($this->phone, 9));
         return <<<EOHTML
-            $this->phone_text <a href="tel:$this->phone"><span class="su_welcome_banner_overlay_bottom_phone">$formatted_phone</span></a>
+            $this->phone_text <span class="su_welcome_banner_overlay_bottom_phone"><a href="tel:$this->phone">$formatted_phone</a></span>
         EOHTML;
     }
 
