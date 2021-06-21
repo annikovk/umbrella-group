@@ -32,7 +32,11 @@ function akciya_block_shortcode($atts)
         $icon = wp_get_attachment_image_src($atts['icon'], 'full');
         $icon = '<img src="' . $icon[0] . '"  />';
     } else {
-        $icon = wp_get_attachment_image_src(9914, 'full');
+        $icon_id = esc_attr(get_post_meta($post->ID, 'akcii_block_icon', true));
+        if ($icon_id == "") {
+            $icon_id = 9914;
+        }
+        $icon = wp_get_attachment_image_src($icon_id, 'full');
         $icon = '<img src="' . $icon[0] . '"  />';
     }
     if (isset($atts['button_text'])) {

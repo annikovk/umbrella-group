@@ -84,6 +84,7 @@ function set_custom_edit_akcii_columns($columns)
     $columns['akcii_form_header'] = 'Заголовок формы';
     $columns['akcii_form_subheader'] = 'Подзаголовок формы';
     $columns['akcii_form_button_text'] = 'Кнопка формы';
+    $columns['akcii_block_icon'] = 'Иконка блока';
     $columns['akcii_tags'] = 'Специальные отметки';
 
     return $columns;
@@ -103,6 +104,9 @@ function custom_akcii_column($column, $post_id)
             break;
         case 'akcii_form_button_text' :
             print_r(get_post_meta($post_id, 'akcii_form_button_text', true));
+            break;
+        case 'akcii_block_icon' :
+            print_r(get_post_meta($post_id, 'akcii_block_icon', true));
             break;
         case 'akcii_tags':
             $terms = get_the_term_list($post_id, 'akcii_tags', '', ',', '');
@@ -159,6 +163,13 @@ function get_metabox_value($post)
                    name="akcii_form_button_text"
                    value="<?php echo esc_attr(get_post_meta(get_the_ID(), 'akcii_form_button_text', true)); ?>">
         </p>
+        <p class="meta-options hcf_field">
+            <label for="akcii_block_icon">Иконка блока</label>
+            <input id="akcii_block_icon"
+                   type="text"
+                   name="akcii_block_icon"
+                   value="<?php echo esc_attr(get_post_meta(get_the_ID(), 'akcii_block_icon', true)); ?>">
+        </p>
     </div>
     <?php
 }
@@ -172,6 +183,7 @@ function akcii_save_meta_box( $post_id ) {
         'akcii_form_header',
         'akcii_form_subheader',
         'akcii_form_button_text',
+        'akcii_block_icon',
     ];
     foreach ( $fields as $field ) {
         if ( array_key_exists( $field, $_POST ) ) {
@@ -180,5 +192,5 @@ function akcii_save_meta_box( $post_id ) {
     }
 }
 add_action( 'save_post', 'akcii_save_meta_box' );
-add_action('add_meta_boxes', function () { add_meta_box('akcii_form_metabox', 'Контактная форма', 'get_metabox_value', 'akcii', 'side');});
+add_action('add_meta_boxes', function () { add_meta_box('akcii_form_metabox', 'Контактная форма и блок', 'get_metabox_value', 'akcii', 'side');});
 
