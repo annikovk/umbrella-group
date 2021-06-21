@@ -66,11 +66,7 @@ function akciya_block_shortcode($atts)
     </div>
     <link href="/wp-content/themes/umbrella-group/css/block-akciya.css" type="text/css" rel="stylesheet"/>
     EOV;
-    if (is_user_logged_in()){
         return $block;
-    } else {
-        return "";
-    }
 }
 
 add_shortcode('akciya_block', 'akciya_block_shortcode');

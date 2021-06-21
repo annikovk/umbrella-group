@@ -140,7 +140,9 @@ require get_theme_file_path() . '/includes/about_subheader.php';
 require get_theme_file_path() . '/template-parts/shortcodes/akcii.php';
 require get_theme_file_path() . '/template-parts/shortcodes/su_welcome_screen.php';
 require get_theme_file_path() . '/template-parts/shortcodes/su_welcome_screen_conditions.php';
-
+// Hook : to get content with s3elected AB tests variants only
+require get_theme_file_path() . '/umbrella_filter_ab_tests.php';
+add_filter('the_content', 'umbrella_filter_ab_tests');
 
 function umbrella_draw_tiles($posts, $type)
 {
