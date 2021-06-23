@@ -25,7 +25,7 @@ function akcii_custom_post_type()
         'description' => __('Акции компании taxlab'),
         'labels' => $labels,
         'rewrite' => array('slug' => 'akcii'),
-        'supports' => array('title', 'editor', 'excerpt', 'thumbnail', 'revisions', 'custom-fields'),
+        'supports' => array('title', 'editor', 'excerpt', 'thumbnail', 'revisions'),
         'hierarchical' => false,
         'public' => true,
         'show_ui' => true,
@@ -47,33 +47,6 @@ function akcii_custom_post_type()
 }
 
 
-function register_taxonomies_for_akcii_post_type()
-{
-
-    $akcii_labels_tags = array(
-        'name' => _x('Специальные отметки', 'taxonomy general name'),
-        'singular_name' => _x('Отметка', 'taxonomy singular name'),
-        'search_items' => __('Поиск отметок'),
-        'all_items' => __('Все отметки'),
-        'edit_item' => __('Редактировать отметку'),
-        'update_item' => __('Обновить отметку'),
-        'add_new_item' => __('Добавить новую отметку'),
-        'new_item_name' => __('Новая отметка'),
-        'menu_name' => __('Специальные отметки'),
-        'not_found' => __('Отметок не найдено'),
-    );
-    $akcii_args_tags = array(
-        'hierarchical' => false,
-        'label' => 'Отметки',
-        'labels' => $akcii_labels_tags,
-    );
-    register_taxonomy('akcii_tags', array('akcii'), $akcii_args_tags);
-    register_post_meta('akcii', 'akcii_form_header', [
-        'show_in_rest' => true,
-        'single' => true,
-        'type' => 'string',
-    ]);
-}
 
 // Add the custom columns to the akcii post type:
 add_filter('manage_akcii_posts_columns', 'set_custom_edit_akcii_columns');
@@ -85,8 +58,6 @@ function set_custom_edit_akcii_columns($columns)
     $columns['akcii_form_subheader'] = 'Подзаголовок формы';
     $columns['akcii_form_button_text'] = 'Кнопка формы';
     $columns['akcii_block_icon'] = 'Иконка блока';
-    $columns['akcii_tags'] = 'Специальные отметки';
-
     return $columns;
 }
 
@@ -121,7 +92,6 @@ function custom_akcii_column($column, $post_id)
 
 
 add_action('init', 'akcii_custom_post_type');
-add_action('init', 'register_taxonomies_for_akcii_post_type');
 add_action('init', function () {
     add_ux_builder_post_type('akcii');
 });

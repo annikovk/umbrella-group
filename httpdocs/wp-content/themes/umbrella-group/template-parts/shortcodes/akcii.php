@@ -34,7 +34,7 @@ function akciya_block_shortcode($atts)
     } else {
         $icon_id = esc_attr(get_post_meta($post->ID, 'akcii_block_icon', true));
         if ($icon_id == "") {
-            $icon_id = 9914;
+            $icon_id = 10183;
         }
         $icon = wp_get_attachment_image_src($icon_id, 'full');
         $icon = '<img src="' . $icon[0] . '"  />';

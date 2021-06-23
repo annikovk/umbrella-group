@@ -225,9 +225,7 @@ screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
         <div class="header-wrapper">
             <?php
             get_template_part('template-parts/header/header', 'wrapper');
-            $page_object = get_queried_object();
-            $page_parent = $page_object->post_parent;
-            if (((isset($page_object->ID)) && ($page_object->ID == 8)) || in_array($page_parent, array(8))) {
+            if (((isset(get_queried_object()->ID)) && (get_queried_object()->ID == 8)) || in_array(get_queried_object()->post_parent, array(8))) {
                 umbrella_get_about_subheader();
             }
             ?>
