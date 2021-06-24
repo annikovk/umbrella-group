@@ -204,6 +204,8 @@ function send_webinar_email($to, $webinar_title, $webinar_date, $webinar_link)
 
     if ($webinar_link=="/learning/stay-alive-2021/"){
         $body = file_get_contents(get_theme_file_path() . '/includes/webinar/assets/html_templates/email_3dec2020.html');
+    } elseif ($webinar_link=="/learning/how-to-deal-with-taxes/") {
+        $body = file_get_contents(get_theme_file_path() . '/includes/webinar/assets/html_templates/email_14july2021.html');
     }
     else {
         $body = file_get_contents(get_theme_file_path() . '/includes/webinar/assets/html_templates/email.html');
