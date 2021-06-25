@@ -1,21 +1,21 @@
 // Cache selectors
-var topMenu = $("#side-menu"),
+var topMenu = jQuery("#side-menu"),
     topMenuHeight = topMenu.outerHeight()+250,
     // All list items
     menuItems = topMenu.find("a"),
     // Anchors corresponding to menu items
     scrollItems = menuItems.map(function(){
-        var item = $($(this).attr("href"));
+        var item = jQuery(jQuery(this).attr("href"));
         if (item.length) { return item; }
     });
 // Bind to scroll
-$(window).scroll(function(){
+jQuery(window).scroll(function(){
     // Get container scroll position
-    var fromTop = $(this).scrollTop()+topMenuHeight;
+    var fromTop = jQuery(this).scrollTop()+topMenuHeight;
 
     // Get id of current scroll item
     var cur = scrollItems.map(function(){
-        if ($(this).offset().top < fromTop)
+        if (jQuery(this).offset().top < fromTop)
             return this;
     });
     // Get the id of the current element

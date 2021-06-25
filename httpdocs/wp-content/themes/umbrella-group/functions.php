@@ -143,6 +143,12 @@ require get_theme_file_path() . '/template-parts/shortcodes/su_welcome_screen_co
 // Hook : to get content with s3elected AB tests variants only
 require get_theme_file_path() . '/umbrella_filter_ab_tests.php';
 add_filter('the_content', 'umbrella_filter_ab_tests');
+require get_theme_file_path() . '/css/css_collector.php';
+function get_umbrella_customizations(){
+    $customizations = new umbrella_customization();
+    echo $customizations->get_umbrella_custom_css().$customizations->get_umbrella_custom_scripts();
+}
+add_action('wp_footer','get_umbrella_customizations', 100);
 
 function umbrella_draw_tiles($posts, $type)
 {

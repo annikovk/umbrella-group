@@ -1,0 +1,122 @@
+/** Reasons **/
+.reasons-icon-body {
+    text-align: left;
+    font-size: 1.1em;
+    color: #333333;
+}
+
+/** feedback **/
+.feedback-row>.medium-9 {
+    padding-left: 0px;
+}
+.feedback-image img{
+    max-height: 64px;
+    width: auto;
+}
+
+
+
+.feedback-image {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    position: absolute;
+    right: 0;
+    top: 40px;
+}
+@media screen and (max-width: 849px) {
+    .feedback-image {
+        position: unset;
+    }
+}
+
+.feedback-industry {
+    font-weight: 300;
+    font-size: 0.65em;
+    color: #b2b2b2;
+}
+
+.feedback-excerpt {
+    font-size: 1.35em;
+    line-height: 1.5em;
+    position: relative;
+    width: 90%;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.feedback-item-header {
+    width: 86.55%;
+    display: table-cell;
+    font-size: 1.35em;
+    font-weight: 600;
+    line-height: 1.45;
+}
+
+/** blog **/
+
+.blog-carousel-header {
+    display: table-cell;
+    width: 100%;
+}
+.blog-carousel-item {
+    padding-left: 25px;
+    padding-top: 32px;
+    min-height: 288px;
+    cursor: pointer;
+
+}
+.blog-carousel-item:hover {
+    background-color:#ec1c23;
+}
+.blog-carousel-item:hover .blog-carousel-item-title a:hover{
+    color: #fff;
+
+}
+
+.blog-carousel-item-date {
+    font-weight: bold;
+}
+.blog-carousel-item-title {
+
+    line-height: 1.4em;
+    letter-spacing: 0.9px;
+    padding-top: 15px;
+    padding-bottom: 1em;
+}
+.blog-carousel-item:hover .blog-carousel-item-permalink {
+    bottom: 30px;
+    position: absolute;
+    opacity: 1;
+    margin-left: 0px;
+    -webkit-transition: all 0.1s;
+    transition: all 0.2s;
+}
+
+.blog-carousel-item:hover .blog-carousel-item-hashtag {
+    opacity: 0;
+    position: absolute;
+    bottom: 30px;
+    margin-left: -30px;
+    -webkit-transition: all 0.1s;
+    transition: all 0.2s;
+}
+.blog-carousel-item-hashtag {
+    bottom: 30px;
+    position: absolute;
+    opacity: 1;
+    margin-left: 0px;
+    -webkit-transition: all 0.1s;
+    transition: all 0.2s;
+}
+.blog-carousel-item-permalink {
+    opacity: 0;
+    bottom: 30px;
+    position: absolute;
+    margin-left: -30px;
+    -webkit-transition: all 0.1s;
+    transition: all 0.2s;
+}
+.blog-carousel-item-permalink a:hover {
+    color: #fff;
+    font-weight: bold;
+}
