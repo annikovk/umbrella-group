@@ -19,7 +19,7 @@ function umbrella_get_about_subheader()
 }
 
 function umbrella_get_about_menu_items(){
-    $about_pages = array(get_page(8));
+    $about_pages = array(get_post(8));
     $args = array(
         'child_of' => '8',
     );

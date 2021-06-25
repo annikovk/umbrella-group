@@ -121,7 +121,7 @@ class SU_welcome_screen
         $phone_text = $this->get_phone_text();
         $specialist_text = $this->get_specialist_text();
         $rating1 = umbrella_get_ratings('expert');
-        $rating2 = umbrella_get_ratings('');
+        $rating2 = umbrella_get_ratings();
         $html = <<<EOHTML
         <div class="su_welcome_screen">
             <div class="su_welcome_banner">
@@ -188,12 +188,15 @@ function su_welcome_screen_shortcode($atts)
 
 add_shortcode('su_welcome_screen', 'su_welcome_screen_shortcode');
 
-function umbrella_get_ratings($type)
+function umbrella_get_ratings($type='')
 {
     switch ($type) {
         case 'expert':
             $icon = '/wp-content/uploads/rating-expert-icon.png';
             $header = '2 место рейтинга консалтинговых агенств Сибири, 2009-2013';
+            break;
+        case 'expert-header':
+            $icon='/wp-content/uploads/top-reitinga-expert-header.png';
             break;
         default:
             if (strpos($_SERVER['REQUEST_URI'], "services/audit") !== false) {

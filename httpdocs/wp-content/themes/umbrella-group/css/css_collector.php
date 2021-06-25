@@ -71,7 +71,9 @@ function umbrella_add_custom_css(string $css){
     if ( false === $value ) {
         wp_cache_set( 'umbrella_custom_css', $css );
     } else if (is_array($value)) {
-        wp_cache_set('umbrella_custom_css',$value.$css);
+        $value .= $css;
+        wp_cache_set('umbrella_custom_css',$value);
+        echo($css);
     }
 }
 function umbrella_add_custom_css_files(array $file){
