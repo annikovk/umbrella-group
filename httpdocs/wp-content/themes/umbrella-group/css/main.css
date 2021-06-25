@@ -678,6 +678,7 @@ div.header-phone-top-right {
 }
 
 div.header-phone-top-right a, div.header-mail-top-right > a {
+    font-size: 0.85em;
     color: #1a1a1a;
 }
 
