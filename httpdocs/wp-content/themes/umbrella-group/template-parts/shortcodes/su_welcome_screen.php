@@ -120,8 +120,8 @@ class SU_welcome_screen
         $button = $this->get_button();
         $phone_text = $this->get_phone_text();
         $specialist_text = $this->get_specialist_text();
-        $rating1 = $this->get_ratings(1);
-        $rating2 = $this->get_ratings(2);
+        $rating1 = umbrella_get_ratings('expert');
+        $rating2 = umbrella_get_ratings('');
         $html = <<<EOHTML
         <div class="su_welcome_screen">
             <div class="su_welcome_banner">
@@ -159,14 +159,14 @@ class SU_welcome_screen
             </div>
             <div class="su_welcome_screen_ratings show-for-medium">
                 <div class="su_welcome_banner_ratings_icon_box">
-                    <div class="su_welcome_banner_ratings_icon"> $rating1[0] </div>
-                    <div class="su_welcome_banner_ratings_header"> $rating1[1] </div>
-                    <div class="su_welcome_banner_ratings_subheader"> $rating1[2] </div>
+                    <div class="su_welcome_banner_ratings_icon" style="background: url({$rating1['icon']}) no-repeat 0 0;"> </div>
+                    <div class="su_welcome_banner_ratings_header"> {$rating1['header']} </div>
+                    <div class="su_welcome_banner_ratings_subheader"> {$rating1['subheader']} </div>
                 </div>
                 <div class="su_welcome_banner_ratings_icon_box">
-                    <div class="su_welcome_banner_ratings_icon">$rating2[0]</div>
-                    <div class="su_welcome_banner_ratings_header">$rating2[1]</div>
-                    <div class="su_welcome_banner_ratings_subheader">$rating2[2]</div>
+                    <div class="su_welcome_banner_ratings_icon" style="background: url({$rating2['icon']}) no-repeat 0 0;"></div>
+                    <div class="su_welcome_banner_ratings_header">{$rating2['header']} </div>
+                    <div class="su_welcome_banner_ratings_subheader">{$rating2['subheader']}</div>
                 </div>
             </div>
         </div>
@@ -174,43 +174,6 @@ class SU_welcome_screen
         $html .= $this->css;
         return $html;
     }
-
-    private function get_ratings($i)
-    {
-        $icon = '';
-        $header = '';
-        $subheader = '';
-        switch ($i) {
-            case 1:
-                $icon = 10007;
-                $header = '2 место рейтинга консалтинговых агенств Сибири, 2009-2013';
-                break;
-            case 2:
-                if (strpos($_SERVER['REQUEST_URI'], "services/audit") !== false) {
-                    $header = 'Финалист конкурса';
-                    $icon = 1861;
-                    $subheader = '«Комплексное предоставление услуг в сфере консалтинга»';
-                } else if (strpos($_SERVER['REQUEST_URI'], "/services/bukhgalterskie-uslugi") !== false) {
-                    $header = '2 место в отрасли «Налоговое право»';
-                    $icon = '/wp-content/uploads/2019/10/laurel-2.svg';
-                    $subheader = 'Деловой Квартал, Новосибирск, 2019';
-                } else if (strpos($_SERVER['REQUEST_URI'], "/services/licensing") !== false) {
-                    $header = '1 место в отрасли «Корпоративное право»';
-                    $icon = 10008;
-                    $subheader = 'рейтинг «Делового квартала», Новосибирск, 2019';
-                } else if (strpos($_SERVER['REQUEST_URI'], "/services/services-le") !== false) {
-                    $header = '1 место рейтинга юридических компаний';
-                    $icon = 10008;
-                    $subheader = 'Новосибирск, pravo.ru, 2020';
-                } else {
-                    $header = '1 место в отрасли «Корпоративное право»';
-                    $icon = 10008;
-                    $subheader = 'рейтинг «Делового квартала», Новосибирск, 2019';
-                }
-        }
-        return ['<img src="' . wp_get_attachment_image_src($icon, 'full')[0] . '"  />', $header, $subheader];
-    }
-
 }
 
 function su_welcome_screen_shortcode($atts)
@@ -224,5 +187,38 @@ function su_welcome_screen_shortcode($atts)
 }
 
 add_shortcode('su_welcome_screen', 'su_welcome_screen_shortcode');
+
+function umbrella_get_ratings($type)
+{
+    switch ($type) {
+        case 'expert':
+            $icon = '/wp-content/uploads/rating-expert-icon.png';
+            $header = '2 место рейтинга консалтинговых агенств Сибири, 2009-2013';
+            break;
+        default:
+            if (strpos($_SERVER['REQUEST_URI'], "services/audit") !== false) {
+                $header = 'Финалист конкурса';
+                $icon = '/wp-content/uploads/2019/10/laurel-nsk.svg';
+                $subheader = '«Комплексное предоставление услуг в сфере консалтинга»';
+            } else if (strpos($_SERVER['REQUEST_URI'], "/services/bukhgalterskie-uslugi") !== false) {
+                $header = '2 место в отрасли «Налоговое право»';
+                $icon = '/wp-content/uploads/2019/10/laurel-2.svg';
+                $subheader = 'Деловой Квартал, Новосибирск, 2019';
+            } else if (strpos($_SERVER['REQUEST_URI'], "/services/licensing") !== false) {
+                $header = '1 место в отрасли «Корпоративное право»';
+                $icon = '/wp-content/uploads/2019/10/laurel-1.svg';
+                $subheader = 'рейтинг «Делового квартала», Новосибирск, 2019';
+            } else if (strpos($_SERVER['REQUEST_URI'], "/services/services-le") !== false) {
+                $header = '1 место рейтинга юридических компаний';
+                $icon = '/wp-content/uploads/2019/10/laurel-1.svg';
+                $subheader = 'Новосибирск, pravo.ru, 2020';
+            } else {
+                $header = '1 место в отрасли «Корпоративное право»';
+                $icon = '/wp-content/uploads/2019/10/laurel-1.svg';
+                $subheader = 'рейтинг «Делового квартала», Новосибирск, 2019';
+            }
+    }
+    return ['icon'=>$icon,'header'=> $header,'subheader'=> $subheader];
+}
 
 
