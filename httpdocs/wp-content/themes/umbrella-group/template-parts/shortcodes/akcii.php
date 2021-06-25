@@ -28,7 +28,7 @@ function akciya_block_shortcode($atts)
     } else {
         $excerpt = get_the_excerpt($post->ID);
     }
-    if (isset($atts['icon'])) {
+    if (isset($atts['icon']) && wp_get_attachment_image_src($atts['icon'], 'full') != false) {
         $icon = wp_get_attachment_image_src($atts['icon'], 'full');
         $icon = '<img src="' . $icon[0] . '"  />';
     } else {

@@ -24,7 +24,7 @@ if (isset($_GET['utm_medium'])) {
     $important_source = true;
     $source_array['medium'] = 'cpc';
     $source_array['source'] = 'google';
-} else if (strpos($_SERVER['HTTP_REFERER'], 'yabs.yandex') !== false) {
+} else if (isset($_SERVER['HTTP_REFERER']) && str_contains($_SERVER['HTTP_REFERER'], 'yabs.yandex')) {
     $important_source = true;
     $source_array['medium'] = 'cpc';
     $source_array['source'] = 'yandex';
