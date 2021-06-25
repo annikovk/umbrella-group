@@ -32,7 +32,7 @@ class umbrella_customization{
         $styles.=$this->get_styles_from_cache_files();
         $styles.=$this->get_umbrella_styles_from_cache();
         $styles.='</style>';
-        $styles = flatsome_minify_css($styles);
+//        $styles = flatsome_minify_css($styles);
         echo $styles;
     }
     public function get_umbrella_custom_scripts(){

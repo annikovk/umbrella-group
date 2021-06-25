@@ -2,7 +2,7 @@
 
 class SU_welcome_screen
 {
-    private $css = '<link href="/wp-content/themes/umbrella-group/css/block-su-welcome-screen.css" type="text/css" rel="stylesheet"/>';
+    private $css_file = ['/assets/css/blocks/su-welcome-screen.css'];
     public $err = "<ul style='padding: 24px;'> Неправильное использование шорткода: ";
 
     public $atts;
@@ -171,7 +171,7 @@ class SU_welcome_screen
             </div>
         </div>
         EOHTML;
-        $html .= $this->css;
+        umbrella_add_custom_css_files($this->css_file);
         return $html;
     }
 }

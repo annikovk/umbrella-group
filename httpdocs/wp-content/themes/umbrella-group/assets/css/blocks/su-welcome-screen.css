@@ -12,23 +12,27 @@
     border-radius: 0px 0px 6px 6px;
     margin-bottom: 10px;
 }
+
 .su_welcome_banner_content {
     position: relative;
     z-index: 2;
 }
+
 .su_welcome_banner_background {
-    top:0;
+    top: 0;
     left: 0;
     position: absolute;
     height: 100%;
     width: 100%;
     z-index: 1;
 }
+
 .su_welcome_banner_background img {
     height: 100%;
     width: 100%;
     object-fit: cover;
 }
+
 .su_welcome_banner {
     padding-bottom: 220px;
     position: relative;
@@ -38,6 +42,7 @@
     margin-right: auto;
     overflow: hidden;
 }
+
 .su_welcome_banner:after {
     position: absolute;
     content: '';
@@ -49,17 +54,21 @@
     opacity: 0.7;
     z-index: 1;
 }
+
 .su_welcome_screen h1.header {
     font-size: 44px;
     line-height: 1.2;
 }
-.su_welcome_banner_offer p{
+
+.su_welcome_banner_offer p {
     max-width: 60%;
 }
+
 .su_welcome_banner_offer {
     text-align: left;
     font-size: 24px;
 }
+
 .su_welcome_banner_overlay_top:after {
     content: "";
     background-color: #918b81;
@@ -71,7 +80,8 @@
     height: 2px;
     width: 90%;
 }
-.su_welcome_banner_overlay{
+
+.su_welcome_banner_overlay {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     position: relative;
     display: flex;
@@ -84,6 +94,7 @@
     margin-right: auto;
     z-index: 2;
 }
+
 .su_welcome_banner_overlay_top {
     display: flex;
     position: relative;
@@ -92,10 +103,12 @@
     padding-top: 50px !important;
     padding-bottom: 20px !important;
 }
+
 .su_welcome_banner_overlay_top .advantage-block-icon {
     width: 100%;
     margin-bottom: 24px;
 }
+
 .su_welcome_banner_overlay_top .advantage-block {
     max-width: 250px;
     text-align: center;
@@ -107,6 +120,7 @@
     height: 80px;
     margin: 0 auto;
 }
+
 .su_welcome_banner_overlay_bottom {
     padding-top: 48px;
     padding-bottom: 72px;
@@ -114,25 +128,31 @@
     min-width: 100%;
     position: relative;
 }
+
 .su_welcome_banner_overlay_bottom .button {
     margin-bottom: unset;
     margin-top: 24px;
 }
+
 .su_welcome_banner_overlay_bottom p {
     margin-bottom: unset;
 }
+
 .su_welcome_banner_overlay_bottom .button span {
     font-size: 18px;
 }
-.su_welcome_banner_overlay_bottom_phone a{
+
+.su_welcome_banner_overlay_bottom_phone a {
     color: rgba(237, 29, 35, 1);
     font-weight: bold;
 }
+
 @media screen and (max-width: 849px) {
     .su_welcome_banner_ratings_icon_box > * {
         max-width: 90%;
     }
-    .su_welcome_banner_ratings_icon_box{
+
+    .su_welcome_banner_ratings_icon_box {
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -140,7 +160,8 @@
         text-align: center;
         padding-top: 50px;
     }
-    .su_welcome_screen_ratings{
+
+    .su_welcome_screen_ratings {
         width: 100%;
         padding-top: 20px;
         background-color: #eeeeee;
@@ -152,37 +173,47 @@
         box-shadow: 0px 0px 60px rgba(0, 0, 0, 0.6);
         margin-bottom: 70px;
     }
-    .su_welcome_banner_ratings_icon{
+
+    .su_welcome_banner_ratings_icon {
         width: 80%;
         padding-bottom: 20px;
     }
-    .su_welcome_banner_ratings_icon img{
+
+    .su_welcome_banner_ratings_icon img {
     }
-    .su_welcome_banner_ratings_header{
+
+    .su_welcome_banner_ratings_header {
         font-weight: bold;
     }
+
     .su_welcome_banner_overlay_top {
         flex-direction: column;
     }
+
     .su_welcome_banner_overlay_top:after {
         content: unset;
     }
-    .su_welcome_banner_overlay{
+
+    .su_welcome_banner_overlay {
         padding-right: 15px;
         padding-left: 15px;
     }
+
     .su_welcome_banner {
         padding-bottom: 45px;
     }
+
     .su_welcome_banner_overlay_bottom {
         padding-left: 0;
         padding-right: 0;
         padding-top: unset;
         padding-bottom: 72px;
     }
+
     .su_welcome_banner_overlay_bottom p {
         margin-bottom: 1em;
     }
+
     .su_welcome_banner_overlay .button {
         top: -25px;
         margin-right: auto;
@@ -190,10 +221,12 @@
         width: 100%;
         z-index: 2;
     }
-    .su_welcome_banner_overlay{
+
+    .su_welcome_banner_overlay {
         bottom: unset;
         margin-bottom: unset;
     }
+
     .su_welcome_banner_overlay .advantage-block {
         font-size: 18px;
         text-align: left;
@@ -205,30 +238,37 @@
         width: unset;
         padding-bottom: 16px;
     }
+
     .su_welcome_banner_overlay_top .advantage-block img {
         height: 20px;
     }
+
     .su_welcome_banner_overlay_top .advantage-block-icon {
         margin-right: 8px;
         min-width: 20px;
         width: unset;
-        margin-bottom:unset ;
+        margin-bottom: unset;
     }
-    .umbrella-header-and-breadcrumbs .breadcrumbs{
+
+    .umbrella-header-and-breadcrumbs .breadcrumbs {
         height: 0;
         position: absolute;
         overflow: hidden;
     }
+
     .su_welcome_banner_offer {
         font-size: 18px;
     }
+
     .su_welcome_screen h1.header {
         font-size: 28px;
         line-height: 1.2;
     }
+
     .su_welcome_banner_offer p {
         max-width: 100%;
     }
+
     .su_welcome_banner_overlay {
         box-shadow: unset;
     }

@@ -5,7 +5,7 @@ class SU_welcome_screen_conditions
 
     public $atts;
     private $columns_number=4;
-    private $css = '<link href="/wp-content/themes/umbrella-group/css/block-su-welcome-screen-conditions.css" type="text/css" rel="stylesheet"/>';
+    private $css_files = ['/assets/css/blocks/su-welcome-screen-conditions.css'];
     public $err = "<ul style='padding: 24px;'> Неправильное использование шорткода: ";
     private $headers;
     private $sub_headers;
@@ -23,7 +23,7 @@ class SU_welcome_screen_conditions
             if (isset($this->button_texts[$i])){ $this->fill_variable('button_link_'.$i_frontend, $this->button_links[$i], true, "Ссылка кнопки ".$i_frontend, "'#calculate-price-contact-form-lightbox'");}
         }
         if (strlen($this->err) > $err_initial_len) {
-            $this->err .= '</ul>' . $this->css;
+            $this->err .= '</ul>' . umbrella_add_custom_css_files($this->css_files);
             return false;
         } else {
             return true;
@@ -63,13 +63,11 @@ class SU_welcome_screen_conditions
             EOHTML;
             $columns .= $column;
         }
-
-
+        umbrella_add_custom_css_files($this->css_files);
         return <<<EOHTML
                [row col_style="divided" class="su_welcome_screen_conditions"]
                 $columns
                [/row]
-               $this->css
         EOHTML;
 
     }
