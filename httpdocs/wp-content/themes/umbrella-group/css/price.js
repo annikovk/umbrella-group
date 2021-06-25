@@ -1,14 +1,3 @@
-var accordions = document.getElementsByClassName("accordion-item");
-
-for (var i = 0; i < accordions.length; i++) {
-    accordions[i].onclick = function () {
-        this.querySelector('.accordion-inner').onclick = function (){
-            jQuery(this).toggle()
-        }
-        this.classList.toggle('active');
-    }
-}
-
 // Cache selectors
 var topMenu = $("#side-menu"),
     topMenuHeight = topMenu.outerHeight()+250,

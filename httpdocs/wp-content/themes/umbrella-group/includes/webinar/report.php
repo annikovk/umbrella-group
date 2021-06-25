@@ -10,8 +10,8 @@ function webinar_task_function()
     $htmlreportlastday = html_report($date);
     if (!empty($htmlreportlastday) && (strpos( $htmlreportlastday, 'не было регистраций' ) == false)) {
         generate_xlsx_report($xlsxFileName);
-        send_report_email('n.kilina@taxlab.ru', $htmlreportlastday, $date, $xlsxFileName);
-        //send_report_email('jvv@taxlab.ru', $htmlreportlastday, $date, $xlsxFileName);
+//        send_report_email('n.kilina@taxlab.ru', $htmlreportlastday, $date, $xlsxFileName);
+//        send_report_email('jvv@taxlab.ru', $htmlreportlastday, $date, $xlsxFileName);
         send_report_email('annikovk@gmail.com', $htmlreportlastday, $date, $xlsxFileName);
         unlink($xlsxFileName);
     } else {

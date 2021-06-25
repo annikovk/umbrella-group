@@ -175,7 +175,7 @@ function log_participant($name, $surname, $patronymic, $mobile_number, $email, $
         'webinar_date' => $webinar_date
 
     ));
-
+    send_individual_report_email($name, $surname, $patronymic, $mobile_number, $email, $inn, $company_name, $webinar_title, $webinar_date);
     return ($wpdb->insert_id);
 }
 
@@ -195,6 +195,7 @@ function send_individual_report_email($name, $surname, $patronymic, $mobile_numb
     $headers = array('Content-Type: text/html; charset=UTF-8', 'From: Umbrella group &lt;site@taxlab.ru');
     wp_mail("server@kannikov.ru", $subject, $body, $headers);
     wp_mail("n.kilina@taxlab.ru", $subject, $body, $headers);
+    wp_mail("jvv@taxlab.ru", $subject, $body, $headers);
 
 }
 

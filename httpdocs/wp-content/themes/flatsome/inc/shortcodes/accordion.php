@@ -54,7 +54,9 @@ function ux_accordion_item($atts, $content = '', $code)
         'title' => 'Accordion Panel',
         'class' => ''
     ), $atts));
-    $subtitle = '<div class="accordion-subtitle">' . $subtitle . '</div>';
+    if (strlen($subtitle)>1){
+        $subtitle = '<div class="accordion-subtitle">' . $subtitle . '</div>';
+    }
 
     if (strlen($content) > 1) {
         $button = '<button class="toggle">↓</button>';

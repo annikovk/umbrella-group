@@ -557,6 +557,95 @@ p.feedback-subheader-right a {
     margin-bottom: 10px;
 }
 
+.accordion-inner a.button {
+    width: 156px;
+}
+
+.accordion-item {
+    position: relative;
+}
+
+.accordion .toggle {
+    left: unset;
+    top: unset;
+    /*display: flex;*/
+    position: absolute;
+    bottom: 24px;
+    padding: 0;
+    margin: 0;
+    right: 0px;
+    font-size: 1.3em;
+    /*height: 100%;*/
+}
+
+.accordion .active .toggle {
+    bottom: 8px;
+    top: unset;
+}
+
+.accordion .toggle.is-open {
+    color: #ec1b24;
+    transform: rotate(
+            -180deg
+    );
+}
+
+.accordion .toggle:hover {
+    color: #ec1b24;
+}
+
+.accordion-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.accordion-title .accordion-subtitle {
+    padding-right: 16px;
+    min-width: 20%;
+    max-width: 40%;
+    text-align: right;
+}
+
+@media screen and (min-width: 849px) {
+    .accordion .toggle {
+        bottom: 8px;
+    }
+
+    .accordion .active .toggle {
+        bottom: 8px;
+        top: unset;
+    }
+
+    .accordion-title-title {
+        min-width: 100%;
+        font-size: 18px;
+    }
+
+    .accordion-title {
+        flex-wrap: wrap;
+    }
+
+    .accordion-title .accordion-subtitle {
+        font-size: 18px;
+        padding-right: unset;
+        padding-top: 16px;
+        min-width: 100%;
+        text-align: left;
+        font-weight: bolder;
+
+    }
+    .accordion-title, .accordion-title.active {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .accordion-inner {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
 @media screen and (min-width: 849px) {
     .banner-bottom-price .col {
         padding-top: 150px !important;
