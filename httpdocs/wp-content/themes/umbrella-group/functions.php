@@ -150,6 +150,13 @@ function get_umbrella_customizations(){
 }
 add_action('wp_footer','get_umbrella_customizations', 100);
 
+//** *Enable upload for webp image files.*/
+function webp_upload_mimes($existing_mimes) {
+    $existing_mimes['webp'] = 'image/webp';
+    return $existing_mimes;
+}
+add_filter('mime_types', 'webp_upload_mimes');
+
 function umbrella_draw_tiles($posts, $type)
 {
     if ($type == 'blogposts') {
