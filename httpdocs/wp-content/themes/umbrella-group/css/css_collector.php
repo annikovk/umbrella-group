@@ -15,6 +15,9 @@ class umbrella_customization{
     private $css_files=[
         "main.css","styles-intelsib.css","tablets-and-down.css"
     ];
+    private $js_files=[
+        "chat.js"
+    ];
 
     public function get_umbrella_custom_css() {
         $styles='<style>';
@@ -37,6 +40,11 @@ class umbrella_customization{
     }
     public function get_umbrella_custom_scripts(){
         $scripts = '<script>';
+        foreach ($this->js_files as $js_file) {
+            if ($js_file != 'chat.js' || !str_contains(get_permalink(), 'blog')) {
+                $scripts .= file_get_contents(get_theme_file_path() . '/assets/js/' . $js_file);
+            }
+        }
         foreach ($this->per_pages as $page) {
             if (str_contains(get_permalink(),$page['url'])) {
                 $scripts .= file_get_contents(get_theme_file_path() . '/assets/js/pages/'.$page['js']);
