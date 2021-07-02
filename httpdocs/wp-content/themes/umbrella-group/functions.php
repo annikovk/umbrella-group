@@ -203,7 +203,9 @@ function umbrella_draw_tiles($posts, $type)
 
                 $category_classes_string = ' ';
                 foreach ($category_classes as $category_class) {
-                    $category_classes_string = $category_classes_string . ' ' . $category_class->slug;
+                    if (!empty($category_class)){
+                        $category_classes_string = $category_classes_string . ' ' . $category_class->slug;
+                    }
                 }
             }
 
@@ -236,11 +238,7 @@ function umbrella_draw_tiles($posts, $type)
         $tiles = '[row_inner padding="0px 0 0px 0" style="normal" v_align="top" ]' . $tile . '[/row_inner]';
         echo do_shortcode($tiles);
         echo '</div>';
-
-
-        ?>
-        <link href="/wp-content/themes/umbrella-group/css/cases-tiles.css" type="text/css" rel="stylesheet"/>
-        <?php
+        umbrella_add_custom_css_files(['/assets/css/blocks/cases-tiles.css']);
     } elseif ($type == 'clients') {
         foreach ($posts as $post) {
 

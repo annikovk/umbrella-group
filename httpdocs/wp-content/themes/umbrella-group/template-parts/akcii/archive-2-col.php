@@ -92,10 +92,7 @@ function umbrella_draw_akcii_tiles($posts)
     $tiles = '[row_inner padding="0px 0 0px 0" style="normal" v_align="top" ]' . $tile . '[/row_inner]';
     echo do_shortcode($tiles);
     echo '</div>';
-    ?>
-    <link href="/wp-content/themes/umbrella-group/css/cases-tiles.css" type="text/css" rel="stylesheet"/>
-    <?php
-
+    umbrella_add_custom_css_files(['/assets/css/blocks/cases-tiles.css']);
 }
 
 

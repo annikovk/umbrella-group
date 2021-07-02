@@ -96,12 +96,17 @@ function umbrella_add_custom_css(string $css)
     }
 }
 
-function umbrella_add_custom_css_files(array $file)
+function umbrella_add_custom_css_files(array $files)
 {
     $value = wp_cache_get('umbrella_custom_css_files');
     if (false === $value) {
-        wp_cache_set('umbrella_custom_css_files', $file);
+        wp_cache_set('umbrella_custom_css_files', $files);
     } else if (is_array($value)) {
-        wp_cache_set('umbrella_custom_css_files', array_merge($file, $value));
+        foreach ($files as $file){
+            if (!in_array($file,$value)) {
+                array_push($value,$file);
+                wp_cache_set('umbrella_custom_css_files', $value);
+            }
+        }
     }
 }
