@@ -194,10 +194,10 @@ function umbrella_get_ratings($type='')
         case 'expert':
             $icon = '/wp-content/uploads/rating-expert-icon.png';
             $header = '2 место рейтинга консалтинговых агенств Сибири, 2009-2013';
-            break;
+            return ['icon'=>$icon,'header'=> $header,'subheader'=> ""];
         case 'expert-header':
             $icon='/wp-content/uploads/top-reitinga-expert-header.png';
-            break;
+            return ['icon'=>$icon,'header'=> "",'subheader'=> ""];
         default:
             if (strpos($_SERVER['REQUEST_URI'], "services/audit") !== false) {
                 $header = 'Финалист конкурса';

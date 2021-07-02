@@ -139,6 +139,7 @@ require get_theme_file_path() . '/includes/draw_header_with_breadcrumbs.php';
 require get_theme_file_path() . '/includes/about_subheader.php';
 require get_theme_file_path() . '/template-parts/shortcodes/akcii.php';
 require get_theme_file_path() . '/template-parts/shortcodes/su_welcome_screen.php';
+require get_theme_file_path() . '/template-parts/shortcodes/service-tile.php';
 require get_theme_file_path() . '/template-parts/shortcodes/su_welcome_screen_conditions.php';
 // Hook : to get content with s3elected AB tests variants only
 require get_theme_file_path() . '/umbrella_filter_ab_tests.php';
@@ -203,7 +204,6 @@ function umbrella_draw_tiles($posts, $type)
                 $category_classes_string = ' ';
                 foreach ($category_classes as $category_class) {
                     $category_classes_string = $category_classes_string . ' ' . $category_class->slug;
-
                 }
             }
 
