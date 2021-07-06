@@ -50,11 +50,12 @@ function umbrella_content_fix($content, $ab_tag): string
 // umbrella_ab_test3_variant2 - 8.7, 10 - Изменен первый, добавлены 2ой и 3ий слайды на баннере на главной.
 // umbrella_ab_test3_variant1 - 10 - старый вариант первого слайда
 // umbrella_ab_test4_variant2 - 2.1, 2.2 - новый вариант меню
+//<umbrella_ab_test5_variant1> - 7 - Подписи гарантий на главной
 function umbrella_get_ab_test_tags(): array
 {
     if (($_SERVER["REMOTE_ADDR"] == "90.189.216.196") || is_user_logged_in() ) {
-        return ['umbrella_ab_test1_variant2', 'umbrella_ab_test2_variant1','umbrella_ab_test3_variant2', 'umbrella_ab_test4_variant2'];
+        return ['umbrella_ab_test1_variant2', 'umbrella_ab_test2_variant1','umbrella_ab_test3_variant2', 'umbrella_ab_test4_variant2','umbrella_ab_test5_variant2'];
     } else {
-        return ['umbrella_ab_test1_variant1', 'umbrella_ab_test2_nothing', 'umbrella_ab_test3_variant1', 'umbrella_ab_test4_variant1'];
+        return ['umbrella_ab_test1_variant1', 'umbrella_ab_test2_nothing', 'umbrella_ab_test3_variant1', 'umbrella_ab_test4_variant1','umbrella_ab_test5_variant1'];
     }
 }
