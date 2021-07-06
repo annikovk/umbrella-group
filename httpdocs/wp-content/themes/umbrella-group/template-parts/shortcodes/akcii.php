@@ -68,8 +68,8 @@ function akciya_block_shortcode($atts)
             </div>
         </div>
     </div>
-    <link href="/wp-content/themes/umbrella-group/css/block-akciya.css" type="text/css" rel="stylesheet"/>
     EOV;
+    umbrella_add_custom_css_files(['/assets/css/blocks/block-akciya.css']);
         return $block;
 }
 

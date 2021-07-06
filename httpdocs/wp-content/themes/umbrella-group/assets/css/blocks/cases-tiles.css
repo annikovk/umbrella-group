@@ -8,11 +8,6 @@
     color: #1a1a1a;
 }
 
-@media screen and (max-width: 849px) {
-    .cases-tile {
-    / / height: 170 px;
-    }
-}
 
 .cases-tile:hover .cases-item-header,.cases-tile:hover .cases-excerpt,.cases-tile:hover .case-item-date-and-tag  {
     color: #ec1d23;
@@ -103,3 +98,17 @@
     transition: all 0.3s;
 }
 
+@media screen and (max-width: 849px) {
+    .cases-tile {
+        height: unset;
+    }
+    .case-item-date-and-tag {
+        position: relative;
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+    .cases-excerpt {
+        position: relative;
+        width: 80%;
+    }
+}

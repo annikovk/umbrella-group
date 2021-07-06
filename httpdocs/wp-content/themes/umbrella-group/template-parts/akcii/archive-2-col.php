@@ -64,7 +64,7 @@ function umbrella_draw_akcii_tiles($posts)
 
     foreach ($posts as $post) {
         $date = "До " . str_replace($en_month, $ru_month, date("d.m.Y", strtotime(date('m', strtotime('+1 month')).'/01/'.date('Y').' 00:00:00')));
-        $date_and_tag = '<div class="case-item-date-and-tag">' . $date . '&emsp;&emsp;&emsp;&emsp;' . $tag . '</div>';
+        $date_and_tag = '<div class="case-item-date-and-tag">' . $date . '</div>';
 
 
         $excerpt = get_the_excerpt($post->ID);

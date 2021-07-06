@@ -1,64 +1,3 @@
-@media screen and (max-width: 849px) {
-    .akciya-block .background::after {
-        background-image: linear-gradient(to top, rgba(46, 79, 117, 0.7) 0%, #2e4f75 50%);
-    }
-
-    .akciya-block .inner-icon {
-        height: 0;
-        top: -44px;
-        width: 88px;
-        left: 32px;
-    }
-
-    .akciya-block .inner-block .inner-text {
-        padding-left: 15px;
-        padding-right: 15px;
-        padding-top: 24px;
-    }
-
-    .akciya-block .inner-block .title {
-        font-size: 28px;
-        max-width: 100%;
-    }
-
-    .akciya-block .excerpt {
-        max-width: 100%;
-        font-size: 18px;
-    }
-
-    .akciya-block .inner-block {
-        position: relative;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        border: unset;
-    }
-
-    .akciya-block.full {
-        height: unset;
-    }
-
-    .akciya-block .inner-label {
-        font-size: 18px;
-        position: relative;
-        top: 0;
-        background-color: unset;
-        padding-top: 64px;
-    }
-
-    .akciya-block .date-and-button .button {
-        margin-top: 50px;
-        margin-bottom: 70px;
-        width: 100%;
-
-    }
-
-    .akciya-block .date-and-button {
-        flex-direction: column;
-        padding-top: 8px;
-    }
-}
 .akciya-block.prices {
     width: 100%;
     height: 340px;
@@ -198,7 +137,7 @@
     left: -90px;
     font-weight: bold;
     width: 180px;
-    height: 180px;
+    height: auto;
 }
 
 .akciya-block .inner-block.half .excerpt {
@@ -251,5 +190,70 @@
     font-weight: 600;
     -webkit-transition: all 0.3s; /* Safari prior 6.1 */
     transition: all 0.3s;
+}
+@media screen and (max-width: 849px) {
+    .akciya-block .background::after {
+        background-image: linear-gradient(to top, rgba(46, 79, 117, 0.7) 0%, #2e4f75 50%);
+    }
+
+    .akciya-block .inner-icon {
+        top: -44px;
+        width: 88px;
+        height: 88px;
+        left: 32px;
+    }
+
+    .akciya-block .inner-block .inner-text, .akciya-block .inner-block.half .inner-text {
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-top: 24px;
+    }
+
+    .akciya-block .inner-block .title, .akciya-block .inner-block.half .title {
+        font-size: 28px;
+        max-width: 100%;
+    }
+
+    .akciya-block .excerpt, .akciya-block .inner-block.half .excerpt {
+        max-width: 100%;
+        font-size: 18px;
+    }
+
+    .akciya-block .inner-block, .akciya-block .inner-block.half{
+        position: relative;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border: unset;
+    }
+
+    .akciya-block .inner-block.half .date {
+        padding-bottom: unset;
+    }
+
+    .akciya-block.full, .akciya-block.half {
+        height: unset;
+    }
+
+    .akciya-block .inner-label {
+        font-size: 18px;
+        position: relative;
+        top: 0;
+        background-color: unset;
+        padding-top: 64px;
+    }
+
+    .akciya-block .date-and-button .button {
+        margin-top: 50px;
+        margin-bottom: 70px;
+        width: 100%;
+
+    }
+
+    .akciya-block .date-and-button, .akciya-block .inner-block.half .date-and-button {
+        flex-direction: column;
+        padding-top: 8px;
+    }
 }
 

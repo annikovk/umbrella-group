@@ -16,7 +16,7 @@ function umbrella_draw_header_with_breadcrumbs()
             <div class="breadcrumbs">
                 $breadcrumbs
             </div>
-            <h1 class="header">
+            <h1>
                 $title
             </h1>
         </header>
