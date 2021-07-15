@@ -1,7 +1,7 @@
 <?php
 
 $rating1 =  umbrella_get_ratings('expert-header');
-$rating2 =  umbrella_get_ratings();
+$rating2 =  umbrella_get_ratings('header');
 
 $ratings_block = <<<EOHTML
         <div class="header-ratings-icons hide-for-medium">

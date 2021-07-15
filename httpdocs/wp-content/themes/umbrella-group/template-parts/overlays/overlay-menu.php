@@ -33,9 +33,13 @@ if (
 		<ul class="<?php echo esc_attr( implode( ' ', $flatsome_nav_classes ) ); ?>">
             <?php
             $header = new AB_tests_header_modifier();
-            $header->override_mobile();
+            if (in_array('umbrella_ab_test4_variant2',umbrella_get_ab_test_tags())) {
+                $header->override_mobile('umbrella_ab_test4_variant2');
+            } else {
+                $header->override_mobile('umbrella_ab_test4_variant1');
+            };
+            flatsome_header_elements( 'mobile_sidebar', 'sidebar' );
             ?>
-			<?php flatsome_header_elements( 'mobile_sidebar', 'sidebar' ); $header->restore_mobile();?>
 		</ul>
 	</div>
 </div>

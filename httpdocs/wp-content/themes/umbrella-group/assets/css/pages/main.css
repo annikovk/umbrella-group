@@ -24,6 +24,15 @@
     top: 40px;
 }
 @media screen and (max-width: 849px) {
+    .mobile-nav li>a>i.icon-menu {
+        font-size: 22px;
+        color: #606060;
+    }
+    .mobile-nav .icon-phone {
+        font-size: 22px;
+        color: #606060;
+        padding-right: 8px;
+    }
     .feedback-image {
         position: unset;
     }

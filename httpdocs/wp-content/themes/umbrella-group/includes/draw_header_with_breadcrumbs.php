@@ -67,8 +67,6 @@ function get_breadcrumbs()
             $breadcrumb .= $currentBefore . get_the_time('Y') . $currentAfter;
 
         } elseif (is_single() && !is_attachment()) {
-            $cat = get_the_category();
-            $cat = $cat[0];
             //$breadcrumb .= get_category_parents($cat, TRUE, ' ' . $delimiter . ' ');
             $breadcrumb .= umbrella_get_post_type($delimiter);
             $breadcrumb .= $currentBefore;

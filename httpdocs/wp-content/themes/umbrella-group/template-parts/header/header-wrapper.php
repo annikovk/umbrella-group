@@ -6,12 +6,11 @@ change_top_header_according_to_ab_tests();
 function change_top_header_according_to_ab_tests(){
     $header = new AB_tests_header_modifier();
     if (in_array("umbrella_ab_test4_variant2",umbrella_get_ab_test_tags())) {
-        $header->override();
+        $header->override("umbrella_ab_test4_variant2");
         umbrella_draw_header();
-        $header->restore();
     } else {
+        $header->override("umbrella_ab_test4_variant1");
         umbrella_draw_header();
-
     }
 }
 

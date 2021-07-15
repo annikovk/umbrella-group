@@ -48,7 +48,7 @@ class SU_welcome_screen_conditions
             $width =  12/$this->columns_number;
             $mobile_width = 12;
             if (isset($this->button_texts[$i])) {
-                $button = '[button style="outline" expand="true" text="'.$this->button_texts[$i].'" link="'.$this->button_links[$i].'"]';
+                $button = '<div class="su_welcome_screen_conditions_button">[button style="outline" expand="true" text="'.$this->button_texts[$i].'" link="'.$this->button_links[$i].'"]</div>';
             } else {
                 $button = '';
             }
@@ -58,14 +58,14 @@ class SU_welcome_screen_conditions
                 [col span="$width" span__sm="$mobile_width" class="su_welcome_screen_conditions_column"]
                     <div class="su_welcome_screen_conditions_header">$header</div>
                     <div class="su_welcome_screen_conditions_subheader">$subheader</div>
-                    <div class="su_welcome_screen_conditions_button">$button</div>
+                    $button
                 [/col]
             EOHTML;
             $columns .= $column;
         }
         umbrella_add_custom_css_files($this->css_files);
         return <<<EOHTML
-               [row col_style="divided" class="su_welcome_screen_conditions"]
+               [row col_style="solid" class="su_welcome_screen_conditions"]
                 $columns
                [/row]
         EOHTML;

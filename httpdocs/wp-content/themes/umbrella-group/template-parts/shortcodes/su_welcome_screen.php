@@ -30,7 +30,13 @@ class SU_welcome_screen
         $this->fill_variable('background', $this->background, true, 'Фоновое изображение', '9108');
         $this->fill_variable('icon', $this->icon, true, 'Иконка', '2252');
         $this->fill_variable('first_advantage', $this->first_advantage, false, 'Первое преимущество', '<strong>Бесплатная</strong> консультация онлайн');
+        if (str_contains($this->first_advantage,"Бесплатная") && !str_contains("<strong>",$this->first_advantage)) {
+            $this->first_advantage=str_replace("Бесплатная","<strong>Бесплтаная</strong>",$this->first_advantage);
+        }
         $this->fill_variable('second_advantage', $this->second_advantage, true, 'Второе преимущество', '\'Риски застрахованы на сумму более 50 млн рублей.\'');
+        if (str_contains($this->second_advantage,"Гарантия") && !str_contains("<strong>",$this->second_advantage)) {
+            $this->second_advantage=str_replace("Гарантия","<strong>Гарантия</strong>",$this->second_advantage);
+        }
         $this->fill_variable('third_advantage', $this->third_advantage, true, 'Третье преимущество', '\'Подадим документы за 7 дней\'');
         $this->fill_variable('phone', $this->phone, false, 'Телефон', '73832021582');
         if (!(strlen($this->phone) == 11 && intval($this->phone, 10) > 70000000000)) {
@@ -121,7 +127,7 @@ class SU_welcome_screen
         $phone_text = $this->get_phone_text();
         $specialist_text = $this->get_specialist_text();
         $rating1 = umbrella_get_ratings('expert');
-        $rating2 = umbrella_get_ratings();
+        $rating2 = umbrella_get_ratings('header');
         $html = <<<EOHTML
         <div class="su_welcome_screen">
             <div class="su_welcome_banner">
@@ -159,12 +165,16 @@ class SU_welcome_screen
             </div>
             <div class="su_welcome_screen_ratings show-for-medium">
                 <div class="su_welcome_banner_ratings_icon_box">
-                    <div class="su_welcome_banner_ratings_icon" style="background: url({$rating1['icon']}) no-repeat 0 0;"> </div>
+                    <div class="su_welcome_banner_ratings_icon" > 
+                        <img src="{$rating1['icon']}" alt="rating">
+                    </div>
                     <div class="su_welcome_banner_ratings_header"> {$rating1['header']} </div>
                     <div class="su_welcome_banner_ratings_subheader"> {$rating1['subheader']} </div>
                 </div>
                 <div class="su_welcome_banner_ratings_icon_box">
-                    <div class="su_welcome_banner_ratings_icon" style="background: url({$rating2['icon']}) no-repeat 0 0;"></div>
+                    <div class="su_welcome_banner_ratings_icon" >
+                        <img src="{$rating2['icon']}" alt="rating">
+                    </div>
                     <div class="su_welcome_banner_ratings_header">{$rating2['header']} </div>
                     <div class="su_welcome_banner_ratings_subheader">{$rating2['subheader']}</div>
                 </div>
@@ -220,6 +230,11 @@ function umbrella_get_ratings($type='')
                 $icon = '/wp-content/uploads/2019/10/laurel-1.svg';
                 $subheader = 'рейтинг «Делового квартала», Новосибирск, 2019';
             }
+    }
+    if ($type=='header') {
+        $icon = str_replace('laurel-1.svg','laurel-1-gray.svg',$icon);
+        $icon = str_replace('laurel-2.svg','laurel-2-gray.svg',$icon);
+        $icon = str_replace('laurel-nsk.svg','laurel-nsk-gray.svg',$icon);
     }
     return ['icon'=>$icon,'header'=> $header,'subheader'=> $subheader];
 }

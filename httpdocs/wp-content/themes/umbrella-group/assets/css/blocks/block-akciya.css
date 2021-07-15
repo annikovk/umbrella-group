@@ -1,6 +1,6 @@
 .akciya-block.prices {
     width: 100%;
-    height: 340px;
+    height: 320px;
     position: relative;
 }
 
@@ -8,6 +8,8 @@
     width: 100%;
     height: 416px;
     position: relative;
+    /*margin-top: 30px;*/
+    margin-bottom: 100px;
 }
 
 .akciya-block.half {
@@ -23,7 +25,7 @@
 }
 
 .akciya-block .background {
-    border: 2px solid #f1f1f1;
+    /*border: 2px solid #f1f1f1;*/
     position: absolute;
     height: 100%;
     width: 100%;
@@ -184,7 +186,8 @@
 .akciya-block .inner-block .title {
     font-family: "PT Serif", sans-serif;
     color: white;
-    max-width: 60%;
+    /*max-width: 60%;*/
+    padding-right: 50px;
     position: relative;
     font-size: 32px;
     font-weight: 600;
@@ -196,30 +199,30 @@
         background-image: linear-gradient(to top, rgba(46, 79, 117, 0.7) 0%, #2e4f75 50%);
     }
 
-    .akciya-block .inner-icon {
+    .akciya-block .inner-icon, .akciya-block .inner-block.prices .inner-icon  {
         top: -44px;
         width: 88px;
         height: 88px;
         left: 32px;
     }
 
-    .akciya-block .inner-block .inner-text, .akciya-block .inner-block.half .inner-text {
+    .akciya-block .inner-block .inner-text, .akciya-block .inner-block.half .inner-text, .akciya-block .inner-block.prices .inner-text {
         padding-left: 15px;
         padding-right: 15px;
         padding-top: 24px;
     }
 
-    .akciya-block .inner-block .title, .akciya-block .inner-block.half .title {
+    .akciya-block .inner-block .title, .akciya-block .inner-block.half .title, .akciya-block .inner-block.prices .title {
         font-size: 28px;
         max-width: 100%;
     }
 
-    .akciya-block .excerpt, .akciya-block .inner-block.half .excerpt {
+    .akciya-block .excerpt, .akciya-block .inner-block.half .excerpt, .akciya-block .inner-block.prices .excerpt {
         max-width: 100%;
         font-size: 18px;
     }
 
-    .akciya-block .inner-block, .akciya-block .inner-block.half{
+    .akciya-block .inner-block, .akciya-block .inner-block.half, .akciya-block .inner-block.prices {
         position: relative;
         top: 0;
         bottom: 0;
@@ -232,8 +235,11 @@
         padding-bottom: unset;
     }
 
-    .akciya-block.full, .akciya-block.half {
+    .akciya-block.full, .akciya-block.half, .akciya-block.prices {
         height: unset;
+    }
+    .akciya-block.prices {
+        margin-top: 48px;
     }
 
     .akciya-block .inner-label {

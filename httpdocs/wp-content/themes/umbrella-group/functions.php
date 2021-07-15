@@ -211,7 +211,9 @@ function umbrella_draw_tiles($posts, $type)
 
             $date = str_replace($en_month, $ru_month, date("j F", strtotime($post->post_date)));
 
-            $date_and_tag = '<div class="case-item-date-and-tag">' . $date . '&emsp;&emsp;&emsp;&emsp;' . $tag . '</div>';
+            if (!isset($tag)){ $tag = "";}
+                $date_and_tag = '<div class="case-item-date-and-tag">' . $date . '&emsp;&emsp;&emsp;&emsp;' . $tag . '</div>';
+
 
             $excerpt = get_the_excerpt($post->ID);
             if (empty($excerpt)) {
@@ -229,7 +231,7 @@ function umbrella_draw_tiles($posts, $type)
 
             $permalink = urldecode(get_permalink($post->ID));
 
-
+            if (!isset($category_classes_string)){ $category_classes_string = "";}
             $tile = $tile . '[col_inner span="6" span__sm="12" align="left" margin="0px 0px 8px 0px" class="all' . $category_classes_string . '"]<div class="cases-tile" ><a href="' . $permalink . '">' . $thumbnail . $title . $excerpt . $date_and_tag . '</a></div>[/col_inner]';
 
 

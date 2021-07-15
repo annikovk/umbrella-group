@@ -17,10 +17,30 @@
 .su_welcome_screen_conditions{
     margin-bottom: 100px;
 }
+
+.su_welcome_screen_conditions .col:before, .su_welcome_screen_conditions .col:before  {
+    border-left: 1px solid #aaaaaa;
+}
 .su_welcome_screen_conditions_button {
-    margin-top: 40px;
+    margin-top: 35px;
 }
 .su_welcome_screen_conditions_column {
     padding-right: 40px;
     padding-left: 24px;
+}
+
+@media screen and (max-width: 849px) {
+    .su_welcome_screen_conditions .col {
+        padding-top: 50px;
+    }
+    .su_welcome_screen_conditions_column {
+        text-align: center;
+    }
+    .su_welcome_screen_conditions_column .col-inner{
+        padding-bottom: 50px;
+    }
+    .su_welcome_screen_conditions_column.col:after {
+        width: 90%;
+        left: 5%;
+    }
 }

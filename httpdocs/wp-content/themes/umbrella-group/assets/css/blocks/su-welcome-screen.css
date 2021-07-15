@@ -42,6 +42,15 @@
     margin-right: auto;
     overflow: hidden;
 }
+.su_welcome_banner .umbrella-header-and-breadcrumbs h1 {
+    padding-top: 25px;
+}
+.su_welcome_banner .umbrella-header-and-breadcrumbs {
+
+}
+.su_welcome_screen .su_welcome_banner .su_welcome_banner_content p {
+    padding-bottom: 32px;
+}
 
 .su_welcome_banner:after {
     position: absolute;
@@ -71,18 +80,18 @@
 
 .su_welcome_banner_overlay_top:after {
     content: "";
-    background-color: #918b81;
+    background-color: #aaaaaa;
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     margin: 0 auto;
-    height: 2px;
+    height: 1px;
     width: 90%;
 }
 
 .su_welcome_banner_overlay {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 9px 30px rgba(0, 0, 0, 0.28);
     position: relative;
     display: flex;
     flex-direction: column;
@@ -100,8 +109,8 @@
     position: relative;
     min-width: 100%;
     background-color: white;
-    padding-top: 50px !important;
-    padding-bottom: 20px !important;
+    padding-top: 50px;
+    padding-bottom: 50px !important;
 }
 
 .su_welcome_banner_overlay_top .advantage-block-icon {
@@ -148,6 +157,12 @@
 }
 
 @media screen and (max-width: 849px) {
+    .su_welcome_banner_overlay_top {
+        padding-top: 5px;
+    }
+    .banner-button span, .button span {
+        font-size: 18px;
+    }
     .su_welcome_banner_ratings_icon_box > * {
         max-width: 90%;
     }
@@ -171,7 +186,7 @@
         -moz-box-shadow: 0px 0px 60px rgba(0, 0, 0, 0.6);
         -webkit-box-shadow: 0px 0px 60px rgba(0, 0, 0, 0.6);
         box-shadow: 0px 0px 60px rgba(0, 0, 0, 0.6);
-        margin-bottom: 70px;
+        margin-bottom: 20px;
     }
 
     .su_welcome_banner_ratings_icon {

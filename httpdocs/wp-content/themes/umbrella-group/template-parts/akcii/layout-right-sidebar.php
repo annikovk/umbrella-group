@@ -49,8 +49,8 @@ function akcii_get_similar_posts(){
         $args = array(
             'order'   => 'DESC',
             'orderby' => 'date',
-            'exclude' => '',
             'include' => $include,
+            'exclude' => get_post()->ID,
             'numberposts' => 2,
             'category' => '',
             'post_type' => 'akcii',
