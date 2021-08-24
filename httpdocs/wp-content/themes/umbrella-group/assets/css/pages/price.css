@@ -4,10 +4,28 @@
 #side-menu {
     list-style: none;
 }
+
+<umbrella_ab_test6_variant2>
 .price-navigation li.active a {
     border-bottom: 3px solid red;
-    color: #333;
+    font-weight: bold;
 }
+
+.accordion-inner {
+    background-color: #f8f8f8;
+}
+.accordion-item > .accordion-title {
+    flex-direction: column;
+    text-align: left;
+    align-items: unset;
+}
+.accordion-title .accordion-subtitle {
+    width: 100%;
+    text-align: left;
+    max-width: unset;
+    min-width: unset;
+}
+</umbrella_ab_test6_variant2>
 
 .price-navigation a:active {
     border-bottom: 2px solid red;
@@ -19,6 +37,7 @@
 .price-navigation li>a {
     font-size: 18px;
     font-weight: 300;
+    <umbrella_ab_test6_variant2>color: #1a1a1a;</umbrella_ab_test6_variant2>
 }
 
 .price-navigation {

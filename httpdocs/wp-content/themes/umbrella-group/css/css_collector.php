@@ -29,10 +29,10 @@ class umbrella_customization
         }
         foreach ($this->per_pages as $page) {
             if (isset($page['url']) && str_contains(get_permalink(), $page['url'])) {
-                $styles .= file_get_contents(get_theme_file_path() . '/assets/css/pages/' . $page['css']);
+                $styles .= umbrella_filter_ab_tests(file_get_contents(get_theme_file_path() . '/assets/css/pages/' . $page['css']));
             }
             if (array_key_exists('id', $page) && get_the_ID() == $page['id']) {
-                $styles .= file_get_contents(get_theme_file_path() . '/assets/css/pages/' . $page['css']);
+                $styles .= umbrella_filter_ab_tests(file_get_contents(get_theme_file_path() . '/assets/css/pages/' . $page['css']));
             }
         }
         $styles .= $this->get_styles_from_cache_files();

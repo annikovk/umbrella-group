@@ -51,6 +51,9 @@ function umbrella_content_fix($content, $ab_tag): string
 // umbrella_ab_test3_variant1 - ТЗ-2, 10 - старый вариант первого слайда
 // umbrella_ab_test4_variant2 - ТЗ-2, 2.1, 2.2 - новый вариант меню
 // umbrella_ab_test5_variant1 - ТЗ-2, 7 - Подписи гарантий на главной
+//
+// umbrella_ab_test6_variant1 - ТЗ-3, 3 - без доработки дизайна страницы цен
+// umbrella_ab_test6_variant2 - ТЗ-3, 3 - с доработкой дизайна страницы цен
 function umbrella_get_ab_test_tags(): array
 {
     $ab_tests_array = [];
