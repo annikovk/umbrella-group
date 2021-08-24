@@ -5,7 +5,7 @@
     list-style: none;
 }
 
-<umbrella_ab_test6_variant2>
+/** <umbrella_ab_test6_variant2>*/
 .price-navigation li.active a {
     border-bottom: 3px solid red;
     font-weight: bold;
@@ -25,7 +25,7 @@
     max-width: unset;
     min-width: unset;
 }
-</umbrella_ab_test6_variant2>
+/**</umbrella_ab_test6_variant2>*/
 
 .price-navigation a:active {
     border-bottom: 2px solid red;
@@ -37,49 +37,49 @@
 .price-navigation li>a {
     font-size: 18px;
     font-weight: 300;
-    <umbrella_ab_test6_variant2>color: #1a1a1a;</umbrella_ab_test6_variant2>
+/**<umbrella_ab_test6_variant2>*/color: #1a1a1a;/**</umbrella_ab_test6_variant2>*/
 }
 
 .price-navigation {
-    margin: 40px 0 0 -22px;
+margin: 40px 0 0 -22px;
 }
 .price-navigation li+li {
-    border: unset;
+border: unset;
 }
 
 .price-content table {
-    font-size: 14px;
+font-size: 14px;
 }
 .price-sub-header {
-    padding-top: 50px;
+padding-top: 50px;
 }
 
 
 @media screen and (max-width: 849px) {
-    .price-content h2.price-header {
-        padding-top: 70px;
-    }
+.price-content h2.price-header {
+    padding-top: 70px;
+}
 
 
-    .row .section {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-    header.entry-header{
-        padding-bottom: 10px !important;
-    }
+.row .section {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+header.entry-header{
+    padding-bottom: 10px !important;
+}
 
-    .price-navigation {
-        margin: 0;
-    }
+.price-navigation {
+    margin: 0;
+}
 
-    #side-menu a {
-        text-decoration: underline;
-        color: #333;
-    }
-    .price-navigation #side-menu li.active a {
-        text-decoration: unset;
-        border-bottom: 3px solid red;
-        color: #333;
-    }
+#side-menu a {
+    text-decoration: underline;
+    color: #333;
+}
+.price-navigation #side-menu li.active a {
+    text-decoration: unset;
+    border-bottom: 3px solid red;
+    color: #333;
+}
 }
