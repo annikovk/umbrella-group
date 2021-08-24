@@ -143,6 +143,7 @@ require get_theme_file_path() . '/template-parts/shortcodes/service-tiles.php';
 require get_theme_file_path() . '/template-parts/shortcodes/su_welcome_screen_conditions.php';
 // Hook : to get content with s3elected AB tests variants only
 require get_theme_file_path() . '/umbrella_filter_ab_tests.php';
+add_action( 'init', 'umbrella_get_ab_test_tags');
 add_filter('the_content', 'umbrella_filter_ab_tests');
 require get_theme_file_path() . '/css/css_collector.php';
 function get_umbrella_customizations(){

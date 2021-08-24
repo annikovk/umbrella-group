@@ -15,7 +15,7 @@ function umbrella_filter_ab_tests($content)
             } else {
                 $content = umbrella_content_fix($content, $ab_tag);
 //                if ($tag_to_remove=='umbrella_ab_test3_variant2'){print_r($content);}
-                $content = umbrella_clear_ab_tags($content,$ab_tag);
+                $content = umbrella_clear_ab_tags($content, $ab_tag);
             }
         }
     }
@@ -44,25 +44,45 @@ function umbrella_content_fix($content, $ab_tag): string
     return strtr($content, $fix);
 }
 
-// umbrella_ab_test1_variant2 - 12 - новые экраны страниц услуг
-// umbrella_ab_test1_variant1 - 12 - старые экраны страниц услуг
-// umbrella_ab_test2_variant1 - 8.3, 8.4 - блоки акций
-// umbrella_ab_test3_variant2 - 8.7, 10 - Изменен первый, добавлены 2ой и 3ий слайды на баннере на главной.
-// umbrella_ab_test3_variant1 - 10 - старый вариант первого слайда
-// umbrella_ab_test4_variant2 - 2.1, 2.2 - новый вариант меню
-//umbrella_ab_test5_variant1 - 7 - Подписи гарантий на главной
+// umbrella_ab_test1_variant2 - ТЗ-2, 12 - новые экраны страниц услуг
+// umbrella_ab_test1_variant1 - ТЗ-2, 12 - старые экраны страниц услуг
+// umbrella_ab_test2_variant1 - ТЗ-2, 8.3, 8.4 - блоки акций
+// umbrella_ab_test3_variant2 - ТЗ-2, 8.7, 10 - Изменен первый, добавлены 2ой и 3ий слайды на баннере на главной.
+// umbrella_ab_test3_variant1 - ТЗ-2, 10 - старый вариант первого слайда
+// umbrella_ab_test4_variant2 - ТЗ-2, 2.1, 2.2 - новый вариант меню
+// umbrella_ab_test5_variant1 - ТЗ-2, 7 - Подписи гарантий на главной
 function umbrella_get_ab_test_tags(): array
 {
-    if (isset($_COOKIE['exp_ii_kIIjrQoG3o5vDpgbkcQ'])){
-      $expVar = $_COOKIE['exp_ii_kIIjrQoG3o5vDpgbkcQ'];
+    $ab_tests_array = [];
+    if (isset($_COOKIE['exp_ii_kIIjrQoG3o5vDpgbkcQ'])) {
+        $expVar = $_COOKIE['exp_ii_kIIjrQoG3o5vDpgbkcQ'];
+    } else {
+        $expVar = rand(0, 1);
     }
-    else {
-      $expVar = rand(0,1);
+    if (isset($_GET['expvar'])) {
+        $expVar1 = $_GET['expvar'];
+        setAbTestCookie("exp_test",$expVar1);
+    } elseif (isset($_COOKIE['exp_test'])) {
+        $expVar1 = $_COOKIE['exp_test'];
+    } else {
+        $expVar1 = "0";
+        setAbTestCookie("exp_test",$expVar1);
     }
 
     if ($expVar == '1') {
-        return ['umbrella_ab_test1_variant2', 'umbrella_ab_test2_variant1','umbrella_ab_test3_variant2', 'umbrella_ab_test4_variant2','umbrella_ab_test5_variant2'];
+        array_push($ab_tests_array, 'umbrella_ab_test1_variant2', 'umbrella_ab_test2_variant1', 'umbrella_ab_test3_variant2', 'umbrella_ab_test4_variant2', 'umbrella_ab_test5_variant2');
     } else {
-        return ['umbrella_ab_test1_variant1', 'umbrella_ab_test2_nothing', 'umbrella_ab_test3_variant1', 'umbrella_ab_test4_variant1','umbrella_ab_test5_variant1'];
+        array_push($ab_tests_array, 'umbrella_ab_test1_variant1', 'umbrella_ab_test2_nothing', 'umbrella_ab_test3_variant1', 'umbrella_ab_test4_variant1', 'umbrella_ab_test5_variant1');
     }
+    if ($expVar1 == "1") {
+        array_push($ab_tests_array, 'umbrella_ab_test6_variant2');
+    } else {
+        array_push($ab_tests_array, 'umbrella_ab_test6_variant1');
+    }
+    return $ab_tests_array;
+}
+
+function setAbTestCookie(string $cookieName, string $value): bool
+{
+    return setcookie($cookieName, $value, time() + 3600 * 24 * 30, "/", ".taxlab.ru");
 }
