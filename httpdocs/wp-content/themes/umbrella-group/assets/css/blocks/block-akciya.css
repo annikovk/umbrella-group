@@ -196,7 +196,7 @@
 }
 @media screen and (max-width: 849px) {
     .akciya-block .background::after {
-        background-image: linear-gradient(to top, rgba(46, 79, 117, 0.7) 0%, #2e4f75 50%);
+        background-color: #2e4f75;
     }
 
     .akciya-block .inner-icon, .akciya-block .inner-block.prices .inner-icon  {
@@ -248,6 +248,9 @@
         top: 0;
         background-color: unset;
         padding-top: 64px;
+        width: 100%;
+        text-align: center;
+        left: 0;
     }
 
     .akciya-block .date-and-button .button {
