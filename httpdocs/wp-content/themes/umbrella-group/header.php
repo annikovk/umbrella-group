@@ -259,7 +259,7 @@
             <?php
             get_template_part('template-parts/header/header', 'wrapper');
             if (isset(get_queried_object()->post_parent)) {
-                if (((isset(get_queried_object()->ID)) && (get_queried_object()->ID == 8)) || in_array(get_queried_object()->post_parent, array(8))) {
+                if ((((isset(get_queried_object()->ID)) && (get_queried_object()->ID == 8)) || in_array(get_queried_object()->post_parent, array(8))) && !in_array('umbrella_ab_test4_variant2',umbrella_get_ab_test_tags())) {
                     umbrella_get_about_subheader();
                 }
             }

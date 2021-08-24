@@ -14,3 +14,9 @@ Version: 3.0
 
 
 }
+
+.new-benefits-main {display:flex; flex-wrap: wrap; justify-content: space-around;}
+.for-new-benefits {max-width: 160px; text-align: center; border: 5px solid #ec1c24; padding: 6px; border-image-slice: 1; box-shadow: 0px 5px 10px 5px rgb(34 60 80 / 20%); margin: 20px auto; font-size: 10pt; border-radius: 20px;}
+.for-new-benefits p {margin-bottom: 3px;}
+.for-new-benefits image {width: 120px;}
+

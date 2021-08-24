@@ -1,5 +1,5 @@
 <?php
-echo '<p class="hide-for-medium" style="font-size: 14px; margin-top: 100px;">' . get_the_date('j F Y') . '</p>';
+/*echo '<p class="hide-for-medium" style="font-size: 14px; margin-top: 100px;">' . get_the_date('j F Y') . '</p>';*/
 
 if (!empty(get_the_tags())){
 

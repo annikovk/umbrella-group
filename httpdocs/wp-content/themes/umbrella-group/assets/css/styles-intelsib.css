@@ -475,3 +475,14 @@ button.accordion {
      }
      @media only screen and (max-device-width: 325px) {.first-shtyka-2-3-4-5-22 {margin-top: 700px;}}
 /* КОНЕЦ */
+
+
+/**/
+.for-nastoyashhikh-otzyvoy {margin-bottom: 20px;}
+.for-nastoyashhikh-otzyvoy p {padding: 0; margin: 0;}
+.for-nastoyashhikh-otzyvoy .title-for-nastoyashhikh-otzyvoy {font-size: 20pt; font-weight: 700;}
+.for-nastoyashhikh-otzyvoy .desc-for-nastoyashhikh-otzyvoy {color: gray;}
+.for-nastoyashhikh-otzyvoy div:nth-child(1) {padding: 10px;}
+.for-nastoyashhikh-otzyvoy div:nth-child(2) {background: white; padding: 20px; border-radius: 0px; box-shadow: 0px 5px 57px -18px rgba(34, 60, 80, 0.2);}
+
+/* КОНЕЦ */

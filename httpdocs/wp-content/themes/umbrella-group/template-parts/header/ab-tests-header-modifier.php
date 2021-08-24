@@ -24,7 +24,7 @@ class AB_tests_header_modifier
                     "primary_mobile" => wp_get_nav_menu_object('mobile-ab-test4-variant2')->term_id,
                 ],
                 "mobile_sidebar" => [
-                    "logo-mobile", "nav", "contact-mobile"
+                    "logo-mobile_ab_test4_variant2", "nav", "contact-mobile_ab_test4_variant2"
                 ]
             ],
             "umbrella_ab_test4_variant1" => [
@@ -43,7 +43,7 @@ class AB_tests_header_modifier
                     "primary_mobile" => wp_get_nav_menu_object('mobile')->term_id,
                 ],
                 "mobile_sidebar" => [
-                    "logo-mobile", "nav", "contact-mobile"
+                    "logo-mobile", "nav", "contact-mobile_ab_test4_variant1"
                 ]
             ]
         ];
@@ -106,7 +106,13 @@ class AB_tests_header_modifier
                     }
                 EOCSS;
         if (get_theme_mod('logo_max_width')) $styles .= '#logo a{max-width:' . get_theme_mod('logo_max_width') . 'px;}';
-        umbrella_add_custom_css_files(["/assets/css/blocks/$ab_test_variant.css"]);
+        $cssfile = "/assets/css/blocks/$ab_test_variant.css";
+//        echo $cssfile;
+        print_r(file_exists(get_theme_file_path() . $cssfile));
+        if (file_exists(get_theme_file_path() . $cssfile)) {
+
+            umbrella_add_custom_css_files([$cssfile]);
+        }
         umbrella_add_custom_css($styles);
 
     }

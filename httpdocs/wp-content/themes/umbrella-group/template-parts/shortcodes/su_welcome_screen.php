@@ -31,7 +31,7 @@ class SU_welcome_screen
         $this->fill_variable('icon', $this->icon, true, 'Иконка', '2252');
         $this->fill_variable('first_advantage', $this->first_advantage, false, 'Первое преимущество', '<strong>Бесплатная</strong> консультация онлайн');
         if (str_contains($this->first_advantage,"Бесплатная") && !str_contains("<strong>",$this->first_advantage)) {
-            $this->first_advantage=str_replace("Бесплатная","<strong>Бесплтаная</strong>",$this->first_advantage);
+            $this->first_advantage=str_replace("Бесплатная","<strong>Бесплатная</strong>",$this->first_advantage);
         }
         $this->fill_variable('second_advantage', $this->second_advantage, true, 'Второе преимущество', '\'Риски застрахованы на сумму более 50 млн рублей.\'');
         if (str_contains($this->second_advantage,"Гарантия") && !str_contains("<strong>",$this->second_advantage)) {
@@ -216,11 +216,11 @@ function umbrella_get_ratings($type='')
             } else if (strpos($_SERVER['REQUEST_URI'], "/services/bukhgalterskie-uslugi") !== false) {
                 $header = '2 место в отрасли «Налоговое право»';
                 $icon = '/wp-content/uploads/2019/10/laurel-2.svg';
-                $subheader = 'Деловой Квартал, Новосибирск, 2019';
+                $subheader = 'Деловой Квартал, Новосибирск, 2021';
             } else if (strpos($_SERVER['REQUEST_URI'], "/services/licensing") !== false) {
                 $header = '1 место в отрасли «Корпоративное право»';
                 $icon = '/wp-content/uploads/2019/10/laurel-1.svg';
-                $subheader = 'рейтинг «Делового квартала», Новосибирск, 2019';
+                $subheader = 'рейтинг «Делового квартала», Новосибирск, 2021';
             } else if (strpos($_SERVER['REQUEST_URI'], "/services/services-le") !== false) {
                 $header = '1 место рейтинга юридических компаний';
                 $icon = '/wp-content/uploads/2019/10/laurel-1.svg';
@@ -228,7 +228,7 @@ function umbrella_get_ratings($type='')
             } else {
                 $header = '1 место в отрасли «Корпоративное право»';
                 $icon = '/wp-content/uploads/2019/10/laurel-1.svg';
-                $subheader = 'рейтинг «Делового квартала», Новосибирск, 2019';
+                $subheader = 'рейтинг «Делового квартала», Новосибирск, 2021';
             }
     }
     if ($type=='header') {

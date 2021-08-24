@@ -1,4 +1,3 @@
-
 .nav>li>a:hover, .nav>li.active>a, .nav>li.current>a, .nav>li>a.active, .nav>li>a.current, .nav-dropdown li.active>a, .nav-column li.active>a, .nav-dropdown>li>a:hover, .nav-column li>a:hover {
     color: red;
 }

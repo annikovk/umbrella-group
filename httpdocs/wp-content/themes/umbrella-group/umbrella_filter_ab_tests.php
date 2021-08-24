@@ -53,7 +53,14 @@ function umbrella_content_fix($content, $ab_tag): string
 //umbrella_ab_test5_variant1 - 7 - Подписи гарантий на главной
 function umbrella_get_ab_test_tags(): array
 {
-    if (($_SERVER["REMOTE_ADDR"] == "90.189.216.196") || is_user_logged_in() ) {
+    if (isset($_COOKIE['exp_ii_kIIjrQoG3o5vDpgbkcQ'])){
+      $expVar = $_COOKIE['exp_ii_kIIjrQoG3o5vDpgbkcQ'];
+    }
+    else {
+      $expVar = rand(0,1);
+    }
+
+    if ($expVar == '1') {
         return ['umbrella_ab_test1_variant2', 'umbrella_ab_test2_variant1','umbrella_ab_test3_variant2', 'umbrella_ab_test4_variant2','umbrella_ab_test5_variant2'];
     } else {
         return ['umbrella_ab_test1_variant1', 'umbrella_ab_test2_nothing', 'umbrella_ab_test3_variant1', 'umbrella_ab_test4_variant1','umbrella_ab_test5_variant1'];
