@@ -107,10 +107,7 @@ class AB_tests_header_modifier
                 EOCSS;
         if (get_theme_mod('logo_max_width')) $styles .= '#logo a{max-width:' . get_theme_mod('logo_max_width') . 'px;}';
         $cssfile = "/assets/css/blocks/$ab_test_variant.css";
-//        echo $cssfile;
-        print_r(file_exists(get_theme_file_path() . $cssfile));
         if (file_exists(get_theme_file_path() . $cssfile)) {
-
             umbrella_add_custom_css_files([$cssfile]);
         }
         umbrella_add_custom_css($styles);
