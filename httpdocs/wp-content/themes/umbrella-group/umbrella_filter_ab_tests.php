@@ -57,10 +57,17 @@ function umbrella_content_fix($content, $ab_tag): string
 function umbrella_get_ab_test_tags(): array
 {
     $ab_tests_array = [];
-    if (isset($_COOKIE['exp_ii_kIIjrQoG3o5vDpgbkcQ'])) {
-        $expVar = $_COOKIE['exp_ii_kIIjrQoG3o5vDpgbkcQ'];
-    } else {
-        $expVar = rand(0, 1);
+
+    if (isset($_COOKIE['exp_xSthYnX-SKuIkAVV_GvSuw'])) {
+        $expVar = $_COOKIE['exp_xSthYnX-SKuIkAVV_GvSuw'];
+    } elseif(isset($GLOBALS['expVar'])) {
+        $expVar = $GLOBALS['expVar'];
+        setAbTestCookie("exp_xSthYnX-SKuIkAVV_GvSuw",$expVar);
+    }
+    else {
+        $expVar = rand(0,1);
+        $GLOBALS['expVar'] = $expVar;
+        setAbTestCookie("exp_xSthYnX-SKuIkAVV_GvSuw",$expVar);
     }
     if (isset($_GET['expvar'])) {
         $expVar1 = $_GET['expvar'];

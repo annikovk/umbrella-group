@@ -14,8 +14,6 @@ if(flatsome_option('pages_template') != 'default') {
     get_header();
     do_action('flatsome_before_page'); ?>
     <div id="content" class="content-area page-wrapper" role="main">
-
-
         <?php
         global $post;     // if outside the loop
         $page_id  = get_queried_object_id(); // Get current page id
