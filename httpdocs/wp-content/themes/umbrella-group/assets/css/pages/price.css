@@ -1,6 +1,7 @@
 .price-content h2.price-header {
     padding-top: 86px;
 }
+
 #side-menu {
     list-style: none;
 }
@@ -11,75 +12,89 @@
     font-weight: bold;
 }
 
-.accordion-inner {
+.accordion-item.active {
     background-color: #f8f8f8;
 }
+
+.accordion-item.active .accordion-title-title {
+    color: #99090d;
+}
+
 .accordion-item > .accordion-title {
     flex-direction: column;
     text-align: left;
     align-items: unset;
 }
+
 .accordion-title .accordion-subtitle {
     width: 100%;
     text-align: left;
     max-width: unset;
     min-width: unset;
 }
+
 /**</umbrella_ab_test6_variant2>*/
 
 .price-navigation a:active {
     border-bottom: 2px solid red;
 }
-.price-navigation>.col-inner {
+
+.price-navigation > .col-inner {
     position: sticky;
     top: 300px;
 }
-.price-navigation li>a {
+
+.price-navigation li > a {
     font-size: 18px;
     font-weight: 300;
-/**<umbrella_ab_test6_variant2>*/color: #1a1a1a;/**</umbrella_ab_test6_variant2>*/
+    /**<umbrella_ab_test6_variant2>*/
+    color: #1a1a1a; /**</umbrella_ab_test6_variant2>*/
 }
 
 .price-navigation {
-margin: 40px 0 0 -22px;
+    margin: 40px 0 0 -22px;
 }
-.price-navigation li+li {
-border: unset;
+
+.price-navigation li + li {
+    border: unset;
 }
 
 .price-content table {
-font-size: 14px;
+    font-size: 14px;
 }
+
 .price-sub-header {
-padding-top: 50px;
+    padding-top: 50px;
 }
 
 
 @media screen and (max-width: 849px) {
-.price-content h2.price-header {
-    padding-top: 70px;
-}
+    .price-content h2.price-header {
+        padding-top: 70px;
+    }
 
 
-.row .section {
-    padding-left: 15px;
-    padding-right: 15px;
-}
-header.entry-header{
-    padding-bottom: 10px !important;
-}
+    .row .section {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
 
-.price-navigation {
-    margin: 0;
-}
+    header.entry-header {
+        padding-bottom: 10px !important;
+    }
 
-#side-menu a {
-    text-decoration: underline;
-    color: #333;
-}
-.price-navigation #side-menu li.active a {
-    text-decoration: unset;
-    border-bottom: 3px solid red;
-    color: #333;
-}
+    .price-navigation {
+        margin: 0;
+    }
+
+    #side-menu a {
+        text-decoration: underline;
+        color: #333;
+    }
+
+    .price-navigation #side-menu li.active a {
+        text-decoration: unset;
+        border-bottom: 3px solid red;
+        color: #333;
+    }
 }
