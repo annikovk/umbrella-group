@@ -9,6 +9,10 @@ class umbrella_customization
             "js" => "price.js"
         ],
         [
+            "url" => "/faq/",
+            "js" => "faq.js"
+        ],
+        [
             "id" => "2",
             "css" => "main.css"
         ]

@@ -809,7 +809,7 @@ div.footer-form-subheader {
 
 input.cf7-footer-input {
     caret-color: #ef1716;
-    font-size: 1.5em;
+    font-size: 16px;
     width: 80%;
     border-style: solid;
     border-width: 0px 0px 2px 0px;
@@ -817,6 +817,9 @@ input.cf7-footer-input {
     /**border: unset;**/
     background-color: unset;
     box-shadow: unset;
+}
+.form-checkbox {
+    margin-left: 10%;
 }
 
 input.cf7-footer-input:focus {

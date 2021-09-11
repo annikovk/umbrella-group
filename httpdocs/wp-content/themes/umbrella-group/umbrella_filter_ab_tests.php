@@ -54,6 +54,7 @@ function umbrella_content_fix($content, $ab_tag): string
 //
 // umbrella_ab_test6_variant1 - ТЗ-3, 3 - без доработки дизайна страницы цен
 // umbrella_ab_test6_variant2 - ТЗ-3, 3 - с доработкой дизайна страницы цен
+// umbrella_ab_test7_variant1 - ТЗ-3, 4 - без блока частые вопросы
 function umbrella_get_ab_test_tags(): array
 {
     $ab_tests_array = [];
@@ -69,9 +70,12 @@ function umbrella_get_ab_test_tags(): array
         $GLOBALS['expVar'] = $expVar;
         setAbTestCookie("exp_xSthYnX-SKuIkAVV_GvSuw",$expVar);
     }
+
     if (isset($_GET['expvar'])) {
         $expVar1 = $_GET['expvar'];
+        $expVar = $expVar1;
         setAbTestCookie("exp_test",$expVar1);
+        setAbTestCookie("exp_xSthYnX-SKuIkAVV_GvSuw",$expVar);
     } elseif (isset($_COOKIE['exp_test'])) {
         $expVar1 = $_COOKIE['exp_test'];
     } else {
@@ -85,9 +89,9 @@ function umbrella_get_ab_test_tags(): array
         array_push($ab_tests_array, 'umbrella_ab_test1_variant1', 'umbrella_ab_test2_nothing', 'umbrella_ab_test3_variant1', 'umbrella_ab_test4_variant1', 'umbrella_ab_test5_variant1');
     }
     if ($expVar1 == "1") {
-        array_push($ab_tests_array, 'umbrella_ab_test6_variant2');
+        array_push($ab_tests_array, 'umbrella_ab_test6_variant2','umbrella_ab_test7_variant1');
     } else {
-        array_push($ab_tests_array, 'umbrella_ab_test6_variant1');
+        array_push($ab_tests_array, 'umbrella_ab_test6_variant1','umbrella_ab_test7_nothing');
     }
     return $ab_tests_array;
 }

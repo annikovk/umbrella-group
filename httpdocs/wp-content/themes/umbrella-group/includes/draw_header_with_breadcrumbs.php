@@ -140,7 +140,7 @@ function umbrella_get_the_title()
         return '#'.single_tag_title("", false);
     } elseif (is_home()){
         return get_the_title( get_option('page_for_posts', true) );
-    } elseif (is_post_type_archive() && get_post_type_object(get_post_type())->name == "akcii") {
+    } elseif (is_post_type_archive() && get_post_type_object(get_post_type())->name == "akcii" ||get_post_type_object(get_post_type())->name == "faq" ) {
         return get_post_type_object(get_post_type())->label;
     } else {
         return get_the_title();
@@ -162,6 +162,9 @@ function umbrella_get_post_type($delimiter) {
         case "akcii":
             $post_link='/akcii/';
             return '<a href="' .$post_link.'">Акции</a> ' . $delimiter . ' ';
+        case "faq":
+            $post_link='/faq/';
+            return '<a href="' .$post_link.'">Вопросы</a> ' . $delimiter . ' ';
     }
      //return $post_name . ' ' . $delimiter . ' ';
 
