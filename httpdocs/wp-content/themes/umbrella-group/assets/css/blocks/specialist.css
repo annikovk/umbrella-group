@@ -1,0 +1,64 @@
+.specialist-tile {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    border: solid 1px #eeeeee;
+    margin-bottom: 50px;
+    position: relative;
+}
+.specialist-tile.main .specialist-photo{
+    max-width: 364px;
+    min-width: 364px;
+}
+.specialist-tile .specialist-photo {
+    flex-grow: 1;
+    max-width: 264px;
+    min-width: 264px;
+}
+.specialist-tile>.label {
+    position: absolute;
+    top: -16px;
+    background-color: white;
+    text-transform: uppercase;
+    padding-left: 24px;
+    padding-right: 24px;
+    font-size: 24px;
+    font-weight: bold;
+}
+.specialist-tile.main>.label {
+    left: 402px;
+}
+.specialist-tile>.label {
+    left: 302px;
+}
+.specialist-tile p {
+     margin: unset;
+    font-size: 18px;
+    line-height: 29px;
+    margin-bottom: 18px;
+}
+.specialist-fio {
+    font-size: 44px;
+}
+
+.specialist-text {
+    flex-grow: 3;
+    margin-left: 64px;
+    margin-right: 40px;
+    position: relative;
+}
+.specialist-contact{
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
+}
+.specialist-button-description{
+    margin-left: 36px;
+    flex-grow: 1;
+}
+.specialist-button {
+    min-width: 36%;
+    flex-basis: auto;
+    flex-grow: 1;
+}
