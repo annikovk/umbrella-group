@@ -1,0 +1,35 @@
+.video-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 50px;
+    position: relative;
+}
+.video-frame {
+    min-width: 700px;
+    min-height: 394px;
+    display: grid;
+}
+.video-description {
+    margin-left: 70px;
+}
+.video-author {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    align-items: center;
+}
+.video-author>.photo>img {
+    object-fit: cover;
+    object-position: center;
+    min-width: 128px;
+    height: 128px;
+    border-radius: 100%;
+}
+.video-author>.fio {
+    margin-left: 32px;
+}
+.video-description>.video-text {
+    margin-top: 24px;
+}

@@ -143,6 +143,7 @@ require get_theme_file_path() . '/template-parts/shortcodes/akcii.php';
 require get_theme_file_path() . '/template-parts/shortcodes/su_welcome_screen.php';
 require get_theme_file_path() . '/template-parts/shortcodes/faq.php';
 require get_theme_file_path() . '/template-parts/shortcodes/specialists.php';
+require get_theme_file_path() . '/template-parts/shortcodes/video.php';
 require get_theme_file_path() . '/template-parts/shortcodes/umbrella_feedback.php';
 require get_theme_file_path() . '/template-parts/shortcodes/service-tiles.php';
 require get_theme_file_path() . '/template-parts/shortcodes/su_welcome_screen_conditions.php';
