@@ -1,6 +1,6 @@
 <?php
 
-class umbrella_specialist
+class specialists
 {
     private $css_file = ['/assets/css/blocks/specialist.css'];
     private $category = "";
@@ -145,7 +145,7 @@ class umbrella_specialist
 
 function specialist_block_shortcode($atts)
 {
-    $shortcode = new umbrella_specialist();
+    $shortcode = new specialists();
     $shortcode->atts = $atts;
     if (!$shortcode->fill_attributes()) {
         return $shortcode->err;

@@ -142,7 +142,8 @@ require get_theme_file_path() . '/includes/about_subheader.php';
 require get_theme_file_path() . '/template-parts/shortcodes/akcii.php';
 require get_theme_file_path() . '/template-parts/shortcodes/su_welcome_screen.php';
 require get_theme_file_path() . '/template-parts/shortcodes/faq.php';
-require get_theme_file_path() . '/template-parts/shortcodes/specialist.php';
+require get_theme_file_path() . '/template-parts/shortcodes/specialists.php';
+require get_theme_file_path() . '/template-parts/shortcodes/umbrella_feedback.php';
 require get_theme_file_path() . '/template-parts/shortcodes/service-tiles.php';
 require get_theme_file_path() . '/template-parts/shortcodes/su_welcome_screen_conditions.php';
 // Hook : to get content with s3elected AB tests variants only
