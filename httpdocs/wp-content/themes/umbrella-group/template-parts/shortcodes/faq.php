@@ -81,7 +81,7 @@ class umbrella_faq
             $title = '<h2>' . $this->atts['title'] . '</h2>';
             $accordion_elements .= $title;
         }
-        $accordion_elements .= '[accordion]';
+        $accordion_elements .= '<div class="faq-tabs">[accordion]';
         foreach ($posts as $post) {
             $accordion_elements .= <<<EOHTML
                         [accordion-item title="$post->post_title" subtitle=""]
@@ -93,11 +93,11 @@ class umbrella_faq
                         [/accordion-item]
             EOHTML;
         }
-        $accordion_elements .= '[/accordion][gap][button text="Смотреть все вопросы" letter_case="lowercase" color="white" style="outline" link="/faq/"][button text="Задать вопрос" link="#faq-form" class=""]';
+        $accordion_elements .= '[/accordion]</div>[gap][button text="Смотреть все вопросы" letter_case="lowercase" color="white" style="outline" link="/faq/"][button text="Задать вопрос" link="#faq-form" class=""]';
         $accordion_elements .= <<<EOHTML
                 [lightbox id="faq-form" width="400px" padding="0px"]
                     [contact-form-7 id="11210" title="Форма Задать вопрос FAQ"]
-                [/lightbox]'
+                [/lightbox]
         EOHTML;
         return do_shortcode($accordion_elements);
     }

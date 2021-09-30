@@ -195,14 +195,17 @@
     transition: all 0.3s;
 }
 @media screen and (max-width: 849px) {
+    .akciya-block .inner-block.prices .inner-label {
+        left: unset;
+    }
     .akciya-block .background::after {
-        background-color: #2e4f75;
+        background-image: linear-gradient(to top, rgba(46, 79, 117, 0.7) 0%, #2e4f75 50%);
     }
 
-    .akciya-block .inner-icon, .akciya-block .inner-block.prices .inner-icon  {
+    .akciya-block .inner-block.half .inner-icon, .akciya-block .inner-icon, .akciya-block .inner-block.prices .inner-icon  {
         top: -44px;
-        width: 88px;
-        height: 88px;
+        width: 0;
+        height: 0;
         left: 32px;
     }
 

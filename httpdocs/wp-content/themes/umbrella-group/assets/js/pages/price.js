@@ -28,6 +28,5 @@ jQuery(window).scroll(function () {
         // Set/remove active class
         menuItems.parent().removeClass("active");
         jQuery(menuItems).filter(jQuery(`[href=${id}]`)).parent().addClass("active");
-
     }
 });

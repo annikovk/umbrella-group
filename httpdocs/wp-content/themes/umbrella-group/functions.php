@@ -647,25 +647,7 @@ function umbrella_draw_tiles($posts, $type)
 
 
         </style>
-        <script>
-            var accordions = document.getElementsByClassName("accordion");
-
-            for (var i = 0; i < accordions.length; i++) {
-                accordions[i].onclick = function () {
-                    this.classList.toggle('is-open');
-
-                    var content = this.nextElementSibling;
-                    if (content.style.maxHeight) {
-                        // accordion is currently open, so close it
-                        content.style.maxHeight = null;
-
-                    } else {
-                        // accordion is currently closed, so open it
-                        content.style.maxHeight = content.scrollHeight + "px";
-                    }
-                }
-            }
-        </script><?php
+        <?php
     } elseif ($type == 'cases') {
         $ru_month = array('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря');
         $en_month = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
