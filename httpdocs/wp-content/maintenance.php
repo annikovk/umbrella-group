@@ -23,7 +23,7 @@ header('Retry-After: 600');
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <link rel="icon" href="https://taxlab.ru/wp-content/uploads/cropped-favicon-32x32.png">
+    <link rel="icon" href="https://taxlab.ru/wp-content/uploads/favicon-16x16.ico">
     <link rel="stylesheet" href="https://taxlab.ru/wp-content/maintenance/assets/styles.css">
     <script src="https://taxlab.ru/wp-content/maintenance/assets/timer.js"></script>
     <title>Запланированное техобслуживание</title>
