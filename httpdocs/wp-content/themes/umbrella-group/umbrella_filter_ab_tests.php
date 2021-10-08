@@ -76,7 +76,7 @@ function umbrella_get_ab_test_tags(): array
     if ($expVar == '1') {
         array_push($ab_tests_array, 'umbrella_ab_test1_variant2', 'umbrella_ab_test2_variant1', 'umbrella_ab_test3_variant2', 'umbrella_ab_test4_variant2', 'umbrella_ab_test5_variant2');
     } else {
-        array_push($ab_tests_array, 'umbrella_ab_test1_variant1', 'umbrella_ab_test2_nothing', 'umbrella_ab_test3_variant1', 'umbrella_ab_test4_variant1', 'umbrella_ab_test5_variant1');
+        array_push($ab_tests_array, 'umbrella_ab_test1_variant2', 'umbrella_ab_test2_variant1', 'umbrella_ab_test3_variant2', 'umbrella_ab_test4_variant2', 'umbrella_ab_test5_variant2');
     }
     if ($expVar1 == "1") {
         array_push($ab_tests_array, 'umbrella_ab_test6_variant2','umbrella_ab_test7_variant1');

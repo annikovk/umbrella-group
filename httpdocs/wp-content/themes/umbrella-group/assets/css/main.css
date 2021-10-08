@@ -727,7 +727,7 @@ div.header-phone-top-right a, div.header-mail-top-right > a {
 }
 
 .social-icons:hover a {
-    color: #fff;
+    color: #1a1a1a;
 }
 
 .footer-top-section .row-large > .col {
@@ -932,7 +932,7 @@ input.cf7-footer-input:focus {
 p.footer-sub-text {
     font-size: 0.8em;
     line-height: 1.45em;
-    color: #b2b2b2;
+    color: #1a1a1a;
 }
 
 .title-p2 {
