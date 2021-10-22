@@ -4,6 +4,33 @@ class specialists
 {
     private $css_file = ['/assets/css/blocks/specialist.css'];
     private $category = "";
+    private $advantages = [
+        "Бухгалтерия" => [
+            "top" => "ГК Umbrella Group предоставляет услуги бухгалтерского аутсорсинга. <strong>Заниматься бухгалтерией вашей компании будут 3 специалиста.</strong>",
+            "bot" => "Это позволит существенно сэкономить на штате и исключить ошибки. Также в нашем штате есть специалисты смежных направлений — аудиторы и юристы. При потребности вы сможете немедленно получить их помощь.",
+            "image"=>"/wp-content/uploads/advantages.png"
+        ],
+        "аудит" => [
+            "top" => "<strong>Наши аттестованные аудиторы — члены СРО аудиторов Ассоциации «Содружество».</strong> Многолетний опыт и профессионализм сотрудников подтверждён сертификатами соответствия.",
+            "bot" => "Сертификаты и более 30 лет лидерства на рынке аудиторских услуг позволяют нам грамотно и в кратчайшие сроки провести для вас различные виды аудита. При необходимости подключаются смежные специалисты: бухгалтеры и юристы. Результатом аудиторских услуг ГК Umbrella Group является аудиторское заключение и рекомендации по устранению выявленных недочётов.",
+            "image"=>"/wp-content/uploads/advantages.png"
+        ],
+        "юридические услуги" => [
+            "top" => "Юристы ГК Umbrella Group — <strong>это специалисты с опытом работы более 15 лет.</strong> В штате есть налоговые консультанты, судебные практики и арбитражные управляющие.",
+            "bot" => "С уверенностью берёмся за сложные задачи — для нас нет нерешаемых вопросов. В спорных ситуациях подключаем наших смежных специалистов (бухгалтеров и аудиторов) и юридических партнёров из других отраслей. Поэтому мы выигрываем более 90 % дел и занимаем 1 место федерального рейтинга юридических услуг.",
+            "image"=>"/wp-content/uploads/advantages.png"
+        ],
+        "лицензирование" => [
+            "top" => "За годы существования отдела лицензирования ГК Umbrella Group <strong>мы получили более 11 200 лицензий</strong> по разным направлениям деятельности.",
+            "bot" => "В штате опытные юристы, досконально знающие процесс лицензирования. Мы следим за всеми изменениями требований, а также на постоянной основе проводим обучения. Помогаем получить лицензию, даже если вам отказывали и возвращали документы. Лицензируем не только в Новосибирске, но и в других городах России.",
+            "image"=>"/wp-content/uploads/advantages.png"
+        ],
+        "Регистрация и ликвидация" => [
+            "top" => "В нашем штате <strong>команда из 6 юристов</strong> по направлению корпоративного права. Мы готовим документы «под ключ» и сопровождаем вас на всех этапах процедуры.",
+            "bot" => "Все работы выполняются в строго оговоренные и указанные договором сроки. Вы можете не переживать, что процесс затянется – мы начинаем заниматься решением вашей проблемы сразу после вашего обращения к нам.",
+            "image"=>"/wp-content/uploads/advantages.png"
+        ],
+    ];
     public $atts;
     public $err;
 
@@ -25,6 +52,7 @@ class specialists
         foreach ($posts as $post) {
             $tiles .= $this->get_tile($post);
         }
+        $tiles .= $this->get_advantages($this->category);
         umbrella_add_custom_css_files($this->css_file);
         return $tiles;
     }
@@ -140,6 +168,25 @@ class specialists
             return "Бухгалтерия";
         }
         return "";
+    }
+
+    private function get_advantages(string $category): string
+    {
+        $adv_top = $this->advantages[$category]["top"];
+        $adv_bot = $this->advantages[$category]["bot"];
+        $adv_img = $this->advantages[$category]['image'];
+        $advantages = <<<EOHTML
+                <div class="specialists_advantages">
+                    
+                    <div class="specialists_advantages_top">
+                        <div class="specialists_advantages_top_text"><span><img src="/wp-content/uploads/Done_All_Icon_1.png" alt="done-all-icon"> </span> $adv_top</div> 
+                        <div class="specialists_advantages_top_img"><img src="$adv_img" alt="advantages-picture"></div>
+                    </div>
+                    <div class="specialists_advantages_bot">  $adv_bot</div>
+                   
+                </div>
+            EOHTML; 
+        return $advantages;
     }
 }
 
