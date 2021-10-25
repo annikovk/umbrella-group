@@ -4,4 +4,4 @@ jQuery(".accordion-title").click(function (){
 });
 jQuery(document).ready(function (){
     jQuery(".accordion .accordion-item:nth-child(2)").find(".accordion-title").click();
-})
+});
