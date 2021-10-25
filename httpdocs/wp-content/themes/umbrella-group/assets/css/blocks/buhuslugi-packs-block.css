@@ -313,7 +313,7 @@ max-width: 80%;
 }
 
 #buh-table .rightBlock .content .buh-table-row .item.text {
-    font-size: 16px;
+    font-size: 14px!important;
     color: #000000;
 }
 
@@ -417,12 +417,13 @@ max-width: 80%;
         border-top: 1px solid #d6d6d6;
         position: relative;
         z-index: 1;
+		font-weight: 700;
         /*width: 260px;*/
     }
 
-    #buh-table .leftBlock .content .item:first-child {
+    /*#buh-table .leftBlock .content .item:first-child {
         border-top: none;
-    }
+    }*/
 
     #buh-table .rightBlock {
         position: absolute;
@@ -485,6 +486,10 @@ max-width: 80%;
         display: flex;
         justify-content: center;
     }
+
+	#buh-table .leftBlock .content .item.service .line {
+		display: none;
+	}
 }
 
 @media (max-width: 425px) {
@@ -496,4 +501,7 @@ max-width: 80%;
         /*background: #f5f5f5;*/
         padding-left: 30px;
     }
+	#buh-table .leftBlock .content .item.service {
+		padding-left: 20px;
+	}
 }
