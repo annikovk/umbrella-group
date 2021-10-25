@@ -24,8 +24,9 @@
 	<span class="comments-link pull-right"><?php comments_popup_link( __( 'Leave a comment', 'flatsome' ), __( '<strong>1</strong> Comment', 'flatsome' ), __( '<strong>%</strong> Comments', 'flatsome' ) ); ?></span>
 	<?php endif; ?>
 	<script> 
-$(document).ready(function(){
-  $('meta[name=yandex-verification][content=dd2451994f5879ef]').remove();
-  console.log("fffff");}
-</script>
+		$(document).ready(function(){
+			$('meta[name=yandex-verification][content=dd2451994f5879ef]').remove();
+			console.log("fffff");
+		});
+	</script>
 </footer><!-- .entry-meta -->

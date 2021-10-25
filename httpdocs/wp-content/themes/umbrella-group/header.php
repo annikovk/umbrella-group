@@ -55,114 +55,100 @@
     </script>
     <!-- End Google Tag Manager -->
 
+    <!-- Marquiz script start -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(function () {
     <?php if ($_SERVER['REQUEST_URI'] == '/blog/%D0%BF%D1%80%D0%B8%D0%B3%D0%BB%D0%B0%D1%88%D0%B0%D0%B5%D0%BC-%D0%BD%D0%B0-%D0%B1%D0%B5%D1%81%D0%BF%D0%BB%D0%B0%D1%82%D0%BD%D1%8B%D0%B9-%D0%B2%D0%B5%D0%B1%D0%B8%D0%BD%D0%B0%D1%80-%D0%B7%D0%B0/'): ?>
-        <!-- Marquiz script start -->
-        <script>
-            (function (w, d, s, o) {
-                var j = d.createElement(s);
-                j.async = true;
-                j.src = '//script.marquiz.ru/v2.js';
-                j.onload = function () {
-                    if (document.readyState !== 'loading') Marquiz.init(o);
-                    else document.addEventListener("DOMContentLoaded", function () {
-                        Marquiz.init(o);
-                    });
-                };
-                d.head.insertBefore(j, d.head.firstElementChild);
-            })(window, document, 'script', {
-                    host: '//quiz.marquiz.ru',
-                    region: 'eu',
-                    id: '602f350e7914c10044581a97',
-                    autoOpen: false,
-                    autoOpenFreq: 'once',
-                    openOnExit: true,
-                    disableOnMobile: false
-                }
-            );
-        </script>
-        <!-- Marquiz script end -->
+        (function (w, d, s, o) {
+            var j = d.createElement(s);
+            j.async = true;
+            j.src = '//script.marquiz.ru/v2.js';
+            j.onload = function () {
+                if (document.readyState !== 'loading') Marquiz.init(o);
+                else document.addEventListener("DOMContentLoaded", function () {
+                    Marquiz.init(o);
+                });
+            };
+            d.head.insertBefore(j, d.head.firstElementChild);
+        })(window, document, 'script', {
+                host: '//quiz.marquiz.ru',
+                region: 'eu',
+                id: '602f350e7914c10044581a97',
+                autoOpen: false,
+                autoOpenFreq: 'once',
+                openOnExit: true,
+                disableOnMobile: false
+            }
+        );
     <?php elseif ($_SERVER['REQUEST_URI'] == '/blog/%D0%B1%D0%B0%D0%BD%D0%BA%D1%80%D0%BE%D1%82%D1%81%D1%82%D0%B2%D0%BE-%D0%BD%D0%B5%D0%BA%D0%BE%D0%BC%D0%BC%D0%B5%D1%80%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D1%85-%D0%BE%D1%80%D0%B3%D0%B0%D0%BD%D0%B8%D0%B7%D0%B0/'): ?>
-        <!-- Marquiz script start -->
-        <script>
-            (function (w, d, s, o) {
-                var j = d.createElement(s);
-                j.async = true;
-                j.src = '//script.marquiz.ru/v2.js';
-                j.onload = function () {
-                    if (document.readyState !== 'loading') Marquiz.init(o);
-                    else document.addEventListener("DOMContentLoaded", function () {
-                        Marquiz.init(o);
-                    });
-                };
-                d.head.insertBefore(j, d.head.firstElementChild);
-            })(window, document, 'script', {
-                    host: '//quiz.marquiz.ru',
-                    region: 'eu',
-                    id: '602f350e7914c10044581a97',
-                    autoOpen: false,
-                    autoOpenFreq: 'once',
-                    openOnExit: true,
-                    disableOnMobile: false
-                }
-            );
-        </script>
-        <!-- Marquiz script end -->
+        (function (w, d, s, o) {
+            var j = d.createElement(s);
+            j.async = true;
+            j.src = '//script.marquiz.ru/v2.js';
+            j.onload = function () {
+                if (document.readyState !== 'loading') Marquiz.init(o);
+                else document.addEventListener("DOMContentLoaded", function () {
+                    Marquiz.init(o);
+                });
+            };
+            d.head.insertBefore(j, d.head.firstElementChild);
+        })(window, document, 'script', {
+                host: '//quiz.marquiz.ru',
+                region: 'eu',
+                id: '602f350e7914c10044581a97',
+                autoOpen: false,
+                autoOpenFreq: 'once',
+                openOnExit: true,
+                disableOnMobile: false
+            }
+        );
     <?php elseif ($_SERVER['REQUEST_URI'] == '/blog/%D0%BB%D0%B8%D0%BA%D0%B2%D0%B8%D0%B4%D0%B0%D1%86%D0%B8%D1%8F-%D0%BE%D0%B1%D1%89%D0%B5%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BE%D0%B1%D1%8A%D0%B5%D0%B4%D0%B8%D0%BD%D0%B5%D0%BD%D0%B8/'): ?>
-        <!-- Marquiz script start -->
-        <script>
-            (function (w, d, s, o) {
-                var j = d.createElement(s);
-                j.async = true;
-                j.src = '//script.marquiz.ru/v2.js';
-                j.onload = function () {
-                    if (document.readyState !== 'loading') Marquiz.init(o);
-                    else document.addEventListener("DOMContentLoaded", function () {
-                        Marquiz.init(o);
-                    });
-                };
-                d.head.insertBefore(j, d.head.firstElementChild);
-            })(window, document, 'script', {
-                    host: '//quiz.marquiz.ru',
-                    region: 'eu',
-                    id: '602f350e7914c10044581a97',
-                    autoOpen: false,
-                    autoOpenFreq: 'once',
-                    openOnExit: true,
-                    disableOnMobile: false
-                }
-            );
-        </script>
-        <!-- Marquiz script end -->
+        (function (w, d, s, o) {
+            var j = d.createElement(s);
+            j.async = true;
+            j.src = '//script.marquiz.ru/v2.js';
+            j.onload = function () {
+                if (document.readyState !== 'loading') Marquiz.init(o);
+                else document.addEventListener("DOMContentLoaded", function () {
+                    Marquiz.init(o);
+                });
+            };
+            d.head.insertBefore(j, d.head.firstElementChild);
+        })(window, document, 'script', {
+                host: '//quiz.marquiz.ru',
+                region: 'eu',
+                id: '602f350e7914c10044581a97',
+                autoOpen: false,
+                autoOpenFreq: 'once',
+                openOnExit: true,
+                disableOnMobile: false
+            }
+        );
     <?php elseif ($_SERVER['REQUEST_URI'] == '/blog/%D0%BF%D1%80%D0%B8%D0%BD%D1%83%D0%B4%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F-%D0%BB%D0%B8%D0%BA%D0%B2%D0%B8%D0%B4%D0%B0%D1%86%D0%B8%D1%8F-%D0%B8%D0%BD%D0%B4%D0%B8%D0%B2%D0%B8%D0%B4%D1%83%D0%B0/'): ?>
-        <!-- Marquiz script start -->
-        <script>
-            (function (w, d, s, o) {
-                var j = d.createElement(s);
-                j.async = true;
-                j.src = '//script.marquiz.ru/v2.js';
-                j.onload = function () {
-                    if (document.readyState !== 'loading') Marquiz.init(o);
-                    else document.addEventListener("DOMContentLoaded", function () {
-                        Marquiz.init(o);
-                    });
-                };
-                d.head.insertBefore(j, d.head.firstElementChild);
-            })(window, document, 'script', {
-                    host: '//quiz.marquiz.ru',
-                    region: 'eu',
-                    id: '602f350e7914c10044581a97',
-                    autoOpen: false,
-                    autoOpenFreq: 'once',
-                    openOnExit: true,
-                    disableOnMobile: false
-                }
-            );
-        </script>
-        <!-- Marquiz script end -->
+        (function (w, d, s, o) {
+            var j = d.createElement(s);
+            j.async = true;
+            j.src = '//script.marquiz.ru/v2.js';
+            j.onload = function () {
+                if (document.readyState !== 'loading') Marquiz.init(o);
+                else document.addEventListener("DOMContentLoaded", function () {
+                    Marquiz.init(o);
+                });
+            };
+            d.head.insertBefore(j, d.head.firstElementChild);
+        })(window, document, 'script', {
+                host: '//quiz.marquiz.ru',
+                region: 'eu',
+                id: '602f350e7914c10044581a97',
+                autoOpen: false,
+                autoOpenFreq: 'once',
+                openOnExit: true,
+                disableOnMobile: false
+            }
+        );
     <?php elseif (strpos($_SERVER['REQUEST_URI'], 'register-elimination') > 0): ?>
-
-        <!-- Marquiz script start -->
-        <script>
+        document.addEventListener("DOMContentLoaded", function () {
             (function (w, d, s, o) {
                 var j = d.createElement(s);
                 j.async = true;
@@ -184,35 +170,34 @@
                     disableOnMobile: false
                 }
             );
-        </script>
-        <!-- Marquiz script end -->
+        });
     <?php else: ?>
-        <!-- Marquiz script start -->
-        <script>
-            (function (w, d, s, o) {
-                var j = d.createElement(s);
-                j.async = true;
-                j.src = '//script.marquiz.ru/v2.js';
-                j.onload = function () {
-                    if (document.readyState !== 'loading') Marquiz.init(o);
-                    else document.addEventListener("DOMContentLoaded", function () {
-                        Marquiz.init(o);
-                    });
-                };
-                d.head.insertBefore(j, d.head.firstElementChild);
-            })(window, document, 'script', {
-                    host: '//quiz.marquiz.ru',
-                    region: 'eu',
-                    id: '5f8423a5d8d13200441acb88',
-                    autoOpen: false,
-                    autoOpenFreq: 'once',
-                    openOnExit: true,
-                    disableOnMobile: false
-                }
-            );
-        </script>
-        <!-- Marquiz script end -->
-    <?php endif ?>
+        (function (w, d, s, o) {
+            var j = d.createElement(s);
+            j.async = true;
+            j.src = '//script.marquiz.ru/v2.js';
+            j.onload = function () {
+                if (document.readyState !== 'loading') Marquiz.init(o);
+                else document.addEventListener("DOMContentLoaded", function () {
+                    Marquiz.init(o);
+                });
+            };
+            d.head.insertBefore(j, d.head.firstElementChild);
+        })(window, document, 'script', {
+                host: '//quiz.marquiz.ru',
+                region: 'eu',
+                id: '5f8423a5d8d13200441acb88',
+                autoOpen: false,
+                autoOpenFreq: 'once',
+                openOnExit: true,
+                disableOnMobile: false
+            }
+        );
+        <?php endif; ?>
+        }, 8000);
+        });
+    </script>
+    <!-- Marquiz script end -->
 </head>
 
 <body <?php body_class(); // Body classes is added from inc/helpers-frontend.php ?>>
