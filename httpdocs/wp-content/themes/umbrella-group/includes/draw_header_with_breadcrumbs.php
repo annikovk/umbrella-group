@@ -42,6 +42,9 @@ function get_breadcrumbs()
         if (is_post_type_archive('akcii')){
             $breadcrumb .= get_post_type_object(get_post_type())->label;
         }
+        if (is_post_type_archive('faq')){
+            $breadcrumb .= get_post_type_object(get_post_type())->label;
+        }
         elseif (is_category()) {
             global $wp_query;
             $cat_obj = $wp_query->get_queried_object();
@@ -140,9 +143,12 @@ function umbrella_get_the_title()
         return '#'.single_tag_title("", false);
     } elseif (is_home()){
         return get_the_title( get_option('page_for_posts', true) );
-    } elseif (is_post_type_archive() && get_post_type_object(get_post_type())->name == "akcii" ||get_post_type_object(get_post_type())->name == "faq" ) {
+    } elseif (is_post_type_archive() && get_post_type_object(get_post_type())->name == "akcii" ) {
         return get_post_type_object(get_post_type())->label;
-    } else {
+    } elseif (get_post_type_object(get_post_type())->name == "faq") {
+        return "Частые вопросы";
+    }
+    else {
         return get_the_title();
     }
 

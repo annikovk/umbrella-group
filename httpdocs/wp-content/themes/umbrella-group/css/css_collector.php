@@ -22,7 +22,7 @@ class umbrella_customization
         "main.css", "styles-intelsib.css", "tablets-and-down.css"
     ];
     private $js_files = [
-        "chat.js"
+        "chat.js", "main.js"
     ];
 
     public function get_umbrella_custom_css()
