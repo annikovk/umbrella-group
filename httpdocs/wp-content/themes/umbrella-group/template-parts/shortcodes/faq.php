@@ -3,6 +3,7 @@
 class umbrella_faq
 {
     private $css_file = ['/assets/css/blocks/faq.css'];
+    private $js_file = ['/assets/js/blocks/faq.js'];
     private $category = "";
     public $atts;
     public $err;
@@ -27,7 +28,7 @@ class umbrella_faq
             $accordion = $this->get_accordions($posts);
         }
         umbrella_add_custom_css_files($this->css_file);
-
+        umbrella_add_custom_js_files($this->js_file);
 
         return $accordion;
     }
