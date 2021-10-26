@@ -1,3 +1,15 @@
+
+
+body {
+    position: relative;
+    font-family: sans-serif;
+    font-size: 16px;
+    color: #000000;
+    background: #ffffff;
+    overflow-x: hidden;
+    padding-bottom: 300px;
+}
+
 .hint {
     position: relative;
     display: inline-table;
@@ -178,13 +190,16 @@
     font-weight: bold;
 }
 
+#buh-table .rightBlock .head .item .name {
+max-width: 80%;
+}
 
 
 #buh-table .sale-flag, #buh-table .hit-flag {
     content: '';
     position: absolute;
     right: -5px;
-    top: -11px;
+    top: -5px;
     width: 56px;
     height: 70px;
 }
@@ -304,7 +319,7 @@
 }
 
 #buh-table .rightBlock .content .buh-table-row .item.text {
-    font-size: 16px;
+    font-size: 14px!important;
     color: #000000;
 }
 
@@ -357,6 +372,10 @@
 @media (max-width: 1150px) {
     .container {
         padding: 0;
+    }
+
+    .hint {
+        z-index: 101;
     }
 
     .tooltip {
