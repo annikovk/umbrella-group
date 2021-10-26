@@ -1,19 +1,7 @@
-
-
-body {
-    position: relative;
-    font-family: sans-serif;
-    font-size: 16px;
-    color: #000000;
-    background: #ffffff;
-    overflow-x: hidden;
-    padding-bottom: 300px;
-}
-
 .hint {
     position: relative;
     display: inline-table;
-    padding: 1px 7px;
+    padding: 0px 6px;
     font-size: 14px;
     border: solid #9a9a9a 1px;
     color: #9a9a9a;
@@ -24,9 +12,12 @@ body {
     font-weight: bold;
     cursor: default;
 }
+#buh-table .name .hint {
+    margin-left: unset;
+}
 
 .tooltip {
-    position: absolute;
+    position: fixed;
     display: none;
     background: #FFFFFF;
     -webkit-box-shadow: 0 9px 20px rgba(0, 0, 0, 0.3);
@@ -92,6 +83,7 @@ body {
     -ms-flex-direction: column;
     flex-direction: column;
     height: 190px;
+    z-index: 101;
 }
 
 #buh-table .leftBlock .price .checkBoxWrapper {
@@ -157,6 +149,7 @@ body {
 
 #buh-table .leftBlock .content .item.accent {
     color: #ec1c23;
+    font-weight: 600;
 }
 
 #buh-table .leftBlock .content .item.accent img {
@@ -174,7 +167,7 @@ body {
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
-    width: 185px;
+    width: 210px;
     height: 100%;
     padding: 0 10px;
 }
@@ -185,24 +178,22 @@ body {
     font-weight: bold;
 }
 
-#buh-table .rightBlock .head .item .name {
-max-width: 80%;
-}
 
-#buh-table .rightBlock .head .item.sale:after, #buh-table .rightBlock .head .item.hit:after {
+
+#buh-table .sale-flag, #buh-table .hit-flag {
     content: '';
     position: absolute;
     right: -5px;
-    top: -5px;
+    top: -11px;
     width: 56px;
     height: 70px;
 }
 
-#buh-table .rightBlock .head .item.sale:after {
+#buh-table .sale-flag {
     background: url("/wp-content/uploads/sale.png");
 }
 
-#buh-table .rightBlock .head .item.hit:after {
+#buh-table .hit-flag {
     background: url("/wp-content/uploads/hit.png");
 }
 
@@ -301,7 +292,7 @@ max-width: 80%;
 }
 
 #buh-table .rightBlock .content .buh-table-row:first-child .item.text {
-    font-size: 12px;
+    font-size: 16px;
 }
 
 #buh-table .rightBlock .content .buh-table-row:last-child .item {
@@ -309,7 +300,7 @@ max-width: 80%;
 }
 
 #buh-table .rightBlock .content .buh-table-row .item.plus {
-    color: #000000;
+    color: #1a1a1a;
 }
 
 #buh-table .rightBlock .content .buh-table-row .item.text {
@@ -360,18 +351,17 @@ max-width: 80%;
     background-size: 12px;
     background-image: url("/wp-content/uploads/point.svg");
 }
-
+#buh-table .rightBlock .content .buh-table-row .item.for-mobile {
+    display: none;
+}
 @media (max-width: 1150px) {
     .container {
         padding: 0;
     }
 
-    .hint {
-        z-index: 101;
-    }
-
     .tooltip {
-        max-width: 150px;
+        width: 90vh;
+        height: 20vh;
     }
 
     .main {
@@ -394,7 +384,6 @@ max-width: 80%;
     #buh-table .leftBlock {
         position: relative;
         border-right: none;
-        padding-left: 30px;
         width: 100vw;
     }
 
@@ -404,7 +393,7 @@ max-width: 80%;
         left: 0;
         width: 100vw;
         height: 115px;
-        padding: 0 15px;
+        /*padding: 0 15px;*/
     }
 
     #buh-table .leftBlock .content {
@@ -417,7 +406,7 @@ max-width: 80%;
         border-top: 1px solid #d6d6d6;
         position: relative;
         z-index: 1;
-        /*width: 260px;*/
+        width: 100%;
     }
 
     #buh-table .leftBlock .content .item:first-child {
@@ -437,12 +426,8 @@ max-width: 80%;
     }
 
     #buh-table .rightBlock .item {
-        min-width: 260px;
-        width: 260px;
-    }
-
-    #buh-table .rightBlock .head .item {
-        font-size: 22px;
+        min-width: 250px;
+        width: 250px;
     }
 
     #buh-table .rightBlock .price {
@@ -468,32 +453,52 @@ max-width: 80%;
         justify-content: center !important;
     }
 
-    #buh-table .rightBlock .content .buh-table-row .item.active:before {
+    #buh-table .rightBlock .content .buh-table-row .item.active:after {
         content: " ";
         background-color: #f5f5f5;
-        width: 260px;
+        width: 250px;
         height: 50px;
         position: absolute;
         margin-top: -50px;margin-bottom: 50px;
-
+        z-index: 0;
     }
     #buh-table .rightBlock .content .buh-table-row .item.active {
         background: #f5f5f5;
     }
+
     #buh-table .rightBlock .item {
         padding: unset;
         display: flex;
-        justify-content: center;
+        /*justify-content: center;*/
     }
 }
 
 @media (max-width: 425px) {
-    #buh-table .leftBlock {
-        padding-left: 0;
+    .priceWrapper{
+        padding-left: 20px;
     }
-
+    .tooltip {
+        position: fixed;
+    }
+    #buh-table .rightBlock .item:last-child {
+        margin-right: 360px;
+    }
+    #buh-table .rightBlock .content .buh-table-row .item.for-mobile  {
+        display: block;
+        width: 70px;
+        min-width: 70px;
+    }
     #buh-table .leftBlock .content .item {
         /*background: #f5f5f5;*/
-        padding-left: 30px;
+        padding-left: 20px;
+        padding-right: 16px;
+    }
+    #buh-table .rightBlock .head .item .name {
+        /*max-width: 80%;*/
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    #buh-table .hint {
+        padding: 0px 7px;
     }
 }

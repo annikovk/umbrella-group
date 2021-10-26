@@ -30,7 +30,8 @@ class buhuslugi_packs_table
 
     public function generate_shortcode()
     {
-        $html = <<<EOHTML
+        $html =
+            <<<EOHTML
                 <div id="buh-table">
                   <div class="leftBlock">
                     <div class="head"></div>
@@ -60,35 +61,16 @@ class buhuslugi_packs_table
                     <div class="content">
                       <div class="item">Бухгалтерский учет</div>
                       <div class="item">Подготовка и сдача отчётности
-                       <span class="hint" data-tooltip="#service1"
-                          >?
-                          <div class="tooltip" id="service1">
-                            Составляем бухгалтерскую и налоговую отчетность с двойным контролем. Отвечаем на требования налоговой. Сопровождаем при проверке. Сдаём всё точно в срок.
-                          </div>
-                        </span>
+                       <span class="hint" data-tooltip="#service1">? </span>
                         </div>
-                      <div class="item">Расчёт зароботной платы
-                      <span class="hint" data-tooltip="#service2">?
-                          <div class="tooltip" id="service2">
-                            Рассчитываем зарплату, составляем и сдаём отчетность по сотрудникам
-                          </div>
-                        </span>
+                      <div class="item">Расчёт заработной платы
+                      <span class="hint" data-tooltip="#service2">?</span>
                         </div>
                       <div class="item">Расчёт налогов
-                      <span class="hint" data-tooltip="#service3"
-                          >?
-                          <div class="tooltip" id="service3">
-                            Рассчитаем все налоги заранее. Без рисков, просрочек и штрафов. Берём всё общение с налоговой на себя.
-                          </div>
-                        </span>
+                      <span class="hint" data-tooltip="#service3">?</span>
                         </div>
                       <div class="item">Консультация бухгалтера
-                      <span class="hint" data-tooltip="#service4"
-                          >?
-                          <div class="tooltip" id="service4">
-                            В рабочие дни бухгалтер будет всё время на связи по вопросам бухгалтерского учета и налогообложения в рамках текущей деятельности.
-                          </div>
-                        </span>
+                      <span class="hint" data-tooltip="#service4">?</span>
                       </div>
                       <div class="item">Кадровый учёт</div>
                       <div class="item">Юридическое сопровождение</div>
@@ -110,15 +92,12 @@ class buhuslugi_packs_table
                       </div>
                       <div class="item accent">
                         <img src="/wp-content/uploads/securityIcon.png" />
-                        Отвественность
+                        Ответственность
                         <span class="hint" data-tooltip="#tooltipResponsibility"
                           >?
-                          <div class="tooltip" id="tooltipResponsibility">
-                            Указана нижняя граница тарифа: до 100 операций в месяц и до
-                            3 работников.
-                          </div>
                         </span>
                       </div>
+
                     </div>
                   </div>
                   <div class="rightBlock">
@@ -136,7 +115,7 @@ class buhuslugi_packs_table
                           </span>
                         </div>
                       </div>
-                      <div class="item sale" data-option="2">
+                      <div class="item" data-option="2">
                         <div class="name">
                           Бухгалтерский аутсорсинг
                           <span class="hint" data-tooltip="#ttEmployee2"
@@ -149,8 +128,13 @@ class buhuslugi_packs_table
                             </div>
                           </span>
                         </div>
+                        <div class="sale-flag"  data-tooltip="#tooltipHeaderSale">
+                            <div class="tooltip" id="tooltipHeaderSale">
+                                СКИДКА 10 % на первый месяц ведения новым клиентам.
+                            </div>
+                        </div>
                       </div>
-                      <div class="item hit" data-option="3">
+                      <div class="item" data-option="3">
                         <div class="name">
                           Бухгалтерия + кадры
                           <span class="hint" data-tooltip="#ttEmployee3"
@@ -163,6 +147,11 @@ class buhuslugi_packs_table
                                 • частые приёмы на работу и увольнения, отпуски, командировки.
                             </div>
                           </span>
+                        </div>
+                        <div class="hit-flag"  data-tooltip="#tooltipHeaderHit">
+                            <div class="tooltip" id="tooltipHeaderHit">
+                                Самый популярный тариф среди наших клиентов.
+                            </div>
                         </div>
                       </div>
                       <div class="item" data-option="4">
@@ -293,19 +282,19 @@ class buhuslugi_packs_table
                         </div>
                       </div>
                       <div class="buh-table-row">
-                        <div class="item plus" data-option="1">+</div>
-                        <div class="item plus" data-option="2">+</div>
-                        <div class="item plus" data-option="3">+</div>
-                        <div class="item plus" data-option="4">+</div>
+                        <div class="item plus" data-option="1"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
+                        <div class="item plus" data-option="2"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
+                        <div class="item plus" data-option="3"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
+                        <div class="item plus" data-option="4"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
                       </div>
                       <div class="buh-table-row">
-                        <div class="item plus" data-option="1">+</div>
-                        <div class="item plus" data-option="2">+</div>
-                        <div class="item plus" data-option="3">+</div>
-                        <div class="item plus" data-option="4">+</div>
+                        <div class="item plus" data-option="1"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
+                        <div class="item plus" data-option="2"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
+                        <div class="item plus" data-option="3"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
+                        <div class="item plus" data-option="4"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
                       </div>
                       <div class="buh-table-row">
-                        <div class="item plus" data-option="1">++ 
+                        <div class="item plus" data-option="1"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""> 
                           <span class="hint" data-tooltip="#ttContent"
                             >?
                             <div class="tooltip" id="ttContent">
@@ -315,57 +304,66 @@ class buhuslugi_packs_table
                             </div>
                           </span>
                         </div>
-                        <div class="item plus" data-option="2">+</div>
-                        <div class="item plus" data-option="3">+</div>
-                        <div class="item plus" data-option="4">+</div>
+                        <div class="item plus" data-option="2"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
+                        <div class="item plus" data-option="3"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
+                        <div class="item plus" data-option="4"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
                       </div>
                       <div class="buh-table-row">
-                        <div class="item plus" data-option="1">+</div>
-                        <div class="item plus" data-option="2">+</div>
-                        <div class="item plus" data-option="3">+</div>
-                        <div class="item plus" data-option="4">+</div>
+                        <div class="item plus" data-option="1"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
+                        <div class="item plus" data-option="2"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
+                        <div class="item plus" data-option="3"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
+                        <div class="item plus" data-option="4"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
                       </div>
                       <div class="buh-table-row">
-                        <div class="item" data-option="1">-</div>
-                        <div class="item" data-option="2">-</div>
-                        <div class="item plus" data-option="3">+</div>
-                        <div class="item plus" data-option="4">+</div>
+                        <div class="item" data-option="1"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
+                        <div class="item" data-option="2"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
+                        <div class="item plus" data-option="3"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height="">
+                            <span class="hint" data-tooltip="#ttBuh5"
+                            >?
+                            <div class="tooltip" id="ttBuh5">
+                             Составим трудовые договоры, штатное расписание, кадровые приказы. Оформим кадровые локально-нормативные акты.
+                            </div>
+                          </span>
+                        </div>
+                        <div class="item plus" data-option="4"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""><span class="hint" data-tooltip="#ttBuh5"
+                            >?</span></div>
                       </div>
                       <div class="buh-table-row">
-                        <div class="item" data-option="1">-</div>
-                        <div class="item" data-option="2">-</div>
-                        <div class="item" data-option="3">-</div>
-                        <div class="item plus" data-option="4">+</div>
+                        <div class="item" data-option="1"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
+                        <div class="item" data-option="2"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
+                        <div class="item" data-option="3"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
+                        <div class="item plus" data-option="4"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
                       </div>
                       <div class="buh-table-row">
-                        <div class="item" data-option="1">-</div>
-                        <div class="item" data-option="2">-</div>
-                        <div class="item" data-option="3">-</div>
-                        <div class="item plus" data-option="4">+</div>
+                        <div class="item" data-option="1"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
+                        <div class="item" data-option="2"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
+                        <div class="item" data-option="3"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
+                        <div class="item plus" data-option="4"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
                       </div>
                       <div class="buh-table-row">
-                        <div class="item" data-option="1">-</div>
-                        <div class="item" data-option="2">-</div>
-                        <div class="item" data-option="3">-</div>
-                        <div class="item plus" data-option="4">+</div>
+                        <div class="item" data-option="1"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
+                        <div class="item" data-option="2"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
+                        <div class="item" data-option="3"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
+                        <div class="item plus" data-option="4"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
                       </div>
                       <div class="buh-table-row">
-                        <div class="item" data-option="1">-</div>
-                        <div class="item" data-option="2">-</div>
-                        <div class="item" data-option="3">-</div>
-                        <div class="item plus" data-option="4">+</div>
+                        <div class="item" data-option="1"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
+                        <div class="item" data-option="2"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
+                        <div class="item" data-option="3"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
+                        <div class="item plus" data-option="4"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
                       </div>
                       <div class="buh-table-row">
-                        <div class="item" data-option="1">-</div>
-                        <div class="item" data-option="2">-</div>
-                        <div class="item" data-option="3">-</div>
-                        <div class="item plus" data-option="4">+</div>
+                        <div class="item" data-option="1"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
+                        <div class="item" data-option="2"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
+                        <div class="item" data-option="3"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
+                        <div class="item plus" data-option="4"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
                       </div>
                       <div class="buh-table-row">
                         <div class="item text" data-option="1">100%</div>
                         <div class="item text" data-option="2">100%</div>
                         <div class="item text" data-option="3">100%</div>
                         <div class="item text" data-option="4">100%</div>
+                        <div class="item for-mobile" ></div>
                       </div>
                       <div class="buh-table-row">
                         <div class="item" data-option="1">
@@ -383,10 +381,27 @@ class buhuslugi_packs_table
                       </div>
                     </div>
                   </div>
+
+                      <div class="tooltip" id="tooltipResponsibility">
+                            Указана нижняя граница тарифа: до 100 операций в месяц и до
+                            3 работников.
+                      </div>
+                      <div class="tooltip" id="service1">
+                            Составляем бухгалтерскую и налоговую отчетность с двойным контролем. Отвечаем на требования налоговой. Сопровождаем при проверке. Сдаём всё точно в срок.
+                      </div>
+                      <div class="tooltip" id="service2">
+                            Рассчитываем зарплату, составляем и сдаём отчетность по сотрудникам
+                      </div>
+                      <div class="tooltip" id="service3">
+                            Рассчитаем все налоги заранее. Без рисков, просрочек и штрафов. Берём всё общение с налоговой на себя.
+                      </div>
+                      <div class="tooltip" id="service4">
+                            В рабочие дни бухгалтер будет всё время на связи по вопросам бухгалтерского учета и налогообложения в рамках текущей деятельности.
+                      </div>
                 </div>
                 [lightbox id="buh-table-form" width="400px" padding="0px"]
-                    [contact-form-7 id="9965" title="Форма Расчёт стоимости услуги"]
-                [/lightbox]'
+                    [contact-form-7 id="11903" title="Форма Расчёт стоимости услуги таблицы бух.услуг"]
+                [/lightbox]
         EOHTML;
         umbrella_add_custom_css_files($this->css_file);
         umbrella_add_custom_js_files($this->js_file);

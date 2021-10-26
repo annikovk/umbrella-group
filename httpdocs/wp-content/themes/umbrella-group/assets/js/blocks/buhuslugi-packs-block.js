@@ -9,6 +9,7 @@ jQuery(document).ready(function () {
             }
         });
     });
+
     function elementInViewport(el) {
         var bounds = el.getBoundingClientRect();
         return (
@@ -29,11 +30,12 @@ jQuery(document).ready(function () {
                 activeList.forEach((element) => {
                     jQuery(element).addClass("active");
                 });
-
+                jQuery(".tooltip").hide()
                 return;
             }
         });
     }
+
     if (window.innerWidth <= 425) {
         activateColumn();
         jQuery("#buh-table .rightBlock").on("scroll", activateColumn);
@@ -49,13 +51,26 @@ jQuery(document).ready(function () {
             });
         });
     }
-
-    jQuery(".hint").hover(
+    jQuery("#buh-table button").click(
+        function (e){
+            service = jQuery(`.item[data-option='${jQuery(this).closest(".item").data("option")}'] .name`)[0].innerText.replace(/[?]/gi, '')
+            jQuery("#leave-request-contact-form div.leave-request-contact-form-service-name").text("Услуга: " + service);
+            jQuery("#leave-request-contact-form  textarea.leave-request-contact-form-service-name").val(service);
+        }
+    );
+    jQuery(".hint, .sale-flag, .hit-flag").hover(
         function (e) {
+            if (window.innerWidth <= 425) {
+                leftTooltipPos = "5vh"
+                topTooltipPos = e.pageY - jQuery(window).scrollTop() + 15 + "px";
+            } else {
+                 leftTooltipPos = e.pageX + 15 + "px";
+                 topTooltipPos =  e.pageY - jQuery(window).scrollTop() + "px";
+            }
             jQuery(jQuery(this).data("tooltip"))
                 .css({
-                    left: 20,
-                    top: 20,
+                    left: leftTooltipPos,
+                    top: topTooltipPos,
                 })
                 .stop()
                 .show(100);
@@ -64,4 +79,5 @@ jQuery(document).ready(function () {
             jQuery(jQuery(this).data("tooltip")).hide();
         }
     );
+
 });
