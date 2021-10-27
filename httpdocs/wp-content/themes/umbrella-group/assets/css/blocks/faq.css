@@ -2,7 +2,9 @@
     border-bottom: 3px solid red;
     font-weight: bold;
 }
-
+button.toggle {
+    z-index: 10;
+}
 .accordion-item.active {
     background-color: #f8f8f8;
 }
