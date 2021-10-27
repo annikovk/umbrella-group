@@ -72,9 +72,9 @@ function umbrella_draw_faq_tiles($posts)
                 [section label="$meta" padding="0px"]
                     [scroll_to title="$meta" link="$i" bullet="false"]
                     <h2>$meta</h2>
-                    [accordion]
+                    <div class="faq-tabs">[accordion]
                         $accordion_element[$meta]
-                    [/accordion]
+                    [/accordion]</div>
                     [gap]
                     [button text="Задать вопрос" link="#faq-form" class="accordion-"]
                 [/section]
@@ -99,7 +99,7 @@ function umbrella_draw_faq_tiles($posts)
         [/row]
         [lightbox id="faq-form" width="400px" padding="0px"]
                     [contact-form-7 id="11210" title="Форма Задать вопрос FAQ"]
-                [/lightbox]'
+        [/lightbox]
     EOHTML;
     echo do_shortcode($template);
     umbrella_add_custom_css_files(['/assets/css/pages/faq.css']);
