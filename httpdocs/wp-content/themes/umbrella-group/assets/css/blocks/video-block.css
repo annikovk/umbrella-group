@@ -1,3 +1,20 @@
+.video-block-outer h3 {
+    font-size: 48px;
+    margin-bottom: 50px;
+}
+.video-block .video-duration{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: #929292;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 18px;
+    margin-bottom: 35px;
+}
+.video-block .video-duration:before{
+content:url("/wp-content/uploads/Play_Arrow_Icon_2.png");
+}
 .video-block {
     display: flex;
     flex-direction: row;
@@ -32,4 +49,36 @@
 }
 .video-description>.video-text {
     margin-top: 24px;
+}
+@media (max-width: 549px) {
+    .video-block .video-duration{
+        margin-bottom: unset;
+    }
+    .video-block-outer h3 {
+        margin-top: 40px;
+        font-size: 28px;
+        margin-bottom: unset;
+    }
+    .video-block {
+        flex-direction: column;
+    }
+    .video-frame {
+        min-width: 100%;
+        min-height: unset;
+        display: grid;
+    }
+    .video-author>.photo {
+        display: none;
+    }
+    .video-description {
+        margin-left: unset;
+    }
+    .video-author>.fio {
+        margin-left: unset;
+        margin-top: 35px;
+        margin-bottom: 35px;
+    }
+    .video-description>.video-text {
+        margin-top: 35px;
+    }
 }
