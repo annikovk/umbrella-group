@@ -58,9 +58,7 @@ function umbrella_content_fix($content, $ab_tag): string
 function umbrella_get_ab_test_tags(): array
 {
     $ab_tests_array = [];
-
     $expVar = "1";
-
     if (isset($_GET['expvar'])) {
         $expVar1 = $_GET['expvar'];
         $expVar = $expVar1;
@@ -88,5 +86,8 @@ function umbrella_get_ab_test_tags(): array
 
 function setAbTestCookie(string $cookieName, string $value): bool
 {
+    if (htmlspecialchars($_COOKIE[$cookieName])==$value){
+        return true;
+    }
     return setcookie($cookieName, $value, time() + 3600 * 24 * 30, "/", ".taxlab.ru");
 }
