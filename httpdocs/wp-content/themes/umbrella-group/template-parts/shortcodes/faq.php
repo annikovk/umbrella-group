@@ -22,6 +22,7 @@ class umbrella_faq
     public function generate_shortcode()
     {
         $posts = $this->get_5_faq_posts($this->category);
+        if (!isset($this->atts['main'])) { $this->atts['main'] = "";}
         if ($this->atts['main']!=""){
             $accordion = $this->get_main_block();
         } else {
@@ -78,6 +79,7 @@ class umbrella_faq
     private function get_accordions($posts): string
     {
         $accordion_elements = "";
+        if (!isset($this->atts['title'])) { $this->atts['title'] = "";}
         if ($this->atts['title'] != "") {
             $title = '<h2>' . $this->atts['title'] . '</h2>';
             $accordion_elements .= $title;
