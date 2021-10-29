@@ -86,8 +86,15 @@ function umbrella_get_ab_test_tags(): array
 
 function setAbTestCookie(string $cookieName, string $value): bool
 {
-    if (htmlspecialchars($_COOKIE[$cookieName])==$value){
+    if (isset($_COOKIE[$cookieName])) {
+        if (htmlspecialchars($_COOKIE[$cookieName])==$value){
+            return true;
+        }
+    }
+    $previously_cached =  wp_cache_get('umbrella_cookie_modified');
+    if (isset($previously_cached) && $previously_cached==$cookieName) {
         return true;
     }
+    wp_cache_set('umbrella_cookie_modified', $cookieName);
     return setcookie($cookieName, $value, time() + 3600 * 24 * 30, "/", ".taxlab.ru");
 }
