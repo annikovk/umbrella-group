@@ -30,3 +30,25 @@ jQuery(window).scroll(function () {
         jQuery(menuItems).filter(jQuery(`[href=${id}]`)).parent().addClass("active");
     }
 });
+
+jQuery(".partial_payment_note_for_prices_page_hint").hover(
+    function (e) {
+        if (window.innerWidth <= 425) {
+            leftTooltipPos = "5vh"
+            topTooltipPos = e.pageY - jQuery(window).scrollTop() + 15 + "px";
+        } else {
+            leftTooltipPos = e.pageX - 30 + "px";
+            topTooltipPos = e.pageY - jQuery(window).scrollTop() + 15 + "px";
+        }
+        a = jQuery(this).find(".partial_payment_note_for_prices_page_tooltip");
+        a.css({
+            left: leftTooltipPos,
+            top: topTooltipPos,
+        })
+            .stop()
+            .show(100);
+    },
+    function () {
+        jQuery(this).find(".partial_payment_note_for_prices_page_tooltip").hide();
+    }
+);

@@ -508,9 +508,9 @@ p.feedback-subheader-right a {
     color: #ec1b24;
 }
 
-.accordion-title.active span.accordion-subtitle, .accordion-title:hover span, .accordion-item:hover > a {
-    color: #1a1a1a;
-}
+/*.accordion-title.active span.accordion-subtitle, .accordion-title:hover span, .accordion-item:hover > a {*/
+/*    color: #1a1a1a;*/
+/*}*/
 
 .accordion-title span.accordion-subtitle {
     width: 60%;
@@ -521,7 +521,7 @@ p.feedback-subheader-right a {
 
 
 .accordion-title span {
-    display: table-cell;
+    /*display: table-cell;*/
     width: 40%;
 }
 

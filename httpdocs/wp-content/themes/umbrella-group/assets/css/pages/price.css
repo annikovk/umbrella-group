@@ -67,6 +67,29 @@
     padding-top: 50px;
 }
 
+.partial_payment_note_for_prices_page_tooltip {
+    position: fixed;
+    display: none;
+    background: #FFFFFF;
+    -webkit-box-shadow: 0 9px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 9px 20px rgba(0, 0, 0, 0.3);
+    padding: 8px 24px;
+    font-size: 16px;
+    font-weight: normal;
+    color: #1a1a1a;
+    line-height: 24px;
+    max-width: 300px;
+    min-width: 200px;
+    z-index: 100;
+}
+
+.partial_payment_note_for_prices_page {
+    color: #729DCD;
+}
+
+.partial_payment_note_for_prices_page:hover {
+    color: #729DCD;
+}
 
 @media screen and (max-width: 849px) {
     .price-content h2.price-header {
