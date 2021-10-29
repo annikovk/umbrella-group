@@ -6,6 +6,7 @@ class SU_welcome_screen_conditions
     public $atts;
     private $columns_number=4;
     private $css_files = ['/assets/css/blocks/su-welcome-screen-conditions.css'];
+    private $js_files = ['/assets/js/blocks/su-welcome-screen-conditions.js'];
     public $err = "<ul style='padding: 24px;'> Неправильное использование шорткода: ";
     private $headers;
     private $sub_headers;
@@ -45,15 +46,33 @@ class SU_welcome_screen_conditions
     {
         $columns = '';
         for ($i = 0; $i <= $this->columns_number-1; $i++) {
-            $width =  12/$this->columns_number;
+            $width = 12 / $this->columns_number;
             $mobile_width = 12;
             if (isset($this->button_texts[$i])) {
-                $button = '<div class="su_welcome_screen_conditions_button">[button style="outline" expand="true" text="'.$this->button_texts[$i].'" link="'.$this->button_links[$i].'"]</div>';
+                $button = '<div class="su_welcome_screen_conditions_button">[button style="outline" expand="true" text="' . $this->button_texts[$i] . '" link="' . $this->button_links[$i] . '"]</div>';
             } else {
                 $button = '';
             }
             $header = $this->headers[$i];
             $subheader = $this->sub_headers[$i];
+            if (str_contains($header, "<Рассрочка>")) {
+                $header = <<<EOHTML
+                    <div class="partial_payments_header">
+                        Возможна оплата частями 
+                        <span class="partial_payments_header_hint"> <img src="/wp-content/uploads/Help_Outline_Icon_18.png" alt="help icon"> 
+                            <div class="partial_payments_header_tooltip">
+                                Предоплата 70 %, остальные 30 % оплачиваются после подписания акта о проделанных работах. Свяжитесь с нами и получите предложение!
+                            </div> 
+                        </span>
+                    </div>
+                EOHTML;
+                $subheader = <<<EOHTML
+                    <div class="partial_payments_subheader">
+                        предоплата 70%
+                    </div>
+                EOHTML;
+
+            }
             $column = <<<EOHTML
                 [col span="$width" span__sm="$mobile_width" class="su_welcome_screen_conditions_column"]
                     <div class="su_welcome_screen_conditions_header">$header</div>
@@ -64,6 +83,7 @@ class SU_welcome_screen_conditions
             $columns .= $column;
         }
         umbrella_add_custom_css_files($this->css_files);
+        umbrella_add_custom_js_files($this->js_files);
         return <<<EOHTML
                [row col_style="solid" class="su_welcome_screen_conditions"]
                 $columns
