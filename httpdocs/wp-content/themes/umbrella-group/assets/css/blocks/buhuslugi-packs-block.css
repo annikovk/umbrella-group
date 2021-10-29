@@ -1,7 +1,7 @@
-.hint {
+#buh-table .hint {
     position: relative;
     display: inline-table;
-    padding: 0px 6px;
+    padding: 0px 7px;
     font-size: 14px;
     border: solid #9a9a9a 1px;
     color: #9a9a9a;
@@ -16,7 +16,7 @@
     margin-left: unset;
 }
 
-.tooltip {
+#buh-table .tooltip {
     position: fixed;
     display: none;
     background: #FFFFFF;
@@ -32,7 +32,7 @@
     z-index: 100;
 }
 
-.container {
+#buh-table .container {
     max-width: 1130px;
     margin: 0 auto;
     padding: 0 10px;
@@ -311,17 +311,17 @@
     color: #000000;
 }
 
-.item.active {
+#buh-table .item.active {
     background: #f5f5f5;
 }
 
-.buh-table-radio {
+#buh-table .buh-table-radio {
     position: absolute;
     z-index: -1;
     opacity: 0;
 }
 
-.buh-table-radio + label {
+#buh-table .buh-table-radio + label {
     display: -webkit-inline-box;
     display: -webkit-inline-flex;
     display: -ms-inline-flexbox;
@@ -336,7 +336,7 @@
     user-select: none;
 }
 
-.buh-table-radio + label:before {
+#buh-table .buh-table-radio + label:before {
     content: '';
     display: inline-block;
     width: 20px;
@@ -347,13 +347,14 @@
     margin-right: 10px;
 }
 
-.buh-table-radio:checked + label:before {
+#buh-table .buh-table-radio:checked + label:before {
     background-position: -webkit-calc(50% - 0.5px) -webkit-calc(50% - 0.5px);
     background-position: calc(50% - 0px) calc(50% - 0.5px);
     background-repeat: no-repeat;
     background-size: 12px;
     background-image: url("/wp-content/uploads/point.svg");
 }
+
 #buh-table .rightBlock .content .buh-table-row .item.for-mobile {
     display: none;
 }
@@ -481,12 +482,14 @@
 }
 
 @media (max-width: 425px) {
-    .priceWrapper{
+    #buh-table .priceWrapper {
         padding-left: 20px;
     }
-    .tooltip {
+
+    #buh-table .tooltip {
         position: fixed;
     }
+
     #buh-table .rightBlock .item:last-child {
         margin-right: 360px;
     }
