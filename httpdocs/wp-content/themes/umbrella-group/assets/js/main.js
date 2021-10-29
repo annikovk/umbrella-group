@@ -8,4 +8,4 @@ jQuery(".accordion-title").click(function (){
 });
 jQuery(".accordion button.toggle").click(function (){
     jQuery(this).parent().find(".accordion-inner").toggle(200);
-})
+});
