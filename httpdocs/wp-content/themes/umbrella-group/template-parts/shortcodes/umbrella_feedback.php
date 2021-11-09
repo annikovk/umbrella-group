@@ -3,6 +3,7 @@
 class umbrella_feedback
 {
     public $err = "error";
+    public $atts;
 
     public function fill_attributes(): bool
     {
@@ -12,6 +13,9 @@ class umbrella_feedback
     public function generate_shortcode()
     {
         $clients = $this->get_clients();
+        if (strlen($clients) == 0) {
+            return null;
+        }
         $html = <<<EOHTML
             [section bg_color="rgb(249, 249, 249)"]
                 [row]
@@ -32,7 +36,13 @@ class umbrella_feedback
 
     private function get_clients()
     {
-        $tag = get_term_by('slug', 'show-on-main', 'client_tags');
+        //show feedback from main on the register-eliminaton and licensing pages
+        $shown_category = $this->get_category();
+        if ($shown_category == 'register-elimination' || $shown_category == 'licensing') {
+            $tag = get_term_by('slug', 'main', 'client_category');
+        } else {
+            $tag = get_term_by('slug', $shown_category, 'client_category');
+        }
         if (!empty($tag)) {
             $args = array(
                 'numberposts' => 99,
@@ -49,7 +59,7 @@ class umbrella_feedback
             $posts = get_posts($args);
         }
         if (!empty($posts)) {
-            $html="";
+            $html = "";
             foreach ($posts as $post) {
                 $logo = get_the_post_thumbnail($post->ID);
                 $logo = '<div class="feedback-image">' . $logo . '</div>';
@@ -88,6 +98,28 @@ class umbrella_feedback
         }
         return $html;
     }
+
+    private function get_category()
+    {
+        $atts = $this->atts;
+        if (!empty($atts['category'])) {
+            return $atts['category'];
+        } else if (is_front_page()) {
+            //main page shows feedback shortcode at custom location. Since that, we do not show this in footer.
+            return "";
+        } else if (strpos($_SERVER['REQUEST_URI'], "services/licensing") !== false) {
+            return "licensing";
+        } else if (strpos($_SERVER['REQUEST_URI'], "services/audit/") !== false) {
+            return "audit";
+        } else if (strpos($_SERVER['REQUEST_URI'], "services/bukhgalterskie-uslugi/") !== false) {
+            return "bukhgalterskie-uslugi";
+        } else if (strpos($_SERVER['REQUEST_URI'], "services/register-elimination") !== false) {
+            return "register-elimination";
+        } else if (strpos($_SERVER['REQUEST_URI'], "services/services-le") !== false) {
+            return "services-le";
+        }
+        return "";
+    }
 }
 
 function umbrella_feedback_block_shortcode($atts)
@@ -101,3 +133,7 @@ function umbrella_feedback_block_shortcode($atts)
 }
 
 add_shortcode('umbrella_feedback', 'umbrella_feedback_block_shortcode');
+
+
+
+

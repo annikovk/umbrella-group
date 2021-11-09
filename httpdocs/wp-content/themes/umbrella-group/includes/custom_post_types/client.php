@@ -29,7 +29,7 @@ function custom_post_type()
         'rewrite' => array('slug' => 'client'),
 // Features this CPT supports in Post Editor
         'supports' => array('title', 'editor', 'excerpt', 'thumbnail', 'revisions', 'custom-fields'),
-        'taxonomies' => array('industry'),
+        'taxonomies' => array('industry', 'category'),
 // You can associate this CPT with a taxonomy or custom taxonomy.
 //'taxonomies'          => array( 'industry' ),
         /* A hierarchical CPT is like Pages and can have
@@ -78,6 +78,25 @@ function register_taxonomies_for_client_post_type()
         'label' => 'Отрасль',
         'labels' => $labels_industry,
     );
+    $labels_category = array(
+        'name' => _x('Отображать на', 'taxonomy general name'),
+        'singular_name' => _x('Отображать на', 'taxonomy singular name'),
+        'search_items' => __('Поиск отметок'),
+        'all_items' => __('Все отметки'),
+        'parent_item' => __('Parent'),
+        'parent_item_colon' => __('Parent:'),
+        'edit_item' => __('Редактировать отметку'),
+        'update_item' => __('Обновить отметку'),
+        'add_new_item' => __('Добавить новую отметку'),
+        'new_item_name' => __('Новая отметка'),
+        'menu_name' => __('Отображение'),
+        'not_found' => __('Не найдено'),
+    );
+    $args_category = array(
+        'hierarchical' => false,
+        'label' => 'Отображать на',
+        'labels' => $labels_category,
+    );
 
     $labels_tags = array(
         'name' => _x('Специальные отметки', 'taxonomy general name'),
@@ -96,8 +115,9 @@ function register_taxonomies_for_client_post_type()
         'label' => 'Отметки',
         'labels' => $labels_tags,
     );
-    register_taxonomy('client_tags', array('client'), $args_tags);
+//    register_taxonomy('client_tags', array('client'), $args_tags);
     register_taxonomy('client_industry', array('client'), $args_industry);
+    register_taxonomy('client_category', array('client'), $args_category);
 }
 
 // Add the custom columns to the client post type:
@@ -107,11 +127,12 @@ function set_custom_edit_client_columns($columns)
     unset($columns['date']);
 
     $columns['client_industry'] = 'Отрасль';
+    $columns['client_category'] = 'Отображать на';
     $columns['umbrella_client_personal_industry'] = 'Индивидуальная отрсаль';
     $columns['umbrella_link_to_client_website'] = 'Сайт';
     $columns['is_feedback'] = 'Отзыв';
     $columns['umbrella_feedback_scan'] = 'Скан отзыва';
-    $columns['client_tags'] = 'Специальные отметки';
+//    $columns['client_tags'] = 'Специальные отметки';
 
     return $columns;
 }
@@ -124,6 +145,13 @@ function custom_client_column($column, $post_id)
 
         case 'client_industry' :
             $terms = get_the_term_list($post_id, 'client_industry', '', ',', '');
+            if (is_string($terms))
+                echo $terms;
+            else
+                echo '';
+            break;
+        case 'client_category' :
+            $terms = get_the_term_list($post_id, 'client_category', '', ',', '');
             if (is_string($terms))
                 echo $terms;
             else
