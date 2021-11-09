@@ -24,7 +24,7 @@ class video_block
             $this->text = $this->atts['text'];
             return true;
         } else {
-            $this->err = 'Not enough attributes. Here is the correct shortcode: [video_block link="https://www.youtube.com/embed/pJikk8r9Aj8" header="Заголовок" duration="5 минут" fio="<b>Тарасова Юлия Сергеевна</b>, руководитель отдела бухгалтерского обслуживания ГК Umbrella Group" photo="123"  text="test text"]';
+            $this->err = 'Not enough attributes. Here is the correct shortcode: \[video_block link="https://www.youtube.com/embed/pJikk8r9Aj8" header="Заголовок" duration="5 минут" fio="<b>Тарасова Юлия Сергеевна</b>, руководитель отдела бухгалтерского обслуживания ГК Umbrella Group" photo="123"  text="test text"\]';
             return false;
         }
     }
