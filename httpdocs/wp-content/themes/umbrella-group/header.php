@@ -171,6 +171,7 @@
                 }
             );
         });
+    <?php elseif (strpos($_SERVER['REQUEST_URI'], 'licensing') > 0): ?>
     <?php else: ?>
         (function (w, d, s, o) {
             var j = d.createElement(s);
