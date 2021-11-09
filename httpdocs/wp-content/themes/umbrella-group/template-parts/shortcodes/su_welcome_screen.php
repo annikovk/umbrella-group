@@ -206,7 +206,7 @@ function umbrella_get_ratings($type='')
             $header = '2 место рейтинга консалтинговых агенств Сибири, 2009-2013';
             return ['icon'=>$icon,'header'=> $header,'subheader'=> ""];
         case 'expert-header':
-            $icon='/wp-content/uploads/pravo-300.jpg';
+            $icon = '/wp-content/uploads/manual_uploads/pravo-300.jpeg';
             $header = 'Топ юридических компаний по версии pravo.ru';
             return ['icon'=>$icon,'header'=> $header,'subheader'=> ""];
         default:
