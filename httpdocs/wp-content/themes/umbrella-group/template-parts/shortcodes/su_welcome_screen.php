@@ -206,8 +206,9 @@ function umbrella_get_ratings($type='')
             $header = '2 место рейтинга консалтинговых агенств Сибири, 2009-2013';
             return ['icon'=>$icon,'header'=> $header,'subheader'=> ""];
         case 'expert-header':
-            $icon='/wp-content/uploads/top-reitinga-expert-header.png';
-            return ['icon'=>$icon,'header'=> "",'subheader'=> ""];
+            $icon='/wp-content/uploads/pravo-300.jpg';
+            $header = 'Топ юридических компаний по версии pravo.ru';
+            return ['icon'=>$icon,'header'=> $header,'subheader'=> ""];
         default:
             if (strpos($_SERVER['REQUEST_URI'], "services/audit") !== false) {
                 $header = 'Финалист конкурса';
