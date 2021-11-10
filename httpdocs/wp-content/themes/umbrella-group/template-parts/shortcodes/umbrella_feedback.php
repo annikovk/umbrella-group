@@ -58,8 +58,8 @@ class umbrella_feedback
             );
             $posts = get_posts($args);
         }
+        $html = "";
         if (!empty($posts)) {
-            $html = "";
             foreach ($posts as $post) {
                 $logo = get_the_post_thumbnail($post->ID);
                 $logo = '<div class="feedback-image">' . $logo . '</div>';
