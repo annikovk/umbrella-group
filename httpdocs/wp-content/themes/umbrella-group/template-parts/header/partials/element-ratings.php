@@ -10,7 +10,7 @@ $ratings_block = <<<EOHTML
                     <div class="header-ratings-header">{$rating2['header']}</div>
                 </div>
                 <div class="header-ratings-icon-box">
-                    <div class="header-ratings-icon" style="background-image: url({$rating1['icon']});border-radius:0;"> </div>
+                    <div class="header-ratings-icon" style="background-image: url({$rating1['icon']});border-radius:0;  width: 47px;"> </div>
                     <div class="header-ratings-header" style="width: 194px;">{$rating1['header']}</div>
                 </div>
             </div>

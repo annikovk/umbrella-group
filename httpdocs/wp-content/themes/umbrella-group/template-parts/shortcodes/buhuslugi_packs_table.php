@@ -60,7 +60,7 @@ class buhuslugi_packs_table
                     </div>
                     <div class="content">
                       <div class="item">Бухгалтерский учет</div>
-                      <div class="item">Подготовка и сдача отчётности
+                      <div class="item">Подготовка, сдача отчётности
                        <span class="hint" data-tooltip="#service1">? </span>
                         </div>
                       <div class="item">Расчёт заработной платы
