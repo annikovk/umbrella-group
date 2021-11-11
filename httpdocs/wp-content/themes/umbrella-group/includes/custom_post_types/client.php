@@ -3,10 +3,8 @@
 * Adding post types support for 'clients' posts.
 */
 
-function custom_post_type()
+function client_post_type()
 {
-
-// Set UI labels for Custom Post Type
     $labels = array(
         'name' => _x('Клиенты', 'Post Type General Name'),
         'singular_name' => _x('Клиент', 'Post Type Singular Name'),
@@ -19,23 +17,13 @@ function custom_post_type()
         'search_items' => __('Поиск клиенты'),
         'not_found' => __('Клиентов не найдено'),
     );
-
-// Set other options for Custom Post Type
-
     $args = array(
         'label' => __('Клиенты'),
         'description' => __('Клиенты и их отзывы'),
         'labels' => $labels,
         'rewrite' => array('slug' => 'client'),
-// Features this CPT supports in Post Editor
         'supports' => array('title', 'editor', 'excerpt', 'thumbnail', 'revisions', 'custom-fields'),
         'taxonomies' => array('industry', 'category'),
-// You can associate this CPT with a taxonomy or custom taxonomy.
-//'taxonomies'          => array( 'industry' ),
-        /* A hierarchical CPT is like Pages and can have
-        * Parent and child items. A non-hierarchical CPT
-        * is like Posts.
-        */
         'hierarchical' => false,
         'public' => true,
         'show_ui' => true,
@@ -50,12 +38,14 @@ function custom_post_type()
         'publicly_queryable' => true,
         'capability_type' => 'post',
     );
-
-// Registering your Custom Post Type
     register_post_type('client', $args);
+    add_filter('manage_client_posts_columns', 'set_custom_edit_client_columns');
+    add_action('manage_client_posts_custom_column', 'custom_client_column', 10, 2);
+
+    new client_shortcode_options();
+
 
 }
-
 
 function register_taxonomies_for_client_post_type()
 {
@@ -97,7 +87,6 @@ function register_taxonomies_for_client_post_type()
         'label' => 'Отображать на',
         'labels' => $labels_category,
     );
-
     $labels_tags = array(
         'name' => _x('Специальные отметки', 'taxonomy general name'),
         'singular_name' => _x('Отметка', 'taxonomy singular name'),
@@ -120,8 +109,6 @@ function register_taxonomies_for_client_post_type()
     register_taxonomy('client_category', array('client'), $args_category);
 }
 
-// Add the custom columns to the client post type:
-add_filter('manage_client_posts_columns', 'set_custom_edit_client_columns');
 function set_custom_edit_client_columns($columns)
 {
     unset($columns['date']);
@@ -137,8 +124,6 @@ function set_custom_edit_client_columns($columns)
     return $columns;
 }
 
-// Add the data to the custom columns for the client post type:
-add_action('manage_client_posts_custom_column', 'custom_client_column', 10, 2);
 function custom_client_column($column, $post_id)
 {
     switch ($column) {
@@ -170,7 +155,6 @@ function custom_client_column($column, $post_id)
             print_r(get_post_meta($post_id, 'umbrella_client_personal_industry', true));
             break;
         case 'umbrella_link_to_client_website' :
-//echo  get_post_meta( $post_id , 'umbrella_link_to_client_website' , true );
             if (!empty(get_post_meta($post_id, 'umbrella_link_to_client_website', true))) {
                 echo '<a href="' . get_post_meta($post_id, 'umbrella_link_to_client_website', true) . '"  target="_blank">перейти на сайт </a>';
             }
@@ -186,15 +170,140 @@ function custom_client_column($column, $post_id)
     }
 }
 
-/* Hook into the 'init' action so that the function
-* Containing our post type registration is not
-* unnecessarily executed.
-*/
+class client_shortcode_options
+{
+    public function __construct()
+    {
+        add_action('admin_menu', array($this, 'add_submenu_page_to_post_type'));
+        add_action('admin_init', array($this, 'sub_menu_page_init'));
+    }
 
-add_action('init', 'custom_post_type');
+    /**
+     * Add sub menu page to the custom post type
+     */
+    public function add_submenu_page_to_post_type()
+    {
+        add_submenu_page(
+            'edit.php?post_type=client',
+            'Опции шорткода',
+            'Шорткод',
+            'manage_options',
+            'projects_archive',
+            array($this, 'client_options_display'));
+    }
+
+    /**
+     * Options page callback
+     */
+    public function client_options_display()
+    {
+        $this->options = get_option('client_shortcode_options');
+
+//        wp_enqueue_media();
+
+        echo '<div class="wrap">';
+
+        printf('<h1>%s</h1>', 'Натсройки отзывов');
+
+        echo '<form method="post" action="options.php">';
+
+        settings_fields('projects_archive');
+
+        do_settings_sections('client_shortcode_options_page');
+
+        submit_button();
+
+        echo '</form></div>';
+    }
+
+    /**
+     * Register and add settings
+     */
+    public function sub_menu_page_init()
+    {
+        register_setting(
+            'projects_archive', // Option group
+            'client_shortcode_options', // Option name
+//        array($this,'sanitize'),
+        );
+
+        add_settings_section(
+            'header_settings_section', // ID
+            'Опции шорткода [umbrella_feedback]', // Title
+            array($this, 'print_section_info'), // Callback
+            'client_shortcode_options_page', // Page
+        );
+
+        add_settings_field(
+            'excluded_pages', // ID
+            'Исключить вывод шорткода на', // Title
+            array($this, 'excluded_pages_callback'), // Callback
+            'client_shortcode_options_page', // Page
+            'header_settings_section' // Section
+        );
+
+    }
+
+    /**
+     * Sanitize each setting field as needed
+     *
+     * @param array $input Contains all settings fields as array keys
+     */
+    public function sanitize($input)
+    {
+        print_r($input);
+        $new_input = array();
+
+        if (isset($input['excluded_pages']))
+            $new_input['excluded_pages'] = absint($input['excluded_pages']);
+
+        if (isset($input['image_attachment_id']))
+            $new_input['image_attachment_id'] = absint($input['image_attachment_id']);
+
+        return $new_input;
+    }
+
+    /**
+     * Print the Section text
+     */
+    public function print_section_info()
+    {
+
+    }
+
+    /**
+     * Get the settings option array and print one of its values
+     */
+    public function excluded_pages_callback()
+    {
+        $pages = get_pages();
+        foreach ($pages as $page) {
+            $id = $page->ID;
+            $selected = isset($this->options) && strlen($this->options > 0) && in_array($id, $this->options['excluded_pages']) ? 'selected' : '';
+            if (!isset($options)) $options = '';
+            $options .= '<option value="' . $id . '" ' . $selected . '>';
+            $options .= $page->post_title;
+            $options .= '</option>';
+        }
+        $pages = <<<EOHTML
+                        <select  multiple="multiple" class="client_shortcode_options" name="client_shortcode_options[excluded_pages][]"> 
+                            $options
+                        </select>
+                        <script src="/wp-content/themes/umbrella-group/assets/js/admin/chosen.jquery.min.js"></script>
+                        <link rel="stylesheet" href="/wp-content/themes/umbrella-group/assets/css/admin/chosen.min.css">
+                        <script>
+                            jQuery(document).ready(function() {
+                                jQuery('select.client_shortcode_options').chosen();
+                            });
+                        </script>
+                    EOHTML;
+        echo $pages;
+
+    }
+}
+
+add_action('init', 'client_post_type');
 add_action('init', 'register_taxonomies_for_client_post_type');
 add_action('init', function () {
     add_ux_builder_post_type('client');
 });
-
-//Set other options for Custom Post Type

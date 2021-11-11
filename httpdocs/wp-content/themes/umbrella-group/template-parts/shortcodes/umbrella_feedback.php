@@ -43,6 +43,10 @@ class umbrella_feedback
         } else {
             $tag = get_term_by('slug', $shown_category, 'client_category');
         }
+        $wp_client_options = get_option('client_shortcode_options');
+        if ($wp_client_options !== null && strlen((string)$wp_client_options) > 0 && in_array(get_the_ID(), $wp_client_options['excluded_pages'])) {
+            return "";
+        }
         if (!empty($tag)) {
             $args = array(
                 'numberposts' => 99,
@@ -104,9 +108,6 @@ class umbrella_feedback
         $atts = $this->atts;
         if (!empty($atts['category'])) {
             return $atts['category'];
-        } else if (is_front_page()) {
-            //main page shows feedback shortcode at custom location. Since that, we do not show this in footer.
-            return "";
         } else if (strpos($_SERVER['REQUEST_URI'], "services/licensing") !== false) {
             return "licensing";
         } else if (strpos($_SERVER['REQUEST_URI'], "services/audit/") !== false) {
