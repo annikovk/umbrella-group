@@ -101,8 +101,6 @@ class buhuslugi_packs_table
                     </div>
                   </div>
                   <div class="rightBlock">
-                    <div class="head-fix">
-                    </div>
                     <div class="head">
                       <div class="item" data-option="1">
                         <div class="name">

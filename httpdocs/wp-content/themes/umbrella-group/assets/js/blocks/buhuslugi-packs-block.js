@@ -35,46 +35,6 @@ jQuery(document).ready(function () {
             }
         });
     }
-    // jQuery('body').click(function(e) {
-    //     alert(e.pageX+ ' , ' + e.pageY);
-    // });
-    jQuery(function () {
-        var margin = 120;
-        var height = 110;
-        var dockTop = jQuery('.rightBlock .head').offset().top;
-        var dockBottom = jQuery('.rightBlock').height() + dockTop - height - margin;
-        var pageY;
-        var headBlock = jQuery('.rightBlock .head');
-        var headFix = jQuery('.head-fix');
-        var hitOnce = false;
-        init = function () {
-            jQuery(window).on('scroll', function () {
-                if(jQuery(window).width() <= 425) {
-                    pageY = window.pageYOffset;
-                    console.log(dockTop + " < " + pageY + " < " + dockBottom);
-                    if(pageY >= dockTop && pageY <= dockBottom) {
-                        var length = jQuery('#buh-table .rightBlock').scrollLeft();
-                        jQuery('#buh-table .head').scrollLeft(length);
-                        headBlock.addClass("is-fixed");
-                        headFix.css("display", "block");
-                        hitOnce = true;
-                    } else {
-                        if (!hitOnce) {
-                            dockTop = jQuery('.rightBlock .head').offset().top;
-                            dockBottom = jQuery('.rightBlock').height() + dockTop - height - margin;
-                        }
-                        headBlock.removeClass("is-fixed");
-                        headFix.css("display", "none");
-                    }
-                }
-            });
-        };
-        jQuery(init);
-        jQuery('#buh-table .rightBlock').scroll(function(){
-            var length = jQuery(this).scrollLeft();
-            jQuery('#buh-table .head').scrollLeft(length);
-        });
-    }());
 
     if (window.innerWidth <= 425) {
         activateColumn();
