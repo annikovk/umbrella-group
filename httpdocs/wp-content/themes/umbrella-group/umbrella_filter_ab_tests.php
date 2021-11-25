@@ -68,12 +68,11 @@ function umbrella_get_ab_test_tags(): array
     // Принудительный вывод нового варианта ТЗ-2
     $expVar = "1";
 
+    // Установка Cookie основываясь на параметр expvar в URL
     /*
     if (isset($_GET['expvar'])) {
         $expVar1 = $_GET['expvar'];
-        $expVar = $expVar1;
         setAbTestCookie("exp_test", $expVar1);
-        setAbTestCookie("exp_xSthYnX-SKuIkAVV_GvSuw", $expVar);
     } elseif (isset($_COOKIE['exp_test'])) {
         $expVar1 = $_COOKIE['exp_test'];
     } else {
