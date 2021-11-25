@@ -60,7 +60,14 @@ function umbrella_content_fix($content, $ab_tag): string
 function umbrella_get_ab_test_tags(): array
 {
     $ab_tests_array = [];
+
+    // expVar - ТЗ-2
+    // expVar1 - ТЗ-3
+
+    // Принудительный вывод нового варианта ТЗ-2
     $expVar = "1";
+
+    /*
     if (isset($_GET['expvar'])) {
         $expVar1 = $_GET['expvar'];
         $expVar = $expVar1;
@@ -72,12 +79,32 @@ function umbrella_get_ab_test_tags(): array
         $expVar1 = "0";
         setAbTestCookie("exp_test",$expVar1);
     }
+    */
 
+    if (isset($_COOKIE['exp_mXyZSFCYQ-y-yfVchN_bSg'])) 
+    {
+        $expVar1 = $_COOKIE['exp_mXyZSFCYQ-y-yfVchN_bSg'];
+    } 
+    elseif (isset($GLOBALS['expVar1'])) 
+    {
+        $expVar1 = $GLOBALS['expVar1'];
+        setAbTestCookie("exp_mXyZSFCYQ-y-yfVchN_bSg",$expVar1);
+    }
+    else 
+    {
+        $expVar1 = rand(0,1);
+        $GLOBALS['expVar1'] = $expVar1;
+        setAbTestCookie("exp_mXyZSFCYQ-y-yfVchN_bSg",$expVar1);
+    }
+
+    // ТЗ-2
     if ($expVar == '1') {
         array_push($ab_tests_array, 'umbrella_ab_test1_variant2', 'umbrella_ab_test2_variant1', 'umbrella_ab_test3_variant2', 'umbrella_ab_test4_variant2', 'umbrella_ab_test5_variant2');
     } else {
         array_push($ab_tests_array, 'umbrella_ab_test1_variant2', 'umbrella_ab_test2_variant1', 'umbrella_ab_test3_variant2', 'umbrella_ab_test4_variant2', 'umbrella_ab_test5_variant2');
     }
+
+    // ТЗ-3
     if ($expVar1 == "1") {
         array_push($ab_tests_array, 'umbrella_ab_test6_variant2', 'umbrella_ab_test7_variant1', 'umbrella_ab_test8_variant2');
     } else {
