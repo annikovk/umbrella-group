@@ -21,25 +21,18 @@ if (
 	$flatsome_levels = (int) get_theme_mod( 'mobile_submenu_levels', '1' );
 
 	$flatsome_mobile_sidebar_classes[] = 'mobile-sidebar-slide';
-	$flatsome_nav_classes[]            = 'nav-slide';
+    $flatsome_nav_classes[] = 'nav-slide';
 
-	for ( $level = 1; $level <= $flatsome_levels; $level++ ) {
-		$flatsome_mobile_sidebar_classes[] = "mobile-sidebar-levels-{$level}";
-	}
+    for ($level = 1; $level <= $flatsome_levels; $level++) {
+        $flatsome_mobile_sidebar_classes[] = "mobile-sidebar-levels-{$level}";
+    }
 }
 ?>
-<div id="main-menu" class="<?php echo esc_attr( implode( ' ', $flatsome_mobile_sidebar_classes ) ); ?>"<?php echo $flatsome_levels ? ' data-levels="' . esc_attr( $flatsome_levels ) . '"' : ''; ?>>
-	<div class="sidebar-menu no-scrollbar <?php if ( $flatsome_mobile_overlay == 'center') echo 'text-center'; ?>">
-		<ul class="<?php echo esc_attr( implode( ' ', $flatsome_nav_classes ) ); ?>">
-            <?php
-            $header = new AB_tests_header_modifier();
-            if (in_array('umbrella_ab_test4_variant2',umbrella_get_ab_test_tags())) {
-                $header->override_mobile('umbrella_ab_test4_variant2');
-            } else {
-                $header->override_mobile('umbrella_ab_test4_variant1');
-            };
-            flatsome_header_elements( 'mobile_sidebar', 'sidebar' );
-            ?>
-		</ul>
-	</div>
+<div id="main-menu"
+     class="<?php echo esc_attr(implode(' ', $flatsome_mobile_sidebar_classes)); ?>"<?php echo $flatsome_levels ? ' data-levels="' . esc_attr($flatsome_levels) . '"' : ''; ?>>
+    <div class="sidebar-menu no-scrollbar <?php if ($flatsome_mobile_overlay == 'center') echo 'text-center'; ?>">
+        <ul class="<?php echo esc_attr(implode(' ', $flatsome_nav_classes)); ?>">
+            <?php flatsome_header_elements('mobile_sidebar', 'sidebar'); ?>
+        </ul>
+    </div>
 </div>

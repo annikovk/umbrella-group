@@ -138,7 +138,6 @@ require get_theme_file_path() . '/includes/custom_post_types/akcii.php';
 require get_theme_file_path() . '/includes/custom_post_types/faq.php';
 require get_theme_file_path() . '/includes/custom_post_types/specialist.php';
 require get_theme_file_path() . '/includes/draw_header_with_breadcrumbs.php';
-require get_theme_file_path() . '/includes/about_subheader.php';
 require get_theme_file_path() . '/template-parts/shortcodes/akcii.php';
 require get_theme_file_path() . '/template-parts/shortcodes/su_welcome_screen.php';
 require get_theme_file_path() . '/template-parts/shortcodes/faq.php';

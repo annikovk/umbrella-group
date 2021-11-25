@@ -9,12 +9,10 @@ function umbrella_filter_ab_tests($content)
             $tag_to_remove = "umbrella_ab_test" . $counter . "_variant" . $i . "";
             if ($tag_to_remove != $ab_tag) {
                 $content = umbrella_content_fix($content, $tag_to_remove);
-//                if ($tag_to_remove=='umbrella_ab_test3_variant1'){print_r($content);}
                 $pattern_to_remove = "/<" . $tag_to_remove . ">[\s\S]+?<\/" . $tag_to_remove . ">/";
                 $content = preg_replace($pattern_to_remove, "", $content);
             } else {
                 $content = umbrella_content_fix($content, $ab_tag);
-//                if ($tag_to_remove=='umbrella_ab_test3_variant2'){print_r($content);}
                 $content = umbrella_clear_ab_tags($content, $ab_tag);
             }
         }
@@ -44,14 +42,6 @@ function umbrella_content_fix($content, $ab_tag): string
     return strtr($content, $fix);
 }
 
-// umbrella_ab_test1_variant2 - ТЗ-2, 12 - новые экраны страниц услуг
-// umbrella_ab_test1_variant1 - ТЗ-2, 12 - старые экраны страниц услуг
-// umbrella_ab_test2_variant1 - ТЗ-2, 8.3, 8.4 - блоки акций
-// umbrella_ab_test3_variant2 - ТЗ-2, 8.7, 10 - Изменен первый, добавлены 2ой и 3ий слайды на баннере на главной.
-// umbrella_ab_test3_variant1 - ТЗ-2, 10 - старый вариант первого слайда
-// umbrella_ab_test4_variant2 - ТЗ-2, 2.1, 2.2 - новый вариант меню
-// umbrella_ab_test5_variant1 - ТЗ-2, 7 - Подписи гарантий на главной
-//
 // umbrella_ab_test6_variant1 - ТЗ-3, 3 - без доработки дизайна страницы цен
 // umbrella_ab_test6_variant2 - ТЗ-3, 3 - с доработкой дизайна страницы цен
 // umbrella_ab_test7_variant1 - ТЗ-3, 4 - без блока частые вопросы
@@ -62,11 +52,7 @@ function umbrella_get_ab_test_tags(): array
 {
     $ab_tests_array = [];
 
-    // expVar - ТЗ-2
     // expVar1 - ТЗ-3
-
-    // Принудительный вывод нового варианта ТЗ-2
-    $expVar = "1";
 
     // Установка Cookie основываясь на параметр expvar в URL
     /*
@@ -95,13 +81,6 @@ function umbrella_get_ab_test_tags(): array
         $expVar1 = rand(0,1);
         $GLOBALS['expVar1'] = $expVar1;
         setAbTestCookie("exp_mXyZSFCYQ-y-yfVchN_bSg",$expVar1);
-    }
-
-    // ТЗ-2
-    if ($expVar == '1') {
-        array_push($ab_tests_array, 'umbrella_ab_test1_variant2', 'umbrella_ab_test2_variant1', 'umbrella_ab_test3_variant2', 'umbrella_ab_test4_variant2', 'umbrella_ab_test5_variant2');
-    } else {
-        array_push($ab_tests_array, 'umbrella_ab_test1_variant2', 'umbrella_ab_test2_variant1', 'umbrella_ab_test3_variant2', 'umbrella_ab_test4_variant2', 'umbrella_ab_test5_variant2');
     }
 
     // ТЗ-3
