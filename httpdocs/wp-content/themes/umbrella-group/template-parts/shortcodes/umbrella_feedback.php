@@ -44,7 +44,12 @@ class umbrella_feedback
             $tag = get_term_by('slug', $shown_category, 'client_category');
         }
         $wp_client_options = get_option('client_shortcode_options');
-        if ($wp_client_options !== null && strlen((string)$wp_client_options) > 0 && in_array(get_the_ID(), $wp_client_options['excluded_pages'])) {
+        if ($wp_client_options !== null &&
+            strlen((string)$wp_client_options) > 0 &&
+            in_array(get_the_ID(), $wp_client_options['excluded_pages']) ||
+            isset($this->atts['ab_test']) &&
+            !in_array($this->atts['ab_test'], umbrella_get_ab_test_tags())
+        ) {
             return "";
         }
         if (!empty($tag)) {
