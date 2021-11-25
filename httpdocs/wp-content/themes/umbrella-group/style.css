@@ -6,14 +6,6 @@ Template: flatsome
 Version: 3.0
 */
 
-/*************** ADD CUSTOM CSS HERE.   ***************/
-
-
-@media only screen and (max-width: 48em) {
-    /*************** ADD MOBILE ONLY CSS HERE  ***************/
-
-
-}
 
 .new-benefits-main {display:flex; flex-wrap: wrap; justify-content: space-around;}
 .for-new-benefits {max-width: 160px; text-align: center; border: 5px solid #ec1c24; padding: 6px; border-image-slice: 1; box-shadow: 0px 5px 10px 5px rgb(34 60 80 / 20%); margin: 20px auto; font-size: 10pt; border-radius: 20px;}
@@ -49,77 +41,110 @@ Version: 3.0
 
 .for-licenses-steps h2 {margin-left: 15px;}
 }
-#popmake-11427{
+#calculate-audit-price {
 	box-shadow: 0px 0px 0px 9999px rgb(0 0 0 / 60%);
-    background-color: white;
-    padding: 35px;
+	background-color: white;
+	padding: 35px;
+	width: 60%;
+	max-width: unset !important;
 }
-#wpcf7-f11415-o1:focus-visible, #popmake-11427 .pum-content:focus-visible {
-    outline:none !important;
+
+#wpcf7-f11415-o1:focus-visible, #calculate-audit-price .pum-content:focus-visible {
+	outline: none !important;
 }
-#pum_popup_title_11427{
+
+#calculate-audit-price-title {
 	font-weight: bold;
-    font-size: 18pt;
-    line-height: 18pt;
-    font-family: Inter, sans-serif !important;
+	line-height: 18pt;
+	font-family: Inter, sans-serif !important;
 }
-.calc_audit_minitext{
+
+.calc_audit_minitext {
 	padding-top: 8px;
-    font-size: 14px;
-    line-height: 14pt;
-    margin-bottom: 15px;
+	font-size: 14px;
+	line-height: 14pt;
+	margin-bottom: 15px;
 }
-#popmake-11427 .wpcf7-list-item-label{
+
+#calculate-audit-price .wpcf7-list-item-label {
 	display: inline-block;
 	background: #eeeded;
 	padding: 5px;
 	border-radius: 6%;
 	font-weight: normal;
 }
-#popmake-11427 .wpcf7-list-item input:checked ~ span{
+
+#calculate-audit-price .wpcf7-list-item input:checked ~ span {
 	background: white;
 	border: 1px #e16464 solid;
 	font-weight: normal;
 }
-#popmake-11427 .wpcf7-list-item input[type='radio']{
+
+#calculate-audit-price .wpcf7-list-item input[type='radio'] {
 	display: none !important;
 }
-.calc_audit_radioblock{
+
+.calc_audit_radioblock {
 	padding-top: 8px !important;
-    font-size: 14px;
-    line-height: 14pt;
-    font-weight: bold;
-    margin-bottom: 10px !important;
+	font-size: 14px;
+	line-height: 14pt;
+	font-weight: bold;
+	margin-bottom: 10px !important;
 }
-#popmake-11427 span.email-35,#popmake-11427 span.tel-908{
-display: inline-block;
-width: 40%;
+
+#calculate-audit-price span.email-35, #calculate-audit-price span.tel-908 {
+	display: inline-block;
+	width: 40%;
 }
-#popmake-11427 span.tel-908{
+
+#calculate-audit-price span.tel-908 {
 	margin-left: 20px;
 }
-#popmake-11427 span.email-35 input, #popmake-11427 span.tel-908 input{
+
+#calculate-audit-price span.email-35 input, #calculate-audit-price span.tel-908 input {
 	background-color: #eeeded;
 }
-#popmake-11427 input[type="submit"]{
+
+#calculate-audit-price input[type="submit"] {
 	background-color: #d32c2c !important;
 }
-#popmake-11427 .calc_audit_ps{
+
+#calculate-audit-price .calc_audit_ps {
 	display: inline-block;
 	width: 65%;
 	font-size: 14px;
 	line-height: 14pt;
 }
-#popmake-11427 .pum-close{
+
+#calculate-audit-price .pum-close {
 	right: -30px;
-    top: 19px;
-    font-size: 25px;
-    font-weight: 100;
+	top: 19px;
+	font-size: 25px;
+	font-weight: 100;
 }
-#popmake-11427 .calc_audit_ps2{
+
+#calculate-audit-price .calc_audit_ps2 {
 	font-size: 11pt;
-    line-height: 18pt;
-    font-family: Inter, sans-serif !important;
-    color: grey;
-    margin-top: 10px;
+	line-height: 18pt;
+	font-family: Inter, sans-serif !important;
+	color: grey;
+	margin-top: 10px;
+}
+
+.wpcf7-spinner {
+	position: absolute;
+}
+
+
+/*************** ADD CUSTOM CSS HERE.   ***************/
+
+
+@media only screen and (max-width: 48em) {
+	/*************** ADD MOBILE ONLY CSS HERE  ***************/
+	#calculate-audit-price {
+		width: 100%;
+		padding: 15px;
+	}
+
+
 }
