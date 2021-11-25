@@ -76,10 +76,11 @@
     font-size: 24px;
     margin-left: 50px;
     margin-top: 50px;
+    margin-bottom: 10px;
 }
-.specialists_advantages .specialists_advantages_top .specialists_advantages_top_img{
+.specialists_advantages .specialists_advantages_top .specialists_advantages_top_img {
     max-width: 40%;
-    margin-top: -40px;
+    margin-top: -20px;
 }
 .specialists_advantages .specialists_advantages_bot {
     padding-top: 36px;
@@ -121,8 +122,13 @@
         margin-top: 40px;
         padding-bottom: 30px;
     }
+
     .specialists_advantages .specialists_advantages_bot {
         padding: 30px 20px 45px;
         font-size: 18px;
+    }
+
+    .specialist-tile > .label {
+        display: none;
     }
 }
