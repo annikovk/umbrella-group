@@ -65,8 +65,8 @@ class Service_tiles
     {
         $title = str_replace("!return_caret", "<br />", $tile['title']);
         $pages_html = '';
-        $parent_id =$tile["parent_id"];
-        if (isset($tile["guarantee_icon"]) && strlen($tile["guarantee_icon"])>0 ) {
+        $parent_id = $tile["parent_id"];
+        if (isset($tile["guarantee_icon"]) && strlen($tile["guarantee_icon"]) > 0) {
             $icon = $tile["guarantee_icon"];
         } else {
             $icon = "/wp-content/uploads/bookmark-services.png";
@@ -96,18 +96,6 @@ class Service_tiles
         foreach ($pages as $page) {
             $pages_html .= "<li><a href='$page->guid'>$page->post_title</a></li>";
         }
-        $guarantee_html = "";
-        if (in_array("umbrella_ab_test5_variant2", umbrella_get_ab_test_tags())) {
-            $guarantee_html = <<<EOHTML
-            <div class="main-services-guarantee">
-                <div class="service-tile-guarantee-icon"><img width="34px" alt="bookmark-icon" src="$icon"></div>
-                <div class="service-tile-guarantee-title">{$tile['guarantee_title']}</div>
-                <div class="service-tile-guarantee-description">{$tile['guarantee_decription']}</div>
-            </div>
-        EOHTML;
-        }
-
-
         $html = <<<EOHTML
                             <div class="main-services-tile">
                                 <div class="main-services-pages">
@@ -121,7 +109,11 @@ class Service_tiles
                                             <a href="#" class='show-for-small show-more-pages' data-before='↓ показать '>услуги</a>
                                         </div>
                                 </div>
-                                $guarantee_html
+                                <div class="main-services-guarantee">
+                                    <div class="service-tile-guarantee-icon"><img width="34px" alt="bookmark-icon" src="$icon"></div>
+                                    <div class="service-tile-guarantee-title">{$tile['guarantee_title']}</div>
+                                    <div class="service-tile-guarantee-description">{$tile['guarantee_decription']}</div>
+                                </div>
                             </div>
                     EOHTML;
         return $html;
