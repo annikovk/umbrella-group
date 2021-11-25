@@ -57,6 +57,7 @@ function umbrella_content_fix($content, $ab_tag): string
 // umbrella_ab_test7_variant1 - ТЗ-3, 4 - без блока частые вопросы
 // umbrella_ab_test8_variant2 - ТЗ-3, 5 - с предоплатой
 // umbrella_ab_test8_variant1 - ТЗ-3, 5 - без предоплаты
+// umbrella_ab_test9_variant2 - ТЗ-3, 8 - с блоком отзывов в футере на СУ
 function umbrella_get_ab_test_tags(): array
 {
     $ab_tests_array = [];
@@ -106,9 +107,9 @@ function umbrella_get_ab_test_tags(): array
 
     // ТЗ-3
     if ($expVar1 == "1") {
-        array_push($ab_tests_array, 'umbrella_ab_test6_variant2', 'umbrella_ab_test7_variant1', 'umbrella_ab_test8_variant2');
+        array_push($ab_tests_array, 'umbrella_ab_test6_variant2', 'umbrella_ab_test7_variant1', 'umbrella_ab_test8_variant2', 'umbrella_ab_test9_variant2');
     } else {
-        array_push($ab_tests_array, 'umbrella_ab_test6_variant1', 'umbrella_ab_test7_nothing', 'umbrella_ab_test8_variant1');
+        array_push($ab_tests_array, 'umbrella_ab_test6_variant1', 'umbrella_ab_test7_nothing', 'umbrella_ab_test8_variant1', 'umbrella_ab_test9_nothing');
     }
     return $ab_tests_array;
 }
