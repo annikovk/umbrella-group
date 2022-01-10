@@ -30,7 +30,7 @@ jQuery(document).ready(function () {
                 activeList.forEach((element) => {
                     jQuery(element).addClass("active");
                 });
-                jQuery(".tooltip").hide()
+                jQuery("#buh-table .tooltip").hide()
                 return;
             }
         });
