@@ -263,4 +263,4 @@ function cases_block_shortcode($atts)
     }
 }
 
-add_shortcode('umbrella_cases', 'cases_block_shortcode');
+add_shortcode('cases', 'cases_block_shortcode');
