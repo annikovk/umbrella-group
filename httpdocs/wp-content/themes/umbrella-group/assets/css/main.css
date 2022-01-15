@@ -188,6 +188,10 @@
     --secondary-color: #ec1c23;
 }
 
+.invisible {
+    display: none;
+}
+
 .cat_img-block {
     display: flex;
 }
