@@ -2,7 +2,7 @@
 
 class cases
 {
-    private $css_files = ['/assets/css/blocks/cases.css'];
+    private $css_files = ['/assets/css/blocks/cases.css', '/assets/css/blocks/cases-and-feedback.css'];
     private $js_files = ['/assets/js/blocks/cases.js'];
     private $category = "";
     private $titles = [

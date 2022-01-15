@@ -1,29 +1,3 @@
-.newcases ul.tabs {
-    list-style-type: none;
-    display: flex;
-    flex-direction: row;
-    padding-top: 40px;
-}
-
-.newcases ul.tabs li {
-    padding: 10px 20px 10px 20px;
-    color: #1a1a1a;
-    font-weight: bold;
-    margin-left: unset;
-    margin-right: 14px;
-    cursor: pointer;
-}
-
-.newcases ul.tabs li:hover {
-    background-color: #1a1a1a;
-    color: #ffffff;
-}
-
-.newcases ul.tabs li.selected {
-    background-color: #1a1a1a;
-    color: #ffffff;
-}
-
 .newcases > .content > .tiles > .tile > .title {
     font-size: 34px;
     margin-top: 68px;
@@ -187,18 +161,6 @@
 }
 
 @media screen and (max-width: 849px) {
-
-    .newcases > .content > .tabs {
-        overflow: scroll;
-        margin-left: -15px;
-        padding-left: 15px;
-        margin-right: -15px;
-        padding-right: 15px;
-    }
-
-    .newcases > .content > .tabs::-webkit-scrollbar {
-        display: none;
-    }
 
     .newcases > .content > .tiles > .tile > .company > .logo {
         min-width: 100px;
