@@ -46,16 +46,18 @@ class cases
     public function generate_shortcode()
     {
         $title = $this->get_title($this->category);
-        $tiles = "";
         $posts = $this->get_cases_posts($this->category);
         foreach ($posts as $post) {
             $this->concat_metas($post);
         }
         $tabs = $this->get_tabs();
-        foreach ($posts as $post) {
-            $tiles .= $this->get_tile($post);
+        $tiles = "";
+        foreach ($this->all_metas as $meta) {
+            $posts = $this->get_posts_by_meta($meta);
+            foreach ($posts as $post) {
+                $tiles .= $this->get_tile($post);
+            }
         }
-
         $html = <<<EOHTML
         [section id='umbrella-cases' bg_color="rgb(249, 249, 249)"]
             [row]
@@ -232,13 +234,38 @@ class cases
      */
     private function getPostmeta($post): mixed
     {
-        if ($this->category == "Общий") {
-            $key = 'case_branch';
-        } else {
-            $key = 'case_category';
-        }
+        $key = $this->getPostmetaKey();
         $postmeta = get_post_meta($post->ID, $key, false);
         return $postmeta;
+    }
+
+    private function getPostmetaKey(): string
+    {
+        if ($this->category == "Общий") {
+            return 'case_branch';
+        } else {
+            return 'case_category';
+        }
+    }
+
+    private function get_posts_by_meta(string $meta): array
+    {
+        $key = $this->getPostmetaKey();
+        $args = array(
+            'numberposts' => -1,
+            'orderby' => 'menu_order',
+            'order' => 'ASC',
+            'post_type' => 'case',
+            'meta_key' => $key,
+            'meta_query' => array(
+                array(
+                    'key' => $key,
+                    'value' => $meta,
+                    'compare' => '=',
+                )
+            )
+        );
+        return get_posts($args);
     }
 
 
