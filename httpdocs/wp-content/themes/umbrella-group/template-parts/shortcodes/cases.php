@@ -53,9 +53,12 @@ class cases
         $tabs = $this->get_tabs();
         $tiles = "";
         foreach ($this->all_metas as $meta) {
-            $posts = $this->get_posts_by_meta($meta);
+            $visible = ($this->all_metas[0] == $meta) ? "" : "invisible";
+            $tiles .= '[ux_slider draggable="false" hide_nav="true" nav_style="simple" bullet_style="square" class="' . transliterate($meta) . ' ' . $visible . '"]';
             foreach ($posts as $post) {
-                $tiles .= $this->get_tile($post);
+                if (in_array($meta, $this->getPostmeta($post))) {
+                    $tiles .= $this->get_tile($post);
+                }
             }
         }
         $html = <<<EOHTML
@@ -80,8 +83,6 @@ class cases
 
     private function get_tile($post): string
     {
-//        if (get_post_meta($post->ID, 'case_common', true) == "Да") $main = true; else $main = false;
-        $visible = in_array_r($this->all_metas[0], get_post_meta($post->ID)) ? "" : "invisible";
         $postmeta = $this->getPostmeta($post);
         $metaclases = "";
         foreach ($postmeta as $post_meta) {
@@ -118,6 +119,8 @@ class cases
             }
 
 
+        } else {
+            $feedback = "";
         }
         $html = <<<EOHTML
             <div class="$metaclases tile $visible">
@@ -232,7 +235,7 @@ class cases
      * @param $post
      * @return mixed
      */
-    private function getPostmeta($post): mixed
+    private function getPostmeta($post): array
     {
         $key = $this->getPostmetaKey();
         $postmeta = get_post_meta($post->ID, $key, false);
