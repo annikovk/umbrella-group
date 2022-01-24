@@ -138,6 +138,7 @@ require get_theme_file_path() . '/includes/custom_post_types/akcii.php';
 require get_theme_file_path() . '/includes/custom_post_types/faq.php';
 require get_theme_file_path() . '/includes/custom_post_types/specialist.php';
 require get_theme_file_path() . '/includes/custom_post_types/cases.php';
+require get_theme_file_path() . '/includes/custom_post_types/feedback.php';
 require get_theme_file_path() . '/includes/draw_header_with_breadcrumbs.php';
 require get_theme_file_path() . '/template-parts/shortcodes/akcii.php';
 require get_theme_file_path() . '/template-parts/shortcodes/su_welcome_screen.php';
@@ -145,6 +146,7 @@ require get_theme_file_path() . '/template-parts/shortcodes/faq.php';
 require get_theme_file_path() . '/template-parts/shortcodes/accordion.php';
 require get_theme_file_path() . '/template-parts/shortcodes/specialists.php';
 require get_theme_file_path() . '/template-parts/shortcodes/cases.php';
+require get_theme_file_path() . '/template-parts/shortcodes/feedback.php';
 require get_theme_file_path() . '/template-parts/shortcodes/video_block.php';
 require get_theme_file_path() . '/template-parts/shortcodes/buhuslugi_packs_table.php';
 require get_theme_file_path() . '/template-parts/shortcodes/umbrella_feedback.php';
@@ -889,10 +891,10 @@ function transliterate($textcyr = null, $textlat = null)
 {
     $cyr = array(
         'я', 'ж', 'ч', 'щ', 'ш', 'ю', 'а', 'б', 'в', 'г', 'д', 'е', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ъ', 'ь',
-        'Я', 'Ж', 'Ч', 'Щ', 'Ш', 'Ю', 'А', 'Б', 'В', 'Г', 'Д', 'Е', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ъ', 'Ь');
+        'Я', 'Ж', 'Ч', 'Щ', 'Ш', 'Ю', 'А', 'Б', 'В', 'Г', 'Д', 'Е', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ъ', 'Ь', ' ');
     $lat = array(
         'ya', 'zh', 'ch', 'sht', 'sh', 'yu', 'a', 'b', 'v', 'g', 'd', 'e', 'z', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'h', 'c', 'y', 'x',
-        'Ya', 'Zh', 'Ch', 'Sht', 'Sh', 'Yu', 'A', 'B', 'V', 'G', 'D', 'E', 'Z', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'F', 'H', 'c', 'Y', 'X',);
+        'Ya', 'Zh', 'Ch', 'Sht', 'Sh', 'Yu', 'A', 'B', 'V', 'G', 'D', 'E', 'Z', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'F', 'H', 'c', 'Y', 'X', '_');
     if ($textcyr) return str_replace($cyr, $lat, $textcyr);
     else if ($textlat) return str_replace($lat, $cyr, $textlat);
     else return null;

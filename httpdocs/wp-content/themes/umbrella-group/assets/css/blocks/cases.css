@@ -27,7 +27,6 @@
 .newcases > .content > .tiles > .tile > .company > .logo {
     width: 100px;
     height: 100px;
-
     display: flex;
     align-items: center;
     margin-left: -15px;
@@ -141,9 +140,6 @@
     flex-direction: row;
 }
 
-.newcases > .content > .tiles > .tile > .timeline > .solution > .content > .proof:hover img {
-    box-shadow: 0 4px 15px rgba(26, 26, 26, 0.5);
-}
 
 .newcases > .content > .tiles > .tile > .timeline > .solution > .content > .proof {
     min-width: 210px;

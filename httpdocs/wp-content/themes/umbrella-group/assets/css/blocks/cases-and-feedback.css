@@ -1,32 +1,51 @@
-.newcases ul.tabs {
+.newcases h2.title,
+.feedback h2.title {
+    margin-bottom: unset;
+}
+
+.newcases ul.tabs,
+.feedback ul.tabs {
     list-style-type: none;
     display: flex;
     flex-direction: row;
     padding-top: 40px;
+    margin-bottom: unset;
 }
 
-.newcases ul.tabs li {
+.newcases ul.tabs li,
+.feedback ul.tabs li {
     padding: 10px 20px 10px 20px;
     color: #1a1a1a;
     font-weight: bold;
     margin-left: unset;
     margin-right: 14px;
     cursor: pointer;
+    margin-bottom: unset;
 }
 
-.newcases ul.tabs li:hover {
+.newcases ul.tabs li:hover,
+.feedback ul.tabs li:hover {
     background-color: #1a1a1a;
     color: #ffffff;
 }
 
-.newcases ul.tabs li.selected {
+.newcases ul.tabs li.selected,
+.feedback ul.tabs li.selected {
     background-color: #1a1a1a;
     color: #ffffff;
+}
+
+.newcases > .content > .tiles > .tile > .timeline > .solution > .content > .proof:hover img,
+.feedback > .content > .tiles > .tile > .proof:hover img {
+    box-shadow: 0 4px 15px rgba(26, 26, 26, 0.5);
+    cursor: pointer;
+    transition: box-shadow 0.3s ease-in-out;
 }
 
 @media screen and (max-width: 849px) {
 
-    .newcases > .content > .tabs {
+    .newcases > .content > .tabs,
+    .feedback > .content > .tabs {
         overflow: scroll;
         margin-left: -15px;
         padding-left: 15px;
@@ -34,7 +53,8 @@
         padding-right: 15px;
     }
 
-    .newcases > .content > .tabs::-webkit-scrollbar {
+    .newcases > .content > .tabs::-webkit-scrollbar,
+    .feedback > .content > .tabs::-webkit-scrollbar {
         display: none;
     }
 }
