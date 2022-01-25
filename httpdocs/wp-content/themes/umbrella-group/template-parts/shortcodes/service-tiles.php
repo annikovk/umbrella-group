@@ -106,7 +106,7 @@ class Service_tiles
                                                 $pages_html
                                             </ul>
                                             <a class='hide-for-small red-on-block-hover show-all-link' href="$parent_url">показать все</a>
-                                            <a href="#" class='show-for-small show-more-pages' data-before='↓ показать '>услуги</a>
+                                            <a class='show-for-small show-more-pages' data-before='↓ показать '>услуги</a>
                                         </div>
                                 </div>
                                 <div class="main-services-guarantee">
