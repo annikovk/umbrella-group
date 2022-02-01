@@ -102,12 +102,34 @@ function get_specialist_metabox_value($post)
         <div class="meta-options hcf_field">
             <label for="specialist_branch">Направление</label>
             <select id="specialist_branch" name="specialist_branch">
-                <option <?php if (esc_attr(get_post_meta(get_the_ID(), 'specialist_branch', true))=="-") {echo "selected";}; ?> value="-">-</option>
-                <option <?php if (esc_attr(get_post_meta(get_the_ID(), 'specialist_branch', true))=="Бухгалтерия") {echo "selected";}; ?> value="Бухгалтерия">Бухгалтерия</option>
-                <option <?php if (esc_attr(get_post_meta(get_the_ID(), 'specialist_branch', true))=="Аудит") {echo "selected";}; ?> value="Аудит">Аудит</option>
-                <option <?php if (esc_attr(get_post_meta(get_the_ID(), 'specialist_branch', true))=="Юридические услуги") {echo "selected";}; ?> value="Юридические услуги">Юридические услуги</option>
-                <option <?php if (esc_attr(get_post_meta(get_the_ID(), 'specialist_branch', true))=="Лицензирование") {echo "лицензирование";}; ?> value="Лицензирование">Лицензирование</option>
-                <option <?php if (esc_attr(get_post_meta(get_the_ID(), 'specialist_branch', true))=="Регистрация и ликвидация") {echo "selected";}; ?> value="Регистрация и ликвидация">Регистрация и ликвидация</option>
+                <option <?php if (esc_attr(get_post_meta(get_the_ID(), 'specialist_branch', true)) == "-") {
+                    echo "selected";
+                }; ?> value="-">-
+                </option>
+                <option <?php if (esc_attr(get_post_meta(get_the_ID(), 'specialist_branch', true)) == "Бухгалтерия") {
+                    echo "selected";
+                }; ?> value="Бухгалтерия">Бухгалтерия
+                </option>
+                <option <?php if (esc_attr(get_post_meta(get_the_ID(), 'specialist_branch', true)) == "Аудит") {
+                    echo "selected";
+                }; ?> value="Аудит">Аудит
+                </option>
+                <option <?php if (esc_attr(get_post_meta(get_the_ID(), 'specialist_branch', true)) == "Юридические услуги") {
+                    echo "selected";
+                }; ?> value="Юридические услуги">Юридические услуги
+                </option>
+                <option <?php if (esc_attr(get_post_meta(get_the_ID(), 'specialist_branch', true)) == "Лицензирование") {
+                    echo "лицензирование";
+                }; ?> value="Лицензирование">Лицензирование
+                </option>
+                <option <?php if (esc_attr(get_post_meta(get_the_ID(), 'specialist_branch', true)) == "Регистрация и ликвидация") {
+                    echo "selected";
+                }; ?> value="Регистрация и ликвидация">Регистрация и ликвидация
+                </option>
+                <option <?php if (esc_attr(get_post_meta(get_the_ID(), 'specialist_branch', true)) == "Сделки с недвижимостью") {
+                    echo "selected";
+                }; ?> value="Сделки с недвижимостью">Сделки с недвижимостью
+                </option>
             </select>
         </div>
         <div class="meta-options hcf_field">
