@@ -54,12 +54,13 @@ class cases
         $tiles = "";
         foreach ($this->all_metas as $meta) {
             $visible = ($this->all_metas[0] == $meta) ? "" : "invisible";
-            $tiles .= '[ux_slider draggable="false" hide_nav="true" nav_style="simple" bullet_style="square" class="' . transliterate($meta) . ' ' . $visible . '"]';
+            $tiles .= '[ux_slider draggable="false" hide_nav="true" nav_style="simple" bullet_style="square" class="cases_' . transliterate($meta) . ' ' . $visible . '"]';
             foreach ($posts as $post) {
                 if (in_array($meta, $this->getPostmeta($post))) {
                     $tiles .= $this->get_tile($post);
                 }
             }
+            $tiles .= "[/ux_slider]";
         }
         $html = <<<EOHTML
         [section id='umbrella-cases' bg_color="rgb(249, 249, 249)"]
@@ -83,11 +84,13 @@ class cases
 
     private function get_tile($post): string
     {
+        $visible = in_array_r($this->all_metas[0], get_post_meta($post->ID)) ? "" : "invisible";
         $postmeta = $this->getPostmeta($post);
         $metaclases = "";
         foreach ($postmeta as $post_meta) {
             $metaclases .= transliterate($post_meta) . " ";
         }
+        $metaclases = "cases_" . $metaclases;
         $title = get_the_title($post);
         $logo_url = esc_attr(get_post_meta($post->ID, 'case_logo_url', true));
         $author = esc_attr(get_post_meta($post->ID, 'case_author', true));
@@ -107,9 +110,9 @@ class cases
         $feedback_url = esc_attr(get_post_meta($post->ID, 'case_feedback_url', true));
         if (strlen($feedback_text) > 0 && strlen($feedback_url) > 0) {
             if (str_contains($feedback_url, "flamp")) {
-                $icon = "<img width='20px' src='https://flamp.ru/static/assets/brand-logo/svg/f.svg' alt='flamp logo'>";
+                $icon = "<img height='20px' width='20px' src='https://flamp.ru/static/assets/brand-logo/svg/f.svg' alt='flamp-logo'>";
                 $target = "target='_blank'";
-                $feedback = "<div class='feedback hide-for-small'><a $target href='{$feedback_url}'>$icon {$feedback_text}</a></div> ";
+                $feedback = "<div class='feedback hide-for-small'>$icon <a $target href='{$feedback_url}'>{$feedback_text}</a></div> ";
             } else {
                 $icon = "";
                 $target = "";
@@ -123,20 +126,24 @@ class cases
             $feedback = "";
         }
         $html = <<<EOHTML
+        [row_inner style="large" v_align="top"]
+        [col_inner span="12" span__sm="12" align="left" margin="0px 0px 0px 0px"] 
             <div class="$metaclases tile $visible">
                 <div class="title"> $title</div>
                 <div class="company">
-                    <div class="logo"><img alt="$author" src="$logo_url"></div>
+                    <div class="logo"><img height='100px' alt="$author" src="$logo_url"></div>
                     <div class="author">$author</div>
                 </div>
-                <div class="industry"><img alt="Briefcase Icon" src="/wp-content/uploads/manual_uploads/Briefcase_Icon_1.png"><strong>Отрасль: </strong>$industry</div>
-                <div class="team"><img alt="User Icon" src="/wp-content/uploads/manual_uploads/User_Icon_1.png"><strong>Сотрудники Umbrella Group: </strong>$team</div>
+                <div class="industry"><img alt="Briefcase-image" style="height:20px;" src="/wp-content/uploads/manual_uploads/Briefcase_Icon_1.png"><strong>Отрасль: </strong>$industry</div>
+                <div class="team"><img alt="person-image" style="height:20px;" src="/wp-content/uploads/manual_uploads/User_Icon_1.png"><strong>Сотрудники Umbrella Group: </strong>$team</div>
                 <div class="timeline">
                     <div class="issue"> <div class="white-background"></div> <div class="title">Проблема </div><div class="content">$issue</div> <div class="arrow show-for-small">→</div></div>
                     <div class="solution"> <div class="title">Результат </div><div class="content"><div class="text">$solution</div> $proof</div></div>
                 </div>
                 $feedback
             </div>
+        [/col_inner]
+        [/row_inner]
         EOHTML;
 
         return $html;
@@ -224,8 +231,9 @@ class cases
         $tabs = '<ul class="tabs">';
         foreach ($this->all_metas as $meta) {
             $selected = $meta == $this->all_metas[0] ? "selected" : "";
-            $metaclass = transliterate($meta);
-            $tabs .= "<li class='$metaclass $selected'>$meta</li>";
+            $metaclasses = transliterate($meta);
+            $metaclasses = "cases_" . $metaclasses;
+            $tabs .= "<li class='$metaclasses $selected'>$meta</li>";
         }
         $tabs .= '</ul>';
         return $tabs;

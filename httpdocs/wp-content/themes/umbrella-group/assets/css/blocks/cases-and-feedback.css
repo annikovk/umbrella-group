@@ -3,6 +3,21 @@
     margin-bottom: unset;
 }
 
+.newcases > .content > .tiles,
+.feedback > .content > .tiles {
+    padding-bottom: 56px;
+}
+
+.newcases > .content > .tiles button.flickity-prev-next-button,
+.feedback > .content > .tiles button.flickity-prev-next-button {
+    bottom: -56px;
+}
+
+.newcases > .content > .tiles .flickity-page-dots,
+.feedback > .content > .tiles .flickity-page-dots {
+    bottom: -41px;
+}
+
 .newcases ul.tabs,
 .feedback ul.tabs {
     list-style-type: none;
@@ -21,6 +36,7 @@
     margin-right: 14px;
     cursor: pointer;
     margin-bottom: unset;
+    white-space: nowrap;
 }
 
 .newcases ul.tabs li:hover,
@@ -35,8 +51,13 @@
     color: #ffffff;
 }
 
-.newcases > .content > .tiles > .tile > .timeline > .solution > .content > .proof:hover img,
-.feedback > .content > .tiles > .tile > .proof:hover img {
+.newcases > .content > .tiles .tile > .timeline > .solution > .content > .proof img,
+.feedback > .content > .tiles .tile > .proof img {
+    height: 297px;
+}
+
+.newcases > .content > .tiles .tile > .timeline > .solution > .content > .proof:hover img,
+.feedback > .content > .tiles .tile > .proof:hover img {
     box-shadow: 0 4px 15px rgba(26, 26, 26, 0.5);
     cursor: pointer;
     transition: box-shadow 0.3s ease-in-out;

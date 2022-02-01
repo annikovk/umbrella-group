@@ -1,4 +1,8 @@
-.feedback > .content > .tiles > .tile {
+.feedback > .content > .tiles {
+    padding-top: 82px;
+}
+
+.feedback > .content > .tiles .tile {
     position: relative;
     display: flex;
     flex-wrap: wrap;
@@ -6,36 +10,39 @@
     justify-content: flex-start;
     align-items: flex-start;
     gap: 30px 50px;
-    margin-top: 82px;
+    /*margin-top: 82px;*/
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
 
-.feedback > .content > .tiles > .tile > .company {
+.feedback > .content > .tiles .tile > .company {
     flex-basis: 100%;
+    position: relative;
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 20px;
 }
 
-.feedback > .content > .tiles > .tile > .text {
+.feedback > .content > .tiles .tile > .text {
     max-width: 900px;
+    padding-right: 10px;
+    padding-left: 10px;
 }
 
-.feedback > .content > .tiles > .tile > .proof {
+.feedback > .content > .tiles .tile > .proof {
     min-width: 250px;
     width: 250px;
     text-align: center;
 }
 
-.feedback > .content > .tiles > .tile > .proof > .title {
+.feedback > .content > .tiles .tile > .proof > .title {
     margin-top: 15px;
 }
 
-.feedback > .content > .tiles > .tile > .text > .title {
+.feedback > .content > .tiles .tile > .text > .title {
     color: #1a1a1a;
     font-family: "PT Serif", sans-serif;
     font-weight: 700;
@@ -43,9 +50,10 @@
     line-height: 1.6;
     text-align: left;
     max-width: 900px;
+    margin-top: -14px;
 }
 
-.feedback > .content > .tiles > .tile > .text > .quote {
+.feedback > .content > .tiles .tile > .text > .quote {
     margin-top: 33px;
     color: #1a1a1a;
     font-weight: 400;
@@ -57,13 +65,15 @@
     border-style: solid;
     padding: 34px 38px 34px 38px;
     position: relative;
+    /*margin-left: 40px;*/
+    /*margin-right: 40px;*/
 }
 
-.feedback > .content > .tiles > .tile > .text > .quote > .hide-for-small > .link > a {
+.feedback > .content > .tiles .tile > .text > .quote > .hide-for-small > .link > a {
     color: #7a7a7a;
 }
 
-.feedback > .content > .tiles > .tile > .text > .quote > .hide-for-small > .link {
+.feedback > .content > .tiles .tile > .text > .quote > .hide-for-small > .link {
     position: absolute;
     width: 343px;
     height: 39px;
@@ -75,10 +85,11 @@
     line-height: 1.3;
     font-family: Inter, sans-serif;
     bottom: -15px;
+    left: 15px;
 }
 
-.feedback > .content > .tiles > .tile > .text > .quote > .quote_symbol:before,
-.feedback > .content > .tiles > .tile > .text > .quote > .quote_symbol:after {
+.feedback > .content > .tiles .tile > .text > .quote > .quote_symbol:before,
+.feedback > .content > .tiles .tile > .text > .quote > .quote_symbol:after {
     position: absolute;
     width: 79px;
     height: 68px;
@@ -92,52 +103,52 @@
     text-align: center;
 }
 
-.feedback > .content > .tiles > .tile > .text > .quote > .quote_symbol:before {
+.feedback > .content > .tiles .tile > .text > .quote > .quote_symbol:before {
     top: 20px;
     left: -40px;
     content: "«";
 }
 
-.feedback > .content > .tiles > .tile > .text > .quote > .quote_symbol:after {
+.feedback > .content > .tiles .tile > .text > .quote > .quote_symbol:after {
     content: "»";
     bottom: 20px;
     right: -40px;
 }
 
 
-.feedback > .content > .tiles > .tile > .company > .logo {
+.feedback > .content > .tiles .tile > .company > .logo {
     border-radius: 100px;
-    border: solid 1px rgba(0, 0, 0, 0%);
+    border: solid 1px #cccccc;
     background-color: #FFFFFF;
     overflow: hidden;
 }
 
-.feedback > .content > .tiles > .tile > .company > .logo {
+.feedback > .content > .tiles .tile > .company > .logo {
     min-width: 100px;
     width: 100px;
     height: 100px;
     display: flex;
     align-items: center;
-    margin-left: -8px;
+    /*margin-left: -8px;*/
 }
 
-.feedback > .content > .tiles > .tile > .company > .author {
+.feedback > .content > .tiles .tile > .company > .author {
     max-width: 800px;
 }
 
 @media screen and (max-width: 849px) {
-    .feedback > .content > .tiles > .tile {
+    .feedback > .content > .tiles .tile {
     }
 
-    .feedback > .content > .tiles > .tile {
+    .feedback > .content > .tiles .tile {
         margin-top: 50px;
     }
 
-    .feedback > .content > .tiles > .tile > .text > .show-for-small > .link > a {
+    .feedback > .content > .tiles .tile > .text > .show-for-small > .link > a {
         color: #7a7a7a;
     }
 
-    .feedback > .content > .tiles > .tile > .text > .show-for-small > .link {
+    .feedback > .content > .tiles .tile > .text > .show-for-small > .link {
         position: relative;
         width: 100%;
         font-size: 18px;
@@ -146,32 +157,33 @@
         margin-top: 25px;
     }
 
-    .feedback > .content > .tiles > .tile > .text > .quote {
+    .feedback > .content > .tiles .tile > .text > .quote {
         font-size: 18px;
     }
 
-    .feedback > .content > .tiles > .tile > .text > .title {
+    .feedback > .content > .tiles .tile > .text > .title {
         color: #1a1a1a;
         font-size: 24px;
+        margin-top: unset;
     }
 
-    .feedback > .content > .tiles > .tile > .company > .author {
+    .feedback > .content > .tiles .tile > .company > .author {
         font-size: 12px;
     }
 
-    .feedback > .content > .tiles > .tile > .text {
+    .feedback > .content > .tiles .tile > .text {
         order: 1;
     }
 
-    .feedback > .content > .tiles > .tile > .company {
+    .feedback > .content > .tiles .tile > .company {
         order: 3;
     }
 
-    .feedback > .content > .tiles > .tile > .proof > a {
+    .feedback > .content > .tiles .tile > .proof > a {
         color: #7a7a7a;
     }
 
-    .feedback > .content > .tiles > .tile > .proof {
+    .feedback > .content > .tiles .tile > .proof {
         order: 2;
         width: 100%;
         text-align: left;

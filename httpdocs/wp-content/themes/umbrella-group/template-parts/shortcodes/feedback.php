@@ -52,8 +52,16 @@ class feedback
             $this->concat_metas($post);
         }
         $tabs = $this->get_tabs();
-        foreach ($posts as $post) {
-            $tiles .= $this->get_tile($post);
+        $tiles = "";
+        foreach ($this->all_metas as $meta) {
+            $visible = ($this->all_metas[0] == $meta) ? "" : "invisible";
+            $tiles .= '[ux_slider draggable="false" hide_nav="true" nav_style="simple" bullet_style="square" class="feedback_' . transliterate($meta) . ' ' . $visible . '"]';
+            foreach ($posts as $post) {
+                if (in_array($meta, $this->getPostmeta($post))) {
+                    $tiles .= $this->get_tile($post);
+                }
+            }
+            $tiles .= "[/ux_slider]";
         }
 
         $html = <<<EOHTML
@@ -86,6 +94,7 @@ class feedback
         foreach ($postmeta as $post_meta) {
             $metaclases .= transliterate($post_meta) . " ";
         }
+        $metaclases = "feedback_" . $metaclases;
         $title = get_the_title($post);
         $logo_url = esc_attr(get_post_meta($post->ID, 'feedback_logo_url', true));
         $author = get_post_meta($post->ID, 'feedback_author', true);
@@ -118,11 +127,13 @@ class feedback
             if (str_contains($feedback_url, "flamp")) {
                 $icon = "<img width='20px' src='https://flamp.ru/static/assets/brand-logo/svg/f.svg' alt='flamp logo'>";
                 $target = "target='_blank'";
-                $feedback = "<div class='link'><a $target href='{$feedback_url}'>$icon {$feedback_url_text}</a></div> ";
+                $feedback = "<div class='link'>$icon <a $target href='{$feedback_url}'>{$feedback_url_text}</a></div> ";
             }
         }
         $quote_symbol = '<div class="quote_symbol"></div>';
         $html = <<<EOHTML
+        [row_inner padding="0px 0 0px 0" style="collapse" v_align="top" ]
+        [col_inner  span="12" span__sm="12"]
             <div class="$metaclases tile $visible">
                 $proof
                 <div class="text">
@@ -135,6 +146,8 @@ class feedback
                     <div class="author">$author</div>
                 </div>
             </div>
+        [/col_inner]
+        [/row_inner]
         EOHTML;
 
         return $html;
@@ -222,8 +235,9 @@ class feedback
         $tabs = '<ul class="tabs">';
         foreach ($this->all_metas as $meta) {
             $selected = $meta == $this->all_metas[0] ? "selected" : "";
-            $metaclass = transliterate($meta);
-            $tabs .= "<li class='$metaclass $selected'>$meta</li>";
+            $metaclasses = "feedback_" . transliterate($meta);
+
+            $tabs .= "<li class='$metaclasses $selected'>$meta</li>";
         }
         $tabs .= '</ul>';
         return $tabs;
