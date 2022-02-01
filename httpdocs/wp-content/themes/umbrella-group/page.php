@@ -27,7 +27,7 @@ if(flatsome_option('pages_template') != 'default') {
         $parentParentPages = get_pages($args);
         $parentParentPagesID = $parentParentPages[0]->post_parent;
 
-        if (!in_array($parentID, array(26, 28, 32, 30, 34)) && !in_array($parentParentPagesID, array(26, 28, 32, 30, 34)) && (!is_front_page() || is_paged())) {
+        if (!in_array($parentID, array(26, 28, 32, 30, 34, 12792)) && !in_array($parentParentPagesID, array(26, 28, 32, 30, 34, 12792)) && (!is_front_page() || is_paged())) {
             echo umbrella_draw_header_with_breadcrumbs();
         } ?>
 
