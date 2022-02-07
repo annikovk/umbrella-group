@@ -67,7 +67,7 @@ class cases
                     $posts_count += 1;
                 }
             }
-            $tiles .= ($this->is_cases || $posts_count < 2) ? "<div class='cases_" . transliterate($meta) . "'>" : '[ux_slider draggable="false" hide_nav="true" nav_style="simple" bullet_style="square" class="cases_' . transliterate($meta) . ' ' . $visible . '"]';
+            $tiles .= ($this->is_cases || $posts_count < 2) ? "<div class='cases_" . transliterate($meta) . "'>" : '[ux_slider auto_slide="false" draggable="true" hide_nav="true" nav_style="simple" bullet_style="square" class="cases_' . transliterate($meta) . ' ' . $visible . '"]';
             $tiles .= $posts_tiles;
             $tiles .= ($this->is_cases || $posts_count < 2) ? "</div>" : "[/ux_slider]";
         }
@@ -76,7 +76,7 @@ class cases
             [row]
                 [col  span="12" span__sm="12"]
                     <div class="newcases">
-                        <h2 class="title">$title</h2>
+                        $title
                         <div class="content">
                             $tabs
                             <div class="tiles">$tiles</div>
@@ -222,12 +222,8 @@ class cases
     private function get_title(string $category): string
     {
         $title = $this->titles[$category]["title"];
-        $html = <<<EOHTML
-                <div class="cases_title">
-                    $title
-                </div>
-            EOHTML;
-        return $html;
+        $title = (strlen($title) > 1) ? ' <div class="cases_title"><h2 class="title">' . $title . '</h2></div>' : '';
+        return $title;
     }
 
     private function concat_metas($post)
@@ -307,16 +303,7 @@ function cases_block_shortcode($atts)
     if (!$shortcode->fill_attributes()) {
         return $shortcode->err;
     }
-    if (isset($_GET['expvar'])) {
-        $expVar1 = $_GET['expvar'];
-    } else {
-        $expVar1 = "0";
-    }
-    if ($expVar1 == "1") {
         return $shortcode->generate_shortcode();
-    } else {
-        return "";
-    }
 }
 
 add_shortcode('cases', 'cases_block_shortcode');

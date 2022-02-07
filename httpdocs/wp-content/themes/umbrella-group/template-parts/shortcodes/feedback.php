@@ -62,7 +62,7 @@ class feedback
                     $posts_count += 1;
                 }
             }
-            $tiles .= ($posts_count < 2) ? '<div class="feedback_' . transliterate($meta) . '">' : '[ux_slider draggable="false" hide_nav="true" nav_style="simple" bullet_style="square" class="feedback_' . transliterate($meta) . ' ' . $visible . '"]';
+            $tiles .= ($posts_count < 2) ? '<div class="feedback_' . transliterate($meta) . '">' : '[ux_slider draggable="true" auto_slide="false" hide_nav="true" nav_style="simple" bullet_style="square" class="feedback_' . transliterate($meta) . ' ' . $visible . '"]';
             $tiles .= $posts_tiles;
             $tiles .= ($posts_count < 2) ? '</div>' : "[/ux_slider]";
         }
@@ -271,16 +271,7 @@ function feedback_block_shortcode($atts)
     if (!$shortcode->fill_attributes()) {
         return $shortcode->err;
     }
-    if (isset($_GET['expvar'])) {
-        $expVar1 = $_GET['expvar'];
-    } else {
-        $expVar1 = "0";
-    }
-    if ($expVar1 == "1") {
         return $shortcode->generate_shortcode();
-    } else {
-        return "";
-    }
 }
 
 add_shortcode('feedback', 'feedback_block_shortcode');

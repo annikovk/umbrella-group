@@ -137,7 +137,8 @@
 }
 
 @media screen and (max-width: 849px) {
-    .feedback > .content > .tiles .tile {
+    .feedback > .content > .tiles {
+        padding-top: unset;
     }
 
     .feedback > .content > .tiles .tile {
@@ -152,8 +153,8 @@
         position: relative;
         width: 100%;
         font-size: 18px;
-        padding: 8px 20px 8px 20px;
-        text-align: center;
+        padding: 8px 20px 8px 0;
+        text-align: left;
         margin-top: 25px;
     }
 
@@ -165,6 +166,7 @@
         color: #1a1a1a;
         font-size: 24px;
         margin-top: unset;
+        line-height: 1.25;
     }
 
     .feedback > .content > .tiles .tile > .company > .author {
@@ -173,6 +175,7 @@
 
     .feedback > .content > .tiles .tile > .text {
         order: 1;
+        padding-left: unset;
     }
 
     .feedback > .content > .tiles .tile > .company {

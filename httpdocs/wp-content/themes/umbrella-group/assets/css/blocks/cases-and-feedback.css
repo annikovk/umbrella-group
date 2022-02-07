@@ -1,7 +1,19 @@
 .newcases h2.title,
 .feedback h2.title {
     margin-bottom: unset;
+    margin-top: 70px;
 }
+
+.newcases > .content > .tiles .slider > div:not(.col),
+.feedback > .content > .tiles .slider > div:not(.col) {
+    width: 150%;
+}
+
+.newcases > .content > .tiles .flickity-viewport,
+.feedback > .content > .tiles .flickity-viewport {
+    overflow: visible;
+}
+
 
 .newcases > .content > .tiles,
 .feedback > .content > .tiles {
@@ -64,6 +76,17 @@
 }
 
 @media screen and (max-width: 849px) {
+
+    .newcases > .content > .tiles .slider > div:not(.col),
+    .feedback > .content > .tiles .slider > div:not(.col) {
+        width: 100%;
+    }
+
+    .newcases > .content > .tiles .slider .col,
+    .feedback > .content > .tiles .slider .col {
+        padding-left: unset;
+    }
+
 
     .newcases > .content > .tabs,
     .feedback > .content > .tabs {
