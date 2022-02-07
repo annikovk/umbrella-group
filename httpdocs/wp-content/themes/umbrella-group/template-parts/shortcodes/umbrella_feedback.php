@@ -16,6 +16,9 @@ class umbrella_feedback
         if (strlen($clients) == 0) {
             return null;
         }
+        if (in_array(get_queried_object_id(), array(1213, 32, 5679, 1222, 6149, 10961, 52, 137, 6075, 1230, 1203, 1236, 3370, 135, 4647, 146, 1224, 2))) {
+            return "";
+        }
         $html = <<<EOHTML
             [section bg_color="rgb(249, 249, 249)"]
                 [row]
