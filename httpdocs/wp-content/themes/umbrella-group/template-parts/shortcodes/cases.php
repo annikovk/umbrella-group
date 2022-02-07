@@ -59,13 +59,17 @@ class cases
         $tiles = "";
         foreach ($this->all_metas as $meta) {
             $visible = ($this->all_metas[0] == $meta) ? "" : "invisible";
-            $tiles .= ($this->is_cases) ? "" : '[ux_slider draggable="false" hide_nav="true" nav_style="simple" bullet_style="square" class="cases_' . transliterate($meta) . ' ' . $visible . '"]';
+            $posts_tiles = "";
+            $posts_count = 0;
             foreach ($posts as $post) {
                 if (in_array($meta, $this->getPostmeta($post))) {
-                    $tiles .= $this->get_tile($post);
+                    $posts_tiles .= $this->get_tile($post);
+                    $posts_count += 1;
                 }
             }
-            $tiles .= ($this->is_cases) ? "" : "[/ux_slider]";
+            $tiles .= ($this->is_cases || $posts_count < 2) ? "<div class='cases_" . transliterate($meta) . "'>" : '[ux_slider draggable="false" hide_nav="true" nav_style="simple" bullet_style="square" class="cases_' . transliterate($meta) . ' ' . $visible . '"]';
+            $tiles .= $posts_tiles;
+            $tiles .= ($this->is_cases || $posts_count < 2) ? "</div>" : "[/ux_slider]";
         }
         $html = <<<EOHTML
         [section id='umbrella-cases' bg_color="rgb(249, 249, 249)"]

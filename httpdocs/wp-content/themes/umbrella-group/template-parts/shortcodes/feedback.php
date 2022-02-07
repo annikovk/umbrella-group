@@ -52,16 +52,19 @@ class feedback
             $this->concat_metas($post);
         }
         $tabs = $this->get_tabs();
-        $tiles = "";
         foreach ($this->all_metas as $meta) {
+            $posts_tiles = "";
+            $posts_count = 0;
             $visible = ($this->all_metas[0] == $meta) ? "" : "invisible";
-            $tiles .= '[ux_slider draggable="false" hide_nav="true" nav_style="simple" bullet_style="square" class="feedback_' . transliterate($meta) . ' ' . $visible . '"]';
             foreach ($posts as $post) {
                 if (in_array($meta, $this->getPostmeta($post))) {
-                    $tiles .= $this->get_tile($post);
+                    $posts_tiles .= $this->get_tile($post);
+                    $posts_count += 1;
                 }
             }
-            $tiles .= "[/ux_slider]";
+            $tiles .= ($posts_count < 2) ? '<div class="feedback_' . transliterate($meta) . '">' : '[ux_slider draggable="false" hide_nav="true" nav_style="simple" bullet_style="square" class="feedback_' . transliterate($meta) . ' ' . $visible . '"]';
+            $tiles .= $posts_tiles;
+            $tiles .= ($posts_count < 2) ? '</div>' : "[/ux_slider]";
         }
 
         $html = <<<EOHTML
