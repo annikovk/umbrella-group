@@ -85,8 +85,7 @@ class specialists
                 [/lightbox]
         EOHTML;
         $lightbox = do_shortcode($lightbox);
-        $label = $this->get_label($this->category);
-        if ($main) $label = "Ведущий " . $label;
+        $label = ($main) ? $this->get_main_label($this->category) : $this->get_label($this->category);
         if ($main) {
             $html = <<<EOHTML
             <div class="specialist-tile main">
@@ -147,6 +146,12 @@ class specialists
             )
         );
         return get_posts($args);
+    }
+
+    private function get_main_label($category): string
+    {
+        if ($category == "Аудит") return "Директор направления";
+        return "Руководитель отдела";
     }
 
     private function get_label($category): string
