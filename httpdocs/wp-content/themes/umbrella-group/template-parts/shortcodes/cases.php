@@ -27,10 +27,14 @@ class cases
         "Общий" => [
             "title" => "Кейсы: истории о клиентах"
         ],
+        "cases" => [
+            "title" => ""
+        ],
     ];
     public $atts;
     public $err;
     private $all_metas = [];
+    private $is_cases;
 
     public function fill_attributes()
     {
@@ -45,6 +49,7 @@ class cases
 
     public function generate_shortcode()
     {
+        $this->is_cases = $this->category == "cases";
         $title = $this->get_title($this->category);
         $posts = $this->get_cases_posts($this->category);
         foreach ($posts as $post) {
@@ -54,13 +59,13 @@ class cases
         $tiles = "";
         foreach ($this->all_metas as $meta) {
             $visible = ($this->all_metas[0] == $meta) ? "" : "invisible";
-            $tiles .= '[ux_slider draggable="false" hide_nav="true" nav_style="simple" bullet_style="square" class="cases_' . transliterate($meta) . ' ' . $visible . '"]';
+            $tiles .= ($this->is_cases) ? "" : '[ux_slider draggable="false" hide_nav="true" nav_style="simple" bullet_style="square" class="cases_' . transliterate($meta) . ' ' . $visible . '"]';
             foreach ($posts as $post) {
                 if (in_array($meta, $this->getPostmeta($post))) {
                     $tiles .= $this->get_tile($post);
                 }
             }
-            $tiles .= "[/ux_slider]";
+            $tiles .= ($this->is_cases) ? "" : "[/ux_slider]";
         }
         $html = <<<EOHTML
         [section id='umbrella-cases' bg_color="rgb(249, 249, 249)"]
@@ -125,9 +130,10 @@ class cases
         } else {
             $feedback = "";
         }
+        $before = ($this->is_cases) ? "" : '[row_inner style="large" v_align="top"][col_inner span="12" span__sm="12" align="left" margin="0px 0px 0px 0px"] ';
+        $after = ($this->is_cases) ? "" : '[/col_inner][/row_inner]';
         $html = <<<EOHTML
-        [row_inner style="large" v_align="top"]
-        [col_inner span="12" span__sm="12" align="left" margin="0px 0px 0px 0px"] 
+        $before
             <div class="$metaclases tile $visible">
                 <div class="title"> $title</div>
                 <div class="company">
@@ -142,8 +148,7 @@ class cases
                 </div>
                 $feedback
             </div>
-        [/col_inner]
-        [/row_inner]
+        $after
         EOHTML;
 
         return $html;
@@ -165,6 +170,13 @@ class cases
                         'compare' => '=',
                     )
                 )
+            );
+        } elseif ($category == "cases") {
+            $args = array(
+                'numberposts' => -1,
+                'orderby' => 'menu_order',
+                'order' => 'ASC',
+                'post_type' => 'case'
             );
         } else {
             $args = array(
@@ -197,6 +209,8 @@ class cases
             return "Аудит";
         } else if (strpos($_SERVER['REQUEST_URI'], "services/bukhgalterskie-uslugi") !== false) {
             return "Бухгалтерия";
+        } else if (strpos($_SERVER['REQUEST_URI'], "/about/cases/") !== false) {
+            return "cases";
         }
         return "Общий";
     }
@@ -252,7 +266,7 @@ class cases
 
     private function getPostmetaKey(): string
     {
-        if ($this->category == "Общий") {
+        if ($this->category == "Общий" || $this->category == "cases") {
             return 'case_branch';
         } else {
             return 'case_category';
