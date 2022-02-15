@@ -176,6 +176,7 @@
     .feedback > .content > .tiles .tile > .text {
         order: 1;
         padding-left: unset;
+        padding-right: unset;
     }
 
     .feedback > .content > .tiles .tile > .company {
