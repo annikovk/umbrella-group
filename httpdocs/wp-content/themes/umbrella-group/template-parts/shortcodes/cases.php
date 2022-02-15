@@ -67,12 +67,12 @@ class cases
                     $posts_count += 1;
                 }
             }
-            $tiles .= ($this->is_cases || $posts_count < 2) ? "<div class='cases_" . transliterate($meta) . "'>" : '[ux_slider auto_slide="false" draggable="true" hide_nav="true" nav_style="simple" bullet_style="square" class="cases_' . transliterate($meta) . ' ' . $visible . '"]';
+            $tiles .= ($this->is_cases || $posts_count < 2) ? "<div class='cases_" . transliterate($meta) . ' ' . $visible . "'>" : '[ux_slider auto_slide="false" draggable="true" hide_nav="true" nav_style="simple" bullet_style="square" class="cases_' . transliterate($meta) . ' ' . $visible . '"]';
             $tiles .= $posts_tiles;
             $tiles .= ($this->is_cases || $posts_count < 2) ? "</div>" : "[/ux_slider]";
         }
         $html = <<<EOHTML
-        [section id='umbrella-cases' bg_color="rgb(249, 249, 249)"]
+        [section id='umbrella-cases' bg_color="rgb(249, 249, 249)" padding="0px"]
             [row]
                 [col  span="12" span__sm="12"]
                     <div class="newcases">
@@ -102,7 +102,8 @@ class cases
         $metaclases = "cases_" . $metaclases;
         $title = get_the_title($post);
         $logo_url = esc_attr(get_post_meta($post->ID, 'case_logo_url', true));
-        $author = esc_attr(get_post_meta($post->ID, 'case_author', true));
+        $author = get_post_meta($post->ID, 'case_author', true);
+        $logo_alt = sanitize_text_field($author);
         $industry = esc_attr(get_post_meta($post->ID, 'case_industry', true));
         $team = esc_attr(get_post_meta($post->ID, 'case_team', true));
         $issue = esc_attr(get_post_meta($post->ID, 'case_issue', true));
@@ -112,7 +113,7 @@ class cases
         if (strlen($proof) > 0 && strlen($proof_title) > 0) {
             $proof_lightbox_id = $post->ID . "-proof-lightbox";
             $proof_lightbox = "[lightbox id={$proof_lightbox_id}] <img src='{$proof}'> [/lightbox]";
-            $proof = " <div class='proof hide-for-small'><a href='#{$proof_lightbox_id}'><img src='{$proof}' alt='{$proof_title}'></a>{$proof_title}</div> $proof_lightbox";
+            $proof = " <div class='proof hide-for-small'><a href='#{$proof_lightbox_id}'><img src='{$proof}' alt='{$proof_title}'></a><span>{$proof_title}</span></div> $proof_lightbox";
 
         }
         $feedback_text = esc_attr(get_post_meta($post->ID, 'case_feedback_text', true));
@@ -141,7 +142,7 @@ class cases
             <div class="$metaclases tile $visible">
                 <div class="title"> $title</div>
                 <div class="company">
-                    <div class="logo"><img height='100px' alt="$author" src="$logo_url"></div>
+                    <div class="logo"><img height='100px' alt="$logo_alt" src="$logo_url"></div>
                     <div class="author">$author</div>
                 </div>
                 <div class="industry"><img alt="Briefcase-image" style="height:20px;" src="/wp-content/uploads/manual_uploads/Briefcase_Icon_1.png"><strong>Отрасль: </strong>$industry</div>
