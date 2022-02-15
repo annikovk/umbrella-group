@@ -1,7 +1,12 @@
 .newcases h2.title,
 .feedback h2.title {
     margin-bottom: unset;
-    margin-top: 70px;
+    margin-top: 100px;
+}
+
+.newcases,
+.feedback {
+    margin-bottom: 70px;
 }
 
 .newcases > .content > .tiles .slider > div:not(.col),
@@ -75,6 +80,9 @@
     transition: box-shadow 0.3s ease-in-out;
 }
 
+.margin-bot-minus-thirty {
+    margin-bottom: -30px;
+}
 @media screen and (max-width: 849px) {
 
     .newcases > .content > .tiles .slider > div:not(.col),
