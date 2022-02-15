@@ -68,7 +68,7 @@ class feedback
         }
 
         $html = <<<EOHTML
-        [section id='umbrella-feedback' bg_color="rgb(249, 249, 249)"]
+        [section id='umbrella-feedback' bg_color="rgb(249, 249, 249)" padding="0px"]
             [row]
                 [col  span="12" span__sm="12"]
                     <div class="feedback">
@@ -101,6 +101,7 @@ class feedback
         $title = get_the_title($post);
         $logo_url = esc_attr(get_post_meta($post->ID, 'feedback_logo_url', true));
         $author = get_post_meta($post->ID, 'feedback_author', true);
+        $logo_alt = sanitize_text_field($author);
         $quote = esc_attr(get_post_meta($post->ID, 'feedback_quote', true));
         $proof = esc_attr(get_post_meta($post->ID, 'feedback_proof', true));
         $proof_title = esc_attr(get_post_meta($post->ID, 'feedback_proof_title', true));
@@ -145,7 +146,7 @@ class feedback
                     <div class="show-for-small">$feedback</div>
                 </div>
                 <div class="company">
-                    <div class="logo"><img alt="$author" src="$logo_url"></div>
+                    <div class="logo"><img alt="$logo_alt" src="$logo_url"></div>
                     <div class="author">$author</div>
                 </div>
             </div>
