@@ -31,6 +31,7 @@ class buhuslugi_packs_table
     public function generate_shortcode()
     {
         $html =
+            <<<EOHTML
                 <div id="buh-table">
                   <div class="leftBlock">
                     <div class="head"></div>
