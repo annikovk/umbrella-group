@@ -37,25 +37,25 @@ class buhuslugi_packs_table
                     <div class="head"></div>
                     <div class="price">
                       <div class="checkBoxWrapper">
+                          <input
+                            type="radio"
+                            name="typeCompany"
+                            id="ip"
+                            class="buh-table-radio"
+                            value="ip"
+                            checked
+                          />
+                          <label for="ip">для ИП</label>
+                      </div>
+                      <div class="checkBoxWrapper">
                         <input
                           type="radio"
                           name="typeCompany"
                           id="company"
                           class="buh-table-radio"
                           value="company"
-                          checked
                         />
                         <label for="company"><span>для юридического лица</span></label>
-                      </div>
-                      <div class="checkBoxWrapper">
-                        <input
-                          type="radio"
-                          name="typeCompany"
-                          id="ip"
-                          class="buh-table-radio"
-                          value="ip"
-                        />
-                        <label for="ip">для ИП</label>
                       </div>
                     </div>
                     <div class="content">
@@ -97,7 +97,6 @@ class buhuslugi_packs_table
                           >?
                         </span>
                       </div>
-
                     </div>
                   </div>
                   <div class="rightBlock">
@@ -178,7 +177,7 @@ class buhuslugi_packs_table
                       <div class="item" data-option="1">
                         <div class="priceWrapper">
                           <div class="value" data-ip="8 000" data-company="10 000">
-                            10 000
+                            8 000
                           </div>
                           <div class="subtitle">
                             руб. в месяц
@@ -195,10 +194,10 @@ class buhuslugi_packs_table
                       <div class="item sale" data-option="2">
                         <div class="priceWrapper">
                           <div class="value prevPrice" data-ip="3 400" data-company="5 600">
-                            5 600
+                            3 400
                           </div>
                           <div class="value" data-ip="3 000" data-company="5 000">
-                            5 000
+                            3 000
                           </div>
                           <div class="subtitle">
                             руб. в месяц
@@ -214,7 +213,7 @@ class buhuslugi_packs_table
                       <div class="item" data-option="3">
                         <div class="priceWrapper">
                           <div class="value" data-ip="8 000" data-company="10 000">
-                            10 000
+                            8 000
                           </div>
                           <div class="subtitle">
                             руб. в месяц
@@ -230,7 +229,7 @@ class buhuslugi_packs_table
                       <div class="item" data-option="4">
                         <div class="priceWrapper">
                          <div class="value" data-ip="18 000" data-company="20 000">
-                            20 000
+                            18 000
                           </div>
                           <div class="subtitle">
                             руб. в месяц
@@ -383,7 +382,6 @@ class buhuslugi_packs_table
                       </div>
                     </div>
                   </div>
-
                       <div class="tooltip" id="tooltipResponsibility">
                            Штрафы и пени по нашей вине — берём на себя.
                       </div>
