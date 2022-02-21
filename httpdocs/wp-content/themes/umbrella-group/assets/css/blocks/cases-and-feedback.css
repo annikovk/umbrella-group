@@ -40,6 +40,8 @@
 .feedback ul.tabs {
     list-style-type: none;
     display: flex;
+    flex-wrap: wrap;
+    row-gap: 8px;
     flex-direction: row;
     padding-top: 40px;
     margin-bottom: unset;
@@ -81,8 +83,8 @@
     transition: box-shadow 0.3s ease-in-out;
 }
 
-.margin-bot-minus-thirty {
-    margin-bottom: -30px;
+.margin-bot-zero {
+    margin-bottom: 0px;
 }
 @media screen and (max-width: 849px) {
 

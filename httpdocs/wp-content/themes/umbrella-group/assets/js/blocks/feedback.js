@@ -7,5 +7,5 @@ jQuery(document).ready(function () {
     });
 
     //If feedback block stays right after the cases block, remove 100px margin-bot from cases to keep 100px margin between them
-    jQuery(".feedback").closest('section').prev().find(".newcases").addClass("margin-bot-minus-thirty");
+    jQuery(".feedback").closest('section').prev().find(".newcases").addClass("margin-bot-zero");
 });
