@@ -1,3 +1,7 @@
+.umbrella-cases-section > .section-content > .row > .col {
+    padding-bottom: unset;
+}
+
 .newcases > .content > .tiles .tile > .title {
     font-size: 34px;
     margin-top: 68px;
@@ -162,11 +166,11 @@
     border-style: solid;
 }
 
-.newcases > .content > .tiles .tile > .feedback > a {
+.newcases > .content > .tiles .tile > .case-feedback > a {
     text-decoration: underline;
 }
 
-.newcases > .content > .tiles .tile > .feedback {
+.newcases > .content > .tiles .tile > .case-feedback {
     margin-top: 29px;
 }
 
@@ -209,6 +213,8 @@
 
     .newcases > .content > .tiles .tile > .timeline > .solution {
         margin-left: 10%;
+        margin-right: 16px;
+        box-shadow: 5px 0 10px rgb(26 26 26 / 9%);
     }
 
     .newcases > .content > .tiles .tile > .timeline > .issue::after {

@@ -120,7 +120,7 @@ class feedback
                         Читать отзыв на бланке
                     </a>
                 </div> 
-                $proof_lightbox   
+                 
             EOHTML;
 
         }
@@ -151,6 +151,7 @@ class feedback
                 </div>
             </div>
         [/col_inner]
+        $proof_lightbox  
         [/row_inner]
         EOHTML;
 
@@ -272,7 +273,16 @@ function feedback_block_shortcode($atts)
     if (!$shortcode->fill_attributes()) {
         return $shortcode->err;
     }
+    if (isset($_GET['expvar'])) {
+        $expVar1 = $_GET['expvar'];
+    } else {
+        $expVar1 = "0";
+    }
+    if ($expVar1 == "1") {
         return $shortcode->generate_shortcode();
+    } else {
+        return "";
+    }
 }
 
 add_shortcode('feedback', 'feedback_block_shortcode');

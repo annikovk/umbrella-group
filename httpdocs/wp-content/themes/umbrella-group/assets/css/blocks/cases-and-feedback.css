@@ -20,14 +20,15 @@
 }
 
 
-.newcases > .content > .tiles,
-.feedback > .content > .tiles {
+.newcases > .content > .tiles > .slider-wrapper,
+.feedback > .content > .tiles > .slider-wrapper {
     padding-bottom: 56px;
 }
 
 .newcases > .content > .tiles button.flickity-prev-next-button,
 .feedback > .content > .tiles button.flickity-prev-next-button {
     bottom: -56px;
+    z-index: 2;
 }
 
 .newcases > .content > .tiles .flickity-page-dots,

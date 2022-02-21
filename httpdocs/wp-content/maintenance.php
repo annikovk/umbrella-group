@@ -39,7 +39,7 @@ header('Retry-After: 600');
     </header>
 
     <!--START_TIMER_BLOCK-->
-        <!--END_TIMER_BLOCK-->
+    <!--END_TIMER_BLOCK-->
 
     <!--START_SOCIAL_LINKS_BLOCK-->
     <section class="social-links">

@@ -34,7 +34,7 @@ class cases
     public $atts;
     public $err;
     private $all_metas = [];
-    private $is_cases;
+    private $is_cases_category_page;
 
     public function fill_attributes()
     {
@@ -49,7 +49,7 @@ class cases
 
     public function generate_shortcode()
     {
-        $this->is_cases = $this->category == "cases";
+        $this->is_cases_category_page = $this->category == "cases";
         $title = $this->get_title($this->category);
         $posts = $this->get_cases_posts($this->category);
         foreach ($posts as $post) {
@@ -67,14 +67,14 @@ class cases
                     $posts_count += 1;
                 }
             }
-            $tiles .= ($this->is_cases || $posts_count < 2) ? "<div class='cases_" . transliterate($meta) . ' ' . $visible . "'>" : '[ux_slider auto_slide="false" draggable="true" hide_nav="true" nav_style="simple" bullet_style="square" class="cases_' . transliterate($meta) . ' ' . $visible . '"]';
+            $tiles .= ($this->is_cases_category_page || $posts_count < 2) ? "<div class='cases_" . transliterate($meta) . ' ' . $visible . "'>" : '[ux_slider auto_slide="false" draggable="true" hide_nav="true" nav_style="simple" bullet_style="square" class="cases_' . transliterate($meta) . ' ' . $visible . '"]';
             $tiles .= $posts_tiles;
-            $tiles .= ($this->is_cases || $posts_count < 2) ? "</div>" : "[/ux_slider]";
+            $tiles .= ($this->is_cases_category_page || $posts_count < 2) ? "</div>" : "[/ux_slider]";
         }
         $html = <<<EOHTML
-        [section id='umbrella-cases' bg_color="rgb(249, 249, 249)" padding="0px"]
+        [section id='umbrella-cases' bg_color="rgb(249, 249, 249)" padding="0px" class="umbrella-cases-section"]
             [row]
-                [col  span="12" span__sm="12"]
+                [col  span="12" span__sm="12" margin="0px 0px 0px 0px"]
                     <div class="newcases">
                         $title
                         <div class="content">
@@ -122,21 +122,21 @@ class cases
             if (str_contains($feedback_url, "flamp")) {
                 $icon = "<img height='20px' width='20px' src='https://flamp.ru/static/assets/brand-logo/svg/f.svg' alt='flamp-logo'>";
                 $target = "target='_blank'";
-                $feedback = "<div class='feedback hide-for-small'>$icon <a $target href='{$feedback_url}'>{$feedback_text}</a></div> ";
+                $feedback = "<div class='case-feedback hide-for-small'>$icon <a $target href='{$feedback_url}'>{$feedback_text}</a></div> ";
             } else {
                 $icon = "";
                 $target = "";
                 $feedback_lightbox_id = $post->ID . "-feedback-lightbox";
                 $feedback_lightbox = "[lightbox id={$feedback_lightbox_id}] <img src='{$feedback_url}'> [/lightbox]";
-                $feedback = "<div class='feedback hide-for-small'><a $target href='#{$feedback_lightbox_id}'>$icon {$feedback_text}</a></div> $feedback_lightbox";
+                $feedback = "<div class='case-feedback hide-for-small'><a $target href='#{$feedback_lightbox_id}'>$icon {$feedback_text}</a></div> $feedback_lightbox";
             }
 
 
         } else {
             $feedback = "";
         }
-        $before = ($this->is_cases) ? "" : '[row_inner style="large" v_align="top"][col_inner span="12" span__sm="12" align="left" margin="0px 0px 0px 0px"] ';
-        $after = ($this->is_cases) ? "" : '[/col_inner][/row_inner]';
+        $before = ($this->is_cases_category_page) ? "" : '[row_inner style="large" v_align="top"][col_inner span="12" span__sm="12" align="left" margin="0px 0px 0px 0px"] ';
+        $after = ($this->is_cases_category_page) ? "" : '[/col_inner][/row_inner]';
         $html = <<<EOHTML
         $before
             <div class="$metaclases tile $visible">
@@ -304,7 +304,16 @@ function cases_block_shortcode($atts)
     if (!$shortcode->fill_attributes()) {
         return $shortcode->err;
     }
+    if (isset($_GET['expvar'])) {
+        $expVar1 = $_GET['expvar'];
+    } else {
+        $expVar1 = "0";
+    }
+    if ($expVar1 == "1" || (strpos($_SERVER['REQUEST_URI'], "/about/cases/") !== false)) {
         return $shortcode->generate_shortcode();
+    } else {
+        return "";
+    }
 }
 
 add_shortcode('cases', 'cases_block_shortcode');
