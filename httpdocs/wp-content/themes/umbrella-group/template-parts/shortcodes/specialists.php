@@ -150,7 +150,7 @@ class specialists
 
     private function get_main_label($category): string
     {
-        if ($category == "Аудит") return "Директор направления";
+        if ($category == "Аудит" || $category == "Юридические услуги") return "Директор направления";
         return "Руководитель отдела";
     }
 
