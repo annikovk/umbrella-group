@@ -118,6 +118,16 @@ class cases
         }
         $feedback_text = esc_attr(get_post_meta($post->ID, 'case_feedback_text', true));
         $feedback_url = esc_attr(get_post_meta($post->ID, 'case_feedback_url', true));
+        if (strlen($logo_url) > 0) {
+            $company = <<<EOHTML
+                <div class="company">
+                    <div class="logo"><img height='100px' alt="$logo_alt" src="$logo_url"></div>
+                    <div class="author">$author</div>
+                </div>
+            EOHTML;
+        } else {
+            $company = "";
+        }
         if (strlen($feedback_text) > 0 && strlen($feedback_url) > 0) {
             if (str_contains($feedback_url, "flamp")) {
                 $icon = "<img height='20px' width='20px' src='https://flamp.ru/static/assets/brand-logo/svg/f.svg' alt='flamp-logo'>";
@@ -141,10 +151,7 @@ class cases
         $before
             <div class="$metaclases tile $visible">
                 <div class="title"> $title</div>
-                <div class="company">
-                    <div class="logo"><img height='100px' alt="$logo_alt" src="$logo_url"></div>
-                    <div class="author">$author</div>
-                </div>
+                $company
                 <div class="industry"><img alt="Briefcase-image" style="height:20px;" src="/wp-content/uploads/manual_uploads/Briefcase_Icon_1.png"><strong>Отрасль: </strong>$industry</div>
                 <div class="team"><img alt="person-image" style="height:20px;" src="/wp-content/uploads/manual_uploads/User_Icon_1.png"><strong>Сотрудники Umbrella Group: </strong>$team</div>
                 <div class="timeline">
@@ -304,16 +311,7 @@ function cases_block_shortcode($atts)
     if (!$shortcode->fill_attributes()) {
         return $shortcode->err;
     }
-    if (isset($_GET['expvar'])) {
-        $expVar1 = $_GET['expvar'];
-    } else {
-        $expVar1 = "0";
-    }
-    if ($expVar1 == "1" || (strpos($_SERVER['REQUEST_URI'], "/about/cases/") !== false)) {
-        return $shortcode->generate_shortcode();
-    } else {
-        return "";
-    }
+    return $shortcode->generate_shortcode();
 }
 
 add_shortcode('cases', 'cases_block_shortcode');
