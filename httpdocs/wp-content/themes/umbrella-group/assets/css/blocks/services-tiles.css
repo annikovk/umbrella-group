@@ -5,10 +5,10 @@ div.main-services-tile-grid {
     grid-column-gap: 34px;
     /*grid-template-columns: minmax(0, 1fr) 300px;*/
     grid-template-areas:
-    "pages1 pages1 pages1 pages2 pages2 pages2"
-    "guarantee1 guarantee1 guarantee1 guarantee2 guarantee2 guarantee2"
-    "pages3 pages3 pages4 pages4 pages5 pages5"
-    "guarantee3 guarantee3 guarantee4 guarantee4 guarantee5 guarantee5";
+    "pages1 pages1 pages2 pages2 pages3 pages3"
+    "guarantee1 guarantee1 guarantee2 guarantee2 guarantee3 guarantee3"
+    "pages4 pages4 pages5 pages5 pages6 pages6"
+    "guarantee4 guarantee4 guarantee5 guarantee5 guarantee6 guarantee6";
 }
 
 .main-services-tile {
@@ -70,6 +70,14 @@ div.main-services-tile-grid {
 
 .main-services-tile:nth-child(5) .main-services-guarantee {
     grid-area: guarantee5;
+}
+
+.main-services-tile:nth-child(6) .main-services-pages {
+    grid-area: pages6;
+}
+
+.main-services-tile:nth-child(6) .main-services-guarantee {
+    grid-area: guarantee6;
 }
 
 /*style*/
