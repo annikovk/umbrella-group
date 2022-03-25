@@ -166,6 +166,29 @@
             disableOnMobile: true
           }
         );
+        (function (t, p) {
+          window.Marquiz
+            ? Marquiz.add([t, p])
+            : document.addEventListener("marquizLoaded", function () {
+                Marquiz.add([t, p]);
+              });
+        })("Pop", {
+          id: "5f8423a5d8d13200441acb88",
+          title: "Пройдите опрос",
+          text: "Получите бесплатную консультацию",
+          delay: 40,
+          textColor: "#ffffff",
+          bgColor: "#ff0000",
+          svgColor: "#ffffff",
+          closeColor: "#ffffff",
+          bonusCount: 0,
+          bonusText: "",
+          type: "side",
+          position: "position_top-left",
+          rounded: true,
+          shadow: "rgba(255, 0, 0, 0)",
+          blicked: true,
+        });    
     <?php elseif ($_SERVER['REQUEST_URI'] == '/services/bukhgalterskie-uslugi/obsluzhivanie/'): ?>
         (function(w, d, s, o){
           var j = d.createElement(s); j.async = true; j.src = '//script.marquiz.ru/v2.js';j.onload = function() {
@@ -185,6 +208,29 @@
             disableOnMobile: true
           }
         );
+        (function (t, p) {
+          window.Marquiz
+            ? Marquiz.add([t, p])
+            : document.addEventListener("marquizLoaded", function () {
+                Marquiz.add([t, p]);
+              });
+        })("Pop", {
+          id: "6102660bfe7cb6003ecc09b9",
+          title: "Рассчитайте за 1 минуту",
+          text: "Стоимость бухгалтерии на аутсорсинге",
+          delay: 40,
+          textColor: "#fff",
+          bgColor: "#ec1c23",
+          svgColor: "#fff",
+          closeColor: "#ffffff",
+          bonusCount: 1,
+          bonusText: "Вам доступен бонус и скидка",
+          type: "side",
+          position: "position_top-left",
+          rounded: true,
+          shadow: "rgba(236, 28, 35, 0)",
+          blicked: true,
+        });
     <?php elseif (strpos($_SERVER['REQUEST_URI'], 'register-elimination') > 0): ?>
         document.addEventListener("DOMContentLoaded", function () {
             (function (w, d, s, o) {
