@@ -147,6 +147,44 @@
                 disableOnMobile: false
             }
         );
+    <?php elseif ($_SERVER['REQUEST_URI'] == '/services/services-le/'): ?>
+        (function(w, d, s, o){
+          var j = d.createElement(s); j.async = true; j.src = '//script.marquiz.ru/v2.js';j.onload = function() {
+            if (document.readyState !== 'loading') Marquiz.init(o);
+            else document.addEventListener("DOMContentLoaded", function() {
+              Marquiz.init(o);
+            });
+          };
+          d.head.insertBefore(j, d.head.firstElementChild);
+        })(window, document, 'script', {
+            host: '//quiz.marquiz.ru',
+            region: 'eu',
+            id: '5f8423a5d8d13200441acb88',
+            autoOpen: 40,
+            autoOpenFreq: 'once',
+            openOnExit: true,
+            disableOnMobile: true
+          }
+        );
+    <?php elseif ($_SERVER['REQUEST_URI'] == '/services/bukhgalterskie-uslugi/obsluzhivanie/'): ?>
+        (function(w, d, s, o){
+          var j = d.createElement(s); j.async = true; j.src = '//script.marquiz.ru/v2.js';j.onload = function() {
+            if (document.readyState !== 'loading') Marquiz.init(o);
+            else document.addEventListener("DOMContentLoaded", function() {
+              Marquiz.init(o);
+            });
+          };
+          d.head.insertBefore(j, d.head.firstElementChild);
+        })(window, document, 'script', {
+            host: '//quiz.marquiz.ru',
+            region: 'eu',
+            id: '6102660bfe7cb6003ecc09b9',
+            autoOpen: 40,
+            autoOpenFreq: 'once',
+            openOnExit: true,
+            disableOnMobile: true
+          }
+        );
     <?php elseif (strpos($_SERVER['REQUEST_URI'], 'register-elimination') > 0): ?>
         document.addEventListener("DOMContentLoaded", function () {
             (function (w, d, s, o) {
