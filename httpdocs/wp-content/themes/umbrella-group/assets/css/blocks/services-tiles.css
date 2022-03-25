@@ -71,7 +71,6 @@ div.main-services-tile-grid {
 .main-services-tile:nth-child(5) .main-services-guarantee {
     grid-area: guarantee5;
 }
-
 .main-services-tile:nth-child(6) .main-services-pages {
     grid-area: pages6;
 }
