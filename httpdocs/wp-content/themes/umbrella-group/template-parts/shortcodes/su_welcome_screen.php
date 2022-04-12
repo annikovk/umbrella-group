@@ -16,6 +16,7 @@ class SU_welcome_screen
     private $button_variants = ['free_consulting', 'price_calc', 'ask_question'];
     private $phone='73833731717';
     private $phone_text;
+    private $price;
     private $specialist_text;
 
 
@@ -44,6 +45,7 @@ class SU_welcome_screen
         }
         $this->fill_variable('phone_text', $this->phone_text, true, 'Текст перед телефоном', '\'Для бесплатной консультации по услуге отправьте форму с сайта или звоните \'');
         $this->fill_variable('specialist_text', $this->specialist_text, true, 'Текст со специалистом', '\'Вам ответит наш {специалист} с опытом работы более 5 лет\'');
+        $this->fill_variable('price', $this->price, false, 'Цена', '');
 
         if (strlen($this->err) > $err_initial_len) {
             $this->err .= '</ul>' . $this->css;
@@ -120,6 +122,9 @@ class SU_welcome_screen
 
     public function generate_shortcode()
     {
+        if (isset($this->price)) {
+            $price_from_conditions = '<p class="price">Стоимость услуги <span class="price_from_conditions_number">' . $this->price . '</span></p>';
+        }
         $this->icon = '<img src="' . wp_get_attachment_image_src($this->icon, 'full')[0] . '"  />';
         $this->background = '<img src="' . wp_get_attachment_image_src($this->background, 'full')[0] . '"  />';
         $breadcrumbs = umbrella_draw_header_with_breadcrumbs();
@@ -158,6 +163,7 @@ class SU_welcome_screen
                         </div>
                     </div>
                     <div class="su_welcome_banner_overlay_bottom">
+                        $price_from_conditions
                         <p>$phone_text</p>
                         <p>$specialist_text</p>
                         <div class="hide-for-medium">$button</div>

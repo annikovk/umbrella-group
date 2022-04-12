@@ -15,20 +15,28 @@ class SU_welcome_screen_conditions
 
     public function fill_attributes()
     {
+        $j = 0;
         $err_initial_len = strlen($this->err);
         for ($i = 0; $i <= $this->columns_number-1; $i++) {
-            $i_frontend = $i+1;
-            $this->fill_variable('header_'.$i_frontend, $this->headers[$i], true, "Заголовок ".$i_frontend, "Цена");
-            $this->fill_variable('sub_header_'.$i_frontend, $this->sub_headers[$i], true, "Подзаголовок ".$i_frontend, "Цена");
-            $this->fill_variable('button_text_'.$i_frontend, $this->button_texts[$i], false, "Текст кнопки ".$i_frontend, "Расчёт стоимости");
-            if (isset($this->button_texts[$i])){ $this->fill_variable('button_link_'.$i_frontend, $this->button_links[$i], true, "Ссылка кнопки ".$i_frontend, "'#calculate-price-contact-form-lightbox'");}
+            $i_frontend = $i + 1;
+            if (isset($this->atts['header_' . $i_frontend])) {
+                $j = $j + 1;
+            }
+            $this->fill_variable('header_' . $i_frontend, $this->headers[$i], false, "Заголовок " . $i_frontend, "Цена");
+            $this->fill_variable('sub_header_' . $i_frontend, $this->sub_headers[$i], false, "Подзаголовок " . $i_frontend, "Цена");
+            $this->fill_variable('button_text_' . $i_frontend, $this->button_texts[$i], false, "Текст кнопки " . $i_frontend, "Расчёт стоимости");
+            if (isset($this->button_texts[$i])) {
+                $this->fill_variable('button_link_' . $i_frontend, $this->button_links[$i], false, "Ссылка кнопки " . $i_frontend, "'#calculate-price-contact-form-lightbox'");
+            }
         }
+        $this->columns_number = $j;
         if (strlen($this->err) > $err_initial_len) {
             $this->err .= '</ul>' . umbrella_add_custom_css_files($this->css_files);
             return false;
         } else {
             return true;
         }
+
     }
 
     private function fill_variable($attribute, &$variable, $obligatory, $name, $sample_value)

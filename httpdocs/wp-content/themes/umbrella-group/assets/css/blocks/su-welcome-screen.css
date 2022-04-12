@@ -13,6 +13,18 @@
     margin-bottom: 10px;
 }
 
+.su_welcome_banner_overlay_bottom .price {
+    padding-bottom: 16px;
+}
+
+.su_welcome_banner_overlay_bottom .price > .price_from_conditions_number {
+    padding-left: 16px;
+    font-size: 32px;
+    line-height: 32px;
+    font-weight: 700;
+    font-family: "PT Serif", sans-serif;
+}
+
 .su_welcome_banner_content {
     position: relative;
     z-index: 2;
