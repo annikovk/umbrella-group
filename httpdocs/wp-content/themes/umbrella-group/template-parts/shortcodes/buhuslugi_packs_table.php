@@ -194,10 +194,10 @@ class buhuslugi_packs_table
                       <div class="item sale" data-option="2">
                         <div class="priceWrapper">
                           <div class="value prevPrice" data-ip="4 500" data-company="5 600">
-                            3 400
+                            4 500
                           </div>
                           <div class="value" data-ip="4 000" data-company="5 000">
-                            3 000
+                            4 000
                           </div>
                           <div class="subtitle">
                             руб. в месяц
