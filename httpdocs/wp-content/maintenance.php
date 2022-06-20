@@ -43,13 +43,15 @@ header('Retry-After: 600');
 
     <!--START_SOCIAL_LINKS_BLOCK-->
     <section class="social-links">
-                    <a class="social-links__link" href="https://www.facebook.com/Plesk" target="_blank" title="Facebook">
-                <span class="icon"><img src="https://taxlab.ru/wp-content/maintenance/assets/images/facebook.svg" alt="Facebook"></span>
-            </a>
-                    <a class="social-links__link" href="https://twitter.com/Plesk" target="_blank" title="Twitter">
-                <span class="icon"><img src="https://taxlab.ru/wp-content/maintenance/assets/images/twitter.svg" alt="Twitter"></span>
-            </a>
-            </section>
+        <a class="social-links__link" href="https://www.facebook.com/Plesk" target="_blank" title="Facebook">
+            <span class="icon"><img src="https://taxlab.ru/wp-content/maintenance/assets/images/facebook.svg"
+                                    alt="Facebook"></span>
+        </a>
+        <a class="social-links__link" href="https://twitter.com/Plesk" target="_blank" title="Twitter">
+            <span class="icon"><img src="https://taxlab.ru/wp-content/maintenance/assets/images/twitter.svg"
+                                    alt="Twitter"></span>
+        </a>
+    </section>
     <!--END_SOCIAL_LINKS_BLOCK-->
 
 </div>

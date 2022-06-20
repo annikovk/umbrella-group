@@ -169,12 +169,19 @@
 }
 
 @media screen and (max-width: 849px) {
+    .su_welcome_banner_overlay_bottom .price > .price_from_conditions_number {
+        padding-left: 4px;
+        font-size: 24px;
+    }
+
     .su_welcome_banner_overlay_top {
         padding-top: 5px;
     }
+
     .banner-button span, .button span {
         font-size: 18px;
     }
+
     .su_welcome_banner_ratings_icon_box > * {
         max-width: 90%;
     }
