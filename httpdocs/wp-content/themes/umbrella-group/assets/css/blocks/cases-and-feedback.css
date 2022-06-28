@@ -36,40 +36,6 @@
     bottom: -41px;
 }
 
-.newcases ul.tabs,
-.feedback ul.tabs {
-    list-style-type: none;
-    display: flex;
-    flex-wrap: wrap;
-    row-gap: 8px;
-    flex-direction: row;
-    padding-top: 40px;
-    margin-bottom: unset;
-}
-
-.newcases ul.tabs li,
-.feedback ul.tabs li {
-    padding: 10px 20px 10px 20px;
-    color: #1a1a1a;
-    font-weight: bold;
-    margin-left: unset;
-    margin-right: 14px;
-    cursor: pointer;
-    margin-bottom: unset;
-    white-space: nowrap;
-}
-
-.newcases ul.tabs li:hover,
-.feedback ul.tabs li:hover {
-    background-color: #1a1a1a;
-    color: #ffffff;
-}
-
-.newcases ul.tabs li.selected,
-.feedback ul.tabs li.selected {
-    background-color: #1a1a1a;
-    color: #ffffff;
-}
 
 .newcases > .content > .tiles .tile > .timeline > .solution > .content > .proof img,
 .feedback > .content > .tiles .tile > .proof img {
@@ -87,13 +53,6 @@
     margin-bottom: 0px;
 }
 @media screen and (max-width: 849px) {
-
-    .newcases ul.tabs,
-    .feedback ul.tabs {
-        flex-wrap: unset;
-    }
-
-
     .newcases > .content > .tiles .slider > div:not(.col),
     .feedback > .content > .tiles .slider > div:not(.col) {
         width: 100%;
@@ -105,17 +64,5 @@
     }
 
 
-    .newcases > .content > .tabs,
-    .feedback > .content > .tabs {
-        overflow: scroll;
-        margin-left: -15px;
-        padding-left: 15px;
-        margin-right: -15px;
-        padding-right: 15px;
-    }
 
-    .newcases > .content > .tabs::-webkit-scrollbar,
-    .feedback > .content > .tabs::-webkit-scrollbar {
-        display: none;
-    }
 }

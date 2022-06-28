@@ -4,7 +4,7 @@ class Service_tiles
 {
     public $atts;
     public $err = "Неправильное использование шорткода";
-
+    private $hide_pages_on_mobile = true;
     private $tiles = [
         [
             "parent_id" => 28,
@@ -12,7 +12,6 @@ class Service_tiles
             "guarantee_title" => "Гарантия получения лицензии. Без рисков для вашего бизнеса",
             "guarantee_decription" => "С 1990 года получили лицензии для более 2000 компаний. 100% возврат оплаты в случае нашей ошибки",
             "guarantee_icon" => "",
-            "span" => 4
         ],
         [
             "parent_id" => 30,
@@ -20,7 +19,6 @@ class Service_tiles
             "guarantee_title" => "Дистанционно, под ключ, в срок",
             "guarantee_decription" => "Без похода в налоговую и к нотариусу. Всё без вашего участия. Можно онлайн! Гарантия срока по договору.",
             "guarantee_icon" => "/wp-content/uploads/Group_7.png",
-            "span" => 4
         ],
         [
             "parent_id" => 26,
@@ -28,7 +26,6 @@ class Service_tiles
             "guarantee_title" => "Минимизируем все риски",
             "guarantee_decription" => "Учёт ведут профессиональные бухгалтеры, которые постоянно повышают свою квалификацию. Гарантия защиты от ошибок.",
             "guarantee_icon" => "",
-            "span" => 4
         ],
         [
             "parent_id" => 12792,
@@ -36,7 +33,6 @@ class Service_tiles
             "guarantee_title" => "Гарантия чистоты проводимой сделки. Без рисков, под ключ.",
             "guarantee_decription" => "Проверяем юридическую чистоту объекта. С вами работает опытный юрист в сфере недвижимости. Гарантия на проведенную сделку в случае возникновения споров.",
             "guarantee_icon" => "",
-            "span" => 4
         ],
         [
             "parent_id" => 32,
@@ -44,7 +40,6 @@ class Service_tiles
             "guarantee_title" => "Гарантия и страхование",
             "guarantee_decription" => "<ul><li> Гарантируем сроки по договору.</li><li> Риски застрахованы.</li><li> Бесплатный прогноз ситуации до заключения договора.</li></ul>",
             "guarantee_icon" => "",
-            "span" => 4
         ],
         [
             "parent_id" => 34,
@@ -52,19 +47,41 @@ class Service_tiles
             "guarantee_title" => "Риски застрахованы на сумму более 50 млн рублей",
             "guarantee_decription" => "После проверки — подробный отчёт, отражающий «узкие места» в работе организации и способы их устранения. Постдоговорное обслуживание.",
             "guarantee_icon" => "",
-            "span" => 4
         ]
     ];
 
-    function generate_shortcode()
+    function generate_shortcode($atts)
     {
-        $html = '[row][col span="12"]<div class="main-services-tile-grid">';
+        if (isset($atts["hide_pages_on_mobile"])) {
+            if ($atts["hide_pages_on_mobile"] == "false") {
+                $this->hide_pages_on_mobile = false;
+                $tabs = "<ul class='tabs'>";
+                foreach ($this->tiles as $tile) {
+                    $title = str_replace("!return_caret", " ", $tile['title']);
+                    $tabs .= <<<EOHTML
+                        <li target-block="service-title-target-parent-{$tile["parent_id"]}">{$title}</li>
+                    EOHTML;
+
+                }
+                $tabs .= "</ul>";
+            }
+        }
+
+        $html = <<<EOHTML
+                    <div class="main-services">{$tabs}[row][col class='main-services-tile-col" span="12"]<div class="main-services-tile-grid">
+                EOHTML;
         foreach ($this->tiles as $tile) {
             $html .= $this->get_tile($tile);
         }
-        $html .= '</div>[/col][/row]
-                <script type="text/javascript" src="/wp-content/themes/umbrella-group/assets/js/blocks/services-tiles.js"></script>
-                ';
+        $html .= '</div>[/col][/row]</div>';
+        umbrella_add_custom_js_files(["/assets/js/blocks/services-tiles.js"]);
+        if ($this->hide_pages_on_mobile) {
+            umbrella_add_custom_js_files(["/assets/js/blocks/services-tiles-hide-pages-on-mobile.js"]);
+        }
+        umbrella_add_custom_css_files(['/assets/css/blocks/services-tiles.css']);
+        if (isset($atts["custom_css"])) {
+            umbrella_add_custom_css_files([$atts["custom_css"]]);
+        }
         umbrella_add_custom_css_files(['/assets/css/blocks/services-tiles.css']);
         return $html;
     }
@@ -99,21 +116,23 @@ class Service_tiles
             'post_status' => 'publish',
         );
         $pages = get_pages($args);
-        $span = $tile["span"];
-
+        if ($this->hide_pages_on_mobile) {
+            $hideforsmall = "hide-for-small";
+        }
         foreach ($pages as $page) {
             $pages_html .= "<li><a href='$page->guid'>$page->post_title</a></li>";
         }
+        $id = 'service-title-target-parent-' . $parent_id;
         $html = <<<EOHTML
-                            <div class="main-services-tile">
-                                <div class="main-services-pages">
+                            <div class="main-services-tile" >
+                                <div class="main-services-pages" id="{$id}">
                                         <div class='category-block'>
                                             <h3 class="category-title red-on-block-hover"><a href="$parent_url">$title</a></h3>
                                             <div class="arrow-on-hover hide-for-small"></div>
                                             <ul class="children-list">
                                                 $pages_html
                                             </ul>
-                                            <a class='hide-for-small red-on-block-hover show-all-link' href="$parent_url">показать все</a>
+                                            <a class='$hideforsmall red-on-block-hover show-all-link' href="$parent_url">показать все</a>
                                             <a class='show-for-small show-more-pages' data-before='↓ показать '>услуги</a>
                                         </div>
                                 </div>
@@ -136,13 +155,12 @@ class Service_tiles
             return false;
         }
     }
-
 }
 
 function service_tile_shortcode($atts)
 {
     $shortcode = new Service_tiles();
-    return $shortcode->generate_shortcode();
+    return $shortcode->generate_shortcode($atts);
 }
 
 add_shortcode('service_tiles', 'service_tile_shortcode');
