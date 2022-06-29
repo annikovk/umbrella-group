@@ -75,6 +75,7 @@ class garantiya_srokov
          [/section]
         EOHTML;
         umbrella_add_custom_css_files(['/assets/css/blocks/garantiya_srokov.css']);
+        umbrella_add_custom_js_files(["/assets/js/blocks/garantiya_srokov.js"]);
         return $html;
     }
 
