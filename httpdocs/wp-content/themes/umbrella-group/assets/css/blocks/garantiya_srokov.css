@@ -28,11 +28,14 @@
     text-decoration: none;
     display: inline;
     border-bottom: 1px solid #334862;
+    cursor: pointer;
 }
 
-.links_download :hover {
-    color: red;
-    border-bottom: 1px solid red;
+.links_download:hover {
+    color: #ec1d23;
+!important;
+    border-bottom: 1px solid #ec1d23;
+!important;
 }
 
 .list_download {

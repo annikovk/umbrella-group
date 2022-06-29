@@ -152,6 +152,7 @@ require get_theme_file_path() . '/template-parts/shortcodes/buhuslugi_packs_tabl
 require get_theme_file_path() . '/template-parts/shortcodes/umbrella_feedback.php';
 require get_theme_file_path() . '/template-parts/shortcodes/service-tiles.php';
 require get_theme_file_path() . '/template-parts/shortcodes/garantiya-srokov.php';
+require get_theme_file_path() . '/template-parts/shortcodes/why_umbrella.php';
 require get_theme_file_path() . '/template-parts/shortcodes/su_welcome_screen_conditions.php';
 // Hook : to get content with s3elected AB tests variants only
 require get_theme_file_path() . '/umbrella_filter_ab_tests.php';
