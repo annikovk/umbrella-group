@@ -8,7 +8,7 @@
     font-size: 42px;
     font-weight: 700;
     line-height: 50px;
-    letter-spacing: 0px;
+    letter-spacing: 0;
     color: #1A1A1A;
     text-rendering: optimizeLegibility;
     margin-bottom: 35px;
@@ -16,7 +16,7 @@
 }
 
 .box-shadow_block {
-    box-shadow: 0px 0px 20px rgba(26, 26, 26, 0.09);
+    box-shadow: 0 0 20px rgba(26, 26, 26, 0.09);
 }
 
 .main_block {
@@ -40,15 +40,23 @@
 }
 
 .text_content {
-    font-family: Inter;
+    font-family: "Inter", sans-serif;
     font-size: 18px;
     font-weight: 400;
     line-height: 27px;
-    letter-spacing: 0em;
+    letter-spacing: 0;
 }
 
 .accent_text {
     font-weight: 700;
+}
+
+.mobile-text {
+    display: none;
+}
+
+.desktop-text {
+    display: block;
 }
 
 @media screen and (max-width: 600px) {
@@ -69,5 +77,13 @@
     .text_content {
         font-size: 16px;
         line-height: 22px;
+    }
+
+    .mobile-text {
+        display: block;
+    }
+
+    .desktop-text {
+        display: none;
     }
 }
