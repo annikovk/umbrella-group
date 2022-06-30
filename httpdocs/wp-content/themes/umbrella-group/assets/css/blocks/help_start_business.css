@@ -128,4 +128,12 @@
     .content_layout_help_start_business {
         justify-items: center;
     }
+
+    .border_card_help {
+        padding: 75px 28px;
+    }
+
+    .legend_position {
+        top: -88px;
+    }
 }
