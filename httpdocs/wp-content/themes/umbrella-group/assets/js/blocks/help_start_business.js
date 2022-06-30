@@ -1,4 +1,5 @@
-function spoiler() {
+function spoilerContent() {
+    console.log('ss')
     if (document.getElementById('spoiler').style.display === 'none') {
         document.getElementById('spoiler').style.display = ''
         document.getElementById('spoiler-btn-hide').style.display = ''
