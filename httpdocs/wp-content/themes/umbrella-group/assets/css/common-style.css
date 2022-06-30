@@ -50,10 +50,8 @@
 }
 
 .action-text-common:hover {
-    color: #ec1d23;
-!important;
-    border-bottom: 1px solid #ec1d23;
-!important;
+    color: #ec1d23 !important;
+    border-bottom: 1px solid #ec1d23 !important;
 }
 
 .card-shadow-common {

@@ -1,0 +1,73 @@
+.title_trouble_2022 {
+    display: grid;
+    grid-gap: 18px;
+}
+
+.content_trouble_2022 {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 15px;
+}
+
+.card_trouble_2022 {
+    padding: 30px;
+}
+
+.border-card_trouble_2022 {
+    border: 1px solid #C9C9C9;
+    padding: 50px;
+    max-width: 446px;
+}
+
+.position-card-legend_trouble_2022 {
+    position: relative;
+    top: -65px;
+    display: flex;
+}
+
+.legend_trouble_2022 {
+    background: white;
+    padding: 0 20px;
+}
+
+.mobile-content_trouble_2022 {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .content_trouble_2022 {
+        grid-template-columns: auto;
+        margin-top: 16px;
+    }
+
+    .mobile-content_trouble_2022 {
+        display: block;
+    }
+
+    .content-desktop_trouble-2022 {
+        display: none;
+    }
+
+    .border-card_trouble_2022 {
+        max-width: 100%;
+    }
+
+    .padding-bottom_trouble_2022 {
+        padding-bottom: 45px;
+    }
+
+    .position-card-legend_trouble_2022 {
+        justify-content: center;
+        top: -45px;
+    }
+
+    .border-card_trouble_2022 {
+        padding: 28px;
+    }
+
+    .card_trouble_2022 {
+        padding: 28px;
+    }
+
+}

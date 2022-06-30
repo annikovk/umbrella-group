@@ -18,7 +18,7 @@ class why_umbrella
                     <div class="citation_why-umbrella">
                         <div class="layout-quote_why-umbrella">
                             <div class="quote_why-umbrella">&laquo;</div>
-                            <div class="main-text-italic-common">
+                            <div class="main-text-italic-common title_why_umbrella">
                                 Помогая российскому бизнесу родиться, жить, расти и&nbsp;развиваться,
                                 мы&nbsp;помогаем России в&nbsp;целом, улучшая качество жизни каждого в&nbsp;отдельности.
                             </div>
