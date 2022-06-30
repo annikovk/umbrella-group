@@ -67,7 +67,7 @@
     align-items: center;
 }
 
-.text {
+.text_why_umbrella {
     font-family: "Inter", sans-serif;
     font-size: 18px;
     font-weight: 400;
@@ -136,7 +136,7 @@
         padding: 25px 15px;
     }
 
-    .text {
+    .text_why_umbrella {
         font-size: 14px;
         line-height: 20px;
     }

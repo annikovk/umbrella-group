@@ -1,0 +1,124 @@
+.number_statistics_title {
+    font-family: "PT Serif", sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 120%;
+    color: #1A1A1A;
+}
+
+.number_statistics_main_text {
+    font-family: "Inter", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 27px;
+    color: #1A1A1A;
+}
+
+.numbers_statistics_header {
+    max-width: 790px;
+}
+
+.container_numbers_statistics {
+    border: 1px solid #C9C9C9;
+    margin-top: 100px;
+    height: 172px;
+}
+
+.numbers_statistics_block_array {
+    display: flex;
+    position: relative;
+    top: -40px;
+    justify-content: space-around;
+    gap: 16px;
+}
+
+.numbers_statistics_block {
+    background: white;
+    padding: 0 10px;
+}
+
+.number_statistics_item {
+    font-family: "PT Serif", sans-serif;
+    font-weight: 700;
+    font-size: 70px;
+    color: #2E4F75;
+    text-align: center;
+    line-height: 70px;
+
+}
+
+.number_statistics_text {
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    color: #1A1A1A;
+    text-align: center;
+
+}
+
+.numbers_statistics_footer {
+    font-weight: 700;
+    position: relative;
+    top: 27px;
+    display: flex;
+    justify-content: center;
+}
+
+.numbers_statistics_footer_text {
+    background: white;
+    padding: 0 20px;
+}
+
+.container_text_numbers_statistics_footer {
+    background: white;
+    padding: 0 20px;
+}
+
+@media screen and (max-width: 630px) {
+    .number_statistics_title {
+        font-size: 28px;
+        line-height: 36px;
+    }
+
+    .number_statistics_main_text {
+        font-size: 16px;
+        line-height: 140%;
+    }
+
+    .container_numbers_statistics {
+        padding: 45px;
+        margin-top: 45px;
+        height: auto;
+    }
+
+    .numbers_statistics_block_array {
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: space-around;
+        grid-gap: 16px;
+        justify-items: center;
+        top: 0;
+        position: inherit;
+    }
+
+    .numbers_statistics_block {
+        padding: 0;
+    }
+
+    .number_statistics_text {
+        font-size: 16px;
+    }
+
+    .numbers_statistics_footer {
+        top: 57px;
+    }
+
+}
+
+@media screen and (max-width: 503px) {
+    .numbers_statistics_footer {
+        top: 82px;
+    }
+}

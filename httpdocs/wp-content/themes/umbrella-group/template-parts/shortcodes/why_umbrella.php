@@ -7,7 +7,7 @@ class why_umbrella
     public function generate_shortcode()
     {
         $html = <<<EOHTML
-         [section id='umbrella-feedback'  padding="0px"]
+         [section id='why_umbrella'  padding="0px"]
            [row]
             [col  span="12" span__sm="12" margin="0px 0px 0px 0px"]
             <div class="block_padding main_container_whe_umbrella">
@@ -27,7 +27,7 @@ class why_umbrella
                         <div class="author_quote_why_umbrella">
                             <img src="https://taxlab.ru/wp-content/uploads/Author_quote.png" 
                                  alt="Author_quote.png">
-                            <div class="text">
+                            <div class="text_why_umbrella">
                                 <span class="author_quote_accent">Александр Климов,</span>
                                 <br>генеральный директор Umbrella Group
                             </div>
@@ -35,11 +35,11 @@ class why_umbrella
                    </div>
                    <div class="layout_thesis">
                        <div class="number_thesis">1</div>
-                       <div class="text">Оправдываем доверие наших клиентов, ведь в нём &mdash; ключ к успеху.</div>
+                       <div class="text_why_umbrella">Оправдываем доверие наших клиентов, ведь в нём &mdash; ключ к успеху.</div>
                        <div class="number_thesis">2</div>
-                       <div class="text">Мы знаем свое дело и любим свою работу.</div>
+                       <div class="text_why_umbrella">Мы знаем свое дело и любим свою работу.</div>
                        <div class="number_thesis">3</div>
-                       <div class="text">Более 30 лет помогаем предпринимателям развивать бизнес и делать его более эффективным.</div>
+                       <div class="text_why_umbrella">Более 30 лет помогаем предпринимателям развивать бизнес и делать его более эффективным.</div>
                    </div>
                 </div>
             </div>
