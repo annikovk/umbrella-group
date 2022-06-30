@@ -1,41 +1,35 @@
-.block_padding {
+.block-padding_why-umbrella {
     padding-top: 90px;
 }
 
-.main_container_whe_umbrella {
+.main-container_why-umbrella {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.card_why_umbrella {
+.card_why-umbrella {
     display: grid;
     grid-gap: 65px;
     position: relative;
     top: -80px;
     max-width: 1054px;
     padding: 40px 50px;
-    background: #FFFFFF;
-    box-shadow: 0 0 20px rgba(26, 26, 26, 0.09);
 }
 
-.title_why_umbrella {
-    font-family: "PT Serif", sans-serif;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 42px;
-    line-height: 120%;
-    color: #1A1A1A;
-    margin: 0;
-}
-
-
-.layout_quote {
+.citation_why-umbrella {
     display: grid;
     grid-gap: 21px;
 }
 
-.text_quote_why_umbrella {
+.layout-author-quote_why-umbrella {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-gap: 25px;
+    align-items: center;
+}
+
+.layout-quote_why-umbrella {
     display: grid;
     grid-template-columns: auto 1fr auto;
     justify-content: space-between;
@@ -43,44 +37,13 @@
     grid-gap: 18px;
 }
 
-.quote {
+.quote_why-umbrella {
     font-size: 40px;
     color: #EC1C23;
-    line-height: 25px;
+    line-height: 24px;
 }
 
-.text_quote {
-    font-family: "PT Serif", sans-serif;
-    font-size: 24px;
-    font-style: italic;
-    font-weight: 400;
-    line-height: 34px;
-    letter-spacing: 0;
-    text-align: left;
-
-}
-
-.author_quote_why_umbrella {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-gap: 25px;
-    align-items: center;
-}
-
-.text_why_umbrella {
-    font-family: "Inter", sans-serif;
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 27px;
-    letter-spacing: 0;
-    text-align: left;
-}
-
-.author_quote_accent {
-    font-weight: 700;
-}
-
-.layout_thesis {
+.layout-thesis_why-umbrella {
     display: grid;
     grid-template-columns: auto 1fr;
     grid-column-gap: 18px;
@@ -88,61 +51,53 @@
     align-items: center;
 }
 
-.number_thesis {
+.number-thesis_why-umbrella {
     font-family: "PT Serif", sans-serif;
     font-style: normal;
     font-weight: 700;
     font-size: 28px;
-    line-height: 20px;
     color: #EC1C23;
+    line-height: 30px;
 
 }
 
 @media screen and (max-width: 1060px) {
-    .card_why_umbrella {
+    .card_why-umbrella {
         position: inherit;
         top: 0;
     }
+
+    .card-shadow_none_why-umbrella {
+        box-shadow: none !important;
+    }
 }
 
-@media screen and (max-width: 648px) {
+@media screen and (max-width: 768px) {
     .title_why_umbrella {
         text-align: center;
-        font-size: 28px;
     }
 
-    .text_quote {
-        font-size: 18px;
-        font-family: "PT Serif", sans-serif;
-        line-height: 25px;
-        letter-spacing: 0;
-        text-align: center;
-    }
-
-    .card_why_umbrella {
+    .card_why-umbrella {
         grid-gap: 40px;
+        padding: 25px 15px;
     }
 
-    .text_quote_why_umbrella {
+    .layout-quote_why-umbrella {
         align-items: inherit;
         grid-gap: 5px;
     }
 
-    .position_down {
+    .position-down_why-umbrella {
         align-self: end;
     }
 
-    .card_why_umbrella {
-        padding: 25px 15px;
-    }
-
-    .text_why_umbrella {
-        font-size: 14px;
-        line-height: 20px;
-    }
-
-    .layout_thesis {
+    .layout-thesis_why-umbrella {
         align-items: initial;
-
+        grid-column-gap: 14px;
     }
+
+    .layout-author-quote_why-umbrella {
+        margin-top: 40px;
+    }
+
 }

@@ -7,69 +7,69 @@ class garantiya_srokov
     public function generate_shortcode()
     {
         $html = <<<EOHTML
-         [section id='umbrella-feedback'  padding="0px"]
+         [section id='garantiya_srokov'  padding="0px"]
            [row]
             [col  span="12" span__sm="12" margin="0px 0px 0px 0px"]
-            <div class="layout main_block box-shadow_block">
-                <div>
-                    <h1 class="title-h1">Гарантия сроков</h1>
-                    <p class="text_content desktop-text">
-                        В каждом договоре вы увидите срок оказания услуг
-                        и ответственность за нарушение сроков. Время &mdash; самый 
-                        ценный ресурс, и мы знаем цену времени наших клиентов. 
-                        Посмотрите гарантии в договорах:
-                    </p>
-                    <p class="text_content mobile-text">
-                        В каждом договоре вы увидите 
-                        срок оказания услуг 
-                        и ответственность за нарушение сроков. Посмотрите гарантии 
-                        в договорах:
-                    </p>
-                    <ul class="list_download">
-                        <li><a class="links_download" href="#">Договор аудита</a></li>     
-                        <li><a class="links_download href="#">Договор лицензирования</a></li>     
-                        <li><a class="links_download href="#">Договор бухгалтерского обслуживания</a></li>
-                    </ul>
+                <div class="layout main_block_garantiya_srokov card-shadow-common">
+                    <div>
+                        <div class="title-h2-text-common margin-title_garantiya_srokov">Гарантия сроков</div>
+                        <div class="main-text-common desktop-text">
+                            В&nbsp;каждом договоре вы&nbsp;увидите срок оказания услуг
+                            и&nbsp;ответственность за&nbsp;нарушение сроков. Время&nbsp;&mdash; самый 
+                            ценный ресурс, и&nbsp;мы&nbsp;знаем цену времени наших клиентов. 
+                            Посмотрите гарантии в&nbsp;договорах:
+                        </div>
+                        <div class="main-text-common mobile-text">
+                            В&nbsp;каждом договоре вы&nbsp;увидите 
+                            срок оказания услуг 
+                            и&nbsp;ответственность за&nbsp;нарушение сроков. Посмотрите гарантии 
+                            в&nbsp;договорах:
+                        </div>
+                        <ul class="list-download_garantiya_srokov margin-link_garantiya_srokov">
+                            <li><a class="action-text-common" href="#">Договор аудита</a></li>     
+                            <li><a class="action-text-common" href="#">Договор лицензирования</a></li>     
+                            <li><a class="action-text-common" href="#">Договор бухгалтерского обслуживания</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="title-h2-text-common margin-title_garantiya_srokov">Гарантия результата</div>
+                        <div class="main-text-common desktop-text">
+                            Исключаем человеческий фактор <span class="main-text-accent-common">двойным контролем:</span>
+                            директора подразделений лично проверяют ведение 
+                            бухгалтерского учёта, аудиторские отчёты и&nbsp;заключения,
+                            участвуют во&nbsp;всех этапах ведения дел в&nbsp;арбитражных 
+                            судах и&nbsp;судах общей юрисдикции. Для <span class="main-text-accent-common">комплексного 
+                            решения вопросов</span> подключается команда из&nbsp;аудиторов, 
+                            бухгалтеров и&nbsp;юристов.
+                            <br>
+                            <br>
+                            Аудиторские и&nbsp;бухгалтерские услуги <span class="main-text-accent-common">застрахованы&nbsp;&mdash; </span>
+                            при допущении ошибки штрафы и&nbsp;ответственность
+                            ложатся на&nbsp;аудитора.
+                            <br>
+                            <br>
+                            Мы&nbsp;за&nbsp;удобство и&nbsp;комфорт. Поэтому при оформлении 
+                            лицензий вы&nbsp;можете воспользоваться <span class="accent_text">оплатой частями.</span>
+                            100% предоплата не&nbsp;требуется.
+                        </div>
+                        <div class="main-text-common mobile-text">
+                            Исключаем человеческий фактор 
+                            двойным контролем.
+                            <br>
+                            <br>
+                            Аудиторские и бухгалтерские 
+                            услуги застрахованы  &mdash; 
+                            при допущении ошибки штрафы 
+                            и ответственность ложатся 
+                            на аудитора.
+                            <br>
+                            <br>
+                            При оформлении лицензий 
+                            вы можете воспользоваться оплатой частями. 100&nbsp;% 
+                            предоплата не требуется.
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <h1 class="title-h1">Гарантия результата</h1>
-                    <p class="text_content desktop-text">
-                        Исключаем человеческий фактор <span class="accent_text">двойным контролем:</span>
-                        директора подразделений лично проверяют ведение 
-                        бухгалтерского учёта, аудиторские отчёты и заключения,
-                        участвуют во всех этапах ведения дел в арбитражных 
-                        судах и судах общей юрисдикции. Для <span class="accent_text">комплексного 
-                        решения вопросов</span> подключается команда из аудиторов, 
-                        бухгалтеров и юристов.
-                        <br>
-                        <br>
-                        Аудиторские и бухгалтерские услуги <span class="accent_text">застрахованы &mdash; </span>
-                        при допущении ошибки штрафы и ответственность
-                        ложатся на аудитора.
-                        <br>
-                        <br>
-                        Мы за удобство и комфорт. Поэтому при оформлении 
-                        лицензий вы можете воспользоваться <span class="accent_text">оплатой частями.</span>
-                        100&nbsp;% предоплата не требуется.
-                    </p>
-                    <p class="text_content mobile-text">
-                        Исключаем человеческий фактор 
-                        двойным контролем.
-                        <br>
-                        <br>
-                        Аудиторские и бухгалтерские 
-                        услуги застрахованы  &mdash; 
-                        при допущении ошибки штрафы 
-                        и ответственность ложатся 
-                        на аудитора.
-                        <br>
-                        <br>
-                        При оформлении лицензий 
-                        вы можете воспользоваться оплатой частями. 100&nbsp;% 
-                        предоплата не требуется.
-                    </p>
-                </div>
-            </div>
             [/col]
            [/row]
          [/section]

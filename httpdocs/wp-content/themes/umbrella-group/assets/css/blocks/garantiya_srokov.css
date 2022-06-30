@@ -4,54 +4,20 @@
     grid-gap: 45px;
 }
 
-.title-h1 {
-    font-size: 42px;
-    font-weight: 700;
-    line-height: 50px;
-    letter-spacing: 0;
-    color: #1A1A1A;
-    text-rendering: optimizeLegibility;
+.margin-title_garantiya_srokov {
     margin-bottom: 35px;
-    font-family: "PT Serif", sans-serif;
 }
 
-.box-shadow_block {
-    box-shadow: 0 0 20px rgba(26, 26, 26, 0.09);
+.margin-link_garantiya_srokov {
+    margin-top: 24px;
 }
 
-.main_block {
+.main_block_garantiya_srokov {
     padding: 50px;
 }
 
-.links_download {
+.list-download_garantiya_srokov {
     color: #334862;
-    text-decoration: none;
-    display: inline;
-    border-bottom: 1px solid #334862;
-    cursor: pointer;
-}
-
-.links_download:hover {
-    color: #ec1d23;
-!important;
-    border-bottom: 1px solid #ec1d23;
-!important;
-}
-
-.list_download {
-    color: #334862;
-}
-
-.text_content {
-    font-family: "Inter", sans-serif;
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 27px;
-    letter-spacing: 0;
-}
-
-.accent_text {
-    font-weight: 700;
 }
 
 .mobile-text {
@@ -62,25 +28,15 @@
     display: block;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
     .layout {
         grid-template-columns: none;
     }
 
-    .title-h1 {
-        font-size: 28px;
-        line-height: 36px;
-        text-align: center;
-    }
-
-    .main_block {
+    .main_block_garantiya_srokov {
         padding: 40px 28px;
     }
 
-    .text_content {
-        font-size: 16px;
-        line-height: 22px;
-    }
 
     .mobile-text {
         display: block;

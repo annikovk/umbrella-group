@@ -10,36 +10,36 @@ class why_umbrella
          [section id='why_umbrella'  padding="0px"]
            [row]
             [col  span="12" span__sm="12" margin="0px 0px 0px 0px"]
-            <div class="block_padding main_container_whe_umbrella">
+            <div class="block-padding_why-umbrella main-container_why-umbrella">
                 <img alt="why_umbrella_background.png" 
                      src="https://taxlab.ru/wp-content/uploads/why_umbrella_background.png"/>
-                <div class="card_why_umbrella">
-                    <h1 class="title_why_umbrella">Почему ГК Umbrella Group?</h1>
-                    <div class="layout_quote">
-                        <div class="text_quote_why_umbrella">
-                            <div class="quote">&laquo;</div>
-                            <div class="text_quote">
-                            Помогая российскому бизнесу родиться, жить, расти и развиваться,
-                            мы помогаем России в целом, улучшая качество жизни каждого в отдельности.
+                <div class="card_why-umbrella card-shadow-common card-shadow_none_why-umbrella">
+                    <div class="title-h1-text-common title_why_umbrella">Почему ГК&nbsp;Umbrella Group?</div>
+                    <div class="citation_why-umbrella">
+                        <div class="layout-quote_why-umbrella">
+                            <div class="quote_why-umbrella">&laquo;</div>
+                            <div class="main-text-italic-common">
+                                Помогая российскому бизнесу родиться, жить, расти и&nbsp;развиваться,
+                                мы&nbsp;помогаем России в&nbsp;целом, улучшая качество жизни каждого в&nbsp;отдельности.
                             </div>
-                            <div class="quote position_down">&raquo;</div>
+                            <div class="quote_why-umbrella position-down_why-umbrella">&raquo;</div>
                         </div>
-                        <div class="author_quote_why_umbrella">
+                        <div class="layout-author-quote_why-umbrella">
                             <img src="https://taxlab.ru/wp-content/uploads/Author_quote.png" 
                                  alt="Author_quote.png">
-                            <div class="text_why_umbrella">
-                                <span class="author_quote_accent">Александр Климов,</span>
-                                <br>генеральный директор Umbrella Group
+                            <div class="main-text-common">
+                                <span class="main-text-accent-common">Александр Климов,</span>
+                                <br>генеральный директор Umbrella&nbsp;Group
                             </div>
                         </div>
                    </div>
-                   <div class="layout_thesis">
-                       <div class="number_thesis">1</div>
-                       <div class="text_why_umbrella">Оправдываем доверие наших клиентов, ведь в нём &mdash; ключ к успеху.</div>
-                       <div class="number_thesis">2</div>
-                       <div class="text_why_umbrella">Мы знаем свое дело и любим свою работу.</div>
-                       <div class="number_thesis">3</div>
-                       <div class="text_why_umbrella">Более 30 лет помогаем предпринимателям развивать бизнес и делать его более эффективным.</div>
+                   <div class="layout-thesis_why-umbrella">
+                       <div class="number-thesis_why-umbrella">1</div>
+                       <div class="main-text-common">Оправдываем доверие наших клиентов, ведь в&nbsp;нём&nbsp;&mdash; ключ к&nbsp;успеху.</div>
+                       <div class="number-thesis_why-umbrella">2</div>
+                       <div class="main-text-common">Мы&nbsp;знаем свое дело и&nbsp;любим свою работу.</div>
+                       <div class="number-thesis_why-umbrella">3</div>
+                       <div class="main-text-common">Более 30&nbsp;лет помогаем предпринимателям развивать бизнес и&nbsp;делать его более эффективным.</div>
                    </div>
                 </div>
             </div>

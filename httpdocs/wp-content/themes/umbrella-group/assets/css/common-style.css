@@ -1,0 +1,89 @@
+.title-h1-text-common {
+    font-family: 'PT Serif', sans-serif;
+    font-weight: 700;
+    font-size: 50px;
+    color: #1A1A1A;
+}
+
+.title-h2-text-common {
+    font-family: 'PT Serif', sans-serif;
+    font-weight: 700;
+    font-size: 42px;
+    color: #1A1A1A;
+}
+
+.main-text-common {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    color: #1A1A1A;
+}
+
+.main-text-accent-common {
+    font-weight: 700;
+}
+
+.main-text-italic-common {
+    font-family: 'PT Serif', sans-serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 24.3px;
+    color: #1A1A1A;
+}
+
+.mute-text-legend {
+    font-family: 'Inter', sans-serif;;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 27px;
+    color: #707070;
+}
+
+.action-text-common {
+    font-family: 'Inter', sans-serif;
+    color: #334862;
+    border-bottom: 1px solid #334862;
+    text-decoration: none;
+    display: inline;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.action-text-common:hover {
+    color: #ec1d23;
+!important;
+    border-bottom: 1px solid #ec1d23;
+!important;
+}
+
+.card-shadow-common {
+    background: #FFFFFF;
+    box-shadow: 0 0 20px rgba(26, 26, 26, 0.09);
+}
+
+@media screen and (max-width: 768px) {
+    .title-h1-text-common {
+        font-size: 28px;
+    }
+
+    .title-h2-text-common {
+        font-size: 28px;
+    }
+
+    .main-text-common {
+        font-size: 16px;
+    }
+
+    .action-text-common {
+        font-size: 16px;
+    }
+
+    .main-text-italic-common {
+        font-size: 18px;
+    }
+
+    .mute-text-legend {
+        font-size: 14px;
+    }
+
+}
