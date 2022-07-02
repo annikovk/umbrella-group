@@ -39,6 +39,14 @@
     color: #707070;
 }
 
+.mute-text-legend-normal-common {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 27px;
+    color: #707070;
+}
+
 .mute-text-common {
     font-family: 'Inter', sans-serif;
     font-weight: 700;

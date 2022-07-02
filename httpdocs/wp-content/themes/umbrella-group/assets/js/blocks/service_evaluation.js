@@ -109,5 +109,4 @@ function mappingSlidAndDot(index) {
             addClassSelect(dots[2])
             break
     }
-
 }

@@ -111,8 +111,6 @@ class service_evaluation
            [/row]
          [/section]
         EOHTML;
-        umbrella_add_custom_js_files(['/assets/simple-adaptive-slider/js/simple-adaptive-slider.js']);
-        umbrella_add_custom_css_files(['/assets/simple-adaptive-slider/css/simple-adaptive-slider.css']);
         umbrella_add_custom_css_files(['/assets/css/blocks/service_evaluation.css']);
         umbrella_add_custom_js_files(['/assets/js/blocks/service_evaluation.js']);
         return $html;

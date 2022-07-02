@@ -157,16 +157,19 @@ require get_theme_file_path() . '/template-parts/shortcodes/numbers_statistics.p
 require get_theme_file_path() . '/template-parts/shortcodes/help_start_business.php';
 require get_theme_file_path() . '/template-parts/shortcodes/trouble_2022.php';
 require get_theme_file_path() . '/template-parts/shortcodes/service_evaluation.php';
+require get_theme_file_path() . '/template-parts/shortcodes/on_call.php';
+require get_theme_file_path() . '/template-parts/shortcodes/free_consultation.php';
 require get_theme_file_path() . '/template-parts/shortcodes/su_welcome_screen_conditions.php';
 // Hook : to get content with s3elected AB tests variants only
 require get_theme_file_path() . '/umbrella_filter_ab_tests.php';
-add_action( 'init', 'umbrella_get_ab_test_tags');
+add_action('init', 'umbrella_get_ab_test_tags');
 add_filter('the_content', 'umbrella_filter_ab_tests');
 add_filter('wp_footer', 'umbrella_filter_ab_tests');
 require get_theme_file_path() . '/css/css_collector.php';
-function get_umbrella_customizations(){
+function get_umbrella_customizations()
+{
     $customizations = new umbrella_customization();
-    echo $customizations->get_umbrella_custom_css().$customizations->get_umbrella_custom_scripts();
+    echo $customizations->get_umbrella_custom_css() . $customizations->get_umbrella_custom_scripts();
 }
 add_action('wp_footer','get_umbrella_customizations', 100);
 

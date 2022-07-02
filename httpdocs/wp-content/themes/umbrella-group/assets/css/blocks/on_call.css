@@ -1,0 +1,152 @@
+.layout_on_call {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 80px;
+}
+
+.descriptions_on_call {
+    display: flex;
+    grid-gap: 45px;
+    max-width: 610px;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.phone_on_call {
+    position: relative;
+}
+
+.screen-phone_on_call {
+    z-index: 1;
+    position: absolute;
+    left: 31px;
+    top: 77px;
+
+}
+
+.mac-up-phone {
+    z-index: 3;
+    position: relative;
+    max-width: 319px !important;
+    height: 618px;
+}
+
+.slider-phone_on_call {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    grid-gap: 30px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container_mac-up-phone {
+    width: 100%;
+    padding: 30px;
+    top: 46px;
+    position: absolute;
+}
+
+.slider_mac-up-phone {
+    width: 259px;
+    height: 456px;
+}
+
+.slider-line_mac-up-phone {
+    display: grid;
+    width: 259px;
+    position: relative;
+}
+
+.img_mac-up-phone {
+    height: 456px;
+    position: absolute;
+    z-index: 1;
+    opacity: 0;
+}
+
+.active_mac-up-phone {
+    z-index: 2;
+    opacity: 1;
+}
+
+.select_phone {
+    background: #EC1C23 !important;
+}
+
+.dotPhone {
+    width: 8px;
+    height: 8px;
+    background-color: #C9C9C9;
+    cursor: pointer;
+}
+
+.dotPhone-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+.btn-arrow-phone {
+    font-size: 15.6761px;
+    line-height: 24px;
+    color: #1A1A1A;
+    cursor: pointer;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.paginator_phone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.desktop_mode_on_call {
+    display: block;
+}
+
+.desktop_mode_on_call_flex {
+    display: flex;
+}
+
+.mobile_mode_on_call {
+    display: none;
+}
+
+.mobile_mode_on_call_flex {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .desktop_mode_on_call {
+        display: none;
+    }
+
+    .mobile_mode_on_call_flex {
+        display: flex;
+    }
+
+    .mobile_mode_on_call {
+        display: block;
+    }
+
+    .desktop_mode_on_call_flex {
+        display: none;
+    }
+
+    .layout_on_call {
+        grid-template-columns: auto;
+    }
+
+    .slider-phone_on_call {
+        grid-template-columns: auto;
+        justify-items: center;
+    }
+}

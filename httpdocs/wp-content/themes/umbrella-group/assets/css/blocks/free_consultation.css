@@ -1,0 +1,110 @@
+.free_consultation_background {
+    background: url(https://taxlab.ru/wp-content/uploads/IMG_9591-1.png) no-repeat;
+    background-size: 100%;
+    max-height: 612px;
+    margin-top: 180px;
+}
+
+.bac_form {
+    padding: 30px;
+    background: white;
+    max-width: 748px;
+    margin: 0 auto;
+    position: relative;
+    top: -33px;
+}
+
+.main-text-free_consultation {
+    text-align: center;
+}
+
+.icon_whatsapp {
+    background: #25D366;
+    border-radius: 10px;
+    width: 21px;
+    height: 21px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 6px;
+}
+
+.contact_whatsapp {
+    display: flex;
+    gap: 7px;
+}
+
+.radio-input_free_consultation {
+    display: flex;
+    gap: 35px;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-form_free_consultation {
+    padding: 9px;
+    background: #EC1C23;
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+
+.border-form_free_consultation {
+    border: 1px solid #C9C9C9;
+    padding: 60px;
+}
+
+.margin_title_free_consultation {
+    margin-bottom: 18px;
+}
+
+.margin_text_free_consultation {
+    margin-bottom: 35px;
+}
+
+.small-mute-text {
+    font-size: 14px;
+    line-height: 19px;
+}
+
+.approve_free_consultation {
+    max-width: 353px;
+    display: flex;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+.mobile_mode_free_consultation {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .bac_form {
+        position: inherit;
+        top: 0;
+        padding: 28px;
+    }
+
+    .mobile_mode_free_consultation {
+        display: block;
+    }
+
+    .free_consultation_background {
+        background: white;
+        max-height: 100%;
+        margin-top: 0;
+        padding-top: 120px;
+    }
+
+    .border-form_free_consultation {
+        border: none;
+        padding: 0;
+    }
+
+    .radio-input_free_consultation {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding-bottom: 40px;
+    }
+}
