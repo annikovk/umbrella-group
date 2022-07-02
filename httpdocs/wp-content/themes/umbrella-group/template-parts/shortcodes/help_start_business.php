@@ -54,7 +54,6 @@ class help_start_business
                                     </div>
                                     <div class="action-text-common" 
                                          title="Click to Show/Hide Content" 
-                                         type="button" 
                                          onclick="spoilerContent()">
                                          <span id="spoiler-btn-show">Посмотрите, что сделаем&nbsp;мы</span>
                                          <span id="spoiler-btn-hide" style="display:none">Свернуть</span>

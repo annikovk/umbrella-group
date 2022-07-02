@@ -32,12 +32,29 @@
 }
 
 .mute-text-legend {
-    font-family: 'Inter', sans-serif;;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 18px;
     line-height: 27px;
     color: #707070;
 }
+
+.mute-text-common {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 15.6761px;
+    line-height: 27px;
+    color: #707070;
+}
+
+.mute-text-normal-common {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 15.6761px;
+    line-height: 27px;
+    color: #707070;
+}
+
 
 .action-text-common {
     font-family: 'Inter', sans-serif;

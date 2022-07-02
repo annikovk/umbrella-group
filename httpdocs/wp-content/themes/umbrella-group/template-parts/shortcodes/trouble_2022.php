@@ -35,7 +35,7 @@ class trouble_2022
                                 </div>
                             </div>
                             <div class="action-text-common" 
-                                 title="Click to Show/Hide Content" type="button" 
+                                 title="Click to Show/Hide Content"
                                  onclick="spoilerContentTrouble2022()">
                                 <span id="spoiler-btn-show-trouble-2022">Узнайте, как</span>
                                 <span id="spoiler-btn-hide-trouble-2022" style="display:none">Свернуть</span>
