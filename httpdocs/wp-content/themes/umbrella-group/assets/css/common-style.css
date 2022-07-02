@@ -30,6 +30,11 @@
     font-weight: 700;
 }
 
+.main-text-accent-common-red {
+    font-weight: 700;
+    color: #EC1C23;
+}
+
 .main-text-italic-common {
     font-family: 'PT Serif', sans-serif;
     font-style: italic;
