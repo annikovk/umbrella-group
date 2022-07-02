@@ -1,0 +1,72 @@
+.padding-top-stock {
+    padding-top: 162px;
+}
+
+.red_border_stock {
+    border: solid 1px #EC1C23;
+    padding: 75px 60px;
+}
+
+.position-card-legend_stock {
+    position: relative;
+    top: -88px;
+
+}
+
+.red_color_stock {
+    color: #EC1C23;
+    font-weight: 700;
+    background: white;
+    width: fit-content;
+    padding: 0 28px;
+}
+
+.text-pad {
+    padding-bottom: 45px;
+}
+
+.stock-parametric {
+    display: flex;
+    gap: 52px;
+    align-items: center;
+}
+
+.btn-about-stock {
+    border: 2px solid #1A1A1A;
+    padding: 9px 18px;
+    align-items: center;
+}
+
+.layout_stock {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 34px;
+}
+
+.desktop_mode_stock {
+    display: block;
+}
+
+@media screen and (max-width: 900px) {
+    .desktop_mode_stock {
+        display: none;
+    }
+
+    .layout_stock {
+        grid-template-columns: auto;
+        grid-gap: 73px;
+    }
+
+    .text-pad {
+        text-align: center;
+    }
+
+    .stock-parametric {
+        justify-content: center;
+    }
+
+    .position-card-legend_stock {
+        display: flex;
+        justify-content: center;
+    }
+}

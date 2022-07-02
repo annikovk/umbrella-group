@@ -1,0 +1,47 @@
+.contact-info_footer_map {
+    width: 376px;
+    padding: 50px;
+    display: grid;
+    grid-gap: 35px;
+    position: absolute;
+    top: 30px;
+    left: 105px;
+}
+
+.position_footer_map {
+    position: relative;
+}
+
+.contact_link {
+    font-weight: 700;
+    font-size: 18px;
+    color: #1A1A1A !important;
+}
+
+.contact_link:hover {
+    color: #ec1d23 !important;
+
+}
+
+.card-shadow-common_footer_map {
+    background: #FFFFFF;
+    box-shadow: 0 0 20px rgba(26, 26, 26, 0.09);
+
+}
+
+@media screen and (max-width: 768px) {
+    .contact-info_footer_map {
+        width: 100%;
+        padding: 0;
+        display: grid;
+        grid-gap: 35px;
+        position: inherit;
+        top: 0;
+        left: 0;
+        margin-top: 60px;
+    }
+
+    .card-shadow-common_footer_map {
+        box-shadow: none;
+    }
+}

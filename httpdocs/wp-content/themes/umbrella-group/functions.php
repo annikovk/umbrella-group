@@ -159,6 +159,8 @@ require get_theme_file_path() . '/template-parts/shortcodes/trouble_2022.php';
 require get_theme_file_path() . '/template-parts/shortcodes/service_evaluation.php';
 require get_theme_file_path() . '/template-parts/shortcodes/on_call.php';
 require get_theme_file_path() . '/template-parts/shortcodes/free_consultation.php';
+require get_theme_file_path() . '/template-parts/shortcodes/stock.php';
+require get_theme_file_path() . '/template-parts/shortcodes/footer_map.php';
 require get_theme_file_path() . '/template-parts/shortcodes/su_welcome_screen_conditions.php';
 // Hook : to get content with s3elected AB tests variants only
 require get_theme_file_path() . '/umbrella_filter_ab_tests.php';

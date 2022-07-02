@@ -12,6 +12,13 @@
     color: #1A1A1A;
 }
 
+.title-h3-text-common {
+    font-family: 'PT Serif', sans-serif;
+    font-weight: 700;
+    font-size: 38px;
+    color: #1A1A1A;
+}
+
 .main-text-common {
     font-family: 'Inter', sans-serif;
     font-weight: 400;
@@ -107,6 +114,11 @@
 
     .mute-text-legend {
         font-size: 14px;
+    }
+
+    .title-h3-text-common {
+        font-size: 28px;
+        line-height: 36px;
     }
 
 }
