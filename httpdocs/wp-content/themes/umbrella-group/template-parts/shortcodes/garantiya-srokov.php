@@ -25,10 +25,10 @@ class garantiya_srokov
                             и&nbsp;ответственность за&nbsp;нарушение сроков. Посмотрите гарантии 
                             в&nbsp;договорах:
                         </div>
-                        <ul class="list_download">
-                            <li><a class="links_download" href="#garantiya-srokov-dogovor-buhobsluzhivaniya">Договор аудита</a></li>     
-                            <li><a class="links_download" href="#garantiya-srokov-dogovor-licenzirovaniya">Договор лицензирования</a></li>     
-                            <li><a class="links_download" href="#garantiya-srokov-dogovor-audita">Договор бухгалтерского обслуживания</a></li>
+                        <ul class="list-download_garantiya_srokov margin-link_garantiya_srokov">
+                            <li><a class="action-text-common" href="#garantiya-srokov-dogovor-buhobsluzhivaniya">Договор аудита</a></li>     
+                            <li><a class="action-text-common" href="#garantiya-srokov-dogovor-licenzirovaniya">Договор лицензирования</a></li>     
+                            <li><a class="action-text-common" href="#garantiya-srokov-dogovor-audita">Договор бухгалтерского обслуживания</a></li>
                         </ul>
                     </div>
                     <div>
