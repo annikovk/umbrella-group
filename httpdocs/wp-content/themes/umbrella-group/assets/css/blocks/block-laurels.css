@@ -1,0 +1,52 @@
+/** laurels **/
+p.laurels-icons-year {
+    text-align: center;
+    font-size: 0.7em;
+    color: #918b81;
+    padding-top: 0px;
+    font-weight: 400;
+    margin-top: 8px;
+}
+
+p.laurel-place {
+    text-align: center;
+    font-size: .9em;
+    font-weight: 300;
+    line-height: 1.5em;
+    margin-bottom: unset;
+}
+
+.laurel-icon-header {
+    text-align: center;
+    font-weight: 900;
+    font-size: 0.8em;
+    line-height: 1.3em;
+    padding-top: 0px;
+    margin-top: 0px;
+    margin-bottom: 0em;
+}
+
+.laurel-footnote {
+    color: #b2b2b2;
+    font-size: 0.65em;
+    line-height: 1.5em;
+    text-align: center;
+    font-style: italic;
+    bottom: 0;
+    background: #f9f9f9;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    width: 100%;
+}
+
+.flex-why-you-should-work-with-us {
+    align-items: baseline;
+}
+
+.flex-why-you-should-work-with-us li.tab {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-right: 36px;
+    font-size: 24px;
+    font-weight: bold;
+}
