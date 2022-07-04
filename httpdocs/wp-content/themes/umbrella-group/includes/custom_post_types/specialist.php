@@ -119,7 +119,7 @@ function get_specialist_metabox_value($post)
                 }; ?> value="Юридические услуги">Юридические услуги
                 </option>
                 <option <?php if (esc_attr(get_post_meta(get_the_ID(), 'specialist_branch', true)) == "Лицензирование") {
-                    echo "лицензирование";
+                    echo "selected";
                 }; ?> value="Лицензирование">Лицензирование
                 </option>
                 <option <?php if (esc_attr(get_post_meta(get_the_ID(), 'specialist_branch', true)) == "Регистрация и ликвидация") {
