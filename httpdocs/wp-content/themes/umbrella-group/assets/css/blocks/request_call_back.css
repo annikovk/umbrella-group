@@ -18,8 +18,12 @@
     justify-content: center;
 }
 
+.btn-form_request_call_back.cf7-submit-button input {
+    margin: unset;
+}
+
 .btn-form_request_call_back {
-    padding: 9px 25px;
+    /*padding: 9px 25px;*/
     background: #EC1C23;
     color: white;
     text-align: center;

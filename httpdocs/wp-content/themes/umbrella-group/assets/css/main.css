@@ -1120,27 +1120,40 @@ button[type="submit"], .button.wc-forward:not(.checkout):not(.checkout-button), 
 }
 
 @media screen and (max-width: 849px) {
-    .header-bottom {
-        background-color: #F9F9F9;
+    .header {
+        position: sticky;
+        top: 0;
     }
 
-    .header-bottom ul.tabs li a {
+    .first-screen-services-tabs {
+        background-color: #F9F9F9;
+        display: grid;
+    }
+
+    .first-screen-services-tabs ul.tabs li a {
         color: #1A1A1A;
         font-weight: 400;
         font-size: 14px;
         line-height: 140%;
     }
 
-    .header-bottom ul.tabs:hover {
-        background-color: #F9F9F9;
-        color: #1A1A1A;
-        border-bottom: 3px solid #ec1c24;
+    .first-screen-services-tabs ul.tabs {
+        padding-top: unset;
     }
 
-    .header-bottom ul.tabs li a:hover {
+    .first-screen-services-tabs ul.tabs:hover {
         background-color: #F9F9F9;
         color: #1A1A1A;
-        border-bottom: 3px solid #ec1c24;
+    }
+
+    .first-screen-services-tabs ul.tabs li a:hover {
+        background-color: #F9F9F9;
+        color: #1A1A1A;
+    }
+
+    .first-screen-services-tabs ul.tabs li:hover {
+        background-color: unset;
+        color: unset;
     }
 
     ul.tabs {
