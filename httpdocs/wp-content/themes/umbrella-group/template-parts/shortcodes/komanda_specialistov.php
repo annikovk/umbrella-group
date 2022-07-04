@@ -3,6 +3,7 @@
 class komanda_specialistov
 {
     private $css_file = ['/assets/css/blocks/komanda_specialistov.css'];
+    private $js_file = ['/assets/js/blocks/komanda_specialistov.js'];
     private $category = "";
     public $atts;
     public $err;
@@ -27,7 +28,7 @@ class komanda_specialistov
         $tiles = $this->get_tiles($posts);
 
         $html = <<<EOHTML
-        [section id='trouble_2022'  padding="0px"]
+        [section class='komanda_specialistov' id='komanda_specialistov'  padding="0px"]
             [row]
                 [col  span="12" span__sm="12" margin="0px 0px 0px 0px"]
                     $tabs
@@ -38,6 +39,7 @@ class komanda_specialistov
         EOHTML;
 
         umbrella_add_custom_css_files($this->css_file);
+        umbrella_add_custom_js_files($this->js_file);
         return $html;
     }
 
@@ -158,6 +160,7 @@ class komanda_specialistov
                 }
             }
         }
+        sort($categories);
         return $categories;
     }
 

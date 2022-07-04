@@ -7,7 +7,7 @@ class service_evaluation
     public function generate_shortcode()
     {
         $html = <<<EOHTML
-         [section id='service_evaluation'  padding="0px"]
+         [section class='service_evaluation' id='service_evaluation'  padding="0px"]
            [row]
             [col  span="12" span__sm="12" margin="0px 0px 0px 0px"]
                 <div class="layout-service_evaluation">
