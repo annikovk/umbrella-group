@@ -80,7 +80,7 @@ class komanda_specialistov
                     <div class="specialist-description">
                         <p><strong>$experience опыта</strong></p>
                         <p><strong>$description</strong></p>
-                        <p><strong>$achievements</strong></p>
+                        <p>$achievements</p>
                         <p><strong>Специализация:</strong> $specialization</p>
                     </div>
                 </div>
