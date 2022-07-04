@@ -163,6 +163,7 @@ require get_theme_file_path() . '/template-parts/shortcodes/stock.php';
 require get_theme_file_path() . '/template-parts/shortcodes/footer_map.php';
 require get_theme_file_path() . '/template-parts/shortcodes/request_call_back.php';
 require get_theme_file_path() . '/template-parts/shortcodes/su_welcome_screen_conditions.php';
+require get_theme_file_path() . '/template-parts/shortcodes/komanda_specialistov.php';
 require get_theme_file_path() . '/template-parts/shortcodes/why_choose_us.php';
 require get_theme_file_path() . '/template-parts/shortcodes/umbrella_footer.php';
 // Hook : to get content with s3elected AB tests variants only

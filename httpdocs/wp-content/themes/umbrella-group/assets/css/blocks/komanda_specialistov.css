@@ -1,0 +1,152 @@
+.specialist-tile {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    border: solid 1px #eeeeee;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.specialist-tile .specialist-photo {
+    flex-grow: 1;
+    max-width: 264px;
+    min-width: 264px;
+}
+
+.specialist-tile > .label {
+    position: absolute;
+    top: -16px;
+    background-color: white;
+    text-transform: uppercase;
+    padding-left: 24px;
+    padding-right: 24px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.specialist-tile.main > .label {
+    left: 402px;
+}
+
+.specialist-tile > .label {
+    left: 302px;
+}
+
+.specialist-tile p {
+    margin: unset;
+    font-size: 18px;
+    line-height: 29px;
+    margin-bottom: 18px;
+}
+
+.specialist-fio {
+    font-size: 44px;
+}
+
+.specialist-text {
+    flex-grow: 3;
+    margin-left: 64px;
+    margin-right: 40px;
+    position: relative;
+}
+
+.specialist-contact {
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
+}
+
+.specialist-button-description {
+    margin-left: 36px;
+    flex-grow: 1;
+}
+
+.specialist-button {
+    min-width: 36%;
+    flex-basis: auto;
+    flex-grow: 1;
+}
+
+.specialists_advantages {
+    width: 100%;
+    margin-top: 50px;
+    background-color: #eeeeee;
+}
+
+.specialists_advantages .specialists_advantages_top {
+    border-bottom: 1px solid #aaaaaa;
+    display: flex;
+}
+
+.specialists_advantages .specialists_advantages_top .specialists_advantages_top_text {
+    max-width: 60%;
+    font-size: 24px;
+    margin-left: 50px;
+    margin-top: 50px;
+    margin-bottom: 10px;
+}
+
+.specialists_advantages .specialists_advantages_top .specialists_advantages_top_img {
+    max-width: 40%;
+    margin-top: -20px;
+}
+
+.specialists_advantages .specialists_advantages_bot {
+    padding-top: 36px;
+    padding-left: 50px;
+    padding-bottom: 50px;
+    font-size: 18px;
+}
+
+@media (max-width: 549px) {
+    .specialist-tile.main .specialist-photo {
+        display: none;
+    }
+
+    .specialist-tile .specialist-photo {
+        display: none;
+    }
+
+    .specialist-text {
+        margin-left: 8px;
+        margin-right: 12px;
+        margin-top: 16px;
+        margin-bottom: 32px;
+    }
+
+    .specialist-fio {
+        font-size: 24px;
+    }
+
+    .specialist-tile p {
+        font-size: 16px;
+    }
+
+    .specialist-contact {
+        display: flex;
+        flex-direction: column;
+        margin-top: 40px;
+    }
+
+    .specialists_advantages_top_img {
+        display: none;
+    }
+
+    .specialists_advantages .specialists_advantages_top .specialists_advantages_top_text {
+        max-width: unset;
+        font-size: 18px;
+        margin-left: 20px;
+        margin-top: 40px;
+        padding-bottom: 30px;
+    }
+
+    .specialists_advantages .specialists_advantages_bot {
+        padding: 30px 20px 45px;
+        font-size: 18px;
+    }
+
+    .specialist-tile > .label {
+        display: none;
+    }
+}

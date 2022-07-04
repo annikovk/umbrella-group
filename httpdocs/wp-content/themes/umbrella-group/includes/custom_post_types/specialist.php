@@ -174,6 +174,13 @@ function get_specialist_metabox_value($post)
                    value="<?php echo esc_attr(get_post_meta(get_the_ID(), 'specialist_specialization', true)); ?>">
         </div>
         <div class="meta-options hcf_field">
+            <label for="specialist_achievements">Достижения</label>
+            <input id="specialist_achievements"
+                   type="text"
+                   name="specialist_achievements"
+                   value="<?php echo esc_attr(get_post_meta(get_the_ID(), 'specialist_achievements', true)); ?>">
+        </div>
+        <div class="meta-options hcf_field">
             <label for="specialist_office">Офис</label>
             <input id="specialist_office"
                    type="text"
@@ -203,6 +210,7 @@ function specialist_save_meta_box( $post_id ) {
         'specialist_description',
         'specialist_education',
         'specialist_specialization',
+        'specialist_achievements',
         'specialist_name',
         'specialist_position',
         'specialist_experience',
