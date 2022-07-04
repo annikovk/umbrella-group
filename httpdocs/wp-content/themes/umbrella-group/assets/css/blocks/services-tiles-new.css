@@ -22,7 +22,6 @@ div.main-services-tile-grid {
 .main-services-tile .children-list li:nth-child(4), .main-services-tile .children-list li:nth-child(5) {
     display: none;
 }
-
 .main-services ul.tabs {
     display: none;
 
@@ -62,7 +61,6 @@ div.main-services-tile-grid {
     .main-services-tile-col {
         padding: unset;
     }
-
     .main-services ul.tabs {
         display: flex;
         margin-left: 15px;
@@ -72,12 +70,10 @@ div.main-services-tile-grid {
         padding-bottom: 10px;
 
     }
-
     .main-services ul.tabs li:hover {
         color: unset;
         background-color: unset;
     }
-
     .main-services ul.tabs li.active {
         box-shadow: inset 0px -3px 0px #EC1C23;
     }
