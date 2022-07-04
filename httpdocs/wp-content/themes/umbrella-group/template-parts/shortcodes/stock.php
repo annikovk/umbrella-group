@@ -11,29 +11,8 @@ class stock
             [row]
                 [col  span="12" span__sm="12" margin="0px 0px 0px 0px"]
                 <div class="padding-top-stock layout_stock">
-                  <div class="red_border_stock card-shadow-common">
-                  <div class="position-card-legend_stock">
-                    <div class="main-text-common red_color_stock">АКЦИЯ</div>
-                  </div>
-                 
-                      <div class="title-h3-text-common text-pad">Бесплатная регистрация ИП</div>
-                      <div class="main-text-common text-pad desktop_mode_stock">Начните свое дело с&nbsp;экономии! Обратитесь к&nbsp;нам для открытия&nbsp;ИП и&nbsp;при открытии расчетного счета в&nbsp;банке-партнере мы&nbsp;зарегистрируем&nbsp;ИП совершенно бесплатно!</div>
-                      <div class="stock-parametric">
-                        <div class="main-text-common main-text-accent-common desktop_mode_stock">До 31.02.2022</div>
-                        <div class="btn-about-stock">Узнать подробнее</div>
-                      </div>
-                  </div>
-                  <div class="red_border_stock card-shadow-common">
-                  <div class="position-card-legend_stock">
-                    <div class="main-text-common red_color_stock">АКЦИЯ</div>
-                  </div>
-                      <div class="title-h3-text-common text-pad">ООО в&nbsp;подарок за&nbsp;оформление лицензии</div>
-                      <div class="main-text-common text-pad desktop_mode_stock">Нужна лицензия для ведения бизнеса, но&nbsp;предприятие еще не&nbsp;зарегистрировано? Сэкономьте на&nbsp;регистрации предприятия!</div>
-                      <div class="stock-parametric">
-                        <div class="main-text-common main-text-accent-common desktop_mode_stock">До 31.02.2022</div>
-                        <div class="btn-about-stock">Узнать подробнее</div>
-                      </div>
-                  </div>
+                  [akciya_block id=9897 title='ООО в подарок за оформление лицензии' excerpt='Нужна лицензия для ведения бизнеса, но предприятие еще не зарегистрировано? Сэкономьте на регистрации предприятия!' type='half' new="true"]
+                  [akciya_block id=9876 title='Бесплатная регистрация ИП' type='half' new="true"]
                 </div>
                 [/col]
            [/row]

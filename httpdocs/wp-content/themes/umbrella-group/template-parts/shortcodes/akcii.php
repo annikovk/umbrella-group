@@ -69,8 +69,25 @@ function akciya_block_shortcode($atts)
         </div>
     </div>
     EOV;
+    if (isset($atts['new'])) {
+        $block = <<<EOHTML
+            <div class="red_border_stock card-shadow-common">
+                  <div class="position-card-legend_stock">
+                    <div class="main-text-common red_color_stock">АКЦИЯ</div>
+                  </div>
+                      <div class="title-h3-text-common text-pad">$title</div>
+                      <div class="main-text-common text-pad desktop_mode_stock">$excerpt</div>
+                      <div class="stock-parametric">
+                        <div class="main-text-common main-text-accent-common desktop_mode_stock">$date</div>
+                        $button
+                      </div>
+                  </div>
+        EOHTML;
+
+
+    }
     umbrella_add_custom_css_files(['/assets/css/blocks/block-akciya.css']);
-        return $block;
+    return $block;
 }
 
 add_shortcode('akciya_block', 'akciya_block_shortcode');
