@@ -7,7 +7,7 @@ class stock
     public function generate_shortcode()
     {
         $html = <<<EOHTML
-         [section id='stock'  padding="0px"]
+         [section class='stock' id='stock'  padding="0px"]
             [row]
                 [col  span="12" span__sm="12" margin="0px 0px 0px 0px"]
                 <div class="padding-top-stock layout_stock">

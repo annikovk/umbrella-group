@@ -34,13 +34,13 @@
 @media screen and (max-width: 768px) {
     .contact-info_footer_map {
         width: 100%;
-        padding: 0;
+        padding: 15px;
         display: grid;
         grid-gap: 35px;
         position: inherit;
         top: 0;
         left: 0;
-        margin-top: 60px;
+        margin-top: 0px;
     }
 
     .card-shadow-common_footer_map {

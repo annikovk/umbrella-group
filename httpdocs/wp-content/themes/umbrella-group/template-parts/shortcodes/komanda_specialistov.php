@@ -31,8 +31,13 @@ class komanda_specialistov
         [section class='komanda_specialistov' id='komanda_specialistov'  padding="0px"]
             [row]
                 [col  span="12" span__sm="12" margin="0px 0px 0px 0px"]
+                <div class="padding_komanda_specialistov">
+                    <div class="title-h1-text-common">Команда специалистов</div>
+                    <div class="main-text-common">Юристы, бухгалтеры и&nbsp;аудиторы накопили опыт с&nbsp;коммерческими и&nbsp;некоммерческими организациями: от&nbsp;кафе и&nbsp;спортивных ассоциаций до&nbsp;промышленных производств с&nbsp;ВЭД.</div>
                     $tabs
                     $tiles
+                </div>
+
                 [/col]
            [/row]
         [/section]    
@@ -59,8 +64,10 @@ class komanda_specialistov
         if (get_the_post_thumbnail_url($post->ID) == "") {
             $image_attributes = wp_get_attachment_image_src(11223, 'full');
             $photo = '<img src="' . $image_attributes[0] . '"  />';
+            $photo_mobile = '<img src="' . $image_attributes[0] . '"  />';
         } else {
             $photo = get_the_post_thumbnail($post->ID);
+            $photo_mobile = get_the_post_thumbnail($post->ID);
         }
         $category = get_post_meta($post->ID, "specialist_branch", true);
         $description = get_post_meta($post->ID, 'specialist_description', true);
@@ -75,33 +82,56 @@ class komanda_specialistov
         if ($main) {
             $html = <<<EOHTML
             <div class="specialist-tile main $filter_class">
-                
-                <div class="specialist-photo">$photo</div>
-                <div class="specialist-text">
-                    <h3 class="specialist-fio"> $full_name</h3>
-                    <div class="specialist-description">
-                        <p><strong>$experience опыта</strong></p>
-                        <p><strong>$description</strong></p>
-                        <p>$achievements</p>
-                        <p><strong>Специализация:</strong> $specialization</p>
-                    </div>
+               <div class="container-text-mute_komanda desktop_mode_komanda">
+                    <div class="mute-text-legend-normal-common">$label</div>
                 </div>
-                <div class="label">$label</div>
+                <div class="komanda-layout">
+                    <div class="specialist-photo desktop_mode_komanda">$photo</div> 
+                    <div class="team_text_decription">
+                        <div class="specialist-description">
+                            <div class="full-fio-komanda desktop_mode_komanda">$full_name</div>
+                            <div class="mobile_mode_komanda_flex padding-left-komand">
+                                <div class="photo_mobile">$photo_mobile</div>
+                                <div>
+                                    <div class="mute-text-legend-normal-common">$label</div>
+                                    <div class="full-fio-komanda">$full_name</div>
+                                </div>
+                            </div>
+                            <div class="main-text-common main-text-accent-common">$experience опыта</div>
+                            <div class="main-text-italic-common">&laquo;$description&raquo;</div>
+                            <div class="main-text-common">$achievements</div>
+                            <div class="main-text-common">Специализация: $specialization</div>
+                        </div>
+                    </div>
+                   </div>
+
             </div>
         EOHTML;
         } else {
             $html = <<<EOHTML
             <div class="specialist-tile $filter_class">
-                <div class="specialist-photo">$photo</div>
-                <div class="specialist-text">
-                    <h3 class="specialist-fio"> $full_name</h3>
+                <div class="container-text-mute_komanda desktop_mode_komanda">
+                    <div class="mute-text-legend-normal-common">$label</div>
+                </div>
+                <div class="komanda-layout">
+                    <div class="specialist-photo desktop_mode_komanda">$photo</div> 
+                    <div class="team_text_decription">
                     <div class="specialist-description">
-                        <p><strong>$experience опыта</strong></p>
-                        <p>$achievements</p>
-                        <p><strong>Специализация:</strong> $specialization</p>
+                      <div class="full-fio-komanda desktop_mode_komanda">$full_name</div>
+                          <div class="mobile_mode_komanda_flex padding-left-komand">
+                                <div class="photo_mobile">$photo_mobile</div>
+                                <div>
+                                    <div class="mute-text-legend-normal-common">$label</div>
+                                    <div class="full-fio-komanda">$full_name</div>
+                                </div>
+                            </div>
+                      <div class="main-text-common main-text-accent-common">$experience опыта</div>
+                      <div class="main-text-common">$achievements</div>
+                      <div class="main-text-common">Специализация: $specialization</div>
                     </div>
                 </div>
-                <div class="label">$label</div>
+                </div>
+
             </div>
         EOHTML;
         }

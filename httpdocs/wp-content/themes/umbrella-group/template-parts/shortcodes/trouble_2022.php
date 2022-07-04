@@ -10,7 +10,7 @@ class trouble_2022
          [section id='trouble_2022'  padding="0px"]
            [row]
             [col  span="12" span__sm="12" margin="0px 0px 0px 0px"]
-                <div>
+                <div class="padding_trouble_2022">
                     <div class="title_trouble_2022">
                         <div class="title-h1-text-common">Выручаем от&nbsp;неприятностей 2020 и&nbsp;2022 годов</div>
                         <div class="main-text-common">Помогаем клиентам адаптироваться во&nbsp;время кризисов.</div>

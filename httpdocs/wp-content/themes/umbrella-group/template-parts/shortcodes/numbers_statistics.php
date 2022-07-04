@@ -10,7 +10,7 @@ class numbers_statistics
          [section id='numbers_statistics'  padding="0px"]
            [row]
             [col  span="12" span__sm="12" margin="0px 0px 0px 0px"]
-                <div>
+                <div class="padding_numbers_statistics">
                     <div class="title-h1-text-common title_numbers-statistics">
                         Закрываем несколько задач за&nbsp;1&nbsp;визит
                     </div>

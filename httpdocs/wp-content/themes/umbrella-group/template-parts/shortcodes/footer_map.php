@@ -18,7 +18,7 @@ class footer_map
                     <div class="main-text-common">Круглосуточно по почте:</div>
                     <a  class="contact_link" href="mailto:info.contact@gmail.com"> info.contact@gmail.com</a>
                 </div>
-                  <div>
+                  <div class="main-text-common">
                         г. Новосибирск, 
                         <ul>
                             <li>ул. Максима Горького, д. 34</li>

@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 65px;
+    margin-top: 90px;
 }
 
 .content_service_evaluation {

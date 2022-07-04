@@ -89,7 +89,6 @@ class specialists
         if ($main) {
             $html = <<<EOHTML
             <div class="specialist-tile main">
-                
                 <div class="specialist-photo">$photo</div>
                 <div class="specialist-text">
                     <h3 class="specialist-fio"> $full_name</h3>

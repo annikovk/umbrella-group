@@ -1,17 +1,48 @@
-.specialist-tile {
+.padding_komanda_specialistov {
+    padding-top: 160px;
+}
+
+.komanda_specialistov ul.tabs li {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 27px;
+    color: #1A1A1A;
+    padding: 8px;
+
+}
+
+.komanda_specialistov ul.tabs li:hover {
+    background: white;
+    color: #1A1A1A;
+}
+
+.komanda_specialistov .active {
+    font-weight: 700;
+    border-bottom: 2px solid #EC1C23;
+}
+
+.komanda_specialistov .specialist-tile {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    border: solid 1px #eeeeee;
+    border: solid 1px #E5E5E5;
     margin-bottom: 50px;
     position: relative;
+    margin-top: 58px;
 }
 
-.specialist-tile .specialist-photo {
-    flex-grow: 1;
-    max-width: 264px;
-    min-width: 264px;
+.komanda_specialistov .specialist-photo {
+    width: 275px;
+    height: 100%;
+}
+
+.komanda_specialistov imgs {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .specialist-tile > .label {
@@ -99,54 +130,116 @@
     font-size: 18px;
 }
 
-@media (max-width: 549px) {
-    .specialist-tile.main .specialist-photo {
+.container-text-mute_komanda {
+    position: absolute;
+    top: -16px;
+    left: 263px;
+    background: white;
+    padding: 0 20px;
+    margin-left: 60px;
+}
+
+.command-fio {
+    font-family: 'PT Serif', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 36px;
+    color: #000000;
+}
+
+.komanda-layout {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-gap: 60px;
+    align-items: center;
+
+}
+
+.komanda_specialistov .team_text_decription {
+    padding: 47px 100px 47px 0;
+
+}
+
+.komanda_specialistov .specialist-description {
+    display: grid;
+    grid-gap: 25px;
+
+}
+
+.full-fio-komanda {
+    font-family: 'PT Serif', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 36px;
+    color: #000000;
+}
+
+
+.mobile_mode_komanda {
+    display: none;
+}
+
+.photo_mobile {
+    border-radius: 50%;
+    overflow: hidden;
+    width: 85px;
+    height: 85px;
+
+}
+
+.photo_mobile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mobile_mode_komanda_flex {
+    display: none;
+}
+
+
+@media (max-width: 768px) {
+    .desktop_mode_komanda {
         display: none;
     }
 
-    .specialist-tile .specialist-photo {
-        display: none;
+    .specialist-photo_komanda_mobile {
+        border-radius: 100px;
+        height: 85px;
+        width: 85px;
     }
 
-    .specialist-text {
-        margin-left: 8px;
-        margin-right: 12px;
-        margin-top: 16px;
-        margin-bottom: 32px;
+    .mobile_mode_komanda {
+        display: block;
     }
 
-    .specialist-fio {
-        font-size: 24px;
+    .mobile_mode_komanda_flex {
+        display: grid;
+        grid-template-columns: 85px 1fr;
+        grid-gap: 25px;
+        align-items: center;
     }
 
-    .specialist-tile p {
+    .komanda-layout {
+        grid-template-columns: auto;
+    }
+
+    .full-fio-komanda {
         font-size: 16px;
+        line-height: 140%;
     }
 
-    .specialist-contact {
-        display: flex;
-        flex-direction: column;
-        margin-top: 40px;
+    .komanda_specialistov .specialist-tile {
+        margin-left: 45px;
     }
 
-    .specialists_advantages_top_img {
-        display: none;
+    .padding-left-komand {
+        position: relative;
+        left: -70px;
     }
 
-    .specialists_advantages .specialists_advantages_top .specialists_advantages_top_text {
-        max-width: unset;
-        font-size: 18px;
-        margin-left: 20px;
-        margin-top: 40px;
-        padding-bottom: 30px;
-    }
-
-    .specialists_advantages .specialists_advantages_bot {
-        padding: 30px 20px 45px;
-        font-size: 18px;
-    }
-
-    .specialist-tile > .label {
-        display: none;
+    .komanda_specialistov .team_text_decription {
+        padding: 30px 28px 45px 28px;
     }
 }

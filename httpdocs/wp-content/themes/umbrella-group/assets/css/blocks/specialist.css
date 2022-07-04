@@ -42,12 +42,7 @@
     font-size: 44px;
 }
 
-.specialist-text {
-    flex-grow: 3;
-    margin-left: 64px;
-    margin-right: 40px;
-    position: relative;
-}
+
 .specialist-contact{
     display: flex;
     flex-direction: row;
@@ -95,14 +90,11 @@
     .specialist-tile .specialist-photo {
         display: none;
     }
-    .specialist-text {
-        margin-left: 8px;
-        margin-right: 12px;
-        margin-top: 16px;
-        margin-bottom: 32px;
-    }
+
     .specialist-fio {
-        font-size: 24px;
+        font-size: 28px;
+        line-height: 36px;
+        color: #000000;
     }
     .specialist-tile p {
         font-size: 16px;

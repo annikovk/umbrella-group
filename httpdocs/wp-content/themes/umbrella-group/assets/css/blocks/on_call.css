@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: auto auto;
     grid-gap: 80px;
+    margin-top: 90px;
 }
 
 .descriptions_on_call {
