@@ -25,10 +25,10 @@ class garantiya_srokov
                             и&nbsp;ответственность за&nbsp;нарушение сроков. Посмотрите гарантии 
                             в&nbsp;договорах:
                         </div>
-                        <ul class="list-download_garantiya_srokov margin-link_garantiya_srokov">
-                            <li><a class="action-text-common" href="#">Договор аудита</a></li>     
-                            <li><a class="action-text-common" href="#">Договор лицензирования</a></li>     
-                            <li><a class="action-text-common" href="#">Договор бухгалтерского обслуживания</a></li>
+                        <ul class="list_download">
+                            <li><a class="links_download" href="#garantiya-srokov-dogovor-buhobsluzhivaniya">Договор аудита</a></li>     
+                            <li><a class="links_download" href="#garantiya-srokov-dogovor-licenzirovaniya">Договор лицензирования</a></li>     
+                            <li><a class="links_download" href="#garantiya-srokov-dogovor-audita">Договор бухгалтерского обслуживания</a></li>
                         </ul>
                     </div>
                     <div>
@@ -72,6 +72,9 @@ class garantiya_srokov
                 </div>
             [/col]
            [/row]
+           [lightbox id="garantiya-srokov-dogovor-buhobsluzhivaniya"  padding="0px"]<img src="/wp-content/uploads/garantiya-srokov-dogovor-buhobsluzhivaniya.webp" alt="garantiya-srokov-dogovor-buhobsluzhivaniya"> [/lightbox]
+           [lightbox id="garantiya-srokov-dogovor-licenzirovaniya"  padding="0px"]<img src="/wp-content/uploads/garantiya-srokov-dogovor-licenzirovaniya.webp" alt="garantiya-srokov-dogovor-licenzirovaniya"> [/lightbox]
+           [lightbox id="garantiya-srokov-dogovor-audita"  padding="0px"]<img src="/wp-content/uploads/garantiya-srokov-dogovor-audita.webp" alt="garantiya-srokov-dogovor-audita"> [/lightbox]
          [/section]
         EOHTML;
         umbrella_add_custom_css_files(['/assets/css/blocks/garantiya_srokov.css']);
