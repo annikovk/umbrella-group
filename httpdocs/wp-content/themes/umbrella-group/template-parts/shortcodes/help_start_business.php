@@ -79,7 +79,7 @@ class help_start_business
                                         &laquo;Всё предельно ясно, сроки выдержаны. Оперативно и&nbsp;качественно&raquo;
                                     </div>
                                     <div>
-                                        <a class="action-text-common" href="#">Посмотреть отзывы</a>
+                                        <a class="action-text-common" href="/about/feedback/">Посмотреть отзывы</a>
                                     </div>
                                   </div>
                              </div>
