@@ -6,11 +6,12 @@ class umbrella_footer
 
     public function generate_shortcode()
     {
+        $why_choose_us = do_shortcode('[why_choose_us]');
         $html = <<<EOHTML
             [section label="Feedback" padding="0px"]
                 [umbrella_feedback ab_test="umbrella_ab_test9_variant2"]
             [/section]
-            [why_choose_us]
+            $why_choose_us
             [section label="contact-us" padding="0px" class="footer-top-section"]
                 [row style="collapse" padding="86px 0px 0px 0px"]
                     [col span__sm="12"]
