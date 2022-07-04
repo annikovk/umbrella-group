@@ -60,17 +60,19 @@ class komanda_specialistov
         } else {
             $photo = get_the_post_thumbnail($post->ID);
         }
+        $category = get_post_meta($post->ID, "specialist_branch", true);
         $description = get_post_meta($post->ID, 'specialist_description', true);
         $name = get_post_meta($post->ID, 'specialist_name', true);
         $full_name = $name . " " . get_the_title($post->ID);
         $experience = get_post_meta($post->ID, 'specialist_experience', true);
         $specialization = get_post_meta($post->ID, 'specialist_specialization', true);
         $achievements = $this->get_achievement(get_post_meta($post->ID, 'specialist_achievements', true));
+        $filter_class = $this->get_filter_class($category);
 
-        $label = ($main) ? $this->get_main_label($this->category) : $this->get_label($this->category);
+        $label = ($main) ? $this->get_main_label($category) : $this->get_label($category);
         if ($main) {
             $html = <<<EOHTML
-            <div class="specialist-tile main">
+            <div class="specialist-tile main $filter_class">
                 
                 <div class="specialist-photo">$photo</div>
                 <div class="specialist-text">
@@ -87,11 +89,9 @@ class komanda_specialistov
         EOHTML;
         } else {
             $html = <<<EOHTML
-            <div class="specialist-tile">
-               
+            <div class="specialist-tile $filter_class">
                 <div class="specialist-photo">$photo</div>
                 <div class="specialist-text">
-                
                     <h3 class="specialist-fio"> $full_name</h3>
                     <div class="specialist-description">
                         <p><strong>$experience опыта</strong></p>
@@ -111,7 +111,8 @@ class komanda_specialistov
     {
         $html = "<ul class='tabs'>";
         foreach ($categories as $category) {
-            $html .= "<li class=''>$category</li>";
+            $filter_class = $this->get_filter_class($category);
+            $html .= "<li class='$filter_class'>$category</li>";
         }
         $html .= "</ul>";
         return $html;
@@ -186,6 +187,13 @@ class komanda_specialistov
         $achievement = str_replace("{текущий минус 1}", $year, $achievement);
         $achievement = str_replace("{месяц год}", $monthyear, $achievement);
         return $achievement;
+    }
+
+    private function get_filter_class($category)
+    {
+        $category = transliterator_transliterate('Any-Latin; Latin-ASCII; [\u0080-\u7fff] remove', $category);
+        $category = str_replace(" ", "-", $category);
+        return $category;
     }
 
     private function get_category_by_url(): string
