@@ -65,10 +65,10 @@ class service_evaluation
                                 </div>
                             </div>
                             <div class="button-block_service_evaluation">
-                                <div class="button-service_evaluation width-content-service_evaluation">
+                                <a class="button-service_evaluation width-content-service_evaluation" href="#service_evaluation_zapros_kp">
                                     Получить предложение
-                                </div>
-                                <a class="action-text-common width-content-service_evaluation" href="#">Посмотреть прайс</a>
+                                </a>
+                                <a class="action-text-common width-content-service_evaluation" href="/price/">Посмотреть прайс</a>
                             </div>
 
                         </div>
@@ -109,6 +109,7 @@ class service_evaluation
                 </div>
             [/col]
            [/row]
+           [lightbox id="service_evaluation_zapros_kp"   width="400px"  padding="0px"][contact-form-7 id="13770" title="Форма на главной (Получить предложение)"][/lightbox]
          [/section]
         EOHTML;
         umbrella_add_custom_css_files(['/assets/css/blocks/service_evaluation.css']);
