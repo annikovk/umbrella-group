@@ -7,9 +7,6 @@ class footer_map
     public function generate_shortcode()
     {
         $html = <<<EOHTML
-         [section id='footer_map'  padding="0px"]
-            [row]
-                [col  span="12" span__sm="12" margin="0px 0px 0px 0px"]
                 <div class="position_footer_map">
                 <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Ad94c7e4f49b0ec7735c9c04c0c8709989b68443c6f4cb399f58b87b289e084b5&amp;source=constructor" width="100%" height="453" frameborder="0"></iframe>
                 <div class="contact-info_footer_map card-shadow-common_footer_map">
@@ -30,10 +27,6 @@ class footer_map
                     </div>
                 </div>
                 </div>
-
-                [/col]
-           [/row]
-         [/section]
         EOHTML;
         umbrella_add_custom_css_files(['/assets/css/blocks/footer_map.css']);
         umbrella_add_custom_js_files(['/assets/js/blocks/footer_map.js']);
@@ -46,7 +39,7 @@ function footer_map_shortcode($atts)
 {
     $shortcode = new footer_map();
     $shortcode->atts = $atts;
-    return $shortcode->generate_shortcode();
+    return do_shortcode($shortcode->generate_shortcode());
 }
 
 add_shortcode('footer_map', 'footer_map_shortcode');

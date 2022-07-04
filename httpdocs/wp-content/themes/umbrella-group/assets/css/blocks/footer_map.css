@@ -10,6 +10,8 @@
 
 .position_footer_map {
     position: relative;
+    margin-top: -170px;
+    margin-bottom: 50px;
 }
 
 .contact_link {
