@@ -48,6 +48,14 @@
 }
 
 @media screen and (max-width: 900px) {
+    .position-card-legend_stock {
+        top: -48px;
+    }
+
+    .red_border_stock {
+        padding: 40px 28px;
+    }
+
     .desktop_mode_stock {
         display: none;
     }
