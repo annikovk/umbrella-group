@@ -5,6 +5,19 @@
     align-items: end;
 }
 
+.grid_form_request_call_back .wpcf7-submit {
+    width: 100%;
+    padding: 9px 25px;
+    font-size: 18px;
+    line-height: 27px;
+}
+
+.grid_form_request_call_back input[type='text'] {
+    border: unset;
+    border-bottom: 2px solid #C9C9C9;
+    -webkit-box-shadow: unset;
+}
+
 .layout_request_call_back {
     max-width: 697px;
     padding-top: 150px;

@@ -13,8 +13,8 @@ class request_call_back
                 [col  span="12" span__sm="12" margin="0px 0px 0px 0px"]
                 <div class="wrapper_request_call_back">
                     <div class="layout_request_call_back">
-                        <div class="title-h1-text-common padding-top-request_call_back">Закажите обратный звонок</div>
-                        <div class="main-text-common">
+                        <div class="title-h1-text-common padding-top-request_call_back" style="text-align: center;">Закажите обратный звонок</div>
+                        <div class="main-text-common" style="text-align: center">
                             Специалист тезисно разберёт ваши вопросы на&nbsp;3-минутной <span class="main-text-accent-common-red">бесплатной консультации</span>.
                             Мы&nbsp;свяжемся с&nbsp;вами в&nbsp;течение 20&nbsp;минут
                             в&nbsp;рабочее время:пн. &mdash;&nbsp;пт.&nbsp;с&nbsp;09:00 до&nbsp;18:00.
