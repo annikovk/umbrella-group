@@ -91,7 +91,7 @@ div.main-services-tile .category-title {
         padding: unset;
         padding-left: 15px;
         min-width: 320px;
-        margin-top: 60px;
+        padding-top: 60px;
     }
 
     .main-services-tile-col {
@@ -118,8 +118,6 @@ div.main-services-tile .category-title {
     .main-services ul.tabs li:hover {
         color: unset;
         background-color: unset;
-        font-weight: 700;
-        box-shadow: inset 0px -3px 0px #EC1C23;
     }
 
     .main-services-tile:hover h3:after {
