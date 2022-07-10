@@ -1,0 +1,158 @@
+
+.first-screen .text-like-h1 {
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 110%;
+}
+
+.first-screen .icon-box-text {
+    padding-right: 50px;
+}
+
+.first-screen .ratings {
+    padding-top: 75px;
+}
+
+.first-screen .ratings .laurel-icon-header,
+.first-screen .ratings .laurel-place {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+}
+
+.first-screen .ratings .laurel-icon-header {
+    font-weight: 600;
+}
+
+.first-screen .laurel-footnote {
+    background-color: unset;
+    padding-top: 32px;
+}
+
+.first-screen .laurel-icon-header, .first-screen .laurel-place, .first-screen .laurels-icons-year {
+    text-align: left;
+}
+
+.main-banner {
+    padding: 75px 0px;
+    background-color: #f9f9f9;
+}
+
+.main-banner .col {
+    padding: 0 15px 0;
+}
+
+.main-banner-content {
+    display: flex;
+    flex-direction: row;
+    max-width: 1200px;
+}
+
+.main-banner-content .text-like-h1 {
+    color: #1A1A1A;
+}
+
+.main-banner-content .button {
+    position: absolute;
+    bottom: 0px;
+    width: 304px;
+    margin-bottom: unset;
+}
+
+.main-banner-content > .left {
+    display: flex;
+    flex-direction: column;
+    max-width: 750px;
+}
+
+.main-banner-content > .right {
+    width: 421px;
+}
+
+@media screen and (max-width: 849px) {
+    .first-screen .icon-box-text {
+        padding-right: unset;
+    }
+
+    .first-screen .main-banner-content .sub-header {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 140%;
+        color: #707070;
+    }
+
+    .first-screen .main-banner-content .description {
+        margin-left: 32px;
+        margin-right: 32px;
+    }
+
+    .first-screen .main-banner-content .description p {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 140%;
+        /* or 20px */
+    }
+
+    .first-screen p.text-like-h1 {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 26px;
+        line-height: 120%;
+        /* or 31px */
+
+        text-align: center;
+    }
+
+    .main-banner {
+        padding: 65px 0px;
+        background-color: #ffffff;
+    }
+
+    .main-banner-content {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .main-banner-content .right {
+        width: 206px;
+    }
+
+    .first-screen .icon-box {
+        margin-top: 35px;
+    }
+
+    .first-screen .ratings {
+        padding-left: 40px;
+        padding-right: 20px;
+        padding-top: 45px;
+    }
+
+    .first-screen .text-like-h1 {
+        font-size: 26px !important;
+        padding-bottom: 25px;
+    }
+
+    .main-banner-content .button {
+        position: relative;
+        margin-top: 25px;
+        width: 273px;
+    }
+
+    .new_main_first_screen {
+        margin-bottom: 120px;
+    }
+
+    .first-screen .laurel-footnote {
+        text-align: left;
+        padding-right: 18px;
+    }
+
+}

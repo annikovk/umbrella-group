@@ -39,13 +39,13 @@
     height: 100%;
 }
 
-.komanda_specialistov imgs {
+.komanda_specialistov img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.specialist-tile > .label {
+.komanda_specialistov .specialist-tile > .label {
     position: absolute;
     top: -16px;
     background-color: white;
@@ -56,61 +56,61 @@
     font-weight: bold;
 }
 
-.specialist-tile.main > .label {
+.komanda_specialistov .specialist-tile.main > .label {
     left: 402px;
 }
 
-.specialist-tile > .label {
+.komanda_specialistov .specialist-tile > .label {
     left: 302px;
 }
 
-.specialist-tile p {
+.komanda_specialistov .specialist-tile p {
     margin: unset;
     font-size: 18px;
     line-height: 29px;
     margin-bottom: 18px;
 }
 
-.specialist-fio {
+.komanda_specialistov .specialist-fio {
     font-size: 44px;
 }
 
-.specialist-text {
+.komanda_specialistov .specialist-text {
     flex-grow: 3;
     margin-left: 64px;
     margin-right: 40px;
     position: relative;
 }
 
-.specialist-contact {
+.komanda_specialistov .specialist-contact {
     display: flex;
     flex-direction: row;
     margin-top: 40px;
 }
 
-.specialist-button-description {
+.komanda_specialistov .specialist-button-description {
     margin-left: 36px;
     flex-grow: 1;
 }
 
-.specialist-button {
+.komanda_specialistov .specialist-button {
     min-width: 36%;
     flex-basis: auto;
     flex-grow: 1;
 }
 
-.specialists_advantages {
+.komanda_specialistov .specialists_advantages {
     width: 100%;
     margin-top: 50px;
     background-color: #eeeeee;
 }
 
-.specialists_advantages .specialists_advantages_top {
+.komanda_specialistov .specialists_advantages .specialists_advantages_top {
     border-bottom: 1px solid #aaaaaa;
     display: flex;
 }
 
-.specialists_advantages .specialists_advantages_top .specialists_advantages_top_text {
+.komanda_specialistov .specialists_advantages .specialists_advantages_top .specialists_advantages_top_text {
     max-width: 60%;
     font-size: 24px;
     margin-left: 50px;
@@ -118,12 +118,12 @@
     margin-bottom: 10px;
 }
 
-.specialists_advantages .specialists_advantages_top .specialists_advantages_top_img {
+.komanda_specialistov .specialists_advantages .specialists_advantages_top .specialists_advantages_top_img {
     max-width: 40%;
     margin-top: -20px;
 }
 
-.specialists_advantages .specialists_advantages_bot {
+.komanda_specialistov .specialists_advantages .specialists_advantages_bot {
     padding-top: 36px;
     padding-left: 50px;
     padding-bottom: 50px;

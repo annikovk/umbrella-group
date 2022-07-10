@@ -70,11 +70,17 @@ div.main-services-tile-grid {
         padding-bottom: 10px;
 
     }
+
     .main-services ul.tabs li:hover {
         color: unset;
         background-color: unset;
     }
+
     .main-services ul.tabs li.active {
         box-shadow: inset 0px -3px 0px #EC1C23;
+    }
+
+    .main-services {
+        margin-top: 120px;
     }
 }
