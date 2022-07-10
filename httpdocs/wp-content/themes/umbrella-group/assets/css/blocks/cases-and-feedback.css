@@ -27,7 +27,7 @@
 
 .newcases > .content > .tiles button.flickity-prev-next-button,
 .feedback > .content > .tiles button.flickity-prev-next-button {
-    bottom: -56px;
+    bottom: -60px;
     z-index: 2;
 }
 

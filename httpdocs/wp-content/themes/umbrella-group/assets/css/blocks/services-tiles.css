@@ -15,6 +15,52 @@ div.main-services-tile-grid {
     display: contents;
 }
 
+.umbrella-cases-section ul.tabs li:hover {
+    background-color: unset;
+    color: unset;
+}
+
+.umbrella-cases-section ul.tabs li {
+    font-weight: unset;
+}
+
+.umbrella-cases-section .flickity-prev-next-button.next, .umbrella-cases-section .flickity-prev-next-button.previous {
+    background-color: unset;
+    color: unset;
+    opacity: 1;
+}
+
+.umbrella-cases-section .flickity-prev-next-button.next {
+    right: calc(47.5% - 50px);
+}
+
+.umbrella-cases-section .flickity-prev-next-button.previous {
+    right: calc(47.5% + 50px);
+}
+
+.umbrella-cases-section .content > .tiles button.flickity-prev-next-button {
+
+}
+
+.umbrella-cases-section .flickity-prev-next-button.next:after, .umbrella-cases-section .flickity-prev-next-button.previous:after {
+    font-size: 18px;
+    line-height: 100%;
+    font-weight: 400;
+}
+
+.umbrella-cases-section .flickity-prev-next-button.next:after {
+    content: "→";
+}
+
+.umbrella-cases-section .flickity-prev-next-button.previous:after {
+    content: "←";
+}
+
+.umbrella-cases-section .flickity-page-dots .dot {
+    height: 10px;
+    width: 10px;
+}
+
 .main-services-pages {
     display: block;
     position: relative;
