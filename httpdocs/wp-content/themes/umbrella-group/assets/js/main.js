@@ -6,6 +6,13 @@ jQuery(".accordion-title").click(function (){
         jQuery(this).parent().addClass("active");
     }
 });
-jQuery(".accordion button.toggle").click(function (){
+jQuery(".accordion button.toggle").click(function () {
     jQuery(this).parent().find(".accordion-inner").toggle(200);
 });
+
+//hide sticky header on desktops
+jQuery(window).scroll((function () {
+    if (jQuery(window).width() > 849) {
+        jQuery("#header .header-wrapper").removeClass("stuck");
+    }
+}))

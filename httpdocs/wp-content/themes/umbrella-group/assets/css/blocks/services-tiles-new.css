@@ -11,12 +11,31 @@ div.main-services-tile-grid {
               "guarantee5 guarantee5 guarantee6 guarantee6";
 }
 
+div.main-services-tile .category-title {
+    font-family: 'PT Serif';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 36px;
+    /* identical to box height */
+    margin-bottom: 25px;
+    text-align: center;
+}
+
 .main-services-guarantee {
     display: none;
 }
 
 .main-services-pages {
     margin-bottom: 54px;
+}
+
+.main-services-tile .children-list {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 27px;
 }
 
 .main-services-tile .children-list li:nth-child(4), .main-services-tile .children-list li:nth-child(5) {
@@ -38,13 +57,29 @@ div.main-services-tile-grid {
         display: block;
     }
 
+
+    div.main-services-tile-grid::-webkit-scrollbar {
+        display: none; /* for Chrome, Safari, and Opera */
+    }
+
     div.main-services-tile-grid {
         overflow: scroll;
         grid-column-gap: 30px;
     }
 
-    a.show-all-link {
+    .main-services-tile .children-list li {
+        margin-bottom: 25px;
+    }
+
+    .main-services-tile a.show-all-link {
+        color: #707070;
         display: block;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 27px;
+        bottom: 0;
     }
 
     a.show-more-pages {
@@ -53,14 +88,24 @@ div.main-services-tile-grid {
 
     .main-services-pages {
         border: unset;
+        padding: unset;
         padding-left: 15px;
-        padding-right: unset;
         min-width: 320px;
+        margin-top: 60px;
     }
 
     .main-services-tile-col {
         padding: unset;
     }
+
+    .main-services ul.tabs li {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 140%;
+    }
+
     .main-services ul.tabs {
         display: flex;
         margin-left: 15px;
@@ -68,7 +113,6 @@ div.main-services-tile-grid {
         background: #F9F9F9;
         padding-top: 10px;
         padding-bottom: 10px;
-
     }
 
     .main-services ul.tabs li:hover {
@@ -76,7 +120,12 @@ div.main-services-tile-grid {
         background-color: unset;
     }
 
+    .main-services-tile:hover h3:after {
+        display: none;
+    }
+
     .main-services ul.tabs li.active {
+        font-weight: 700;
         box-shadow: inset 0px -3px 0px #EC1C23;
     }
 

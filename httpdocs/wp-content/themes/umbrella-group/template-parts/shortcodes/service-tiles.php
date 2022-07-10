@@ -56,11 +56,13 @@ class Service_tiles
             if ($atts["hide_pages_on_mobile"] == "false") {
                 $this->hide_pages_on_mobile = false;
                 $tabs = "<ul class='tabs'>";
+                $active = "class='active'";
                 foreach ($this->tiles as $tile) {
                     $title = str_replace("!return_caret", " ", $tile['title']);
                     $tabs .= <<<EOHTML
-                        <li target-block="service-title-target-parent-{$tile["parent_id"]}">{$title}</li>
+                        <li target-block="service-title-target-parent-{$tile["parent_id"]}" $active>{$title}</li>
                     EOHTML;
+                    $active = "";
 
                 }
                 $tabs .= "</ul>";
@@ -132,7 +134,7 @@ class Service_tiles
                                             <ul class="children-list">
                                                 $pages_html
                                             </ul>
-                                            <a class='$hideforsmall red-on-block-hover show-all-link' href="$parent_url">показать все</a>
+                                            <a class='$hideforsmall red-on-block-hover show-all-link' href="$parent_url">Показать все <span class="show-for-small"> услуги</span></a>
                                             <a class='show-for-small show-more-pages' data-before='↓ показать '>услуги</a>
                                         </div>
                                 </div>
