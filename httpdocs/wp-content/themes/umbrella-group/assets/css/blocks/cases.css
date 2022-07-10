@@ -2,6 +2,13 @@
     padding-bottom: unset;
 }
 
+.newcases ul.tabs li.selected {
+    background-color: unset;
+    color: unset;
+    font-weight: 700;
+    border-bottom: 2px solid #EC1C23;
+}
+
 .newcases > .content > .tiles .tile > .title {
     font-size: 34px;
     margin-top: 68px;

@@ -14,7 +14,7 @@ class why_umbrella
                 <img alt="why_umbrella_background.png" 
                      src="https://taxlab.ru/wp-content/uploads/why_umbrella_background.png"/>
                 <div class="card_why-umbrella card-shadow-common card-shadow_none_why-umbrella">
-                    <div class="title-h1-text-common title_why_umbrella">Почему ГК&nbsp;Umbrella Group?</div>
+                    <div class="title-h1-text-common title_why_umbrella">Почему ГК <span class="show-for-small"><br/></span>Umbrella Group?</div>
                     <div class="citation_why-umbrella">
                         <div class="layout-quote_why-umbrella">
                             <div class="quote_why-umbrella">&laquo;</div>

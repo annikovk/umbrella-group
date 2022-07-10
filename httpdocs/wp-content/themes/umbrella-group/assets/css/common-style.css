@@ -99,26 +99,32 @@
 @media screen and (max-width: 768px) {
     .title-h1-text-common {
         font-size: 28px;
+        line-height: 36px;
     }
 
     .title-h2-text-common {
         font-size: 28px;
+        line-height: 36px;
     }
 
     .main-text-common {
         font-size: 16px;
+        line-height: 140%;
     }
 
     .action-text-common {
         font-size: 16px;
+        line-height: 24px;
     }
 
     .main-text-italic-common {
         font-size: 18px;
+        line-height: 140%;
     }
 
     .mute-text-legend {
         font-size: 14px;
+        line-height: 140%;
     }
 
     .title-h3-text-common {

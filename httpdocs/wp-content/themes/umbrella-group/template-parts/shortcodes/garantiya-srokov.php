@@ -12,7 +12,7 @@ class garantiya_srokov
             [col  span="12" span__sm="12" margin="0px 0px 0px 0px"]
                 <div class="layout main_block_garantiya_srokov card-shadow-common">
                     <div>
-                        <div class="title-h2-text-common margin-title_garantiya_srokov">Гарантия сроков</div>
+                        <div class="title-h2-text-common margin-title_garantiya_srokov" style="text-align: center;">Гарантия сроков</div>
                         <div class="main-text-common desktop-text">
                             В&nbsp;каждом договоре вы&nbsp;увидите срок оказания услуг
                             и&nbsp;ответственность за&nbsp;нарушение сроков. Время&nbsp;&mdash; самый 
@@ -32,7 +32,7 @@ class garantiya_srokov
                         </ul>
                     </div>
                     <div>
-                        <div class="title-h2-text-common margin-title_garantiya_srokov">Гарантия результата</div>
+                        <div class="title-h2-text-common margin-title_garantiya_srokov"  style="text-align: center;">Гарантия результата</div>
                         <div class="main-text-common desktop-text">
                             Исключаем человеческий фактор <span class="main-text-accent-common">двойным контролем:</span>
                             директора подразделений лично проверяют ведение 

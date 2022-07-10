@@ -87,6 +87,9 @@
 }
 
 @media screen and (max-width: 768px) {
+    .text_help_start_business_legend {
+        padding: 0 10px;
+    }
 
     .text_help_start_business_italic {
         font-size: 18px;
@@ -98,11 +101,16 @@
     }
 
     .border_card_help {
-        padding: 75px 28px;
+        padding: 35px 28px 65px 28px;
     }
 
     .legend_position {
-        margin: 0 22px;
-        top: -88px;
+        margin: 0 12px;
+        top: -48px;
+        min-width: 187px;
+    }
+
+    .content_layout_help_start_business {
+        grid-gap: 10px;
     }
 }

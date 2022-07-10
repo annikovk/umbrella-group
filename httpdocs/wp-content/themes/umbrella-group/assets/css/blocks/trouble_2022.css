@@ -72,6 +72,11 @@
 
     .card_trouble_2022 {
         padding: 28px;
+        line-height: 22px;
+    }
+
+    .card_trouble_2022 li {
+        margin-bottom: unset;
     }
 
 }

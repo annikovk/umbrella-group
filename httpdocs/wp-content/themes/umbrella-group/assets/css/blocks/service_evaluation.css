@@ -167,6 +167,11 @@
 
     .mobile_service_evaluation_flex {
         display: flex;
+
+    }
+
+    div.mobile_service_evaluation_flex::-webkit-scrollbar {
+        display: none; /* for Chrome, Safari, and Opera */
     }
 
     .mobile_service_evaluation {

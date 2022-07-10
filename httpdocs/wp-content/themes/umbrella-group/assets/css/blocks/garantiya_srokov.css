@@ -21,6 +21,24 @@
     color: #334862;
 }
 
+.main_block_garantiya_srokov a.action-text-common::marker {
+    color: #587291;
+}
+
+.main_block_garantiya_srokov ul.list-download_garantiya_srokov.margin-link_garantiya_srokov {
+    margin-bottom: unset;
+}
+
+.main_block_garantiya_srokov li {
+    margin-bottom: unset;
+}
+
+.main_block_garantiya_srokov a.action-text-common {
+    border-bottom: unset;
+    color: #587291;
+
+}
+
 .mobile-text {
     display: none;
 }
