@@ -191,7 +191,6 @@ class SU_welcome_screen
         return $html;
     }
 }
-
 function su_welcome_screen_shortcode($atts)
 {
     $shortcode = new SU_welcome_screen();
@@ -229,9 +228,9 @@ function umbrella_get_ratings($type='')
                 $icon = '/wp-content/uploads/2019/10/laurel-1.svg';
                 $subheader = 'рейтинг «Делового квартала», Новосибирск, 2021';
             } else if (strpos($_SERVER['REQUEST_URI'], "/services/services-le") !== false) {
-                $header = '1 место рейтинга юридических компаний';
+                $header = 'ТОП юридических компаний в Сибири';
                 $icon = '/wp-content/uploads/2019/10/laurel-1.svg';
-                $subheader = 'Новосибирск, pravo.ru, 2020';
+                $subheader = 'Новосибирск, pravo.ru, 2021';
             } else {
                 $header = '1 место в отрасли «Корпоративное право»';
                 $icon = '/wp-content/uploads/2019/10/laurel-1.svg';
