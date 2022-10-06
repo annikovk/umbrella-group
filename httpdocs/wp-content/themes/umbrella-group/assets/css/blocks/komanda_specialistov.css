@@ -200,6 +200,17 @@
 
 
 @media (max-width: 768px) {
+    .specialist-text {
+        margin-left: unset;
+        margin-right: unset;
+        margin-top: unset;
+        margin-bottom: unset;
+    }
+
+    .specialist-fio {
+        font-size: unset;
+    }
+
     .desktop_mode_komanda {
         display: none;
     }

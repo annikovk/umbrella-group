@@ -58,7 +58,9 @@ header('Retry-After: 600');
 
 <footer class="footer">
     <div class="footer__content">
-        Под управлением WordPress Toolkit <a href="https://www.plesk.com/" target="_blank"><img class="logo" src="https://taxlab.ru/wp-content/maintenance/assets/images/plesk-logo.png" alt="Plesk"></a>
+        Под управлением WordPress Toolkit <a href="https://www.plesk.com/" target="_blank"><img class="logo"
+                                                                                                src="https://taxlab.ru/wp-content/maintenance/assets/images/plesk-logo.png"
+                                                                                                alt="Plesk"></a>
     </div>
 </footer>
 

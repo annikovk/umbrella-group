@@ -67,7 +67,7 @@ class umbrella_footer
             [/section]
             [divider width="100%" height="1px" margin="0px" color="rgb(68, 69, 69)"]
         EOHTML;
-        if (get_the_ID() == 13514) {
+        if (get_the_ID() == 13514 || get_the_ID() == 13516) {
             $html = <<<EOHTML
                 [section bg_color="#d7d7d7" dark="true" class="footer-bottom"]
                 [row style="collapse" padding="20px 0px 0px 0px"]

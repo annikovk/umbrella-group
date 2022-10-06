@@ -33,7 +33,7 @@
     left: 302px;
 }
 .specialist-tile p {
-     margin: unset;
+    margin: unset;
     font-size: 18px;
     line-height: 29px;
     margin-bottom: 18px;
@@ -42,13 +42,20 @@
     font-size: 44px;
 }
 
+.specialist-text {
+    flex-grow: 3;
+    margin-left: 64px;
+    margin-right: 40px;
+    position: relative;
+}
 
-.specialist-contact{
+.specialist-contact {
     display: flex;
     flex-direction: row;
     margin-top: 40px;
 }
-.specialist-button-description{
+
+.specialist-button-description {
     margin-left: 36px;
     flex-grow: 1;
 }
@@ -83,22 +90,31 @@
     padding-bottom: 50px;
     font-size: 18px;
 }
+
 @media (max-width: 549px) {
-    .specialist-tile.main .specialist-photo{
+    .specialist-tile.main .specialist-photo {
         display: none;
     }
+
     .specialist-tile .specialist-photo {
         display: none;
     }
 
-    .specialist-fio {
-        font-size: 28px;
-        line-height: 36px;
-        color: #000000;
+    .specialist-text {
+        margin-left: 8px;
+        margin-right: 12px;
+        margin-top: 16px;
+        margin-bottom: 32px;
     }
+
+    .specialist-fio {
+        font-size: 24px;
+    }
+
     .specialist-tile p {
         font-size: 16px;
     }
+
     .specialist-contact {
         display: flex;
         flex-direction: column;

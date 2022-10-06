@@ -5,6 +5,20 @@
     margin-top: 180px;
 }
 
+.free_consultation_background .wpcf7-submit {
+    width: 100%;
+    padding: 9px 25px;
+    font-size: 18px;
+    line-height: 27px;
+}
+
+.free_consultation_background input[type='text'] {
+    border: unset;
+    border-bottom: 2px solid #C9C9C9;
+    -webkit-box-shadow: unset;
+}
+
+
 .bac_form {
     padding: 30px;
     background: white;

@@ -30,8 +30,10 @@ ul.tabs li:hover {
 }
 
 ul.tabs li.selected {
-    background-color: #1a1a1a;
-    color: #ffffff;
+    background-color: unset;
+    color: unset;
+    font-weight: 700;
+    border-bottom: 2px solid #EC1C23;
 }
 
 .nav > li > a, .nav-dropdown > li > a, .nav-column > li > a {
@@ -504,10 +506,12 @@ footer.entry-meta {
 }
 
 .flickity-prev-next-button.next {
-    background-color: #1a1a1a;
-    color: #ffffff;
-    opacity: 1;
-    right: 0%;
+    font-size: 18px;
+    line-height: 100%;
+    font-weight: 400;
+    background-color: unset;
+    color: black;
+    right: calc(47.5% - 50px);
 }
 
 .flickity-prev-next-button.previous:hover {
@@ -521,11 +525,13 @@ footer.entry-meta {
 }
 
 .flickity-prev-next-button.previous {
-    background-color: #1a1a1a;
-    color: #ffffff;
-    opacity: 1;
+    font-size: 18px;
+    line-height: 100%;
+    font-weight: 400;
+    background-color: unset;
+    color: black;
     left: unset;
-    right: 56px;
+    right: calc(47.5% + 50px);
 }
 
 .flickity-prev-next-button.next:after {
