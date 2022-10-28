@@ -1,0 +1,113 @@
+h2.title_calculate_busnisse {
+    font-family: 'PT Serif';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 120%;
+    text-align: center;
+    color: #1A1A1A;
+    margin-bottom: 60px;
+}
+
+.subtitle_calculate_busnisse{
+    font-family: 'PT Serif';
+    font-style: italic;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 140%;
+    color: #1A1A1A;
+    text-align: center;
+    margin-bottom: 60px;
+}
+ul.dynamic_tariff_menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    max-width: 1049px;
+    width: 100%;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+ul.dynamic_tariff_menu>li {
+    position: relative;
+    height: 100%;
+    margin: 0;
+    padding-bottom: 12px;
+}
+ul.dynamic_tariff_menu>li:hover {
+    border-bottom: 3px solid red;
+}
+ul.dynamic_tariff_menu>li:hover span {
+    transform: rotate(180deg);
+}
+ul.dynamic_tariff_menu>li span {
+    transform: rotate(0deg);
+    display: inline-block;
+}
+ul.dynamic_tariff_menu>li>a {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 27px;
+    color: #1A1A1A;
+    padding: 8px;
+}
+ul.dynamic_tariff_menu>li:hover>ul.dynamic_tariff_sub_menu {
+    height: auto;
+    opacity: 1;
+    z-index: 999;
+    overflow: visible;
+}
+ul.dynamic_tariff_sub_menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 291px;
+    height: 345px;
+    left: 0px;
+    top: 43px;
+    background: #FFFFFF;
+    box-shadow: 1px 20px 20px rgb(26 26 26 / 9%);
+    height: 0;
+    overflow: hidden;
+    transition: all 0.3s linear;
+    position: absolute;
+    left: 0;
+    top: 44px;
+}
+ul.dynamic_tariff_menu>li:last-child>ul.dynamic_tariff_sub_menu {
+    right: 0;
+    left: auto;
+}
+ul.dynamic_tariff_sub_menu li {
+    cursor: pointer;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 27px;
+    color: #1A1A1A;
+    padding: 9px 18px;
+    margin: 0;
+}
+ul.dynamic_tariff_sub_menu li:hover, ul.dynamic_tariff_sub_menu li.active {
+    background: #F4F4F4;
+    color: #BD161C !important;
+}
+/**Tabs**/
+ul.dynamic_tariff_sub_menu li.active:before {
+    content: '✓';
+    margin-right: 10px;
+}
+
+.tab-content.current {
+    display: block !important;
+}
+.tab-content{
+    display: none;
+}
+li.current-menu-parent {
+    border-bottom: 3px solid #EC1C23;
+}
