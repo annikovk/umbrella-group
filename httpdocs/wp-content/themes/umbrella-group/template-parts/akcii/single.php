@@ -9,7 +9,7 @@
                 <?php
                 if(flatsome_option('blog_post_style') == 'default' || flatsome_option('blog_post_style') == 'inline'){
                     get_template_part('template-parts/posts/partials/entry-header', flatsome_option('blog_posts_header_style') );
-                    echo "<div style='font-weight: bolder;font-size: 18px;'> <span style='text-transform: uppercase; color: #ec1c23;'>Специальное предложение </span> до ".date("d.m.Y", strtotime(date('m', strtotime('+1 month')).'/01/'.date('Y').' 00:00:00')). '</div>';
+                    echo "<div style='font-weight: bolder;font-size: 18px;'> <span style='text-transform: uppercase; color: #ec1c23;'>Специальное предложение </span> до ".date("d.m.Y", strtotime(date('m', strtotime('+1 month')).'/31/'.date('Y').' 00:00:00')). '</div>';
                 }
                 ?>
                 <?php
