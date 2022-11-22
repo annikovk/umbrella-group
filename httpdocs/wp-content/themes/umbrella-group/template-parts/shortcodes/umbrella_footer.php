@@ -41,10 +41,19 @@ class umbrella_footer
                             [col_inner span="4" span__sm="10"]
                             <p><img src="https://taxlab.ru/wp-content/uploads/logo-2020-new.svg" alt="Umbrella Group" class="int-logo"></p>
                                 [gap height="39px"]
-                            <p><span itemscope itemtype="http://schema.org/Organization"><br /><meta itemprop="name" content="Taxlab"></p>
-                                <p class="footer-sub-text" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><span itemprop="postalCode">630099</span>, г. <span itemprop="addressLocality">Новосибирск</span>, <br /> <span itemprop="streetAddress">ул. Максима Горького, д. 34</span><br />ул. площадь Труда, д. 1</p>
-                                <p><meta itemprop="telephone" content="+7 (383) 230-97-45" ><br /><meta itemprop="email" content="contact@taxlab.ru" ><br />
-                                </span></p>
+                            <div><span itemscope itemtype="http://schema.org/Organization"><br />
+    <meta itemprop="name" content="Taxlab">
+    <meta itemprop="telephone" content="+7 (383) 373-17-17" >
+    <meta itemprop="email" content="contact@taxlab.ru" >
+
+    <p class="footer-sub-text" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+        <span itemprop="postalCode">630099</span>, г. 
+        <span itemprop="addressLocality">Новосибирск</span>, <br /> 
+        <span itemprop="streetAddress">ул. Максима Горького, д. 34</span><br />ул. площадь Труда, д. 1
+    </p>
+       
+    </span>
+  </div>
                             [gap height="39px"]<p class="footer-sub-text">1990 - 2022 © Umbrella Group</p>[/col_inner]
                             [col_inner span="2" span__sm="12" visibility="hide-for-medium"]
                                 [wbcr_php_snippet id="701" name="top-bar-menu" class="footer-menu"]
