@@ -99,7 +99,7 @@ class specialists
                         <p><strong>Специализация:</strong> $specialization</p>
                     </div>
                     <div class="specialist-contact">
-                        <div class="specialist-button">[button text="Задать вопрос" link="#specialist-form-$post->ID" class="" expand="true"]</div> <div class="specialist-button-description">Задайте вопрос и $name ответит в течение 1 рабочего дня. Это бесплатно.</div> 
+                        <div class="specialist-button">[button text="Задать вопрос" link="#specialist-form-$post->ID" class="" expand="true"]</div> <div class="specialist-button-description">Задайте вопрос, и $name ответит в течение 1 рабочего дня. Это бесплатно.</div> 
                     </div>
                 </div>
                 <div class="label">$label</div>
