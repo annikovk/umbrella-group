@@ -27,6 +27,14 @@ class komanda_specialistov
         $tabs = $this->get_tabs($categories);
         $tiles = $this->get_tiles($posts);
 
+         if (isMobile()) {
+
+        $html = <<<EOHTML
+
+        EOHTML;
+
+         } else {
+
         $html = <<<EOHTML
         [section class='komanda_specialistov' id='komanda_specialistov'  padding="0px"]
             [row]
@@ -41,7 +49,7 @@ class komanda_specialistov
                 [/col]
            [/row]
         [/section]    
-        EOHTML;
+        EOHTML; }
 
         umbrella_add_custom_css_files($this->css_file);
         umbrella_add_custom_js_files($this->js_file);
@@ -80,6 +88,13 @@ class komanda_specialistov
 
         $label = ($main) ? $this->get_main_label($category) : $this->get_label($category);
         if ($main) {
+             if (isMobile()) {
+
+        $html = <<<EOHTML
+
+        EOHTML;
+
+         } else {
             $html = <<<EOHTML
             <div class="specialist-tile main $filter_class">
                <div class="container-text-mute_komanda desktop_mode_komanda">
@@ -106,7 +121,7 @@ class komanda_specialistov
                    </div>
 
             </div>
-        EOHTML;
+        EOHTML; }
         } else {
             $html = <<<EOHTML
             <div class="specialist-tile $filter_class">

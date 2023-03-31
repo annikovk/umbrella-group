@@ -6,6 +6,14 @@ class trouble_2022
 
     public function generate_shortcode()
     {
+
+        if (isMobile()) {
+
+        $html = <<<EOHTML
+
+        EOHTML;
+
+         } else {
         $html = <<<EOHTML
          [section id='trouble_2022'  padding="0px"]
            [row]
@@ -85,7 +93,7 @@ class trouble_2022
             [/col]
            [/row]
          [/section]
-        EOHTML;
+        EOHTML; }
         umbrella_add_custom_css_files(['/assets/css/blocks/trouble_2022.css']);
         umbrella_add_custom_js_files(['/assets/js/blocks/trouble_2022.js']);
         return $html;

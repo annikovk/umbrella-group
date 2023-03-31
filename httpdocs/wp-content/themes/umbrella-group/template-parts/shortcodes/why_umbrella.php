@@ -6,6 +6,13 @@ class why_umbrella
 
     public function generate_shortcode()
     {
+        if (isMobile()) {
+
+        $html = <<<EOHTML
+
+        EOHTML;
+
+         } else {
         $html = <<<EOHTML
          [section id='why_umbrella'  padding="0px"]
            [row]
@@ -46,7 +53,7 @@ class why_umbrella
             [/col]
            [/row]
          [/section]
-        EOHTML;
+        EOHTML; }
         umbrella_add_custom_css_files(['/assets/css/blocks/why_umbrella.css']);
         umbrella_add_custom_js_files(["/assets/js/blocks/why_umbrella.js"]);
         return $html;
