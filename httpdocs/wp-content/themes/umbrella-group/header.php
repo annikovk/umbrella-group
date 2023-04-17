@@ -16,28 +16,20 @@
 
     <?php wp_head(); ?>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-168903290-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L1SYSHHPK5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-
-        gtag('js', new Date());
-
-        gtag('config', 'UA-168903290-1', {
+  gtag('config', 'G-L1SYSHHPK5');
+  gtag('config', 'UA-168903290-1', {
             'custom_map': {
-                'dimension1': 'clientId'
+            'dimension1': 'clientId'
             }
         });
-        setTimeout(function () {
-            gtag('event', 'Over 15 seconds', {
-                event_category: "NoBounce"
-            });
-        }, 15000);
-    </script>
+</script>
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) {
             w[l] = w[l] || [];
