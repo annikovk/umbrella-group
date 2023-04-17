@@ -72,7 +72,7 @@ class cases
             $tiles .= ($this->is_cases_category_page || $posts_count < 2) ? "</div>" : "[/ux_slider]";
         }
         $html = <<<EOHTML
-        [section id='umbrella-cases' bg_color="rgb(249, 249, 249)" padding="0px" class="umbrella-cases-section"]
+        [section id='umbrella-cases'  padding="0px" class="umbrella-cases-section"]
             [row]
                 [col  span="12" span__sm="12" margin="0px 0px 0px 0px"]
                     <div class="newcases">
@@ -152,8 +152,8 @@ class cases
             <div class="$metaclases tile $visible">
                 <div class="title"> $title</div>
                 $company
-                <div class="industry"><img alt="Briefcase-image" style="height:20px;" src="/wp-content/uploads/manual_uploads/Briefcase_Icon_1.png"><strong>Отрасль: </strong>$industry</div>
-                <div class="team"><img alt="person-image" style="height:20px;" src="/wp-content/uploads/manual_uploads/User_Icon_1.png"><strong>Сотрудники Umbrella Group: </strong>$team</div>
+                <div class="industry"><img alt="Briefcase-image" style="height:20px;" src="/wp-content/uploads/manual_uploads/Briefcase_Icon_1.png"><span class="strong">Отрасль: </span>$industry</div>
+                <div class="team"><img alt="person-image" style="height:20px;" src="/wp-content/uploads/manual_uploads/User_Icon_1.png"><span class="strong">Сотрудники Umbrella Group: </span>$team</div>
                 <div class="timeline">
                     <div class="issue"> <div class="white-background"></div> <div class="title">Проблема </div><div class="content">$issue</div> <div class="arrow show-for-small">→</div></div>
                     <div class="solution"> <div class="title">Результат </div><div class="content"><div class="text">$solution</div> $proof</div></div>

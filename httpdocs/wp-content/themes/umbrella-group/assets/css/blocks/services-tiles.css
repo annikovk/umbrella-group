@@ -64,8 +64,9 @@ div.main-services-tile-grid {
 .main-services-pages {
     display: block;
     position: relative;
-    padding: 38px 48px 48px 40px;
-    border: solid 2px #f9f9f9;
+    padding: 50px 44px 50px 50px;
+    background: #FFFFFF;
+    border: 1px solid #C9C9C9;
 }
 
 .main-services-guarantee {

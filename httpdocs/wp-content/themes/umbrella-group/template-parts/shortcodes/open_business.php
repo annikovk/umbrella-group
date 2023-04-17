@@ -18,6 +18,7 @@ function open_business_shortcode($atts){
                             <li><a href="#educational">Образовательные услуги</a></li>
                             <li><a href="#other">Другое</a></li>
                           </ul>
+                          
                           <div id="tabs-content">
                             <div id="beauty" class="tab-content">
                               <div class="wrap_open_business_tab">
@@ -30,114 +31,6 @@ function open_business_shortcode($atts){
                                     <li>Салон красоты</li>
                                     <li>Cпа-салон</li>
                                     <li>Аптека</li>
-                                </ul>
-                              </div>
-                                <div class="swiper step_slider_busnisse">
-                                  <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <div class="title_step">
-                                            <span class="num_step">1</span>
-                                        </div>
-                                        <div class="content_step">
-                                            Бесплатно проконсультируем по открытию бизнеса. Можно в офисе или по телефону.
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="title_step">
-                                            <span class="num_step">2</span>
-                                        </div>
-                                        <div class="content_step">
-                                           Зарегистрируем ИП / ООО / НКО. Выберем оптимальный вариант и подготовим документы.
-                                           <a href="#" class="btn_modal_step" data-modal="how-do">Как мы это сделаем?</a>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="title_step">
-                                            <span class="num_step">3</span>
-                                        </div>
-                                        <div class="content_step">
-                                            Откроем расчётный счёт в банке.
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="title_step">
-                                            <span class="num_step">4</span>
-                                        </div>
-                                        <div class="content_step">
-                                            Подберём, зарегистрируем и установим онлайн-кассы.
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="title_step">
-                                            <span class="num_step">5</span>
-                                        </div>
-                                        <div class="content_step">
-                                            Подберём помещение. Силами Жилфонда найдем прибыльное место.
-                                            <a href="#" class="btn_modal_step" data-modal="how-select">Как подбираем?</a>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="title_step">
-                                            <span class="num_step">6</span>
-                                        </div>
-                                        <div class="content_step">
-                                           Оформим лицензию на ваш вид детельности за максимально сжатые сроки.
-                                            <a href="#" class="btn_modal_step" data-modal="exactly-do">Что конкретно делаем?</a>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="title_step">
-                                            <span class="num_step">7</span>
-                                        </div>
-                                        <div class="content_step">
-                                           Отрисуем и зарегистрируем товарный знак. Защитим интеллектуальную собственность.
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="no_title_step">
-                                            <div class="no_title_text chek_icon">
-                                            
-                                            </div>
-                                        </div>
-                                        <div class="content_step">
-                                            Вы получаете действующий бизнес.
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="no_title_step">
-                                            <div class="no_title_text krest_icon">
-                                                Помощь от государства
-                                            </div>
-                                        </div>
-                                        <div class="content_step">
-                                           Расскажем про меры поддержки малого и среднего бизнеса. Например, вы сможете бесплатно получить от государства…
-                                           <a href="#" class="btn_modal_step" data-modal="help-state">Читать подробнее</a>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="no_title_step">
-                                            <div class="no_title_text krest_icon">
-                                                Для иностранных граждан
-                                            </div>
-                                        </div>
-                                        <div class="content_step">
-                                         Помогаем открыть бизнес в России. Оформим разрешение на временное пребывание в России. Мы станем вашим представителем в налоговой инспекции и передадим…
-                                         <a href="#" class="btn_modal_step" data-modal="foreign-citizens">Читать подробнее</a>
-                                        </div>
-                                    </div>
-                                  </div>
-                                  <div class="swiper-button-next">→</div>
-                                  <div class="swiper-button-prev">←</div>
-                                </div>
-                            </div>
-
-                            <div id="trade" class="tab-content">
-                              <div class="wrap_open_business_tab">
-                                <img src="https://taxlab.ru/wp-content/uploads/trade.jpg">
-                                <ul class="list_type_busnisse">
-                                    <li>Розничный магазин продуктов</li>
-                                    <li>Интернет-магазин</li>
-                                    <li>Магазин разливного пива</li>
                                 </ul>
                               </div>
                                 <div class="swiper step_slider_busnisse">
@@ -180,8 +73,7 @@ function open_business_shortcode($atts){
                                             <span class="num_step">5</span>
                                         </div>
                                         <div class="content_step">
-                                           Подберем, зарегистрируем и установим онлайн-кассы.
-                                            <a href="#" class="btn_modal_step" data-modal="how-select">Как подбираем?</a>
+                                            Подберём, зарегистрируем и установим онлайн-кассы.
                                         </div>
                                     </div>
                                     <div class="swiper-slide">
@@ -189,7 +81,139 @@ function open_business_shortcode($atts){
                                             <span class="num_step">6</span>
                                         </div>
                                         <div class="content_step">
-                                           Подберем помещение. Силами Жилфонда найдем прибыльное место.
+                                            Подберём помещение. Найдем прибыльное место.
+                                            <a href="#" class="btn_modal_step" data-modal="how-select">Как подбираем?</a>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="title_step">
+                                            <span class="num_step">7</span>
+                                        </div>
+                                        <div class="content_step">
+                                           Оформим лицензию на ваш вид детельности за максимально сжатые сроки.
+                                            <a href="#" class="btn_modal_step" data-modal="exactly-do">Что конкретно делаем?</a>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="title_step">
+                                            <span class="num_step">8</span>
+                                        </div>
+                                        <div class="content_step">
+                                           Отрисуем и зарегистрируем товарный знак. Защитим интеллектуальную собственность.
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="title_step">
+                                            <span class="num_step">9</span>
+                                        </div>
+                                        <div class="content_step">
+                                         Получим заключение Роспотребнадзора о соответствии организации санитарным требованиям
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="title_step">
+                                            <span class="num_step">10</span>
+                                        </div>
+                                        <div class="content_step">
+                                        Заключим договор с РАО и ВОИС
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="no_title_step">
+                                            <div class="no_title_text chek_icon">
+                                            
+                                            </div>
+                                        </div>
+                                        <div class="content_step">
+                                            Вы получаете действующий бизнес.
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="no_title_step">
+                                            <div class="no_title_text krest_icon">
+                                                Помощь от государства
+                                            </div>
+                                        </div>
+                                        <div class="content_step">
+                                           Расскажем про меры поддержки малого и среднего бизнеса. Например, вы сможете бесплатно получить от государства…
+                                           <a href="#" class="btn_modal_step" data-modal="help-state">Читать подробнее</a>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="no_title_step">
+                                            <div class="no_title_text krest_icon">
+                                                Для иностранных граждан
+                                            </div>
+                                        </div>
+                                        <div class="content_step">
+                                         Помогаем открыть бизнес в России. Оформим разрешение на временное пребывание в России. Мы станем вашим представителем в налоговой инспекции и передадим…
+                                         <a href="#" class="btn_modal_step" data-modal="foreign-citizens">Читать подробнее</a>
+                                        </div>
+                                    </div>
+                                  </div>
+                                  <div class="swiper-button-next">→</div>
+                                  <div class="swiper-button-prev">←</div>
+                                </div>
+                            </div>
+
+                            <div id="trade" class="tab-content">
+                              <div class="wrap_open_business_tab">
+                                <img src="https://taxlab.ru/wp-content/uploads/Frame-875.jpg">
+                                <ul class="list_type_busnisse">
+                                    <li>Розничный магазин продуктов</li>
+                                    <li>Интернет-магазин</li>
+                                    <li>Магазин разливного пива</li>
+                                </ul>
+                              </div>
+                                <div class="swiper step_slider_busnisse">
+                                  <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <div class="title_step">
+                                            <span class="num_step">1</span>
+                                        </div>
+                                        <div class="content_step">
+                                            Бесплатно проконсультируем по открытию бизнеса. Можно в офисе или по телефону.
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="title_step">
+                                            <span class="num_step">2</span>
+                                        </div>
+                                        <div class="content_step">
+                                         Готовим коммерческое предложение и договор. Прописываем все действия с этапами, сроками и гарантиями, итоговую стоимость и госпошлины.
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="title_step">
+                                            <span class="num_step">3</span>
+                                        </div>
+                                        <div class="content_step">
+                                           Зарегистрируем ИП / ООО Выберем оптимальный вариант и подготовим документы.
+                                           <a href="#" class="btn_modal_step" data-modal="how-do">Как мы это сделаем?</a>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="title_step">
+                                            <span class="num_step">4</span>
+                                        </div>
+                                        <div class="content_step">
+                                            Откроем расчётный счёт в банке.
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="title_step">
+                                            <span class="num_step">5</span>
+                                        </div>
+                                        <div class="content_step">
+                                           Подберем, зарегистрируем и установим онлайн-кассы.
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="title_step">
+                                            <span class="num_step">6</span>
+                                        </div>
+                                        <div class="content_step">
+                                           Подберем помещение. Найдем прибыльное место.
                                             <a href="#" class="btn_modal_step" data-modal="how-select">Как подбираем?</a>
                                         </div>
                                     </div>
@@ -223,7 +247,7 @@ function open_business_shortcode($atts){
                                             <span class="num_step">10</span>
                                         </div>
                                         <div class="content_step">
-                                           Поставим на учёт в Роспотребнадзор. 
+                                           Получим заключение Роспотребнадзора о соответствии организации санитарным требованиям
                                         </div>
                                     </div>
                                     <div class="swiper-slide">
@@ -321,7 +345,6 @@ function open_business_shortcode($atts){
                                         </div>
                                         <div class="content_step">
                                            Подберем, зарегистрируем и установим онлайн-кассы.
-                                            <a href="#" class="btn_modal_step" data-modal="how-select">Как подбираем?</a>
                                         </div>
                                     </div>
                                     <div class="swiper-slide">
@@ -329,7 +352,7 @@ function open_business_shortcode($atts){
                                             <span class="num_step">6</span>
                                         </div>
                                         <div class="content_step">
-                                           Подберем помещение. Силами Жилфонда найдем прибыльное место.
+                                           Подберем помещение. Найдем прибыльное место.
                                             <a href="#" class="btn_modal_step" data-modal="how-select">Как подбираем?</a>
                                         </div>
                                     </div>
@@ -363,7 +386,7 @@ function open_business_shortcode($atts){
                                             <span class="num_step">10</span>
                                         </div>
                                         <div class="content_step">
-                                           Поставим на учёт в Роспотребнадзор. 
+                                           Получим заключение Роспотребнадзора о соответствии организации санитарным требованиям
                                         </div>
                                     </div>
                                     <div class="swiper-slide">
@@ -464,15 +487,14 @@ function open_business_shortcode($atts){
                                         </div>
                                         <div class="content_step">
                                            Подберем, зарегистрируем и установим онлайн-кассы.
-                                            <a href="#" class="btn_modal_step" data-modal="how-select">Как подбираем?</a>
-                                        </div>
+                                         </div>
                                     </div>
                                     <div class="swiper-slide">
                                         <div class="title_step">
                                             <span class="num_step">6</span>
                                         </div>
                                         <div class="content_step">
-                                           Подберем помещение. Силами Жилфонда найдем прибыльное место.
+                                           Подберем помещение. Найдем прибыльное место.
                                             <a href="#" class="btn_modal_step" data-modal="how-select">Как подбираем?</a>
                                         </div>
                                     </div>
@@ -498,7 +520,7 @@ function open_business_shortcode($atts){
                                             <span class="num_step">9</span>
                                         </div>
                                         <div class="content_step">
-                                           Поставим на учёт в Роспотребнадзор. 
+                                           Получим заключение Роспотребнадзора о соответствии организации санитарным требованиям
                                         </div>
                                     </div>
                                     <div class="swiper-slide">
@@ -592,7 +614,6 @@ function open_business_shortcode($atts){
                                         </div>
                                         <div class="content_step">
                                            Подберем, зарегистрируем и установим онлайн-кассы.
-                                            <a href="#" class="btn_modal_step" data-modal="how-select">Как подбираем?</a>
                                         </div>
                                     </div>
                                     <div class="swiper-slide">
@@ -600,7 +621,7 @@ function open_business_shortcode($atts){
                                             <span class="num_step">6</span>
                                         </div>
                                         <div class="content_step">
-                                           Подберем помещение. Силами Жилфонда найдем прибыльное место.
+                                           Подберем помещение. Найдем прибыльное место.
                                             <a href="#" class="btn_modal_step" data-modal="how-select">Как подбираем?</a>
                                         </div>
                                     </div>
@@ -626,7 +647,15 @@ function open_business_shortcode($atts){
                                             <span class="num_step">9</span>
                                         </div>
                                         <div class="content_step">
-                                           Поставим на учёт в Роспотребнадзор. 
+                                         Получим заключение Роспотребнадзора о соответствии организации санитарным требованиям
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="title_step">
+                                            <span class="num_step">10</span>
+                                        </div>
+                                        <div class="content_step">
+                                        Заключим договор с РАО и ВОИС
                                         </div>
                                     </div>
                                     <div class="swiper-slide">
@@ -690,7 +719,7 @@ function open_business_shortcode($atts){
                             <li>Подготовим документы для открытия расчётного счета в любом выбранном банке.</li>
                             <li>Уплатим пошлины.</li>
                             <li>Передаём документы в налоговую (или Минюст для НКО).</li>
-                            <li>Получаем свидетельства о регистрации в налоговой (или Минюсте для НКО)</li>
+                            <li>Получим свидетельства о регистрации в налоговой (или Минюсте для НКО)</li>
                         </ul>
                     </div>
                 </div>
@@ -750,7 +779,6 @@ function open_business_shortcode($atts){
                             <li>Подготовку и сопровождение экспортных контрактов;</li>
                             <li>Обучающие программы и мастер-классы;</li>
                             <li>Содействие в продвижении продукции и услуг;</li>
-                            <li>Регистрацию бизнеса для физических лиц;</li>
                         </ul>
                         <p>и многое другое.</p>
                     </div>

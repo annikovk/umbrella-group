@@ -49,7 +49,7 @@ class garantiya_srokov
                             <br>
                             <br>
                             Мы&nbsp;за&nbsp;удобство и&nbsp;комфорт. Поэтому при оформлении 
-                            лицензий вы&nbsp;можете воспользоваться <span class="accent_text">оплатой частями.</span>
+                            лицензий вы&nbsp;можете воспользоваться <span class="main-text-accent-common">оплатой частями.</span>
                             100% предоплата не&nbsp;требуется.
                         </div>
                         <div class="main-text-common mobile-text">

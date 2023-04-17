@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 65px;
-    margin-top: 90px;
+    margin-top: 100px;
 }
 
 .content_service_evaluation {
@@ -53,6 +53,7 @@
 }
 
 .card {
+    display: block;
     filter: drop-shadow(0px 0px 18.7041px rgba(26, 26, 26, 0.27));
     transition: 0.4s ease-out;
     position: relative;
@@ -134,7 +135,9 @@
 .item-img-mobile {
     min-width: 248px;
     min-height: 353px;
-    box-shadow: 0 0 5px rgb(26 26 26 / 9%);
+    /*box-shadow: 0 0 5px rgb(26 26 26 / 9%);*/
+    box-shadow: 0px 0px 9px 2px rgb(26 26 26 / 9%);
+    border: 0.569634px solid #D7D7D7;
 }
 
 .card-mobile__service_evaluation {
@@ -155,6 +158,10 @@
     grid-gap: 45px;
 }
 
+a.button-service_evaluation.width-content-service_evaluation:hover {
+    color: #fff;
+    background: #BD161C;
+}
 @media screen and (max-width: 940px) {
     .layout-service_evaluation {
         grid-template-columns: auto;

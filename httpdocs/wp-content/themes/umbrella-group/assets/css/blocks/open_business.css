@@ -1,3 +1,8 @@
+.modal-content::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
 h2.title_open_business {
     margin-bottom: 60px;
     font-family: 'PT Serif';
@@ -71,7 +76,7 @@ ul.list_type_busnisse {
 }
 ul.list_type_busnisse li {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 25px;
 }
 
@@ -84,8 +89,9 @@ ul.list_type_busnisse li:before {
     background-size: contain;
     background-repeat: no-repeat;
     display: block;
-    margin-right:9px;
+    margin-right: 9px;
     flex-shrink: 0;
+    margin-top: 4px;
 }
 span.num_step {
     font-family: 'PT Serif';
@@ -316,3 +322,74 @@ section.section.open_business .section-content.relative {
     z-index: auto !important;
 }
 */
+@media (max-width: 768px) {
+    h2.title_open_business {
+        font-size: 28px;
+        padding: 0 40px;
+        margin-bottom: 45px;
+    }
+
+    ul#tabs-nav {
+        justify-content: flex-start;
+        overflow: scroll;
+        position: absolute;
+        /* left: 0; */
+        width: 100%;
+        padding-right: 25px;
+    }
+
+    ul#tabs-nav li {
+        flex-shrink: 0;
+    }
+
+    ul#tabs-nav::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
+
+    .open_business_screen .wrap_open_business_tab {
+        padding-top: 75px;
+        padding-bottom: 350px;
+    }
+
+    .wrap_open_business_tab img {
+        display: none;
+    }
+
+    ul.list_type_busnisse {
+        padding-top: 0;
+        padding-left: 27px;
+    }
+
+    ul.list_type_busnisse li {
+        font-size: 16px;
+        margin-bottom: 16px;
+    }
+
+    .page-template-page-bussnise .open_business_screen .swiper {
+        cursor: grab;
+        position: absolute;
+        right: 0;
+        left: 15px;
+        top: 0 bott;
+        bottom: 0;
+        z-index: 1;
+    }
+
+    .swiper-button-next, .swiper-button-prev {
+        display: none;
+    }
+
+    .content_step {
+        font-size: 16px;
+        line-height: 140%;
+    }
+
+    .step_slider_busnisse {
+        padding: 45px 42px;
+    }
+
+    .open_business_screen .swiper-slide {
+        min-height: 220px !important;
+    }
+}

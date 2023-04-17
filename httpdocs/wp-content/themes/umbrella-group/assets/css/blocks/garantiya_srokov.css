@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 45px;
-    margin-top: 130px;
+    margin-top: 67px;
 }
 
 .margin-title_garantiya_srokov {
@@ -15,10 +15,15 @@
 
 .main_block_garantiya_srokov {
     padding: 50px;
+    padding-bottom: 60px;
+}
+
+.title-h2-text-common.margin-title_garantiya_srokov {
+    text-align: left !important;
 }
 
 .list-download_garantiya_srokov {
-    color: #334862;
+    color: #587291;
 }
 
 .main_block_garantiya_srokov a.action-text-common::marker {
@@ -34,7 +39,7 @@
 }
 
 .main_block_garantiya_srokov a.action-text-common {
-    border-bottom: unset;
+    border-bottom: 1px solid;
     color: #587291;
 
 }
@@ -50,6 +55,7 @@
 @media screen and (max-width: 768px) {
     .layout {
         grid-template-columns: none;
+        margin-top: 40px;
     }
 
     .main_block_garantiya_srokov {

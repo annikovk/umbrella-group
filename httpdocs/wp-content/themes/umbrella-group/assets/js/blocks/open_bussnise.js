@@ -1,4 +1,3 @@
-// Show the first tab and hide the rest
 jQuery('#tabs-nav li:first-child').addClass('active');
 jQuery('.tab-content').hide();
 jQuery('.tab-content:first').show();
@@ -14,18 +13,31 @@ jQuery('#tabs-nav li').click(function(){
   return false;
 });
 
+jQuery('a.item_directions').click(function () {
+    jQuery('#tabs-nav li a[href=' + jQuery(this).attr('href') + ']').click();
+})
 var swiper = new Swiper(".step_slider_busnisse", {
-  slidesPerView: "auto",
-  spaceBetween: 40,
-  allowTouchMove: true,
-  pagination: {
-      el: ".swiper-pagination",
-     clickable: false,
-  },
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  },
+    slidesPerView: "auto",
+    spaceBetween: 40,
+    allowTouchMove: true,
+    autoHeight: false,
+    breakpoints: {
+        300: {
+            autoHeight: true,
+        },
+        768: {
+            autoHeight: false,
+        },
+
+    },
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: false,
+    },
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
 });
 
 jQuery(document).ready(function(){
@@ -43,11 +55,11 @@ jQuery(document).ready(function(){
   })
 
 
-  jQuery(window).on('click', function(event){
+    jQuery(window).on('click', function (event) {
 
-    if (jQuery.inArray( event.target, jQuery('.modal') ) != "-1") {
-          jQuery('.modal').css('display','none');
-             jQuery('html').css('overflow', 'visible');
-      }
-  })
-})
+        if (jQuery.inArray(event.target, jQuery('.modal')) != "-1") {
+            jQuery('.modal').css('display', 'none');
+            jQuery('html').css('overflow', 'visible');
+        }
+    })
+});

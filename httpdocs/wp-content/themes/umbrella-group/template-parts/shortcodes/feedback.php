@@ -62,13 +62,13 @@ class feedback
                     $posts_count += 1;
                 }
             }
-            $tiles .= ($posts_count < 2) ? '<div class="feedback_' . transliterate($meta) . '">' : '[ux_slider draggable="true" auto_slide="false" hide_nav="true" nav_style="simple" bullet_style="square" class="feedback_' . transliterate($meta) . ' ' . $visible . '"]';
+            $tiles .= ($posts_count < 1) ? '<div class="feedback_' . transliterate($meta) . '">' : '[ux_slider draggable="true" auto_slide="false" hide_nav="true" nav_style="simple" bullet_style="square" class="feedback_' . transliterate($meta) . ' ' . $visible . '"]';
             $tiles .= $posts_tiles;
-            $tiles .= ($posts_count < 2) ? '</div>' : "[/ux_slider]";
+            $tiles .= ($posts_count < 1) ? '</div>' : "[/ux_slider]";
         }
 
         $html = <<<EOHTML
-        [section id='umbrella-feedback' bg_color="rgb(249, 249, 249)" padding="0px"]
+        [section id='umbrella-feedback' padding="0px"]
             [row]
                 [col  span="12" span__sm="12"]
                     <div class="feedback">

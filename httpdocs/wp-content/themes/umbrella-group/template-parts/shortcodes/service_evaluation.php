@@ -7,6 +7,7 @@ class service_evaluation
     public function generate_shortcode()
     {
         $html = <<<EOHTML
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
          [section class='service_evaluation' id='service_evaluation'  padding="0px"]
            [row]
             [col  span="12" span__sm="12" margin="0px 0px 0px 0px"]
@@ -16,7 +17,6 @@ class service_evaluation
                         <div class="content_service_evaluation">
                             <div class="main-text-common">
                                 У&nbsp;наших клиентов не&nbsp;бывает &laquo;непредвиденных&raquo; расходов.
-                                <br>    <br>
                                 <div class="main-text-common mobile_service_evaluation">
                                 Точно обозначаем стоимость решения ваших задач до&nbsp;старта работ 
                                 и&nbsp;заранее предупреждаем о&nbsp;возможных дополнительных расходах.
@@ -39,30 +39,35 @@ class service_evaluation
                                 и&nbsp;последовательная работа.
                             </div>
                             <div class="slider_mobile_service_evaluation mobile_service_evaluation_flex">
-                                <div class="card-mobile__service_evaluation">
+                                <a href="https://taxlab.ru/wp-content/uploads/kp1_page-0001-1.jpg"  class="card-mobile__service_evaluation" data-fancybox="doc" data-caption="Пример КП на лицензирование с оценкой сроков и стоимости.">
                                     <img class="item-img-mobile" 
-                                            src="https://taxlab.ru/wp-content/uploads/service_evaluation_1.png" 
+                                            src="https://taxlab.ru/wp-content/uploads/kp1_page-0001-1.jpg?v2" 
                                             alt="Пример КП на лицензирование с оценкой сроков и стоимости.">
+                                    
                                     <div class="mute-text-common comment_card_service_evaluation">
                                         Пример КП на лицензирование с оценкой сроков и стоимости.
                                     </div>
-                                </div>
-                                <div class="card-mobile__service_evaluation">
+                                </a>
+                                <a href="https://taxlab.ru/wp-content/uploads/service_evaluation_2.png" data-fancybox="doc" data-caption="Пример КП на аудит с оценкой сроков и стоимости." class="card-mobile__service_evaluation">
+                                
                                     <img class="item-img-mobile" 
                                                 src="https://taxlab.ru/wp-content/uploads/service_evaluation_2.png" 
                                                 alt="Пример КП на аудит с оценкой сроков и стоимости.">
+                                               
                                      <div class="mute-text-common comment_card_service_evaluation">
                                         Пример КП на аудит с оценкой сроков и стоимости.
                                      </div>
-                                </div>
-                                <div class="card-mobile__service_evaluation">
+                                </a>
+                                <a href="https://taxlab.ru/wp-content/uploads/service_evaluation_3.png" data-fancybox="doc" data-caption=" Пример КП на бухгалтерское обслуживание с оценкой." class="card-mobile__service_evaluation">
+                           
                                     <img class="item-img-mobile" 
                                                 src="https://taxlab.ru/wp-content/uploads/service_evaluation_3.png" 
                                                 alt="Пример КП на бухгалтерское обслуживание с оценкой.">
+                                    
                                     <div class="mute-text-common comment_card_service_evaluation">
                                         Пример КП на бухгалтерское обслуживание с оценкой.
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <div class="button-block_service_evaluation">
                                 <a class="button-service_evaluation width-content-service_evaluation" href="#service_evaluation_zapros_kp">
@@ -76,21 +81,27 @@ class service_evaluation
                     <div class="layout-stack-and-text desktop_service_evaluation">
                         <div class="layout-stack">
                             <div class="container-stack">
-                                <div class="card">
-                                    <img class="item-img" 
-                                        src="https://taxlab.ru/wp-content/uploads/service_evaluation_3.png" 
-                                        alt="Пример КП на бухгалтерское обслуживание с оценкой.">
-                                </div>
-                                <div class="card">
-                                    <img class="item-img" 
-                                        src="https://taxlab.ru/wp-content/uploads/service_evaluation_2.png" 
-                                        alt="Пример КП на аудит с оценкой сроков и стоимости.">
-                                </div>
-                                <div class="card">
-                                    <img class="item-img" 
-                                    src="https://taxlab.ru/wp-content/uploads/service_evaluation_1.png" 
-                                    alt="Пример КП на лицензирование с оценкой сроков и стоимости.">
-                                </div>
+                              
+                                    <a href="https://taxlab.ru/wp-content/uploads/service_evaluation_3.png" class="card" data-fancybox="doc2" data-caption=" Пример КП на бухгалтерское обслуживание с оценкой.">
+                                    <img class="item-img-mobile" 
+                                                src="https://taxlab.ru/wp-content/uploads/service_evaluation_3.png" 
+                                                alt="Пример КП на бухгалтерское обслуживание с оценкой.">
+                                    
+                                </a>
+                                
+                                    <a href="https://taxlab.ru/wp-content/uploads/service_evaluation_2.png" class="card" data-fancybox="doc2" data-caption="Пример КП на аудит с оценкой сроков и стоимости.">
+                                    <img class="item-img-mobile" 
+                                                src="https://taxlab.ru/wp-content/uploads/service_evaluation_2.png" 
+                                                alt="Пример КП на аудит с оценкой сроков и стоимости.">
+                                                
+                                </a>
+                                
+                                   <a href="https://taxlab.ru/wp-content/uploads/kp1_page-0001-1.jpg" class="card" data-fancybox="doc2" data-caption="Пример КП на лицензирование с оценкой сроков и стоимости.">
+                                    <img class="item-img-mobile" 
+                                            src="https://taxlab.ru/wp-content/uploads/kp1_page-0001-1.jpg" 
+                                            alt="Пример КП на лицензирование с оценкой сроков и стоимости.">
+                                    
+                                </a>
                             </div>
                         </div>
                         <div class="text-under-stack">

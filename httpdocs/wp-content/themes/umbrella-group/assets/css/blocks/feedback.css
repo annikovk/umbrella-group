@@ -1,5 +1,9 @@
 .feedback > .content > .tiles {
-    padding-top: 82px;
+    padding-top: 0px;
+}
+
+section#section_1018661123 {
+    margin-top: 150px;
 }
 
 .feedback > .content > .tiles .tile {
@@ -17,6 +21,12 @@
     transition: all 0.5s ease;
 }
 
+#section_846002721 {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    background-color: transparent !important;
+}
+
 .feedback > .content > .tiles .tile > .company {
     flex-basis: 100%;
     position: relative;
@@ -24,6 +34,16 @@
     flex-direction: row;
     align-items: center;
     gap: 20px;
+}
+
+ul.tabs li {
+    font-weight: 400;
+}
+
+ul.tabs li:hover {
+    background: transparent;
+    color: #000;
+
 }
 
 .feedback > .content > .tiles .tile > .text {
@@ -136,6 +156,15 @@
     max-width: 800px;
 }
 
+.feedback > .content > .tiles .tile {
+    padding: 60px 0px;
+    gap: 30px 21px;
+}
+
+.feedback > .content > .tiles .tile > .company {
+    padding-left: 30px;
+}
+
 @media screen and (max-width: 849px) {
     .feedback > .content > .tiles {
         padding-top: unset;
@@ -201,5 +230,18 @@
     .feedback > .check-all > a {
         color: #1a1a1a;
         text-decoration: underline;
+    }
+
+    .feedback > .content > .tiles .tile {
+        padding: 0px 0px 30px;
+        gap: 30px 21px;
+    }
+
+    .page-id-13516 .feedback {
+        margin-top: 100px;
+    }
+
+    .feedback button.flickity-button {
+        display: none !important;
     }
 }

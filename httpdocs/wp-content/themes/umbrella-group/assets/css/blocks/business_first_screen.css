@@ -64,6 +64,7 @@ ul.capabilities_list li {
     line-height: 27px;
     color: #FFFFFF;
     text-shadow: 0px 0px 20px rgb(26 26 26 / 27%);
+    height: 374px;
 }
 a.btn_bus.get_plans_price {
     padding: 9px 18px;
@@ -75,4 +76,480 @@ a.btn_bus.get_plans_price {
     text-align: center;
     color: #FFFFFF;
     background: #EC1C23;
+}
+
+/**Modal**/
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 999; /* Sit on top */
+    left: 0;
+    top: 0px;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    margin: auto;
+    padding: 0;
+    max-width: 971px;
+    width: 100%;
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    top: 10%;
+    left: 0;
+    right: 0;
+    overflow: scroll;
+    height: 100%;
+    height: auto;
+    display: flex;
+    align-items: flex-start;
+    position: fixed;
+    bottom: 10%;
+}
+
+.modal-body {
+    position: absolute;
+    padding: 100px;
+    background-color: #fefefe;
+    border: 1px solid #888;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    /* height: 100%; */
+    overflow: scroll;
+    top: 0;
+    width: 100%;
+    /* min-height: 800px; */
+}
+
+.content_modal h3 {
+    margin-bottom: 15px;
+}
+
+.content_modal ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+    to {
+        top: 10%;
+        opacity: 1
+    }
+}
+
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+    to {
+        top: 10%;
+        opacity: 1
+    }
+}
+
+.close {
+    cursor: pointer;
+    color: black;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: sticky;
+    top: 24px;
+    right: 24px;
+    z-index: 99;
+    line-height: 1;
+    /* left: 0; */
+    /* max-width: 931px; */
+    /* text-align: right; */
+    margin-left: auto;
+}
+
+.modal-header h2 {
+    font-family: 'PT Serif';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 110%;
+    color: #1A1A1A;
+    margin-bottom: 25px;
+}
+
+/**modal sofart**/
+.salon_pd {
+    padding-bottom: 80px;
+}
+
+h3.modal_sub_title {
+    font-family: 'PT Serif';
+    font-style: italic;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 140%;
+    color: #1A1A1A;
+    margin-bottom: 80px;
+}
+
+.ceo_salon {
+    display: flex;
+    justify-content: space-between;
+    max-width: 578px;
+    width: 100%;
+}
+
+.ceo_salon img {
+    margin-right: 40px;
+}
+
+.ceo_salon p {
+    margin-bottom: 0;
+}
+
+.ceo_salon p:first-child {
+    margin-bottom: 30px;
+}
+
+.about_ceo_salon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.salon_desc {
+    max-width: 600px;
+    width: 100%;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 27px;
+    color: #1A1A1A;
+}
+
+.mokup_salon {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.video_salon iframe {
+    max-width: 771px;
+    min-height: 431px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.timeline_video {
+    display: flex;
+    align-items: center;
+}
+
+.timeline_video img {
+    margin-right: 12px;
+}
+
+.time_video {
+    margin-right: 38px;
+}
+
+.title_video_md {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 27px;
+    color: #1A1A1A;
+}
+
+.btn_mobile_price {
+    display: none;
+}
+
+.btn_bus.btn_mobile_price {
+    display: none !important;
+}
+
+div#salon .modal-header h2 br {
+    display: none;
+}
+
+.play_mob {
+    display: none;
+}
+
+@media screen and (max-width: 991px) {
+    .play_mob {
+        display: block;
+    }
+
+    img.play_desc {
+        display: none !important;
+    }
+
+    div#salon .modal-header h2 br {
+        display: block;
+    }
+
+    .btn_bus.btn_mobile_price {
+        display: block !important;
+    }
+
+    .bus-first-screen h1 {
+        font-size: 36px;
+    }
+
+    .bus-first-screen h2 {
+        font-size: 18px;
+    }
+
+    .top_content {
+        text-align: center;
+    }
+
+    .bus_capabilities {
+        display: block;
+    }
+
+    .bus_capabilities_list:before {
+        content: '';
+        background: linear-gradient(0.9deg, #FFFFFF 0.78%, rgba(255, 255, 255, 0) 60.32%);
+        height: 56px;
+        width: 100%;
+        display: block;
+        position: absolute;
+        bottom: 89px;
+        z-index: 2;
+    }
+
+    .bus_capabilities_list:hover:after {
+        opacity: 0;
+    }
+
+    ul.capabilities_list {
+        position: relative;
+        height: 158px;
+        overflow-y: scroll;
+        box-shadow: 1px 1px 1px linear-gradient(0.9deg, #FFFFFF 0.78%, rgba(255, 255, 255, 0) 60.32%);
+        margin: 0;
+        padding: 0;
+        padding-right: 20px;
+        padding-left: 20px;
+        max-width: 293px;
+        margin: 0 auto;
+        margin-bottom: 45px;
+        overflow-x: hidden;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .bus_capabilities_list {
+        position: relative;
+    }
+
+    ul.capabilities_list li:last-child {
+        padding-bottom: 100px;
+    }
+
+    .bus_capabilities_list:after {
+        opacity: 1;
+        margin: 0 auto;
+        content: '';
+        background: url(https://taxlab.ru/wp-content/uploads/ic_outline-swipe.svg);
+        background-repeat: no-repeat;
+        position: absolute;
+        bottom: 76px;
+        left: 0;
+        right: 0;
+        width: 30px;
+        height: 30px;
+        display: block;
+        z-index: 3;
+    }
+
+    ul.capabilities_list::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
+
+    ul.capabilities_list li {
+        margin-bottom: 5px;
+    }
+
+    .btn_mobile_price {
+        display: block;
+    }
+
+    .btn_desc_price {
+        display: none !important;
+    }
+
+    .btn_mobile_price {
+        display: block !important;
+        max-width: 276px;
+        margin: 0 auto;
+        margin-bottom: 85px !important;
+    }
+
+    .first-screen-services-tabs ul.tabs {
+        display: none;
+    }
+
+    div#salon .modal-body {
+        padding: 100px 10px;
+    }
+
+    .ceo_salon {
+        display: block;
+    }
+
+    .ceo_salon img {
+        margin: 0 auto;
+        display: block;
+        margin-bottom: 25px;
+        width: 137px;
+    }
+
+    .about_ceo_salon {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        font-size: 16px;
+        line-height: 140%;
+    }
+
+    .salon_pd {
+        padding-bottom: 60px;
+    }
+
+    .salon_desc {
+        font-size: 16px;
+        line-height: 140%;
+    }
+
+    .mokup_salon {
+        display: block;
+    }
+
+    .mokup_salon img:not(:nth-child(2)) {
+        display: none;
+    }
+
+    .mokup_salon img {
+        max-width: 270px;
+        height: 200px;
+        width: 100%;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .video_salon iframe {
+        max-width: 771px;
+        min-height: 160px;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .timeline_video {
+        display: block;
+        text-align: center;
+    }
+
+    .time_video {
+        margin-right: 0;
+    }
+
+    span.title_video_md {
+        display: block;
+        text-align: center;
+        padding: 0 50px;
+    }
+
+    div#salon .modal-content:before {
+        content: '';
+        background: linear-gradient(0.9deg, #FFFFFF 6.36%, rgba(255, 255, 255, 0) 60.32%);
+        height: 70px;
+        position: sticky;
+        width: 100%;
+        top: 90%;
+        left: 0;
+        right: 0;
+        z-index: 9;
+        right: 0;
+    }
+
+    div#salon .modal-header {
+        text-align: center;
+    }
+
+    div#salon h3.modal_sub_title {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 27px;
+        text-align: center;
+        padding: 0 20px;
+        margin-bottom: 60px;
+    }
+
+    .bus_first-screen_video {
+        background: url(https://taxlab.ru/wp-content/uploads/Кейс-Софарт-1-1.jpg) !important;
+        background-size: cover !important;
+    }
+
+    .bus_first-screen_video {
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: auto;
+    }
+
+    .bus_capabilities {
+        display: block;
+        padding-bottom: 500px;
+    }
+
+    a.btn_modal_screen_one {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        ont-family: 'Inter';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 27px;
+        text-align: center;
+        color: #1A1A1A;
+        text-shadow: 0px 0px 20px #ffffff, 0px 0px 20px #ffffff, 0px 0px 20px #ffffff, 0px 0px 20px #ffffff, 0px 0px 20px #ffffff;
+    }
+
+    a.btn_modal_screen_one {
+        height: 550px;
+    }
+
+    .bus_first-screen_video img {
+        width: 47px;
+        display: block;
+        margin-right: 0;
+        box-shadow: none;
+        border-radius: 50%;
+        margin-bottom: 18px;
+    }
+
+    img.play_mob {
+        display: block !important;
+    }
 }

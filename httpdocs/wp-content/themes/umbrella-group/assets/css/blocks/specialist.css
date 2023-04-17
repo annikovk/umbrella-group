@@ -91,7 +91,12 @@
     font-size: 18px;
 }
 
+.komanda_specialistov .active {
+    font-weight: 700 !important;
+}
+
 @media (max-width: 549px) {
+
     .specialist-tile.main .specialist-photo {
         display: none;
     }

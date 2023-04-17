@@ -35,22 +35,29 @@ ul.umbrela_sticky_list li a {
     align-items: center;
     justify-content: space-between;
 }
+
 .sticky_menu-phone-top-bus a {
     font-weight: 700;
     font-size: 18px;
     line-height: 27px;
     color: #1A1A1A;
 }
+
+@media (max-width: 768px) {
+    .umbrela_sticky_menu {
+        display: none;
+    }
+}
 </style>
 <div class="umbrela_sticky_menu">
-  <div class="container">
-    <div class="wrap_sticky_menu_top">
-      <ul class="umbrela_sticky_list">
-        <li>
-          <a href="#">Как помогаем</a>
-        </li>
-        <li>
-          <a href="#">Сколько стоит открыть дело</a>
+    <div class="container">
+        <div class="wrap_sticky_menu_top">
+            <ul class="umbrela_sticky_list">
+                <li>
+                    <a href="#">Как помогаем</a>
+                </li>
+                <li>
+                    <a href="#">Сколько стоит открыть дело</a>
         </li>
         <li>
           <a href="#">Кейсы</a>

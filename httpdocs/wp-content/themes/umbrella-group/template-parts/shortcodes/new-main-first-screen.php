@@ -7,7 +7,7 @@ class new_main_first_screen
 
     public function generate_shortcode()
     {
-        $html = <<<EOHTML
+        $html = <<<EOT
          [section id='new_main_first_screen' class='new_main_first_screen'  padding="0px"]
             <div class="first-screen-services-tabs show-for-small">
                 <ul class="tabs">
@@ -16,8 +16,9 @@ class new_main_first_screen
                     <li><a href="/services/licensing/">Лицензирование</a></li>
                     <li><a href="/services/register-elimination/">Регистрация</a></li>
                     <li><a href="/services/register-elimination/likvidatsiya-ooo/">Ликвидация</a></li>
-                    <li><a href="/services/licensing/ ">Товарный знак</a></li>
+                    <li><a href="/services/licensing/registracija-tovarnogo-znaka/">Товарный знак</a></li>
                     <li><a href="/services/services-le/">Юридические услуги</a></li>
+                    <li><a href="/services/sdelki-s-nedvizhimostyu/">Сделки с недвижимостью</a></li>
                 </ul>
             </div>
             <div class="first-screen">
@@ -155,12 +156,12 @@ class new_main_first_screen
                     [/col_inner_1]
                     [col_inner_1 span="4" span__sm="12"]
                     [featured_box img="13809" inline_svg="0" img_width="95" pos="left"]
-                    <p class="laurel-place">Лидер в отрасли «Корпоративное право»</p>
-                    <p class="laurel-icon-header">города Новосибирск<sup style="font-size: 6pt;"> 1</sup></p>
+                    <p class="laurel-place">Лидер в отрасли</p>
+                     <p class="laurel-icon-header">«Корпоративное право» <br> города Новосибирск<sup style="font-size: 6pt;"> 1</sup></p>
                     <p class="laurels-icons-year">2021</p>
                     [/featured_box]
                     [/col_inner_1]
-            <div class="laurel-footnote">1 — по версии журнала «Деловой квартал»      2 — по версии журнала pravo.ru      3 — по версии журнала «Эксперт Сибирь»</div>
+            <div class="laurel-footnote">1 — по версии журнала «Деловой квартал» 2 — по версии журнала pravo.ru 3 — по версии журнала «Деловой квартал»;</div>
                     [/row_inner_1]
             
                     [/col]
@@ -170,8 +171,12 @@ class new_main_first_screen
             [lightbox width="400px" padding="0" id="main-banner-contact-form-lightbox"]
             [contact-form-7 id="13619" title="Форма на главной (узнать стоимость услуг)"]
             [/lightbox]
+
+
+
+
          [/section]
-        EOHTML;
+        EOT;
         umbrella_add_custom_css_files(['/assets/css/blocks/new_main_first_screen.css']);
         umbrella_add_custom_css_files(['/assets/css/blocks/block-laurels.css']);
         umbrella_add_custom_js_files(['/assets/js/blocks/block-laurels.js']);

@@ -19,6 +19,8 @@ h2.title_sections_directions {
 }
 .item_directions {
     border: 1px solid #C9C9C9;
+    max-width: 212px;
+    width: 100%;
 }
 .item_directions p.title_directions {
     font-weight: 700;
@@ -33,15 +35,45 @@ h2.title_sections_directions {
     margin: 0;
     max-width: 212px;
     width: 100%;
- transition: all 0.3s linear;
+    transition: all 0.3s linear;
+    justify-content: center;
+    align-items: center;
+    height: 54px;
+    margin: 20px 0;
 }
 a.item_directions img {
+    width: 100%;
     filter: grayscale(1);
     transition: all 0.3s linear;
+    height: 150px;
 }
 a.item_directions:hover img {
     filter: none;
 }
 a.item_directions:hover p {
     color: #EC1C23;
+}
+
+@media screen and (max-width: 768px) {
+    .business_direction_screen .col {
+        padding-right: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    .list_directions {
+        overflow: scroll;
+        padding-right: 40px;
+        overflow-y: hidden;
+    }
+
+    a.item_directions {
+        flex-shrink: 0;
+        margin-right: 34px;
+        height: 249px;
+    }
+
+    .list_directions::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
 }

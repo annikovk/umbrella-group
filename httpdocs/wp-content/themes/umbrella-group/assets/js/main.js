@@ -1,3 +1,4 @@
+
 jQuery(".accordion-title").click(function (){
     if (jQuery(this).parent().hasClass("active")) {
         jQuery(this).parent().removeClass("active");
@@ -16,3 +17,4 @@ jQuery(window).scroll((function () {
         jQuery("#header .header-wrapper").removeClass("stuck");
     }
 }))
+

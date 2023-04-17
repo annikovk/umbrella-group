@@ -20,7 +20,7 @@ $ratings_block = <<<EOHTML
         </style>
         <div class="header-ratings-bus header-ratings-icons hide-for-medium">
                 <div class="header-ratings-icon-box">
-                    <div class="header-ratings-header" style="width: 214px;">Откроем бизнес под ключ Работаем с 1990 г.</div>
+                    <div class="header-ratings-header" style="width: 225px;style="font-weight:800><span>Откроем бизнес под ключ</span><br> <span style="font-weight:700">Работаем с 1990 г.</span></div>
                 </div>
                 <div class="header-ratings-icon-box">
                     <div class="header-ratings-icon " style="background-image: url({$rating2['icon']});"> </div>

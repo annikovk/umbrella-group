@@ -53,3 +53,38 @@ p.remark_text {
     max-width: 674px;
     margin: 0 auto;
 }
+
+
+@media (max-width: 768px) {
+    .since_wrap h2 {
+        font-size: 28px;
+        text-align: center;
+        padding: 0;
+        border-right: 0;
+        margin-bottom: 45px;
+    }
+
+    .since_wrap {
+        display: block;
+        margin-bottom: 45px;
+    }
+
+    .since_percent {
+        padding-right: 0;
+        padding-left: 0;
+        text-align: center;
+    }
+
+    .since_percent p {
+        display: block;
+    }
+
+    .since_percent span {
+        display: block;
+        margin-bottom: 15px;
+    }
+
+    p.remark_text {
+        text-align: center;
+    }
+}
