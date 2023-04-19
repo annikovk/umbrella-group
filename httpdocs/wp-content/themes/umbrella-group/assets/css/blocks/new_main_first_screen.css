@@ -9,8 +9,13 @@
     padding-right: 50px;
 }
 
+.banner-button:hover {
+    background-color: #BD161C !important;
+}
+
 .first-screen .ratings {
     padding-top: 75px;
+    margin-bottom: 143px;
 }
 
 .first-screen .ratings .laurel-icon-header,
@@ -146,6 +151,11 @@
         width: 273px;
     }
 
+    .button:hover {
+        background: #BD161C !important;
+        color: #fff !important;
+    }
+
     .new_main_first_screen {
         margin-bottom: 120px;
     }
@@ -155,4 +165,17 @@
         padding-right: 18px;
     }
 
+    ul.tabs li {
+        padding-right: 0;
+        margin-right: 0px;
+        padding-left: 18px;
+    }
+
+    ul.tabs li:last-child {
+        padding-right: 23px !important;
+    }
+
+    .first-screen .ratings {
+        margin-bottom: 0px;
+    }
 }

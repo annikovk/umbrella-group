@@ -16,6 +16,8 @@
     border: unset;
     border-bottom: 2px solid #C9C9C9;
     -webkit-box-shadow: unset;
+    width: 350px;
+    margin-bottom: 10px;
 }
 
 .layout_request_call_back {
@@ -46,16 +48,63 @@
 .wrapper_btn_and_checkbox {
     display: grid;
     grid-gap: 8px;
+    margin-bottom: 10px;
+}
+
+.approve_free_consultation {
+    display: flex;
+    align-items: flex-start;
+}
+
+.mute-text-normal-common.small-mute-text > br:first-child {
+    display: block !important;
+}
+
+.approve_free_consultation input#approve {
+    margin-bottom: 0px !important;
+    margin-top: 4px;
+    accent-color: #C9C9C9;
+}
+
+.approve_free_consultation .small-mute-text, .approve_free_consultation .small-mute-text a {
+    color: #C9C9C9 !important;
+    font-size: 14px;
+}
+
+.wrapper_request_call_back .main-text-common {
+    text-align: left !important;
+}
+
+.title-h1-text-common.padding-top-request_call_back {
+    font-family: 'PT Serif';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 120%;
+}
+
+span.main-text-accent-common-red {
+    font-weight: 700;
+    color: #EC1C23;
+}
+
+.page-id-13516 .layout_request_call_back {
+    padding-top: 31px;
+}
+
+.page-id-13516 .btn-form_request_call_back {
+    margin-bottom: 0;
 }
 
 @media screen and (max-width: 768px) {
     .grid_form_request_call_back {
-        grid-template-columns:auto;
+        grid-template-columns: auto;
+        grid-gap: 20px;
     }
 
     .layout_request_call_back {
         padding-top: 100px;
-        padding-bottom: 130px;
+        padding-bottom: 110px;
     }
 
     .btn-form_request_call_back {
@@ -65,5 +114,25 @@
     .wrapper_btn_request_call_back {
         display: flex;
         justify-content: center;
+    }
+
+    .layout_request_call_back, .wrapper_request_call_back {
+        display: block;
+    }
+
+    .title-h1-text-common.padding-top-request_call_back {
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 36px;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .grid_form_request_call_back input[type='text'] {
+        width: 100%;
+    }
+
+    .page-id-13516 .layout_request_call_back {
+        padding-top: 0;
     }
 }

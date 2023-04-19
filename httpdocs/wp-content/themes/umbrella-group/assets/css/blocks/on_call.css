@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: auto auto;
     grid-gap: 80px;
-    margin-top: 90px;
+    margin-top: 110px;
 }
 
 .descriptions_on_call {
@@ -55,6 +55,7 @@
 .slider_mac-up-phone {
     width: 259px;
     height: 456px;
+    overflow: hidden;
 }
 
 .slider-line_mac-up-phone {
@@ -68,11 +69,15 @@
     position: absolute;
     z-index: 1;
     opacity: 0;
+    transform: translate(0px, 0px);
+    transform: translate(0px, 456px);
+    transition: transform 0.3s;
 }
 
 .active_mac-up-phone {
     z-index: 2;
     opacity: 1;
+    transform: translate(0px, 0px);
 }
 
 .select_phone {
@@ -125,6 +130,79 @@
     display: none;
 }
 
+.slider_screen {
+    z-index: 22;
+    height: 457px;
+    position: absolute;
+    top: 76px;
+    left: 31px;
+}
+
+span.swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    background-color: #C9C9C9;;
+    cursor: pointer;
+    display: block;
+    opacity: 1;
+}
+
+.swiper-container {
+    overflow: hidden;
+}
+
+.pag_wrap {
+    position: absolute;
+    top: 169px;
+    left: -71px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 128px;
+}
+
+.pag_wrap > div {
+    cursor: pointer;
+    font-size: 15.6761px;
+    line-height: 24px;
+    color: #1A1A1A;
+    cursor: pointer;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+span.swiper-pagination-bullet.swiper-pagination-bullet-active {
+    background-color: #EC1C23 !important;
+}
+
+.swiper-pagination {
+    /* position: absolute; */
+    /* top: 50%; */
+    /* left: -90px; */
+    /* z-index: 99; */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    margin-top: 0px;
+}
+
+.swiper-wrapper {
+    overflow: hidden !important;
+    /* height: 100%; */
+}
+
+.swiper-container {
+    height: 100%;
+}
+
+.phone_on_call {
+    position: relative;
+    /* width: 100%; */
+    max-width: 290px !important;
+    margin: 0 auto;
+}
+
 @media screen and (max-width: 768px) {
     .desktop_mode_on_call {
         display: none;
@@ -149,5 +227,48 @@
     .slider-phone_on_call {
         grid-template-columns: auto;
         justify-items: center;
+    }
+
+    .slider_screen {
+        z-index: 22;
+        height: 457px;
+        position: absolute;
+        top: 76px;
+        left: 31px;
+    }
+}
+
+
+@media screen and (max-width: 576px) {
+    .pag_wrap {
+        display: none;
+    }
+
+    .phone_on_call {
+        position: relative;
+        /* width: 100%; */
+        max-width: 100% !important;
+        margin: 0 auto;
+    }
+
+    .mac-up-phone {
+        margin: 0 auto;
+        display: block;
+    }
+
+    .slider_screen {
+        z-index: 22;
+        height: 457px;
+        position: absolute;
+        top: 76px;
+        left: 0;
+        right: 0;
+        max-width: 258px;
+        margin: 0 auto;
+    }
+
+    .layout_on_call {
+
+        margin-top: 90px;
     }
 }

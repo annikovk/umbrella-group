@@ -110,3 +110,4 @@ function mappingSlidAndDot(index) {
             break
     }
 }
+Fancybox.bind("[data-fancybox]", {});

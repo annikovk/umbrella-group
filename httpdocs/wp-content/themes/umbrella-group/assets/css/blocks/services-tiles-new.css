@@ -19,7 +19,7 @@ div.main-services-tile .category-title {
     line-height: 36px;
     /* identical to box height */
     margin-bottom: 25px;
-    text-align: center;
+    text-align: left;
 }
 
 .main-services-guarantee {
@@ -72,6 +72,7 @@ div.main-services-tile .category-title {
     }
 
     .main-services-tile a.show-all-link {
+        position: static;
         color: #707070;
         display: block;
         font-family: 'Inter';
@@ -104,6 +105,9 @@ div.main-services-tile .category-title {
         font-weight: 300;
         font-size: 14px;
         line-height: 140%;
+        padding-right: 8px;
+        padding-left: 8px;
+        margin-right: 8px;
     }
 
     .main-services ul.tabs {
@@ -126,10 +130,19 @@ div.main-services-tile .category-title {
 
     .main-services ul.tabs li.active {
         font-weight: 700;
-        box-shadow: inset 0px -3px 0px #EC1C23;
+        /* box-shadow: inset 0px -3px 0px #EC1C23;*/
+        border-bottom: 3px solid #ec1c23;
     }
 
     .main-services {
         margin-top: 120px;
+    }
+
+    .main-services-tile .children-list {
+        padding-bottom: 0;
+    }
+
+    .main-services ul.tabs {
+        margin-left: 0;
     }
 }

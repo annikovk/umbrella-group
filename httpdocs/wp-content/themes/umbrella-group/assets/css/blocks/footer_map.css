@@ -1,11 +1,12 @@
 .contact-info_footer_map {
     width: 376px;
-    padding: 50px;
+    padding: 62px 50px;
     display: grid;
     grid-gap: 35px;
     position: absolute;
     top: 30px;
     left: 105px;
+    color: #000;
 }
 
 .position_footer_map {
@@ -31,6 +32,18 @@
 
 }
 
+.contact-info_footer_map.card-shadow-common_footer_map ul li:last-child {
+    margin-bottom: 0;
+}
+
+.contact-info_footer_map.card-shadow-common_footer_map ul {
+    margin-bottom: 0;
+}
+
+.contact-info_footer_map.card-shadow-common_footer_map ul li {
+    margin-bottom: 0;
+}
+
 @media screen and (max-width: 768px) {
     .contact-info_footer_map {
         width: 100%;
@@ -45,5 +58,21 @@
 
     .card-shadow-common_footer_map {
         box-shadow: none;
+    }
+
+    .position_footer_map {
+        position: relative;
+        background: #fff;
+    }
+
+    .card-shadow-common_footer_map {
+        box-shadow: none;
+        padding-bottom: 60px;
+        padding-top: 60px
+    }
+
+    .position_footer_map iframe {
+        padding: 0 15px;
+        height: 340px;
     }
 }

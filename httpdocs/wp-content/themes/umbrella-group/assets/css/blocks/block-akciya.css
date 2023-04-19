@@ -47,6 +47,12 @@
     content: '';
 }
 
+.red_border_stock {
+    border: solid 1px #EC1C23;
+    padding: 30px 60px 37px;
+    box-shadow: 0px 12px 20px rgb(26 26 26 / 9%);
+}
+
 .akciya-block .inner-block {
     position: absolute;
     top: 28px;
@@ -194,15 +200,33 @@
     -webkit-transition: all 0.3s; /* Safari prior 6.1 */
     transition: all 0.3s;
 }
+
+.position-card-legend_stock {
+    position: relative;
+    top: -45px;
+    left: -26px;
+}
+
+.padding-top-stock {
+    padding-top: 78px;
+}
+
+a.button.white.is-outline:hover {
+    background: #1A1A1A !important;
+    border-color: #1A1A1A !important;
+    color: #fff !important;
+}
+
 @media screen and (max-width: 849px) {
     .akciya-block .inner-block.prices .inner-label {
         left: unset;
     }
+
     .akciya-block .background::after {
         background-image: linear-gradient(to top, rgba(46, 79, 117, 0.7) 0%, #2e4f75 50%);
     }
 
-    .akciya-block .inner-block.half .inner-icon, .akciya-block .inner-icon, .akciya-block .inner-block.prices .inner-icon  {
+    .akciya-block .inner-block.half .inner-icon, .akciya-block .inner-icon, .akciya-block .inner-block.prices .inner-icon {
         top: -44px;
         width: 0;
         height: 0;
@@ -266,6 +290,14 @@
     .akciya-block .date-and-button, .akciya-block .inner-block.half .date-and-button {
         flex-direction: column;
         padding-top: 8px;
+    }
+
+    .red_border_stock {
+        padding: 25px 28px 43px;
+    }
+
+    .padding-top-stock {
+        padding-top: 58px;
     }
 }
 

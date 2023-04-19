@@ -139,6 +139,7 @@ require get_theme_file_path() . '/includes/custom_post_types/faq.php';
 require get_theme_file_path() . '/includes/custom_post_types/specialist.php';
 require get_theme_file_path() . '/includes/custom_post_types/cases.php';
 require get_theme_file_path() . '/includes/custom_post_types/feedback.php';
+require get_theme_file_path() . '/includes/custom_post_types/result.php';
 require get_theme_file_path() . '/includes/draw_header_with_breadcrumbs.php';
 require get_theme_file_path() . '/template-parts/shortcodes/akcii.php';
 require get_theme_file_path() . '/template-parts/shortcodes/su_welcome_screen.php';
@@ -167,6 +168,21 @@ require get_theme_file_path() . '/template-parts/shortcodes/komanda_specialistov
 require get_theme_file_path() . '/template-parts/shortcodes/why_choose_us.php';
 require get_theme_file_path() . '/template-parts/shortcodes/new-main-first-screen.php';
 require get_theme_file_path() . '/template-parts/shortcodes/umbrella_footer.php';
+require get_theme_file_path() . '/template-parts/shortcodes/bus-first-main.php';
+require get_theme_file_path() . '/template-parts/shortcodes/business-directions.php';
+require get_theme_file_path() . '/template-parts/shortcodes/static_startup.php';
+require get_theme_file_path() . '/template-parts/shortcodes/ignor_static.php';
+require get_theme_file_path() . '/template-parts/shortcodes/since_90.php';
+require get_theme_file_path() . '/template-parts/shortcodes/open_business.php';
+require get_theme_file_path() . '/template-parts/shortcodes/calculate_business.php';
+require get_theme_file_path() . '/template-parts/shortcodes/form_business_calculation.php';
+require get_theme_file_path() . '/template-parts/shortcodes/case_business.php';
+require get_theme_file_path() . '/template-parts/shortcodes/result_clinet_business.php';
+require get_theme_file_path() . '/template-parts/shortcodes/customer_reviews_business.php';
+require get_theme_file_path() . '/template-parts/shortcodes/more_question_bus.php';
+require get_theme_file_path() . '/template-parts/shortcodes/team_business.php';
+require get_theme_file_path() . '/template-parts/shortcodes/foooter_business_page.php';
+require get_theme_file_path() . '/template-parts/shortcodes/form_bottom_business.php';
 // Hook : to get content with s3elected AB tests variants only
 require get_theme_file_path() . '/umbrella_filter_ab_tests.php';
 add_action('init', 'umbrella_get_ab_test_tags');
@@ -977,5 +993,42 @@ function umbrella_draw_filter_tabs($tabs, $posts, $type = 'blogposts')
     </style>
     <?php
 }
+
+function custom_filter_wpcf7_is_tel($result, $tel)
+{
+    $result = preg_match('/^\(?\+?([0-9]{1,4})?\)?[-\. ]?(\d{10})$/', $tel);
+    return $result;
+}
+
+add_filter('wpcf7_validate_tel', 'custom_filter_wpcf7_is_tel', 10, 2);
+
+
+if (function_exists('acf_add_options_page')) {
+
+    acf_add_options_page(array(
+        'page_title' => 'Основные настройки',
+        'menu_title' => 'Настройки темы',
+        'menu_slug' => 'theme-general-settings',
+        'capability' => 'edit_posts',
+        'redirect' => false
+    ));
+
+    acf_add_options_sub_page(array(
+        'page_title' => 'Кейс из нашей практики',
+        'menu_title' => 'Кейс из нашей практики',
+        'menu_slug' => 'theme-case-bus',
+        'parent_slug' => 'theme-general-settings',
+    ));
+
+    acf_add_options_sub_page(array(
+        'page_title' => 'Отзывы клиентов',
+        'menu_title' => 'Отзывы клиентов',
+        'menu_slug' => 'theme-reviews-bus',
+        'parent_slug' => 'theme-general-settings',
+    ));
+
+
+}
+
 
 ?>

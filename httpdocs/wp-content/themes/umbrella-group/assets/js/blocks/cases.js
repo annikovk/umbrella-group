@@ -8,6 +8,14 @@ jQuery(document).ready(function () {
 
     //If cases block stays right after the feedback block, remove 100px margin-bot from feedback to keep 100px margin between them
     jQuery(".newcases").closest('section').prev().find(".feedback").addClass("margin-bot-zero");
+
+    var maxscroll = jQuery('.timeline')[0].scrollWidth
+    jQuery('.arrow').click(function () {
+        event.preventDefault();
+        jQuery('.is-selected .timeline').animate({
+            scrollLeft: maxscroll
+        }, 500);
+    })
 });
 
 //Prevents slider moving on scrolling elements inside slider

@@ -8,11 +8,17 @@
     color: #1a1a1a;
 }
 
+#section_2003399274 {
+    background-color: transparent !important;
+}
 
-.cases-tile:hover .cases-item-header,.cases-tile:hover .cases-excerpt,.cases-tile:hover .case-item-date-and-tag  {
+.cases-tile:hover .cases-item-header, .cases-tile:hover .cases-excerpt, .cases-tile:hover .case-item-date-and-tag {
     color: #ec1d23;
 }
 
+.newcases h2.title, .feedback h2.title {
+    margin-top: 180px;
+}
 /*.cases-tile .cases-excerpt {*/
 /*    opacity: 1;*/
 /*    bottom: 20%;*/

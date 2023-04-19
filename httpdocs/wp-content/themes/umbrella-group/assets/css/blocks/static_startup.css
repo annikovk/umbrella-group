@@ -30,6 +30,7 @@ h2.title_sections_startup {
 .static_desc img {
     max-width: 411px;
     width: 100%;
+    height: 257px;
 }
 .row_content {
     display: grid;
@@ -105,17 +106,126 @@ span.problems__text {
     top: 3px;
 }
 .b-problems .problems__symbol {
-    font-weight: 700;
+    font-family: 'Inter';
     font-weight: 700;
     font-size: 18px;
     line-height: 27px;
     color: #1A1A1A;
     margin-left: 15px;
+    margin-right: 0;
 }
+
 .b-problems .problems__active .problems__spoiler.js-faq-rotate {
     transform: rotate(-180deg);
     margin-left: 15px;
 }
+
 .b-problems:last-child {
     border-bottom: 1px solid #C9C9C9;
+}
+
+.static_desc_mobile {
+    display: none;
+}
+
+.problems__text br {
+    display: none;
+}
+
+span.problems__text br {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .statick_startup_shortcode .static_desc {
+        display: block;
+        margin: 0 25px;
+    }
+
+    span.problems__text br {
+        display: block;
+    }
+
+    .statick_startup_shortcode .static_desc .static_desc p {
+        font-size: 16px;
+    }
+
+    .statick_startup_shortcode .static_desc .static_text p br:not(:first-of-type) {
+        display: none;
+    }
+
+    .statick_startup_shortcode .static_desc_mobile {
+        display: block;
+        margin-bottom: 85px;
+    }
+
+    .statick_startup_shortcode .static_desc {
+        display: none;
+    }
+
+    .statick_startup_shortcode .static_desc_mobile a {
+        text-decoration-line: underline;
+        color: #2E4F75;
+        font-weight: 700;
+    }
+
+    .static_desc_mobile p {
+        margin-bottom: 45px;
+    }
+
+    span.problems__text span {
+        margin-right: 27px;
+    }
+
+    .row_content {
+        display: block;
+    }
+
+    .row_content p {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 140%;
+    }
+
+    .row_content p:first-child {
+        margin-bottom: 40px;
+    }
+
+    .row_content p:last-child b:before {
+        position: static;
+        margin-bottom: 9px;
+    }
+
+    .row_content p:last-child b {
+        color: rgba(35, 174, 100, 1);
+        position: relative;
+        font-weight: 400;
+    }
+
+    .statick_startup_shortcode .problems__text br {
+        display: block;
+    }
+
+    .accrodion_top_problems .b-problems .problems__title .problems__spoiler.js-faq-rotate span.problems__symbol {
+        font-family: 'Inter';
+        margin-left: 0;
+        margin-right: 0px;
+    }
+
+    .accrodion_top_problems .b-problems .problems__symbol {
+        margin-right: 10px !important;
+        margin-left: 10px !important;
+    }
+
+    .accrodion_top_problems .b-problems .problems__title .problems__spoiler.js-faq-rotate {
+        font-family: 'Inter';
+        height: 100%;
+        align-items: flex-end;
+        display: flex;
+    }
+
+    .accrodion_top_problems .b-problems .problems__active .problems__spoiler.js-faq-rotate {
+        margin-left: 0;
+    }
+
 }

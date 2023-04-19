@@ -14,22 +14,20 @@
 
 .legend_position {
     position: relative;
-    top: -65px;
+    top: -26px;
     margin: 0 -80px;
     display: flex;
     justify-content: center;
-
 }
 
 .rite_text_help_start_business {
     padding: 30px;
     display: flex;
-    align-items: center;
 }
 
 .border_card_help {
     border: 1px solid #C9C9C9;
-    padding: 50px 80px;
+    padding: 13px 80px;
 }
 
 .left_text_help_start_business_content {
@@ -42,7 +40,7 @@
 }
 
 .top_padding_help_start_business {
-    margin-top: 150px;
+    margin-top: 97px;
 }
 
 .left_text_help_start_business_layout {
@@ -54,6 +52,9 @@
     display: none;
 }
 
+.top_padding_help_start_business {
+    margin-bottom: 10px;
+}
 @media screen and (max-width: 1040px) {
     .legend_position {
         margin: 0 -20px;
@@ -112,5 +113,14 @@
 
     .content_layout_help_start_business {
         grid-gap: 10px;
+    }
+
+    .content_layout_help_start_business a.action-text-common {
+        margin-top: 50px;
+        display: block;
+    }
+
+    .top_padding_help_start_business {
+        margin-bottom: 0px;
     }
 }

@@ -178,7 +178,7 @@ function get_specialist_metabox_value($post)
             <input id="specialist_achievements"
                    type="text"
                    name="specialist_achievements"
-                   value="<?php echo esc_attr(get_post_meta(get_the_ID(), 'specialist_achievements', true)); ?>">
+                   value="<?php echo get_post_meta(get_the_ID(), 'specialist_achievements', true); ?>">
         </div>
         <div class="meta-options hcf_field">
             <label for="specialist_office">Офис</label>
@@ -218,7 +218,7 @@ function specialist_save_meta_box( $post_id ) {
     ];
     foreach ( $fields as $field ) {
         if ( array_key_exists( $field, $_POST ) ) {
-            update_post_meta( $post_id, $field, sanitize_text_field( $_POST[$field] ) );
+            update_post_meta($post_id, $field, $_POST[$field]);
         }
     }
 }

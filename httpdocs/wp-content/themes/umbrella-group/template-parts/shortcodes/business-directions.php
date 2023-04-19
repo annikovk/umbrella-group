@@ -22,25 +22,25 @@ function business_direction_shortcode($atts){
                             Чем вы хотите заниматься?
                             </h2>
                             <div class="list_directions">
-                                <a href="#" class="item_directions">
+                                <a href="#beauty" class="item_directions">
                                     <img src="https://taxlab.ru/wp-content/uploads/dir4.jpg"/>
                                     <p class="title_directions">Красота и здоровье</p>
                                 </a>
-                                <a href="#" class="item_directions">
-                                    <img src="https://taxlab.ru/wp-content/uploads/dir5.jpg"/>
-                                    <p class="title_directions">Красота и здоровье</p>
+                                <a href="#trade" class="item_directions ">
+                                    <img src="https://taxlab.ru/wp-content/uploads/I1w2Ldsrlwg.jpg"/>
+                                    <p class="title_directions">Торговля</p>
                                 </a>
-                                <a href="#" class="item_directions">
+                                <a href="#food" class="item_directions ">
                                     <img src="https://taxlab.ru/wp-content/uploads/dir3.jpg"/>
-                                    <p class="title_directions">Красота и здоровье</p>
+                                    <p class="title_directions">Общественное питание</p>
                                 </a>
-                                <a href="#" class="item_directions">
+                                <a href="#educational" class="item_directions ">
                                     <img src="https://taxlab.ru/wp-content/uploads/dir2.jpg"/>
-                                    <p class="title_directions">Красота и здоровье</p>
+                                    <p class="title_directions">Образовательные услуги</p>
                                 </a>
-                                <a href="#" class="item_directions">
+                                <a href="#other" class="item_directions ">
                                     <img src="https://taxlab.ru/wp-content/uploads/dir1.jpg"/>
-                                    <p class="title_directions">Красота и здоровье</p>
+                                    <p class="title_directions">Другое</p>
                                 </a>
                             </div>  
 
@@ -51,7 +51,8 @@ function business_direction_shortcode($atts){
          [/section]
         EOTHTML;
         umbrella_add_custom_css_files(['/assets/css/blocks/business_direction.css']);
-        umbrella_add_custom_js_files(['/assets/js/blocks/business_direction.js']);
+    umbrella_add_custom_js_files(['/assets/js/blocks/business_direction.js']);
+    umbrella_add_custom_js_files(['/assets/js/blocks/open_bussnise.js']);
         return $html;
     }
 

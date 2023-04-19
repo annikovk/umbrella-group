@@ -1,25 +1,31 @@
 .block-padding_why-umbrella {
-    padding-top: 120px;
+    margin-top: 120px;
+}
+
+.block-padding_why-umbrella.main-container_why-umbrella {
+    margin-bottom: 79px;
 }
 
 .main-container_why-umbrella {
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-shadow: 0px 0px 20px rgb(26 26 26 / 9%);
 }
 
 .card_why-umbrella {
     display: grid;
-    grid-gap: 65px;
+    grid-gap: 62px;
     position: relative;
-    top: -80px;
-    max-width: 1054px;
-    padding: 40px 50px;
+    top: 0px;
+    max-width: 100%;
+    padding: 55px 128px 97px 80px;
+    box-shadow: none !important;
 }
 
 .citation_why-umbrella {
     display: grid;
-    grid-gap: 21px;
+    grid-gap: 57.15px;
 }
 
 .layout-author-quote_why-umbrella {
@@ -61,6 +67,102 @@
 
 }
 
+.layout-quote_why-umbrella .main-text-italic-common {
+    font-size: 24px;
+    line-height: 140%;
+    font-family: 'PT Serif';
+    font-style: italic;
+}
+
+.main-text-common {
+    line-height: 27px;
+}
+
+.time-speak {
+    color: #C9C9C9;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 27px;
+    margin-bottom: 8px;
+}
+
+video.video {
+    width: 100%;
+    height: 670px;
+    object-fit: cover !important;
+}
+
+.vide_ceo {
+    width: 100%;
+    position: relative;
+}
+
+.play-button-wrapper {
+    /* top: 50% !important; */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+}
+
+#circle-play-b {
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+div#circle-play-b img {
+    width: 80px;
+    opacity: 0.8;
+}
+
+div#circle-play-b:hover img {
+    opacity: 1;
+}
+
+.container_numbers_statistics .numbers_statistics_block_array {
+    justify-content: space-between;
+    gap: 0;
+    padding-left: 156px;
+    padding-right: 156px;
+}
+
+.container_numbers_statistics .numbers_statistics_block_array .numbers_statistics_block {
+    padding: 0;
+}
+
+.container_numbers_statistics .numbers_statistics_footer {
+    top: 13px;
+}
+
+.container_numbers_statistics .number_statistics_item {
+    margin-bottom: 18px;
+}
+
+.title-h1-text-common.title_why_umbrella {
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 120%;
+}
+
+.main-text-accent-common {
+    font-weight: 700;
+}
+
+.page-id-13516 .block-padding_why-umbrella {
+    margin-top: 70px;
+}
+
+
 @media screen and (max-width: 1060px) {
     .card_why-umbrella {
         position: inherit;
@@ -100,4 +202,83 @@
         margin-top: 40px;
     }
 
+    .container_numbers_statistics .numbers_statistics_block_array {
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
+
+@media screen and (max-width: 420px) {
+    video.video {
+        width: 100%;
+        height: 225px;
+        object-fit: cover !important;
+    }
+
+    div#circle-play-b img {
+        width: 49px;
+        opacity: 0.8;
+    }
+
+    .card_why-umbrella {
+        padding: 25px 15px;
+        padding-bottom: 60px;
+    }
+
+    .layout-author-quote_why-umbrella {
+        margin-top: 0;
+    }
+
+    .citation_why-umbrella {
+        grid-gap: 40px;
+    }
+
+    .layout-quote_why-umbrella .main-text-italic-common {
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 140%;
+    }
+
+    .citation_why-umbrella .main-text-common {
+        font-size: 14px !important;
+        line-height: 140%;
+    }
+
+    .citation_why-umbrella .main-text-common br {
+        display: none;
+    }
+
+    .time-speak {
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 140%;
+    }
+
+    .block-padding_why-umbrella {
+        margin-bottom: 70px;
+    }
+
+    .block-padding_why-umbrella {
+        margin-top: 100px;
+    }
+
+    .first-screen .ratings {
+        padding-top: 20px;
+    }
+
+    .container_numbers_statistics .numbers_statistics_footer {
+        top: 82px;
+    }
+
+    #section_32167594 {
+        margin-bottom: 60px;
+    }
+
+    .container_numbers_statistics .numbers_statistics_block_array {
+        padding-left: 0;
+        padding-right: 0;
+        grid-row-gap: 34px;
+        grid-column-gap: 0px;
+    }
+}
+

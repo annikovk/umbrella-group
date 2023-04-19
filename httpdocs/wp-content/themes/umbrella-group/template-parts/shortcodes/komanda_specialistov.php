@@ -41,7 +41,7 @@ class komanda_specialistov
                 [col  span="12" span__sm="12" margin="0px 0px 0px 0px"]
                 <div class="padding_komanda_specialistov">
                     <div class="title-h1-text-common">Команда специалистов</div>
-                    <div class="main-text-common">Юристы, бухгалтеры и&nbsp;аудиторы накопили опыт с&nbsp;коммерческими и&nbsp;некоммерческими организациями: от&nbsp;кафе и&nbsp;спортивных ассоциаций до&nbsp;промышленных производств с&nbsp;ВЭД.</div>
+                    <div class="main-text-common">Юристы, бухгалтеры и&nbsp;аудиторы накопили опыт с&nbsp;коммерческими и&nbsp;некоммерческими<br> организациями: от&nbsp;кафе и&nbsp;спортивных ассоциаций до&nbsp;промышленных производств с&nbsp;ВЭД.</div>
                     $tabs
                     $tiles
                 </div>
@@ -107,7 +107,7 @@ class komanda_specialistov
                             <div class="full-fio-komanda desktop_mode_komanda">$full_name</div>
                             <div class="mobile_mode_komanda_flex padding-left-komand">
                                 <div class="photo_mobile">$photo_mobile</div>
-                                <div>
+                                <div class="specialist-fio-place">
                                     <div class="mute-text-legend-normal-common">$label</div>
                                     <div class="full-fio-komanda">$full_name</div>
                                 </div>
@@ -135,7 +135,7 @@ class komanda_specialistov
                       <div class="full-fio-komanda desktop_mode_komanda">$full_name</div>
                           <div class="mobile_mode_komanda_flex padding-left-komand">
                                 <div class="photo_mobile">$photo_mobile</div>
-                                <div>
+                                <div class="specialist-fio-place">
                                     <div class="mute-text-legend-normal-common">$label</div>
                                     <div class="full-fio-komanda">$full_name</div>
                                 </div>

@@ -17,7 +17,7 @@ class request_call_back
                         <div class="main-text-common" style="text-align: center">
                             Специалист тезисно разберёт ваши вопросы на&nbsp;3-минутной <span class="main-text-accent-common-red">бесплатной консультации</span>.
                             Мы&nbsp;свяжемся с&nbsp;вами в&nbsp;течение 20&nbsp;минут
-                            в&nbsp;рабочее время:пн. &mdash;&nbsp;пт.&nbsp;с&nbsp;09:00 до&nbsp;18:00.
+                            в&nbsp;рабочее время:<br>пн. &mdash;&nbsp;пт.&nbsp;с&nbsp;09:00 до&nbsp;18:00.
                         </div>
                         [contact-form-7 id="13790" title="Главная форма в footer (Обратный звонок)"]
                     </div>

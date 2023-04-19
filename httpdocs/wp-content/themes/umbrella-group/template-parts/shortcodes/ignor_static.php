@@ -12,10 +12,11 @@ function statick_ignor_shortcode($atts){
                             <h3>Помогаем открыть бизнес с минимумом рисков.</h3>
                             <div class="static_desc">
                                <p>
-                               <b>Статистика ГК Umbrella Group:</b><br> На рынке 32 года. 5 лет назад, в 2017 году, комплексно открыли<br> 46 компаний. Зарегистрировали, получили для них лицензию, ведём<br> бухгалтерию и правовой консалтинг. В 2022 году 89 % из них<br> продолжают функционировать и празднуют 5-летний юбилей.<br> Некоторые клиенты ведут бизнес уже по 15, 16, 17 лет.
-                               <a href="#" class="link_reviews">Посмотрите их отзывы</a>
+                               <span style="font-weight:700">Статистика ГК Umbrella Group:</span><br> На рынке 32 года. 5 лет назад, в 2017 году, комплексно открыли<br> 46 компаний. Зарегистрировали, получили для них лицензию, ведём<br> бухгалтерию и правовой консалтинг. В 2022 году 89 % из них<br> продолжают функционировать и празднуют 5-летний юбилей.<br> Некоторые клиенты ведут бизнес уже по 15, 16, 17 лет.
+                               <a href="#customer_reviews" class="link_reviews btn_scrolls">Посмотрите их отзывы</a>
                                </p>
-                               <img src="https://taxlab.ru/wp-content/uploads/diagrqam-ignor-bus.svg" >
+                               <img src="https://taxlab.ru/wp-content/uploads/diagrqam-ignor-bus.svg" class="statick_ignor_desc">
+                               <img src="https://taxlab.ru/wp-content/uploads/Диаграмма.jpg" class="statick_ignor_mob">
                             </div>
                         </div>
                     </div>
