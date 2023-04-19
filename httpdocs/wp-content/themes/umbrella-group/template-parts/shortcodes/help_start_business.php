@@ -1,4 +1,8 @@
 <?php
+ function isMobile() {
+            $useragent=$_SERVER['HTTP_USER_AGENT'];
+            return preg_match("/(android|webos|avantgo|iphone|ipad|ipod|blackberry|iemobile|bolt|boost|cricket|docomo|fone|hiptop|mini|opera mini|kitkat|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
+        }
 
 class help_start_business
 {
@@ -6,6 +10,13 @@ class help_start_business
 
     public function generate_shortcode()
     {
+         if (isMobile()) {
+
+        $html = <<<EOHTML
+
+        EOHTML;
+
+         } else {
         $html = <<<EOHTML
          [section id='help_start_business'  padding="0px"]
            [row]
@@ -89,7 +100,7 @@ class help_start_business
             [/col]
            [/row]
          [/section]
-        EOHTML;
+        EOHTML; }
         umbrella_add_custom_css_files(['/assets/css/common-style.css']);
         umbrella_add_custom_css_files(['/assets/css/blocks/help_start_business.css']);
         umbrella_add_custom_js_files(['/assets/js/blocks/help_start_business.js']);
