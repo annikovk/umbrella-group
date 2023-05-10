@@ -65,7 +65,15 @@ class umbrella_footer
                                     <p><a href="tel:+73833731717">+7 (383) 373-17-17 </a></p>
                                     <p><a href="mailto:contact@taxlab.ru" >contact@taxlab.ru </a></p>
                                     <div class="social-icons">
-                                        <a href="https://www.facebook.com/umbrellagroup.nsk"rel="noopener noreferrer nofollow" class="umbrella-follow-icon facebook " data-label="Facebook"><i class="icon-facebook"></i></a>
+                                        <a href="https://t.me/umbrella_club_nsk" rel="noopener noreferrer nofollow" class="" data-label="Telegram">
+                                            <img src="/wp-content/uploads/telegram_logo.png" alt="Telegram" class="umbrella-follow-icon int-logo">
+                                        </a>
+                                        <a href="https://vk.com/umbrellagroup_nsk" rel="noopener noreferrer nofollow" class="" data-label="VK">
+                                            <img src="/wp-content/uploads/vk_logo.png" alt="VK" class="umbrella-follow-icon int-logo" class="int-logo">
+                                        </a>
+                                        <a href="https://api.whatsapp.com/send?phone=79137202634" rel="noopener noreferrer nofollow" class="" data-label="Whatsapp">
+                                            <img src="/wp-content/uploads/whatsapp_logo.png" alt="Whatsapp" class="umbrella-follow-icon int-logo">
+                                        </a>
                                     </div>
                                 [/ux_text]
                             [/col_inner]
