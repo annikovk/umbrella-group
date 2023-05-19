@@ -90,6 +90,10 @@ ul.tabs li.selected {
     background-repeat: no-repeat;
 }
 
+.header-social-text{
+    color: #000000;
+}
+
 .header-contacts {
     display: flex;
     flex-direction: column-reverse;
@@ -174,6 +178,7 @@ ul.tabs li.selected {
 .logo-left .logo {
     margin-right: 84px;
 }
+
 @media screen and (max-width: 849px) {
     #logo {
         width: 150px;
@@ -767,10 +772,12 @@ p.feedback-subheader-right a {
         font-weight: bolder;
 
     }
+
     .accordion-title, .accordion-title.active {
         padding-left: 20px;
         padding-right: 20px;
     }
+
     .accordion-inner {
         padding-left: 20px;
         padding-right: 20px;
@@ -912,6 +919,26 @@ div.wpcf7-validation-errors:before {
     margin: 0;
 }
 
+.whatsapp-box {
+    margin-left: 230px;
+}
+
+@media (min-width: 850px) {
+    #header .stuck #masthead {
+        height: 130px !important;
+    }
+}
+
+@media (max-width: 850px) {
+    .header-ratings-icons {
+        width: 100%;
+    }
+
+    .whatsapp-box {
+        margin-left: auto;
+    }
+}
+
 @media screen and (min-width: 540px) {
     footer .wpcf7-form {
         width: 384px;
@@ -949,6 +976,7 @@ input.cf7-footer-input {
     background-color: unset;
     box-shadow: unset;
 }
+
 .form-checkbox {
     margin-left: 10%;
 }
