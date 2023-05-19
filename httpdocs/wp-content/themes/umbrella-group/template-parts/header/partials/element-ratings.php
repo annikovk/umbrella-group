@@ -15,7 +15,9 @@ $ratings_block = <<<EOHTML
                 </div>
                 <div class="header-ratings-icon-box whatsapp-box">
                     <a href="{$whatsAppUrl}" class="header-ratings-icon" style="background-image: url({$whatsAppIconUrl});border-radius:0;  width: 48px;"> </a>
-<!--                    <a href="{$whatsAppUrl}" class="header-social-text"><b>{$whatsAppText}</b></a>-->
+
+                    <a href="{$whatsAppUrl}" class="header-social-text"><b>{$whatsAppText}</b></a>
+<!--                <a href="{$whatsAppUrl}" class="header-social-text"><b>{$whatsAppText}</b></a>-->
                 </div>
             </div>
 
