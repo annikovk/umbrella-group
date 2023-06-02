@@ -23,7 +23,7 @@ header('Retry-After: 600');
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <link rel="icon" href="https://taxlab.ru/wp-content/uploads/favicon-280x280.png">
+    <link rel="icon" href="/favicon.ico">
     <link rel="stylesheet" href="https://taxlab.ru/wp-content/maintenance/assets/styles.css">
     <script src="https://taxlab.ru/wp-content/maintenance/assets/timer.js"></script>
     <title>Запланированное техобслуживание</title>
@@ -58,9 +58,9 @@ header('Retry-After: 600');
 
 <footer class="footer">
     <div class="footer__content">
-        Под управлением WordPress Toolkit <a href="https://www.plesk.com/" target="_blank"><img class="logo"
-                                                                                                src="https://taxlab.ru/wp-content/maintenance/assets/images/plesk-logo.png"
-                                                                                                alt="Plesk"></a>
+        Powered by WP Toolkit <a href="https://www.plesk.com/" target="_blank"><img class="logo"
+                                                                                    src="https://taxlab.ru/wp-content/maintenance/assets/images/plesk-logo.png"
+                                                                                    alt="Plesk"></a>
     </div>
 </footer>
 
