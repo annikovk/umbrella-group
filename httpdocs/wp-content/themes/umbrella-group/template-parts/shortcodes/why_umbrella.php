@@ -19,7 +19,7 @@ class why_umbrella
             [col  span="12" span__sm="12" margin="0px 0px 0px 0px"]
             <div class="block-padding_why-umbrella main-container_why-umbrella">
             <div class="vide_ceo">
-                <iframe width="100%" height="670px" src="https://www.youtube.com/embed/LNBxVF7Z0d0?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe loading="lazy" width="100%" height="670px" src="https://www.youtube.com/embed/LNBxVF7Z0d0?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
                 <div class="card_why-umbrella card-shadow-common card-shadow_none_why-umbrella">
                     <div class="title-h1-text-common title_why_umbrella">Почему ГК <span class="show-for-small"><br/></span>Umbrella Group?</div>
