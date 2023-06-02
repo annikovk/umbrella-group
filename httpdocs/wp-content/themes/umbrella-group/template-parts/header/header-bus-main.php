@@ -14,7 +14,7 @@
           </div>
 
           <!-- Left Elements -->
-          <div class="flex-col hide-for-medium flex-left
+          <div class="flex-col flex-left
             <?php if(get_theme_mod('logo_position', 'left') == 'left') echo 'flex-grow'; ?>">
             <ul class="header-nav header-nav-main nav nav-left <?php flatsome_nav_classes('main'); ?>" >
              <?php get_template_part('template-parts/header/partials/element','ratings-bus'); ?>
