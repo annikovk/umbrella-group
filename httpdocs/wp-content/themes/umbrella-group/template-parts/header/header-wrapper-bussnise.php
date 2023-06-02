@@ -5,9 +5,11 @@ umbrella_draw_header();
 
 function umbrella_draw_header(): void
 {
-    get_template_part('template-parts/header/header', 'bus-top');
-    get_template_part('template-parts/header/header', 'bus-main');
-    get_template_part('template-parts/header/header', 'bus-bottom');
+    if(!wp_is_mobile()):
+        get_template_part('template-parts/header/header', 'top');
+    endif;
+    get_template_part('template-parts/header/header', 'main');
+    get_template_part('template-parts/header/header', 'bottom');
     echo '<div class="header-bg-container fill">';
     do_action('flatsome_header_background');
     echo '</div>';

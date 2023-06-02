@@ -134,20 +134,26 @@ class SU_welcome_screen
         $rating1 = umbrella_get_ratings('expert');
         $rating2 = umbrella_get_ratings('header');
         $html = <<<EOHTML
-        <div class="su_welcome_screen">
-            <div class="su_welcome_banner">
-                    <div class="su_welcome_banner_content dark">
-                        $breadcrumbs
-                        <div class="su_welcome_banner_offer container">
-                            <p>$this->offer</p> 
-                        </div>      
-                    </div>
-                    <div class="su_welcome_banner_background">
-                        $this->background
-                    </div>
-            </div>
+            <div class="su_welcome_screen">
+                <div class="su_welcome_banner">
+                        <div class="su_welcome_banner_content dark">
+                            $breadcrumbs
+                            <div class="su_welcome_banner_offer container">
+                                <p>$this->offer</p> 
+                            </div>      
+                        </div>
+                        <div class="su_welcome_banner_background">
+                            $this->background
+                        </div>
+                </div>
             <div class="su_welcome_banner_overlay">
-                  <div class="show-for-medium">$button</div>
+            EOHTML;
+        if(wp_is_mobile()){
+            $html .= <<<EOHTML
+                <div class="show-for-medium">$button</div>
+            EOHTML;
+        }
+        $html .= <<<EOHTML
                     <div class="su_welcome_banner_overlay_top">
                         <div class="advantage-block"> 
                             <div class="advantage-block-icon">$this->icon</div> 
@@ -166,7 +172,13 @@ class SU_welcome_screen
                         $price_from_conditions
                         <p>$phone_text</p>
                         <p>$specialist_text</p>
-                        <div class="hide-for-medium">$button</div>
+                    EOHTML;
+            if(!wp_is_mobile()){
+                $html .= <<<EOHTML
+                    <div style="display:block" class="hide-for-medium">$button</div>
+                EOHTML;
+            }
+            $html .= <<<EOHTML
                     </div>
             </div>
             <div class="su_welcome_screen_ratings show-for-medium">
