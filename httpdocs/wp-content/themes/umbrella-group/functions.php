@@ -309,7 +309,7 @@ function umbrella_draw_tiles($posts, $type)
             }
             if ($isFeedback) {
                 $block_id = uniqid('', false);
-                echo '<a class="client-item-block" href="#' . $block_id . '">';
+                echo '<a class="client-item-block" rel="nofollow" href="#' . $block_id . '">';
                 //echo "<div class='client-item-block' onclick='window.location=`" . get_permalink($post->ID) . "`;'>";
                 echo '<div class="feedback-exists-icon"><img src="/wp-content/uploads/2019/09/icon-people.png" height="20px" width="20px"></div>';
                 echo '<div class="feedback-exists-text">Читать отзыв клиента →</div>';

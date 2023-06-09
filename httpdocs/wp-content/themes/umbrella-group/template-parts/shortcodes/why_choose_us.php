@@ -10,6 +10,7 @@ class why_choose_us
             return "";
         }
         $html = <<<EOHTML
+        <noindex>
          [row style="collapse" width="full-width"]
             [col span__sm="12"]
                 [section bg="9108" bg_size="original" bg_overlay="rgba(0, 0, 0, 0.7)" bg_pos="0% 0%" dark="true" padding="100px" class="flex-why-you-should-work-with-us"]
@@ -97,6 +98,7 @@ class why_choose_us
                 <div class="laurel-footnote">1 — по версии журнала «Деловой квартал»      2 — по версии журнала pravo.ru      3 — по версии журнала «Эксперт Сибирь»      4 — Новосибирская городская торгово-промышленная палата</div>
             [/col]
            [/row]
+           </noindex>
         EOHTML;
         umbrella_add_custom_css_files(['/assets/css/blocks/block-laurels.css']);
         umbrella_add_custom_js_files(['/assets/js/blocks/block-laurels.js']);

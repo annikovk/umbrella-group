@@ -220,7 +220,7 @@ function umbrella_get_ratings($type='')
     switch ($type) {
         case 'expert':
             $icon = '/wp-content/uploads/rating-expert-icon.png';
-            $header = '2 место рейтинга консалтинговых агенств Сибири, 2009-2013';
+            $header = '2 место рейтинга консалтинговых агентств Сибири, 2009-2013';
             return ['icon'=>$icon,'header'=> $header,'subheader'=> ""];
         case 'expert-header':
             $icon = '/wp-content/uploads/manual_uploads/pravo-300.png';
