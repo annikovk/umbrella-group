@@ -38,7 +38,7 @@ div.main-services-tile .category-title {
     line-height: 27px;
 }
 
-.main-services-tile .children-list li:nth-child(4), .main-services-tile .children-list li:nth-child(5) {
+.main-services-tile .children-list li:nth-child(11), .main-services-tile .children-list li:nth-child(11) {
     display: none;
 }
 .main-services ul.tabs {
@@ -53,7 +53,7 @@ div.main-services-tile .category-title {
                 "guarantee1 guarantee2  guarantee3  guarantee4 guarantee5 guarantee6";
     }
 
-    .main-services-tile .children-list li:nth-child(4), .main-services-tile .children-list li:nth-child(5) {
+    .main-services-tile .children-list li:nth-child(11), .main-services-tile .children-list li:nth-child(11) {
         display: block;
     }
 

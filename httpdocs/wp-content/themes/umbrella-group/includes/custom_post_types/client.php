@@ -43,8 +43,6 @@ function client_post_type()
     add_action('manage_client_posts_custom_column', 'custom_client_column', 10, 2);
 
     new client_shortcode_options();
-
-
 }
 
 function register_taxonomies_for_client_post_type()
@@ -115,7 +113,7 @@ function set_custom_edit_client_columns($columns)
 
     $columns['client_industry'] = 'Отрасль';
     $columns['client_category'] = 'Отображать на';
-    $columns['umbrella_client_personal_industry'] = 'Индивидуальная отрсаль';
+    $columns['umbrella_client_personal_industry'] = 'Индивидуальная отрасль';
     $columns['umbrella_link_to_client_website'] = 'Сайт';
     $columns['is_feedback'] = 'Отзыв';
     $columns['umbrella_feedback_scan'] = 'Скан отзыва';
@@ -170,6 +168,146 @@ function custom_client_column($column, $post_id)
     }
 }
 
+/* ============================================================
+ *  Мета-боксы для типа записи "client"
+ * ============================================================ */
+
+// Регистрация мета-боксов
+function umbrella_client_add_meta_boxes()
+{
+    add_meta_box(
+        'umbrella_client_personal_industry_box',
+        __('Индивидуальная отрасль'),
+        'umbrella_client_personal_industry_render',
+        'client',
+        'side',
+        'default'
+    );
+
+    add_meta_box(
+        'umbrella_link_to_client_website_box',
+        __('Ссылка на сайт клиента'),
+        'umbrella_link_to_client_website_render',
+        'client',
+        'side',
+        'default'
+    );
+
+    add_meta_box(
+        'umbrella_feedback_scan_box',
+        __('Скан отзыва (ID вложения)'),
+        'umbrella_feedback_scan_render',
+        'client',
+        'side',
+        'default'
+    );
+}
+add_action('add_meta_boxes', 'umbrella_client_add_meta_boxes');
+
+// Поле "Индивидуальная отрасль"
+function umbrella_client_personal_industry_render($post)
+{
+    wp_nonce_field('umbrella_client_save_meta', 'umbrella_client_meta_nonce');
+    $value = get_post_meta($post->ID, 'umbrella_client_personal_industry', true);
+    ?>
+    <p>
+        <input type="text"
+               name="umbrella_client_personal_industry"
+               id="umbrella_client_personal_industry"
+               value="<?php echo esc_attr($value); ?>"
+               style="width:100%;"
+               placeholder="Например: Производство кабеля" />
+    </p>
+    <p class="description">
+        Заполняется, если стандартной таксономии «Отрасль» недостаточно.
+    </p>
+    <?php
+}
+
+// Поле "Ссылка на сайт клиента"
+function umbrella_link_to_client_website_render($post)
+{
+    $value = get_post_meta($post->ID, 'umbrella_link_to_client_website', true);
+    ?>
+    <p>
+        <input type="url"
+               name="umbrella_link_to_client_website"
+               id="umbrella_link_to_client_website"
+               value="<?php echo esc_attr($value); ?>"
+               style="width:100%;"
+               placeholder="https://example.com" />
+    </p>
+    <p class="description">
+        Адрес внешнего сайта клиента. Используется, когда у клиента нет отзыва.
+    </p>
+    <?php
+}
+
+// Поле "Скан отзыва"
+function umbrella_feedback_scan_render($post)
+{
+    $value = get_post_meta($post->ID, 'umbrella_feedback_scan', true);
+    ?>
+    <p>
+        <input type="text"
+               name="umbrella_feedback_scan"
+               id="umbrella_feedback_scan"
+               value="<?php echo esc_attr($value); ?>"
+               style="width:100%;"
+               placeholder="ID изображения из медиатеки" />
+    </p>
+    <p class="description">
+        ID вложения (изображения) скана отзыва. ID можно увидеть в URL медиафайла в админке.
+    </p>
+    <?php
+}
+
+// Сохранение всех трёх полей
+function umbrella_client_save_meta($post_id)
+{
+    if (!isset($_POST['umbrella_client_meta_nonce']) ||
+        !wp_verify_nonce($_POST['umbrella_client_meta_nonce'], 'umbrella_client_save_meta')) {
+        return;
+    }
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
+
+    $fields = array(
+        'umbrella_client_personal_industry' => 'text',
+        'umbrella_link_to_client_website'   => 'url',
+        'umbrella_feedback_scan'            => 'text',
+    );
+
+    foreach ($fields as $field => $type) {
+        if (!isset($_POST[$field])) {
+            continue;
+        }
+
+        $raw = wp_unslash($_POST[$field]);
+
+        if ($type === 'url') {
+            $clean = esc_url_raw($raw);
+        } else {
+            $clean = sanitize_text_field($raw);
+        }
+
+        if ($clean !== '') {
+            update_post_meta($post_id, $field, $clean);
+        } else {
+            delete_post_meta($post_id, $field);
+        }
+    }
+}
+add_action('save_post_client', 'umbrella_client_save_meta');
+
+/* ============================================================
+ *  Класс настроек шорткода
+ * ============================================================ */
+
 class client_shortcode_options
 {
     public function __construct()
@@ -178,9 +316,6 @@ class client_shortcode_options
         add_action('admin_init', array($this, 'sub_menu_page_init'));
     }
 
-    /**
-     * Add sub menu page to the custom post type
-     */
     public function add_submenu_page_to_post_type()
     {
         add_submenu_page(
@@ -192,63 +327,42 @@ class client_shortcode_options
             array($this, 'client_options_display'));
     }
 
-    /**
-     * Options page callback
-     */
     public function client_options_display()
     {
         $this->options = get_option('client_shortcode_options');
 
-//        wp_enqueue_media();
-
         echo '<div class="wrap">';
-
         printf('<h1>%s</h1>', 'Натсройки отзывов');
-
         echo '<form method="post" action="options.php">';
-
         settings_fields('projects_archive');
-
         do_settings_sections('client_shortcode_options_page');
-
         submit_button();
-
         echo '</form></div>';
     }
 
-    /**
-     * Register and add settings
-     */
     public function sub_menu_page_init()
     {
         register_setting(
-            'projects_archive', // Option group
-            'client_shortcode_options', // Option name
-//        array($this,'sanitize'),
+            'projects_archive',
+            'client_shortcode_options'
         );
 
         add_settings_section(
-            'header_settings_section', // ID
-            'Опции шорткода [umbrella_feedback]', // Title
-            array($this, 'print_section_info'), // Callback
-            'client_shortcode_options_page', // Page
+            'header_settings_section',
+            'Опции шорткода [umbrella_feedback]',
+            array($this, 'print_section_info'),
+            'client_shortcode_options_page'
         );
 
         add_settings_field(
-            'excluded_pages', // ID
-            'Исключить вывод шорткода на', // Title
-            array($this, 'excluded_pages_callback'), // Callback
-            'client_shortcode_options_page', // Page
-            'header_settings_section' // Section
+            'excluded_pages',
+            'Исключить вывод шорткода на',
+            array($this, 'excluded_pages_callback'),
+            'client_shortcode_options_page',
+            'header_settings_section'
         );
-
     }
 
-    /**
-     * Sanitize each setting field as needed
-     *
-     * @param array $input Contains all settings fields as array keys
-     */
     public function sanitize($input)
     {
         print_r($input);
@@ -263,17 +377,10 @@ class client_shortcode_options
         return $new_input;
     }
 
-    /**
-     * Print the Section text
-     */
     public function print_section_info()
     {
-
     }
 
-    /**
-     * Get the settings option array and print one of its values
-     */
     public function excluded_pages_callback()
     {
         $pages = get_pages();
@@ -298,7 +405,6 @@ class client_shortcode_options
                         </script>
                     EOHTML;
         echo $pages;
-
     }
 }
 

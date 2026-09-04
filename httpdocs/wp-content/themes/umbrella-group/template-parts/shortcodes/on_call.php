@@ -7,7 +7,8 @@ class on_call
     public function generate_shortcode()
     {
         $html = <<<EOHTML
-        <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+        <!--script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script-->
+        <script src="/wp-content/themes/umbrella-group/js/swiper-bundle.min.js"></script>
          [section id='on_call'  padding="0px"]
            [row]
             [col  span="12" span__sm="12" margin="0px 0px 0px 0px"]
@@ -52,7 +53,7 @@ class on_call
                         <div class="main-text-common desktop_mode_on_call">
                             За&nbsp;вами закрепляется специалист, который на&nbsp;связи даже в&nbsp;новогоднюю ночь и&nbsp;утро. 
                             Не&nbsp;оставляем клиентов без поддержки и&nbsp;реагируем на&nbsp;срочные вопросы. 
-                            Позвоните или напишите вашему специалисту на&nbsp;What&rsquo;s App и&nbsp;получите ответ незамедлительно.
+                            Позвоните или напишите вашему специалисту на  <a href="https://t.me/umbrella_club_nsk" class="action-text-common">Telegram</a> или <a href="https://max.ru/u/f9LHodD0cOJIOXNE7YL84YaWLr0Fmn7wgpMChu5575DDdYM9wCgFx0Dmzuw" class="action-text-common">МАХ</a> и получите ответ незамедлительно.
                         </div>                        
                         <div class="main-text-common mobile_mode_on_call">
                             За&nbsp;вами закрепляется специалист, который на&nbsp;связи даже в&nbsp;новогоднюю ночь и&nbsp;утро. 

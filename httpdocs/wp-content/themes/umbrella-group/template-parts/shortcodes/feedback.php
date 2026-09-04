@@ -34,13 +34,20 @@ class feedback
 
     public function fill_attributes()
     {
-        if (isset($this->atts['branch'])) {
-            $this->category = $this->atts['branch'];
-            return true;
-        } else {
-            $this->category = $this->get_category_by_url();
+        // Приоритет: конкретные ID > branch > определение по URL
+        if (isset($this->atts['ids']) && strlen(trim($this->atts['ids'])) > 0) {
+            // Если задан branch — используем его для заголовка/табов, иначе "Общий"
+            $this->category = (isset($this->atts['branch']) && strlen(trim($this->atts['branch'])) > 0)
+                ? $this->atts['branch']
+                : "Общий";
             return true;
         }
+        if (isset($this->atts['branch']) && strlen(trim($this->atts['branch'])) > 0) {
+            $this->category = $this->atts['branch'];
+            return true;
+        }
+        $this->category = $this->get_category_by_url();
+        return true;
     }
 
     public function generate_shortcode()
@@ -105,6 +112,7 @@ class feedback
         $quote = esc_attr(get_post_meta($post->ID, 'feedback_quote', true));
         $proof = esc_attr(get_post_meta($post->ID, 'feedback_proof', true));
         $proof_title = esc_attr(get_post_meta($post->ID, 'feedback_proof_title', true));
+        $proof_lightbox = "";
         if (strlen($proof) > 0 && strlen($proof_title) > 0) {
             $proof_lightbox_id = $post->ID . "-proof-lightbox";
             $proof_lightbox = "[lightbox id={$proof_lightbox_id}] <img src='{$proof}'> [/lightbox]";
@@ -158,8 +166,55 @@ class feedback
         return $html;
     }
 
-    private function get_feedback_posts(string $category): array
+        private function get_feedback_posts(string $category): array
     {
+        $has_ids      = isset($this->atts['ids']) && strlen(trim($this->atts['ids'])) > 0;
+        $has_category = isset($this->atts['category']) && strlen(trim($this->atts['category'])) > 0;
+        $has_branch   = isset($this->atts['branch']) && strlen(trim($this->atts['branch'])) > 0;
+
+        // Если задан хотя бы один из новых фильтров — собираем комбинированный запрос
+        if ($has_ids || $has_category || $has_branch) {
+            $args = array(
+                'numberposts' => -1,
+                'orderby'     => $has_ids ? 'post__in' : 'menu_order',
+                'order'       => 'ASC',
+                'post_type'   => 'feedback',
+            );
+
+            // фильтр по конкретным ID
+            if ($has_ids) {
+                $ids = array_filter(array_map('intval', array_map('trim', explode(',', $this->atts['ids']))));
+                if (empty($ids)) {
+                    return [];
+                }
+                $args['include'] = $ids;
+            }
+
+            // фильтр по метаполям (branch и/или category) через И
+            $meta_query = array('relation' => 'AND');
+            if ($has_branch) {
+                $meta_query[] = array(
+                    'key'     => 'feedback_branch',
+                    'value'   => $this->atts['branch'],
+                    'compare' => '=',
+                );
+            }
+            if ($has_category) {
+                $meta_query[] = array(
+                    'key'     => 'feedback_category',
+                    'value'   => $this->atts['category'],
+                    'compare' => '=',
+                );
+            }
+            // добавляем meta_query только если есть хотя бы одно метаусловие
+            if (count($meta_query) > 1) {
+                $args['meta_query'] = $meta_query;
+            }
+
+            return get_posts($args);
+        }
+
+        // Существующая логика (Общий / branch по URL) без изменений
         if ($category == "Общий") {
             $args = array(
                 'numberposts' => -1,
@@ -194,6 +249,7 @@ class feedback
         return get_posts($args);
     }
 
+
     private function get_category_by_url(): string
     {
         if (strpos($_SERVER['REQUEST_URI'], "services/licensing") !== false) {
@@ -212,7 +268,10 @@ class feedback
 
     private function get_title(string $category): string
     {
-        $title = $this->titles[$category]["title"];
+        // защита: если для категории нет заголовка в массиве — берём дефолт
+        $title = isset($this->titles[$category]["title"])
+            ? $this->titles[$category]["title"]
+            : "Отзывы клиентов";
         $html = <<<EOHTML
                 <div class="feedback_title">
                     $title

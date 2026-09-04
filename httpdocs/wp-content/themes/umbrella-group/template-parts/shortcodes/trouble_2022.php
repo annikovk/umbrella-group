@@ -34,7 +34,7 @@ class trouble_2022
                                     <br>
                                     <br>
                                     <span class="main-text-accent-common">В&nbsp;2022</span> 
-                                    помогаем нашим клиентам наладить цепочки поставок, заключать договоры с&nbsp;защитой 
+                                    помогали нашим клиентам наладить цепочки поставок, заключать договоры с&nbsp;защитой 
                                     от&nbsp;скачков доллара и&nbsp;спекуляций. Регистрируем фирмы в&nbsp;Казахстане.
                                     <br>
                                     <br>
@@ -63,7 +63,7 @@ class trouble_2022
                                     </li>
                                     <li>
                                         <span class="main-text-common">
-                                            Зарегистрировали для клиента юрлицо в&nbsp;Казахстане для импорта немецких запчастей 
+                                            <a class="action-text-common" href="/services/register-elimination/registracija-kommercheskoj-organizacii/registracija-ooo/">Зарегистрировали для клиента юрлицо</a> в&nbsp;Казахстане для импорта немецких запчастей 
                                             после ухода поставщика с&nbsp;рынка&nbsp;РФ из-за санкций 2022.
                                         </span>
                                     </li>
@@ -80,7 +80,7 @@ class trouble_2022
                                 <br>
                                 <br>
                                 <span class="main-text-accent-common">В&nbsp;2022</span> 
-                                помогаем нашим клиентам наладить цепочки поставок, заключать договоры с&nbsp;защитой 
+                                помогали нашим клиентам наладить цепочки поставок, <a class="action-text-common" href="/services/services-le/sostavlenie-dogovorov/">заключать договоры</a> с&nbsp;защитой 
                                 от&nbsp;скачков доллара и&nbsp;спекуляций. Регистрируем фирмы в&nbsp;Казахстане.
                                 <br>
                                 <br>

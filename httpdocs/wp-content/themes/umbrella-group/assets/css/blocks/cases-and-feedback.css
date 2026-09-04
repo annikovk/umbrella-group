@@ -11,7 +11,7 @@
 
 .newcases > .content > .tiles .slider > div:not(.col),
 .feedback > .content > .tiles .slider > div:not(.col) {
-    width: 150%;
+    width: 120%;
 }
 
 .newcases > .content > .tiles .flickity-viewport,

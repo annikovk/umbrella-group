@@ -63,7 +63,7 @@ ul.tabs li.selected {
     font-size: 12px;
     line-height: 1.3;
     font-weight: bold;
-    max-width: 180px;
+    max-width: 316px;
 }
 
 .header-ratings-icon.expert-rating {
@@ -111,7 +111,15 @@ ul.tabs li.selected {
     width: 100%;
     font-size: 24px;
 }
-
+@media (max-width:849px){
+    .whatsapp-box{
+        margin-left: 0 !important;
+    }
+    .header-ratings-icons{
+        gap: unset;
+        justify-content: space-evenly;
+    }
+}
 
 /* End Header */
 
@@ -190,6 +198,7 @@ ul.tabs li.selected {
 }
 
 .nav > li > a {
+    font-size: 14px;
     font-family: Inter, sans-serif;
 }
 
@@ -920,7 +929,7 @@ div.wpcf7-validation-errors:before {
 }
 
 .whatsapp-box {
-    margin-left: 230px;
+    margin-left: 10px;
 }
 @media (min-width: 850px) {
     #header .stuck #masthead {
@@ -931,10 +940,6 @@ div.wpcf7-validation-errors:before {
 @media (max-width: 850px) {
     .header-ratings-icons {
         width: 100%;
-    }
-
-    .whatsapp-box {
-        margin-left: auto;
     }
 }
 

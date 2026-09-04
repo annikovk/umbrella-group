@@ -158,8 +158,12 @@ class komanda_specialistov
     {
         $html = "<ul class='tabs'>";
         foreach ($categories as $category) {
+            if ($category == 'Сделки с недвижимостью') {
+                
+            }else{
             $filter_class = $this->get_filter_class($category);
             $html .= "<li class='$filter_class'>$category</li>";
+            }
         }
         $html .= "</ul>";
         return $html;

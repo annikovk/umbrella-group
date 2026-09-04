@@ -44,7 +44,7 @@ div#umbrella-menu-button-open-bus {
     align-items: center;
     text-align: center;
     max-width: 222px;
-    margin-left: auto;
+
 }
 </style>
 <div id="wide-nav" class="header-bottom wide-nav <?php header_inner_class('bottom'); ?>">
@@ -69,6 +69,27 @@ div#umbrella-menu-button-open-bus {
             <?php if(get_theme_mod('header_elements_bottom_right') || get_theme_mod('header_elements_bottom_left')){ ?>
             <div class="flex-col hide-for-medium flex-right flex-grow">
               <ul class="nav header-nav header-bottom-nav nav-right <?php flatsome_nav_classes('bottom'); ?>">
+                  <li class="html custom html_nav_position_text_top"><div class="akcii-menu"> <a href="/akcii/">Акции</a> </div>
+
+
+
+                      <style>
+                          .akcii-menu {
+
+                              padding: 10px 20px;
+                              display: flex;
+                              align-items: center;
+                              text-align: center;
+                              max-width: 220px;
+
+                          }
+                          .akcii-menu a {
+                              color: #fd4d53;
+                              font-weight: 700;
+                              font-size: 14px;
+                              line-height: 20px;
+                          }
+                      </style></li>
                                <div id="umbrella-menu-button-open-bus">
                                 <a href="#header-contact-form-lightbox" >Расчёт открытия  бизнеса</div></a>
 

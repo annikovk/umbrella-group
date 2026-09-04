@@ -7,7 +7,8 @@ class service_evaluation
     public function generate_shortcode()
     {
         $html = <<<EOHTML
-        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+        <!--script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script-->
+        <script src="/wp-content/themes/umbrella-group/js/fancybox.umd.js"></script>
          [section class='service_evaluation' id='service_evaluation'  padding="0px"]
            [row]
             [col  span="12" span__sm="12" margin="0px 0px 0px 0px"]
@@ -24,7 +25,7 @@ class service_evaluation
                             </div>
                             <div class="main-text-common desktop_service_evaluation">
                                 Каждый день специалисты мониторят изменения в&nbsp;законодательстве, чтобы быть в&nbsp;курсе нововведений. 
-                                Мы&nbsp;знаем обо всех пошлинах на&nbsp;2022&nbsp;год. Юристы прогнозируют этапы ведения 
+                                Мы&nbsp;знаем обо всех пошлинах на&nbsp;2026&nbsp;год. Юристы прогнозируют этапы ведения 
                                 дел в&nbsp;суде и&nbsp;анализируют всевозможные риски. Поэтому мы&nbsp;точно обозначаем стоимость 
                                 решения ваших задач до&nbsp;старта работ и&nbsp;заранее предупреждаем о&nbsp;возможных дополнительных расходах.
                             </div>

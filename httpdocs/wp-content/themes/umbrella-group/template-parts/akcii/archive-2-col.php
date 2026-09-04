@@ -60,10 +60,15 @@ function umbrella_draw_akcii_tiles($posts)
 
     echo '<div style="padding-top:48px" id="tiles">';
     $tile = "";
-    //echo count($posts);
+    //echo $posts;
 
     foreach ($posts as $post) {
-        $date = "До " . str_replace($en_month, $ru_month, date("d.m.Y", strtotime(date('m', strtotime('+1 month')).'/31/'.date('Y').' 00:00:00')));
+        if($post == 26853) {
+            $date = "До " . str_replace($en_month, $ru_month, date("d.m.Y", strtotime(date('m', strtotime('+12 month')).'/1/'.date('Y').' 00:00:00')));
+        }else{
+            $date = "До " . str_replace($en_month, $ru_month, date("d.m.Y", strtotime(date('m', strtotime('+1 month')).'/1/'.date('2026').' 00:00:00')));
+        }
+
         $date_and_tag = '<div class="case-item-date-and-tag">' . $date . '</div>';
 
 

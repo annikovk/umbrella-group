@@ -27,13 +27,7 @@ class Service_tiles
             "guarantee_decription" => "Учёт ведут профессиональные бухгалтеры, которые постоянно повышают свою квалификацию. Гарантия защиты от ошибок.",
             "guarantee_icon" => "",
         ],
-        [
-            "parent_id" => 12792,
-            "title" => "Сделки с!return_caretнедвижимостью",
-            "guarantee_title" => "Гарантия чистоты проводимой сделки. Без рисков, под ключ.",
-            "guarantee_decription" => "Проверяем юридическую чистоту объекта. С вами работает опытный юрист в сфере недвижимости. Гарантия на проведенную сделку в случае возникновения споров.",
-            "guarantee_icon" => "",
-        ],
+       
         [
             "parent_id" => 32,
             "title" => "Юридические услуги",
@@ -48,6 +42,7 @@ class Service_tiles
             "guarantee_decription" => "После проверки — подробный отчёт, отражающий «узкие места» в работе организации и способы их устранения. Постдоговорное обслуживание.",
             "guarantee_icon" => "",
         ]
+         
     ];
 
     function generate_shortcode($atts)
@@ -75,7 +70,27 @@ class Service_tiles
         foreach ($this->tiles as $tile) {
             $html .= $this->get_tile($tile);
         }
-        $html .= '</div>[/col][/row]</div>';
+        $html .= '<div class="main-services-tile">
+                            <div class="main-services-pages" id="service-title-target-parent-34">
+                            <div class="category-block">
+                            <h3 class="category-title red-on-block-hover"><a href="https://taxlab.ru/services/">Услуги</a></h3>
+                            <div class="arrow-on-hover hide-for-small"></div>
+                            <ul class="children-list">
+                                <li><a href="/services/register-elimination/registracija-kommercheskoj-organizacii/registracija-ooo/">Регистрация ООО</a></li>
+                                <li><a href="/services/register-elimination/likvidatsiya-ooo/s-nulevym-balansom/">Ликвидация ООО с нулевым балансом</a></li>
+                                <li><a href="/services/register-elimination/vnesenie-izmenenij-v-uchreditelnye-dokumenty/smena-yuridicheskogo-adresa-ooo/">Смена юридического адреса ООО</a></li>
+                                <li><a href="/services/register-elimination/vnesenie-izmenenij-v-uchreditelnye-dokumenty/vkhod-uchastnikov-ooo/">Вход нового участника в ООО</a></li>
+                            </ul>
+                            <a class=" red-on-block-hover show-all-link" href="https://taxlab.ru/services/">Показать все <span class="show-for-small"> услуги</span></a>
+                            <a class="show-for-small show-more-pages" data-before="↓ показать ">услуги</a>
+                            </div>
+                            </div>
+                            <div class="main-services-guarantee">
+                            <div class="service-tile-guarantee-icon"><img class="lazy-load" decoding="async" width="34px" alt="bookmark-icon" src="" data-src="/wp-content/uploads/bookmark-services.png"></div>
+                            <div class="service-tile-guarantee-title">Риски застрахованы на сумму более 50 млн рублей</div>
+                            <div class="service-tile-guarantee-description">После проверки — подробный отчёт, отражающий «узкие места» в работе организации и способы их устранения. Постдоговорное обслуживание.</div>
+                            </div>
+                            </div></div>[/col][/row]</div>';
         umbrella_add_custom_js_files(["/assets/js/blocks/services-tiles.js"]);
         if ($this->hide_pages_on_mobile) {
             umbrella_add_custom_js_files(["/assets/js/blocks/services-tiles-hide-pages-on-mobile.js"]);
@@ -104,7 +119,7 @@ class Service_tiles
             'sort_order' => 'ASC',
             'sort_column' => 'menu_order',
             'hierarchical' => 0,
-            'exclude' => '',
+            'exclude' => '30025',
             'include' => '',
             'meta_key' => '',
             'meta_value' => '',
@@ -112,7 +127,7 @@ class Service_tiles
             'child_of' => 0,
             'parent' => $parent_id,
             'exclude_tree' => '',
-            'number' => '5',
+            'number' => '8',
             'offset' => 0,
             'post_type' => 'page',
             'post_status' => 'publish',
@@ -144,6 +159,7 @@ class Service_tiles
                                     <div class="service-tile-guarantee-description">{$tile['guarantee_decription']}</div>
                                 </div>
                             </div>
+
                     EOHTML;
         return $html;
     }

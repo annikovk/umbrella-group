@@ -1,0 +1,176 @@
+.result_title_bus{
+    font-family: 'PT Serif';
+font-style: normal;
+font-weight: 700;
+font-size: 50px;
+line-height: 120%;
+color: #1A1A1A;
+margin-bottom: 60px;
+text-align: center;
+}
+.bg_result_slide {
+    width: 100%;
+    height: 270px;
+    background-size: cover !important;
+}
+.result_item_slide {
+    max-width: 511px;
+    border: 1px solid #F4F4F4;
+    box-shadow: 0px 0px 20px 0px rgb(26 26 26 / 9%);
+    min-height: 880px;
+}
+.result_content {
+    padding: 0 50px 50px;
+}
+.result_logo {
+    border: 1px solid #F4F4F4;
+    box-shadow: 0px 0px 20px rgb(26 26 26 / 9%);
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: block;
+    background-size: cover !important;
+}
+.result_city {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 27px;
+    text-align: right;
+    color: #B3B3B3;
+}
+.result_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    top: -20px;
+}
+.title_result {
+    font-family: 'PT Serif';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 36px;
+    color: #1A1A1A;
+    margin-bottom: 35px;
+}
+.direction_result, .result_status, .result_doing {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 27px;
+    color: #1A1A1A;
+    margin-bottom: 12px;
+}
+.direction_result{
+    font-weight: 700;
+}
+.result_status span {
+    color: #23AE64;
+}
+a.slider_link_reviews{
+    display: flex;
+    align-items: center;
+}
+a.slider_link_reviews span {
+    width: 24px;
+    height: 24px;
+    display: block;
+    background-size: cover !important;
+    margin-right: 15px;
+}
+.pagination_case {
+    margin-top: 75px;
+}
+.swiper-result.swiper-slide:last-child {
+    margin-right: 10px !important;
+}
+.swiper-scrollbar-drag {
+    background: #C9C9C9;
+height: 12px;
+    border-radius: 100px;
+}
+.swiper-horizontal>.swiper-scrollbar, .swiper-scrollbar.swiper-scrollbar-horizontal {
+    background: #F4F4F4;
+    height: 14px;
+    border-radius: 100px;
+    width: 100% !important;
+    left: 0;
+}
+.swiper-result .swiper-slide:last-child {
+    margin-right: 20px !important;
+}
+
+@media(max-width: 768px){
+.swiper-result {
+    padding-bottom: 15px;
+}
+    .result_title_bus{
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 36px;
+        text-align: center;
+        margin-bottom: 45px;
+    }
+.col-mobile_no {
+    padding-right: 0;
+}
+.result_header {
+    display: block;
+    position: static;
+    margin-top: -22px;
+    margin-bottom: 12px;
+}
+.result_city{
+    text-align: center;
+}
+.result_logo {
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+.result_content {
+    padding: 0 30px 50px;
+}
+.bg_result_slide {
+    width: 100%;
+    height: 163px;
+    background-size: cover !important;
+}
+.title_result {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 27px;
+    margin-bottom: 12px;
+}
+.result_content {
+    padding: 0 30px 10px;
+    position: relative;
+    top: -40px !important;
+}
+.direction_result, .result_status, .result_doing{
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 140%;
+}
+a.slider_link_reviews {
+    margin-top: 13px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    font-family: 'Inter';
+}
+.result_client .pagination_case {
+    margin-top: 0px;
+    display: none;
+}
+.result_status span{
+    font-weight: 700;
+}
+}

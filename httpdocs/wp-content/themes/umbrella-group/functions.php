@@ -1,4 +1,20 @@
 <?php
+
+// increase recaptcha score
+// please be aware that KEYS for recaptcha are written in 2 places: header.php and /themes/umbrella/js/recaptcha-wpcf7.js
+
+add_filter( 'wpcf7_recaptcha_threshold',
+
+    function( $threshold ) {
+        $threshold = 0.7; // decrease threshold to 0.3
+
+        return $threshold;
+    },
+
+    10, 1
+);
+
+
 //OMA INTELSIB CODE
 $search_systems = array('google', 'yandex', 'mail.ru', 'rambler', 'bing');
 $important_source = false;
@@ -9,6 +25,7 @@ $source_array = array(
     'term' => null,
     'content' => null
 );
+
 if (isset($_GET['utm_medium'])) {
     $important_source = true;
     $source_array['medium'] = $_GET['utm_medium'];
@@ -106,6 +123,24 @@ function do_shortcode_mail($components, $contactForm, $mailComponent)
 
 //END OMA INTELSIB CODE
 
+add_action('wp_footer', function() {
+    ?>
+    <script>
+    var getCookie = function(name) {
+        var matches = document.cookie.match(new RegExp(
+            "(?:^|; )" + name.replace(/([.$?*|{}()\[\]\/+^])/g, '\\$1') + "=([^;]*)"
+        ));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+    };
+    </script>
+    <?php
+}, 5);
+add_filter('wpcf7_form_response_output', function($output, $class, $content, $form) {
+    return '<div class="custom-cf7-alert ' . esc_attr($class) . '">' 
+           . $content . 
+           '</div>';
+}, 10, 4);
+
 add_filter('use_block_editor_for_post', '__return_false', 10);
 remove_filter('get_the_excerpt', 'wp_trim_excerpt');
 // Add custom Theme Functions here
@@ -132,6 +167,25 @@ function add_custom_fonts()
 }
 
 add_action('wp_enqueue_scripts', 'add_custom_fonts');
+
+// Подключение стилей и скриптов для кастомной формы
+
+add_action('wp_enqueue_scripts', 'custom_form_styles');
+
+function custom_form_styles() 
+{
+	wp_enqueue_style('custom-form-style', '/wp-content/themes/umbrella-group/css/form-custom.css', array(), 5.4);
+}
+
+
+add_action('wp_enqueue_scripts', 'true_include_mailscript');
+ 
+function true_include_mailscript() {
+	wp_enqueue_script( 'mailscript', get_stylesheet_directory_uri() . '/js/script.js', array(), 4.1, true);
+}
+
+
+/* ************************************************************ */
 
 require get_theme_file_path() . '/includes/custom_post_types/client.php';
 require get_theme_file_path() . '/includes/custom_post_types/akcii.php';
@@ -185,7 +239,10 @@ require get_theme_file_path() . '/template-parts/shortcodes/foooter_business_pag
 require get_theme_file_path() . '/template-parts/shortcodes/form_bottom_business.php';
 // Hook : to get content with s3elected AB tests variants only
 require get_theme_file_path() . '/umbrella_filter_ab_tests.php';
+
+
 add_action('init', 'umbrella_get_ab_test_tags');
+
 add_filter('the_content', 'umbrella_filter_ab_tests');
 add_filter('wp_footer', 'umbrella_filter_ab_tests');
 require get_theme_file_path() . '/css/css_collector.php';
@@ -257,7 +314,7 @@ function umbrella_draw_tiles($posts, $type)
             $date = str_replace($en_month, $ru_month, date("j F", strtotime($post->post_date)));
 
             if (!isset($tag)){ $tag = "";}
-                $date_and_tag = '<div class="case-item-date-and-tag">' . $date . '&emsp;&emsp;&emsp;&emsp;' . $tag . '</div>';
+            $date_and_tag = '<div class="case-item-date-and-tag">' . $date . '&emsp;&emsp;&emsp;&emsp;' . $tag . '</div>';
 
 
             $excerpt = get_the_excerpt($post->ID);
@@ -309,7 +366,7 @@ function umbrella_draw_tiles($posts, $type)
             }
             if ($isFeedback) {
                 $block_id = uniqid('', false);
-                echo '<a class="client-item-block" rel="nofollow" href="#' . $block_id . '">';
+                echo '<a class="client-item-block" href="#' . $block_id . '">';
                 //echo "<div class='client-item-block' onclick='window.location=`" . get_permalink($post->ID) . "`;'>";
                 echo '<div class="feedback-exists-icon"><img src="/wp-content/uploads/2019/09/icon-people.png" height="20px" width="20px"></div>';
                 echo '<div class="feedback-exists-text">Читать отзыв клиента →</div>';
@@ -893,7 +950,7 @@ function make_feedback_tile($post, $border = true)
         $tile = '[col_inner span="12" span__sm="12" align="left" margin="0px 0px -30px 0px"]' . $titleAndIndustry . $thumbnail . $excerpt . $content . '[/col_inner]';
     }
     if ($border) {
-        return '<div style="border: solid 2px #f9f9f9; margin-top: 40px;">[row_inner padding="40px 0 40px 0" style="collapse" v_align="top" class="feedback-row all ' . $category_classes_string . '"]' . $tile . '[/row_inner] </div>';
+        return '<div style="border: solid 2px #f9f9f9;">[row_inner padding="40px 20px 40px 20px" style="collapse" v_align="top" class="feedback-row all ' . $category_classes_string . '"]' . $tile . '[/row_inner] </div>';
     } else {
         return '<div style="margin-top: 40px;">[row_inner padding="40px 0 40px 0" style="collapse" v_align="top" class="feedback-row all ' . $category_classes_string . '"]' . $tile . '[/row_inner] </div>';
     }
@@ -995,12 +1052,14 @@ function umbrella_draw_filter_tabs($tabs, $posts, $type = 'blogposts')
 }
 
 function custom_filter_wpcf7_is_tel($result, $tel)
+
 {
     $result = preg_match('/^\(?\+?([0-9]{1,4})?\)?[-\. ]?(\d{10})$/', $tel);
     return $result;
 }
 
 add_filter('wpcf7_validate_tel', 'custom_filter_wpcf7_is_tel', 10, 2);
+
 
 
 if (function_exists('acf_add_options_page')) {
@@ -1032,3 +1091,19 @@ if (function_exists('acf_add_options_page')) {
 
 
 ?>
+
+<?php
+add_action('wp_footer', 'output_cookie_notice');
+
+function output_cookie_notice() {
+    if( isset( $_COOKIE['cookieNotice'] ) ) {
+        return;
+    } ?>
+    <div class="cookie-notice">
+        <div class="cookie-notice__text">Мы используем cookies, чтобы сайт работал лучше. Продолжая пользоваться сайтом, вы соглашаетесь с <a href="/politika-cookie/">использованием cookies</a></div>
+        <div class="cookie-notice__buttons">
+            <a href="#" class="cookie-notice__confirm">Принимаю</a>
+        </div>
+    </div>
+<?php }
+

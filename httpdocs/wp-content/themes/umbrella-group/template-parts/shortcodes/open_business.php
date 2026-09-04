@@ -3,7 +3,8 @@
 function open_business_shortcode($atts){
         $html = <<<EOTHTML
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"/>
-        <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+        <!--script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script-->
+        <script src="/wp-content/themes/umbrella-group/js/swiper-bundle.min.js"></script>
          [section id='open_business' class='open_business'  padding="0px"]
              
             <div class="open_business_screen pd">

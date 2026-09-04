@@ -19,6 +19,11 @@ class SU_welcome_screen
     private $price;
     private $specialist_text;
 
+    // === Список URL, на которых НЕ нужно выводить номер телефона (текст остаётся) ===
+    private $hide_phone_urls = [
+        '/services/licensing/skidka-15-procentov-na-tovarny-znak/',
+    ];
+
 
     public function fill_attributes()
     {
@@ -88,8 +93,6 @@ class SU_welcome_screen
                        EOHTML;
 
         }
-
-
     }
 
     private function get_phone_text()
@@ -133,6 +136,16 @@ class SU_welcome_screen
         $specialist_text = $this->get_specialist_text();
         $rating1 = umbrella_get_ratings('expert');
         $rating2 = umbrella_get_ratings('header');
+
+        // === Проверяем: нужно ли скрыть номер телефона на текущей странице ===
+        if (in_array($_SERVER['REQUEST_URI'], $this->hide_phone_urls)) {
+            // Только текст без номера
+            $phone_block = '<p>' . $this->phone_text . '</p>';
+        } else {
+            // Обычный вывод: текст + номер
+            $phone_block = '<p>' . $phone_text . '</p>';
+        }
+
         $html = <<<EOHTML
             <div class="su_welcome_screen">
                 <div class="su_welcome_banner">
@@ -148,6 +161,7 @@ class SU_welcome_screen
                 </div>
             <div class="su_welcome_banner_overlay">
             EOHTML;
+
         if(wp_is_mobile()){
             $html .= <<<EOHTML
                 <div class="show-for-medium">$button</div>
@@ -170,14 +184,26 @@ class SU_welcome_screen
                     </div>
                     <div class="su_welcome_banner_overlay_bottom">
                         $price_from_conditions
-                        <p>$phone_text</p>
+                        $phone_block
                         <p>$specialist_text</p>
                     EOHTML;
+
+           if($_SERVER['REQUEST_URI']=='/services/licensing/litsenziya-na-meditsinskuyu-deyatelnost/') {
+            if(!wp_is_mobile()){
+                $html .= <<<EOHTML
+                <div style="display:flex;">
+                    <div data-rr style="display:block" class="hide-for-medium">$button</div>
+                    
+                </div>
+                EOHTML;
+            }
+           }else{
             if(!wp_is_mobile()){
                 $html .= <<<EOHTML
                     <div style="display:block" class="hide-for-medium">$button</div>
                 EOHTML;
             }
+          }
             $html .= <<<EOHTML
                     </div>
             </div>
@@ -220,7 +246,7 @@ function umbrella_get_ratings($type='')
     switch ($type) {
         case 'expert':
             $icon = '/wp-content/uploads/rating-expert-icon.png';
-            $header = '2 место рейтинга консалтинговых агентств Сибири, 2009-2013';
+            $header = '2 место рейтинга консалтинговых агенств Сибири, 2009-2013';
             return ['icon'=>$icon,'header'=> $header,'subheader'=> ""];
         case 'expert-header':
             $icon = '/wp-content/uploads/manual_uploads/pravo-300.png';
@@ -256,5 +282,3 @@ function umbrella_get_ratings($type='')
     }
     return ['icon'=>$icon,'header'=> $header,'subheader'=> $subheader];
 }
-
-

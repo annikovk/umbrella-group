@@ -1,0 +1,209 @@
+h2.title_form_calculate_busnisse_bottom {
+    font-family: 'PT Serif';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 110%;
+    text-align: center;
+    color: #1A1A1A;
+    margin-bottom: 60px;
+}
+p.sub_title_form_calculate_busnisse_bottom {
+    font-family: 'PT Serif';
+    font-style: italic;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 140%;
+    text-align: center;
+    color: #1A1A1A;
+    margin-bottom: 60px;
+}
+.form_busnisse_wrap_inner {
+    border: 1px solid #C9C9C9;
+    padding: 60px 164px;
+    padding-bottom: 80px;
+}
+
+.form_busnisse_wrap {
+    padding: 30px;
+    max-width: 994px;
+    width: 100%;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px rgb(26 26 26 / 27%);
+    margin: 0 auto;
+}
+.form_busnisse_wrap_inner h2 {
+    font-family: 'PT Serif';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 120%;
+    color: #1A1A1A;
+    text-align: center;
+    margin-bottom: 35px;
+}
+.desc_form_calc {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 27px;
+    color: #1A1A1A;
+    margin-bottom: 35px;
+}
+.bonus_desc_form {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 35px;
+    margin-left: -87px;
+}
+.bonus_desc_form img {
+    height: 73px;
+}
+.list_form_bonus {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 27px;
+}
+.list_form_bonus li{
+    margin-bottom: 0;
+}
+.list_form_bonus p{
+    margin-bottom: 0;
+}
+.list_form_bonus p span{
+    color: #EC1C23;
+}
+.bonus_desc_form img{
+   margin-right: 15px;
+}
+.form_busnisse_wrap_inner input {
+    box-shadow: none;
+    border: none;
+    border-bottom: 2px solid #C9C9C9;
+    outline: none !important;
+}
+.form_busnisse_wrap_inner .mute-text-normal-common.small-mute-text {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+    color: #C9C9C9;
+}
+.form_busnisse_wrap_inner .approve_free_consultation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 35px;
+    margin-bottom: 8px;
+}
+.form_busnisse_wrap_inner input.wpcf7-form-control.has-spinner.wpcf7-submit {
+    max-width: 285px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 27px;
+    border: none;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.form_busnisse_wrap_inner  .approve_free_consultation #approve {
+    accent-color: #C9C9C9;
+    margin: 0;
+    margin-bottom: 0px;
+}
+.form_busnisse_wrap_inner .cf7-submit-button {
+    text-align: center;
+    margin: 0 auto;
+}
+.form_busnisse_wrap_inner .wpcf7 .wpcf7-form-control-wrap input {
+    margin-bottom: 0;
+}
+
+.form_busnisse_wrap_inner .wpcf7 .wpcf7-form-control-wrap {
+    margin-bottom: 18px;
+}
+.list_form_bonus ul {
+    padding-left: 17px;
+}
+.list_form_bonus ul{
+    margin: 0;
+}
+.page-template-page-bussnise{
+    background: #fff;
+}
+
+@media(max-width: 768px){
+    .form_busnisse_wrap_inner {
+        border: 0;
+        padding: 0;
+        padding-bottom: 0;
+    }
+    .form_busnisse_wrap{
+        box-shadow: none;
+    }
+    .form_busnisse_wrap_inner h2 {
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 36px;
+        margin-bottom: 25px;
+    }
+    .list_form_bonus ul {
+        display: none;
+    }
+    .bonus_desc_form {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 30px;
+        margin-left: 0;
+    }
+    .list_form_bonus p {
+        margin-bottom: 0;
+        font-size: 16px;
+    }
+    .bonus_desc_form img {
+        margin-right: 15px;
+        width: 49px;
+    }
+    .desc_form_calc br {
+        display: none;
+    }
+
+    .desc_form_calc {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 140%;
+    }
+    .form_busnisse_wrap_inner .approve_free_consultation {
+        align-items: flex-start;
+        margin-left: 6px;
+    }
+    .bonus_desc_form {
+        margin-bottom: 25px;
+    }
+    .form_busnisse_wrap_inner .mute-text-normal-common.small-mute-text {
+        margin-left: 10px;
+    }
+    .form_busnisse_wrap_inner input.wpcf7-form-control.has-spinner.wpcf7-submit {
+        width: 270px;
+        margin: 0 auto !important;
+    }
+    h2.title_form_calculate_busnisse_bottom {
+        font-weight: 700;
+        font-size: 36px;
+        line-height: 120%;
+        margin-bottom: 15px;
+    }
+    p.sub_title_form_calculate_busnisse_bottom {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 27px;
+        margin-bottom: 180px;
+    }
+}

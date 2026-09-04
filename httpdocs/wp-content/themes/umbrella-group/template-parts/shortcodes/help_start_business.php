@@ -25,7 +25,7 @@ class help_start_business
                     <div class="title-h1-text-common">Помогаем открыть бизнес &laquo;под&nbsp;ключ&raquo;</div>
                     <div class="main-text-common">
                         С&nbsp;1990 года мы&nbsp;накопили опыт, чтобы не&nbsp;только решать отдельные вопросы,
-                        но&nbsp;и&nbsp;открывать бизнес &laquo;под ключ&raquo;.
+                        но&nbsp;и&nbsp;<a class="action-text-common" href="/services/register-elimination/otkrytie-biznesa-pod-klyuch/">открывать бизнес &laquo;под ключ&raquo;</a>.
                     </div>
                     <div class="help_start_business_content">
                         <div class="left_text_help_start_business_content">
@@ -40,8 +40,8 @@ class help_start_business
                                     </span> 
                                     <br>
                                     Зарегистрируем организацию и&nbsp;товарный знак, 
-                                    получим образовательную лицензию, подберём помещение, подходящее под все требования, проверим программу обучения 
-                                    и&nbsp;подготовим к&nbsp;проверкам Роспотребнадзора и&nbsp;Минобра. Поможем установить онлайн-кассу. 
+                                    получим <a class="action-text-common" href="/services/licensing/litsenziya-na-obrazovatelnuyu-deyatelnost/">образовательную лицензию</a>, подберём помещение, подходящее под все требования, проверим программу обучения 
+                                    и&nbsp;<a class="action-text-common" href="/services/licensing/zaklyuchenie-rospotrebnadzora/">подготовим к&nbsp;проверкам Роспотребнадзора</a> и&nbsp;Минобра. Поможем установить онлайн-кассу. 
                                     Если вы&nbsp;хотите, чтобы в&nbsp;школе проигрывлась музыка, например, на&nbsp;ресепшене, 
                                     то&nbsp;заключим договор с&nbsp;РАО или ВОИС&nbsp;&mdash; аккредитованными организациями по&nbsp;коллективному 
                                     управлению интеллектуальными правами. <br><br>

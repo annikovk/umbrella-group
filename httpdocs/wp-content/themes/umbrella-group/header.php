@@ -6,6 +6,8 @@
 <!--[if (gte IE 9)|!(IE)]><!-->
 <html <?php language_attributes(); ?> class="<?php flatsome_html_classes(); ?>"> <!--<![endif]-->
 <head>
+
+  
     <meta charset="<?php bloginfo('charset'); ?>"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta name="cmsmagazine" content="6436b2df9477c3bdde6dd89690ae98b9"/>
@@ -13,6 +15,42 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="profile" href="http://gmpg.org/xfn/11"/>
     <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>"/>
+    <link rel='stylesheet'href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <!--link rel='stylesheet' href='/wp-content/themes/umbrella-group/css/font-awesome.min.css'-->
+    <style>
+        ul.tabs {
+            list-style-type: none;
+            display: flex;
+            flex-wrap: wrap;
+            row-gap: 8px;
+            flex-direction: row;
+            padding-top: 40px;
+            margin-bottom: unset;
+        }
+        @media screen and (max-width: 849px) {
+            .first-screen-services-tabs {
+                background-color: #F9F9F9;
+                display: grid;
+            }
+            h1 {
+                font-size: 34px !important;
+                line-height: 1.25 !important;
+            }
+            .main-banner-content {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+                width: 100%;
+                font-size: 14px;
+            }
+            ul.tabs {
+                flex-wrap: unset;
+            }
+            .first-screen-services-tabs ul.tabs {
+                padding-top: unset;
+            }
+        }
+    </style>
 
     <?php wp_head(); ?>
 
@@ -49,6 +87,7 @@
 
     <!-- Marquiz script start -->
     <script>
+        
     <?php if ($_SERVER['REQUEST_URI'] == '/blog/%D0%BF%D1%80%D0%B8%D0%B3%D0%BB%D0%B0%D1%88%D0%B0%D0%B5%D0%BC-%D0%BD%D0%B0-%D0%B1%D0%B5%D1%81%D0%BF%D0%BB%D0%B0%D1%82%D0%BD%D1%8B%D0%B9-%D0%B2%D0%B5%D0%B1%D0%B8%D0%BD%D0%B0%D1%80-%D0%B7%D0%B0/'): ?>
         (function (w, d, s, o) {
             var j = d.createElement(s);

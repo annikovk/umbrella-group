@@ -20,7 +20,7 @@ class free_consultation
                     <div class="main-text-common main-text-free_consultation margin_text_free_consultation">
                         Специалист тезисно разберёт ваш вопрос на&nbsp;3-минутной бесплатной консультации.
                         Закажите обратный звонок и&nbsp;мы&nbsp;свяжемся с&nbsp;вами в&nbsp;течение 20&nbsp;минут
-                        в&nbsp;наше рабочее время:пн. &mdash;&nbsp;пт.&nbsp;с&nbsp;09:00 до&nbsp;18:00.
+                        в&nbsp;наше рабочее время:пн. &mdash;&nbsp;пт.&nbsp;с&nbsp;09:00 до&nbsp;18:00 по Новосибирску.
                     </div>
                     [contact-form-7 id="13771" title="Форма на главной (бесплатная консультация)"]
                 </div>

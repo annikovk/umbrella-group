@@ -15,18 +15,18 @@ class footer_map
                 </iframe>
             <div class="contact-info_footer_map card-shadow-common_footer_map" itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
                 <div>
-                <div class="main-text-common">C 09:00 до 18:00 на связи:</div>
-                <a  class="contact_link" href=”tel:+73833731717”>+ 7 (383) xx xx xx</a>
+                <div class="main-text-common">C 09:00 до 18:00 по Новосибирску:</div>
+                <a  class="contact_link" 11 href="tel:+73833731717">+ 7 (383) xx xx xx</a>
                 </div>
                 <div>
                 <div class="main-text-common">Круглосуточно по почте:</div>
-                <a  class="contact_link" mailvalue="contact@taxlab.ru" href="contact@taxlab.ru"> contact@taxlab.ru</a>
+                <a  class="contact_link" mailvalue="contact@taxlab.ru" href="mailto:contact@taxlab.ru"> contact@taxlab.ru</a>
                 </div>
                 <div class="main-text-common">
                 <span itemprop="addressLocality">г. Новосибирск </span> ,
                 <ul>
                 <li test1 itemprop="streetAddress">ул. Максима Горького, д. 34</li>
-                <li>ул. Площадь Труда, д. 1</li>
+                <li>площадь Труда, д. 1</li>
                 </ul>
                 </div>
             </div>

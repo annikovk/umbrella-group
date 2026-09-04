@@ -1,0 +1,208 @@
+h2.case_title_bus {
+    font-family: 'PT Serif';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 120%;
+    text-align: center;
+    color: #1A1A1A;
+    margin-bottom: 60px;
+}
+.text_case span{
+        display: block;
+        margin-bottom: 30px;
+}
+img.reviews_news {
+    height: 31px;
+    margin-right: 18px;
+}
+h3.case_sub_title_bus {
+        font-family: 'PT Serif';
+        font-style: italic;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 140%;
+        color: #1A1A1A;
+        max-width: 800px;
+        margin: 0 auto 60px;
+}
+.case_business_slider .swiper-slide {
+        width: 1100px;
+        box-shadow: 0px 0px 20px rgb(26 26 26 / 9%);
+}
+.case_business_slider .swiper{
+        width: 100%;
+        height: 100%;
+}
+.case_item_slide {
+        display: flex;
+        align-items: center;
+}
+.case_business_slider .swiper-slide:last-child{
+        margin-right: 15px !important;
+}
+.case_business_slider {
+        padding: 25px 0;
+}
+.case_content {
+        padding: 48.5px 60px;
+}
+.text_case ul {
+        padding: 0;
+        margin: 0;
+        padding-left: 25px;
+}
+.text_case {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 27px;
+        color: #1A1A1A;
+}
+.date_case_bus {
+        color: #B3B3B3;
+        font-weight: 700;
+        margin-bottom: 30px;
+}
+a.slider_link_reviews {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 27px;
+        text-decoration-line: underline;
+        color: #587291;
+        display: block;
+        margin-top: 35px;
+}
+.bg_slide {
+        max-width: 460px;
+        flex-shrink: 0;
+        width: 100%;
+        height: 460px;
+        background-size: cover !important;
+        background-position: center !important;
+}
+.case_business_slider .pagination_case {
+    justify-content: center;
+    display: flex;
+    /* max-width: 151px; */
+    margin: 0 auto;
+    margin-top: 40px;
+}
+.case_business_slider .swiper-pagination {
+        position: static;
+        padding: 0;
+        margin: 0 20px;
+        width: auto;
+}
+.case-swiper-button-prev, .case-swiper-button-next{
+        cursor: pointer;
+}
+.case_business_slider span.swiper-pagination-bullet.swiper-pagination-bullet-active{
+        background: #EC1C23;
+}
+.case_business_slider  span.swiper-pagination-bullet {
+        width: 9.51px;
+        height: 9.51px;
+        left: 18.07px;
+        top: 17.75px;
+        background: #C9C9C9;
+        border-radius: 0;
+}
+.case_business_slider .swiper-button-disabled {
+        display: none;
+}
+.mobile_case_bus{
+        display: none;
+}
+@media(max-width: 768px){
+h2.case_title_bus{
+        font-family: 'PT Serif';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 36px;
+        text-align: center; 
+        margin-bottom: 45px;
+}
+h3.case_sub_title_bus {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 27px;
+        color: #1A1A1A;
+        margin-bottom: 45px;
+}
+.mobile_case_bus .bg_slide {
+    height: 330px;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    width: 100%;
+}
+.mobile_case_bus {
+    box-shadow: 0px 0px 20px rgb(26 26 26 / 9%);
+    max-width: 330px;
+    margin: 0 auto;
+}
+.mobile_case_bus .case_item_slide {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+}
+.mobile_case_bus .case_item_slide {
+    display: block;
+}
+.mobile_case_bus .case_content {
+    padding: 42px 30px;
+}
+.mobile_case_bus .text_case {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 140%;
+}
+.mobile_case_bus .date_case_bus {
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 140%;
+        margin-bottom: 20px;
+}
+.mobile_case_bus .case_item_slide {
+    display: block;
+}
+.mobile_case_bus .case_content .text_case span {
+    margin-bottom: 20px;
+    display: block;
+}
+div#history_case .modal-body {
+    position: absolute;
+    padding: 100px 30px;
+}
+div#history_case .content_modal h2 {
+    font-size: 28px;
+    margin-bottom: 25px;
+}
+.wrap_history_img{
+        padding:60px 0;
+}
+.mobile_case_bus{
+        display: block;
+}
+.case_business_slider {
+    display: none;
+}
+div#history_case .modal-content:before {
+    content: '';
+    background: linear-gradient(0.9deg, #FFFFFF 6.36%, rgba(255, 255, 255, 0) 60.32%);
+    height: 70px;
+    position: sticky;
+    width: 100%;
+    top: 90%;
+    left: 0;
+    right: 0;
+    z-index: 9;
+}
+}

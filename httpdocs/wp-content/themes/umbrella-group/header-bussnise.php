@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css"/>
     <link rel="stylesheet" href="https://unpkg.com/slick-carousel@1.7.1/slick/slick-theme.css"/>
     <link rel="stylesheet" href="https://unpkg.com/slick-carousel@1.7.1/slick/slick.css"/>
+   
+     <link rel='stylesheet'href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
     <?php wp_head(); ?>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->

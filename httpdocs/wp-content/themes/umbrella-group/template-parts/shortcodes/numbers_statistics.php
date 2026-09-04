@@ -18,7 +18,7 @@ class numbers_statistics
                         Перед встречей мы&nbsp;тщательно изучаем ваш вопрос и&nbsp;собираем команду
                         из&nbsp;специалистов так, чтобы комплексно решить вашу задачу. Например, за&nbsp;1&nbsp;визит
                         вы&nbsp;можете навестить вашего бухгалтера или специалиста по&nbsp;кадрам, задать вопросы
-                        юристу, получить консультацию по&nbsp;регистрации товарного знака.
+                        юристу, получить консультацию по&nbsp;<a class="action-text-common" href="/services/licensing/registracija-tovarnogo-znaka/">регистрации товарного знака</a>.
                         <br>
                         <br>
                         ГК&nbsp;Umbrella Group&nbsp;&mdash;&nbsp;это:

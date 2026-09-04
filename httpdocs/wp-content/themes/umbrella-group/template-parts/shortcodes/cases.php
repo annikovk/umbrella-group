@@ -6,52 +6,100 @@ class cases
     private $js_files = ['/assets/js/blocks/cases.js'];
     private $category = "";
     private $titles = [
-        "Бухгалтерия" => [
-            "title" => "Кейсы: проблемы с бухгалтерией и их решения"
-        ],
-        "Аудит" => [
-            "title" => "Кейсы об аудиторской проверке"
-        ],
-        "Юридические услуги" => [
-            "title" => "Кейсы: юридическая практика"
-        ],
-        "Лицензирование" => [
-            "title" => "Кейсы лицензирования"
-        ],
-        "Регистрация" => [
-            "title" => "Кейсы: истории регистрации наших клиентов"
-        ],
-        "Ликвидация" => [
-            "title" => "Кейсы: истории о закрытии компаний"
-        ],
-        "Общий" => [
-            "title" => "Кейсы: истории о клиентах"
-        ],
-        "cases" => [
-            "title" => ""
-        ],
+        "Бухгалтерия" => ["title" => "Кейсы: проблемы с бухгалтерией и их решения"],
+        "Аудит" => ["title" => "Кейсы об аудиторской проверке"],
+        "Юридические услуги" => ["title" => "Кейсы: юридическая практика"],
+        "Лицензирование" => ["title" => "Кейсы лицензирования"],
+        "Регистрация" => ["title" => "Кейсы: истории регистрации наших клиентов"],
+        "Ликвидация" => ["title" => "Кейсы: истории о закрытии компаний"],
+        "Общий" => ["title" => "Кейсы: истории о клиентах"],
+        "cases" => ["title" => ""],
     ];
     public $atts;
     public $err;
     private $all_metas = [];
     private $is_cases_category_page;
 
+    // Доп. фильтры и режим
+    private $filter_category = "";   // значение category="..."
+    private $filter_ids = [];        // массив ID из ids="..."
+    private $is_flat_mode = false;   // без табов, но со слайдером
+
     public function fill_attributes()
     {
+        // Базовое направление (branch) — как раньше
         if (isset($this->atts['branch'])) {
             $this->category = $this->atts['branch'];
-            return true;
         } else {
             $this->category = $this->get_category_by_url();
-            return true;
         }
+
+        // Доп. фильтр по конкретной категории
+        if (isset($this->atts['category']) && trim($this->atts['category']) !== "") {
+            $this->filter_category = trim($this->atts['category']);
+        }
+
+        // Доп. выборка по ID
+        if (isset($this->atts['ids']) && trim($this->atts['ids']) !== "") {
+            $ids = array_map('intval', explode(',', $this->atts['ids']));
+            $this->filter_ids = array_values(array_filter($ids, function ($id) {
+                return $id > 0;
+            }));
+        }
+
+        // Плоский режим (без табов, со слайдером): задан category ИЛИ ids
+        $this->is_flat_mode = ($this->filter_category !== "" || !empty($this->filter_ids));
+
+        return true;
     }
 
     public function generate_shortcode()
     {
         $this->is_cases_category_page = $this->category == "cases";
-        $title = $this->get_title($this->category);
+
+        // В плоском режиме заголовок по branch не выводим
+        $title = $this->is_flat_mode ? "" : $this->get_title($this->category);
+
         $posts = $this->get_cases_posts($this->category);
+
+        // ===== ПЛОСКИЙ РЕЖИМ: без табов, один слайдер =====
+        if ($this->is_flat_mode) {
+            $posts_tiles = "";
+            $posts_count = 0;
+            foreach ($posts as $post) {
+                $posts_tiles .= $this->get_tile($post);
+                $posts_count += 1;
+            }
+
+            if ($posts_count < 2) {
+                $tiles = "<div class='cases_flat'>" . $posts_tiles . "</div>";
+            } else {
+                $tiles = '[ux_slider auto_slide="false" draggable="true" hide_nav="true" nav_style="simple" bullet_style="square" class="cases_flat"]'
+                    . $posts_tiles
+                    . '[/ux_slider]';
+            }
+
+            $html = <<<EOHTML
+            [section id='umbrella-cases'  padding="0px" class="umbrella-cases-section"]
+                [row]
+                    [col  span="12" span__sm="12" margin="0px 0px 0px 0px"]
+                        <div class="newcases">
+                            $title
+                            <div class="content">
+                                <div class="tiles" style="padding:0 20px;">$tiles</div>
+                            </div>
+                        </div>
+                    [/col]
+                [/row]
+            [/section]
+            EOHTML;
+
+            umbrella_add_custom_css_files($this->css_files);
+            umbrella_add_custom_js_files($this->js_files);
+            return $html;
+        }
+
+        // ===== СТАРАЯ ЛОГИКА: табы + слайдеры =====
         foreach ($posts as $post) {
             $this->concat_metas($post);
         }
@@ -79,7 +127,7 @@ class cases
                         $title
                         <div class="content">
                             $tabs
-                            <div class="tiles">$tiles</div>
+                            <div class="tiles" style="padding:0 20px;">$tiles</div>
                         </div>
                     </div>
                 [/col]
@@ -93,7 +141,7 @@ class cases
 
     private function get_tile($post): string
     {
-        $visible = in_array_r($this->all_metas[0], get_post_meta($post->ID)) ? "" : "invisible";
+        $visible = in_array_r($this->all_metas[0] ?? null, get_post_meta($post->ID)) ? "" : "invisible";
         $postmeta = $this->getPostmeta($post);
         $metaclases = "";
         foreach ($postmeta as $post_meta) {
@@ -114,7 +162,6 @@ class cases
             $proof_lightbox_id = $post->ID . "-proof-lightbox";
             $proof_lightbox = "[lightbox id={$proof_lightbox_id}] <img src='{$proof}'> [/lightbox]";
             $proof = " <div class='proof hide-for-small'><a href='#{$proof_lightbox_id}'><img src='{$proof}' alt='{$proof_title}'></a><span>{$proof_title}</span></div> $proof_lightbox";
-
         }
         $feedback_text = esc_attr(get_post_meta($post->ID, 'case_feedback_text', true));
         $feedback_url = esc_attr(get_post_meta($post->ID, 'case_feedback_url', true));
@@ -140,8 +187,6 @@ class cases
                 $feedback_lightbox = "[lightbox id={$feedback_lightbox_id}] <img src='{$feedback_url}'> [/lightbox]";
                 $feedback = "<div class='case-feedback hide-for-small'><a $target href='#{$feedback_lightbox_id}'>$icon {$feedback_text}</a></div> $feedback_lightbox";
             }
-
-
         } else {
             $feedback = "";
         }
@@ -168,6 +213,61 @@ class cases
 
     private function get_cases_posts(string $category): array
     {
+        // ===== ПЛОСКИЙ РЕЖИМ: category + ids (объединение) =====
+        if ($this->is_flat_mode) {
+            $result = [];
+            $seen_ids = [];
+
+            // 1) Сначала — кейсы по branch + category
+            if ($this->filter_category !== "") {
+                $meta_query = array('relation' => 'AND');
+                if ($category !== "" && $category !== "Общий" && $category !== "cases") {
+                    $meta_query[] = array(
+                        'key' => 'case_branch',
+                        'value' => $category,
+                        'compare' => '=',
+                    );
+                }
+                $meta_query[] = array(
+                    'key' => 'case_category',
+                    'value' => $this->filter_category,
+                    'compare' => '=',
+                );
+
+                $cat_posts = get_posts(array(
+                    'numberposts' => -1,
+                    'orderby' => 'menu_order',
+                    'order' => 'ASC',
+                    'post_type' => 'case',
+                    'meta_query' => $meta_query,
+                ));
+
+                foreach ($cat_posts as $p) {
+                    if (!in_array($p->ID, $seen_ids)) {
+                        $result[] = $p;
+                        $seen_ids[] = $p->ID;
+                    }
+                }
+            }
+
+            // 2) Потом — добавленные по ids (в порядке из шорткода)
+            if (!empty($this->filter_ids)) {
+                foreach ($this->filter_ids as $id) {
+                    if (in_array($id, $seen_ids)) {
+                        continue;
+                    }
+                    $p = get_post($id);
+                    if ($p && $p->post_type === 'case' && $p->post_status === 'publish') {
+                        $result[] = $p;
+                        $seen_ids[] = $p->ID;
+                    }
+                }
+            }
+
+            return $result;
+        }
+
+        // ===== СТАРАЯ ЛОГИКА =====
         if ($category == "Общий") {
             $args = array(
                 'numberposts' => -1,
@@ -176,11 +276,7 @@ class cases
                 'post_type' => 'case',
                 'meta_key' => 'case_common',
                 'meta_query' => array(
-                    array(
-                        'key' => 'case_common',
-                        'value' => 'Да',
-                        'compare' => '=',
-                    )
+                    array('key' => 'case_common', 'value' => 'Да', 'compare' => '=')
                 )
             );
         } elseif ($category == "cases") {
@@ -198,11 +294,7 @@ class cases
                 'post_type' => 'case',
                 'meta_key' => 'case_branch',
                 'meta_query' => array(
-                    array(
-                        'key' => 'case_branch',
-                        'value' => $category,
-                        'compare' => '=',
-                    )
+                    array('key' => 'case_branch', 'value' => $category, 'compare' => '=')
                 )
             );
         }
@@ -229,7 +321,7 @@ class cases
 
     private function get_title(string $category): string
     {
-        $title = $this->titles[$category]["title"];
+        $title = $this->titles[$category]["title"] ?? "";
         $title = (strlen($title) > 1) ? ' <div class="cases_title"><h2 class="title">' . $title . '</h2></div>' : '';
         return $title;
     }
@@ -261,10 +353,6 @@ class cases
         return $tabs;
     }
 
-    /**
-     * @param $post
-     * @return mixed
-     */
     private function getPostmeta($post): array
     {
         $key = $this->getPostmetaKey();
@@ -300,8 +388,6 @@ class cases
         );
         return get_posts($args);
     }
-
-
 }
 
 function cases_block_shortcode($atts)

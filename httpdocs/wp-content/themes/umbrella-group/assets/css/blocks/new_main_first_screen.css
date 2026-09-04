@@ -5,6 +5,15 @@
     line-height: 110%;
 }
 
+.first-screen h1.sub-header {
+    font-family: Inter, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 140%;
+    color: #1a1a1a;
+}
+
 .first-screen .icon-box-text {
     padding-right: 50px;
 }
@@ -53,6 +62,7 @@
     display: flex;
     flex-direction: row;
     max-width: 1200px;
+    align-items: center;
 }
 
 .main-banner-content .text-like-h1 {
@@ -60,7 +70,7 @@
 }
 
 .main-banner-content .button {
-    position: absolute;
+    /*position: absolute;*/
     bottom: 0px;
     width: 304px;
     margin-bottom: unset;
@@ -88,6 +98,15 @@
         font-size: 14px;
         line-height: 140%;
         color: #707070;
+    }
+
+    .first-screen .main-banner-content h1.sub-header {
+        font-family: Inter, sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px!important;
+        line-height: 140%;
+        color: #1a1a1a;
     }
 
     .first-screen .main-banner-content .description {

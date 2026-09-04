@@ -1,0 +1,48 @@
+# В git едет только свой код: тема umbrella-group, два правленых шорткода
+# flatsome, корневые SEO-файлы и картинки, залитые руками под тему. Ядро
+# WordPress, плагины, кэш, медиатека, wp-config.php с паролями и защитные
+# скрипты остаются только в локальном зеркале httpdocs/ (2.4 ГБ, копия сервера).
+# Скоуп ровно тот, что репозиторий вёл до этого, — чтобы диффы читались.
+
+/httpdocs/*
+!/httpdocs/googlefe7ca66817e2398c.html
+!/httpdocs/robots.txt
+!/httpdocs/sitemap.xml
+!/httpdocs/wp-content/
+
+/httpdocs/wp-content/*
+!/httpdocs/wp-content/advanced-cache.php
+!/httpdocs/wp-content/index.php
+!/httpdocs/wp-content/maintenance.php
+!/httpdocs/wp-content/themes/
+!/httpdocs/wp-content/uploads/
+
+/httpdocs/wp-content/themes/*
+!/httpdocs/wp-content/themes/umbrella-group/
+!/httpdocs/wp-content/themes/flatsome/
+
+# Из flatsome правлены только два шорткода, остальное — вендорский код темы.
+/httpdocs/wp-content/themes/flatsome/*
+!/httpdocs/wp-content/themes/flatsome/inc/
+/httpdocs/wp-content/themes/flatsome/inc/*
+!/httpdocs/wp-content/themes/flatsome/inc/shortcodes/
+/httpdocs/wp-content/themes/flatsome/inc/shortcodes/*
+!/httpdocs/wp-content/themes/flatsome/inc/shortcodes/accordion.php
+!/httpdocs/wp-content/themes/flatsome/inc/shortcodes/team_members.php
+
+# 149 МБ — выше жёсткого лимита GitHub в 100 МБ. Файл лежит в зеркале и на сервере.
+/httpdocs/wp-content/themes/umbrella-group/assets/Umbrella_2_1.mp4
+
+# Из медиатеки — только то, что залито руками для темы.
+/httpdocs/wp-content/uploads/*
+!/httpdocs/wp-content/uploads/manual_uploads/
+!/httpdocs/wp-content/uploads/telegram_logo.png
+!/httpdocs/wp-content/uploads/vk_logo.png
+!/httpdocs/wp-content/uploads/whatsapp_logo.png
+
+# Четыре файла из uploads, чьи имена на сервере различаются только регистром:
+# APFS регистронезависим, рядом они не живут, поэтому вторые копии сложены сюда.
+/_case-conflicts/
+
+# Локальный мусор
+.DS_Store

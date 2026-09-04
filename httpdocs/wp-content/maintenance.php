@@ -31,7 +31,7 @@ header('Retry-After: 600');
 
 <body>
 
-<div class="container">
+    <div class="container">
 
     <header class="header">
         <h1>Сайт находится в режиме запланированного техобслуживания.</h1>
@@ -39,28 +39,24 @@ header('Retry-After: 600');
     </header>
 
     <!--START_TIMER_BLOCK-->
-    <!--END_TIMER_BLOCK-->
+        <!--END_TIMER_BLOCK-->
 
     <!--START_SOCIAL_LINKS_BLOCK-->
     <section class="social-links">
-        <a class="social-links__link" href="https://www.facebook.com/Plesk" target="_blank" title="Facebook">
-            <span class="icon"><img src="https://taxlab.ru/wp-content/maintenance/assets/images/facebook.svg"
-                                    alt="Facebook"></span>
-        </a>
-        <a class="social-links__link" href="https://twitter.com/Plesk" target="_blank" title="Twitter">
-            <span class="icon"><img src="https://taxlab.ru/wp-content/maintenance/assets/images/twitter.svg"
-                                    alt="Twitter"></span>
-        </a>
-    </section>
+                    <a class="social-links__link" href="https://www.facebook.com/Plesk" target="_blank" title="Facebook">
+                <span class="icon"><img src="https://taxlab.ru/wp-content/maintenance/assets/images/facebook.svg" alt="Facebook"></span>
+            </a>
+                    <a class="social-links__link" href="https://x.com/Plesk" target="_blank" title="Twitter">
+                <span class="icon"><img src="https://taxlab.ru/wp-content/maintenance/assets/images/twitter.svg" alt="Twitter"></span>
+            </a>
+            </section>
     <!--END_SOCIAL_LINKS_BLOCK-->
 
 </div>
 
 <footer class="footer">
     <div class="footer__content">
-        Powered by WP Toolkit <a href="https://www.plesk.com/" target="_blank"><img class="logo"
-                                                                                    src="https://taxlab.ru/wp-content/maintenance/assets/images/plesk-logo.png"
-                                                                                    alt="Plesk"></a>
+        Под управлением WP Toolkit <a href="https://www.plesk.com/" target="_blank"><img class="logo" src="https://taxlab.ru/wp-content/maintenance/assets/images/plesk-logo.png" alt="Plesk"></a>
     </div>
 </footer>
 

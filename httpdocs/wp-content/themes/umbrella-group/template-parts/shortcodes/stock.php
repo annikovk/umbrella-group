@@ -12,7 +12,7 @@ class stock
                 [col  span="12" span__sm="12" margin="0px 0px 0px 0px"]
                 <div class="padding-top-stock layout_stock">
                   [akciya_block id=9897 title='ООО в подарок за оформление лицензии' excerpt='Нужна лицензия для ведения бизнеса, но предприятие еще не зарегистрировано? Сэкономьте на регистрации предприятия!' type='half' new="true"]
-                  [akciya_block id=9876 title='Бесплатная регистрация ИП' type='half' new="true"]
+                  
                 </div>
                 [/col]
            [/row]

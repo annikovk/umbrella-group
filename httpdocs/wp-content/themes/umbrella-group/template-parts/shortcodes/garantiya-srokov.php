@@ -37,8 +37,8 @@ class garantiya_srokov
                             Исключаем человеческий фактор <span class="main-text-accent-common">двойным контролем:</span>
                             директора подразделений лично проверяют ведение 
                             бухгалтерского учёта, аудиторские отчёты и&nbsp;заключения,
-                            участвуют во&nbsp;всех этапах ведения дел в&nbsp;арбитражных 
-                            судах и&nbsp;судах общей юрисдикции. Для <span class="main-text-accent-common">комплексного 
+                            участвуют во&nbsp;всех этапах <a class="action-text-common" href="/services/services-le/predstavitelstvo-v-arbitrazhnom-sude/">ведения дел в&nbsp;арбитражных 
+                            судах</a> и&nbsp;судах общей юрисдикции. Для <span class="main-text-accent-common">комплексного 
                             решения вопросов</span> подключается команда из&nbsp;аудиторов, 
                             бухгалтеров и&nbsp;юристов.
                             <br>

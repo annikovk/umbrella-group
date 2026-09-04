@@ -12,7 +12,6 @@ function business_direction_shortcode($atts){
                     <li><a href="/services/register-elimination/likvidatsiya-ooo/">Ликвидация</a></li>
                     <li><a href="/services/licensing/registracija-tovarnogo-znaka/">Товарный знак</a></li>
                     <li><a href="/services/services-le/">Юридические услуги</a></li>
-                    <li><a href="/services/sdelki-s-nedvizhimostyu/">Сделки с недвижимостью</a></li>
                 </ul>
             </div>
             <div class="business_direction_screen pd">

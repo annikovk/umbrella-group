@@ -5,7 +5,9 @@ umbrella_draw_header();
 
 function umbrella_draw_header(): void
 {
-    get_template_part('template-parts/header/header', 'top');
+    if(!wp_is_mobile()):
+        get_template_part('template-parts/header/header', 'top');
+    endif;
     get_template_part('template-parts/header/header', 'main');
     get_template_part('template-parts/header/header', 'bottom');
     echo '<div class="header-bg-container fill">';
