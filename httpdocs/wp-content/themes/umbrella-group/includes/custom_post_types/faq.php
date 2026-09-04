@@ -106,8 +106,9 @@ function get_faq_metabox_value($post)
                 <option <?php if (esc_attr(get_post_meta(get_the_ID(), 'faq_branch', true))=="Бухгалтерия") {echo "selected";}; ?> value="Бухгалтерия">Бухгалтерия</option>
                 <option <?php if (esc_attr(get_post_meta(get_the_ID(), 'faq_branch', true))=="Аудит") {echo "selected";}; ?> value="Аудит">Аудит</option>
                 <option <?php if (esc_attr(get_post_meta(get_the_ID(), 'faq_branch', true))=="Юридические услуги") {echo "selected";}; ?> value="Юридические услуги">Юридические услуги</option>
-                <option <?php if (esc_attr(get_post_meta(get_the_ID(), 'faq_branch', true))=="Лицензирование") {echo "лицензирование";}; ?> value="Лицензирование">Лицензирование</option>
+                <option <?php if (esc_attr(get_post_meta(get_the_ID(), 'faq_branch', true))=="Лицензирование") {echo "selected";}; ?> value="Лицензирование">Лицензирование</option>
                 <option <?php if (esc_attr(get_post_meta(get_the_ID(), 'faq_branch', true))=="Регистрация и ликвидация") {echo "selected";}; ?> value="Регистрация и ликвидация">Регистрация и ликвидация</option>
+                <option <?php if (esc_attr(get_post_meta(get_the_ID(), 'faq_branch', true))=="Интеллектуальные права") {echo "selected";}; ?> value="Интеллектуальные права">Интеллектуальные права</option>
             </select>
         </p>
         <div class="meta-options hcf_field">
