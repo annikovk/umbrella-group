@@ -1,0 +1,65 @@
+# Локальный стенд taxlab.ru: PHP 8.3 + Apache и MariaDB 10.11 — те же версии,
+# что на проде. Код берётся из зеркала httpdocs/ как есть, поверх монтируются
+# только два файла: свой wp-config.php и mu-plugin для локальных правок.
+#
+# Docroot внутри контейнера — /var/www/vhosts/taxlab.ru/httpdocs, ровно как на
+# сервере. Это не косметика: WP Rocket, webp-express и часть настроек в БД
+# держат абсолютные пути, и при совпадении путей копия ведёт себя как прод.
+#
+# Поднимать через tools/local-site.sh, а не руками: он готовит .env, тянет базу
+# и ждёт готовности.
+name: taxlab-local
+
+services:
+  db:
+    image: mariadb:10.11
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-local}
+      MARIADB_DATABASE: ${DB_NAME:-wp_taxlab}
+    command:
+      # Сервер держим в utf8mb4, но саму базу local-site.sh пересоздаёт в
+      # utf8mb3_general_ci — как на проде. Остальное: развязать руки большому
+      # дампу (220 МБ) и не тратить время на fsync там, где данные одноразовые.
+      - --max-allowed-packet=512M
+      - --innodb-buffer-pool-size=512M
+      - --innodb-flush-log-at-trx-commit=0
+      - --sync-binlog=0
+      - --skip-log-bin
+    volumes:
+      - db-data:/var/lib/mysql
+    ports:
+      # Наружу — чтобы можно было подключиться из TablePlus/Sequel Ace.
+      - "127.0.0.1:${DB_PORT:-3307}:3306"
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 40
+
+  web:
+    build:
+      context: .
+      dockerfile: php/Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      # Apache работает под uid/gid хозяина машины: зеркало лежит с правами
+      # 750 на владельце-человеке, www-data его просто не прочитает.
+      APACHE_RUN_USER: "#${HOST_UID:-501}"
+      APACHE_RUN_GROUP: "#${HOST_GID:-20}"
+      LOCAL_SITE_URL: "http://localhost:${HTTP_PORT:-8088}"
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: ${DB_NAME:-wp_taxlab}
+      WORDPRESS_DB_USER: root
+      WORDPRESS_DB_PASSWORD: ${DB_ROOT_PASSWORD:-local}
+      WP_DEBUG: "${WP_DEBUG:-0}"
+    volumes:
+      - ../httpdocs:/var/www/vhosts/taxlab.ru/httpdocs
+      - ./overlay/wp-config.php:/var/www/vhosts/taxlab.ru/httpdocs/wp-config.php:ro
+      - ./overlay/mu-plugins:/var/www/vhosts/taxlab.ru/httpdocs/wp-content/mu-plugins:ro
+    ports:
+      - "127.0.0.1:${HTTP_PORT:-8088}:80"
+
+volumes:
+  db-data:
