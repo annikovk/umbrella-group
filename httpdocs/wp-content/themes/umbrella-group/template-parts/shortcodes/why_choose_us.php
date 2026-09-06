@@ -49,8 +49,11 @@ class why_choose_us
                                             <p class="laurels-icons-year">по итогам 2025 г.</p>
                                         [/featured_box]
                                     [/col_inner_1]
-                                    [col_inner_1 span="3" span__sm="12"]
-                                        
+                                    [col_inner_1 span="3" span__sm="6"]
+                                        [featured_box img="30657" inline_svg="0" img_width="108" pos="center" icon_color="rgb(166, 220, 18)"]
+                                            <p class="laurel-icon-header">5-ое место в номинации «Интеллектуальное право»<sup style="font-size: 6pt;"> 4</sup></p>
+                                            <p class="laurels-icons-year">по итогам 2025 г.</p>
+                                        [/featured_box]
                                     [/col_inner_1]
                                     [col_inner_1 span="3" span__sm="6" ]
                                         [featured_box img="1863" inline_svg="0" img_width="108" pos="center" icon_color="rgb(166, 220, 18)"]          
