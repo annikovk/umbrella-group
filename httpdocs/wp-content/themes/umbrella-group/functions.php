@@ -237,6 +237,7 @@ require get_theme_file_path() . '/template-parts/shortcodes/more_question_bus.ph
 require get_theme_file_path() . '/template-parts/shortcodes/team_business.php';
 require get_theme_file_path() . '/template-parts/shortcodes/foooter_business_page.php';
 require get_theme_file_path() . '/template-parts/shortcodes/form_bottom_business.php';
+require get_theme_file_path() . '/template-parts/shortcodes/akciya_tz.php';
 // Hook : to get content with s3elected AB tests variants only
 require get_theme_file_path() . '/umbrella_filter_ab_tests.php';
 
