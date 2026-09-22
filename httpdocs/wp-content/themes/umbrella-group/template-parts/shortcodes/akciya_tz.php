@@ -229,8 +229,9 @@ class akciya_tz
     }
 
     /**
-     * Баннер с призывом оставить заявку. Кнопка ведёт к форме акции в боковой
-     * колонке (#secondary): на телефоне та же форма стоит ниже контента.
+     * Баннер с призывом оставить заявку. Кнопка открывает всплывающую форму
+     * «Расчёт стоимости услуги» — ту же, что кнопка «Получить консультацию»
+     * на странице услуги о регистрации товарного знака.
      */
     public function render_cta()
     {
@@ -255,16 +256,20 @@ class akciya_tz
 
         $arrow = '<svg width="20" height="10" viewBox="0 0 20 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M1 5h17M14 1l4 4-4 4" stroke="#ec1c23" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
+        // Лайтбокс рендерим сразу: возвращённые шорткоды второй раз не разбираются.
+        $lightbox = do_shortcode('[lightbox id="calculate-price-contact-form-lightbox" width="400px" padding="0px"][contact-form-7 id="9965" title="Форма Расчёт стоимости услуги"][/lightbox]');
+
         return <<<EOT
             <section class="akciya-tz-cta">
                 <div class="akciya-tz-cta__main">
                     <p class="akciya-tz-cta__kicker">Специальное предложение</p>
                     <p class="akciya-tz-cta__title">Ваш бренд заслуживает защиты.<br>Регистрация со скидкой 15%</p>
-                    <a class="akciya-tz-cta__button" href="#secondary">Получить скидку 15% $arrow</a>
+                    <a class="akciya-tz-cta__button" href="#calculate-price-contact-form-lightbox">Получить скидку 15% $arrow</a>
                 </div>
                 <div class="akciya-tz-cta__features">
                     $features_html
                 </div>
+                $lightbox
             </section>
             EOT;
     }
