@@ -1,0 +1,788 @@
+/* Блоки страницы акции «Паспорт безопасности объекта со скидкой 10 000 ₽». */
+
+/* Свой первый экран заменяет стандартную шапку записи акции. */
+.akciya-pb-hero {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 32px;
+    padding: 16px 0 48px;
+}
+
+.akciya-pb-hero__text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.akciya-pb-hero__badge {
+    font-family: Inter, sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 100%;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #ec1c23;
+    border-radius: 999px;
+    padding: 9px 18px 8px;
+    margin-bottom: 24px;
+}
+
+.akciya-pb-hero__title {
+    font-family: "PT Serif", sans-serif;
+    font-size: 34px;
+    line-height: 112%;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+}
+
+.akciya-pb-hero__title-accent {
+    display: block;
+    color: #ec1c23;
+}
+
+.akciya-pb-hero__lead {
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    line-height: 150%;
+    color: #4a4a4a;
+    max-width: 32em;
+    margin-bottom: 28px;
+}
+
+.akciya-pb-hero__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    background-color: #ec1c23;
+    border-radius: 4px;
+    padding: 18px 28px;
+    white-space: nowrap;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 100%;
+    color: #fff;
+}
+
+.akciya-pb-hero__button:hover {
+    background-color: #d0141b;
+    color: #fff;
+}
+
+/* Правая колонка с ценой отделена тонкой вертикальной чертой. */
+.akciya-pb-hero__price {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    text-align: center;
+    padding-left: 32px;
+    border-left: 1px solid #ececec;
+}
+
+.akciya-pb-hero__price-label,
+.akciya-pb-hero__caption {
+    font-family: Inter, sans-serif;
+    font-size: 13px;
+    line-height: 150%;
+    color: #707070;
+    margin-bottom: 0;
+}
+
+.akciya-pb-hero__price-label {
+    margin-bottom: 8px;
+}
+
+.akciya-pb-hero__price-new {
+    font-family: "PT Serif", sans-serif;
+    font-size: 54px;
+    line-height: 100%;
+    font-weight: 700;
+    color: #ec1c23;
+    white-space: nowrap;
+    margin-bottom: 6px;
+}
+
+.akciya-pb-hero__price-from {
+    font-size: 22px;
+    vertical-align: 0.35em;
+    margin-right: 0.1em;
+}
+
+.akciya-pb-hero__price-old {
+    font-family: "PT Serif", sans-serif;
+    font-size: 18px;
+    line-height: 130%;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 16px;
+}
+
+.akciya-pb-hero__price-old s {
+    text-decoration-color: #ec1c23;
+    text-decoration-thickness: 2px;
+}
+
+.akciya-pb-hero__discount {
+    align-self: stretch;
+    font-family: "PT Serif", sans-serif;
+    font-size: 38px;
+    line-height: 100%;
+    font-weight: 700;
+    color: #fff;
+    white-space: nowrap;
+    background-color: #ec1c23;
+    border-radius: 8px;
+    padding: 18px 24px;
+    margin-bottom: 16px;
+}
+
+@media screen and (max-width: 1099px) {
+    .akciya-pb-hero {
+        gap: 24px;
+    }
+
+    .akciya-pb-hero__title {
+        font-size: 28px;
+    }
+
+    .akciya-pb-hero__button {
+        white-space: normal;
+    }
+
+    .akciya-pb-hero__price {
+        padding-left: 24px;
+    }
+
+    .akciya-pb-hero__price-new {
+        font-size: 44px;
+    }
+
+    .akciya-pb-hero__price-from {
+        font-size: 18px;
+    }
+
+    .akciya-pb-hero__discount {
+        font-size: 32px;
+        padding: 16px 18px;
+    }
+}
+
+@media screen and (max-width: 849px) {
+    .akciya-pb-hero {
+        flex-direction: column;
+        gap: 32px;
+        padding: 8px 0 32px;
+    }
+
+    .akciya-pb-hero__title {
+        font-size: 28px;
+    }
+
+    .akciya-pb-hero__lead {
+        font-size: 15px;
+        margin-bottom: 24px;
+    }
+
+    .akciya-pb-hero__button {
+        width: 100%;
+        justify-content: center;
+        padding: 18px 20px;
+    }
+
+    /* Без боковой колонки разделитель переезжает наверх. */
+    .akciya-pb-hero__price {
+        padding-left: 0;
+        padding-top: 28px;
+        border-left: none;
+        border-top: 1px solid #ececec;
+    }
+
+    .akciya-pb-hero__price-new {
+        font-size: 56px;
+    }
+
+    .akciya-pb-hero__discount {
+        font-size: 40px;
+    }
+}
+
+/* ── Кому стоит проверить требования ─────────────────────────────────────── */
+
+.akciya-pb-audience {
+    background-color: #f7f7f7;
+    border-radius: 16px;
+    padding: 36px 32px 32px;
+    margin-bottom: 48px;
+}
+
+.akciya-pb-audience__head {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 32px;
+    margin-bottom: 28px;
+}
+
+.akciya-pb-audience__head-left {
+    flex: 1 1 60%;
+    min-width: 0;
+}
+
+.akciya-pb-audience__kicker {
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 140%;
+    text-transform: lowercase;
+    color: #8c8c8c;
+    margin-bottom: 8px;
+}
+
+.akciya-pb-audience__title {
+    font-family: "PT Serif", sans-serif;
+    font-size: 30px;
+    line-height: 115%;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 0;
+}
+
+.akciya-pb-audience__lead {
+    flex: 1 1 40%;
+    font-family: Inter, sans-serif;
+    font-size: 13px;
+    line-height: 155%;
+    color: #707070;
+    margin-bottom: 0;
+}
+
+.akciya-pb-audience__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.akciya-pb-audience__card {
+    background-color: #fff;
+    border: 1px solid #ececec;
+    border-radius: 12px;
+    padding: 16px 20px 24px;
+}
+
+.akciya-pb-audience__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 10px;
+    background-color: rgba(236, 28, 35, 0.1);
+    color: #ec1c23;
+    margin-bottom: 20px;
+}
+
+/* Рисунок иконки — примерно в половину плашки, как в макете. */
+.akciya-pb-audience__icon svg {
+    width: 36px;
+    height: 36px;
+}
+
+.akciya-pb-audience__card-title {
+    font-family: "PT Serif", sans-serif;
+    font-size: 18px;
+    line-height: 130%;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+}
+
+.akciya-pb-audience__card-text {
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    line-height: 150%;
+    color: #707070;
+    margin-bottom: 0;
+}
+
+.akciya-pb-audience__note {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+}
+
+.akciya-pb-audience__note-icon {
+    display: flex;
+    color: #ec1c23;
+    flex-shrink: 0;
+}
+
+.akciya-pb-audience__note-text {
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    line-height: 150%;
+    color: #4a4a4a;
+    margin-bottom: 0;
+}
+
+@media screen and (max-width: 1099px) {
+    .akciya-pb-audience__head {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .akciya-pb-audience__cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 849px) {
+    .akciya-pb-audience {
+        border-radius: 12px;
+        padding: 28px 20px;
+        margin-bottom: 32px;
+    }
+
+    .akciya-pb-audience__title {
+        font-size: 26px;
+    }
+
+    .akciya-pb-audience__lead {
+        font-size: 14px;
+    }
+
+    .akciya-pb-audience__card {
+        padding: 16px 20px 20px;
+    }
+
+    .akciya-pb-audience__icon {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 16px;
+    }
+
+    .akciya-pb-audience__icon svg {
+        width: 32px;
+        height: 32px;
+    }
+
+    .akciya-pb-audience__note {
+        align-items: flex-start;
+    }
+}
+
+/* ── Что входит в сопровождение ────────────────────────────────────────── */
+
+.akciya-pb-steps {
+    background-color: #f7f7f7;
+    border-radius: 16px 16px 0 0;
+    padding: 36px 32px 40px;
+}
+
+.akciya-pb-steps__head-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 32px;
+    margin-bottom: 32px;
+}
+
+.akciya-pb-steps__head-left {
+    flex: 1 1 60%;
+    min-width: 0;
+}
+
+.akciya-pb-steps__kicker {
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 140%;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #8c8c8c;
+    margin-bottom: 8px;
+}
+
+.akciya-pb-steps__title {
+    font-family: "PT Serif", sans-serif;
+    font-size: 30px;
+    line-height: 115%;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 0;
+}
+
+.akciya-pb-steps__lead {
+    flex: 1 1 40%;
+    font-family: Inter, sans-serif;
+    font-size: 13px;
+    line-height: 155%;
+    color: #707070;
+    margin-bottom: 0;
+}
+
+.akciya-pb-steps__items {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px 20px;
+}
+
+.akciya-pb-steps__head {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.akciya-pb-steps__badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ec1c23;
+    font-family: "PT Serif", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: #fff;
+    flex-shrink: 0;
+}
+
+/* Линия со стрелкой к следующему шагу ряда. */
+.akciya-pb-steps__line {
+    display: flex;
+    align-items: center;
+    flex: 1 1 auto;
+    min-width: 24px;
+    margin-left: 14px;
+}
+
+.akciya-pb-steps__line::before {
+    content: '';
+    flex: 1 1 auto;
+    height: 1px;
+    background-color: rgba(236, 28, 35, 0.35);
+    margin-right: 8px;
+}
+
+/* У последнего шага в ряду стрелке не к кому вести. */
+.akciya-pb-steps__item:last-child .akciya-pb-steps__line {
+    display: none;
+}
+
+.akciya-pb-steps__item-title {
+    font-family: "PT Serif", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 135%;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+}
+
+.akciya-pb-steps__item-text {
+    font-family: Inter, sans-serif;
+    font-size: 13px;
+    line-height: 155%;
+    color: #707070;
+    margin-bottom: 0;
+}
+
+/* Красная полоса с экономией — продолжение блока этапов, под серой подложкой. */
+.akciya-pb-saving {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+    background-color: #ec1c23;
+    border-radius: 12px;
+    padding: 22px 28px;
+    margin-bottom: 48px;
+}
+
+.akciya-pb-saving__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border: 1.5px solid rgba(255, 255, 255, 0.85);
+    border-radius: 50%;
+    color: #fff;
+    flex-shrink: 0;
+}
+
+.akciya-pb-saving__text {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding-left: 24px;
+    border-left: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.akciya-pb-saving__title {
+    font-family: "PT Serif", sans-serif;
+    font-size: 26px;
+    line-height: 115%;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+.akciya-pb-saving__sum {
+    font-size: 1.4em;
+    white-space: nowrap;
+}
+
+.akciya-pb-saving__caption {
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    line-height: 140%;
+    color: #fff;
+    margin-bottom: 0;
+}
+
+.akciya-pb-saving__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 16px 28px;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 100%;
+    color: #1a1a1a;
+    white-space: nowrap;
+}
+
+.akciya-pb-saving__button:hover {
+    background-color: #f5f5f5;
+    color: #1a1a1a;
+}
+
+@media screen and (max-width: 1099px) {
+    .akciya-pb-steps__head-row {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .akciya-pb-steps__items {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Сетка 2×2: правому шагу в ряду стрелка не нужна. */
+    .akciya-pb-steps__item:nth-child(2n) .akciya-pb-steps__line {
+        display: none;
+    }
+
+    .akciya-pb-saving {
+        flex-wrap: wrap;
+    }
+
+    .akciya-pb-saving__text {
+        flex-basis: calc(100% - 84px);
+    }
+
+    .akciya-pb-saving__button {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 849px) {
+    .akciya-pb-steps {
+        border-radius: 12px 12px 0 0;
+        padding: 28px 20px 32px;
+    }
+
+    .akciya-pb-steps__title {
+        font-size: 26px;
+    }
+
+    .akciya-pb-steps__lead {
+        font-size: 14px;
+    }
+
+    .akciya-pb-steps__items {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .akciya-pb-steps__head {
+        margin-bottom: 14px;
+    }
+
+    /* В одну колонку стрелки вбок теряют смысл. */
+    .akciya-pb-steps__line {
+        display: none;
+    }
+
+    .akciya-pb-saving {
+        gap: 16px;
+        padding: 20px;
+        margin-bottom: 32px;
+    }
+
+    .akciya-pb-saving__icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .akciya-pb-saving__text {
+        flex-basis: calc(100% - 64px);
+        padding-left: 16px;
+    }
+
+    .akciya-pb-saving__title {
+        font-size: 20px;
+    }
+
+    .akciya-pb-saving__caption {
+        font-size: 14px;
+    }
+}
+
+/* ── Заявка внизу страницы ───────────────────────────────────────────────── */
+
+.akciya-pb-request {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;
+    background-color: #f7f7f7;
+    border-radius: 16px;
+    padding: 36px 32px;
+    margin-bottom: 48px;
+}
+
+.akciya-pb-request__text {
+    flex: 1 1 50%;
+    min-width: 0;
+}
+
+.akciya-pb-request__kicker {
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 140%;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #8c8c8c;
+    margin-bottom: 8px;
+}
+
+.akciya-pb-request__title {
+    font-family: "PT Serif", sans-serif;
+    font-size: 30px;
+    line-height: 115%;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 16px;
+}
+
+.akciya-pb-request__lead {
+    font-family: Inter, sans-serif;
+    font-size: 15px;
+    line-height: 155%;
+    color: #4a4a4a;
+    margin-bottom: 0;
+}
+
+.akciya-pb-request__form {
+    flex: 1 1 50%;
+    min-width: 0;
+}
+
+/*
+ * Та же форма, что в боковой колонке (CF7 9878), со своими стилями из
+ * main.css и akcii.css — здесь снимаем её карточку и раскладываем под блок.
+ * Заголовок и подзаголовок формы заменяет текст слева. Высоту и отступ
+ * сверху flatsome.css задаёт .footer-form с !important — перебиваем так же.
+ */
+.akciya-pb-request #blog-side-contact-form.footer-form,
+.akciya-pb-request #blog-side-contact-form.footer-form:hover {
+    position: static;
+    height: auto !important;
+    margin: 0;
+    padding: 0 !important;
+    border: none;
+    box-shadow: none;
+    background: none;
+}
+
+.akciya-pb-request #blog-side-contact-form > p:nth-of-type(-n+2) {
+    display: none;
+}
+
+.akciya-pb-request #blog-side-contact-form p {
+    margin-bottom: 0;
+}
+
+.akciya-pb-request #blog-side-contact-form label br {
+    display: none;
+}
+
+.akciya-pb-request #blog-side-contact-form.footer-form .cf7-footer-input {
+    width: 100%;
+    height: 48px;
+    margin: 0;
+    padding: 0 16px;
+    font-size: 15px;
+    background-color: #fff;
+    border: 1px solid #e2e2e2;
+    border-radius: 6px;
+}
+
+.akciya-pb-request #blog-side-contact-form.footer-form .cf7-footer-input:focus {
+    border: 1px solid #ec1c23;
+}
+
+.akciya-pb-request #blog-side-contact-form .cf7-submit-button {
+    margin: 12px 0 14px;
+}
+
+.akciya-pb-request #blog-side-contact-form.footer-form .cf7-submit-button input {
+    width: 100%;
+    height: 50px;
+    margin: 0;
+    border-radius: 6px;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.akciya-pb-request #blog-side-contact-form.footer-form .cf7-legal-notice {
+    font-size: 11px;
+    line-height: 150%;
+}
+
+@media screen and (max-width: 1099px) {
+    .akciya-pb-request {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 24px;
+    }
+}
+
+@media screen and (max-width: 849px) {
+    .akciya-pb-request {
+        border-radius: 12px;
+        padding: 28px 20px;
+        margin-bottom: 32px;
+    }
+
+    .akciya-pb-request__title {
+        font-size: 26px;
+    }
+}

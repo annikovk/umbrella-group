@@ -284,7 +284,8 @@ function umbrella_akciya_has_own_hero($post = null)
 {
     $post = get_post($post);
 
-    return $post && has_shortcode($post->post_content, 'akciya_tz_hero');
+    return $post && (has_shortcode($post->post_content, 'akciya_tz_hero')
+        || has_shortcode($post->post_content, 'akciya_pb_hero'));
 }
 
 /** Крошки без заголовка — для страниц акций со своим первым экраном. */
@@ -293,6 +294,22 @@ function umbrella_akciya_print_breadcrumbs()
     echo '<header class="umbrella-header-and-breadcrumbs container"><div class="breadcrumbs">'
         . get_breadcrumbs()
         . '</div></header>';
+}
+
+/**
+ * Форма заявки со страницы акции (CF7 «Форма на боковой панели акции»).
+ * Заголовок, подзаголовок и текст кнопки у каждой акции свои — из полей записи.
+ * Выводится в боковой колонке и в нижнем блоке акций, где он есть.
+ */
+function umbrella_akcii_contact_form($post_id = null)
+{
+    $post_id = $post_id ?: get_the_ID();
+    $contact_form = do_shortcode('[contact-form-7 id="9878" title="Форма на боковой панели акции"]', true);
+    $contact_form = str_replace("_akcii_form_header_", get_post_meta($post_id, 'akcii_form_header', true), $contact_form);
+    $contact_form = str_replace("_akcii_form_subheader_", get_post_meta($post_id, 'akcii_form_subheader', true), $contact_form);
+    $contact_form = str_replace("_akcii_form_button_text_", get_post_meta($post_id, 'akcii_form_button_text', true), $contact_form);
+
+    return $contact_form;
 }
 
 function akciya_tz_hero_shortcode($atts)
