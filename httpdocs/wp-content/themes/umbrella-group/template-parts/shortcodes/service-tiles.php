@@ -5,6 +5,8 @@ class Service_tiles
     public $atts;
     public $err = "Неправильное использование шорткода";
     private $hide_pages_on_mobile = true;
+    // сколько услуг показывать в плитке — поровну во всех, чтобы плитки были одного размера
+    private $pages_per_tile = 4;
     private $tiles = [
         [
             "parent_id" => 28,
@@ -149,7 +151,7 @@ class Service_tiles
             'child_of' => 0,
             'parent' => $parent_id,
             'exclude_tree' => '',
-            'number' => '8',
+            'number' => isset($tile['pages']) ? '' : '8',
             'offset' => 0,
             'post_type' => 'page',
             'post_status' => 'publish',
@@ -159,6 +161,8 @@ class Service_tiles
             // get_pages сортирует по menu_order, а нам нужен порядок из списка
             usort($pages, fn($a, $b) => array_search($a->ID, $tile['pages']) <=> array_search($b->ID, $tile['pages']));
         }
+        // режем здесь, а не через number: так порядок совпадает с прежним списком из 8
+        $pages = array_slice($pages, 0, $this->pages_per_tile);
         if ($this->hide_pages_on_mobile) {
             $hideforsmall = "hide-for-small";
         }
