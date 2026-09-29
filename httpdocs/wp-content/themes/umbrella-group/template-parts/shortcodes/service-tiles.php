@@ -9,6 +9,8 @@ class Service_tiles
         [
             "parent_id" => 28,
             "title" => "Лицензирование",
+            // товарные знаки и лицензионный договор — в плитке «Интеллектуальное право»
+            "exclude" => [1220, 27551, 1234],
             "guarantee_title" => "Гарантия получения лицензии. Без рисков для вашего бизнеса",
             "guarantee_decription" => "С 1990 года получили лицензии для более 2000 компаний. 100% возврат оплаты в случае нашей ошибки",
             "guarantee_icon" => "",
@@ -31,6 +33,25 @@ class Service_tiles
         [
             "parent_id" => 32,
             "title" => "Юридические услуги",
+            // эти услуги показываются в плитках «Интеллектуальное право» и «Налоговое право»
+            "exclude" => [1208, 30556, 1198, 1203, 6399],
+            "guarantee_title" => "Гарантия и страхование",
+            "guarantee_decription" => "<ul><li> Гарантируем сроки по договору.</li><li> Риски застрахованы.</li><li> Бесплатный прогноз ситуации до заключения договора.</li></ul>",
+            "guarantee_icon" => "",
+        ],
+        [
+            "parent_id" => 29220,
+            "title" => "Интеллектуальное !return_caretправо",
+            // страницы лежат в разных разделах, поэтому список задан явно — как в главном меню
+            "pages" => [1220, 27551, 1234, 1208],
+            "guarantee_title" => "Гарантия и страхование",
+            "guarantee_decription" => "<ul><li> Гарантируем сроки по договору.</li><li> Риски застрахованы.</li><li> Бесплатный прогноз ситуации до заключения договора.</li></ul>",
+            "guarantee_icon" => "",
+        ],
+        [
+            "parent_id" => 30352,
+            "title" => "Налоговое право",
+            "pages" => [30556, 1198, 1203, 6399, 1252],
             "guarantee_title" => "Гарантия и страхование",
             "guarantee_decription" => "<ul><li> Гарантируем сроки по договору.</li><li> Риски застрахованы.</li><li> Бесплатный прогноз ситуации до заключения договора.</li></ul>",
             "guarantee_icon" => "",
@@ -38,6 +59,7 @@ class Service_tiles
         [
             "parent_id" => 34,
             "title" => "Аудиторские !return_caret услуги",
+            "exclude" => [1252],
             "guarantee_title" => "Риски застрахованы на сумму более 50 млн рублей",
             "guarantee_decription" => "После проверки — подробный отчёт, отражающий «узкие места» в работе организации и способы их устранения. Постдоговорное обслуживание.",
             "guarantee_icon" => "",
@@ -119,8 +141,8 @@ class Service_tiles
             'sort_order' => 'ASC',
             'sort_column' => 'menu_order',
             'hierarchical' => 0,
-            'exclude' => '30025',
-            'include' => '',
+            'exclude' => implode(',', array_merge([30025], $tile['exclude'] ?? [])),
+            'include' => isset($tile['pages']) ? implode(',', $tile['pages']) : '',
             'meta_key' => '',
             'meta_value' => '',
             'authors' => '',
@@ -133,6 +155,10 @@ class Service_tiles
             'post_status' => 'publish',
         );
         $pages = get_pages($args);
+        if (isset($tile['pages'])) {
+            // get_pages сортирует по menu_order, а нам нужен порядок из списка
+            usort($pages, fn($a, $b) => array_search($a->ID, $tile['pages']) <=> array_search($b->ID, $tile['pages']));
+        }
         if ($this->hide_pages_on_mobile) {
             $hideforsmall = "hide-for-small";
         }

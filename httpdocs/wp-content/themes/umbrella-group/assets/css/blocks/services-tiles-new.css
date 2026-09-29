@@ -8,7 +8,9 @@ div.main-services-tile-grid {
               "pages3 pages3 pages4 pages4 "
               "guarantee3 guarantee3 guarantee4 guarantee4"
               "pages5 pages5 pages6 pages6 "
-              "guarantee5 guarantee5 guarantee6 guarantee6";
+              "guarantee5 guarantee5 guarantee6 guarantee6"
+              "pages7 pages7 pages8 pages8 "
+              "guarantee7 guarantee7 guarantee8 guarantee8";
 }
 
 div.main-services-tile .category-title {
@@ -49,8 +51,8 @@ div.main-services-tile .category-title {
 @media screen and (max-width: 849px) {
     div.main-services-tile-grid {
         grid-template-areas:
-                "pages1 pages2 pages3 pages4 pages5 pages6"
-                "guarantee1 guarantee2  guarantee3  guarantee4 guarantee5 guarantee6";
+                "pages1 pages2 pages3 pages4 pages5 pages6 pages7 pages8"
+                "guarantee1 guarantee2  guarantee3  guarantee4 guarantee5 guarantee6 guarantee7 guarantee8";
     }
 
     .main-services-tile .children-list li:nth-child(11), .main-services-tile .children-list li:nth-child(11) {

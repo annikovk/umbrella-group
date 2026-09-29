@@ -8,7 +8,9 @@ div.main-services-tile-grid {
     "pages1 pages1 pages2 pages2 pages3 pages3"
     "guarantee1 guarantee1 guarantee2 guarantee2 guarantee3 guarantee3"
     "pages4 pages4 pages5 pages5 pages6 pages6"
-    "guarantee4 guarantee4 guarantee5 guarantee5 guarantee6 guarantee6";
+    "guarantee4 guarantee4 guarantee5 guarantee5 guarantee6 guarantee6"
+    "pages7 pages7 pages8 pages8 . ."
+    "guarantee7 guarantee7 guarantee8 guarantee8 . .";
 }
 
 .main-services-tile {
@@ -126,6 +128,22 @@ div.main-services-tile-grid {
     grid-area: guarantee6;
 }
 
+.main-services-tile:nth-child(7) .main-services-pages {
+    grid-area: pages7;
+}
+
+.main-services-tile:nth-child(7) .main-services-guarantee {
+    grid-area: guarantee7;
+}
+
+.main-services-tile:nth-child(8) .main-services-pages {
+    grid-area: pages8;
+}
+
+.main-services-tile:nth-child(8) .main-services-guarantee {
+    grid-area: guarantee8;
+}
+
 /*style*/
 .main-services-tile {
     cursor: pointer;
@@ -229,6 +247,12 @@ div.main-services-tile-grid {
         "pages4"
         "guarantee4"
         "pages5"
-        "guarantee5";
+        "guarantee5"
+        "pages6"
+        "guarantee6"
+        "pages7"
+        "guarantee7"
+        "pages8"
+        "guarantee8";
     }
 }
