@@ -11,8 +11,8 @@ class Service_tiles
         [
             "parent_id" => 28,
             "title" => "Лицензирование",
-            // товарные знаки и лицензионный договор — в плитке «Интеллектуальное право»
-            "exclude" => [1220, 27551, 1234],
+            // главные лицензии — порядок задан вручную
+            "pages" => [28362, 1213, 1228, 6149],
             "guarantee_title" => "Гарантия получения лицензии. Без рисков для вашего бизнеса",
             "guarantee_decription" => "С 1990 года получили лицензии для более 2000 компаний. 100% возврат оплаты в случае нашей ошибки",
             "guarantee_icon" => "",
@@ -167,7 +167,9 @@ class Service_tiles
             $hideforsmall = "hide-for-small";
         }
         foreach ($pages as $page) {
-            $pages_html .= "<li><a href='$page->guid'>$page->post_title</a></li>";
+            // guid — не адрес страницы: у части страниц там ?page_id= или адрес старой копии
+            $url = get_permalink($page);
+            $pages_html .= "<li><a href='$url'>$page->post_title</a></li>";
         }
         $id = 'service-title-target-parent-' . $parent_id;
         $html = <<<EOHTML
