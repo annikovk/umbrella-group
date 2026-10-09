@@ -80,16 +80,20 @@ function ug_register_style(string $rel, array $deps = ['ug-main']): ?string
     if (wp_style_is($handle, 'registered')) {
         return $handle;
     }
-    // Абсолютные https://taxlab.ru/… в url() файла: пока CSS был инлайном, их
-    // переписывал под адрес стенда фильтр вывода, у файла этого нет — стенд
-    // тянул бы картинки с прода (антибот отдаёт там не картинку). Такой файл
-    // печатаем инлайном на его месте в очереди, как раньше. Сейчас это
-    // business_first_screen.css, open_business.css, static_startup.css (WS-5:
-    // сделать url() относительными — и ветка уйдёт).
+    // Файлы, которые в <link> повели бы себя не так, как в склейке коллектора,
+    // печатаем инлайном на их месте в очереди, как раньше:
+    //  - абсолютные https://taxlab.ru/… в url(): инлайн переписывал под адрес
+    //    стенда фильтр вывода, у файла этого нет — стенд тянул бы картинки с
+    //    прода (антибот отдаёт там не картинку). Сейчас это
+    //    business_first_screen.css, open_business.css, static_startup.css;
+    //  - @import (su-welcome-screen.css: Roboto с Google): в середине склейки
+    //    браузер его игнорировал, первой строкой файла — выполнит. Вырезаем.
+    // Владельцам файлов (WS-4, WS-5): сделать url() относительными и убрать
+    // @import — и файл уйдёт обычным <link>.
     $css = (string) file_get_contents(get_stylesheet_directory() . '/' . $rel);
-    if (str_contains($css, '//taxlab.ru/')) {
+    if (str_contains($css, '//taxlab.ru/') || str_contains($css, '@import')) {
         wp_register_style($handle, false, $deps);
-        wp_add_inline_style($handle, $css);
+        wp_add_inline_style($handle, (string) preg_replace('~^\s*@import\s[^;]*;\s*~m', '', $css));
         return $handle;
     }
     wp_register_style($handle, get_theme_file_uri($rel), $deps, ug_asset_ver($rel));
@@ -292,12 +296,27 @@ function umbrella_add_custom_js_files(array $files): void
 }
 
 // До Flatsome, на прежнем месте хэндлов Inter-font, fonts-configuration и
-// custom-form-style: @font-face Inter и ug-base (assets/css/base.css — стили,
-// которые Flatsome и custom-css должны перекрывать, как и раньше).
+// custom-form-style: @font-face Inter и PT Serif (fonts/fonts.css) и ug-base
+// (assets/css/base.css — стили, которые Flatsome и custom-css должны
+// перекрывать, как и раньше).
 add_action('wp_enqueue_scripts', function (): void {
-    wp_enqueue_style('Inter-font', get_theme_file_uri('fonts/inter.css'), [], ug_asset_ver('fonts/inter.css'));
-    wp_enqueue_style('ug-base', get_theme_file_uri('assets/css/base.css'), ['Inter-font'], ug_asset_ver('assets/css/base.css'));
+    wp_enqueue_style('ug-fonts', get_theme_file_uri('fonts/fonts.css'), [], ug_asset_ver('fonts/fonts.css'));
+    wp_enqueue_style('ug-base', get_theme_file_uri('assets/css/base.css'), ['ug-fonts'], ug_asset_ver('assets/css/base.css'));
 });
+
+// Google Fonts Flatsome (PT Serif + системные стеки из type_texts/type_nav,
+// которые Google не отдаёт) — не нужен: PT Serif лежит в fonts/fonts.css.
+add_action('after_setup_theme', function (): void {
+    remove_action('wp_enqueue_scripts', 'flatsome_google_fonts', 9999);
+});
+
+// Основное начертание текста — preload: качается до разбора CSS.
+add_action('wp_head', function (): void {
+    printf(
+        "<link rel='preload' href='%s' as='font' type='font/woff2' crossorigin />\n",
+        esc_url(get_theme_file_uri('fonts/Inter-Regular.woff2'))
+    );
+}, 2);
 
 add_action('wp_enqueue_scripts', function (): void {
     wp_enqueue_script('mailscript', get_theme_file_uri('js/script.js'), [], ug_asset_ver('js/script.js'), true);
