@@ -18,6 +18,9 @@ function akciya_block_shortcode($atts)
     } else {
         // баннер акции стоит внизу страницы — не LCP: без fetchpriority=high, который ставило ядро
         $thumbnail = get_the_post_thumbnail($post->ID, 'post-thumbnail', ['fetchpriority' => 'low', 'loading' => 'lazy']);
+        // с явным loading ядро картинку не считает — счёт медиа контента как был,
+        // иначе loading=lazy съезжает у следующих картинок страницы
+        wp_increase_content_media_count();
     }
     if (isset($atts['title'])) {
         $title = $atts['title'];
