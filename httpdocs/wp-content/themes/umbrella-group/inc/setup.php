@@ -53,3 +53,36 @@ if (function_exists('acf_add_options_page')) {
 
 
 }
+
+
+/**
+ * Лишний CSS/JS ядра и Flatsome на фронте (WS-2, спека §3.4, шаг 7).
+ *
+ * - wp-block-library (113 КБ), classic-theme-styles, global-styles (8,9 КБ):
+ *   редактор блоков выключен, в HTML 602 рендеров нет ни одного класса
+ *   wp-block-* / has-*-color / is-layout-*, в CSS темы, Flatsome и CF7 нет
+ *   var(--wp--preset…). То же, что theme_mod disable_blockcss, но для всех
+ *   трёх хэндлов и без настройки в БД.
+ * - Эмодзи: скрипт-детектор (wp_head:7), стили и dns-prefetch s.w.org — то же,
+ *   что theme_mod disable_emoji. Эмодзи в тексте остаются символами.
+ * - flatsome_add_fallbacks: условные комментарии <!--[if IE]> с html5shiv и
+ *   ie-flexibility — IE их только и читает.
+ */
+add_action('wp_enqueue_scripts', function (): void {
+    wp_dequeue_style('wp-block-library');
+    wp_dequeue_style('classic-theme-styles');
+    wp_dequeue_style('global-styles');
+}, 100);
+remove_action('wp_enqueue_scripts', 'wp_enqueue_global_styles');
+remove_action('wp_footer', 'wp_enqueue_global_styles', 1);
+remove_action('wp_enqueue_scripts', 'wp_enqueue_classic_theme_styles');
+
+remove_action('wp_head', 'print_emoji_detection_script', 7);
+remove_action('wp_enqueue_scripts', 'wp_enqueue_emoji_styles');
+remove_action('wp_print_styles', 'print_emoji_styles');
+add_filter('emoji_svg_url', '__return_false');
+
+// Родительская тема грузится после дочерней — снимаем её хук, когда он уже стоит.
+add_action('after_setup_theme', function (): void {
+    remove_action('wp_head', 'flatsome_add_fallbacks');
+});
