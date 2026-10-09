@@ -252,6 +252,8 @@ class cases
 
             // 2) Потом — добавленные по ids (в порядке из шорткода)
             if (!empty($this->filter_ids)) {
+                // посты и их мета одним запросом, а не get_post()/get_post_meta() на каждый id
+                _prime_post_caches($this->filter_ids, false, true);
                 foreach ($this->filter_ids as $id) {
                     if (in_array($id, $seen_ids)) {
                         continue;

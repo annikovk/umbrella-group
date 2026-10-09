@@ -6,7 +6,7 @@ class why_choose_us
 
     public function generate_shortcode()
     {
-        if (get_the_ID() == 13514 || is_front_page() || (preg_match('/about\/$/', $_SERVER['REQUEST_URI']))) {
+        if (get_the_ID() == 13514 || is_front_page() || (preg_match('/about\/$/', ug_request_path()))) {
             return "";
         }
         $html = <<<EOHTML
