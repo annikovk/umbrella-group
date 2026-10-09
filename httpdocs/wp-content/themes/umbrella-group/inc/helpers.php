@@ -137,8 +137,8 @@ function ug_eager_img(string $img): string
     $GLOBALS['ug_eager_imgs'][$key] = $img;
     if (!$hooked) {
         $hooked = true;
-        add_filter('the_content', static function (string $content): string {
-            return strtr($content, $GLOBALS['ug_eager_imgs'] ?? []);
+        add_filter('the_content', static function ($content) {
+            return is_string($content) ? strtr($content, $GLOBALS['ug_eager_imgs'] ?? []) : $content;
         }, PHP_INT_MAX);
     }
     return $key;
