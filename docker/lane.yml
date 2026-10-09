@@ -1,0 +1,35 @@
+# «Полоса» — второй web-контейнер стенда со своей копией темы umbrella-group.
+#
+# Нужна, чтобы несколько веток рефакторинга проверялись скриншотами параллельно,
+# не ломая друг другу картинку: ядро, плагины и медиа берутся из общего зеркала,
+# база — общая с основным стендом (сеть taxlab-local_default, хост db), а поверх
+# монтируется только каталог темы из git worktree.
+#
+# Поднимать через tools/lane.sh, а не руками.
+name: ${LANE_NAME:?LANE_NAME}
+
+services:
+  web:
+    image: taxlab-local-web:latest
+    environment:
+      APACHE_RUN_USER: "#${HOST_UID:-501}"
+      APACHE_RUN_GROUP: "#${HOST_GID:-20}"
+      LOCAL_SITE_URL: "http://localhost:${LANE_PORT:?LANE_PORT}"
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: ${DB_NAME:-wp_taxlab}
+      WORDPRESS_DB_USER: root
+      WORDPRESS_DB_PASSWORD: ${DB_ROOT_PASSWORD:-local}
+      WP_DEBUG: "${WP_DEBUG:-0}"
+    volumes:
+      - ../httpdocs:/var/www/vhosts/taxlab.ru/httpdocs
+      - ./overlay/wp-config.php:/var/www/vhosts/taxlab.ru/httpdocs/wp-config.php:ro
+      - ./overlay/mu-plugins:/var/www/vhosts/taxlab.ru/httpdocs/wp-content/mu-plugins:ro
+      - ${LANE_THEME:?LANE_THEME}:/var/www/vhosts/taxlab.ru/httpdocs/wp-content/themes/umbrella-group
+    ports:
+      - "127.0.0.1:${LANE_PORT}:80"
+    networks: [stand]
+
+networks:
+  stand:
+    name: taxlab-local_default
+    external: true
