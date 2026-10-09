@@ -2,6 +2,10 @@
 
 class Service_tiles
 {
+    // единственное значение атрибута custom_css в контенте (страницы 13514, 13516);
+    // раньше путь из атрибута читался file_get_contents как есть — любой файл темы
+    private const CUSTOM_CSS_ALLOWED = ['/assets/css/blocks/services-tiles-new.css'];
+
     public $atts;
     public $err = "Неправильное использование шорткода";
     private $hide_pages_on_mobile = true;
@@ -71,6 +75,7 @@ class Service_tiles
 
     function generate_shortcode($atts)
     {
+        $tabs = "";
         if (isset($atts["hide_pages_on_mobile"])) {
             if ($atts["hide_pages_on_mobile"] == "false") {
                 $this->hide_pages_on_mobile = false;
@@ -89,7 +94,7 @@ class Service_tiles
         }
 
         $html = <<<EOHTML
-                    <div class="main-services">{$tabs}[row][col class='main-services-tile-col" span="12"]<div class="main-services-tile-grid">
+                    <div class="main-services">{$tabs}[row][col span="12"]<div class="main-services-tile-grid">
                 EOHTML;
         foreach ($this->tiles as $tile) {
             $html .= $this->get_tile($tile);
@@ -120,10 +125,9 @@ class Service_tiles
             umbrella_add_custom_js_files(["/assets/js/blocks/services-tiles-hide-pages-on-mobile.js"]);
         }
         umbrella_add_custom_css_files(['/assets/css/blocks/services-tiles.css']);
-        if (isset($atts["custom_css"])) {
+        if (in_array($atts["custom_css"] ?? null, self::CUSTOM_CSS_ALLOWED, true)) {
             umbrella_add_custom_css_files([$atts["custom_css"]]);
         }
-        umbrella_add_custom_css_files(['/assets/css/blocks/services-tiles.css']);
         return $html;
     }
 
@@ -163,9 +167,7 @@ class Service_tiles
         }
         // режем здесь, а не через number: так порядок совпадает с прежним списком из 8
         $pages = array_slice($pages, 0, $this->pages_per_tile);
-        if ($this->hide_pages_on_mobile) {
-            $hideforsmall = "hide-for-small";
-        }
+        $hideforsmall = $this->hide_pages_on_mobile ? "hide-for-small" : "";
         foreach ($pages as $page) {
             // guid — не адрес страницы: у части страниц там ?page_id= или адрес старой копии
             $url = get_permalink($page);
@@ -194,16 +196,6 @@ class Service_tiles
 
                     EOHTML;
         return $html;
-    }
-
-    private function fill_variable(&$variable, $attribute): bool
-    {
-        if (strlen($this->atts[$attribute]) > 0) {
-            $variable = $this->atts[$attribute];
-            return true;
-        } else {
-            return false;
-        }
     }
 }
 

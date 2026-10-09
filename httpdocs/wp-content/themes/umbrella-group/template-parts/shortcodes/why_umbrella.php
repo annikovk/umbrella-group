@@ -4,22 +4,43 @@ class why_umbrella
 {
     public $atts;
 
+    private const RUTUBE_ID = '8a3e704fa59f88bb08442e29a291fba9';
+    // постер ролика из API rutube (/api/video/<id>/ → thumbnail_url)
+    private const POSTER = 'https://pic.rtbcdn.ru/video/2025-07-24/ed/53/ed535f661cf9f5699340fc0757e17f20.jpg';
+
+    /**
+     * Фасад видео: тот же <iframe> с теми же размерами, но вместо плеера rutube
+     * (≈ 730 КБ сразу при загрузке страницы) — srcdoc с постером и кнопкой;
+     * клик переводит фрейм на плеер. Бокс не меняется — разметка вокруг та же.
+     */
+    private function get_video(): string
+    {
+        $player = 'https://rutube.ru/play/embed/' . self::RUTUBE_ID . '/?autoplay=true';
+        $srcdoc = '<style>*{margin:0;padding:0}html,body{height:100%;overflow:hidden;background:#000}'
+            . 'a{position:relative;display:block;height:100%}img{width:100%;height:100%;object-fit:cover}'
+            . 'span{position:absolute;top:50%;left:50%;width:80px;height:56px;margin:-28px 0 0 -40px;border-radius:12px;background:rgba(0,0,0,.7)}'
+            . 'span:after{content:"";position:absolute;left:32px;top:16px;border-style:solid;border-width:12px 0 12px 20px;border-color:transparent transparent transparent #fff}'
+            . 'a:hover span,a:focus span{background:#EC1C23}</style>'
+            . '<a href="' . esc_url($player) . '" aria-label="Смотреть видео"><img src="' . esc_url(self::POSTER) . '" alt=""><span></span></a>';
+        // ядро считает iframe без loading в счётчик медиа контента (порог loading=lazy
+        // для картинок ниже); у фасада loading задан явно — счёт тот же, что был
+        wp_increase_content_media_count();
+        return '<iframe width="1200" height="405" title="Почему ГК Umbrella Group — рассказывает Александр Климов" loading="lazy" srcdoc="'
+            . esc_attr($srcdoc) . '" frameBorder="0" allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+    }
+
     public function generate_shortcode()
     {
-        if (isMobile()) {
-
+        $video = $this->get_video();
+        // Блок только для десктопа: раньше на мобильных UA (isMobile()) шорткод
+        // возвращал пусто, теперь один DOM для всех и hide-for-medium (≤ 849 px).
         $html = <<<EOHTML
-
-        EOHTML;
-
-         } else {
-        $html = <<<EOHTML
-         [section id='why_umbrella'  padding="0px"]
+         [section id='why_umbrella'  padding="0px" class="hide-for-medium"]
            [row]
             [col  span="12" span__sm="12" margin="0px 0px 0px 0px"]
             <div class="block-padding_why-umbrella main-container_why-umbrella">
             <div class="vide_ceo">
-               <iframe width="1200" height="405" src="https://rutube.ru/play/embed/8a3e704fa59f88bb08442e29a291fba9/" frameBorder="0" allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+               $video
                 </div>
                 <div class="card_why-umbrella card-shadow-common card-shadow_none_why-umbrella">
                     <div class="title-h1-text-common title_why_umbrella">Почему ГК <span class="show-for-small"><br/></span>Umbrella Group?</div>
@@ -63,7 +84,7 @@ class why_umbrella
             [/col]
            [/row]
          [/section]
-        EOHTML; }
+        EOHTML;
         umbrella_add_custom_css_files(['/assets/css/blocks/why_umbrella.css']);
         umbrella_add_custom_js_files(["/assets/js/blocks/why_umbrella.js"]);
         return $html;
@@ -79,5 +100,3 @@ function why_umbrella_shortcode($atts)
 }
 
 add_shortcode('why_umbrella', 'why_umbrella_shortcode');
-
-?>

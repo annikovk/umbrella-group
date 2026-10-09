@@ -22,21 +22,16 @@ class komanda_specialistov
     public function generate_shortcode()
     {
         $posts = $this->get_specialists_posts($this->category);
+        ug_prime_thumbnails($posts);
         $categories = $this->get_categories_of_posts($posts);
 
         $tabs = $this->get_tabs($categories);
         $tiles = $this->get_tiles($posts);
 
-         if (isMobile()) {
-
+        // Блок только для десктопа: раньше на мобильных UA (isMobile()) шорткод
+        // возвращал пусто, теперь один DOM для всех и hide-for-medium (≤ 849 px).
         $html = <<<EOHTML
-
-        EOHTML;
-
-         } else {
-
-        $html = <<<EOHTML
-        [section class='komanda_specialistov' id='komanda_specialistov'  padding="0px"]
+        [section class='komanda_specialistov hide-for-medium' id='komanda_specialistov'  padding="0px"]
             [row]
                 [col  span="12" span__sm="12" margin="0px 0px 0px 0px"]
                 <div class="padding_komanda_specialistov">
@@ -49,7 +44,7 @@ class komanda_specialistov
                 [/col]
            [/row]
         [/section]    
-        EOHTML; }
+        EOHTML;
 
         umbrella_add_custom_css_files($this->css_file);
         umbrella_add_custom_js_files($this->js_file);
@@ -88,13 +83,6 @@ class komanda_specialistov
 
         $label = ($main) ? $this->get_main_label($category) : $this->get_label($category);
         if ($main) {
-             if (isMobile()) {
-
-        $html = <<<EOHTML
-
-        EOHTML;
-
-         } else {
             $html = <<<EOHTML
             <div class="specialist-tile main $filter_class">
                <div class="container-text-mute_komanda desktop_mode_komanda">
@@ -121,7 +109,7 @@ class komanda_specialistov
                    </div>
 
             </div>
-        EOHTML; }
+        EOHTML;
         } else {
             $html = <<<EOHTML
             <div class="specialist-tile $filter_class">
@@ -250,20 +238,7 @@ class komanda_specialistov
 
     private function get_category_by_url(): string
     {
-        if (strpos($_SERVER['REQUEST_URI'], "services/licensing") !== false) {
-            return "Лицензирование";
-        } else if (strpos($_SERVER['REQUEST_URI'], "services/register-elimination") !== false) {
-            return "Регистрация и ликвидация";
-        } else if (strpos($_SERVER['REQUEST_URI'], "services/services-le") !== false) {
-            return "Юридические услуги";
-        } else if (strpos($_SERVER['REQUEST_URI'], "services/audit") !== false) {
-            return "Аудит";
-        } else if (strpos($_SERVER['REQUEST_URI'], "services/bukhgalterskie-uslugi") !== false) {
-            return "Бухгалтерия";
-        } else if (strpos($_SERVER['REQUEST_URI'], "services/sdelki-s-nedvizhimostyu") !== false) {
-            return "Сделки с недвижимостью";
-        }
-        return "";
+        return ug_service_category() ?? "";
     }
 
 }

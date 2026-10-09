@@ -51,7 +51,6 @@ jQuery(document).ready(function () {
             jQuery(window).on('scroll', function () {
                 if(jQuery(window).width() <= 425) {
                     pageY = window.pageYOffset;
-                    console.log(dockTop + " < " + pageY + " < " + dockBottom);
                     if(pageY >= dockTop && pageY <= dockBottom) {
                         var length = jQuery('#buh-table .rightBlock').scrollLeft();
                         jQuery('#buh-table .head').scrollLeft(length);

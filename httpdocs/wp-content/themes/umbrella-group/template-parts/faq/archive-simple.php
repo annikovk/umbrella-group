@@ -1,23 +1,10 @@
 <?php if (have_posts()) :
-    // Create IDS
     $ids = array();
-    $tags_ids = array();
     $args = array_merge($wp_query->query_vars, ['posts_per_page' => 100]);
     query_posts($args);
 endif;
 while (have_posts()) : the_post();
     array_push($ids, get_the_ID());
-    if (!empty(get_the_tags())) {
-        foreach (get_the_tags() as $tag) {
-            $tag = $tag->term_id;
-            if (empty ($tags_ids[$tag])) {
-                $tags_ids[$tag] = 1;
-            } else {
-                $tags_ids[$tag] += 1;
-
-            }
-        }
-    }
 endwhile;
 $posts = get_faq_by_ids($ids);
 umbrella_draw_faq_tiles($posts);
@@ -39,10 +26,6 @@ function umbrella_draw_faq_tiles($posts)
     foreach ($posts as $post) {
         if (!in_array(get_post_meta($post->ID, 'faq_branch', true), $metas)) {
             array_push($metas, get_post_meta($post->ID, 'faq_branch', true));
-        }
-        $excerpt = get_the_content($post->ID);
-        if (empty($excerpt)) {
-            $excerpt = "<span style='color: red'> Нужно добавить ответ</span>";
         }
         $question = <<<EOHTML
                     [accordion-item title="$post->post_title" subtitle=""]

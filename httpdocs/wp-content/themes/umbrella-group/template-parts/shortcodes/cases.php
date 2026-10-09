@@ -177,7 +177,7 @@ class cases
         }
         if (strlen($feedback_text) > 0 && strlen($feedback_url) > 0) {
             if (str_contains($feedback_url, "flamp")) {
-                $icon = "<img height='20px' width='20px' src='https://flamp.ru/static/assets/brand-logo/svg/f.svg' alt='flamp-logo'>";
+                $icon = "<img height='20px' width='20px' src='" . esc_url(ug_flamp_icon_url()) . "' alt='flamp-logo'>";
                 $target = "target='_blank'";
                 $feedback = "<div class='case-feedback hide-for-small'>$icon <a $target href='{$feedback_url}'>{$feedback_text}</a></div> ";
             } else {
@@ -252,6 +252,8 @@ class cases
 
             // 2) Потом — добавленные по ids (в порядке из шорткода)
             if (!empty($this->filter_ids)) {
+                // посты и их мета одним запросом, а не get_post()/get_post_meta() на каждый id
+                _prime_post_caches($this->filter_ids, false, true);
                 foreach ($this->filter_ids as $id) {
                     if (in_array($id, $seen_ids)) {
                         continue;
@@ -303,20 +305,11 @@ class cases
 
     private function get_category_by_url(): string
     {
-        if (strpos($_SERVER['REQUEST_URI'], "services/licensing") !== false) {
-            return "Лицензирование";
-        } else if (strpos($_SERVER['REQUEST_URI'], "services/register-elimination") !== false) {
-            return "Регистрация и ликвидация";
-        } else if (strpos($_SERVER['REQUEST_URI'], "services/services-le") !== false) {
-            return "Юридические услуги";
-        } else if (strpos($_SERVER['REQUEST_URI'], "services/audit") !== false) {
-            return "Аудит";
-        } else if (strpos($_SERVER['REQUEST_URI'], "services/bukhgalterskie-uslugi") !== false) {
-            return "Бухгалтерия";
-        } else if (strpos($_SERVER['REQUEST_URI'], "/about/cases/") !== false) {
+        if (str_contains(ug_request_path(), "/about/cases/")) {
             return "cases";
         }
-        return "Общий";
+        $category = ug_service_category();
+        return ($category === null || $category === "Сделки с недвижимостью") ? "Общий" : $category;
     }
 
     private function get_title(string $category): string
