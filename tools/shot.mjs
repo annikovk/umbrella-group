@@ -6,20 +6,33 @@
  *     tools/shot.mjs 1280 1440 1600 1920 390m    # пять ширин, один хром
  *     tools/shot.mjs --url /services/audit/obyazatelnyiy/ --out /tmp/A- 1440
  *     tools/shot.mjs --eval "document.querySelector('[data-promo-next]').click()" 1440
+ *     tools/shot.mjs --expect 404 --url /net-takoi-stranicy/ 1440   # страница 404
  *
- * Гоняет headless Chrome по DevTools Protocol. Зависимостей нет — WebSocket
- * в Node встроенный.
+ * Гоняет headless Chrome по DevTools Protocol через `--remote-debugging-pipe`
+ * (fd 3/4, сообщения JSON через `\0`). Зависимостей нет.
+ *
+ * Стенд — `TAXLAB_BASE` (по умолчанию http://localhost:8088): так же снимаются
+ * полосы tools/lane.sh — `TAXLAB_BASE=http://localhost:8092 tools/shot.mjs 1440`.
+ * Полный URL в `--url` базу перекрывает.
+ *
+ * ⚠️ Почему pipe, а не WebSocket: встроенный WebSocket Node (undici) рвёт
+ * соединение на входящем сообщении больше 4 МиБ (жёсткий
+ * kDefaultMaxDecompressedSize в permessage-deflate), и делает это молча.
+ * Full-PNG длинной страницы с догруженными картинками весит >3 МБ (base64
+ * >4 МиБ) — на WebSocket `--full` висел до watchdog на 5 из 14 страниц
+ * эталона. Не возвращай WebSocket и `--remote-debugging-port`.
  *
  * ⚠️ Зачем не `chrome --screenshot`: с `--virtual-time-budget` он на десктопной
  * вёрстке этого сайта пишет PNG за 6 секунд и после этого НЕ ВЫХОДИТ НИКОГДА.
  * Проверено: 1440 + бюджет 6000/12000 — висит вечно; без бюджета или на 390 px
- * — выходит за 5 с. На 390 не висит потому, что бесконечный таймер держит
- * десктопный элемент (виджет qoopler), а на телефонной вёрстке его нет: пока
- * таймеры не кончились, виртуальное время не истекает и браузер не завершается.
- * Одна сессия 7 сентября потеряла на этом 19 минут: пять вызовов сгорели в
- * таймаутах Bash по 120–400 с, хотя картинки лежали на диске через 6 секунд, а
- * поверх этого агент ждал их слепыми `sleep 90/100/180`. Не возвращай
- * `--screenshot` и `--virtual-time-budget`, даже если кажется, что так короче.
+ * — выходит за 5 с. Кто именно держит виртуальное время, не установлено:
+ * раньше здесь было написано «бесконечный таймер виджета qoopler», но замер
+ * таймеров и rAF в простое (аудит 09.10.2026) показал, что qoopler их не
+ * создаёт, — вероятнее Метрика или Venyoo. Одна сессия 7 сентября потеряла на
+ * этом 19 минут: пять вызовов сгорели в таймаутах Bash по 120–400 с, хотя
+ * картинки лежали на диске через 6 секунд, а поверх этого агент ждал их
+ * слепыми `sleep 90/100/180`. Не возвращай `--screenshot` и
+ * `--virtual-time-budget`, даже если кажется, что так короче.
  */
 
 import { spawn, spawnSync } from "node:child_process";
@@ -27,21 +40,20 @@ import { mkdirSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 
 const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
-const STAND = "http://localhost:8088";
+const STAND = (process.env.TAXLAB_BASE || "http://localhost:8088").replace(/\/+$/, "");
 const UA_IPHONE = "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) " +
   "AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1";
 
-// ⚠️ Порт и профиль — СВОИ на прогон (грабли из dutch-exam/tools/shot.mjs: при
-// общем порте новый прогон цепляется к хрому прошлого, если тот не успел умереть,
-// и снимает чужое состояние).
-const PORT = 9300 + (process.pid % 190);
+// ⚠️ Профиль — СВОЙ на прогон (грабли из dutch-exam/tools/shot.mjs: при общем
+// профиле/порте новый прогон цепляется к хрому прошлого, если тот не успел
+// умереть, и снимает чужое состояние). С pipe порта нет вовсе.
 const PROFILE = `/tmp/taxlab-shot-profile-${process.pid}`;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const die = (msg) => { process.stderr.write(`shot.mjs: ${msg}\n`); process.exit(1); };
 
 // ── аргументы ────────────────────────────────────────────────────────────────
-const opt = { url: "/", out: "/tmp/shot-", height: 1200, wait: 400, full: false, eval: null };
+const opt = { url: "/", out: "/tmp/shot-", height: 1200, wait: 400, full: false, eval: null, expect: 0 };
 const widths = [];
 for (let i = 2; i < process.argv.length; i++) {
   const a = process.argv[i];
@@ -51,6 +63,7 @@ for (let i = 2; i < process.argv.length; i++) {
   else if (a === "--height") opt.height = Number(process.argv[++i]);
   else if (a === "--wait") opt.wait = Number(process.argv[++i]);
   else if (a === "--eval") opt.eval = process.argv[++i];
+  else if (a === "--expect") opt.expect = Number(process.argv[++i]);
   else if (/^\d+m?$/.test(a)) widths.push({ w: parseInt(a, 10), mobile: a.endsWith("m") });
   else die(`не понял аргумент «${a}»`);
 }
@@ -103,44 +116,57 @@ process.on("exit", () => {
 });
 for (const sig of ["SIGINT", "SIGTERM", "SIGHUP"]) process.on(sig, () => process.exit(1));
 
-async function launch() {
+// CDP через --remote-debugging-pipe: хром читает команды из fd 3 и пишет
+// ответы в fd 4, каждое сообщение — JSON с нулевым байтом в конце. Ответ
+// приходит кусками произвольной длины, поэтому собираем буфер до `\0`.
+function launch() {
   child = spawn(CHROME, [
     "--headless=new", "--disable-gpu", "--hide-scrollbars",
     "--no-first-run", "--no-default-browser-check", "--disable-extensions",
-    `--user-data-dir=${PROFILE}`, `--remote-debugging-port=${PORT}`, "about:blank",
-  ], { stdio: "ignore" });
-  for (let i = 0; i < 80; i++) {              // ~1 с в норме, потолок 20 с
-    try {
-      const r = await fetch(`http://127.0.0.1:${PORT}/json/version`);
-      return (await r.json()).webSocketDebuggerUrl;
-    } catch { await sleep(250); }
-  }
-  die("Chrome не поднял отладочный порт за 20 с");
+    `--user-data-dir=${PROFILE}`, "--remote-debugging-pipe", "about:blank",
+  ], { stdio: ["ignore", "ignore", "ignore", "pipe", "pipe"] });
+  child.on("error", (e) => die(`Chrome не запустился: ${e.message}`));
+  return child;
 }
 
-function connect(wsUrl) {
-  const ws = new WebSocket(wsUrl);
+function connect(proc) {
+  const out = proc.stdio[3], inp = proc.stdio[4];
   const waiting = new Map();
   const events = new Map();
-  let id = 0;
-  ws.addEventListener("message", (m) => {
-    const msg = JSON.parse(m.data);
-    if (msg.id && waiting.has(msg.id)) {
-      const { ok, fail } = waiting.get(msg.id);
-      waiting.delete(msg.id);
-      msg.error ? fail(new Error(msg.error.message)) : ok(msg.result);
-    } else if (msg.method) {
-      (events.get(msg.method) || []).splice(0).forEach((fn) => fn(msg.params));
+  let id = 0, buf = [], closed = null;
+  inp.on("data", (chunk) => {
+    let start = 0, i;
+    while ((i = chunk.indexOf(0, start)) !== -1) {
+      buf.push(chunk.subarray(start, i));
+      const msg = JSON.parse(Buffer.concat(buf).toString("utf8"));
+      buf = []; start = i + 1;
+      if (msg.id && waiting.has(msg.id)) {
+        const { ok, fail } = waiting.get(msg.id);
+        waiting.delete(msg.id);
+        msg.error ? fail(new Error(msg.error.message)) : ok(msg.result);
+      } else if (msg.method) {
+        (events.get(msg.method) || []).splice(0).forEach((fn) => fn(msg.params));
+      }
     }
+    if (start < chunk.length) buf.push(chunk.subarray(start));
   });
-  const ready = new Promise((ok, fail) => {
-    ws.addEventListener("open", ok);
-    ws.addEventListener("error", () => fail(new Error("не подключился к CDP")));
-  });
+  // Хром умер или закрыл канал — все ожидающие вызовы падают сразу, а не
+  // висят до watchdog.
+  const onClose = (why) => {
+    if (closed) return;
+    closed = new Error(`CDP-канал закрыт (${why})`);
+    for (const { fail } of waiting.values()) fail(closed);
+    waiting.clear();
+  };
+  inp.on("close", () => onClose("хром закрыл fd 4"));
+  inp.on("error", (e) => onClose(e.message));
+  out.on("error", (e) => onClose(e.message));
+  proc.on("exit", (code, sig) => onClose(`хром вышел: ${sig || code}`));
   const send = (method, params = {}, sessionId) => new Promise((ok, fail) => {
+    if (closed) return fail(closed);
     const n = ++id;
     waiting.set(n, { ok, fail });
-    ws.send(JSON.stringify({ id: n, method, params, sessionId }));
+    out.write(JSON.stringify({ id: n, method, params, sessionId }) + "\0");
   });
   // Событие с потолком: ждём загрузку, но если страница тянет внешний скрипт
   // (GTM, шрифты Google, cdnjs) — снимаем что есть, а не висим.
@@ -149,7 +175,7 @@ function connect(wsUrl) {
     list.push(ok);
     setTimeout(ok, ms);
   });
-  return { ready, send, once, close: () => ws.close() };
+  return { send, once };
 }
 
 // ── прогон ───────────────────────────────────────────────────────────────────
@@ -162,9 +188,11 @@ async function main() {
   // снимок, то есть врёт молча.
   const probe = await fetch(url).catch((e) => die(`стенд не отвечает (${url}): ${e.message}`));
   probe.body?.cancel();
-  if (probe.status >= 400) die(`${url} отдаёт HTTP ${probe.status} — снимать нечего`);
-  const cdp = connect(await launch());
-  await cdp.ready;
+  // --expect 404 — для снимка страницы «не найдено»: тогда врёт как раз 200.
+  if (opt.expect ? probe.status !== opt.expect : probe.status >= 400) {
+    die(`${url} отдаёт HTTP ${probe.status}${opt.expect ? `, ждали ${opt.expect}` : ""} — снимать нечего`);
+  }
+  const cdp = connect(launch());
 
   const { targetId } = await cdp.send("Target.createTarget", { url: "about:blank" });
   const { sessionId } = await cdp.send("Target.attachToTarget", { targetId, flatten: true });
@@ -221,7 +249,6 @@ async function main() {
     process.stdout.write(`${file}\n`);
   }
 
-  cdp.close();
   await cleanup();
   const sec = ((Date.now() - t0) / 1000).toFixed(1);
   process.stderr.write(`${widths.length} снимк(ов) за ${sec} с\n`);
