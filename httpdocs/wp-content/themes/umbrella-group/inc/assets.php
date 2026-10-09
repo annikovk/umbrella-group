@@ -142,6 +142,74 @@ function ug_head_styles(?string $add = null): array
     return $head;
 }
 
+/**
+ * Копия CSS блока в <head> — только для первого кадра (CLS, LCP). Сам файл
+ * блока по-прежнему встаёт в late styles, когда шорткод отрендерится, и стоит
+ * там, где стоял: копия идентична и раньше по документу, поэтому каскад тот
+ * же (любое её значение перекрывается тем же значением late-копии).
+ */
+function ug_paint_copy(string $rel): void
+{
+    $handle = ug_register_style($rel);
+    if ($handle === null || did_action('ug_head_styles_printed')) {
+        return;
+    }
+    $styles = wp_styles();
+    $copy = $handle . '-head';
+    if (!wp_style_is($copy, 'registered')) {
+        $item = $styles->registered[$handle];
+        wp_register_style($copy, $item->src, [], $item->ver);
+        foreach ((array) $styles->get_data($handle, 'after') as $css) {
+            wp_add_inline_style($copy, (string) $css);
+        }
+    }
+    ug_paint_styles($copy);
+}
+
+function ug_paint_styles(?string $add = null): array
+{
+    static $copies = [];
+    if ($add !== null && !in_array($add, $copies, true)) {
+        $copies[] = $add;
+    }
+    return $copies;
+}
+
+/**
+ * Первый экран: CSS шорткодов, которые стоят в контенте записи, — копией в
+ * <head> (спека §3.2, предскан на хуке wp). Шорткоды из UX-блоков (тип blocks)
+ * сюда не попадают — их CSS приходит late styles, как и раньше.
+ */
+const UG_FIRST_SCREEN_CSS = [
+    'new_main_first_screen'        => ['assets/css/blocks/new_main_first_screen.css'],
+    'su_welcome_screen'            => ['assets/css/blocks/su-welcome-screen.css'],
+    'su_welcome_screen_conditions' => ['assets/css/blocks/su-welcome-screen-conditions.css'],
+    'business_first_screen'        => ['assets/css/blocks/business_first_screen.css'],
+    'service_tiles'                => ['assets/css/blocks/services-tiles.css'],
+];
+
+add_action('wp', function (): void {
+    if (!is_singular() || is_404()) {
+        return;
+    }
+    $post = get_queried_object();
+    if (!$post instanceof WP_Post || $post->post_content === '') {
+        return;
+    }
+    foreach (UG_FIRST_SCREEN_CSS as $tag => $files) {
+        if (!has_shortcode($post->post_content, $tag)) {
+            continue;
+        }
+        foreach ($files as $rel) {
+            ug_paint_copy($rel);
+        }
+    }
+    // service_tiles custom_css: единственное значение в БД (страницы 13514, 13516).
+    if (str_contains($post->post_content, 'services-tiles-new.css') && has_shortcode($post->post_content, 'service_tiles')) {
+        ug_paint_copy('assets/css/blocks/services-tiles-new.css');
+    }
+});
+
 /** JS темы по пути: in_footer по умолчанию, зависимости явно. */
 function ug_enqueue_script(string $rel, array $deps = [], array $args = ['in_footer' => true]): void
 {
@@ -202,7 +270,7 @@ add_action('wp_head', function (): void {
     // раньше печатался только в wp_footer, на 404 не выводился вовсе. Вёрстку
     // 404 не меняем: в head ug-main тоже не печатаем (решение — за владельцем).
     if (!is_404()) {
-        wp_print_styles(ug_head_styles());
+        wp_print_styles(array_merge(ug_head_styles(), ug_paint_styles()));
     }
     do_action('ug_head_styles_printed');
 }, 101);
