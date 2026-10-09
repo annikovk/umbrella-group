@@ -54,7 +54,10 @@ function ug_post_types(): array
             'can_export' => true,
             'has_archive' => true,
             'exclude_from_search' => false,
-            'publicly_queryable' => true,
+            // Своих страниц у клиента нет: /client/<slug>/ отдавали заглушку
+            // «Шаблог страницы типа 'клиент'» (ссылок в контенте и sitemap 0).
+            // Клиенты выводятся плитками на /about/clients/ — туда и 301 ниже.
+            'publicly_queryable' => false,
             'capability_type' => 'post',
         ],
         'akcii' => [
@@ -306,6 +309,21 @@ add_action('init', static function (): void {
         if (in_array($type, UG_UX_BUILDER_TYPES, true) && function_exists('add_ux_builder_post_type')) {
             add_ux_builder_post_type($type);
         }
+    }
+});
+
+/**
+ * /client/, /client/<slug>/, /client/feed/ … → 301 на /about/clients/.
+ * После publicly_queryable => false WP отдал бы на них главную с кодом 200.
+ */
+add_action('parse_request', static function (WP $wp): void {
+    // wp-admin/edit.php?post_type=client тоже проходит через wp() → parse_request.
+    if (is_admin() || wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST)) {
+        return;
+    }
+    if (preg_match('#^client(/|$)#', $wp->request) || ($_GET['post_type'] ?? '') === 'client') {
+        wp_redirect(home_url('/about/clients/'), 301);
+        exit;
     }
 });
 
