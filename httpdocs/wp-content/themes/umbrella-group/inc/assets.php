@@ -1,41 +1,273 @@
 <?php
 /**
- * Подключение ассетов темы.
+ * Подключение ассетов темы (спека 1, §3.2).
  *
- * Перенесено из functions.php:163-186, 251-257 дословно (WS-0): шрифты,
- * form-custom.css, js/script.js и коллектор css/css_collector.php (инлайн-CSS/JS
- * на wp_footer:100). Владелец — WS-2: здесь появляются реестр и API
- * ug_enqueue_style()/ug_enqueue_script() (спека §3.2), коллектор уходит.
+ *     ug_enqueue_style('assets/css/blocks/cases.css');      // хэндл ug-blocks-cases
+ *     ug_enqueue_script('assets/js/blocks/cases.js', ['jquery']);
+ *
+ * Хэндл выводится из пути (ug_style_handle), регистрация ленивая — при первом
+ * вызове, версия — filemtime файла. Реестр руками — только у библиотек
+ * (ug-main, ug-swiper, ug-fancybox) в ug_register_libraries().
+ *
+ * Где печатается CSS:
+ *  - ug-base (assets/css/base.css) — в <head> до Flatsome, где раньше стояли
+ *    fonts-configuration.css, form-custom.css и инлайн ul.tabs из header.php.
+ *  - ug-main (assets/css/main.css) — в <head> на wp_head:101, сразу после
+ *    Flatsome custom-css (wp_head:100), и ещё раз той же ссылкой в конце
+ *    <body> перед CSS блоков (якорь каскада, wp_footer:19 — ниже). Раньше этот
+ *    CSS стоял <style>-блоком в самом конце <body> (css/css_collector.php,
+ *    удалён) и побеждал всё, что раньше по документу.
+ *  - CSS страниц и первого экрана (ug_head_style) — там же, после ug-main.
+ *  - CSS блоков (ug_enqueue_style из шорткодов) — late styles ядра на
+ *    wp_footer:20, после разметки, в порядке первого вызова: как и у
+ *    коллектора, после всего инлайна body и после ug-main.
+ *    Вызов до печати head (шорткод, отрендеренный в wp_head плагином SEO, или
+ *    на хуке wp) не попадает в head: хэндл ждёт до wp_head:102 и встаёт в
+ *    общую очередь late styles — иначе ядро напечатало бы его на wp_head:8
+ *    вместе с зависимостью ug-main, раньше custom-css.
+ *  - Всё, что поставлено в очередь после wp_footer:20 (шорткод в подвале
+ *    плагина), печатается страховкой на wp_footer:100.
+ *
+ * JS — в подвале (in_footer), зависимости явно.
  */
 
-function add_custom_fonts()
+declare(strict_types=1);
+
+/** Версия ассета — mtime файла: меняется файл, меняется ?ver=, кэш браузера сбрасывается. */
+function ug_asset_ver(string $rel): string
 {
-    wp_enqueue_style('Inter-font', '/wp-content/themes/umbrella-group/fonts/inter.css');
-    wp_enqueue_style('fonts-configuration', '/wp-content/themes/umbrella-group/fonts/fonts-configuration.css');
+    $path = get_theme_file_path(ltrim($rel, '/'));
+    return is_file($path) ? (string) filemtime($path) : '0';
 }
 
-add_action('wp_enqueue_scripts', 'add_custom_fonts');
-
-// Подключение стилей и скриптов для кастомной формы
-
-add_action('wp_enqueue_scripts', 'custom_form_styles');
-
-function custom_form_styles() 
+/** assets/css/blocks/cases.css → ug-blocks-cases; assets/js/main.js → ug-main-js. */
+function ug_style_handle(string $rel): string
 {
-	wp_enqueue_style('custom-form-style', '/wp-content/themes/umbrella-group/css/form-custom.css', array(), 5.4);
+    $rel = ltrim($rel, '/');
+    $rel = (string) preg_replace('~^assets/(?:css|js)/~', '', $rel);
+    $rel = (string) preg_replace('~\.(?:css|js)$~', '', $rel);
+    return 'ug-' . sanitize_title(str_replace('/', '-', $rel));
 }
 
-
-add_action('wp_enqueue_scripts', 'true_include_mailscript');
- 
-function true_include_mailscript() {
-	wp_enqueue_script( 'mailscript', get_stylesheet_directory_uri() . '/js/script.js', array(), 4.1, true);
-}
-
-require get_theme_file_path() . '/css/css_collector.php';
-function get_umbrella_customizations()
+/**
+ * Путь ассета внутри темы или null. Только файлы темы с нужным расширением:
+ * атрибуты шорткодов (custom_css у service_tiles) приходят из контента, и
+ * раньше путь вида ../../wp-config.php читался file_get_contents и уходил
+ * в HTML. Несуществующий файл тоже null — без 404 на странице.
+ */
+function ug_asset_rel(string $rel, string $ext): ?string
 {
-    $customizations = new umbrella_customization();
-    echo $customizations->get_umbrella_custom_css() . $customizations->get_umbrella_custom_scripts();
+    $rel = ltrim(trim($rel), '/');
+    if ($rel === '' || str_contains($rel, '..') || !str_ends_with(strtolower($rel), '.' . $ext)) {
+        return null;
+    }
+    $root = realpath(get_stylesheet_directory());
+    $path = realpath(get_stylesheet_directory() . '/' . $rel);
+    if ($root === false || $path === false || !str_starts_with($path, $root . DIRECTORY_SEPARATOR) || !is_file($path)) {
+        return null;
+    }
+    return $rel;
 }
-add_action('wp_footer','get_umbrella_customizations', 100);
+
+/** Регистрирует CSS темы по пути (один раз), возвращает хэндл или null. */
+function ug_register_style(string $rel, array $deps = ['ug-main']): ?string
+{
+    $rel = ug_asset_rel($rel, 'css');
+    if ($rel === null) {
+        return null;
+    }
+    $handle = ug_style_handle($rel);
+    if (wp_style_is($handle, 'registered')) {
+        return $handle;
+    }
+    // Абсолютные https://taxlab.ru/… в url() файла: пока CSS был инлайном, их
+    // переписывал под адрес стенда фильтр вывода, у файла этого нет — стенд
+    // тянул бы картинки с прода (антибот отдаёт там не картинку). Такой файл
+    // печатаем инлайном на его месте в очереди, как раньше. Сейчас это
+    // business_first_screen.css, open_business.css, static_startup.css (WS-5:
+    // сделать url() относительными — и ветка уйдёт).
+    $css = (string) file_get_contents(get_stylesheet_directory() . '/' . $rel);
+    if (str_contains($css, '//taxlab.ru/')) {
+        wp_register_style($handle, false, $deps);
+        wp_add_inline_style($handle, $css);
+        return $handle;
+    }
+    wp_register_style($handle, get_theme_file_uri($rel), $deps, ug_asset_ver($rel));
+    return $handle;
+}
+
+/** CSS, который ждёт печати head, — см. шапку файла. */
+function ug_pending_styles(?string $add = null): array
+{
+    static $pending = [];
+    if ($add !== null && !in_array($add, $pending, true)) {
+        $pending[] = $add;
+    }
+    return $pending;
+}
+
+/** CSS блока: late styles на wp_footer:20 (после ug-main и разметки). */
+function ug_enqueue_style(string $rel, array $deps = ['ug-main']): void
+{
+    $handle = ug_register_style($rel, $deps);
+    if ($handle === null) {
+        return;
+    }
+    if (did_action('ug_head_styles_printed')) {
+        wp_enqueue_style($handle);
+    } else {
+        ug_pending_styles($handle);
+    }
+}
+
+/** CSS в <head> сразу после ug-main. Звать до wp_head:101 (хук wp, wp_enqueue_scripts). */
+function ug_head_style(string $rel): void
+{
+    $handle = ug_register_style($rel);
+    if ($handle === null) {
+        return;
+    }
+    if (did_action('ug_head_styles_printed')) {
+        wp_enqueue_style($handle);
+        return;
+    }
+    ug_head_styles($handle);
+}
+
+function ug_head_styles(?string $add = null): array
+{
+    static $head = ['ug-main'];
+    if ($add !== null && !in_array($add, $head, true)) {
+        $head[] = $add;
+    }
+    return $head;
+}
+
+/** JS темы по пути: in_footer по умолчанию, зависимости явно. */
+function ug_enqueue_script(string $rel, array $deps = [], array $args = ['in_footer' => true]): void
+{
+    $rel = ug_asset_rel($rel, 'js');
+    if ($rel === null) {
+        return;
+    }
+    $handle = ug_style_handle($rel);
+    if (!wp_script_is($handle, 'registered')) {
+        wp_register_script($handle, get_theme_file_uri($rel), $deps, ug_asset_ver($rel), $args);
+    }
+    wp_enqueue_script($handle);
+}
+
+/** Библиотеки — реестр руками: у них стабильные хэндлы, по ним зовут шорткоды. */
+function ug_register_libraries(): void
+{
+    wp_register_style('ug-main', get_theme_file_uri('assets/css/main.css'), [], ug_asset_ver('assets/css/main.css'));
+}
+add_action('wp_enqueue_scripts', 'ug_register_libraries', 1);
+
+add_action('wp_head', function (): void {
+    // 404.php не зовёт get_footer(): wp_footer там нет, и CSS темы, который
+    // раньше печатался только в wp_footer, на 404 не выводился вовсе. Вёрстку
+    // 404 не меняем: в head ug-main тоже не печатаем (решение — за владельцем).
+    if (!is_404()) {
+        wp_print_styles(ug_head_styles());
+    }
+    do_action('ug_head_styles_printed');
+}, 101);
+
+add_action('wp_head', function (): void {
+    foreach (ug_pending_styles() as $handle) {
+        wp_enqueue_style($handle);
+    }
+}, 102);
+
+/**
+ * Якорь каскада: те же ug-main и CSS страницы ещё раз — в конце <body>, перед
+ * CSS блоков (late styles на wp_footer:20). Файл тот же, браузер берёт его из
+ * кэша, второго запроса нет.
+ *
+ * Зачем: раньше весь CSS темы стоял <style>-блоком в самом конце <body> и
+ * в равных по специфичности правилах побеждал инлайн-<style> контента — UX-
+ * блоков и форм из БД (например, .lightbox-form label в блоке 2891 против
+ * .footer-form label темы), шапки из theme_mods (#umbrella-menu-button) и
+ * шорткодов. Копия в <head> красит первый кадр (CLS), копия здесь сохраняет
+ * прежний победитель каждой пары: она идентична и стоит позже, поэтому любое
+ * значение из head-копии перекрывается тем же значением отсюда.
+ * Убирается, когда инлайн-стили контента переедут в файлы (спека §9, п. 12).
+ */
+add_action('wp_footer', function (): void {
+    if (!did_action('ug_head_styles_printed')) {
+        return;
+    }
+    $styles = wp_styles();
+    foreach (ug_head_styles() as $handle) {
+        $item = $styles->registered[$handle] ?? null;
+        if ($item === null) {
+            continue;
+        }
+        $href = $styles->_css_href((string) $item->src, $item->ver, $handle);
+        printf("<link rel='stylesheet' id='%s-tail-css' href='%s' type='text/css' media='all' />\n", esc_attr($handle), esc_url($href));
+    }
+}, 19);
+
+// Страховка: что встало в очередь после печати подвала ядром (wp_footer:20),
+// печатаем в конце wp_footer — там, где раньше стоял <style> коллектора.
+add_action('wp_footer', function (): void {
+    if (!did_action('ug_head_styles_printed')) {
+        do_action('ug_head_styles_printed');
+        wp_print_styles(ug_head_styles());
+        foreach (ug_pending_styles() as $handle) {
+            wp_enqueue_style($handle);
+        }
+    }
+    print_late_styles();
+    print_footer_scripts();
+}, 100);
+
+/**
+ * @deprecated Переходный шим (спека §3.2): старый API коллектора поверх
+ * ug_enqueue_style(). Пути — от корня темы со слэшем, как в шорткодах.
+ * Удаляется последним коммитом WS-2, когда grep umbrella_add_custom_ → 0.
+ */
+function umbrella_add_custom_css_files(array $files): void
+{
+    foreach ($files as $file) {
+        ug_enqueue_style((string) $file);
+    }
+}
+
+/** @deprecated См. umbrella_add_custom_css_files(). */
+function umbrella_add_custom_js_files(array $files): void
+{
+    foreach ($files as $file) {
+        ug_enqueue_script((string) $file, ['jquery']);
+    }
+}
+
+// До Flatsome, на прежнем месте хэндлов Inter-font, fonts-configuration и
+// custom-form-style: @font-face Inter и ug-base (assets/css/base.css — стили,
+// которые Flatsome и custom-css должны перекрывать, как и раньше).
+add_action('wp_enqueue_scripts', function (): void {
+    wp_enqueue_style('Inter-font', get_theme_file_uri('fonts/inter.css'), [], ug_asset_ver('fonts/inter.css'));
+    wp_enqueue_style('ug-base', get_theme_file_uri('assets/css/base.css'), ['Inter-font'], ug_asset_ver('assets/css/base.css'));
+});
+
+add_action('wp_enqueue_scripts', function (): void {
+    wp_enqueue_script('mailscript', get_theme_file_uri('js/script.js'), [], ug_asset_ver('js/script.js'), true);
+});
+
+/**
+ * CSS и JS отдельных страниц (были в коллекторе по подстроке permalink):
+ * страницы цен /price/… — pages/price.css + pages/price.js, вопросы /faq/
+ * (архив и записи faq) — pages/faq.js. Скрипты страниц и общий main.js
+ * исполнялись в конце <body> после всех скриптов — ставим их после flatsome-js.
+ */
+add_action('wp_enqueue_scripts', function (): void {
+    ug_enqueue_script('assets/js/main.js', ['jquery', 'flatsome-js']);
+    if (is_page() && str_contains((string) get_permalink(get_queried_object_id()), '/price/')) {
+        ug_head_style('assets/css/pages/price.css');
+        ug_enqueue_script('assets/js/pages/price.js', ['jquery', 'flatsome-js']);
+    }
+    if (is_post_type_archive('faq') || is_singular('faq')) {
+        ug_enqueue_script('assets/js/pages/faq.js', ['jquery', 'flatsome-js']);
+    }
+}, 100);
