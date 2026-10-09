@@ -5,6 +5,7 @@
  *     tools/shot.mjs 1440                        # /tmp/shot-1440.png
  *     tools/shot.mjs 1280 1440 1600 1920 390m    # пять ширин, один хром
  *     tools/shot.mjs --url /services/audit/obyazatelnyiy/ --out /tmp/A- 1440
+ *     tools/shot.mjs --eval "document.querySelector('[data-promo-next]').click()" 1440
  *
  * Гоняет headless Chrome по DevTools Protocol. Зависимостей нет — WebSocket
  * в Node встроенный.
@@ -40,7 +41,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const die = (msg) => { process.stderr.write(`shot.mjs: ${msg}\n`); process.exit(1); };
 
 // ── аргументы ────────────────────────────────────────────────────────────────
-const opt = { url: "/", out: "/tmp/shot-", height: 1200, wait: 400, full: false };
+const opt = { url: "/", out: "/tmp/shot-", height: 1200, wait: 400, full: false, eval: null };
 const widths = [];
 for (let i = 2; i < process.argv.length; i++) {
   const a = process.argv[i];
@@ -49,6 +50,7 @@ for (let i = 2; i < process.argv.length; i++) {
   else if (a === "--out") opt.out = process.argv[++i];
   else if (a === "--height") opt.height = Number(process.argv[++i]);
   else if (a === "--wait") opt.wait = Number(process.argv[++i]);
+  else if (a === "--eval") opt.eval = process.argv[++i];
   else if (/^\d+m?$/.test(a)) widths.push({ w: parseInt(a, 10), mobile: a.endsWith("m") });
   else die(`не понял аргумент «${a}»`);
 }
@@ -184,6 +186,24 @@ async function main() {
     await call("Page.navigate", { url });
     await cdp.once("Page.loadEventFired", 15000);
     await sleep(opt.wait);
+
+    // Доводим страницу до нужного состояния перед кадром: щёлкнуть стрелку
+    // слайдера, раскрыть аккордеон, переключить таб. Выражение гоняется на
+    // каждой ширине — перезаход сбрасывает состояние.
+    if (opt.eval) {
+      const r = await call("Runtime.evaluate", {
+        expression: opt.eval, awaitPromise: true, returnByValue: true,
+      });
+      if (r.exceptionDetails) {
+        die(`--eval упал: ${r.exceptionDetails.exception?.description || r.exceptionDetails.text}`);
+      }
+      // Значение выражения печатаем: тем же вызовом удобно снять замеры со
+      // страницы, а не только довести её до нужного состояния.
+      if (r.result && r.result.value !== undefined) {
+        process.stderr.write(`--eval → ${JSON.stringify(r.result.value)}\n`);
+      }
+      await sleep(opt.wait);
+    }
 
     // Кадр режем клипом, а не высотой окна: результат детерминированный и не
     // зависит от того, куда доскроллил предыдущий заход.

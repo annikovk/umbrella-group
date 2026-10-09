@@ -10,6 +10,7 @@ class SU_welcome_screen_conditions
     public $err = "<ul style='padding: 24px;'> Неправильное использование шорткода: ";
     private $headers;
     private $sub_headers;
+    private $hints;
     private $button_texts;
     private $button_links;
 
@@ -24,6 +25,7 @@ class SU_welcome_screen_conditions
             }
             $this->fill_variable('header_' . $i_frontend, $this->headers[$i], false, "Заголовок " . $i_frontend, "Цена");
             $this->fill_variable('sub_header_' . $i_frontend, $this->sub_headers[$i], false, "Подзаголовок " . $i_frontend, "Цена");
+            $this->fill_variable('hint_' . $i_frontend, $this->hints[$i], false, "Подсказка " . $i_frontend, "Текст всплывающей подсказки");
             $this->fill_variable('button_text_' . $i_frontend, $this->button_texts[$i], false, "Текст кнопки " . $i_frontend, "Расчёт стоимости");
             if (isset($this->button_texts[$i])) {
                 $this->fill_variable('button_link_' . $i_frontend, $this->button_links[$i], false, "Ссылка кнопки " . $i_frontend, "'#calculate-price-contact-form-lightbox'");
@@ -80,6 +82,16 @@ class SU_welcome_screen_conditions
                     </div>
                 EOHTML;
 
+            }
+            if (isset($this->hints[$i])) {
+                $hint = $this->hints[$i];
+                $subheader .= <<<EOHTML
+                    <span class="partial_payments_header_hint su_welcome_screen_conditions_subheader_hint"><img src="/wp-content/uploads/Help_Outline_Icon_18.png" alt="help icon">
+                        <div class="partial_payments_header_tooltip">
+                            $hint
+                        </div>
+                    </span>
+                EOHTML;
             }
             $column = <<<EOHTML
                 [col span="$width" span__sm="$mobile_width" class="su_welcome_screen_conditions_column"]

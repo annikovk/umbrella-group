@@ -31,6 +31,18 @@
     padding-left: 24px;
 }
 
+/* Подсказка-сноска у подзаголовка: сам подзаголовок — 32 px PT Serif, поэтому
+   иконку поднимаем к верху строки, а тексту подсказки возвращаем шрифт текста. */
+.su_welcome_screen_conditions_subheader_hint {
+    display: inline-block;
+    vertical-align: super;
+    line-height: 1;
+}
+
+.su_welcome_screen_conditions_subheader_hint .partial_payments_header_tooltip {
+    font-family: 'Inter', sans-serif;
+}
+
 .partial_payments_header_tooltip {
     position: fixed;
     display: none;

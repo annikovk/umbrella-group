@@ -198,3 +198,267 @@
         margin-bottom: 0px;
     }
 }
+/* === Слайдер акций на первом экране ===================================== */
+
+.promo-slider {
+    position: relative;
+    padding: 0 48px;
+}
+
+.promo-slide {
+    display: none;
+}
+
+.promo-slide.is-active {
+    display: block;
+}
+
+.promo-slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 50%;
+    background-color: #EC1C23;
+    color: #ffffff;
+    box-shadow: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.promo-slider-arrow:hover,
+.promo-slider-arrow:focus {
+    background-color: #BD161C;
+    color: #ffffff;
+}
+
+.promo-slider-prev {
+    left: 0;
+}
+
+.promo-slider-next {
+    right: 0;
+}
+
+/* На широком экране стрелки уходят на поля, и картинке достаётся вся ширина
+   контейнера; на экранах поуже они внутри, а картинка становится компактнее. */
+@media screen and (min-width: 1600px) {
+    .promo-slider {
+        padding: 0;
+    }
+
+    .promo-slider-prev {
+        left: -64px;
+    }
+
+    .promo-slider-next {
+        right: -64px;
+    }
+}
+
+/* Блок, а не span: иначе строку держит межстрочный интервал крупного заголовка
+   и красные строки расходятся шире чёрных. */
+.main-banner-content .text-like-h1 .accent {
+    display: block;
+    color: #EC1C23;
+    font-size: 48px;
+    line-height: 1.1;
+}
+
+/* Три шага услуги под текстом оффера */
+.promo-features {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    margin: 16px 0 40px;
+}
+
+.promo-feature {
+    max-width: 220px;
+}
+
+.promo-feature-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 16px;
+    border-radius: 10px;
+    background-color: #FCE9EA;
+    color: #EC1C23;
+}
+
+.promo-feature-title {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 140%;
+    color: #1A1A1A;
+    margin-bottom: 6px;
+}
+
+.promo-feature-text {
+    font-size: 14px;
+    line-height: 140%;
+    color: #707070;
+}
+
+/* Кнопка тянется по длине текста акции, стрелка — справа от надписи */
+.main-banner-content .banner-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    width: auto;
+    max-width: 100%;
+    align-self: flex-start;
+    padding: 0 32px;
+}
+
+.main-banner-content .banner-button .banner-button-arrow {
+    flex-shrink: 0;
+}
+
+.main-banner-content > .left {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.promo-slide .main-banner-content {
+    gap: 32px;
+}
+
+/* Картинку не даём сжимать: без flex-basis её ужимает длинный текст слева.
+   Отрицательный отступ слева — картинка заходит прозрачным полем в колонку
+   текста, иначе на её размер не хватает ширины и заголовок рвётся. */
+.promo-slide .main-banner-content > .right {
+    flex: 0 0 auto;
+    width: 570px;
+    max-width: 50%;
+    margin-left: -70px;
+}
+
+.promo-slide .main-banner-content > .right img {
+    width: 100%;
+    height: auto;
+}
+
+@media screen and (max-width: 1599px) {
+    .promo-slide .main-banner-content > .right {
+        width: 470px;
+        margin-left: -40px;
+    }
+}
+
+@media screen and (max-width: 1279px) {
+    .promo-slide .main-banner-content > .right {
+        width: 400px;
+        margin-left: -24px;
+    }
+}
+
+@media screen and (max-width: 849px) {
+    /* На телефоне стрелки уезжают под слайд: по краям они попадают в середину
+       текста и перекрывают его. */
+    .promo-slider {
+        padding: 0 0 64px;
+    }
+
+    .promo-slider-arrow {
+        top: auto;
+        bottom: 0;
+        width: 44px;
+        height: 44px;
+        transform: none;
+    }
+
+    .promo-slider-prev {
+        left: calc(50% - 52px);
+    }
+
+    .promo-slider-next {
+        right: calc(50% - 52px);
+    }
+
+    .promo-slide .main-banner-content {
+        gap: 0;
+    }
+
+    .promo-slide .main-banner-content > .right {
+        width: 280px;
+        max-width: 80%;
+        margin-left: 0;
+    }
+
+    .promo-features {
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        margin: 24px 0 8px;
+        text-align: center;
+    }
+
+    .promo-feature {
+        max-width: 260px;
+    }
+
+    .promo-feature-icon {
+        margin: 0 auto 12px;
+    }
+
+    .main-banner-content .banner-button {
+        align-self: center;
+        padding: 0 20px;
+        gap: 12px;
+    }
+
+    .main-banner-content .text-like-h1 .accent {
+        font-size: 21px;
+    }
+}
+
+.promo-slide .main-banner-content > .right picture {
+    display: block;
+}
+
+/* У первого слайда подзаголовок — h1 (на странице он один), у остальных абзац.
+   Выглядеть они должны одинаково, поэтому повторяем стили h1.sub-header. */
+.first-screen .promo-slide p.sub-header {
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 140%;
+    color: #1a1a1a;
+    margin-bottom: 9px;
+}
+
+@media screen and (max-width: 849px) {
+    .first-screen .promo-slide p.sub-header {
+        font-size: 14px;
+    }
+}
+
+/* Акция «Паспорт безопасности»: картинка квадратная, а строка «безопасности
+   объекта» в 60 px просит 670 px. Отдаём картинке меньше ширины — иначе
+   заголовок рвётся на три строки вместо двух. */
+@media screen and (min-width: 1600px) {
+    .promo-slide-pasport .main-banner-content > .right {
+        width: 500px;
+        margin-left: -40px;
+    }
+}
+
+@media screen and (min-width: 1280px) and (max-width: 1599px) {
+    .promo-slide-pasport .main-banner-content > .right {
+        width: 420px;
+        margin-left: -40px;
+    }
+}
