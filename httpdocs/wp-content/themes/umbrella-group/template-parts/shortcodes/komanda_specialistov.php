@@ -22,6 +22,7 @@ class komanda_specialistov
     public function generate_shortcode()
     {
         $posts = $this->get_specialists_posts($this->category);
+        ug_prime_thumbnails($posts);
         $categories = $this->get_categories_of_posts($posts);
 
         $tabs = $this->get_tabs($categories);

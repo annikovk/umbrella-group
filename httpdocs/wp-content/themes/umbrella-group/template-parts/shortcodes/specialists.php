@@ -54,6 +54,7 @@ class specialists
     {
         $tiles = "";
         $posts = $this->get_specialists_posts($this->category);
+        ug_prime_thumbnails($posts);
         foreach ($posts as $post) {
             $tiles .= $this->get_tile($post);
         }
