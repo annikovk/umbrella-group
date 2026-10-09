@@ -3,8 +3,6 @@
  * Загрузчик темы: явный список require (без glob — порядок важен).
  *
  * Порядок повторяет старый functions.php там, где он влияет на поведение:
- *  - attribution.php — до всех includes/ и template-parts/: исполняется при
- *    загрузке и пишет глобальные переменные ($html и др.), шорткоды читают их;
  *  - assets.php — до shortcodes.php: на wp_enqueue_scripts:10 шрифты,
  *    form-custom.css и script.js встают в очередь раньше ассетов upsell;
  *  - legacy-webinar.php — до post-types.php: session_start на init:10 раньше
@@ -13,9 +11,6 @@
  *    с первой строки (PHP поднимает объявления);
  *  - cookie-notice.php — последним: output_cookie_notice на wp_footer:10
  *    выводится после umbrella_upsell_template и umbrella_filter_ab_tests.
- *
- * Все require — на верхнем уровне файла (не в функции и не в цикле), чтобы
- * глобальная область видимости functions.php доходила до inc/attribution.php.
  *
  * Владельцы файлов по пакетам спеки 1 (§5): helpers — WS-4; cf7, attribution,
  * cookie-notice, legacy-webinar, legacy-stubs — WS-1; setup, assets — WS-2;
