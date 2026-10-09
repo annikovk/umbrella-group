@@ -1,32 +1,39 @@
 <?php
 /**
- * Плашка согласия на cookie и getCookie() для неё.
+ * Плашка согласия на cookie.
  *
- * Перенесено из functions.php:126-137, 1099-1111 дословно (WS-0). Подключается
- * последним в inc/bootstrap.php: output_cookie_notice на wp_footer:10 должен
- * идти после umbrella_upsell_template и umbrella_filter_ab_tests того же
- * приоритета — как в старом functions.php. Переписывает WS-1.
+ * Разметка печатается всегда (раньше — только без cookie cookieNotice, и это
+ * запекалось в кэш страниц: у согласившихся плашка висела, а «Принимаю» не
+ * работал). Скрыта стилем assets/css/cookie-notice.css; показывает её
+ * инлайн-скрипт в <head> — ставит html.ug-consent-needed, если cookie нет.
+ * Клик «Принимаю» — js/script.js.
+ *
+ * Подключается последним в inc/bootstrap.php: output_cookie_notice на
+ * wp_footer:10 идёт после umbrella_upsell_template и umbrella_filter_ab_tests
+ * того же приоритета.
  */
 
-add_action('wp_footer', function() {
-    ?>
-    <script>
-    var getCookie = function(name) {
-        var matches = document.cookie.match(new RegExp(
-            "(?:^|; )" + name.replace(/([.$?*|{}()\[\]\/+^])/g, '\\$1') + "=([^;]*)"
-        ));
-        return matches ? decodeURIComponent(matches[1]) : undefined;
-    };
-    </script>
-    <?php
-}, 5);
+declare(strict_types=1);
+
+add_action('wp_enqueue_scripts', static function (): void {
+    $rel = 'assets/css/cookie-notice.css';
+    wp_enqueue_style(
+        'ug-cookie-notice',
+        get_theme_file_uri($rel),
+        [],
+        (string) filemtime(get_theme_file_path($rel))
+    );
+});
+
+// До первой отрисовки: иначе плашка мигнёт или не появится до загрузки script.js.
+add_action('wp_head', static function (): void {
+    echo "<script>if(!/(?:^|; )cookieNotice=/.test(document.cookie))document.documentElement.classList.add('ug-consent-needed')</script>\n";
+}, 1);
 
 add_action('wp_footer', 'output_cookie_notice');
 
-function output_cookie_notice() {
-    if( isset( $_COOKIE['cookieNotice'] ) ) {
-        return;
-    } ?>
+function output_cookie_notice(): void
+{ ?>
     <div class="cookie-notice">
         <div class="cookie-notice__text">Мы используем cookies, чтобы сайт работал лучше. Продолжая пользоваться сайтом, вы соглашаетесь с <a href="/politika-cookie/">использованием cookies</a></div>
         <div class="cookie-notice__buttons">

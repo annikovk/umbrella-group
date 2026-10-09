@@ -1,36 +1,20 @@
 <?php
 /**
- * Contact Form 7: порог reCAPTCHA, обёртка вывода ответа формы, валидация tel.
+ * Contact Form 7: порог reCAPTCHA и обёртка вывода ответа формы.
  *
- * Перенесено из functions.php дословно (WS-0, спека 1 §5): строки 3-15, 138-142,
- * 1057-1064. Владелец дальнейших правок — WS-1 (custom_filter_wpcf7_is_tel удаляется).
+ * Атрибуция заявок (поля omatraffic/omacid) — inc/attribution.php.
+ * custom_filter_wpcf7_is_tel удалён (WS-1): висел на wpcf7_validate_tel, а в формах
+ * нет ни одного [tel] — только один [tel*] (свой фильтр wpcf7_validate_tel*);
+ * к тому же возвращал int вместо WPCF7_Validation.
  */
 
-// increase recaptcha score
-// please be aware that KEYS for recaptcha are written in 2 places: header.php and /themes/umbrella/js/recaptcha-wpcf7.js
+declare(strict_types=1);
 
-add_filter( 'wpcf7_recaptcha_threshold',
+// Ключи reCAPTCHA — в настройках CF7 (wp-admin → Contact → Integration).
+add_filter('wpcf7_recaptcha_threshold', static fn($threshold) => 0.7, 10, 1);
 
-    function( $threshold ) {
-        $threshold = 0.7; // decrease threshold to 0.3
-
-        return $threshold;
-    },
-
-    10, 1
-);
-
-add_filter('wpcf7_form_response_output', function($output, $class, $content, $form) {
-    return '<div class="custom-cf7-alert ' . esc_attr($class) . '">' 
-           . $content . 
+add_filter('wpcf7_form_response_output', static function ($output, $class, $content, $form) {
+    return '<div class="custom-cf7-alert ' . esc_attr((string) $class) . '">'
+           . $content .
            '</div>';
 }, 10, 4);
-
-function custom_filter_wpcf7_is_tel($result, $tel)
-
-{
-    $result = preg_match('/^\(?\+?([0-9]{1,4})?\)?[-\. ]?(\d{10})$/', $tel);
-    return $result;
-}
-
-add_filter('wpcf7_validate_tel', 'custom_filter_wpcf7_is_tel', 10, 2);

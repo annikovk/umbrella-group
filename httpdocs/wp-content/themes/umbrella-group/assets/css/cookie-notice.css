@@ -1,0 +1,11 @@
+/* Плашка согласия на cookie (inc/cookie-notice.php): в HTML есть всегда —
+   страница одинакова для всех и кэшируется, — а показывается, только если
+   инлайн-скрипт в <head> не нашёл cookie cookieNotice и поставил класс на <html>.
+   Оформление плашки — в style.css. */
+.cookie-notice {
+  display: none;
+}
+
+html.ug-consent-needed .cookie-notice {
+  display: block;
+}

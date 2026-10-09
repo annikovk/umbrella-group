@@ -30,13 +30,15 @@ function getCookie(name) {
     return matches ? decodeURIComponent(matches[ 1 ]) : undefined;
 }
 
+// Плашка cookie: разметка есть всегда, видна при html.ug-consent-needed
+// (класс ставит инлайн-скрипт в <head>, inc/cookie-notice.php).
 var cookieName = 'cookieNotice';
-var cookieNotice = document.querySelector('.cookie-notice');
+var cookieConfirm = document.querySelector('.cookie-notice__confirm');
 
-if (typeof getCookie(cookieName) == 'undefined') {
-    document.querySelector('.cookie-notice__confirm').addEventListener('click', function (e) {
+if (cookieConfirm) {
+    cookieConfirm.addEventListener('click', function (e) {
         e.preventDefault();
         document.cookie = cookieName + '=true; max-age=15552000; path=/'; // установка куки на 6 месяцев
-        cookieNotice.style.display = 'none';
+        document.documentElement.classList.remove('ug-consent-needed');
     });
 }
