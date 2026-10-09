@@ -16,7 +16,8 @@ function akciya_block_shortcode($atts)
         $image_attributes = wp_get_attachment_image_src($atts['thumbnail'], 'full');
         $thumbnail = '<img src="' . $image_attributes[0] . '"  />';
     } else {
-        $thumbnail = get_the_post_thumbnail($post->ID);
+        // баннер акции стоит внизу страницы — не LCP: без fetchpriority=high, который ставило ядро
+        $thumbnail = get_the_post_thumbnail($post->ID, 'post-thumbnail', ['fetchpriority' => 'low', 'loading' => 'lazy']);
     }
     if (isset($atts['title'])) {
         $title = $atts['title'];
@@ -44,7 +45,9 @@ function akciya_block_shortcode($atts)
     } else {
         $button_text = "Узнать подробнее";
     }
-    $date = "До " . date("d.m.Y", strtotime(date('m', strtotime('+1 month')) . '/01/' . date('Y') . ' 00:00:00'));
+    // «До 1-го числа следующего месяца»: прежняя склейка «месяц+1 / 01 / текущий год»
+    // в декабре давала 01.01 уже прошедшего года, а 31-го числа перескакивала месяц
+    $date = "До " . ug_ru_date('d.m.Y', new DateTimeImmutable('first day of next month midnight', wp_timezone()));
     $button = do_shortcode('[button text="' . $button_text . '" color="white" style="outline" link="' . urldecode(get_permalink($post->ID)) . '"]');
 
     $block = <<<EOV
