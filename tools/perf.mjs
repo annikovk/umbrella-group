@@ -6,6 +6,7 @@
  *     tools/perf.mjs --out /tmp/perf-before                 # 8 страниц × 2 × 3 прогона
  *     tools/perf.mjs --out /tmp/perf-after --runs 5 / /blog/
  *     tools/perf.mjs --out /tmp/perf-prod --base https://taxlab.ru --runs 1 /
+ *     TAXLAB_BASE=http://localhost:8092 tools/perf.mjs --out /tmp/perf-ws-2   # полоса
  *
  * Для каждого пути — mobile (дефолт Lighthouse) и desktop (`--preset=desktop`),
  * категории performance, accessibility, best-practices, seo. Результат в --out:
@@ -22,8 +23,8 @@
  *
  * ⚠️ Прогоны СТРОГО последовательно и каждый в своём процессе с жёстким
  * таймаутом (180 с). Параллельные Lighthouse'ы делят CPU и врут в TBT/LCP в
- * разы. А таймаут нужен потому, что десктопная вёрстка держит бесконечный
- * таймер виджета qoopler (см. шапку tools/shot.mjs) — зависший прогон не должен
+ * разы. А таймаут нужен потому, что хром на десктопной вёрстке этого сайта
+ * умеет не завершаться (см. шапку tools/shot.mjs) — зависший прогон не должен
  * съесть весь замер.
  *
  * ⚠️ Убить по таймауту одну группу процессов мало: chrome-launcher запускает
@@ -56,7 +57,8 @@ const die = (msg) => { process.stderr.write(`perf.mjs: ${msg}\n`); process.exit(
 const log = (msg) => process.stdout.write(`[${new Date().toTimeString().slice(0, 8)}] ${msg}\n`);
 
 // ── аргументы ────────────────────────────────────────────────────────────────
-const opt = { out: null, runs: 3, base: "http://localhost:8088" };
+// База: --base, иначе TAXLAB_BASE (полосы tools/lane.sh), иначе основной стенд.
+const opt = { out: null, runs: 3, base: (process.env.TAXLAB_BASE || "http://localhost:8088").replace(/\/+$/, "") };
 const paths = [];
 for (let i = 2; i < process.argv.length; i++) {
   const a = process.argv[i];
