@@ -10,6 +10,14 @@
 # WIDTHS="1280 1440 390m" tools/shots-set.sh /tmp/x
 # Одну страницу: PAGES_ONLY="/faq/" tools/shots-set.sh /tmp/x
 #
+# Наборы страниц — SET=base (по умолчанию, 14 страниц эталона shots-before),
+# SET=extra (расширенный эталон §4.1 спеки 1: 14148, акции-лендинги, клиенты,
+# отзывы, МЧС, поиск, 404, кейсы, акция) или SET=all — оба подряд:
+#     SET=extra tools/shots-set.sh /tmp/x
+#
+# Стенд — TAXLAB_BASE (по умолчанию http://localhost:8088), полоса tools/lane.sh:
+#     TAXLAB_BASE=http://localhost:8092 tools/shots-set.sh /tmp/ws-2
+#
 # Стабилизация (выражение STABILIZE ниже, гоняется через --eval перед кадром):
 #  - анимации, transition, caret выключены стилем *{…!important};
 #  - страница прокручивается до низа шагами (два прохода) — срабатывают
@@ -30,6 +38,11 @@
 #    сохраняют, так что сдвиги вокруг них diff всё равно поймает (видео
 #    rutube на главной поэтому — белый прямоугольник); плашка cookie
 #    убирается совсем — иначе она закрывает CTA первого экрана;
+#  - анимированные GIF (404.gif) прячутся так же; табы-фильтры клиентов и
+#    отзывов, которые сервер отдаёт в случайном порядке, выстраиваются по name;
+#  - srcset: на 390m явно берётся кандидат, загруженный на прошлой ширине, если
+#    он крупнее (так делает Blink при тёплом кэше, но не всегда успевает) —
+#    подробно у кода «srcset и кэш прошлой ширины»; в отчёте прогона «forced»;
 #
 # Diff: python3 + Pillow (numpy/cv2/ImageMagick на машине нет, Pillow хватает).
 # Печатает % отличающихся пикселей по каждой паре и кладёт <out>/<name>.png —
@@ -39,13 +52,8 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-# ⚠️ tools/shot.mjs ходит в хром через встроенный WebSocket Node (undici), а тот
-# рвёт соединение на входящем сообщении больше 4 МиБ (жёсткий
-# kDefaultMaxDecompressedSize в permessage-deflate). Full-PNG длинной страницы
-# с догруженными картинками весит >3 МБ (base64 >4 МиБ) — и shot.mjs молча висит
-# до своего watchdog в 120 с. Пока shot.mjs не переведён на
-# --remote-debugging-pipe, подставляй исправленную копию: SHOT=/путь/shot-pipe.mjs.
 SHOT="${SHOT:-$ROOT/tools/shot.mjs}"
+export TAXLAB_BASE="${TAXLAB_BASE:-http://localhost:8088}"
 
 PAGES=(
   /
@@ -62,6 +70,24 @@ PAGES=(
   /about/
   /about/contacts/
   /akcii/
+)
+# Расширенный эталон. Запись — «путь [slug [ожидаемый HTTP-код]]»: slug нужен,
+# где путь в имя файла не годится (поиск), код — для страницы 404.
+# Пост формата aside (layout-aside.php) не снимается: единственный такой пост
+# (6780) — черновик. Одиночный кейс /case/<slug>/ отдаёт 301 на главную, поэтому
+# «страница кейса» — это список /about/cases/ и архив /category/cases/.
+EXTRA=(
+  /services/register-elimination/otkrytie-biznesa-pod-klyuch/
+  /akcii/registraciya-tovarnogo-znaka-skidka-15/
+  /akcii/pasport-bezopasnosti-obekta-skidka-10000/
+  /akcii/ooo-v-podarok-za-litsenziyu/
+  /about/clients/
+  /about/feedback/
+  /about/cases/
+  /category/cases/
+  /services/licensing/litsenziya-mchs/
+  "/?s=%D0%BD%D0%B0%D0%BB%D0%BE%D0%B3 search-nalog"
+  "/taxlab-shots-404/ 404 404"
 )
 read -r -a WIDTHS_ARR <<< "${WIDTHS:-1440 390m}"
 
@@ -105,6 +131,25 @@ read -r -d '' STABILIZE <<'JS' || true
     if (external(u)) { img.removeAttribute("data-src"); img.removeAttribute("srcset"); img.src = BLANK; }
   });
   neuter();
+  // Анимированные GIF (404.gif в блоке страницы 404) рисуют кадр, на который
+  // попал снимок, — прячем, как внешние виджеты: место в вёрстке остаётся.
+  document.querySelectorAll("img").forEach((img) => {
+    if (/\.gif(\?|$)/i.test(img.dataset.src || img.getAttribute("src") || "")) img.style.visibility = "hidden";
+  });
+  // Табы-фильтры клиентов и отзывов (umbrella_draw_filter_tabs из сниппетов
+  // insert-php) сервер отдаёт в случайном порядке от запроса к запросу —
+  // выстраиваем по name, «все» первой. Табы тегов блога (/blog/) стабильны и
+  // не трогаются.
+  document.querySelectorAll(".toolbar").forEach((bar) => {
+    const all = bar.querySelector('.btn-filter[name="all"]');
+    if (!all || !/клиент|отзыв/i.test(all.textContent)) return;
+    // Кнопки меняются местами по своим слотам — пробелы между ними (они
+    // тоже inline-вёрстка) остаются где были.
+    const btns = [...bar.querySelectorAll(".btn-filter")].filter((b) => b !== all);
+    const slots = btns.map((b) => b.parentNode.insertBefore(document.createComment(""), b));
+    const sorted = [...btns].sort((a, b) => a.getAttribute("name").localeCompare(b.getAttribute("name")));
+    slots.forEach((c, i) => c.replaceWith(sorted[i]));
+  });
   // loading=lazy → eager сразу: иначе картинка вне экрана (или в скрытом
   // табе) грузится, когда повезёт, и 404-значок/высота меняются от прогона
   // к прогону.
@@ -132,6 +177,43 @@ read -r -d '' STABILIZE <<'JS' || true
       img.src = img.dataset.src;
     }
   });
+
+  // srcset и кэш прошлой ширины. Blink, выбирая кандидата из srcset, берёт
+  // самый крупный, который уже лежит в кэше памяти, если он крупнее «своего»
+  // (AvoidDownloadIfHigherDensityResourceIsInCache в HTMLSrcsetParser.cpp). Все
+  // ширины снимаются в одном хроме, поэтому 390m обычно получает файлы,
+  // загруженные на 1440, — так снят эталон shots-before. Но «обычно»: попал
+  // ли файл в кэш к моменту выбора — гонка, и раз в несколько прогонов
+  // картинка приходит своим кандидатом с другим ресэмплингом (карточки /blog/
+  // 390m, баннер алкоголя 390m, «Кари» на МЧС 390m — 0.005–0.04 %). Здесь
+  // это правило применяется явно: что загрузилось на прошлых ширинах, лежит в
+  // localStorage прогона (профиль у каждого запуска shot.mjs свой), и если там
+  // есть кандидат крупнее выбранного — srcset сужается до него одного (с тем
+  // же w-дескриптором, так что размер на странице не меняется).
+  const LS_KEY = "shots-set-loaded";
+  const prevLoaded = new Set(JSON.parse(localStorage.getItem(LS_KEY) || "[]"));
+  const candW = (img) => (img.getAttribute("srcset") || "").split(",").map((c) => c.trim().split(/\s+/))
+    .filter(([u, d]) => u && /^\d+w$/.test(d || ""))
+    .map(([u, d]) => ({ url: new URL(u, location.href).href, w: parseInt(d, 10) }));
+  let forced = 0;
+  if (prevLoaded.size) {
+    const withSet = [...document.images].filter((img) => candW(img).length > 1);
+    await Promise.race([Promise.all(withSet.filter((img) => !img.complete).map((img) => new Promise((r) => {
+      img.addEventListener("load", r, { once: true }); img.addEventListener("error", r, { once: true });
+    }))), sleep(10000)]);
+    const pending = [];
+    for (const img of withSet) {
+      const list = candW(img);
+      const cur = list.find((c) => c.url === img.currentSrc);
+      const cached = list.filter((c) => prevLoaded.has(c.url)).sort((a, b) => b.w - a.w)[0];
+      if (cur && cached && cached.w > cur.w) {
+        img.srcset = `${cached.url} ${cached.w}w`;
+        pending.push(img);
+      }
+    }
+    await Promise.race([Promise.all(pending.map((img) => img.decode().catch(() => {}))), sleep(10000)]);
+    forced = pending.length;
+  }
 
   // Слайдеры: пауза и первый слайд.
   if (window.jQuery) {
@@ -177,26 +259,53 @@ read -r -d '' STABILIZE <<'JS' || true
   const broken = [...document.images].filter((i) => i.complete && !i.naturalWidth && !i.src.startsWith("data:"));
   broken.forEach((i) => (i.style.visibility = "hidden"));
 
+  // Что загрузила эта ширина — следующей (см. «srcset и кэш прошлой ширины»).
+  const loaded = new Set(prevLoaded);
+  performance.getEntriesByType("resource").forEach((e) => loaded.add(e.name));
+  for (const i of document.images) if (i.currentSrc) loaded.add(i.currentSrc);
+  localStorage.setItem(LS_KEY, JSON.stringify([...loaded]));
+
   scrollTo(0, 0);
   await sleep(600);
   return { h: document.documentElement.scrollHeight,
            pending: [...document.images].filter((i) => !i.complete).length,
            broken: [...new Set(broken.map((i) => i.currentSrc.replace(location.origin, "")))],
-           bg: bgUrls.size };
+           bg: bgUrls.size, forced };
 })()
 JS
 
 take() {
   local out="${1:-/tmp/taxlab-shots}"
   mkdir -p "$out"
-  local pages=("${PAGES[@]}")
-  [[ -n "${PAGES_ONLY:-}" ]] && read -r -a pages <<< "$PAGES_ONLY"
+  local pages=()
+  case "${SET:-base}" in
+    base)  pages=("${PAGES[@]}") ;;
+    extra) pages=("${EXTRA[@]}") ;;
+    all)   pages=("${PAGES[@]}" "${EXTRA[@]}") ;;
+    *) echo "SET=${SET} — бывает base, extra, all" >&2; return 2 ;;
+  esac
+  if [[ -n "${PAGES_ONLY:-}" ]]; then
+    # Путь из известных наборов берёт оттуда свой slug и код ответа.
+    local only known; read -r -a only <<< "$PAGES_ONLY"; pages=()
+    for p in "${only[@]}"; do
+      known="$p"
+      for e in "${PAGES[@]}" "${EXTRA[@]}"; do [[ "${e%% *}" == "$p" ]] && known="$e"; done
+      pages+=("$known")
+    done
+  fi
+  echo "стенд: $TAXLAB_BASE"
   local t0=$SECONDS fail=0
-  for p in "${pages[@]}"; do
-    local s; s="$(slug "$p")"
+  for entry in "${pages[@]}"; do
+    local p s code extra=()
+    read -r p s code <<< "$entry"
+    [[ -n "$s" ]] || s="$(slug "$p")"
+    [[ -n "$code" ]] && extra=(--expect "$code")
     printf '%-60s ' "$p"
-    if node "$SHOT" --full --wait 800 --url "$p" --out "$out/$s-" --eval "$STABILIZE" \
-         "${WIDTHS_ARR[@]}" >/dev/null 2>"$out/.$s.log"; then
+    : > "$out/.$s.log"
+    local ok=1
+    node "$SHOT" --full --wait 800 --url "$p" --out "$out/$s-" --eval "$STABILIZE" \
+      ${extra[@]+"${extra[@]}"} "${WIDTHS_ARR[@]}" >/dev/null 2>>"$out/.$s.log" || ok=0
+    if ((ok)); then
       grep -o '{"h".*' "$out/.$s.log" | tr '\n' ' '; echo
     else
       echo "FAIL: $(tail -1 "$out/.$s.log")"; fail=1
@@ -256,6 +365,6 @@ PY
 case "${1:-}" in
   diff) [[ $# -eq 4 ]] || { echo "usage: $0 diff <dirA> <dirB> <outdir>" >&2; exit 2; }
         diff_sets "$2" "$3" "$4" ;;
-  -h|--help) sed -n '2,30p' "$0" ;;
+  -h|--help) sed -n '2,40p' "$0" ;;
   *) take "${1:-}" ;;
 esac
