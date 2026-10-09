@@ -27,16 +27,10 @@ class komanda_specialistov
         $tabs = $this->get_tabs($categories);
         $tiles = $this->get_tiles($posts);
 
-         if (isMobile()) {
-
+        // Блок только для десктопа: раньше на мобильных UA (isMobile()) шорткод
+        // возвращал пусто, теперь один DOM для всех и hide-for-medium (≤ 849 px).
         $html = <<<EOHTML
-
-        EOHTML;
-
-         } else {
-
-        $html = <<<EOHTML
-        [section class='komanda_specialistov' id='komanda_specialistov'  padding="0px"]
+        [section class='komanda_specialistov hide-for-medium' id='komanda_specialistov'  padding="0px"]
             [row]
                 [col  span="12" span__sm="12" margin="0px 0px 0px 0px"]
                 <div class="padding_komanda_specialistov">
@@ -49,7 +43,7 @@ class komanda_specialistov
                 [/col]
            [/row]
         [/section]    
-        EOHTML; }
+        EOHTML;
 
         umbrella_add_custom_css_files($this->css_file);
         umbrella_add_custom_js_files($this->js_file);
@@ -88,13 +82,6 @@ class komanda_specialistov
 
         $label = ($main) ? $this->get_main_label($category) : $this->get_label($category);
         if ($main) {
-             if (isMobile()) {
-
-        $html = <<<EOHTML
-
-        EOHTML;
-
-         } else {
             $html = <<<EOHTML
             <div class="specialist-tile main $filter_class">
                <div class="container-text-mute_komanda desktop_mode_komanda">
@@ -121,7 +108,7 @@ class komanda_specialistov
                    </div>
 
             </div>
-        EOHTML; }
+        EOHTML;
         } else {
             $html = <<<EOHTML
             <div class="specialist-tile $filter_class">
