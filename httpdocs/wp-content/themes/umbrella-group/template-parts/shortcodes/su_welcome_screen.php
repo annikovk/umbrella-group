@@ -205,3 +205,22 @@ function umbrella_get_ratings($type='')
     }
     return ['icon'=>$icon,'header'=> $header,'subheader'=> $subheader];
 }
+/**
+ * Preload фона первого экрана: шорткод рендерится в body, а <head> перед ним
+ * тянет блокирующие CSS — без preload браузер узнаёт о LCP-картинке поздно
+ * (Lighthouse: Load Delay ≈ 3 с на mobile). Атрибут background — ID вложения.
+ */
+add_action('wp_head', function () {
+    if (!is_singular()) {
+        return;
+    }
+    $content = (string) get_post_field('post_content', get_queried_object_id());
+    if (!has_shortcode($content, 'su_welcome_screen')
+        || !preg_match('/\[su_welcome_screen\s[^\]]*?background=[\'"]?(\d+)/', $content, $m)) {
+        return;
+    }
+    $src = wp_get_attachment_image_src((int) $m[1], 'full');
+    if ($src) {
+        echo '<link rel="preload" as="image" href="' . esc_url($src[0]) . '" fetchpriority="high">' . "\n";
+    }
+}, 2);
