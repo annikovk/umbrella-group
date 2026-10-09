@@ -22,6 +22,9 @@ class why_umbrella
             . 'span:after{content:"";position:absolute;left:32px;top:16px;border-style:solid;border-width:12px 0 12px 20px;border-color:transparent transparent transparent #fff}'
             . 'a:hover span,a:focus span{background:#EC1C23}</style>'
             . '<a href="' . esc_url($player) . '" aria-label="Смотреть видео"><img src="' . esc_url(self::POSTER) . '" alt=""><span></span></a>';
+        // ядро считает iframe без loading в счётчик медиа контента (порог loading=lazy
+        // для картинок ниже); у фасада loading задан явно — счёт тот же, что был
+        wp_increase_content_media_count();
         return '<iframe width="1200" height="405" title="Почему ГК Umbrella Group — рассказывает Александр Климов" loading="lazy" srcdoc="'
             . esc_attr($srcdoc) . '" frameBorder="0" allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
     }

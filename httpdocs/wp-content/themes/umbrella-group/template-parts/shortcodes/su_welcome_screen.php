@@ -109,20 +109,7 @@ class SU_welcome_screen
     {
         $src = wp_get_attachment_image_src($this->background, 'full');
         $size = ($src && $src[1] && $src[2]) ? ' width="' . $src[1] . '" height="' . $src[2] . '"' : '';
-        return ug_eager_img('<img src="' . ($src[0] ?? '') . '"' . $size . ' loading="eager" fetchpriority="high" decoding="async"  />');
-    }
-
-    private function get_phone_text()
-    {
-        $formatted_phone = sprintf("+%s (%s) %s-%s-%s",
-            substr($this->phone, 0, 1),
-            substr($this->phone, 1, 3),
-            substr($this->phone, 4, 3),
-            substr($this->phone, 7, 2),
-            substr($this->phone, 9));
-        return <<<EOHTML
-            $this->phone_text <span class="su_welcome_banner_overlay_bottom_phone"><a href="tel:$this->phone">$formatted_phone</a></span>
-        EOHTML;
+        return ug_eager_img('<img src="' . esc_url($src[0] ?? '') . '"' . $size . ' loading="eager" fetchpriority="high" decoding="async"  />');
     }
 
     private function get_specialist_text()
@@ -141,99 +128,26 @@ class SU_welcome_screen
 
     public function generate_shortcode()
     {
-        $price_from_conditions = '';
-        if (isset($this->price)) {
-            $price_from_conditions = '<p class="price">Стоимость услуги <span class="price_from_conditions_number">' . $this->price . '</span></p>';
-        }
-        $this->icon = '<img src="' . wp_get_attachment_image_src($this->icon, 'full')[0] . '"  />';
-        $this->background = $this->get_background();
-        $breadcrumbs = umbrella_draw_header_with_breadcrumbs();
-        $button = $this->get_button();
-        $lightbox = $this->get_lightbox();
-        $phone_text = $this->get_phone_text();
-        $specialist_text = $this->get_specialist_text();
-        $rating1 = umbrella_get_ratings('expert');
-        $rating2 = umbrella_get_ratings('header');
         $path = ug_request_path();
-
-        // === Проверяем: нужно ли скрыть номер телефона на текущей странице ===
-        if (in_array($path, $this->hide_phone_urls, true)) {
-            // Только текст без номера
-            $phone_block = '<p>' . $this->phone_text . '</p>';
-        } else {
-            // Обычный вывод: текст + номер
-            $phone_block = '<p>' . $phone_text . '</p>';
-        }
-
-        // Кнопка — в одном DOM для всех: сверху для планшета/телефона (show-for-medium),
-        // внизу для десктопа (hide-for-medium); раньше выбиралась по wp_is_mobile().
-        if ($path === '/services/licensing/litsenziya-na-meditsinskuyu-deyatelnost/') {
-            $desktop_button = <<<EOHTML
-                <div style="display:flex;">
-                    <div data-rr style="display:block" class="hide-for-medium">$button$lightbox</div>
-                    
-                </div>
-                EOHTML;
-        } else {
-            $desktop_button = <<<EOHTML
-                    <div style="display:block" class="hide-for-medium">$button$lightbox</div>
-                EOHTML;
-        }
-
-        $html = <<<EOHTML
-            <div class="su_welcome_screen">
-                <div class="su_welcome_banner">
-                        <div class="su_welcome_banner_content dark">
-                            $breadcrumbs
-                            <div class="su_welcome_banner_offer container">
-                                <p>$this->offer</p> 
-                            </div>      
-                        </div>
-                        <div class="su_welcome_banner_background">
-                            $this->background
-                        </div>
-                </div>
-            <div class="su_welcome_banner_overlay">
-                <div class="show-for-medium">$button</div>
-                    <div class="su_welcome_banner_overlay_top">
-                        <div class="advantage-block"> 
-                            <div class="advantage-block-icon">$this->icon</div> 
-                            <div class="advantage-block-text">$this->first_advantage</div>
-                        </div>
-                        <div class="advantage-block"> 
-                            <div class="advantage-block-icon">$this->icon</div> 
-                            <div class="advantage-block-text">$this->second_advantage</div>
-                        </div>
-                        <div class="advantage-block"> 
-                            <div class="advantage-block-icon">$this->icon</div> 
-                            <div class="advantage-block-text">$this->third_advantage</div>
-                        </div>
-                    </div>
-                    <div class="su_welcome_banner_overlay_bottom">
-                        $price_from_conditions
-                        $phone_block
-                        <p>$specialist_text</p>
-                    $desktop_button
-                    </div>
-            </div>
-            <div class="su_welcome_screen_ratings show-for-medium">
-                <div class="su_welcome_banner_ratings_icon_box">
-                    <div class="su_welcome_banner_ratings_icon" > 
-                        <img src="{$rating1['icon']}" alt="rating">
-                    </div>
-                    <div class="su_welcome_banner_ratings_header"> {$rating1['header']} </div>
-                    <div class="su_welcome_banner_ratings_subheader"> {$rating1['subheader']} </div>
-                </div>
-                <div class="su_welcome_banner_ratings_icon_box">
-                    <div class="su_welcome_banner_ratings_icon" >
-                        <img src="{$rating2['icon']}" alt="rating">
-                    </div>
-                    <div class="su_welcome_banner_ratings_header">{$rating2['header']} </div>
-                    <div class="su_welcome_banner_ratings_subheader">{$rating2['subheader']}</div>
-                </div>
-            </div>
-        </div>
-        EOHTML;
+        $html = ug_render('su-welcome-screen', [
+            'breadcrumbs' => umbrella_draw_header_with_breadcrumbs(),
+            'background' => $this->get_background(),
+            'icon' => '<img src="' . esc_url(wp_get_attachment_image_src($this->icon, 'full')[0] ?? '') . '"  />',
+            // [button] Flatsome на каждый link="#…" ищет страницу get_page_by_title —
+            // кнопка рендерится один раз, а выводится в двух местах
+            'button' => do_shortcode($this->get_button()),
+            'lightbox' => $this->get_lightbox(),
+            'flex_button' => $path === '/services/licensing/litsenziya-na-meditsinskuyu-deyatelnost/',
+            'offer' => $this->offer,
+            'advantages' => [$this->first_advantage, $this->second_advantage, $this->third_advantage],
+            'price' => $this->price,
+            'phone' => $this->phone,
+            'phone_text' => $this->phone_text,
+            // на страницах из списка — только текст, без номера
+            'show_phone' => !in_array($path, $this->hide_phone_urls, true),
+            'specialist_text' => $this->get_specialist_text(),
+            'ratings' => [umbrella_get_ratings('expert'), umbrella_get_ratings('header')],
+        ]);
         umbrella_add_custom_css_files($this->css_file);
         return $html;
     }

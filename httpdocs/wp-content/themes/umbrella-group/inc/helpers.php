@@ -10,7 +10,8 @@
  *                                    (case_branch, feedback_branch, …);
  *  - ug_request_path()             — путь текущего запроса без query string;
  *  - ug_render()                   — шаблон template-parts/blocks/<имя>.php в строку;
- *  - ug_remember()                 — кэш данных шорткода на запрос.
+ *  - ug_eager_img()                — <img> первого экрана мимо lazy-load Flatsome;
+ *  - ug_prime_thumbnails()         — миниатюры списка записей одним запросом.
  */
 
 declare(strict_types=1);
@@ -110,25 +111,6 @@ function ug_render(string $template, array $args = []): string
 }
 
 /**
- * Данные шорткода, посчитанные один раз на запрос для одного набора аргументов:
- * один и тот же блок (отзывы, кейсы, FAQ) часто стоит на странице дважды —
- * в контенте и в UX-блоке.
- *
- * @template T
- * @param callable(): T $compute
- * @return T
- */
-function ug_remember(string $group, array $key, callable $compute): mixed
-{
-    static $memo = [];
-    $k = $group . ':' . md5(serialize($key));
-    if (!array_key_exists($k, $memo)) {
-        $memo[$k] = $compute();
-    }
-    return $memo[$k];
-}
-
-/**
  * <img> первого экрана мимо lazy-load Flatsome.
  *
  * Пока в theme_mods включён lazy_load_images, Flatsome на the_content:9999
@@ -136,10 +118,18 @@ function ug_remember(string $group, array $key, callable $compute): mixed
  * в том числе LCP-баннер, который тогда грузится только после JS. Внутри
  * the_content картинка подменяется комментарием-меткой и возвращается на
  * место после всех фильтров (PHP_INT_MAX); вне the_content — как есть.
+ *
+ * Ядро эту картинку не видит, поэтому ему сообщается: картинка первого экрана
+ * уже есть (счётчик для loading=lazy у следующих), а с fetchpriority=high —
+ * второй такой на странице не ставить.
  */
 function ug_eager_img(string $img): string
 {
     static $hooked = false;
+    wp_increase_content_media_count();
+    if (str_contains($img, 'fetchpriority="high"')) {
+        wp_high_priority_element_flag(false);
+    }
     if (!doing_filter('the_content')) {
         return $img;
     }
@@ -152,4 +142,24 @@ function ug_eager_img(string $img): string
         }, PHP_INT_MAX);
     }
     return $key;
+}
+
+/**
+ * Миниатюры списка записей одним запросом: get_the_post_thumbnail*() в цикле
+ * иначе тянет пост вложения и его мету по одному (2 запроса на запись).
+ *
+ * @param WP_Post[] $posts
+ */
+function ug_prime_thumbnails(array $posts): void
+{
+    $ids = [];
+    foreach ($posts as $post) {
+        $id = (int) get_post_thumbnail_id($post);
+        if ($id > 0) {
+            $ids[] = $id;
+        }
+    }
+    if ($ids) {
+        _prime_post_caches(array_unique($ids), false, true);
+    }
 }
