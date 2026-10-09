@@ -40,9 +40,7 @@ jQuery('.main-services .main-services-tile-grid').on('scroll', function () {
                 jQuery(this).addClass("active");
                 var tile = jQuery(this)
                 var container = jQuery(this).parent()
-                // container.animate({'scrollLeft': 0}, 0);
                 var scrollTo = container.scrollLeft() + tile.position().left - 30;
-                console.log(scrollTo)
                 container.animate({'scrollLeft': scrollTo}, 300);
             }
 
@@ -157,9 +155,7 @@ jQuery('.main-services .main-services-tile-grid').on('scroll', function () {
                 jQuery(this).addClass("active");
                 var tile = jQuery(this)
                 var container = jQuery(this).parent()
-                // container.animate({'scrollLeft': 0}, 0);
                 var scrollTo = container.scrollLeft() + tile.position().left - 30;
-                console.log(scrollTo)
                 container.animate({'scrollLeft': scrollTo}, 300);
             }
 
