@@ -57,6 +57,9 @@ function ug_current_service_section(?int $post_id = null): ?string
 {
     static $current = false;
     if ($post_id === null) {
+        if (!did_action('wp')) { // запрос ещё не разобран — не запоминаем
+            return ug_current_service_section(get_queried_object_id());
+        }
         if ($current === false) {
             $current = ug_current_service_section(get_queried_object_id());
         }
@@ -123,4 +126,30 @@ function ug_remember(string $group, array $key, callable $compute): mixed
         $memo[$k] = $compute();
     }
     return $memo[$k];
+}
+
+/**
+ * <img> первого экрана мимо lazy-load Flatsome.
+ *
+ * Пока в theme_mods включён lazy_load_images, Flatsome на the_content:9999
+ * переписывает каждый <img> контента на SVG-заглушку 100×100 + data-src —
+ * в том числе LCP-баннер, который тогда грузится только после JS. Внутри
+ * the_content картинка подменяется комментарием-меткой и возвращается на
+ * место после всех фильтров (PHP_INT_MAX); вне the_content — как есть.
+ */
+function ug_eager_img(string $img): string
+{
+    static $hooked = false;
+    if (!doing_filter('the_content')) {
+        return $img;
+    }
+    $key = '<!--ug-eager-' . md5($img) . '-->';
+    $GLOBALS['ug_eager_imgs'][$key] = $img;
+    if (!$hooked) {
+        $hooked = true;
+        add_filter('the_content', static function (string $content): string {
+            return strtr($content, $GLOBALS['ug_eager_imgs'] ?? []);
+        }, PHP_INT_MAX);
+    }
+    return $key;
 }

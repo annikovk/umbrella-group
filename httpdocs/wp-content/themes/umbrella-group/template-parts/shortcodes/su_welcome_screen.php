@@ -53,7 +53,7 @@ class SU_welcome_screen
         $this->fill_variable('price', $this->price, false, 'Цена', '');
 
         if (strlen($this->err) > $err_initial_len) {
-            $this->err .= '</ul>' . $this->css;
+            $this->err .= '</ul>';
             return false;
         } else {
             return true;
@@ -72,27 +72,44 @@ class SU_welcome_screen
     }
 
 
-    private function get_button()
+    private function get_button(): string
+    {
+        return match ($this->button_type) {
+            'free_consulting' => '[button text="Бесплатная консультация" link="#leave-request-contact-form-lightbox"]',
+            'price_calc' => '[button text="Расчёт стоимости" link="#calculate-price-contact-form-lightbox"]',
+            'ask_question' => '[button text="Задать вопрос" link="#ask-question-contact-form-lightbox"]',
+            default => '',
+        };
+    }
+
+    // попап формы для кнопки: один на блок, хотя кнопок две (мобильная сверху, десктопная снизу)
+    private function get_lightbox(): string
     {
         switch ($this->button_type) {
-            case 'free_consulting':
-                return '[button text="Бесплатная консультация" link="#leave-request-contact-form-lightbox"]';
             case 'price_calc':
                 return <<<EOHTML
-                        [button text="Расчёт стоимости" link="#calculate-price-contact-form-lightbox"]
+
                         [lightbox id="calculate-price-contact-form-lightbox" width="400px" padding="0px"]
                             [contact-form-7 id="9965" title="Форма Расчёт стоимости услуги"]
                         [/lightbox]
                        EOHTML;
             case 'ask_question':
                 return <<<EOHTML
-                        [button text="Задать вопрос" link="#ask-question-contact-form-lightbox"]
+
                         [lightbox id="ask-question-contact-form-lightbox" width="400px" padding="0px"]
                             [contact-form-7 id="9967" title="Форма Задать вопрос"]
                         [/lightbox]
                        EOHTML;
-
         }
+        return '';
+    }
+
+    // фон первого экрана — LCP страниц услуг: сразу, с высоким приоритетом и размерами
+    private function get_background(): string
+    {
+        $src = wp_get_attachment_image_src($this->background, 'full');
+        $size = ($src && $src[1] && $src[2]) ? ' width="' . $src[1] . '" height="' . $src[2] . '"' : '';
+        return ug_eager_img('<img src="' . ($src[0] ?? '') . '"' . $size . ' loading="eager" fetchpriority="high" decoding="async"  />');
     }
 
     private function get_phone_text()
@@ -110,40 +127,57 @@ class SU_welcome_screen
 
     private function get_specialist_text()
     {
-        if (strpos($_SERVER['REQUEST_URI'], "services/bukhgalterskie-uslugi/") !== false) {
-            $specialist = "ведущий бухгалтер";
-        } else if (strpos($_SERVER['REQUEST_URI'], "services/licensing/") !== false) {
-            $specialist = "специалист по лицензированию";
-        } else if (strpos($_SERVER['REQUEST_URI'], "services/services-le") !== false) {
-            $specialist = "юрист";
-        } else {
-            $specialist = "специалист";
-        }
+        // прежде — strpos(REQUEST_URI, "services/licensing/") и т.п.: со слэшем
+        // на конце, поэтому макет licensing-maket1 сюда не попадал
+        $specialist = match (ug_current_service_section()) {
+            'bukhgalterskie-uslugi' => "ведущий бухгалтер",
+            'licensing' => "специалист по лицензированию",
+            'services-le' => "юрист",
+            default => "специалист",
+        };
 
         return str_replace('{специалист}', $specialist, $this->specialist_text);
     }
 
     public function generate_shortcode()
     {
+        $price_from_conditions = '';
         if (isset($this->price)) {
             $price_from_conditions = '<p class="price">Стоимость услуги <span class="price_from_conditions_number">' . $this->price . '</span></p>';
         }
         $this->icon = '<img src="' . wp_get_attachment_image_src($this->icon, 'full')[0] . '"  />';
-        $this->background = '<img src="' . wp_get_attachment_image_src($this->background, 'full')[0] . '"  />';
+        $this->background = $this->get_background();
         $breadcrumbs = umbrella_draw_header_with_breadcrumbs();
         $button = $this->get_button();
+        $lightbox = $this->get_lightbox();
         $phone_text = $this->get_phone_text();
         $specialist_text = $this->get_specialist_text();
         $rating1 = umbrella_get_ratings('expert');
         $rating2 = umbrella_get_ratings('header');
+        $path = ug_request_path();
 
         // === Проверяем: нужно ли скрыть номер телефона на текущей странице ===
-        if (in_array($_SERVER['REQUEST_URI'], $this->hide_phone_urls)) {
+        if (in_array($path, $this->hide_phone_urls, true)) {
             // Только текст без номера
             $phone_block = '<p>' . $this->phone_text . '</p>';
         } else {
             // Обычный вывод: текст + номер
             $phone_block = '<p>' . $phone_text . '</p>';
+        }
+
+        // Кнопка — в одном DOM для всех: сверху для планшета/телефона (show-for-medium),
+        // внизу для десктопа (hide-for-medium); раньше выбиралась по wp_is_mobile().
+        if ($path === '/services/licensing/litsenziya-na-meditsinskuyu-deyatelnost/') {
+            $desktop_button = <<<EOHTML
+                <div style="display:flex;">
+                    <div data-rr style="display:block" class="hide-for-medium">$button$lightbox</div>
+                    
+                </div>
+                EOHTML;
+        } else {
+            $desktop_button = <<<EOHTML
+                    <div style="display:block" class="hide-for-medium">$button$lightbox</div>
+                EOHTML;
         }
 
         $html = <<<EOHTML
@@ -160,14 +194,7 @@ class SU_welcome_screen
                         </div>
                 </div>
             <div class="su_welcome_banner_overlay">
-            EOHTML;
-
-        if(wp_is_mobile()){
-            $html .= <<<EOHTML
                 <div class="show-for-medium">$button</div>
-            EOHTML;
-        }
-        $html .= <<<EOHTML
                     <div class="su_welcome_banner_overlay_top">
                         <div class="advantage-block"> 
                             <div class="advantage-block-icon">$this->icon</div> 
@@ -186,25 +213,7 @@ class SU_welcome_screen
                         $price_from_conditions
                         $phone_block
                         <p>$specialist_text</p>
-                    EOHTML;
-
-           if($_SERVER['REQUEST_URI']=='/services/licensing/litsenziya-na-meditsinskuyu-deyatelnost/') {
-            if(!wp_is_mobile()){
-                $html .= <<<EOHTML
-                <div style="display:flex;">
-                    <div data-rr style="display:block" class="hide-for-medium">$button</div>
-                    
-                </div>
-                EOHTML;
-            }
-           }else{
-            if(!wp_is_mobile()){
-                $html .= <<<EOHTML
-                    <div style="display:block" class="hide-for-medium">$button</div>
-                EOHTML;
-            }
-          }
-            $html .= <<<EOHTML
+                    $desktop_button
                     </div>
             </div>
             <div class="su_welcome_screen_ratings show-for-medium">
@@ -253,26 +262,26 @@ function umbrella_get_ratings($type='')
             $header = 'Топ юридических компаний по версии pravo.ru';
             return ['icon'=>$icon,'header'=> $header,'subheader'=> ""];
         default:
-            if (strpos($_SERVER['REQUEST_URI'], "services/audit") !== false) {
-                $header = 'Финалист конкурса';
-                $icon = '/wp-content/uploads/2019/10/laurel-nsk.svg';
-                $subheader = '«Комплексное предоставление услуг в сфере консалтинга»';
-            } else if (strpos($_SERVER['REQUEST_URI'], "/services/bukhgalterskie-uslugi") !== false) {
-                $header = '2 место в отрасли «Налоговое право»';
-                $icon = '/wp-content/uploads/2019/10/laurel-2.svg';
-                $subheader = 'Деловой Квартал, Новосибирск, 2021';
-            } else if (strpos($_SERVER['REQUEST_URI'], "/services/licensing") !== false) {
-                $header = '1 место в отрасли «Корпоративное право»';
-                $icon = '/wp-content/uploads/2019/10/laurel-1.svg';
-                $subheader = 'рейтинг «Делового квартала», Новосибирск, 2021';
-            } else if (strpos($_SERVER['REQUEST_URI'], "/services/services-le") !== false) {
-                $header = 'ТОП юридических компаний в Сибири';
-                $icon = '/wp-content/uploads/2019/10/laurel-1.svg';
-                $subheader = 'Новосибирск, pravo.ru, 2021';
-            } else {
-                $header = '1 место в отрасли «Корпоративное право»';
-                $icon = '/wp-content/uploads/2019/10/laurel-1.svg';
-                $subheader = 'рейтинг «Делового квартала», Новосибирск, 2021';
+            switch (ug_current_service_section()) {
+                case 'audit':
+                    $header = 'Финалист конкурса';
+                    $icon = '/wp-content/uploads/2019/10/laurel-nsk.svg';
+                    $subheader = '«Комплексное предоставление услуг в сфере консалтинга»';
+                    break;
+                case 'bukhgalterskie-uslugi':
+                    $header = '2 место в отрасли «Налоговое право»';
+                    $icon = '/wp-content/uploads/2019/10/laurel-2.svg';
+                    $subheader = 'Деловой Квартал, Новосибирск, 2021';
+                    break;
+                case 'services-le':
+                    $header = 'ТОП юридических компаний в Сибири';
+                    $icon = '/wp-content/uploads/2019/10/laurel-1.svg';
+                    $subheader = 'Новосибирск, pravo.ru, 2021';
+                    break;
+                default: // в т.ч. licensing — та же плашка, что по умолчанию
+                    $header = '1 место в отрасли «Корпоративное право»';
+                    $icon = '/wp-content/uploads/2019/10/laurel-1.svg';
+                    $subheader = 'рейтинг «Делового квартала», Новосибирск, 2021';
             }
     }
     if ($type=='header') {
