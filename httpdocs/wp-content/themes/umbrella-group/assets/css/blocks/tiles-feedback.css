@@ -1,0 +1,121 @@
+/** feedback **/
+button.accordion {
+    position: absolute;
+    right: -20px;
+    bottom: -20px;
+    color: white;
+    background-color: #1a1a1a;
+    width: 56px;
+    height: 56px;
+    transition: background-color 0.2s linear;
+}
+
+button.accordion:hover {
+    background-color: #ec1c23;
+}
+
+button.accordion:after {
+    content: "↓";
+}
+
+button.accordion.is-open {
+    background-color: #1a1a1a;
+}
+
+button.accordion.is-open:after {
+    content: "↑";
+}
+
+.feedback-subheader {
+    display: table-cell;
+    width: 100%;
+}
+
+.feedback-subheader-right {
+    display: table-cell;
+    white-space: nowrap;
+    text-align: right;
+    width: 20%
+}
+
+p.feedback-subheader-right a:hover:after {
+    color: #ec1c23;
+    opacity: 1;
+    margin-left: 0px;
+    -webkit-transition: all 0.1s;
+    transition: all 0.1s;
+}
+
+p.feedback-subheader-right a:after {
+    content: " →";
+    color: #ec1c23;
+    opacity: 0;
+    margin-left: -30px;
+    -webkit-transition: all 0.1s;
+    transition: all 0.1s;
+}
+
+p.feedback-subheader-right a:hover {
+    margin-left: -30px;
+    -webkit-transition: all 0.1s;
+    transition: all 0.1s;
+}
+
+p.feedback-subheader-right a {
+    margin-left: 0px;
+    -webkit-transition: all 0.1s;
+    transition: all 0.1s;
+}
+
+.feedback-image img {
+    max-height: 64px;
+    height: 64px;
+    width: auto;
+}
+
+@media screen and (max-width: 849px) {
+    .feedback-image img {
+        display: none;
+    }
+}
+
+.feedback-image {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    position: absolute;
+    right: 40px;
+    top: 40px;
+}
+
+.feedback-industry {
+    font-weight: 300;
+    font-size: 0.65em;
+    color: #b2b2b2;
+}
+
+.feedback-excerpt {
+    font-size: 1.35em;
+    line-height: 1.5em;
+    position: relative;
+    width: 90%;
+    font-weight: 300;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.feedback-item-content {
+    max-height: 0px;
+    padding-right: 112px;
+
+    overflow: hidden;
+
+    transition: max-height 0.2s ease-in-out;
+}
+
+.feedback-item-header {
+    width: 86.55%;
+    display: table-cell;
+    font-size: 1.35em;
+    font-weight: 600;
+    line-height: 1.45;
+}

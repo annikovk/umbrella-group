@@ -4,17 +4,50 @@
  * спутники. Контракт спеки §2.4: umbrella_draw_tiles и umbrella_draw_filter_tabs
  * зовут шаблоны и PHP-сниппеты insert-php из БД — сигнатуры не менять.
  *
- * Перенесено из functions.php:266-893, 904-1055 дословно (WS-0);
- * umbrella_date_of_post() (бывш. :895-902, 0 вызовов в теме и БД) удалена.
- * Владелец — WS-6 (CSS в assets/css/blocks/tiles.css, ug_ru_date).
+ * Перенесено из functions.php:266-893, 904-1055 (WS-0), в WS-6:
+ *  - CSS (было три <style> внутри PHP) — в assets/css/blocks/tiles-clients.css,
+ *    tiles-feedback.css, filter-tabs.css; <link> печатается там же, где стоял
+ *    <style>, поэтому порядок каскада тот же. Файлов три, а не один: клиентский
+ *    и отзывный CSS задают разные значения одним селекторам (.feedback-image img,
+ *    button.accordion, .feedback-excerpt …), и на страницах, где был только один
+ *    из них, общий файл поменял бы вёрстку;
+ *  - ветка 'cases' удалена — вызывающие передают только blogposts/clients/feedback;
+ *  - копии массива месяцев → ug_ru_date().
  */
+
+if (!function_exists('ug_ru_date')) {
+    /**
+     * date() с русскими месяцами в родительном падеже («5 марта»).
+     *
+     * $date — строка даты из БД (post_date). Как и старый код, разбирает и
+     * форматирует её в часовом поясе PHP (WP ставит UTC), то есть без сдвига:
+     * wp_date() здесь сдвинул бы дату на пояс сайта.
+     */
+    function ug_ru_date(string $format, string $date): string
+    {
+        static $en = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        static $ru = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+        return str_replace($en, $ru, date($format, strtotime($date)));
+    }
+}
+
+/**
+ * <link> на CSS плиток прямо в месте вывода (один раз за запрос).
+ * $name — файл assets/css/blocks/<name>.css, хэндл ug-blocks-<name>.
+ */
+function ug_tiles_print_style(string $name): void
+{
+    $rel    = 'assets/css/blocks/' . $name . '.css';
+    $handle = 'ug-blocks-' . $name;
+    if (!wp_style_is($handle, 'registered')) {
+        wp_register_style($handle, get_theme_file_uri($rel), [], (string) filemtime(get_theme_file_path($rel)));
+    }
+    wp_print_styles($handle);
+}
 
 function umbrella_draw_tiles($posts, $type)
 {
     if ($type == 'blogposts') {
-        $ru_month = array('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря');
-        $en_month = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
-
         echo '<div style="padding-top:48px" id="tiles">';
         $tile = "";
         //echo count($posts);
@@ -60,7 +93,7 @@ function umbrella_draw_tiles($posts, $type)
                 }
             }
 
-            $date = str_replace($en_month, $ru_month, date("j F", strtotime($post->post_date)));
+            $date = ug_ru_date("j F", $post->post_date);
 
             if (!isset($tag)){ $tag = "";}
             $date_and_tag = '<div class="case-item-date-and-tag">' . $date . '&emsp;&emsp;&emsp;&emsp;' . $tag . '</div>';
@@ -144,216 +177,7 @@ function umbrella_draw_tiles($posts, $type)
                 jQuery("#open-leave-request-contact-form-lightbox").click();
             }
         </script>
-        <style>
-            .lightbox-want-the-same-button {
-                position: absolute;
-                bottom: 0;
-                top: unset;
-                height: 56px;
-                background-color: #1a1a1a;
-                font-weight: 300;
-                color: white;
-                margin: 0;
-                left: 0;
-
-            }
-
-            .lightbox-want-the-same-button:hover {
-                background-color: #ef1716;
-            }
-
-            .mfp-content .lightbox-close-button {
-                position: absolute;
-                bottom: 0;
-                top: unset;
-                width: 56px;
-                height: 56px;
-                background-color: #1a1a1a;
-                opacity: unset;
-                mix-blend-mode: unset;
-            }
-
-            .mfp-content .lightbox-close-button:hover {
-                background-color: #ef1716;
-            }
-
-            .client-item {
-                padding-bottom: 100px;
-            }
-
-            .client-item > .col-inner {
-                background-color: #fff;
-                height: 250px;
-            }
-
-            @media screen and (max-width: 849px) {
-                .client-item {
-                    padding-bottom: 150px;
-                }
-
-                .client-item > .col-inner {
-                    background-color: #fff;
-                    max-height: 150px;
-                }
-            }
-
-
-            a.client-item-block {
-                display: inline-block;
-                width: 100%;
-                height: 100%;
-            }
-
-            .client-item-block:hover {
-                cursor: pointer;
-            }
-
-            .client-item-block:hover > .client-item-title {
-                color: #ef1716;
-            }
-
-            .client-item-block:hover > .feedback-exists-icon {
-                visibility: hidden;
-                opacity: 0;
-                transition: visibility 0.2s, opacity 0.2s linear;
-            }
-
-            .client-item-block:hover > .feedback-exists-text {
-                visibility: visible;
-                opacity: 1;
-                z-index: 1;
-            }
-
-            .feedback-industry {
-                font-weight: 300;
-                font-size: 0.65em;
-                color: #b2b2b2;
-            }
-
-            .feedback-excerpt {
-                font-size: 1.35em;
-                line-height: 1.5em;
-                position: relative;
-                width: 90%;
-                font-weight: 300;
-                padding-top: 1em;
-                padding-bottom: 1em;
-            }
-
-            .feedback-item-content {
-                /*max-height: 0px;*/
-                overflow: hidden;
-                transition: max-height 0.2s ease-in-out;
-            }
-
-            .feedback-item-header {
-                width: 86.55%;
-                display: table-cell;
-                font-size: 1.35em;
-                font-weight: 600;
-                line-height: 1.45;
-            }
-
-            .feedback-image img {
-                max-height: 64px;
-                height: 64px;
-                width: auto;
-            }
-
-            @media screen and (max-width: 849px) {
-                .feedback-image img {
-                    display: none;
-                }
-
-                .feedback-excerpt {
-                    font-size: 14px;
-                }
-
-                .feedback-item-content {
-                    display: none;
-                }
-            }
-
-
-            .feedback-image {
-                -webkit-filter: grayscale(100%);
-                filter: grayscale(100%);
-                position: absolute;
-                right: 0;
-                top: 40px;
-            }
-
-            button.accordion {
-
-                display: none;
-            }
-
-            .feedback-exists-icon {
-                position: absolute;
-                left: 20px;
-                bottom: 20px;
-                visibility: visible;
-                opacity: 1;
-            }
-
-            .feedback-exists-text {
-                visibility: hidden;
-                opacity: 0;
-                transition: visibility 0.2s, opacity 0.2s linear;
-                text-align: center;
-                color: #fff;
-                height: 52px;
-                padding-top: 0.8em;
-                padding-left: 10px;
-                background-color: #ec1c24;
-                width: 100%;
-                position: absolute;
-                left: 0;
-                bottom: 0;
-            }
-
-            @media screen and (max-width: 849px) {
-                .feedback-exists-text {
-                    font-size: 14px;
-                }
-            }
-
-
-            .client-item-image {
-                position: absolute;
-                display: inline-block;
-                text-align: center;
-                width: 100%;
-                height: 100%;
-                padding: 40px 40px 40px 40px;
-            }
-
-            @media screen and (max-width: 849px) {
-                .client-item-image {
-                    padding: unset;
-                }
-            }
-
-
-            .client-item-image-helper {
-                display: inline-block;
-                height: 100%;
-                vertical-align: middle;
-            }
-
-            .client-item-title {
-
-                font-weight: 600;
-                padding-top: 10px;
-                font-size: 1em;
-            }
-
-            .client-item-industry {
-                font-size: 0.8em;
-                color: #b2b2b2;
-            }
-
-        </style>
+        <?php ug_tiles_print_style('tiles-clients'); ?>
         <?php
     } elseif ($type == 'feedback') {
         // Рисуем отдельный отзыв во всплывающем окне, если на входе послан только один отзыв
@@ -366,270 +190,7 @@ function umbrella_draw_tiles($posts, $type)
             echo '</div>';
         }
         ?>
-        <style>
-            /** feedback **/
-            button.accordion {
-                position: absolute;
-                right: -20px;
-                bottom: -20px;
-                color: white;
-                background-color: #1a1a1a;
-                width: 56px;
-                height: 56px;
-                transition: background-color 0.2s linear;
-            }
-
-            button.accordion:hover {
-                background-color: #ec1c23;
-            }
-
-            button.accordion:after {
-                content: "↓";
-            }
-
-            button.accordion.is-open {
-                background-color: #1a1a1a;
-            }
-
-            button.accordion.is-open:after {
-                content: "↑";
-            }
-
-            .feedback-subheader {
-                display: table-cell;
-                width: 100%;
-            }
-
-            .feedback-subheader-right {
-                display: table-cell;
-                white-space: nowrap;
-                text-align: right;
-                width: 20%
-            }
-
-            p.feedback-subheader-right a:hover:after {
-                color: #ec1c23;
-                opacity: 1;
-                margin-left: 0px;
-                -webkit-transition: all 0.1s;
-                transition: all 0.1s;
-            }
-
-            p.feedback-subheader-right a:after {
-                content: " →";
-                color: #ec1c23;
-                opacity: 0;
-                margin-left: -30px;
-                -webkit-transition: all 0.1s;
-                transition: all 0.1s;
-            }
-
-            p.feedback-subheader-right a:hover {
-                margin-left: -30px;
-                -webkit-transition: all 0.1s;
-                transition: all 0.1s;
-            }
-
-            p.feedback-subheader-right a {
-                margin-left: 0px;
-                -webkit-transition: all 0.1s;
-                transition: all 0.1s;
-            }
-
-            .feedback-image img {
-                max-height: 64px;
-                height: 64px;
-                width: auto;
-            }
-
-            @media screen and (max-width: 849px) {
-                .feedback-image img {
-                    display: none;
-                }
-            }
-
-            .feedback-image {
-                -webkit-filter: grayscale(100%);
-                filter: grayscale(100%);
-                position: absolute;
-                right: 40px;
-                top: 40px;
-            }
-
-            .feedback-industry {
-                font-weight: 300;
-                font-size: 0.65em;
-                color: #b2b2b2;
-            }
-
-            .feedback-excerpt {
-                font-size: 1.35em;
-                line-height: 1.5em;
-                position: relative;
-                width: 90%;
-                font-weight: 300;
-                padding-top: 1em;
-                padding-bottom: 1em;
-            }
-
-            .feedback-item-content {
-                max-height: 0px;
-                padding-right: 112px;
-
-                overflow: hidden;
-
-                transition: max-height 0.2s ease-in-out;
-            }
-
-            .feedback-item-header {
-                width: 86.55%;
-                display: table-cell;
-                font-size: 1.35em;
-                font-weight: 600;
-                line-height: 1.45;
-            }
-
-
-        </style>
-        <?php
-    } elseif ($type == 'cases') {
-        $ru_month = array('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря');
-        $en_month = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
-
-        echo '<div id="cases-tiles">';
-        $tile = "";
-        foreach ($posts as $post) {
-            $title = $post->post_title;
-            $title = '<div class="cases-item-header"> ' . $title . '</div>';
-
-            $tag = get_the_terms($post->ID, 'cases_tags');
-            if (!empty($tag)) {
-                $tag = '<a href="' . get_term_link($tag[0], 'cases_tags') . '" >#' . $tag[0]->name . '</a>';
-            }
-            $date = str_replace($en_month, $ru_month, date("j F", strtotime($post->post_date)));
-
-            $date_and_tag = '<div class="case-item-date-and-tag">' . $date . '&emsp;&emsp;&emsp;&emsp;' . $tag . '</div>';
-
-            $excerpt = get_the_excerpt($post->ID);
-            if (empty($excerpt)) {
-                $excerpt = "<span style='color: red'> Нужно добавить краткое описание кейса</span>";
-            }
-            $excerpt = '<div class="cases-excerpt">' . $excerpt . '</div>';
-
-            $thumbnail = get_the_post_thumbnail($post->ID);
-            $thumbnail = '<div class="cases-item-image">' . $thumbnail . '</div>';
-
-            if (!empty(get_the_terms($post->ID, 'cases_industry'))) {
-                $category_classes = get_the_terms($post->ID, 'cases_industry');
-            } else {
-                $category_classes = array('');
-            }
-
-            $category_classes_string = ' ';
-            foreach ($category_classes as $category_class) {
-                $category_classes_string = $category_classes_string . ' ' . $category_class->slug;
-
-            }
-            $permalink = get_post_permalink($post->ID);
-
-            $tile = $tile . '[col_inner span="6" span__sm="12" align="left" margin="0px 0px 42px 0px" class="all' . $category_classes_string . '"]<div class="cases-tile" onclick="window.location=\'' . $permalink . '\'" >' . $thumbnail . $title . $excerpt . $date_and_tag . '</div>[/col_inner]';
-
-
-        }
-        $tiles = '[row_inner padding="0px 0 0px 0" style="large" v_align="top" ]' . $tile . '[/row_inner]';
-        echo do_shortcode($tiles);
-        echo '</div>';
-
-
-        ?>
-        <style>
-            /** cases **/
-
-            .cases-tile {
-                height: 281px;
-                cursor: pointer;
-            }
-
-            .cases-tile:hover .cases-item-header {
-                color: #ec1d23;
-            }
-
-            .cases-tile:hover .case-item-date-and-tag {
-                opacity: 0;
-                bottom: 20%;
-                -webkit-transition: all 0.3s; /* Safari prior 6.1 */
-                transition: all 0.3s;
-
-            }
-
-            .cases-tile:hover .cases-excerpt {
-                opacity: 1;
-                bottom: 10%;
-                -webkit-transition: all 0.3s; /* Safari prior 6.1 */
-                transition: all 0.3s;
-
-            }
-
-            .cases-item-image img {
-                height: 100%;
-                vertical-align: top;
-
-            }
-
-            .cases-item-image {
-                position: absolute;
-                height: 100%;
-                width: 100%;
-                text-align: right;
-                right: 0;
-
-            }
-
-            .cases-item-image::after {
-                display: block;
-                position: absolute;
-                background-image: linear-gradient(to left, rgba(255, 255, 255, 0) 0, #fff 50%);
-                top: 0;
-                height: 100%;
-                width: 100%;
-                content: '';
-
-            }
-
-            .case-item-date-and-tag {
-                font-size: 0.8em;
-                position: absolute;
-                bottom: 10%;
-                font-weight: 300;
-                color: #b2b2b2;
-                -webkit-transition: all 0.3s; /* Safari prior 6.1 */
-                transition: all 0.3s;
-            }
-
-            .cases-excerpt {
-                opacity: 0;
-                bottom: 0%;
-                font-size: 0.8em;
-                line-height: 1.5em;
-                position: absolute;
-                width: 60%;
-
-                -webkit-transition: all 0.3s; /* Safari prior 6.1 */
-                transition: all 0.3s;
-
-            }
-
-            .cases-item-header {
-                max-width: 60%;
-                position: relative;
-                font-size: 18px;
-                font-weight: 600;
-                line-height: 1.45;
-
-            }
-
-
-        </style>
+        <?php ug_tiles_print_style('tiles-feedback'); ?>
         <?php
     } else {
         echo "posts type to draw were defined incorrectly";
@@ -641,9 +202,6 @@ function umbrella_draw_tiles($posts, $type)
 function make_feedback_tile($post, $border = true)
 {
     //print_r($post);
-
-    $ru_month = array('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря');
-    $en_month = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 
     $scan = get_post_meta($post->ID, 'umbrella_feedback_scan', true);
     $scan = '[ux_image id="' . $scan . '" width="100" height="312px" lightbox="true" depth_hover="3" depth="1" ]';
@@ -679,7 +237,7 @@ function make_feedback_tile($post, $border = true)
         }
     }
 
-    $date = str_replace($en_month, $ru_month, date("j F", strtotime($post->post_date)));
+    $date = ug_ru_date("j F", $post->post_date);
 
     $permalink = get_post_permalink($post->ID);
 
@@ -779,15 +337,7 @@ function umbrella_draw_filter_tabs($tabs, $posts, $type = 'blogposts')
             });
         });
     </script>
-    <style>
-        .size-of-filter-tab {
-            color: #b2b2b2;
-        }
-
-        .btn-filter:hover .size-of-filter-tab {
-            color: #fff;
-        }
-    </style>
+    <?php ug_tiles_print_style('filter-tabs'); ?>
     <?php
 }
 
