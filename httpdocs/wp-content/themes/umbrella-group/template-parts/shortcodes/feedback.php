@@ -252,18 +252,8 @@ class feedback
 
     private function get_category_by_url(): string
     {
-        if (strpos($_SERVER['REQUEST_URI'], "services/licensing") !== false) {
-            return "Лицензирование";
-        } else if (strpos($_SERVER['REQUEST_URI'], "services/register-elimination") !== false) {
-            return "Регистрация и ликвидация";
-        } else if (strpos($_SERVER['REQUEST_URI'], "services/services-le") !== false) {
-            return "Юридические услуги";
-        } else if (strpos($_SERVER['REQUEST_URI'], "services/audit") !== false) {
-            return "Аудит";
-        } else if (strpos($_SERVER['REQUEST_URI'], "services/bukhgalterskie-uslugi") !== false) {
-            return "Бухгалтерия";
-        }
-        return "Общий";
+        $category = ug_service_category();
+        return ($category === null || $category === "Сделки с недвижимостью") ? "Общий" : $category;
     }
 
     private function get_title(string $category): string

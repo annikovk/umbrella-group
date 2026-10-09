@@ -166,20 +166,7 @@ class specialists
 
     private function get_category_by_url(): string
     {
-        if (strpos($_SERVER['REQUEST_URI'], "services/licensing") !== false) {
-            return "Лицензирование";
-        } else if (strpos($_SERVER['REQUEST_URI'], "services/register-elimination") !== false) {
-            return "Регистрация и ликвидация";
-        } else if (strpos($_SERVER['REQUEST_URI'], "services/services-le") !== false) {
-            return "Юридические услуги";
-        } else if (strpos($_SERVER['REQUEST_URI'], "services/audit") !== false) {
-            return "Аудит";
-        } else if (strpos($_SERVER['REQUEST_URI'], "services/bukhgalterskie-uslugi") !== false) {
-            return "Бухгалтерия";
-        } else if (strpos($_SERVER['REQUEST_URI'], "services/sdelki-s-nedvizhimostyu") !== false) {
-            return "Сделки с недвижимостью";
-        }
-        return "";
+        return ug_service_category() ?? "";
     }
 
     private function get_advantages(string $category): string
