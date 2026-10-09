@@ -29,6 +29,11 @@ class video_block
         }
     }
 
+    private function iframe_title(): string
+    {
+        return esc_attr(wp_strip_all_tags($this->header));
+    }
+
     public function generate_shortcode()
     {
         $image_attributes = wp_get_attachment_image_src($this->photo, 'full');
@@ -51,7 +56,7 @@ class video_block
                     </div>
                 </div>  
                 <div class="video-frame">   
-                    <iframe width="100%" height="100%" loading="lazy" src="$this->link" frameBorder="0" allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+                    <iframe width="100%" height="100%" loading="lazy" title="{$this->iframe_title()}" src="$this->link" frameBorder="0" allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
                 </div>
                 <div class="video-description ">
                     <div class="video-duration hide-for-small">

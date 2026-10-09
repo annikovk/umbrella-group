@@ -27,7 +27,7 @@ function accordion_umbrella($atts, $content = null)
     return $title . '<div class="' . implode(' ', $classes) . '" rel="' . $open . '">' . flatsome_contentfix($content) . '</div>';
 }
 
-function accordion_item_umbrella($atts, $content = '', $code)
+function accordion_item_umbrella($atts, $content = '', $code = '')
 {
 
     extract(shortcode_atts(array(

@@ -41,5 +41,3 @@ function request_call_back_shortcode($atts)
 }
 
 add_shortcode('request_call_back', 'request_call_back_shortcode');
-
-?>

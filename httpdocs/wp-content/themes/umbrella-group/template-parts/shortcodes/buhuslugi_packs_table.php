@@ -155,25 +155,6 @@ class buhuslugi_packs_table
                             </div>
                         </div>
                       </div>
-                      <!--
-                      <div class="item" data-option="4">
-                        <div class="name">
-                          Бухгалтерия + кадры + юристы
-                          <span class="hint" data-tooltip="#ttEmployee4"
-                            >?
-                            <div class="tooltip" id="ttEmployee4">
-                              Подойдёт, если у вас:<br/>
-                                • нет штатного бухгалтера, либо он перегружен и не справляется;<br/>
-                                • нет 1С;<br/>
-                                • частые согласования договоров;<br/>
-                                • бывают претензии и нужна помощь юриста в грамотной работе с ними;<br/>
-                                • разрабатываются локальные нормативные акты;<br/>
-                                • частые перемещения персонала.
-                            </div>
-                          </span>
-                        </div>
-                      </div>
-                      -->
                     </div>
                     <div class="price">
                       <div class="item" data-option="1">
@@ -226,24 +207,6 @@ class buhuslugi_packs_table
                           </div>
                         </div>
                       </div>
-                      <!--
-                      <div class="item" data-option="4">
-                        <div class="priceWrapper">
-                         <div class="value" data-ip="18 000" data-company="20 000">
-                            18 000
-                          </div>
-                          <div class="subtitle">
-                            руб. в месяц
-                            <span class="hint" data-tooltip="#ttPrice4"
-                              >?
-                              <div class="tooltip" id="ttPrice4">
-                                Указана нижняя граница тарифа: до 20 операций в месяц, до 5 работников, до 5 часов работы юриста.
-                              </div>
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                      -->
                     </div>
                     <div class="content">
                       <div class="buh-table-row">
@@ -274,29 +237,16 @@ class buhuslugi_packs_table
                             </div>
                           </span>
                         </div>
-                        <!--
-                        <div class="item text" data-option="4">
-                          Ведение + 1С
-                          <span class="hint" data-tooltip="#ttBuh4"
-                            >?
-                            <div class="tooltip" id="ttBuh4">
-                             Вы предоставляете нам первичные документы, а мы ведём 1С в нашем ПО. Вы экономите на 1С, рабочих местах, налогах с зарплаты штатных бухгалтеров, кадровиков и юристов.
-                            </div>
-                          </span>
-                        </div>
-                        -->
                       </div>
                       <div class="buh-table-row">
                         <div class="item plus" data-option="1"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
                         <div class="item plus" data-option="2"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
                         <div class="item plus" data-option="3"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
-                        <!-- <div class="item plus" data-option="4"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div> -->
                       </div>
                       <div class="buh-table-row">
                         <div class="item plus" data-option="1"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
                         <div class="item plus" data-option="2"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
                         <div class="item plus" data-option="3"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
-                        <!-- <div class="item plus" data-option="4"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div> -->
                       </div>
                       <div class="buh-table-row">
                         <div class="item plus" data-option="1"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""> 
@@ -311,13 +261,11 @@ class buhuslugi_packs_table
                         </div>
                         <div class="item plus" data-option="2"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
                         <div class="item plus" data-option="3"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
-                        <!-- <div class="item plus" data-option="4"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div> -->
                       </div>
                       <div class="buh-table-row">
                         <div class="item plus" data-option="1"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
                         <div class="item plus" data-option="2"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
                         <div class="item plus" data-option="3"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div>
-                        <!-- <div class="item plus" data-option="4"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div> -->
                       </div>
                       <div class="buh-table-row">
                         <div class="item" data-option="1"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
@@ -330,46 +278,36 @@ class buhuslugi_packs_table
                             </div>
                           </span>
                         </div>
-                        <!--
-                        <div class="item plus" data-option="4"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""><span class="hint" data-tooltip="#ttBuh5"
-                            >?</span></div>
-                        -->
                       </div>
                       <div class="buh-table-row">
                         <div class="item" data-option="1"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
                         <div class="item" data-option="2"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
                         <div class="item" data-option="3"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
-                        <!-- <div class="item plus" data-option="4"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div> -->
                       </div>
                       <div class="buh-table-row">
                         <div class="item" data-option="1"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
                         <div class="item" data-option="2"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
                         <div class="item" data-option="3"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
-                        <!-- <div class="item plus" data-option="4"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div> -->
                       </div>
                       <div class="buh-table-row">
                         <div class="item" data-option="1"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
                         <div class="item" data-option="2"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
                         <div class="item" data-option="3"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
-                        <!-- <div class="item plus" data-option="4"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div> -->
                       </div>
                       <div class="buh-table-row">
                         <div class="item" data-option="1"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
                         <div class="item" data-option="2"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
                         <div class="item" data-option="3"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
-                        <!-- <div class="item plus" data-option="4"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div> -->
                       </div>
                       <div class="buh-table-row">
                         <div class="item" data-option="1"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
                         <div class="item" data-option="2"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
                         <div class="item" data-option="3"><img src="/wp-content/uploads/buh_table_minus.png" alt="plus icon" width="" height=""></div>
-                        <!-- <div class="item plus" data-option="4"><img src="/wp-content/uploads/buh_table_plus.png" alt="plus icon" width="" height=""></div> -->
                       </div>
                       <div class="buh-table-row">
                         <div class="item text" data-option="1">100%</div>
                         <div class="item text" data-option="2">100%</div>
                         <div class="item text" data-option="3">100%</div>
-                        <!-- <div class="item text" data-option="4">100%</div> -->
                         <div class="item for-mobile" ></div>
                       </div>
                       <div class="buh-table-row">
@@ -382,11 +320,6 @@ class buhuslugi_packs_table
                         <div class="item" data-option="3">
                           <a href="#buh-table-form"><button>Расчет стоимости</button></a>
                         </div>
-                        <!--
-                        <div class="item" data-option="4">
-                          <a href="#buh-table-form"><button>Расчет стоимости</button></a>
-                        </div>
-                        -->
                       </div>
                     </div>
                   </div>

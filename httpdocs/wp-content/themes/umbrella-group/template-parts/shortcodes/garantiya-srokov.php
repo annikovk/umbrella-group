@@ -92,5 +92,3 @@ function garantiya_srokov_shortcode($atts)
 }
 
 add_shortcode('garantiya_srokov', 'garantiya_srokov_shortcode');
-
-?>
