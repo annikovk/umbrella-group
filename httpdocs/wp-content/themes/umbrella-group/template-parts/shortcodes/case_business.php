@@ -1,9 +1,9 @@
 <?php
 function case_busnisse_shortcode($args)
 {
+    ug_enqueue_library('ug-swiper-14');
     ob_start();
     ?>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"/>
     <?php echo '[section id="case_busnisse" class="case_busnisse"  padding="0px"]'; ?>
     <div class="form_calculate_busnisse_screen pd">
         <div class="row">
@@ -80,7 +80,6 @@ function case_busnisse_shortcode($args)
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <?php echo '[/section]'; ?>
     <div id="history_case" class="modal">
         <div class="modal-content">

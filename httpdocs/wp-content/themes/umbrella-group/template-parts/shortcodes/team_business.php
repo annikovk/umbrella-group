@@ -2,10 +2,8 @@
 
 function team_business_shortcode($atts)
 {
+    ug_enqueue_library('ug-fancybox');
     $html = <<<EOTHTML
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css"/>
-        <!--script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script-->
-        <script src="/wp-content/themes/umbrella-group/js/fancybox.umd.js"></script>
          [section id='team_business' class='team_business'  padding="0px"]
             <div class="open_business_screen pd">
                 <div class="row">

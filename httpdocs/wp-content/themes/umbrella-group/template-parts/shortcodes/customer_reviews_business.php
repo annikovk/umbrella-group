@@ -1,10 +1,9 @@
 <?php
 function customer_reviews_busnisse_shortcode($args)
 {
+    ug_enqueue_library('ug-swiper-14');
     ob_start();
     ?>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"/>
-    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <?php echo '[section id="customer_reviews" class="customer_reviews"  padding="0px"]'; ?>
     <div class="customer_reviews_busnisse_screen pd d-none" id="customer_reviews">
         <div class="row">

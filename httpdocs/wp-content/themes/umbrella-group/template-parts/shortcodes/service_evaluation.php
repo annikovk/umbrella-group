@@ -6,9 +6,8 @@ class service_evaluation
 
     public function generate_shortcode()
     {
+        ug_enqueue_library('ug-fancybox');
         $html = <<<EOHTML
-        <!--script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script-->
-        <script src="/wp-content/themes/umbrella-group/js/fancybox.umd.js"></script>
          [section class='service_evaluation' id='service_evaluation'  padding="0px"]
            [row]
             [col  span="12" span__sm="12" margin="0px 0px 0px 0px"]

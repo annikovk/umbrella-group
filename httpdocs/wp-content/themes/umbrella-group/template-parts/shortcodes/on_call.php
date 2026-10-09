@@ -6,9 +6,8 @@ class on_call
 
     public function generate_shortcode()
     {
+        wp_enqueue_script('ug-swiper');
         $html = <<<EOHTML
-        <!--script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script-->
-        <script src="/wp-content/themes/umbrella-group/js/swiper-bundle.min.js"></script>
          [section id='on_call'  padding="0px"]
            [row]
             [col  span="12" span__sm="12" margin="0px 0px 0px 0px"]

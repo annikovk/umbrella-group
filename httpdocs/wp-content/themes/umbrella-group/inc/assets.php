@@ -7,7 +7,7 @@
  *
  * Хэндл выводится из пути (ug_style_handle), регистрация ленивая — при первом
  * вызове, версия — filemtime файла. Реестр руками — только у библиотек
- * (ug-main, ug-swiper, ug-fancybox) в ug_register_libraries().
+ * (ug-main, ug-swiper, ug-swiper-14, ug-fancybox) в ug_register_libraries().
  *
  * Где печатается CSS:
  *  - ug-base (assets/css/base.css) — в <head> до Flatsome, где раньше стояли
@@ -110,13 +110,8 @@ function ug_pending_styles(?string $add = null): array
 function ug_enqueue_style(string $rel, array $deps = ['ug-main']): void
 {
     $handle = ug_register_style($rel, $deps);
-    if ($handle === null) {
-        return;
-    }
-    if (did_action('ug_head_styles_printed')) {
-        wp_enqueue_style($handle);
-    } else {
-        ug_pending_styles($handle);
+    if ($handle !== null) {
+        ug_enqueue_style_handle($handle);
     }
 }
 
@@ -161,6 +156,40 @@ function ug_enqueue_script(string $rel, array $deps = [], array $args = ['in_foo
 function ug_register_libraries(): void
 {
     wp_register_style('ug-main', get_theme_file_uri('assets/css/main.css'), [], ug_asset_ver('assets/css/main.css'));
+
+    // Swiper — две версии, как и было: 11.2.5 (js/swiper-bundle.min.js) у
+    // слайдера on_call на главной, без CSS; 14.3.0 — локальная копия того,
+    // что отдавал jsdelivr без версии (/npm/swiper/…) на 14148: там он
+    // грузился последним, и все слайдеры страницы инициализировались им
+    // (стрелки навигации — его SVG). Одна версия на обе страницы меняет
+    // снимки (проверено): свести — с прокликиванием слайдеров (WS-5).
+    wp_register_script('ug-swiper', get_theme_file_uri('js/swiper-bundle.min.js'), [], '11.2.5', ['in_footer' => true]);
+    wp_register_script('ug-swiper-14', get_theme_file_uri('assets/js/vendor/swiper-bundle.min.js'), [], '14.3.0', ['in_footer' => true]);
+    wp_register_style('ug-swiper-14', get_theme_file_uri('assets/css/vendor/swiper-bundle.min.css'), [], '14.3.0');
+
+    // Fancybox 4.0.31: js/fancybox.umd.js и css/fancybox.css — те же файлы,
+    // что на jsdelivr @fancyapps/ui@4.0 (побайтно).
+    wp_register_script('ug-fancybox', get_theme_file_uri('js/fancybox.umd.js'), [], '4.0.31', ['in_footer' => true]);
+    wp_register_style('ug-fancybox', get_theme_file_uri('css/fancybox.css'), [], '4.0.31');
+}
+
+/** Библиотека целиком: JS в подвал, CSS — в late styles перед CSS блоков. */
+function ug_enqueue_library(string $handle): void
+{
+    wp_enqueue_script($handle);
+    if (wp_style_is($handle, 'registered')) {
+        ug_enqueue_style_handle($handle);
+    }
+}
+
+/** Зарегистрированный хэндл CSS с той же логикой head/late, что у ug_enqueue_style(). */
+function ug_enqueue_style_handle(string $handle): void
+{
+    if (did_action('ug_head_styles_printed')) {
+        wp_enqueue_style($handle);
+    } else {
+        ug_pending_styles($handle);
+    }
 }
 add_action('wp_enqueue_scripts', 'ug_register_libraries', 1);
 
@@ -206,6 +235,25 @@ add_action('wp_footer', function (): void {
         }
         $href = $styles->_css_href((string) $item->src, $item->ver, $handle);
         printf("<link rel='stylesheet' id='%s-tail-css' href='%s' type='text/css' media='all' />\n", esc_attr($handle), esc_url($href));
+    }
+}, 19);
+
+// Библиотеки, которые встали в очередь на этой странице (ug-swiper,
+// ug-swiper-14, ug-fancybox), печатаются раньше JS темы: раньше они стояли <script> в body,
+// а JS блоков — в конце body, и open_bussnise.js, отрендеренный выше
+// open_business, всё равно видел Swiper.
+add_action('wp_footer', function (): void {
+    $scripts = wp_scripts();
+    $libs = array_values(array_filter(['ug-swiper', 'ug-swiper-14', 'ug-fancybox'], fn(string $h): bool => wp_script_is($h, 'enqueued')));
+    if ($libs === []) {
+        return;
+    }
+    foreach ($scripts->queue as $handle) {
+        if (str_starts_with($handle, 'ug-') && !in_array($handle, $libs, true) && isset($scripts->registered[$handle])) {
+            $deps = &$scripts->registered[$handle]->deps;
+            $deps = array_values(array_unique(array_merge($deps, $libs)));
+            unset($deps);
+        }
     }
 }, 19);
 
