@@ -300,6 +300,9 @@ function umbrella_add_custom_js_files(array $files): void
 // (assets/css/base.css — стили, которые Flatsome и custom-css должны
 // перекрывать, как и раньше).
 add_action('wp_enqueue_scripts', function (): void {
+    // Иконки .fa (6 штук) сабсетом Font Awesome 4.7 — замена cdnjs
+    // font-awesome.min.css из header.php: WS-3 удаляет ту ссылку, эта уже стоит.
+    wp_enqueue_style('ug-icons', get_theme_file_uri('assets/css/icons.css'), [], ug_asset_ver('assets/css/icons.css'));
     wp_enqueue_style('ug-fonts', get_theme_file_uri('fonts/fonts.css'), [], ug_asset_ver('fonts/fonts.css'));
     wp_enqueue_style('ug-base', get_theme_file_uri('assets/css/base.css'), ['ug-fonts'], ug_asset_ver('assets/css/base.css'));
 });
