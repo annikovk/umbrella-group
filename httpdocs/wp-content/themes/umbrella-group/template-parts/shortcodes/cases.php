@@ -177,7 +177,7 @@ class cases
         }
         if (strlen($feedback_text) > 0 && strlen($feedback_url) > 0) {
             if (str_contains($feedback_url, "flamp")) {
-                $icon = "<img height='20px' width='20px' src='https://flamp.ru/static/assets/brand-logo/svg/f.svg' alt='flamp-logo'>";
+                $icon = "<img height='20px' width='20px' src='" . esc_url(ug_flamp_icon_url()) . "' alt='flamp-logo'>";
                 $target = "target='_blank'";
                 $feedback = "<div class='case-feedback hide-for-small'>$icon <a $target href='{$feedback_url}'>{$feedback_text}</a></div> ";
             } else {

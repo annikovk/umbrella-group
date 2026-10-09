@@ -163,3 +163,16 @@ function ug_prime_thumbnails(array $posts): void
         _prime_post_caches(array_unique($ids), false, true);
     }
 }
+
+/**
+ * Иконка flamp для ссылок на отзывы. Хотлинк flamp.ru/…/f.svg части клиентов
+ * отвечает 403 (карточка отзыва меняет высоту) — локальная assets/img/flamp.svg
+ * (кладёт WS-2), пока её нет — прежний внешний адрес.
+ */
+function ug_flamp_icon_url(): string
+{
+    $rel = 'assets/img/flamp.svg';
+    return is_file(get_theme_file_path($rel))
+        ? get_theme_file_uri($rel)
+        : 'https://flamp.ru/static/assets/brand-logo/svg/f.svg';
+}

@@ -137,7 +137,7 @@ class feedback
         $feedback = "";
         if (strlen($feedback_url_text) > 0 && strlen($feedback_url) > 0) {
             if (str_contains($feedback_url, "flamp")) {
-                $icon = "<img width='20px' src='https://flamp.ru/static/assets/brand-logo/svg/f.svg' alt='flamp logo'>";
+                $icon = "<img width='20px' src='" . esc_url(ug_flamp_icon_url()) . "' alt='flamp logo'>";
                 $target = "target='_blank'";
                 $feedback = "<div class='link'>$icon <a $target href='{$feedback_url}'>{$feedback_url_text}</a></div> ";
             }
