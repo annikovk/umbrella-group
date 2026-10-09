@@ -20,7 +20,7 @@
                 }
                 ?>
                 <?php
-                get_template_part( 'template-parts/akcii/content', 'single' );
+                get_template_part( 'template-parts/posts/content', 'single-akcii' );
                 umbrella_add_custom_css_files(['/assets/css/blocks/akcii.css']);
                 ?>
             </div><!-- .article-inner -->

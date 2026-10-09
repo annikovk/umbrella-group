@@ -790,3 +790,98 @@ function umbrella_draw_filter_tabs($tabs, $posts, $type = 'blogposts')
     </style>
     <?php
 }
+
+
+/**
+ * Записи по списку ID, свежие первыми (архивы плитками, template-parts/posts/archive-2-col.php).
+ * Бывшие get_post_by_ids() и get_akcii_by_ids() из двух копий шаблона.
+ */
+function ug_get_posts_by_ids(array $ids, string $post_type = 'post'): array
+{
+    return get_posts(array(
+        'numberposts' => count($ids),
+        'orderby' => 'date',
+        'order' => 'DESC',
+        'post__in' => $ids,
+        'post_type' => $post_type,
+    ));
+}
+
+/**
+ * Плитки архива акций /akcii/ (бывш. template-parts/akcii/archive-2-col.php).
+ *
+ * Срок «До 01.ММ.2026» — первое число следующего месяца, год зашит в шаблоне.
+ * Ветка «+12 месяцев» для акции 26853 в старом коде не срабатывала никогда:
+ * сравнивался объект WP_Post с числом ($post == 26853 → false и PHP Notice),
+ * поэтому её нет и здесь — вывод тот же.
+ */
+function umbrella_draw_akcii_tiles($posts)
+{
+    echo '<div style="padding-top:48px" id="tiles">';
+    $tile = "";
+
+    foreach ($posts as $post) {
+        $date = "До " . date("d.m.Y", strtotime(date('m', strtotime('+1 month')).'/1/'.date('2026').' 00:00:00'));
+
+        $date_and_tag = '<div class="case-item-date-and-tag">' . $date . '</div>';
+
+
+        $excerpt = get_the_excerpt($post->ID);
+        if (empty($excerpt)) {
+            $excerpt = "<span style='color: red'> Нужно добавить краткое описание записи</span>";
+        }
+        if (strlen($excerpt) > 150) {
+            $excerpt = implode(' ', array_slice(explode(' ', $excerpt), 0, 10)) . '...';
+        }
+        $excerpt = '<div class="cases-excerpt">' . $excerpt . '</div>';
+        $title_and_excerpt = '<div class="cases-item-header"> ' . $post->post_title . '</div>' . $excerpt ;
+        $thumbnail = get_the_post_thumbnail($post->ID);
+        $thumbnail = '<div class="cases-item-image">' . $thumbnail . '</div>';
+
+        $permalink = urldecode(get_permalink($post->ID));
+
+        $tile = $tile . '[col_inner span="6" span__sm="12" align="left" margin="0px 0px 8px 0px" class="all"]<div class="cases-tile tile-akcii" ><a href="' . $permalink . '">' . $thumbnail . $title_and_excerpt  . $date_and_tag . '</a></div>[/col_inner]';
+    }
+
+    $tiles = '[row_inner padding="0px 0 0px 0" style="normal" v_align="top" ]' . $tile . '[/row_inner]';
+    echo do_shortcode($tiles);
+    echo '</div>';
+    umbrella_add_custom_css_files(['/assets/css/blocks/cases-tiles.css']);
+}
+
+/**
+ * Две свежие записи под записью («Читать еще») или две другие акции под акцией
+ * (template-parts/posts/layout-right-sidebar.php). Бывшие get_similar_posts()
+ * и akcii_get_similar_posts() из двух копий шаблона.
+ */
+function ug_draw_similar_posts(string $post_type = 'post'): void
+{
+    $is_akcii = $post_type === 'akcii';
+    $args = array(
+        'order'   => 'DESC',
+        'orderby' => 'date',
+        'exclude' => $is_akcii ? get_post()->ID : '',
+        'include' => '',
+        'numberposts' => 2,
+        'category' => '',
+        'post_type' => $post_type,
+    );
+    ?>
+<div class="large-12 col">
+    <?php if ($is_akcii) : ?>
+    <h2 class="feedback-subheader">Другие акции</h2>
+
+    <p class="feedback-subheader-right">
+        <a style="text-decoration: underline;" href="/akcii/"> Посмотреть все</a></p>
+    <?php else : ?>
+    <p class="h2 for-h2 feedback-subheader">Читать еще</p>
+
+    <p class="feedback-subheader-right">
+        <a style="text-decoration: underline;" href="/about/cases/"> Посмотреть все</a></p>
+    <?php endif; ?>
+    <?php
+    umbrella_draw_tiles(get_posts($args), 'blogposts');
+    ?>
+</div>
+<?php
+}

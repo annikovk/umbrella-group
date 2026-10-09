@@ -1,4 +1,15 @@
-<?php 
+<?php
+/**
+ * Запись и акция: контент слева, сайдбар справа, ниже — «Читать еще» / «Другие акции».
+ *
+ * $args['post_type'] — 'post' (по умолчанию, single.php) или 'akcii'
+ * (single-akcii.php); раньше акции жили в копии этого файла
+ * template-parts/akcii/layout-right-sidebar.php.
+ */
+
+$ug_post_type = $args['post_type'] ?? 'post';
+$ug_is_akcii  = $ug_post_type === 'akcii';
+
 	do_action('flatsome_before_blog');
 
 ?>
@@ -11,7 +22,7 @@
 	<?php if(!is_single() && flatsome_option('blog_featured') == 'content'){ get_template_part('template-parts/posts/featured-posts'); } ?>
 	<?php
 		if(is_single()){
-			get_template_part( 'template-parts/posts/single');
+			get_template_part( 'template-parts/posts/single', $ug_is_akcii ? 'akcii' : null );
 			comments_template();
 		} elseif(flatsome_option('blog_style_archive') && (is_archive() || is_search())){
 
@@ -23,6 +34,9 @@
 	</div> <!-- .large-9 -->
 
 	<div class="post-sidebar large-4 col ">
+<?php if ($ug_is_akcii) : ?>
+		<?php get_sidebar('akcii'); ?>
+<?php else : ?>
 		<?php get_sidebar(); ?>
 
 
@@ -76,40 +90,13 @@
 </div>
 </div>	
 	<?php endif;?> 
+<?php endif; ?>
 	</div><!-- .post-sidebar -->
 
-<?php get_similar_posts() ?>
+<?php ug_draw_similar_posts($ug_post_type) ?>
 
 </div><!-- .row -->
 
 <?php 
 	do_action('flatsome_after_blog');
-?>
-<?php
-
-function get_similar_posts(){
-
-?>
-<div class="large-12 col">
-    <p class="h2 for-h2 feedback-subheader">Читать еще</p>
-
-    <p class="feedback-subheader-right">
-        <a style="text-decoration: underline;" href="/about/cases/"> Посмотреть все</a></p>
-    <?php
-    if (!isset($include)) {$include='';}
-    $args = array(
-        'order'   => 'DESC',
-        'orderby' => 'date',
-        'exclude' => '',
-        'include' => $include,
-        'numberposts' => 2,
-        'category' => '',
-    );
-
-    $pages = get_posts($args);
-    umbrella_draw_tiles($pages, 'blogposts');
-    ?>
-</div>
-<?php
-}
 ?>
