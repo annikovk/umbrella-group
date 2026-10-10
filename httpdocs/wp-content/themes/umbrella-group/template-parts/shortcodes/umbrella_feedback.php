@@ -46,12 +46,13 @@ class umbrella_feedback
         } else {
             $tag = get_term_by('slug', $shown_category, 'client_category');
         }
+        // Блока нет на страницах из «Клиенты → Шорткод» (excluded_pages) и вне
+        // A/B-варианта из атрибута ab_test. Раньше — strlen((string) массив):
+        // «Array to string conversion» на каждой странице, результат тот же.
         $wp_client_options = get_option('client_shortcode_options');
-        if ($wp_client_options !== null &&
-            strlen((string)$wp_client_options) > 0 &&
-            in_array(get_the_ID(), $wp_client_options['excluded_pages']) ||
-            isset($this->atts['ab_test']) &&
-            !in_array($this->atts['ab_test'], umbrella_get_ab_test_tags())
+        $excluded_pages = is_array($wp_client_options) ? (array) ($wp_client_options['excluded_pages'] ?? []) : [];
+        if (in_array(get_the_ID(), $excluded_pages) ||
+            (isset($this->atts['ab_test']) && !in_array($this->atts['ab_test'], umbrella_get_ab_test_tags()))
         ) {
             return "";
         }
@@ -111,23 +112,26 @@ class umbrella_feedback
         return $html;
     }
 
+    /**
+     * Раздел услуг для категории клиентов — по предкам страницы
+     * (ug_current_service_section), а не по подстроке REQUEST_URI; сверено по
+     * всем 430 опубликованным записям публичных типов: совпадает 1:1
+     * (licensing-maket1, макет 28975, — как licensing).
+     */
     private function get_category()
     {
         $atts = $this->atts;
         if (!empty($atts['category'])) {
             return $atts['category'];
-        } else if (strpos($_SERVER['REQUEST_URI'], "services/licensing") !== false) {
-            return "licensing";
-        } else if (strpos($_SERVER['REQUEST_URI'], "services/audit/") !== false) {
-            return "audit";
-        } else if (strpos($_SERVER['REQUEST_URI'], "services/bukhgalterskie-uslugi/") !== false) {
-            return "bukhgalterskie-uslugi";
-        } else if (strpos($_SERVER['REQUEST_URI'], "services/register-elimination") !== false) {
-            return "register-elimination";
-        } else if (strpos($_SERVER['REQUEST_URI'], "services/services-le") !== false) {
-            return "services-le";
         }
-        return "";
+        return [
+            'licensing'             => 'licensing',
+            'licensing-maket1'      => 'licensing',
+            'audit'                 => 'audit',
+            'bukhgalterskie-uslugi' => 'bukhgalterskie-uslugi',
+            'register-elimination'  => 'register-elimination',
+            'services-le'           => 'services-le',
+        ][ug_current_service_section() ?? ''] ?? '';
     }
 }
 
@@ -142,7 +146,3 @@ function umbrella_feedback_block_shortcode($atts)
 }
 
 add_shortcode('umbrella_feedback', 'umbrella_feedback_block_shortcode');
-
-
-
-
