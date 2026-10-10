@@ -1,3 +1,4 @@
+(function () {
 const cards = document.querySelectorAll('.card');
 const dots = document.querySelectorAll('.dot');
 const currentSlide = document.getElementById('current-slide');
@@ -111,3 +112,4 @@ function mappingSlidAndDot(index) {
     }
 }
 Fancybox.bind("[data-fancybox]", {});
+})();

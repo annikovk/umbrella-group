@@ -15,30 +15,32 @@ jQuery('#tabs-nav li').click(function(){
 
 jQuery('a.item_directions').click(function () {
     jQuery('#tabs-nav li a[href=' + jQuery(this).attr('href') + ']').click();
-})
-var swiper = new Swiper(".step_slider_busnisse", {
-    slidesPerView: "auto",
-    spaceBetween: 40,
-    allowTouchMove: true,
-    autoHeight: false,
-    breakpoints: {
-        300: {
-            autoHeight: true,
-        },
-        768: {
-            autoHeight: false,
-        },
-
-    },
-    pagination: {
-        el: ".swiper-pagination",
-        clickable: false,
-    },
-    navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-    },
 });
+(function () {
+    new Swiper(".step_slider_busnisse", {
+        slidesPerView: "auto",
+        spaceBetween: 40,
+        allowTouchMove: true,
+        autoHeight: false,
+        breakpoints: {
+            300: {
+                autoHeight: true,
+            },
+            768: {
+                autoHeight: false,
+            },
+
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: false,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+})();
 
 jQuery(document).ready(function(){
   jQuery('.btn_modal_step').on('click', function(event){

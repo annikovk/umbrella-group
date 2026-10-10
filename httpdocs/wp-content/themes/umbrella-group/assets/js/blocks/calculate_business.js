@@ -1,3 +1,4 @@
+(function () {
 jQuery(document).on('click', '.dynamic_tariff_sub_menu li', function(){
   jQuery('.dynamic_tariff_sub_menu li').removeClass('active');
     jQuery('.dynamic_tariff_menu li').removeClass('current-menu-parent');
@@ -112,7 +113,6 @@ jQuery('ul.dynamic_tariff_menu>li>a').hover(function () {
     }
 
     jQuery('div#calc_form .leave-request-contact-form-sub-header .title_sfera').text(text_new);
-    console.log(text_new);
 });
 
 jQuery('.dynamic_tariff_sub_menu li').click(function () {
@@ -126,14 +126,4 @@ jQuery('.dynamic_tariff_sub_menu li').click(function () {
 jQuery('ul.dynamic_tariff_menu>li>a').click(function (event) {
     event.preventDefault();
 });
-
-
-// jQuery('ul.dynamic_tariff_sub_menu li').click(function(){
-//    var dataatr = jQuery(this).data('tab');
-//    var $div = jQuery("#"+dataatr+""); 
-//    console.log($div);
-//     var height = $div.height();
-//  jQuery( '.tariff_col_three' ).height(0);
-//     jQuery( '.tariff_col_three' ).height(height);
-// });
-
+})();

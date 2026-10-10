@@ -1,4 +1,5 @@
-var swiper = new Swiper(".swiper-result", {
+(function () {
+new Swiper(".swiper-result", {
   direction: "horizontal",
         slidesPerView: "2.26",
         spaceBetween: 40,
@@ -12,7 +13,6 @@ var swiper = new Swiper(".swiper-result", {
       spaceBetween: 40,
     }
   },
-  // effect: "slide",
   mousewheel: {
     eventsTarged: ".swiper-slide",
     forceToAxis:true,
@@ -27,3 +27,4 @@ var swiper = new Swiper(".swiper-result", {
     draggable: true
   },
 });
+})();

@@ -14,7 +14,6 @@ jQuery('.btn_modal_screen_one').on('click', function (event) {
     jQuery('html').css('overflow', 'hidden');
     event.preventDefault();
     jQuery('#' + jQuery(this).data('modal')).css('display', 'block');
-    console.log('wqewe');
 })
 
 

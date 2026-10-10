@@ -1,4 +1,4 @@
-  var swiper4 = new Swiper(".case_business_slider", {
+  new Swiper(".case_business_slider", {
     slidesPerView: "auto",
     spaceBetween: 40,
     pagination: {
@@ -15,7 +15,6 @@
     jQuery('html').css('overflow', 'hidden');
     event.preventDefault();
     jQuery('#'+jQuery(this).data('modal')).css('display','block');
-    console.log('wqewe');
   })
 
 
