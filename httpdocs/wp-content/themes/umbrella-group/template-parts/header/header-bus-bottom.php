@@ -1,52 +1,11 @@
 <?php if(flatsome_has_bottom_bar()['large_or_mobile']) {
 ?>
-<style>
-#umbrella-menu-button>a {
-    font-size: 14px;
-    color: #fff;
-    padding-top: 9px;
-    height: 100%;
-    width: 100%;
-    position: relative;
-    display: inline-block;
-}
-#umbrella-menu-button{
-    cursor:pointer;
-    position: absolute;
-    width: 150px;
-    height: 40px;
-    background-color: #b2b2b2;
-    margin: 0;
-    right: 0;
-    top: -20px;
-    text-align: center;
-    font-weight: normal;
-
-background-image: linear-gradient(#ec1d23, #ec1d23);
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    background-size: 0% 100%;
-    transition: background-size .2s, color .2s;
-}
-#umbrella-menu-button:hover{
-background-size: 100% 100%;
-}
-div#umbrella-menu-button-open-bus a {
-    color: #fff;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 27px;
-}
-div#umbrella-menu-button-open-bus {
-    background: #EC1C23;
-    padding: 8px 18px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    max-width: 222px;
-
-}
-</style>
+<?php
+// CSS нижней полосы шапки business — <link> на прежнем месте инлайн-<style>
+// (каскад тот же: после custom-css Flatsome и ug-main в <head>).
+wp_register_style('ug-header-business', get_theme_file_uri('assets/css/header-business.css'), [], ug_asset_ver('assets/css/header-business.css'));
+wp_print_styles('ug-header-business');
+?>
 <div id="wide-nav" class="header-bottom wide-nav <?php header_inner_class('bottom'); ?>">
     <div class="flex-row container">
 
@@ -69,27 +28,7 @@ div#umbrella-menu-button-open-bus {
             <?php if(get_theme_mod('header_elements_bottom_right') || get_theme_mod('header_elements_bottom_left')){ ?>
             <div class="flex-col hide-for-medium flex-right flex-grow">
               <ul class="nav header-nav header-bottom-nav nav-right <?php flatsome_nav_classes('bottom'); ?>">
-                  <li class="html custom html_nav_position_text_top"><div class="akcii-menu"> <a href="/akcii/">Акции</a> </div>
-
-
-
-                      <style>
-                          .akcii-menu {
-
-                              padding: 10px 20px;
-                              display: flex;
-                              align-items: center;
-                              text-align: center;
-                              max-width: 220px;
-
-                          }
-                          .akcii-menu a {
-                              color: #fd4d53;
-                              font-weight: 700;
-                              font-size: 14px;
-                              line-height: 20px;
-                          }
-                      </style></li>
+                  <li class="html custom html_nav_position_text_top"><div class="akcii-menu"> <a href="/akcii/">Акции</a> </div></li>
                                <div id="umbrella-menu-button-open-bus">
                                 <a href="#header-contact-form-lightbox" >Расчёт открытия  бизнеса</div></a>
 
