@@ -9,8 +9,7 @@
  * Клик «Принимаю» — js/script.js.
  *
  * Подключается последним в inc/bootstrap.php: output_cookie_notice на
- * wp_footer:10 идёт после umbrella_upsell_template и umbrella_filter_ab_tests
- * того же приоритета.
+ * wp_footer:10 идёт после umbrella_upsell_template того же приоритета.
  */
 
 declare(strict_types=1);

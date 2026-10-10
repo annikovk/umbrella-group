@@ -13,7 +13,7 @@ class umbrella_footer
         $img = esc_url(get_theme_file_uri('assets/img')) . '/';
         $html = <<<EOHTML
             [section label="Feedback" padding="0px"]
-                [umbrella_feedback ab_test="umbrella_ab_test9_variant2"]
+                [umbrella_feedback]
             [/section]
             $why_choose_us
             [section label="contact-us" padding="0px" class="footer-top-section"]

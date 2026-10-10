@@ -8,11 +8,11 @@
  *  - tiles.php — до шаблонов и шорткодов: в одном файле функции были видны
  *    с первой строки (PHP поднимает объявления);
  *  - cookie-notice.php — последним: output_cookie_notice на wp_footer:10
- *    выводится после umbrella_upsell_template и umbrella_filter_ab_tests.
+ *    выводится после umbrella_upsell_template.
  *
  * Владельцы файлов по пакетам спеки 1 (§5): helpers — WS-4; cf7, attribution,
  * cookie-notice, legacy-stubs — WS-1; setup, assets — WS-2;
- * post-types, shortcodes, tiles — WS-6; acf — WS-5; ab-tests — WS-7; layout — WS-3.
+ * post-types, shortcodes, tiles — WS-6; acf — WS-5; layout — WS-3.
  * Новый файл inc/ добавляется строкой сюда тем пакетом, который его создаёт.
  */
 
@@ -29,5 +29,4 @@ require __DIR__ . '/layout.php';
 require __DIR__ . '/tiles.php';
 require __DIR__ . '/post-types.php';
 require __DIR__ . '/shortcodes.php';
-require __DIR__ . '/ab-tests.php';
 require __DIR__ . '/cookie-notice.php';

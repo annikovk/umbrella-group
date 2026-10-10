@@ -6,7 +6,6 @@
     list-style: none;
 }
 
-/** <umbrella_ab_test6_variant2>*/
 .price-navigation li.active a {
     border-bottom: 3px solid red;
     font-weight: bold;
@@ -33,8 +32,6 @@
     min-width: unset;
 }
 
-/**</umbrella_ab_test6_variant2>*/
-
 .price-navigation a:active {
     border-bottom: 2px solid red;
 }
@@ -47,8 +44,7 @@
 .price-navigation li > a {
     font-size: 18px;
     font-weight: 300;
-    /**<umbrella_ab_test6_variant2>*/
-    color: #1a1a1a; /**</umbrella_ab_test6_variant2>*/
+    color: #1a1a1a;
 }
 
 .price-navigation {

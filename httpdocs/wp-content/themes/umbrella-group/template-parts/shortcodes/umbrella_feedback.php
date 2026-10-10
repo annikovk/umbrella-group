@@ -46,14 +46,13 @@ class umbrella_feedback
         } else {
             $tag = get_term_by('slug', $shown_category, 'client_category');
         }
-        // Блока нет на страницах из «Клиенты → Шорткод» (excluded_pages) и вне
-        // A/B-варианта из атрибута ab_test. Раньше — strlen((string) массив):
-        // «Array to string conversion» на каждой странице, результат тот же.
+        // Блока нет на страницах из «Клиенты → Шорткод» (excluded_pages).
+        // Раньше — strlen((string) массив): «Array to string conversion» на
+        // каждой странице, результат тот же. Атрибут ab_test (A/B-вариант,
+        // единственный вызов — подвал с выбранным test9_variant2) снят в WS-7.
         $wp_client_options = get_option('client_shortcode_options');
         $excluded_pages = is_array($wp_client_options) ? (array) ($wp_client_options['excluded_pages'] ?? []) : [];
-        if (in_array(get_the_ID(), $excluded_pages) ||
-            (isset($this->atts['ab_test']) && !in_array($this->atts['ab_test'], umbrella_get_ab_test_tags()))
-        ) {
+        if (in_array(get_the_ID(), $excluded_pages)) {
             return "";
         }
         if (!empty($tag)) {
