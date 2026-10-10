@@ -29,6 +29,11 @@ EOHTML;
     return;
 }
 
+// Max — lossless webp тех же пикселей, что uploads/max-icon.png (1080 px,
+// 395 → 179 КБ): SVG-перерисовка (assets/img/max.svg) на 32 px отличается
+// сглаживанием — видно на снимках.
+$img = esc_url(get_theme_file_uri('assets/img')) . '/';
+
 echo <<<EOHTML
         <div class="header-ratings-icons">
                 <div class="header-ratings-icon-box hide-for-medium">
@@ -36,12 +41,12 @@ echo <<<EOHTML
                     <div class="header-ratings-header" style="width: 316px;">1 место в отрасли «Корпоративное право» <span style="font-weight: 500;">рейтинг «Делового квартала», Новосибирск, 2025</span></div>
                 </div>
                 <div class="header-ratings-icon-box whatsapp-box">
-                    <a href="https://max.ru/u/f9LHodD0cOJIOXNE7YL84YaWLr0Fmn7wgpMChu5575DDdYM9wCgFx0Dmzuw" class="header-ratings-icon" style="background-image: url(/wp-content/uploads/max-icon.png);border-radius:0;  width: 32px;"> </a>
+                    <a href="https://max.ru/u/f9LHodD0cOJIOXNE7YL84YaWLr0Fmn7wgpMChu5575DDdYM9wCgFx0Dmzuw" class="header-ratings-icon" style="background-image: url({$img}max-icon.webp);border-radius:0;  width: 32px;"> </a>
 
                     <a href="https://max.ru/u/f9LHodD0cOJIOXNE7YL84YaWLr0Fmn7wgpMChu5575DDdYM9wCgFx0Dmzuw" class="header-social-text"><b>{$whatsAppText}</b></a>
                 </div>
                 <div class="header-ratings-icon-box whatsapp-box">
-                    <a href="https://t.me/umbrella_club_nsk" class="header-ratings-icon" style="background-image: url(/wp-content/themes/umbrella-group/assets/img/tg-img.png);border-radius:0;  width: 28px;"> </a>
+                    <a href="https://t.me/umbrella_club_nsk" class="header-ratings-icon" style="background-image: url({$img}tg-img.png);border-radius:0;  width: 28px;"> </a>
 
                     <a href="https://t.me/umbrella_club_nsk" class="header-social-text"><b>{$whatsAppText}</b></a>
                 </div>
