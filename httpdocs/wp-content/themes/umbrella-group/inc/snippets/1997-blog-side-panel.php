@@ -6,6 +6,8 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 function ug_snippet_blog_side_panel(array $a): void
 {
     require get_theme_file_path() . '/includes/blog-side-panel.php';

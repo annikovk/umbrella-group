@@ -7,6 +7,8 @@
  * Владелец дальнейших правок — WS-2 (отключение block-library, emoji и т.п.).
  */
 
+defined('ABSPATH') || exit;
+
 add_filter('use_block_editor_for_post', '__return_false', 10);
 remove_filter('get_the_excerpt', 'wp_trim_excerpt');
 // Add custom Theme Functions here

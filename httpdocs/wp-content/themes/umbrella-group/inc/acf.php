@@ -15,6 +15,8 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 /** Определения полей групп — в хранилище ACF: get_field('ключ') дальше без SQL. */
 function ug_acf_prime_fields(string ...$groups): void
 {

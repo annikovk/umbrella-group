@@ -6,6 +6,8 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 function ug_snippet_menu(array $a): void
 {
     // Без name сниппет падал в warning на неопределённой $name — меню ядро

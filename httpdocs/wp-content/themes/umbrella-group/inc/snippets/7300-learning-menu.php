@@ -6,6 +6,8 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 function ug_snippet_learning_menu(array $a): void
 {
     global $post;

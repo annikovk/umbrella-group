@@ -22,6 +22,8 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 /**
  * Атрибуты шорткода — как их видел код сниппета после filterAttributes().
  *

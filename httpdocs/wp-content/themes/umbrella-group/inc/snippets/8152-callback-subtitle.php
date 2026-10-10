@@ -6,6 +6,8 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 function ug_snippet_callback_subtitle(array $a): void
 {
     $uri = (string) ($_SERVER['REQUEST_URI'] ?? '');

@@ -6,6 +6,8 @@
  * Владелец списка — WS-6; пакеты WS-4/WS-5 правят сами файлы шорткодов.
  */
 
+defined('ABSPATH') || exit;
+
 require get_theme_file_path() . '/includes/draw_header_with_breadcrumbs.php';
 require get_theme_file_path() . '/template-parts/shortcodes/akcii.php';
 require get_theme_file_path() . '/template-parts/shortcodes/su_welcome_screen.php';

@@ -16,6 +16,8 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 /**
  * Реестр CPT: тип => аргументы register_post_type(). Порядок = порядок регистрации.
  */

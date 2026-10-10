@@ -6,6 +6,8 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 function ug_snippet_client_tiles(array $a): void
 {
     $args = array(

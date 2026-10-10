@@ -6,6 +6,8 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 function ug_snippet_title_breadcrumbs(array $a): void
 {
     echo umbrella_draw_header_with_breadcrumbs();

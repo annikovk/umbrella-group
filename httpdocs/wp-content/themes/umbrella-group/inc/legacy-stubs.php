@@ -11,5 +11,7 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 add_shortcode('webinar_registration_form', '__return_empty_string');
 add_shortcode('webinar_participants_table', '__return_empty_string');

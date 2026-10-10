@@ -7,6 +7,8 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 function ug_snippet_blog_tiles(array $a): void
 {
     $include = empty($a['include']) ? '' : $a['include'];

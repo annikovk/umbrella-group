@@ -14,6 +14,8 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 function ug_snippet_service_tiles(array $a): void
 {
     $parent_id = $a['parent_id'] ?? null;

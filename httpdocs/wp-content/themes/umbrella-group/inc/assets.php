@@ -33,6 +33,8 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 /** Версия ассета — mtime файла: меняется файл, меняется ?ver=, кэш браузера сбрасывается. */
 function ug_asset_ver(string $rel): string
 {

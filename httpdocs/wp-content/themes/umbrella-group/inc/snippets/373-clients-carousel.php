@@ -7,6 +7,8 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 function ug_snippet_clients_carousel(array $a): void
 {
     $tag = get_term_by('slug', 'show-on-main', 'client_tags');

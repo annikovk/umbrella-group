@@ -7,6 +7,8 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 function ug_snippet_child_pages(array $a): void
 {
     $parent = 10;

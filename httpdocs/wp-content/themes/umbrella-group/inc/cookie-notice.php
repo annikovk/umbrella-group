@@ -14,6 +14,8 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 add_action('wp_enqueue_scripts', static function (): void {
     $rel = 'assets/css/cookie-notice.css';
     wp_enqueue_style(

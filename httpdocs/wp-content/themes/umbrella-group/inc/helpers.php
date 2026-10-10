@@ -16,6 +16,8 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 const UG_RU_MONTHS_GENITIVE = [
     'January' => 'января', 'February' => 'февраля', 'March' => 'марта', 'April' => 'апреля',
     'May' => 'мая', 'June' => 'июня', 'July' => 'июля', 'August' => 'августа',

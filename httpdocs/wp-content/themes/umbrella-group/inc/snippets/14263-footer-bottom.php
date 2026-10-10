@@ -12,6 +12,8 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 function ug_snippet_footer_bottom(array $a): void
 {
     ?><div class="absolute-footer <?php echo flatsome_option('footer_bottom_text'); ?> medium-text-center ">

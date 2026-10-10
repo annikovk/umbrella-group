@@ -8,6 +8,8 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 function ug_snippet_download_program(array $a): void
 {
     echo "<a target='_self' download class='button primary is-outline' onclick='roistat.event.send('pam');'' rel='noopener' href='" . esc_url($a['href'] ?? '') . "'><span>Скачать программу</span></a>";

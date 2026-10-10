@@ -10,6 +10,8 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 // Ключи reCAPTCHA — в настройках CF7 (wp-admin → Contact → Integration).
 add_filter('wpcf7_recaptcha_threshold', static fn($threshold) => 0.7, 10, 1);
 

@@ -10,6 +10,8 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 /**
  * @param string[] $service_urls
  */

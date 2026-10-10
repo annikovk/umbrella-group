@@ -15,6 +15,8 @@
  *  - копии массива месяцев → ug_ru_date() из inc/helpers.php.
  */
 
+defined('ABSPATH') || exit;
+
 /**
  * <link> на CSS плиток прямо в месте вывода (один раз за запрос).
  * $name — файл assets/css/blocks/<name>.css, хэндл ug-blocks-<name>.

@@ -12,6 +12,8 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 function ug_snippet_rating_badge(array $a): void
 {
     global $post;

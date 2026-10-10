@@ -7,6 +7,8 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 function ug_snippet_service_tiles_tax(array $a): void
 {
     ug_snippet_service_tiles_by_url(array(

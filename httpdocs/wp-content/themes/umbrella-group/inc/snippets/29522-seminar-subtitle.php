@@ -6,6 +6,8 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 function ug_snippet_seminar_subtitle(array $a): void
 {
     if (strpos((string) ($_SERVER['REQUEST_URI'] ?? ''), "blog/nalogovaya-perestroyka-seminar-2026/") !== false) {

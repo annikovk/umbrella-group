@@ -18,6 +18,8 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 require __DIR__ . '/helpers.php';
 require __DIR__ . '/acf.php';
 require __DIR__ . '/cf7.php';

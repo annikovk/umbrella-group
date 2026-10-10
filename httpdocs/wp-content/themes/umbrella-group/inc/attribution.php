@@ -21,6 +21,8 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 const UG_ATTRIBUTION_FIELDS = ['omatraffic', 'omacid'];
 
 add_action('wp_enqueue_scripts', static function (): void {

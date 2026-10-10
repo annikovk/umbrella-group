@@ -20,6 +20,8 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 function ug_header_variant(): string
 {
     return get_query_var('ug_header_variant') === 'business' ? 'business' : 'default';

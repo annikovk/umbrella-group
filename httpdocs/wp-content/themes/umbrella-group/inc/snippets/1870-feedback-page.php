@@ -8,6 +8,8 @@
 
 declare(strict_types=1);
 
+defined('ABSPATH') || exit;
+
 function ug_snippet_feedback_page(array $a): void
 {
     require get_theme_file_path() . '/includes/pages/feedback-page.php';
