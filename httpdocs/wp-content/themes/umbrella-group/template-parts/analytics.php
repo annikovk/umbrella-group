@@ -96,8 +96,10 @@ if ($ug_variant === 'business') : ?>
 <?php
 /*
  * Marquiz: какой квиз на какой странице — 1:1 с прежними восемью ветками
- * header.php. Сравнение адреса — как было: точное совпадение REQUEST_URI
- * (с query string), потом подстроки register-elimination и licensing.
+ * header.php. Сравнение адреса — как было: побайтовое совпадение REQUEST_URI
+ * (с query string; кириллица — %-кодами в верхнем регистре, как у rawurlencode:
+ * ссылки WordPress с %d0%… в нижнем регистре сюда не попадали и не попадают),
+ * потом подстроки register-elimination и licensing.
  */
 $ug_quiz_default = [
     'host'           => 'https://quiz.marquiz.ru',
@@ -117,10 +119,10 @@ $ug_quiz_pop = [
     'blicked'  => true,
 ];
 $ug_quizzes = [
-    '/blog/приглашаем-на-бесплатный-вебинар-за/'     => ['init' => $ug_quiz_602],
-    '/blog/банкротство-некоммерческих-организа/'     => ['init' => $ug_quiz_602],
-    '/blog/ликвидация-общественного-объединени/'     => ['init' => $ug_quiz_602],
-    '/blog/принудительная-ликвидация-индивидуа/'     => ['init' => $ug_quiz_602],
+    '/blog/' . rawurlencode('приглашаем-на-бесплатный-вебинар-за') . '/' => ['init' => $ug_quiz_602],
+    '/blog/' . rawurlencode('банкротство-некоммерческих-организа') . '/' => ['init' => $ug_quiz_602],
+    '/blog/' . rawurlencode('ликвидация-общественного-объединени') . '/' => ['init' => $ug_quiz_602],
+    '/blog/' . rawurlencode('принудительная-ликвидация-индивидуа') . '/' => ['init' => $ug_quiz_602],
     '/services/services-le/' => [
         'init' => array_merge($ug_quiz_default, ['autoOpen' => 30, 'disableOnMobile' => true]),
         'pop'  => [
@@ -154,7 +156,7 @@ $ug_quizzes = [
 ];
 
 $ug_uri  = (string) ($_SERVER['REQUEST_URI'] ?? '');
-$ug_quiz = $ug_quizzes[rawurldecode($ug_uri)] ?? null;
+$ug_quiz = $ug_quizzes[$ug_uri] ?? null;
 if ($ug_quiz === null) {
     if (str_contains($ug_uri, 'register-elimination')) {
         // Как было: загрузчик стартует по DOMContentLoaded.
