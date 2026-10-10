@@ -29,9 +29,12 @@ EOHTML;
     return;
 }
 
-// Max — lossless webp тех же пикселей, что uploads/max-icon.png (1080 px,
-// 395 → 179 КБ): SVG-перерисовка (assets/img/max.svg) на 32 px отличается
-// сглаживанием — видно на снимках.
+// Max — uploads/max-icon.png (1080 px, 395 КБ), уменьшенный до 270 px (28 КБ)
+// так же, как Chrome строит мип-уровни при уменьшении: два прохода бокс-фильтра
+// 2×2 по premultiplied RGBA с отбрасыванием остатка, lossless webp. Иконка на
+// экране — 28–96 физ. px, и браузер берёт для неё те же уровни 135/67/33,
+// что строил из 1080 px, поэтому кадр совпадает попиксельно (PIL-ресемплы
+// BOX/LANCZOS и SVG-перерисовка assets/img/max.svg — нет, видно на снимках).
 $img = esc_url(get_theme_file_uri('assets/img')) . '/';
 
 echo <<<EOHTML
