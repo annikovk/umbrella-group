@@ -27,6 +27,9 @@ jQuery(window).scroll(function () {
         lastId = id;
         // Set/remove active class
         menuItems.parent().removeClass("active");
-        jQuery(menuItems).filter(jQuery(`[href=${id}]`)).parent().addClass("active");
+        // Выше первого вопроса id пустой: селектор [href=] бросал исключение jQuery.
+        if (id) {
+            jQuery(menuItems).filter(jQuery(`[href=${id}]`)).parent().addClass("active");
+        }
     }
 });
