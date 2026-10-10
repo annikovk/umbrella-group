@@ -165,10 +165,10 @@ function ug_prime_thumbnails(array $posts): void
 }
 
 /**
- * Иконка flamp для ссылок на отзывы. Пока прежний внешний адрес: переход на
- * локальную assets/img/flamp.svg — видимое изменение (§7.3), отдельным коммитом.
+ * Иконка flamp для ссылок на отзывы — локальная assets/img/flamp.svg: хотлинк
+ * flamp.ru/…/f.svg части клиентов отвечает 403, и карточка отзыва меняет высоту.
  */
 function ug_flamp_icon_url(): string
 {
-    return 'https://flamp.ru/static/assets/brand-logo/svg/f.svg';
+    return get_theme_file_uri('assets/img/flamp.svg');
 }
