@@ -308,7 +308,6 @@ class new_main_first_screen
          [/section]
         EOT;
         ug_enqueue_style('assets/css/blocks/new_main_first_screen.css');
-        ug_enqueue_style('assets/css/blocks/block-laurels.css');
         ug_enqueue_script('assets/js/blocks/main-first-screen-slider.js', ['jquery'], ['in_footer' => true, 'strategy' => 'defer']);
         return $html;
     }

@@ -200,7 +200,6 @@ class why_choose_us
            [/row]
            </noindex>
         EOHTML;
-        ug_enqueue_style('/assets/css/blocks/block-laurels.css');
         return $html;
     }
 
