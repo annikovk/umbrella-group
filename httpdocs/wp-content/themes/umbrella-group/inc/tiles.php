@@ -12,24 +12,8 @@
  *    button.accordion, .feedback-excerpt …), и на страницах, где был только один
  *    из них, общий файл поменял бы вёрстку;
  *  - ветка 'cases' удалена — вызывающие передают только blogposts/clients/feedback;
- *  - копии массива месяцев → ug_ru_date().
+ *  - копии массива месяцев → ug_ru_date() из inc/helpers.php.
  */
-
-if (!function_exists('ug_ru_date')) {
-    /**
-     * date() с русскими месяцами в родительном падеже («5 марта»).
-     *
-     * $date — строка даты из БД (post_date). Как и старый код, разбирает и
-     * форматирует её в часовом поясе PHP (WP ставит UTC), то есть без сдвига:
-     * wp_date() здесь сдвинул бы дату на пояс сайта.
-     */
-    function ug_ru_date(string $format, string $date): string
-    {
-        static $en = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        static $ru = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
-        return str_replace($en, $ru, date($format, strtotime($date)));
-    }
-}
 
 /**
  * <link> на CSS плиток прямо в месте вывода (один раз за запрос).
