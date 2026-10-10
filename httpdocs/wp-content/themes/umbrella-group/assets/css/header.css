@@ -1,0 +1,37 @@
+/*
+ * ug-header — бывший инлайн-<style> header.php (до wp_head, раньше всех <link>).
+ * Подключается первым в очереди стилей (inc/layout.php), у шапки business
+ * (page-bussnise.php) его не было и нет.
+ */
+ul.tabs {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 8px;
+    flex-direction: row;
+    padding-top: 40px;
+    margin-bottom: unset;
+}
+@media screen and (max-width: 849px) {
+    .first-screen-services-tabs {
+        background-color: #F9F9F9;
+        display: grid;
+    }
+    h1 {
+        font-size: 34px !important;
+        line-height: 1.25 !important;
+    }
+    .main-banner-content {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        width: 100%;
+        font-size: 14px;
+    }
+    ul.tabs {
+        flex-wrap: unset;
+    }
+    .first-screen-services-tabs ul.tabs {
+        padding-top: unset;
+    }
+}

@@ -1,5 +1,5 @@
+<?php $ug_variant = $args['variant'] ?? 'default'; ?>
 <div id="masthead" class="header-main <?php header_inner_class('main'); ?>">
-
       <div class="header-inner flex-row container <?php flatsome_logo_position(); ?>" role="navigation">
 
           <!-- Logo -->
@@ -18,7 +18,11 @@
           <div class="flex-col flex-left
             <?php if(get_theme_mod('logo_position', 'left') == 'left') echo 'flex-grow'; ?>">
             <ul class="header-nav header-nav-main nav nav-left <?php flatsome_nav_classes('main'); ?>" >
-              <?php flatsome_header_elements('header_elements_left'); ?>
+              <?php if ($ug_variant === 'business') {
+                  get_template_part('template-parts/header/partials/element', 'ratings', ['variant' => 'business']);
+              } else {
+                  flatsome_header_elements('header_elements_left');
+              } ?>
             </ul>
           </div>
 

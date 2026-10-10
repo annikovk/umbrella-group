@@ -2,32 +2,28 @@
 /**
  * The template for displaying all pages.
  *
+ * Шаблон page-bussnise.php (страница 14148) — этот же файл с шапкой business.
+ *
  * @package flatsome
  */
 
+if (flatsome_option('pages_template') != 'default') {
+    // Get default template from theme options.
+    get_template_part('page', flatsome_option('pages_template'));
+    return;
+}
 
-if(flatsome_option('pages_template') != 'default') {
-	// Get default template from theme options.
-	get_template_part('page', flatsome_option('pages_template'));
-	return;
-} else {
-    get_header();
-    do_action('flatsome_before_page'); ?>
+get_header();
+do_action('flatsome_before_page'); ?>
     <div id="content" class="content-area page-wrapper" role="main">
         <?php
-        global $post;     // if outside the loop
-        $page_id  = get_queried_object_id(); // Get current page id
-        $page =  get_queried_object();
-        $parentID = $page->post_parent; // Get current page parent id
-        $args = array(
-            'include' => $parentID,
-            'post_type' => 'page',
-            'post_status' => 'publish'
-        );
-        $parentParentPages = get_pages($args);
-        $parentParentPagesID = $parentParentPages[0]->post_parent;
+        // Без шапки с хлебными крошками — разделы услуг (26, 28, 30, 32, 34,
+        // 12792) на первых двух уровнях вложенности и главная.
+        $ug_sections = [26, 28, 32, 30, 34, 12792];
+        $ug_parent   = (int) get_queried_object()->post_parent;
+        $ug_grand    = $ug_parent ? (int) get_post_field('post_parent', $ug_parent) : 0;
 
-        if (!in_array($parentID, array(26, 28, 32, 30, 34, 12792)) && !in_array($parentParentPagesID, array(26, 28, 32, 30, 34, 12792)) && (!is_front_page() || is_paged())) {
+        if (!in_array($ug_parent, $ug_sections, true) && !in_array($ug_grand, $ug_sections, true) && (!is_front_page() || is_paged())) {
             echo umbrella_draw_header_with_breadcrumbs();
         } ?>
 
@@ -44,10 +40,6 @@ if(flatsome_option('pages_template') != 'default') {
         <?php endwhile; // end of the loop. ?>
     </div>
 
-    <?php
-    do_action('flatsome_after_page');
-    get_footer();
-
-}
-
-?>
+<?php
+do_action('flatsome_after_page');
+get_footer();
