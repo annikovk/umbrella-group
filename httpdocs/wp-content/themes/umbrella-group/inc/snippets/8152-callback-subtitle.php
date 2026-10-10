@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 function ug_snippet_callback_subtitle(array $a): void
 {
-    $uri = $_SERVER['REQUEST_URI'];
+    $uri = (string) ($_SERVER['REQUEST_URI'] ?? '');
     if (strpos($uri, "services/audit") !== false) {
         echo "Наш аудитор позвонит Вам в ближайшее время и проконсультирует! Режим работы: с 09:00 до 18:00 по Новосибирску.";
     } else if (strpos($uri, "services/bukhgalterskie-uslugi/") !== false) {

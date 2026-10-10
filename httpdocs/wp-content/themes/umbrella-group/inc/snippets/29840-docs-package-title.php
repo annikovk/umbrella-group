@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 function ug_snippet_docs_package_title(array $a): void
 {
-    if (strpos($_SERVER['REQUEST_URI'], "paket-dokumentov-dlya-medicinskoj-organizacii") !== false) {
+    if (strpos((string) ($_SERVER['REQUEST_URI'] ?? ''), "paket-dokumentov-dlya-medicinskoj-organizacii") !== false) {
         echo "Заказать пакет";
     } else {
         echo "Расчёт стоимости услуги";

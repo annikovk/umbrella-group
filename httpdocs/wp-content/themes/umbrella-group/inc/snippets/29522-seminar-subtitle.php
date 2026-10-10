@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 function ug_snippet_seminar_subtitle(array $a): void
 {
-    if (strpos($_SERVER['REQUEST_URI'], "blog/nalogovaya-perestroyka-seminar-2026/") !== false) {
+    if (strpos((string) ($_SERVER['REQUEST_URI'] ?? ''), "blog/nalogovaya-perestroyka-seminar-2026/") !== false) {
         echo "Дата семинара: 10 апреля 2026 г.";
     } else {
         echo "НДС 22% и новая налоговая реальность: инструкция по выживанию для бизнеса! Семинар для владельцев бизнеса, бухгалтеров, финансовых директоров и руководителей. 21 ноября 2025 г. с 09:30 до 15:00";

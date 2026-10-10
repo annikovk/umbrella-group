@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 function ug_snippet_footer_form_title(array $a): void
 {
-    $uri = $_SERVER['REQUEST_URI'];
+    $uri = (string) ($_SERVER['REQUEST_URI'] ?? '');
     $subheader = '<p class="footer-h2">';
     $p_end = "</p>";
     if (strpos($uri, "/services/audit/konsultatsiya") !== false) {

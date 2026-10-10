@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 function ug_snippet_seminar_title(array $a): void
 {
-    if (strpos($_SERVER['REQUEST_URI'], "blog/nalogovaya-perestroyka-seminar-2026/") !== false) {
+    if (strpos((string) ($_SERVER['REQUEST_URI'] ?? ''), "blog/nalogovaya-perestroyka-seminar-2026/") !== false) {
         echo "Налоговая перестройка: сохраняем бизнес, команду и прибыль";
     } else {
         echo "Регистрация на семинар";

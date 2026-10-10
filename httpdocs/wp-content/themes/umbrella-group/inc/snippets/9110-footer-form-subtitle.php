@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 function ug_snippet_footer_form_subtitle(array $a): void
 {
-    $uri = $_SERVER['REQUEST_URI'];
+    $uri = (string) ($_SERVER['REQUEST_URI'] ?? '');
     $subheader = '<div class="footer-form-subheader">';
     $div_end = "</div>";
     $text = "Мы позвоним Вам в ближайшее время и проконсультируем! Режим работы: с 09:00 до 18:00 по Новосибирску.";

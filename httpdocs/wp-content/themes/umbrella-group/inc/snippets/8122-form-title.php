@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 function ug_snippet_form_title(array $a): void
 {
-    $uri = $_SERVER['REQUEST_URI'];
+    $uri = (string) ($_SERVER['REQUEST_URI'] ?? '');
     $header = get_post_meta(get_the_ID(), 'umbrella_form_title', true);
     if (strpos($uri, "services/register-elimination/uvedomlenie-rkn") !== false) {
         echo "Бесплатная консультация по подаче уведомления в Роскомнадзор";
