@@ -15,10 +15,10 @@ function business_footer_shortcode($atts)
                                 </span></p>
                             [gap height="39px"]<p class="footer-sub-text">1990 - 2025 © Umbrella Group</p>[/col_inner]
                             [col_inner span="2" span__sm="12" visibility="hide-for-medium"]
-                                [wbcr_php_snippet id="701" name="top-bar-menu" class="footer-menu"]
+                                [ug_menu name="top-bar-menu" class="footer-menu"]
                             [/col_inner]
                             [col_inner span="3" span__sm="12" visibility="hide-for-medium"]
-                                [wbcr_php_snippet id="701" name="main-menu" class="footer-menu"]
+                                [ug_menu name="main-menu" class="footer-menu"]
                             [/col_inner]
                             [col_inner span="3" span__sm="10"]
                                 [ux_text class="int-dark-text"]
