@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 function ug_snippet_download_memo(array $a): void
 {
-    echo "<a target='_self' download class='button primary is-outline' onclick='roistat.event.send('pam');'' rel='noopener' href=" . ($a['href'] ?? '') . "><span>Скачать памятку</span></a>";
+    echo "<a target='_self' download class='button primary is-outline' onclick='roistat.event.send('pam');'' rel='noopener' href='" . esc_url($a['href'] ?? '') . "'><span>Скачать памятку</span></a>";
 }
 
 ug_snippet_shortcode('ug_download_memo', 'ug_snippet_download_memo', ['href']);
