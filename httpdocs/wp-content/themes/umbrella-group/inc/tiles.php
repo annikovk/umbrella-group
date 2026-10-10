@@ -142,13 +142,13 @@ function umbrella_draw_tiles($posts, $type)
                 $lightbox = '[lightbox id="' . $block_id . '" width="1200px" padding="0px 60px 60px 20px"] ' . $feedback_tile . $feedback_tile_buttons . ' [/lightbox]';
             } else {
                 //echo "<div class='client-item-block' onclick='window.location=`" . get_post_meta($post->ID, 'umbrella_link_to_client_website', true) . "`;'>";
-                echo "<a class='client-item-block' href='" . get_post_meta($post->ID, 'umbrella_link_to_client_website', true) . "'>";
+                echo "<a class='client-item-block' href='" . esc_url((string) get_post_meta($post->ID, 'umbrella_link_to_client_website', true)) . "'>";
             }
             $thumbnail = get_the_post_thumbnail($post->ID);
             echo '<div  class="client-item-image"><span class="client-item-image-helper"></span>' . $thumbnail . '</div>';
             echo '</a>';
             $title = '<div class="client-item-title">' . $post->post_title . '</div>';
-            $title = $title . '<div class="client-item-industry">' . get_post_meta($post->ID, 'umbrella_client_personal_industry', true) . '</div>';
+            $title = $title . '<div class="client-item-industry">' . esc_html((string) get_post_meta($post->ID, 'umbrella_client_personal_industry', true)) . '</div>';
             echo $title;
             echo '</div>';
             echo '</div>';
