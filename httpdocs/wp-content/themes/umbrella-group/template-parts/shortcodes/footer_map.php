@@ -11,12 +11,12 @@ class footer_map
             <meta itemprop="name" content="Группа компаний «Umbrella Group»">
             <meta itemprop="telephone" content="+73833731717">
             <meta itemprop="email" content="contact@taxlab.ru">
-                <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Ad94c7e4f49b0ec7735c9c04c0c8709989b68443c6f4cb399f58b87b289e084b5&amp;source=constructor" width="100%" height="453" frameborder="0">
+                <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Ad94c7e4f49b0ec7735c9c04c0c8709989b68443c6f4cb399f58b87b289e084b5&amp;source=constructor" width="100%" height="453" frameborder="0" loading="lazy" title="Офисы Umbrella Group на Яндекс Картах">
                 </iframe>
             <div class="contact-info_footer_map card-shadow-common_footer_map" itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
                 <div>
                 <div class="main-text-common">C 09:00 до 18:00 по Новосибирску:</div>
-                <a  class="contact_link" 11 href="tel:+73833731717">+ 7 (383) xx xx xx</a>
+                <a  class="contact_link" href="tel:+73833731717">+ 7 (383) xx xx xx</a>
                 </div>
                 <div>
                 <div class="main-text-common">Круглосуточно по почте:</div>
@@ -25,7 +25,7 @@ class footer_map
                 <div class="main-text-common">
                 <span itemprop="addressLocality">г. Новосибирск </span> ,
                 <ul>
-                <li test1 itemprop="streetAddress">ул. Максима Горького, д. 34</li>
+                <li itemprop="streetAddress">ул. Максима Горького, д. 34</li>
                 <li>площадь Труда, д. 1</li>
                 </ul>
                 </div>
@@ -55,8 +55,7 @@ class footer_map
         } 
         </script>
         EOHTML;
-        umbrella_add_custom_css_files(['/assets/css/blocks/footer_map.css']);
-        umbrella_add_custom_js_files(['/assets/js/blocks/footer_map.js']);
+        ug_enqueue_style('assets/css/blocks/footer_map.css');
         return $html;
     }
 
@@ -70,5 +69,3 @@ function footer_map_shortcode($atts)
 }
 
 add_shortcode('footer_map', 'footer_map_shortcode');
-
-?>
