@@ -11,7 +11,6 @@
     <meta charset="<?php bloginfo('charset'); ?>"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta name="cmsmagazine" content="6436b2df9477c3bdde6dd89690ae98b9"/>
-    <meta name="ip" content="<?php echo $_SERVER["REMOTE_ADDR"] ?>">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="profile" href="http://gmpg.org/xfn/11"/>
     <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>"/>
