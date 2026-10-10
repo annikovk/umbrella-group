@@ -328,6 +328,11 @@ add_shortcode('new_main_first_screen', 'new_main_first_screen_shortcode');
  * Preload картинки первого слайда: шорткод рендерится в body после
  * блокирующих CSS в <head> — без preload браузер узнаёт о LCP-картинке поздно.
  * Браузер берёт из <picture> webp, его и грузим.
+ *
+ * Только на ширине от 850px (граница hide-for-medium Flatsome): там LCP —
+ * эта картинка. На телефоне LCP — текст первого экрана, а картинка 280px
+ * и так грузится тегом <img fetchpriority="high"> из разметки; ранний
+ * preload там только отнимает канал у CSS и шрифтов до первой отрисовки.
  */
 add_action('wp_head', function () {
     if (!is_singular() || !has_shortcode((string) get_post_field('post_content', get_queried_object_id()), 'new_main_first_screen')) {
@@ -339,7 +344,7 @@ add_action('wp_head', function () {
     }
     $webp = !empty($slide['image_webp']);
     printf(
-        '<link rel="preload" as="image" href="%s"%s fetchpriority="high">' . "\n",
+        '<link rel="preload" as="image" href="%s"%s media="(min-width: 850px)" fetchpriority="high">' . "\n",
         esc_url($webp ? $slide['image_webp'] : $slide['image']),
         $webp ? ' type="image/webp"' : ''
     );
