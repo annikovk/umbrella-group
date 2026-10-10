@@ -7,6 +7,10 @@ class umbrella_footer
     public function generate_shortcode()
     {
         $why_choose_us = do_shortcode('[why_choose_us]');
+        // Иконки соцсетей — lossless webp тех же пикселей (было PNG 1024 px из
+        // uploads, 300 КБ на четыре). width/height — пропорции исходника,
+        // высоту задаёт CSS .int-logo (40px), width:auto — ширина по пропорции.
+        $img = esc_url(get_theme_file_uri('assets/img')) . '/';
         $html = <<<EOHTML
             [section label="Feedback" padding="0px"]
                 [umbrella_feedback ab_test="umbrella_ab_test9_variant2"]
@@ -39,7 +43,7 @@ class umbrella_footer
                     [col span__sm="12"]
                         [row_inner width="full-width" h_align="center"]
                             [col_inner span="4" span__sm="10"]
-                            <p><img src="https://taxlab.ru/wp-content/uploads/logo-3.png" alt="Umbrella Group" class="int-logo"></p>
+                            <p><img src="/wp-content/uploads/logo-3.png" width="1168" height="226" style="width:auto" loading="lazy" decoding="async" alt="Umbrella Group" class="int-logo"></p>
                                 [gap height="39px"]
                             <div>
                                 <span itemscope itemtype="http://schema.org/Organization"><br />
@@ -66,16 +70,16 @@ class umbrella_footer
                                     <p><a href="mailto:contact@taxlab.ru" >contact@taxlab.ru </a></p>
                                     <div class="social-icons">
                                         <a href="https://t.me/umbrella_club_nsk" rel="noopener noreferrer nofollow" class="" data-label="Telegram">
-                                            <img src="/wp-content/uploads/telegram_logo.png" alt="Telegram" class="umbrella-follow-icon int-logo">
+                                            <img src="{$img}telegram-logo.webp" width="1024" height="1024" style="width:auto" loading="lazy" decoding="async" alt="Telegram" class="umbrella-follow-icon int-logo">
                                         </a>
                                         <a href="https://vk.com/umbrellagroup_nsk" rel="noopener noreferrer nofollow" class="" data-label="VK">
-                                            <img src="/wp-content/uploads/vk_logo.png" alt="VK" class="umbrella-follow-icon int-logo" class="int-logo">
+                                            <img src="{$img}vk-logo.webp" width="1024" height="1024" style="width:auto" loading="lazy" decoding="async" alt="VK" class="umbrella-follow-icon int-logo">
                                         </a>
                                         <a href="https://api.whatsapp.com/send?phone=79137202634" rel="noopener noreferrer nofollow" class="" data-label="Whatsapp">
-                                            <img src="/wp-content/uploads/whatsapp_logo.png" alt="Whatsapp" class="umbrella-follow-icon int-logo">
+                                            <img src="{$img}whatsapp-logo.webp" width="971" height="983" style="width:auto" loading="lazy" decoding="async" alt="WhatsApp" class="umbrella-follow-icon int-logo">
                                         </a>
-                                         <a 2 href="https://max.ru/u/f9LHodD0cOJIOXNE7YL84YaWLr0Fmn7wgpMChu5575DDdYM9wCgFx0Dmzuw" rel="noopener noreferrer nofollow" class="" data-label="max">
-                                            <img src="/wp-content/themes/umbrella-group/includes/max.png" alt="max" class="umbrella-follow-icon int-logo">
+                                         <a href="https://max.ru/u/f9LHodD0cOJIOXNE7YL84YaWLr0Fmn7wgpMChu5575DDdYM9wCgFx0Dmzuw" rel="noopener noreferrer nofollow" class="" data-label="max">
+                                            <img src="{$img}max-logo-footer.webp" width="400" height="400" style="width:auto" loading="lazy" decoding="async" alt="Max" class="umbrella-follow-icon int-logo">
                                         </a>
                                     </div>
                                 [/ux_text]
@@ -94,20 +98,20 @@ class umbrella_footer
                         [footer_map]
                         [row_inner width="full-width" h_align="center"]
                             [col_inner span="3" span__sm="10"]
-                            <p><img src="https://taxlab.ru/wp-content/uploads/logo-3.png" alt="Umbrella Group" class="int-logo"></p>
+                            <p><img src="/wp-content/uploads/logo-3.png" width="1168" height="226" style="width:auto" loading="lazy" decoding="async" alt="Umbrella Group" class="int-logo"></p>
                             <p class="footer-sub-text">1990 - 2026 © Umbrella Group</p>
                             <div class="social-icons">
                                         <a href="https://t.me/umbrella_club_nsk" rel="noopener noreferrer nofollow" class="" data-label="Telegram">
-                                            <img src="/wp-content/uploads/telegram_logo.png" alt="Telegram" class="umbrella-follow-icon int-logo">
+                                            <img src="{$img}telegram-logo.webp" width="1024" height="1024" style="width:auto" loading="lazy" decoding="async" alt="Telegram" class="umbrella-follow-icon int-logo">
                                         </a>
                                         <a href="https://vk.com/umbrellagroup_nsk" rel="noopener noreferrer nofollow" class="" data-label="VK">
-                                            <img src="/wp-content/uploads/vk_logo.png" alt="VK" class="umbrella-follow-icon int-logo" class="int-logo">
+                                            <img src="{$img}vk-logo.webp" width="1024" height="1024" style="width:auto" loading="lazy" decoding="async" alt="VK" class="umbrella-follow-icon int-logo">
                                         </a>
                                         <a href="https://api.whatsapp.com/send?phone=79137202634" rel="noopener noreferrer nofollow" class="" data-label="Whatsapp">
-                                            <img src="/wp-content/uploads/whatsapp_logo.png" alt="Whatsapp" class="umbrella-follow-icon int-logo">
+                                            <img src="{$img}whatsapp-logo.webp" width="971" height="983" style="width:auto" loading="lazy" decoding="async" alt="WhatsApp" class="umbrella-follow-icon int-logo">
                                         </a>
-                                        <a 3 href="https://max.ru/u/f9LHodD0cOJIOXNE7YL84YaWLr0Fmn7wgpMChu5575DDdYM9wCgFx0Dmzuw" rel="noopener noreferrer nofollow" class="" data-label="max">
-                                            <img src="/wp-content/themes/umbrella-group/includes/max.png" alt="max" class="umbrella-follow-icon int-logo">
+                                        <a href="https://max.ru/u/f9LHodD0cOJIOXNE7YL84YaWLr0Fmn7wgpMChu5575DDdYM9wCgFx0Dmzuw" rel="noopener noreferrer nofollow" class="" data-label="max">
+                                            <img src="{$img}max-logo-footer.webp" width="400" height="400" style="width:auto" loading="lazy" decoding="async" alt="Max" class="umbrella-follow-icon int-logo">
                                         </a>
                                     </div>
                             [/col_inner]
@@ -146,4 +150,4 @@ function umbrella_footer_shortcode($atts)
 }
 
 
-add_shortcode('umbrella_footer', 'umbrella_footer_shortcode'); ?>
+add_shortcode('umbrella_footer', 'umbrella_footer_shortcode');
