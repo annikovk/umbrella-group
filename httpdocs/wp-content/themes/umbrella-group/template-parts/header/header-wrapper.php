@@ -1,6 +1,5 @@
 <?php
 
-require get_theme_file_path() . '/template-parts/header/ab-tests-header-modifier.php';
 umbrella_draw_header();
 
 function umbrella_draw_header(): void
