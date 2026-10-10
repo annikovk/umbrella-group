@@ -2,6 +2,9 @@
 function customer_reviews_busnisse_shortcode($args)
 {
     ug_enqueue_library('ug-swiper-14');
+    // Репитер страницы опций и логотипы — пачкой (inc/acf.php).
+    ug_acf_prime_fields('group_63732a02442bb');
+    ug_acf_prime_option_repeater('slider_reviews_bus', ['logo_company_reviews', 'img_reviews_bus']);
     ob_start();
     ?>
     <?php echo '[section id="customer_reviews" class="customer_reviews"  padding="0px"]'; ?>
@@ -58,8 +61,8 @@ function customer_reviews_busnisse_shortcode($args)
 
     $output_string = ob_get_contents();
     ob_end_clean();
-    umbrella_add_custom_css_files(['/assets/css/blocks/customer_reviews_business.css']);
-    umbrella_add_custom_js_files(['/assets/js/blocks/customer_reviews_business.js']);
+    ug_enqueue_style('assets/css/blocks/customer_reviews_business.css');
+    ug_enqueue_script('assets/js/blocks/customer_reviews_business.js', ['jquery'], ['in_footer' => true, 'strategy' => 'defer']);
     return $output_string;
 }
 

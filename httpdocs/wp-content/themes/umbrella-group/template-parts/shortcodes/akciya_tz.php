@@ -17,7 +17,7 @@ class akciya_tz
      */
     public function render_hero()
     {
-        umbrella_add_custom_css_files(['/assets/css/blocks/akciya-tz.css']);
+        ug_enqueue_style('assets/css/blocks/akciya-tz.css');
 
         return <<<EOT
             <section class="akciya-tz-hero">
@@ -36,16 +36,14 @@ class akciya_tz
     }
 
     /** Иконки карточек — инлайном, чтобы не заводить картинки в медиатеке. */
-    private function get_icon($name)
+    private function get_icons()
     {
-        $icons = [
+        return [
             'shield' => '<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 3.5 5.6 6.8v6.5c0 4.9 3.4 8.9 8.4 10.7 5-1.8 8.4-5.8 8.4-10.7V6.8L14 3.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
             'document' => '<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M16.3 3.8H8.4A1.4 1.4 0 0 0 7 5.2v17.6a1.4 1.4 0 0 0 1.4 1.4h11.2a1.4 1.4 0 0 0 1.4-1.4V8.5l-4.7-4.7Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M16 4.2V8.8h4.7" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M10.3 13.3h7.4M10.3 17h5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
             'chart' => '<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="4.2" y="17" width="5" height="7" rx="1.2" fill="currentColor"/><rect x="11.5" y="11.5" width="5" height="12.5" rx="1.2" fill="currentColor"/><rect x="18.8" y="4.5" width="5" height="19.5" rx="1.2" fill="currentColor"/></svg>',
             'diamond' => '<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8.4 4.9h11.2l4.2 6.3L14 23.8 2.2 11.2l4.2-6.3h2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M2.6 11.2h22.8M10.5 4.9 8.4 11.2 14 23.4l5.6-12.2-2.1-6.3" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>',
         ];
-
-        return isset($icons[$name]) ? $icons[$name] : '';
     }
 
     /** Карточки «Ваши возможности» — порядок массива = порядок на странице. */
@@ -78,34 +76,17 @@ class akciya_tz
     /** Зачем регистрировать знак: шапка блока и карточки возможностей. */
     public function render_benefits()
     {
-        umbrella_add_custom_css_files(['/assets/css/blocks/akciya-tz.css']);
+        ug_enqueue_style('assets/css/blocks/akciya-tz.css');
 
-        $cards = '';
-        foreach ($this->get_benefits() as $benefit) {
-            $icon = $this->get_icon($benefit['icon']);
-            $cards .= <<<EOT
-                <div class="akciya-tz-benefits__card">
-                    <div class="akciya-tz-benefits__icon">$icon</div>
-                    <p class="akciya-tz-benefits__card-title">{$benefit['title']}</p>
-                    <p class="akciya-tz-benefits__card-text">{$benefit['text']}</p>
-                </div>
-                EOT;
-        }
-
-        return <<<EOT
-            <section class="akciya-tz-benefits">
-                <div class="akciya-tz-benefits__head">
-                    <div class="akciya-tz-benefits__head-left">
-                        <p class="akciya-tz-benefits__kicker">Ваши возможности</p>
-                        <h2 class="akciya-tz-benefits__title">Зачем регистрировать товарный знак?</h2>
-                    </div>
-                    <p class="akciya-tz-benefits__lead">Регистрация позволяет закрепить исключительное право на обозначение и получить инструменты для развития и защиты бизнеса.</p>
-                </div>
-                <div class="akciya-tz-benefits__cards">
-                    $cards
-                </div>
-            </section>
-            EOT;
+        return ug_render('akciya-section', [
+            'block'  => 'akciya-tz-benefits',
+            'kicker' => 'Ваши возможности',
+            'title'  => 'Зачем регистрировать товарный знак?',
+            'lead'   => 'Регистрация позволяет закрепить исключительное право на обозначение и получить инструменты для развития и защиты бизнеса.',
+            'layout' => 'cards',
+            'items'  => $this->get_benefits(),
+            'icons'  => $this->get_icons(),
+        ]);
     }
 
     /** Пункты «Кому актуальна регистрация» — нумерация считается по порядку. */
@@ -130,31 +111,15 @@ class akciya_tz
     /** Кому актуальна регистрация: нумерованные пункты через разделители. */
     public function render_audience()
     {
-        umbrella_add_custom_css_files(['/assets/css/blocks/akciya-tz.css']);
+        ug_enqueue_style('assets/css/blocks/akciya-tz.css');
 
-        $items = '';
-        foreach ($this->get_audience() as $index => $item) {
-            $number = sprintf('%02d', $index + 1);
-            $items .= <<<EOT
-                <div class="akciya-tz-audience__item">
-                    <div class="akciya-tz-audience__number">$number</div>
-                    <div class="akciya-tz-audience__body">
-                        <p class="akciya-tz-audience__item-title">{$item['title']}</p>
-                        <p class="akciya-tz-audience__item-text">{$item['text']}</p>
-                    </div>
-                </div>
-                EOT;
-        }
-
-        return <<<EOT
-            <section class="akciya-tz-audience">
-                <p class="akciya-tz-audience__kicker">Для кого</p>
-                <h2 class="akciya-tz-audience__title">Кому актуальна регистрация?</h2>
-                <div class="akciya-tz-audience__items">
-                    $items
-                </div>
-            </section>
-            EOT;
+        return ug_render('akciya-section', [
+            'block'  => 'akciya-tz-audience',
+            'kicker' => 'Для кого',
+            'title'  => 'Кому актуальна регистрация?',
+            'layout' => 'numbered',
+            'items'  => $this->get_audience(),
+        ]);
     }
 
     /** Шаги регистрации — порядок массива задаёт нумерацию и стрелки. */
@@ -186,34 +151,16 @@ class akciya_tz
      */
     public function render_steps()
     {
-        umbrella_add_custom_css_files(['/assets/css/blocks/akciya-tz.css']);
+        ug_enqueue_style('assets/css/blocks/akciya-tz.css');
 
-        $arrow = '<svg width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M1 5h15M12 1l4 4-4 4" stroke="#ec1c23" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-
-        $items = '';
-        foreach ($this->get_steps() as $index => $step) {
-            $number = sprintf('%02d', $index + 1);
-            $items .= <<<EOT
-                <div class="akciya-tz-steps__item">
-                    <div class="akciya-tz-steps__head">
-                        <div class="akciya-tz-steps__badge">$number</div>
-                        <div class="akciya-tz-steps__line">$arrow</div>
-                    </div>
-                    <p class="akciya-tz-steps__item-title">{$step['title']}</p>
-                    <p class="akciya-tz-steps__item-text">{$step['text']}</p>
-                </div>
-                EOT;
-        }
-
-        return <<<EOT
-            <section class="akciya-tz-steps">
-                <p class="akciya-tz-steps__kicker">Как это работает</p>
-                <h2 class="akciya-tz-steps__title">Как проходит регистрация?</h2>
-                <div class="akciya-tz-steps__items">
-                    $items
-                </div>
-            </section>
-            EOT;
+        return ug_render('akciya-section', [
+            'block'  => 'akciya-tz-steps',
+            'kicker' => 'Как это работает',
+            'title'  => 'Как проходит регистрация?',
+            'layout' => 'steps',
+            'items'  => $this->get_steps(),
+            'arrow'  => '<svg width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M1 5h15M12 1l4 4-4 4" stroke="#ec1c23" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+        ]);
     }
 
     /** Контурные иконки правой колонки баннера. */
@@ -235,7 +182,7 @@ class akciya_tz
      */
     public function render_cta()
     {
-        umbrella_add_custom_css_files(['/assets/css/blocks/akciya-tz.css']);
+        ug_enqueue_style('assets/css/blocks/akciya-tz.css');
 
         $features = [
             ['icon' => 'gift', 'text' => 'Выгодные условия<br>до конца акции'],
@@ -283,7 +230,6 @@ class akciya_tz
 function umbrella_akciya_has_own_hero($post = null)
 {
     $post = get_post($post);
-
     return $post && (has_shortcode($post->post_content, 'akciya_tz_hero')
         || has_shortcode($post->post_content, 'akciya_pb_hero'));
 }
@@ -308,56 +254,11 @@ function umbrella_akcii_contact_form($post_id = null)
     $contact_form = str_replace("_akcii_form_header_", get_post_meta($post_id, 'akcii_form_header', true), $contact_form);
     $contact_form = str_replace("_akcii_form_subheader_", get_post_meta($post_id, 'akcii_form_subheader', true), $contact_form);
     $contact_form = str_replace("_akcii_form_button_text_", get_post_meta($post_id, 'akcii_form_button_text', true), $contact_form);
-
     return $contact_form;
 }
 
-function akciya_tz_hero_shortcode($atts)
-{
-    $shortcode = new akciya_tz();
-    $shortcode->atts = $atts;
-
-    return $shortcode->render_hero();
+// [akciya_tz_hero], [akciya_tz_benefits], [akciya_tz_audience], [akciya_tz_steps], [akciya_tz_cta]
+foreach (['hero', 'benefits', 'audience', 'steps', 'cta'] as $akciya_tz_block) {
+    add_shortcode('akciya_tz_' . $akciya_tz_block, static fn($atts) => (new akciya_tz())->{'render_' . $akciya_tz_block}());
 }
-
-add_shortcode('akciya_tz_hero', 'akciya_tz_hero_shortcode');
-
-function akciya_tz_benefits_shortcode($atts)
-{
-    $shortcode = new akciya_tz();
-    $shortcode->atts = $atts;
-
-    return $shortcode->render_benefits();
-}
-
-add_shortcode('akciya_tz_benefits', 'akciya_tz_benefits_shortcode');
-
-function akciya_tz_audience_shortcode($atts)
-{
-    $shortcode = new akciya_tz();
-    $shortcode->atts = $atts;
-
-    return $shortcode->render_audience();
-}
-
-add_shortcode('akciya_tz_audience', 'akciya_tz_audience_shortcode');
-
-function akciya_tz_steps_shortcode($atts)
-{
-    $shortcode = new akciya_tz();
-    $shortcode->atts = $atts;
-
-    return $shortcode->render_steps();
-}
-
-add_shortcode('akciya_tz_steps', 'akciya_tz_steps_shortcode');
-
-function akciya_tz_cta_shortcode($atts)
-{
-    $shortcode = new akciya_tz();
-    $shortcode->atts = $atts;
-
-    return $shortcode->render_cta();
-}
-
-add_shortcode('akciya_tz_cta', 'akciya_tz_cta_shortcode');
+unset($akciya_tz_block);

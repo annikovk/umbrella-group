@@ -158,9 +158,13 @@ function umbrella_upsell_assets()
     if (!umbrella_upsell_current_paths()) {
         return;
     }
-    $dir = get_stylesheet_directory_uri();
-    wp_enqueue_style('umbrella-upsell', $dir . '/assets/css/blocks/upsell.css', array(), '1.2');
-    wp_enqueue_script('umbrella-upsell', $dir . '/assets/js/blocks/upsell.js', array(), '1.2', true);
+    // CSS — обычной очередью в <head> (не late styles блоков): его место в
+    // каскаде то же, что было. Версия — mtime файла вместо ручной «1.2».
+    // JS только слушает wpcf7mailsent — defer.
+    $css = 'assets/css/blocks/upsell.css';
+    $js = 'assets/js/blocks/upsell.js';
+    wp_enqueue_style('umbrella-upsell', get_theme_file_uri($css), array(), ug_asset_ver($css));
+    wp_enqueue_script('umbrella-upsell', get_theme_file_uri($js), array(), ug_asset_ver($js), array('in_footer' => true, 'strategy' => 'defer'));
 }
 
 add_action('wp_footer', 'umbrella_upsell_template');

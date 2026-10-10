@@ -8,7 +8,7 @@ class new_main_first_screen
      * элемент массива: разметка, стрелки и переключение подхватятся сами.
      * Порядок элементов = порядок листания слева направо.
      */
-    private function get_slides()
+    public static function get_slides()
     {
         return [
             [
@@ -92,6 +92,16 @@ class new_main_first_screen
         ];
     }
 
+    /** [ширина, высота] картинки слайда из uploads по её пути или null (внешний URL, нет файла). */
+    private static function image_size($src)
+    {
+        if (!is_string($src) || !str_starts_with($src, '/wp-content/uploads/')) {
+            return null;
+        }
+        $size = wp_getimagesize(ABSPATH . ltrim($src, '/'));
+        return $size ? [(int) $size[0], (int) $size[1]] : null;
+    }
+
     /** Иконки блока преимуществ — инлайном, чтобы не зависеть от медиатеки. */
     private function get_icon($name)
     {
@@ -163,9 +173,17 @@ class new_main_first_screen
         $button_mobile = $this->render_button($slide, 'show-for-small');
         $image = $slide['image'];
         $image_alt = $slide['image_alt'];
-        $lazy = $index === 0 ? '' : ' loading="lazy"';
+        // Первый слайд — LCP главной: грузится сразу и первым (мимо lazy-load
+        // Flatsome, см. ug_eager_img), остальные скрыты до клика — в конец очереди.
+        $loading = $index === 0 ? ' fetchpriority="high"' : ' loading="lazy" fetchpriority="low"';
+        // width/height — пропорции до загрузки картинки (CSS всё равно width:100%; height:auto).
+        $size = self::image_size($image);
+        $dims = $size ? ' width="' . $size[0] . '" height="' . $size[1] . '"' : '';
         // webp весит в семь раз меньше png, но png оставляем запасным вариантом.
-        $picture = '<img src="' . $image . '" alt="' . $image_alt . '"' . $lazy . '>';
+        $picture = '<img src="' . $image . '" alt="' . $image_alt . '"' . $dims . $loading . '>';
+        if ($index === 0) {
+            $picture = ug_eager_img($picture);
+        }
         if (!empty($slide['image_webp'])) {
             $picture = '<picture><source srcset="' . $slide['image_webp'] . '" type="image/webp">' . $picture . '</picture>';
         }
@@ -192,7 +210,7 @@ class new_main_first_screen
 
     private function render_slider()
     {
-        $slides = $this->get_slides();
+        $slides = self::get_slides();
         $slides_html = '';
         foreach ($slides as $index => $slide) {
             $slides_html .= $this->render_slide($slide, $index);
@@ -289,10 +307,9 @@ class new_main_first_screen
 
          [/section]
         EOT;
-        umbrella_add_custom_css_files(['/assets/css/blocks/new_main_first_screen.css']);
-        umbrella_add_custom_css_files(['/assets/css/blocks/block-laurels.css']);
-        umbrella_add_custom_js_files(['/assets/js/blocks/block-laurels.js']);
-        umbrella_add_custom_js_files(['/assets/js/blocks/main-first-screen-slider.js']);
+        ug_enqueue_style('assets/css/blocks/new_main_first_screen.css');
+        ug_enqueue_style('assets/css/blocks/block-laurels.css');
+        ug_enqueue_script('assets/js/blocks/main-first-screen-slider.js', ['jquery'], ['in_footer' => true, 'strategy' => 'defer']);
         return $html;
     }
 
@@ -306,3 +323,24 @@ function new_main_first_screen_shortcode($atts)
 }
 
 add_shortcode('new_main_first_screen', 'new_main_first_screen_shortcode');
+
+/**
+ * Preload картинки первого слайда: шорткод рендерится в body после
+ * блокирующих CSS в <head> — без preload браузер узнаёт о LCP-картинке поздно.
+ * Браузер берёт из <picture> webp, его и грузим.
+ */
+add_action('wp_head', function () {
+    if (!is_singular() || !has_shortcode((string) get_post_field('post_content', get_queried_object_id()), 'new_main_first_screen')) {
+        return;
+    }
+    $slide = new_main_first_screen::get_slides()[0] ?? null;
+    if (!$slide) {
+        return;
+    }
+    $webp = !empty($slide['image_webp']);
+    printf(
+        '<link rel="preload" as="image" href="%s"%s fetchpriority="high">' . "\n",
+        esc_url($webp ? $slide['image_webp'] : $slide['image']),
+        $webp ? ' type="image/webp"' : ''
+    );
+}, 2);

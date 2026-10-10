@@ -17,7 +17,6 @@ jQuery(function() {
 });
 
 jQuery(window).bind("resize", function () {
-    console.log(jQuery(this).width())
     if (jQuery(this).width() < 768) {
         jQuery('.teams__title').removeClass('opn');
     } else {
@@ -30,7 +29,6 @@ jQuery(window).bind("resize", function () {
     jQuery('html').css('overflow', 'hidden');
     event.preventDefault();
     jQuery('#'+jQuery(this).data('modal')).css('display','block');
-    console.log('wqewe');
   })
 
 

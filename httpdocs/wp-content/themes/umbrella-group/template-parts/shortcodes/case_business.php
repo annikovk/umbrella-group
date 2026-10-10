@@ -2,6 +2,9 @@
 function case_busnisse_shortcode($args)
 {
     ug_enqueue_library('ug-swiper-14');
+    // Репитер страницы опций и картинки слайдов — пачкой (inc/acf.php).
+    ug_acf_prime_fields('group_6373093261a4f');
+    ug_acf_prime_option_repeater('slider_case_bus', ['img_slide_case', 'img_link_case']);
     ob_start();
     ?>
     <?php echo '[section id="case_busnisse" class="case_busnisse"  padding="0px"]'; ?>
@@ -98,8 +101,8 @@ function case_busnisse_shortcode($args)
 
     $output_string = ob_get_contents();
     ob_end_clean();
-    umbrella_add_custom_css_files(['/assets/css/blocks/case_business.css']);
-    umbrella_add_custom_js_files(['/assets/js/blocks/case_business.js']);
+    ug_enqueue_style('assets/css/blocks/case_business.css');
+    ug_enqueue_script('assets/js/blocks/case_business.js', ['jquery'], ['in_footer' => true, 'strategy' => 'defer']);
     return $output_string;
 }
 

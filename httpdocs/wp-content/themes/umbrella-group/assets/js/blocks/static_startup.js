@@ -17,7 +17,6 @@ jQuery(function() {
 });
 
 jQuery(window).bind("resize", function () {
-    console.log(jQuery(this).width())
     if (jQuery(this).width() < 500) {
         jQuery('.problems__title').removeClass('problems__active');
         jQuery(".js-problems-content").hide();

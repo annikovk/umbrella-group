@@ -46,8 +46,7 @@ function business_footer_shortcode($atts)
             [/section]
             [divider width="100%" height="1px" margin="0px" color="rgb(68, 69, 69)"]
         EOTHTML;
-    umbrella_add_custom_css_files(['/assets/css/blocks/footer_business_page.css']);
-    umbrella_add_custom_js_files(["/assets/js/blocks/footer_business_page.js"]);
+    ug_enqueue_style('assets/css/blocks/footer_business_page.css');
     return $html;
 }
 

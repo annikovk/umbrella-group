@@ -16,7 +16,7 @@ class akciya_pb
      */
     public function render_hero()
     {
-        umbrella_add_custom_css_files(['/assets/css/blocks/akciya-pb.css']);
+        ug_enqueue_style('assets/css/blocks/akciya-pb.css');
 
         $arrow = '<svg width="22" height="10" viewBox="0 0 22 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M1 5h19M16 1l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
@@ -44,15 +44,13 @@ class akciya_pb
     }
 
     /** Иконки карточек — инлайном, чтобы не заводить картинки в медиатеке. */
-    private function get_icon($name)
+    private function get_icons()
     {
-        $icons = [
+        return [
             'cross' => '<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M11.5 4.5h7v7h7v7h-7v7h-7v-7h-7v-7h7v-7Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>',
             'bag' => '<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6.5 10.5h17l-1.2 14.2a1.5 1.5 0 0 1-1.5 1.3H9.2a1.5 1.5 0 0 1-1.5-1.3L6.5 10.5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M11 13.5V9a4 4 0 0 1 8 0v4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
             'pill' => '<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2.9" y="10.2" width="24.2" height="9.6" rx="4.8" transform="rotate(-45 15 15)" stroke="currentColor" stroke-width="2"/><path d="m11.6 11.6 6.8 6.8" stroke="currentColor" stroke-width="2"/></svg>',
         ];
-
-        return isset($icons[$name]) ? $icons[$name] : '';
     }
 
     /** Карточки «Кому стоит проверить требования» — порядок массива = порядок на странице. */
@@ -80,40 +78,25 @@ class akciya_pb
     /** Кому стоит проверить требования: шапка, карточки объектов и сноска. */
     public function render_audience()
     {
-        umbrella_add_custom_css_files(['/assets/css/blocks/akciya-pb.css']);
-
-        $cards = '';
-        foreach ($this->get_audience() as $item) {
-            $icon = $this->get_icon($item['icon']);
-            $cards .= <<<EOT
-                <div class="akciya-pb-audience__card">
-                    <div class="akciya-pb-audience__icon">$icon</div>
-                    <p class="akciya-pb-audience__card-title">{$item['title']}</p>
-                    <p class="akciya-pb-audience__card-text">{$item['text']}</p>
-                </div>
-                EOT;
-        }
+        ug_enqueue_style('assets/css/blocks/akciya-pb.css');
 
         $alert = '<svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="13" cy="13" r="11.5" stroke="currentColor" stroke-width="1.8"/><path d="M13 7.5v7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="13" cy="18.3" r="1.2" fill="currentColor"/></svg>';
 
-        return <<<EOT
-            <section class="akciya-pb-audience">
-                <div class="akciya-pb-audience__head">
-                    <div class="akciya-pb-audience__head-left">
-                        <p class="akciya-pb-audience__kicker">Для кого</p>
-                        <h2 class="akciya-pb-audience__title">Кому стоит проверить требования?</h2>
-                    </div>
-                    <p class="akciya-pb-audience__lead">Требования антитеррористической защищённости применяются к&nbsp;различным объектам. Мы&nbsp;поможем определить, распространяются&nbsp;ли они на&nbsp;ваш.</p>
-                </div>
-                <div class="akciya-pb-audience__cards">
-                    $cards
-                </div>
+        return ug_render('akciya-section', [
+            'block'  => 'akciya-pb-audience',
+            'kicker' => 'Для кого',
+            'title'  => 'Кому стоит проверить требования?',
+            'lead'   => 'Требования антитеррористической защищённости применяются к&nbsp;различным объектам. Мы&nbsp;поможем определить, распространяются&nbsp;ли они на&nbsp;ваш.',
+            'layout' => 'cards',
+            'items'  => $this->get_audience(),
+            'icons'  => $this->get_icons(),
+            'after'  => <<<EOT
                 <div class="akciya-pb-audience__note">
                     <div class="akciya-pb-audience__note-icon">$alert</div>
                     <p class="akciya-pb-audience__note-text">Необходимость паспорта зависит от&nbsp;категории объекта и&nbsp;применимых требований.</p>
                 </div>
-            </section>
-            EOT;
+                EOT,
+        ]);
     }
 
     /** Этапы сопровождения — порядок массива задаёт нумерацию и стрелки. */
@@ -146,40 +129,22 @@ class akciya_pb
      */
     public function render_steps()
     {
-        umbrella_add_custom_css_files(['/assets/css/blocks/akciya-pb.css']);
+        ug_enqueue_style('assets/css/blocks/akciya-pb.css');
 
         $arrow = '<svg width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M1 5h15M12 1l4 4-4 4" stroke="#ec1c23" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-
-        $items = '';
-        foreach ($this->get_steps() as $index => $step) {
-            $number = sprintf('%02d', $index + 1);
-            $items .= <<<EOT
-                <div class="akciya-pb-steps__item">
-                    <div class="akciya-pb-steps__head">
-                        <div class="akciya-pb-steps__badge">$number</div>
-                        <div class="akciya-pb-steps__line">$arrow</div>
-                    </div>
-                    <p class="akciya-pb-steps__item-title">{$step['title']}</p>
-                    <p class="akciya-pb-steps__item-text">{$step['text']}</p>
-                </div>
-                EOT;
-        }
-
         $percent = '<svg width="36" height="36" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M22 8 8 22" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="9.5" cy="9.5" r="2.8" stroke="currentColor" stroke-width="1.8"/><circle cx="20.5" cy="20.5" r="2.8" stroke="currentColor" stroke-width="1.8"/></svg>';
 
-        return <<<EOT
-            <section class="akciya-pb-steps">
-                <div class="akciya-pb-steps__head-row">
-                    <div class="akciya-pb-steps__head-left">
-                        <p class="akciya-pb-steps__kicker">Как мы работаем</p>
-                        <h2 class="akciya-pb-steps__title">Что входит в&nbsp;сопровождение</h2>
-                    </div>
-                    <p class="akciya-pb-steps__lead">Берём на&nbsp;себя весь процесс&nbsp;— от&nbsp;анализа до&nbsp;получения готового документа.</p>
-                </div>
-                <div class="akciya-pb-steps__items">
-                    $items
-                </div>
-            </section>
+        $steps = ug_render('akciya-section', [
+            'block'  => 'akciya-pb-steps',
+            'kicker' => 'Как мы работаем',
+            'title'  => 'Что входит в&nbsp;сопровождение',
+            'lead'   => 'Берём на&nbsp;себя весь процесс&nbsp;— от&nbsp;анализа до&nbsp;получения готового документа.',
+            'head'   => 'head-row',
+            'layout' => 'steps',
+            'items'  => $this->get_steps(),
+            'arrow'  => $arrow,
+        ]);
+        return $steps . <<<EOT
             <div class="akciya-pb-saving">
                 <div class="akciya-pb-saving__icon">$percent</div>
                 <div class="akciya-pb-saving__text">
@@ -190,13 +155,14 @@ class akciya_pb
             </div>
             EOT;
     }
+
     /**
      * Заявка внизу страницы: текст слева, справа та же форма акции, что
      * в боковой колонке, — вёрстка под ширину блока в akciya-pb.css.
      */
     public function render_request()
     {
-        umbrella_add_custom_css_files(['/assets/css/blocks/akciya-pb.css']);
+        ug_enqueue_style('assets/css/blocks/akciya-pb.css');
 
         $form = umbrella_akcii_contact_form();
 
@@ -215,42 +181,8 @@ class akciya_pb
     }
 }
 
-function akciya_pb_hero_shortcode($atts)
-{
-    $shortcode = new akciya_pb();
-    $shortcode->atts = $atts;
-
-    return $shortcode->render_hero();
+// [akciya_pb_hero], [akciya_pb_audience], [akciya_pb_steps], [akciya_pb_request]
+foreach (['hero', 'audience', 'steps', 'request'] as $akciya_pb_block) {
+    add_shortcode('akciya_pb_' . $akciya_pb_block, static fn($atts) => (new akciya_pb())->{'render_' . $akciya_pb_block}());
 }
-
-add_shortcode('akciya_pb_hero', 'akciya_pb_hero_shortcode');
-
-function akciya_pb_audience_shortcode($atts)
-{
-    $shortcode = new akciya_pb();
-    $shortcode->atts = $atts;
-
-    return $shortcode->render_audience();
-}
-
-add_shortcode('akciya_pb_audience', 'akciya_pb_audience_shortcode');
-
-function akciya_pb_steps_shortcode($atts)
-{
-    $shortcode = new akciya_pb();
-    $shortcode->atts = $atts;
-
-    return $shortcode->render_steps();
-}
-
-add_shortcode('akciya_pb_steps', 'akciya_pb_steps_shortcode');
-
-function akciya_pb_request_shortcode($atts)
-{
-    $shortcode = new akciya_pb();
-    $shortcode->atts = $atts;
-
-    return $shortcode->render_request();
-}
-
-add_shortcode('akciya_pb_request', 'akciya_pb_request_shortcode');
+unset($akciya_pb_block);

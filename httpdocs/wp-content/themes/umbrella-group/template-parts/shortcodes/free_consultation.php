@@ -30,8 +30,7 @@ class free_consultation
          </div>
          [/section]
         EOHTML;
-        umbrella_add_custom_css_files(['/assets/css/blocks/free_consultation.css']);
-        umbrella_add_custom_js_files(['/assets/js/blocks/free_consultation.js']);
+        ug_enqueue_style('assets/css/blocks/free_consultation.css');
         return $html;
     }
 

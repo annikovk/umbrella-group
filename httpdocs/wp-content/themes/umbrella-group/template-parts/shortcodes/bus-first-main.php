@@ -96,9 +96,8 @@ function business_first_screen_shortcode($atts){
         </div>
 
         EOTHTML;
-        umbrella_add_custom_css_files(['/assets/css/blocks/business_first_screen.css']);
-        umbrella_add_custom_js_files(['/assets/js/blocks/business_first_screen.js']);
-
+        ug_enqueue_style('assets/css/blocks/business_first_screen.css');
+        ug_enqueue_script('assets/js/blocks/business_first_screen.js', ['jquery'], ['in_footer' => true, 'strategy' => 'defer']);
     return $html;
     }
 

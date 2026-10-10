@@ -166,8 +166,8 @@ function team_business_shortcode($atts)
             </div>
         </div>
         EOTHTML;
-    umbrella_add_custom_css_files(['/assets/css/blocks/team_business.css']);
-    umbrella_add_custom_js_files(['/assets/js/blocks/team_business.js']);
+    ug_enqueue_style('assets/css/blocks/team_business.css');
+    ug_enqueue_script('assets/js/blocks/team_business.js', ['jquery'], ['in_footer' => true, 'strategy' => 'defer']);
     return $html;
 }
 

@@ -69,8 +69,8 @@ class on_call
          [/section]
 
         EOHTML;
-        umbrella_add_custom_css_files(['/assets/css/blocks/on_call.css']);
-        umbrella_add_custom_js_files(['/assets/js/blocks/on_call.js']);
+        ug_enqueue_style('assets/css/blocks/on_call.css');
+        ug_enqueue_script('assets/js/blocks/on_call.js', ['jquery'], ['in_footer' => true, 'strategy' => 'defer']);
         return $html;
     }
 

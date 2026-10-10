@@ -20,7 +20,7 @@ function since_shortcode($atts){
             </div>
          [/section]
         EOTHTML;
-        umbrella_add_custom_css_files(['/assets/css/blocks/since_90.css']);
+        ug_enqueue_style('assets/css/blocks/since_90.css');
         return $html;
     }
 

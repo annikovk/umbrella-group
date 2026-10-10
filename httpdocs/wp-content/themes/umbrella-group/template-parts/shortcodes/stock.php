@@ -18,8 +18,7 @@ class stock
            [/row]
          [/section]
         EOHTML;
-        umbrella_add_custom_css_files(['/assets/css/blocks/stock.css']);
-        umbrella_add_custom_js_files(['/assets/js/blocks/stock.js']);
+        ug_enqueue_style('assets/css/blocks/stock.css');
         return $html;
     }
 
