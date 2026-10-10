@@ -1,0 +1,7 @@
+.size-of-filter-tab {
+    color: #b2b2b2;
+}
+
+.btn-filter:hover .size-of-filter-tab {
+    color: #fff;
+}

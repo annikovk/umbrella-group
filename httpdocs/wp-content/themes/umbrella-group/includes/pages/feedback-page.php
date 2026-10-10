@@ -26,12 +26,14 @@ function get_feedback_posts()
         if (!empty(get_the_excerpt($post->ID))) {
             array_push($result, $post);
             $posts_categries = get_the_terms($post->ID, 'client_industry');
-            //print_r($posts_categries).'<br><br>';
-            //print_r($posts_categries);
+            if (!is_array($posts_categries)) {
+                continue;
+            }
 
             foreach ($posts_categries as $posts_categry){
-//                if (!first_value_matches($feedback_categories,$posts_categry->slug)) {
-                  if (!$feedback_categories[$posts_categry->slug]["slug"]==$posts_categry->slug){
+                // Раньше: !$feedback_categories[$slug]["slug"] == $slug — то же самое,
+                // но с warning на каждую новую отрасль (ключа ещё нет).
+                if (!isset($feedback_categories[$posts_categry->slug])) {
                     $category =  array("slug"=>$posts_categry->slug,"name"=>$posts_categry->name,"count"=>1);
                     $feedback_categories[$posts_categry->slug] = $category;
                 } else {
@@ -43,10 +45,6 @@ function get_feedback_posts()
     umbrella_draw_filter_tabs($feedback_categories, $result,'feedback');
     return $result;
 }
-//function first_value_matches ($array, $string) {
-//    if ($array[$string]["slug"]==$string) return true;
-//    return false;
-//}
 
 ?>
 
