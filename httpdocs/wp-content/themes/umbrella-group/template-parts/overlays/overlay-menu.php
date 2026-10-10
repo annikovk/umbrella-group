@@ -30,11 +30,10 @@ if (
 ?>
 <div id="main-menu"
      class="<?php echo esc_attr(implode(' ', $flatsome_mobile_sidebar_classes)); ?>"<?php echo $flatsome_levels ? ' data-levels="' . esc_attr($flatsome_levels) . '"' : ''; ?>>
-    <?php if(wp_is_mobile()):?>
-        <div class="sidebar-menu no-scrollbar <?php if ($flatsome_mobile_overlay == 'center') echo 'text-center'; ?>">
-            <ul class="<?php echo esc_attr(implode(' ', $flatsome_nav_classes)); ?>">
-                <?php flatsome_header_elements('mobile_sidebar', 'sidebar'); ?>
-            </ul>
-        </div>
-    <?php endif;?>
+    <?php // Меню печатается всем, не только wp_is_mobile(): панель скрыта (mfp-hide), пока её не откроют. ?>
+    <div class="sidebar-menu no-scrollbar <?php if ($flatsome_mobile_overlay == 'center') echo 'text-center'; ?>">
+        <ul class="<?php echo esc_attr(implode(' ', $flatsome_nav_classes)); ?>">
+            <?php flatsome_header_elements('mobile_sidebar', 'sidebar'); ?>
+        </ul>
+    </div>
 </div>
