@@ -33,7 +33,9 @@ if (function_exists('acf_add_options_page')) {
         'page_title' => 'Основные настройки',
         'menu_title' => 'Настройки темы',
         'menu_slug' => 'theme-general-settings',
-        'capability' => 'edit_posts',
+        // Тексты и WhatsApp на всех страницах: администратор и редактор
+        // (их 6 и 2), автор и участник — нет (было edit_posts).
+        'capability' => 'edit_others_posts',
         'redirect' => false
     ));
 
@@ -42,6 +44,7 @@ if (function_exists('acf_add_options_page')) {
         'menu_title' => 'Кейс из нашей практики',
         'menu_slug' => 'theme-case-bus',
         'parent_slug' => 'theme-general-settings',
+        'capability' => 'edit_others_posts',
     ));
 
     acf_add_options_sub_page(array(
@@ -49,6 +52,7 @@ if (function_exists('acf_add_options_page')) {
         'menu_title' => 'Отзывы клиентов',
         'menu_slug' => 'theme-reviews-bus',
         'parent_slug' => 'theme-general-settings',
+        'capability' => 'edit_others_posts',
     ));
 
 
