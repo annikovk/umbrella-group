@@ -291,7 +291,6 @@ class new_main_first_screen
         EOT;
         umbrella_add_custom_css_files(['/assets/css/blocks/new_main_first_screen.css']);
         umbrella_add_custom_css_files(['/assets/css/blocks/block-laurels.css']);
-        umbrella_add_custom_js_files(['/assets/js/blocks/block-laurels.js']);
         umbrella_add_custom_js_files(['/assets/js/blocks/main-first-screen-slider.js']);
         return $html;
     }
