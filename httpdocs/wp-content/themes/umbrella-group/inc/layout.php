@@ -12,7 +12,10 @@
  *    пальцами снова работает). Раньше их было два: свой в header.php и
  *    Flatsome на wp_head:1 — оба запрещали масштаб;
  *  - ссылки «Скачать анкету/памятку» → roistat.event.send: бывший
- *    jQuery-блок в начале <body>, теперь defer-файл после jQuery.
+ *    jQuery-блок в начале <body>, теперь defer-файл после jQuery;
+ *  - кнопки Telegram/Max — в подвале на flatsome_footer:99 (были вписаны
+ *    руками в вендорный flatsome/footer.php, который не в git); их CSS — в
+ *    assets/css/main.css (ug-main, WS-2).
  */
 
 declare(strict_types=1);
@@ -39,3 +42,7 @@ add_action('wp_enqueue_scripts', static function (): void {
         ['in_footer' => true, 'strategy' => 'defer']
     );
 });
+
+add_action('flatsome_footer', static function (): void {
+    get_template_part('template-parts/blocks/messenger-buttons');
+}, 99);
