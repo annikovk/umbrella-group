@@ -8,15 +8,8 @@ function calculate_busnisse_shortcode($args)
     ?>
 
     <?php
-    $terms = get_terms(
-        array(
-            'taxonomy' => '_sfer_uslug',
-            'hide_empty' => true,
-            'hierarchical' => false,
-            'orderby' => 'name',
-            'order' => 'ASC',
-        )
-    );
+    $data = ug_calculate_business_data();
+    $terms = $data['terms'];
 
     foreach ($terms as $term) { ?>
         <div id="<?php echo $term->slug; ?>-tarif" class="modal modal_tarif_bus">
@@ -24,38 +17,14 @@ function calculate_busnisse_shortcode($args)
                 <div class="modal-body">
                     <ul class="dynamic_tariff_sub_menu">
                         <?php
-
-                        $args = array(
-                            'post_type' => 'business_calculation',
-                            'post_status' => 'publish',
-                            'posts_per_page' => -1,
-                            'orderby' => 'date',
-                            'order' => 'DESC',
-                            'tax_query' => array(
-                                array(
-                                    'taxonomy' => '_sfer_uslug',
-                                    'field' => 'name',
-                                    'terms' => $term->name
-                                )
-                            )
-                        );
-
-                        //the query
-                        $partnersList = new WP_Query($args);
-
-                        //loop through query
-                        if ($partnersList->have_posts()) {
-
-                            while ($partnersList->have_posts()) {
-                                $partnersList->the_post();
+                        global $post;
+                        foreach ($data['by_term'][$term->term_id] as $post) {
+                                setup_postdata($post);
                                 ?>
                                 <li class="<?php if (get_field('star_tabs')): ?>active<?php endif; ?>"
                                     data-tab="tab-mob-<?php the_ID(); ?>"
                                     data-title="<?php the_field('opening_method'); ?>"><?php the_title(); ?></li>
                                 <?php
-                            }
-                        } else {
-                            //no posts found
                         }
 
                         wp_reset_postdata();
@@ -78,16 +47,6 @@ function calculate_busnisse_shortcode($args)
             <div class="dynamic_tariff" id="desctop_grid_tarif">
                 <ul class="dynamic_tariff_menu">
                     <?php
-                    $terms = get_terms(
-                        array(
-                            'taxonomy' => '_sfer_uslug',
-                            'hide_empty' => true,
-                            'hierarchical' => false,
-                            // 'orderby' => 'name',
-                            'order' => 'ASC',
-                        )
-                    );
-                    $term = get_queried_object();
                     foreach ($terms as $term) {
 
                         ?>
@@ -95,38 +54,13 @@ function calculate_busnisse_shortcode($args)
                                 href="#"><?php echo $term->name; ?> <span>↓</span></a>
                             <ul class="dynamic_tariff_sub_menu">
                                 <?php
-
-                                $args = array(
-                                    'post_type' => 'business_calculation',
-                                    'post_status' => 'publish',
-                                    'posts_per_page' => -1,
-                                    'orderby' => 'date',
-                                    'order' => 'ASC',
-                                    'tax_query' => array(
-                                        array(
-                                            'taxonomy' => '_sfer_uslug',
-                                            'field' => 'name',
-                                            'terms' => $term->name
-                                        )
-                                    )
-                                );
-
-                                //the query
-                                $partnersList = new WP_Query($args);
-
-                                //loop through query
-                                if ($partnersList->have_posts()) {
-
-                                    while ($partnersList->have_posts()) {
-                                        $partnersList->the_post();
+                                foreach (array_reverse($data['by_term'][$term->term_id]) as $post) {
+                                        setup_postdata($post);
                                         ?>
                                         <li class="<?php if (get_field('star_tabs')): ?>active<?php endif; ?>"
                                             data-tab="tab-<?php the_id(); ?>"
                                             data-title="<?php the_field('opening_method'); ?>"><?php the_title(); ?></li>
                                         <?php
-                                    }
-                                } else {
-                                    //no posts found
                                 }
 
                                 wp_reset_postdata();
@@ -141,18 +75,8 @@ function calculate_busnisse_shortcode($args)
                 <div class="col ">
                     <div class="dynamic_tariff_content" id="desctop_tabs">
                         <?php
-                        $posts = get_posts(array(
-                            // 'orderby'     => 'date',
-                            'order' => 'DESC',
-                            'post_type' => 'business_calculation',
-                            'suppress_filters' => true,
-                            'posts_per_page' => -1,
-                        ));
-                        global $post;
-
-                        foreach ($posts as $post) {
+                        foreach ($data['posts'] as $post) {
                             setup_postdata($post);
-                            $category = get_the_category();
                             ?>
 
                             <div id="tab-<?php the_id(); ?>"
@@ -280,18 +204,8 @@ function calculate_busnisse_shortcode($args)
 
 
             <div class="tarif_mobile_grid">
-                <?php
-                $terms = get_terms(
-                    array(
-                        'taxonomy' => '_sfer_uslug',
-                        'hide_empty' => true,
-                        'hierarchical' => false,
-                        // 'orderby' => 'name',
-                        'order' => 'DESC',
-                    )
-                ); ?>
                 <ul class="dynamic_tariff_menu">
-                    <?php foreach ($terms as $term) { ?>
+                    <?php foreach (array_reverse($terms) as $term) { ?>
                         <li class="<?php if (get_field('activr_sferf', $term)): ?>current-menu-parent<?php endif; ?>"><a
                                 href="#" class="modal_tarif "
                                 data-modal="<?php echo $term->slug; ?>-tarif"><?php echo $term->name; ?> <span>↓</span></a>
@@ -303,18 +217,8 @@ function calculate_busnisse_shortcode($args)
                 </div>
 
                 <?php
-                $posts = get_posts(array(
-                    // 'orderby'     => 'date',
-                    'order' => 'ASC',
-                    'post_type' => 'business_calculation',
-                    'suppress_filters' => true,
-                    'posts_per_page' => -1,
-                ));
-                global $post;
-
-                foreach ($posts as $post) {
+                foreach (array_reverse($data['posts']) as $post) {
                     setup_postdata($post);
-                    $category = get_the_category();
                     ?>
 
                     <div id="tab-mob-<?php the_id(); ?>"
@@ -468,4 +372,51 @@ function calculate_busnisse_shortcode($args)
 }
 
 add_shortcode('calculate_business', 'calculate_busnisse_shortcode');
-?>
+
+/**
+ * Данные калькулятора: сферы (_sfer_uslug) и тарифы (business_calculation)
+ * одним запросом вместо WP_Query на каждую сферу в двух циклах и двух
+ * get_posts (338 → … SQL на странице 14148).
+ *
+ * Порядок как был: сферы — get_terms по умолчанию (name, у плагина
+ * taxonomy-terms-order — term_order), мобильное меню — обратный; тарифы —
+ * по дате, по убыванию (попап сферы на мобильном, вкладки на десктопе) или
+ * по возрастанию (меню сфер на десктопе, вкладки на мобильном — array_reverse
+ * у вызывающего). Сферы без тарифов get_terms(hide_empty) и так не отдаёт.
+ *
+ * Определения полей ACF — заранее, по группам (inc/acf.php).
+ *
+ * @return array{terms: WP_Term[], posts: WP_Post[], by_term: array<int, WP_Post[]>}
+ */
+function ug_calculate_business_data(): array
+{
+    $terms = get_terms([
+        'taxonomy'     => '_sfer_uslug',
+        'hide_empty'   => true,
+        'hierarchical' => false,
+        'order'        => 'ASC',
+    ]);
+    $terms = is_array($terms) ? $terms : [];
+
+    $posts = get_posts([
+        'post_type'        => 'business_calculation',
+        'post_status'      => 'publish',
+        'posts_per_page'   => -1,
+        'orderby'          => 'date',
+        'order'            => 'DESC',
+        'suppress_filters' => true,
+    ]);
+
+    $by_term = [];
+    foreach ($terms as $term) {
+        $by_term[$term->term_id] = array_values(array_filter(
+            $posts,
+            static fn(WP_Post $p): bool => has_term($term->term_id, '_sfer_uslug', $p)
+        ));
+    }
+
+    // «О тарифе», «Тарифы» (поля тарифа), «Активаня сфера» (activr_sferf у сферы).
+    ug_acf_prime_fields('group_6371f6cba7e85', 'group_636b8b5f95926', 'group_6372e6799e488');
+
+    return ['terms' => $terms, 'posts' => $posts, 'by_term' => $by_term];
+}

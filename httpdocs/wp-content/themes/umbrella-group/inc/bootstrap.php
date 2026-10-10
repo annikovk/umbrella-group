@@ -12,13 +12,14 @@
  *
  * Владельцы файлов по пакетам спеки 1 (§5): helpers — WS-4; cf7, attribution,
  * cookie-notice, legacy-stubs — WS-1; setup, assets — WS-2;
- * post-types, shortcodes, tiles — WS-6; ab-tests — WS-7. Новый файл inc/
+ * post-types, shortcodes, tiles — WS-6; acf — WS-5; ab-tests — WS-7. Новый файл inc/
  * добавляется строкой сюда тем пакетом, который его создаёт.
  */
 
 declare(strict_types=1);
 
 require __DIR__ . '/helpers.php';
+require __DIR__ . '/acf.php';
 require __DIR__ . '/cf7.php';
 require __DIR__ . '/attribution.php';
 require __DIR__ . '/setup.php';

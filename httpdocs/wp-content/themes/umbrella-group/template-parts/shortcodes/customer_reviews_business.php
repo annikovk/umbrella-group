@@ -2,6 +2,9 @@
 function customer_reviews_busnisse_shortcode($args)
 {
     ug_enqueue_library('ug-swiper-14');
+    // Репитер страницы опций и логотипы — пачкой (inc/acf.php).
+    ug_acf_prime_fields('group_63732a02442bb');
+    ug_acf_prime_option_repeater('slider_reviews_bus', ['logo_company_reviews', 'img_reviews_bus']);
     ob_start();
     ?>
     <?php echo '[section id="customer_reviews" class="customer_reviews"  padding="0px"]'; ?>

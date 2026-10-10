@@ -10,6 +10,16 @@ function func_result_clinets($args)
         'post_type' => 'result',
         'suppress_filters' => true,
     ));
+    // Миниатюры, логотипы и иконки — одним запросом, определения полей ACF —
+    // по группе (inc/acf.php); раньше — get_post() и мета на каждую картинку.
+    ug_prime_thumbnails($posts);
+    $images = [];
+    foreach ($posts as $p) {
+        $images[] = get_post_meta($p->ID, 'logo_company', true);
+        $images[] = get_post_meta($p->ID, 'icon_company_res', true);
+    }
+    ug_prime_attachments($images);
+    ug_acf_prime_fields('group_636e58687911e');
     global $post;
     //обертка для записей например <ul>
     ?>
@@ -28,7 +38,6 @@ function func_result_clinets($args)
                         //выводим в записи в цикле
                         foreach ($posts as $post) {
                             setup_postdata($post);
-                            $category = get_the_category();
                             ?>
                             <div class="swiper-slide">
                                 <div class="result_item_slide">
