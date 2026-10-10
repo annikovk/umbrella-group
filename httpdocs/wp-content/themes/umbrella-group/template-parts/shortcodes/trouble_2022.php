@@ -94,8 +94,8 @@ class trouble_2022
            [/row]
          [/section]
         EOHTML; }
-        umbrella_add_custom_css_files(['/assets/css/blocks/trouble_2022.css']);
-        umbrella_add_custom_js_files(['/assets/js/blocks/trouble_2022.js']);
+        ug_enqueue_style('assets/css/blocks/trouble_2022.css');
+        ug_enqueue_script('assets/js/blocks/trouble_2022.js', ['jquery'], ['in_footer' => true, 'strategy' => 'defer']);
         return $html;
     }
 

@@ -60,8 +60,8 @@ EOTHTML;
         {$form}{$close}
         EOTHTML;
     }
-    umbrella_add_custom_css_files(['/assets/css/blocks/form_business_calculation.css']);
-    umbrella_add_custom_js_files(['/assets/js/blocks/form_business_calculation.js']);
+    ug_enqueue_style('assets/css/blocks/form_business_calculation.css');
+    ug_enqueue_script('assets/js/blocks/form_business_calculation.js', ['jquery'], ['in_footer' => true, 'strategy' => 'defer']);
     return $html;
 }
 

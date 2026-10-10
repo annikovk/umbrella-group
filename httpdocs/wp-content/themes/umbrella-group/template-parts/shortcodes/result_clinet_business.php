@@ -85,8 +85,8 @@ function func_result_clinets($args)
 
     $output_string = ob_get_contents();
     ob_end_clean();
-    umbrella_add_custom_js_files(['/assets/js/blocks/result_clinet_business.js']);
-    umbrella_add_custom_css_files(["/assets/css/blocks/result_clinet_business.css"]);
+    ug_enqueue_script('assets/js/blocks/result_clinet_business.js', ['jquery'], ['in_footer' => true, 'strategy' => 'defer']);
+    ug_enqueue_style('assets/css/blocks/result_clinet_business.css');
     return $output_string;
 }
 

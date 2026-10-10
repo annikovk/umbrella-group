@@ -55,8 +55,7 @@ class numbers_statistics
            [/row]
          [/section]
         EOHTML;
-        umbrella_add_custom_css_files(['/assets/css/blocks/numbers_statistics.css']);
-        umbrella_add_custom_js_files(['/assets/js/blocks/numbers_statistics.js']);
+        ug_enqueue_style('assets/css/blocks/numbers_statistics.css');
         return $html;
     }
 

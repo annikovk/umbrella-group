@@ -61,8 +61,8 @@ function customer_reviews_busnisse_shortcode($args)
 
     $output_string = ob_get_contents();
     ob_end_clean();
-    umbrella_add_custom_css_files(['/assets/css/blocks/customer_reviews_business.css']);
-    umbrella_add_custom_js_files(['/assets/js/blocks/customer_reviews_business.js']);
+    ug_enqueue_style('assets/css/blocks/customer_reviews_business.css');
+    ug_enqueue_script('assets/js/blocks/customer_reviews_business.js', ['jquery'], ['in_footer' => true, 'strategy' => 'defer']);
     return $output_string;
 }
 

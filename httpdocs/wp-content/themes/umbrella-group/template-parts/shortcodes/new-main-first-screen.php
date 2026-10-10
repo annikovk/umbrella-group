@@ -307,9 +307,9 @@ class new_main_first_screen
 
          [/section]
         EOT;
-        umbrella_add_custom_css_files(['/assets/css/blocks/new_main_first_screen.css']);
-        umbrella_add_custom_css_files(['/assets/css/blocks/block-laurels.css']);
-        umbrella_add_custom_js_files(['/assets/js/blocks/main-first-screen-slider.js']);
+        ug_enqueue_style('assets/css/blocks/new_main_first_screen.css');
+        ug_enqueue_style('assets/css/blocks/block-laurels.css');
+        ug_enqueue_script('assets/js/blocks/main-first-screen-slider.js', ['jquery'], ['in_footer' => true, 'strategy' => 'defer']);
         return $html;
     }
 

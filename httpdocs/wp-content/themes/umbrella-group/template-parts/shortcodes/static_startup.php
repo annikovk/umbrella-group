@@ -131,8 +131,8 @@ function statick_startup_shortcode($atts){
             </div>
          [/section]
         EOTHTML;
-        umbrella_add_custom_css_files(['/assets/css/blocks/static_startup.css']);
-        umbrella_add_custom_js_files(['/assets/js/blocks/static_startup.js']);
+        ug_enqueue_style('assets/css/blocks/static_startup.css');
+        ug_enqueue_script('assets/js/blocks/static_startup.js', ['jquery'], ['in_footer' => true, 'strategy' => 'defer']);
         return $html;
     }
 

@@ -101,9 +101,9 @@ class help_start_business
            [/row]
          [/section]
         EOHTML; }
-        umbrella_add_custom_css_files(['/assets/css/common-style.css']);
-        umbrella_add_custom_css_files(['/assets/css/blocks/help_start_business.css']);
-        umbrella_add_custom_js_files(['/assets/js/blocks/help_start_business.js']);
+        ug_enqueue_style('assets/css/common-style.css');
+        ug_enqueue_style('assets/css/blocks/help_start_business.css');
+        ug_enqueue_script('assets/js/blocks/help_start_business.js', ['jquery'], ['in_footer' => true, 'strategy' => 'defer']);
         return $html;
     }
 

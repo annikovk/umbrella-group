@@ -18,8 +18,7 @@ function more_question_busnisse_shortcode($atts)
             </div>
          [/section]
         EOTHTML;
-    umbrella_add_custom_css_files(['/assets/css/blocks/more_question_bus.css']);
-    umbrella_add_custom_js_files(['/assets/js/blocks/more_question_bus.js']);
+    ug_enqueue_style('assets/css/blocks/more_question_bus.css');
     return $html;
 }
 

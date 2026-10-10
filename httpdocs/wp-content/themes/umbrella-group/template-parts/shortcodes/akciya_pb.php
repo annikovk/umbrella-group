@@ -16,7 +16,7 @@ class akciya_pb
      */
     public function render_hero()
     {
-        umbrella_add_custom_css_files(['/assets/css/blocks/akciya-pb.css']);
+        ug_enqueue_style('assets/css/blocks/akciya-pb.css');
 
         $arrow = '<svg width="22" height="10" viewBox="0 0 22 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M1 5h19M16 1l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
@@ -78,7 +78,7 @@ class akciya_pb
     /** Кому стоит проверить требования: шапка, карточки объектов и сноска. */
     public function render_audience()
     {
-        umbrella_add_custom_css_files(['/assets/css/blocks/akciya-pb.css']);
+        ug_enqueue_style('assets/css/blocks/akciya-pb.css');
 
         $alert = '<svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="13" cy="13" r="11.5" stroke="currentColor" stroke-width="1.8"/><path d="M13 7.5v7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="13" cy="18.3" r="1.2" fill="currentColor"/></svg>';
 
@@ -129,7 +129,7 @@ class akciya_pb
      */
     public function render_steps()
     {
-        umbrella_add_custom_css_files(['/assets/css/blocks/akciya-pb.css']);
+        ug_enqueue_style('assets/css/blocks/akciya-pb.css');
 
         $arrow = '<svg width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M1 5h15M12 1l4 4-4 4" stroke="#ec1c23" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
         $percent = '<svg width="36" height="36" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M22 8 8 22" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="9.5" cy="9.5" r="2.8" stroke="currentColor" stroke-width="1.8"/><circle cx="20.5" cy="20.5" r="2.8" stroke="currentColor" stroke-width="1.8"/></svg>';
@@ -144,7 +144,6 @@ class akciya_pb
             'items'  => $this->get_steps(),
             'arrow'  => $arrow,
         ]);
-
         return $steps . <<<EOT
             <div class="akciya-pb-saving">
                 <div class="akciya-pb-saving__icon">$percent</div>
@@ -163,7 +162,7 @@ class akciya_pb
      */
     public function render_request()
     {
-        umbrella_add_custom_css_files(['/assets/css/blocks/akciya-pb.css']);
+        ug_enqueue_style('assets/css/blocks/akciya-pb.css');
 
         $form = umbrella_akcii_contact_form();
 

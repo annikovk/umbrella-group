@@ -17,7 +17,7 @@ class akciya_tz
      */
     public function render_hero()
     {
-        umbrella_add_custom_css_files(['/assets/css/blocks/akciya-tz.css']);
+        ug_enqueue_style('assets/css/blocks/akciya-tz.css');
 
         return <<<EOT
             <section class="akciya-tz-hero">
@@ -76,7 +76,7 @@ class akciya_tz
     /** Зачем регистрировать знак: шапка блока и карточки возможностей. */
     public function render_benefits()
     {
-        umbrella_add_custom_css_files(['/assets/css/blocks/akciya-tz.css']);
+        ug_enqueue_style('assets/css/blocks/akciya-tz.css');
 
         return ug_render('akciya-section', [
             'block'  => 'akciya-tz-benefits',
@@ -111,7 +111,7 @@ class akciya_tz
     /** Кому актуальна регистрация: нумерованные пункты через разделители. */
     public function render_audience()
     {
-        umbrella_add_custom_css_files(['/assets/css/blocks/akciya-tz.css']);
+        ug_enqueue_style('assets/css/blocks/akciya-tz.css');
 
         return ug_render('akciya-section', [
             'block'  => 'akciya-tz-audience',
@@ -151,7 +151,7 @@ class akciya_tz
      */
     public function render_steps()
     {
-        umbrella_add_custom_css_files(['/assets/css/blocks/akciya-tz.css']);
+        ug_enqueue_style('assets/css/blocks/akciya-tz.css');
 
         return ug_render('akciya-section', [
             'block'  => 'akciya-tz-steps',
@@ -182,7 +182,7 @@ class akciya_tz
      */
     public function render_cta()
     {
-        umbrella_add_custom_css_files(['/assets/css/blocks/akciya-tz.css']);
+        ug_enqueue_style('assets/css/blocks/akciya-tz.css');
 
         $features = [
             ['icon' => 'gift', 'text' => 'Выгодные условия<br>до конца акции'],
@@ -230,7 +230,6 @@ class akciya_tz
 function umbrella_akciya_has_own_hero($post = null)
 {
     $post = get_post($post);
-
     return $post && (has_shortcode($post->post_content, 'akciya_tz_hero')
         || has_shortcode($post->post_content, 'akciya_pb_hero'));
 }
@@ -255,7 +254,6 @@ function umbrella_akcii_contact_form($post_id = null)
     $contact_form = str_replace("_akcii_form_header_", get_post_meta($post_id, 'akcii_form_header', true), $contact_form);
     $contact_form = str_replace("_akcii_form_subheader_", get_post_meta($post_id, 'akcii_form_subheader', true), $contact_form);
     $contact_form = str_replace("_akcii_form_button_text_", get_post_meta($post_id, 'akcii_form_button_text', true), $contact_form);
-
     return $contact_form;
 }
 

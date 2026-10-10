@@ -804,8 +804,8 @@ function open_business_shortcode($atts){
 
          [/section]
         EOTHTML;
-        umbrella_add_custom_css_files(['/assets/css/blocks/open_business.css']);
-        umbrella_add_custom_js_files(['/assets/js/blocks/open_bussnise.js']);
+        ug_enqueue_style('assets/css/blocks/open_business.css');
+        ug_enqueue_script('assets/js/blocks/open_bussnise.js', ['jquery'], ['in_footer' => true, 'strategy' => 'defer']);
         return $html;
     }
 

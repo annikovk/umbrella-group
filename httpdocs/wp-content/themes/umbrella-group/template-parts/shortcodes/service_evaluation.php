@@ -123,8 +123,8 @@ class service_evaluation
            [lightbox id="service_evaluation_zapros_kp"   width="400px"  padding="0px"][contact-form-7 id="13770" title="Форма на главной (Получить предложение)"][/lightbox]
          [/section]
         EOHTML;
-        umbrella_add_custom_css_files(['/assets/css/blocks/service_evaluation.css']);
-        umbrella_add_custom_js_files(['/assets/js/blocks/service_evaluation.js']);
+        ug_enqueue_style('assets/css/blocks/service_evaluation.css');
+        ug_enqueue_script('assets/js/blocks/service_evaluation.js', ['jquery'], ['in_footer' => true, 'strategy' => 'defer']);
         return $html;
     }
 
