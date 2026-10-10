@@ -120,13 +120,13 @@ class Service_tiles
                             <div class="service-tile-guarantee-description">После проверки — подробный отчёт, отражающий «узкие места» в работе организации и способы их устранения. Постдоговорное обслуживание.</div>
                             </div>
                             </div></div>[/col][/row]</div>';
-        umbrella_add_custom_js_files(["/assets/js/blocks/services-tiles.js"]);
+        ug_enqueue_script('/assets/js/blocks/services-tiles.js', ['jquery']);
         if ($this->hide_pages_on_mobile) {
-            umbrella_add_custom_js_files(["/assets/js/blocks/services-tiles-hide-pages-on-mobile.js"]);
+            ug_enqueue_script('/assets/js/blocks/services-tiles-hide-pages-on-mobile.js', ['jquery']);
         }
-        umbrella_add_custom_css_files(['/assets/css/blocks/services-tiles.css']);
+        ug_enqueue_style('/assets/css/blocks/services-tiles.css');
         if (in_array($atts["custom_css"] ?? null, self::CUSTOM_CSS_ALLOWED, true)) {
-            umbrella_add_custom_css_files([$atts["custom_css"]]);
+            ug_enqueue_style((string) $atts["custom_css"]);
         }
         return $html;
     }

@@ -135,9 +135,6 @@ class umbrella_footer
 
 
         }
-
-//        umbrella_add_custom_css_files(['/assets/css/blocks/umbrella_footer.css']);
-//        umbrella_add_custom_js_files(["/assets/js/blocks/umbrella_footer.js"]);
         return $html;
     }
 }

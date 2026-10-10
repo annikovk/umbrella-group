@@ -94,8 +94,12 @@ class cases
             [/section]
             EOHTML;
 
-            umbrella_add_custom_css_files($this->css_files);
-            umbrella_add_custom_js_files($this->js_files);
+            foreach ($this->css_files as $rel) {
+                ug_enqueue_style($rel);
+            }
+            foreach ($this->js_files as $rel) {
+                ug_enqueue_script($rel, ['jquery']);
+            }
             return $html;
         }
 
@@ -134,8 +138,12 @@ class cases
             [/row]
         [/section]
         EOHTML;
-        umbrella_add_custom_css_files($this->css_files);
-        umbrella_add_custom_js_files($this->js_files);
+        foreach ($this->css_files as $rel) {
+            ug_enqueue_style($rel);
+        }
+        foreach ($this->js_files as $rel) {
+            ug_enqueue_script($rel, ['jquery']);
+        }
         return $html;
     }
 

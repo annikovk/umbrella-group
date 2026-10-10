@@ -85,8 +85,8 @@ class why_umbrella
            [/row]
          [/section]
         EOHTML;
-        umbrella_add_custom_css_files(['/assets/css/blocks/why_umbrella.css']);
-        umbrella_add_custom_js_files(["/assets/js/blocks/why_umbrella.js"]);
+        ug_enqueue_style('/assets/css/blocks/why_umbrella.css');
+        ug_enqueue_script('/assets/js/blocks/why_umbrella.js', ['jquery']);
         return $html;
     }
 

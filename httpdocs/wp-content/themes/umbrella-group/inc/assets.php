@@ -343,26 +343,6 @@ add_action('wp_footer', function (): void {
     print_footer_scripts();
 }, 100);
 
-/**
- * @deprecated Переходный шим (спека §3.2): старый API коллектора поверх
- * ug_enqueue_style(). Пути — от корня темы со слэшем, как в шорткодах.
- * Удаляется последним коммитом WS-2, когда grep umbrella_add_custom_ → 0.
- */
-function umbrella_add_custom_css_files(array $files): void
-{
-    foreach ($files as $file) {
-        ug_enqueue_style((string) $file);
-    }
-}
-
-/** @deprecated См. umbrella_add_custom_css_files(). */
-function umbrella_add_custom_js_files(array $files): void
-{
-    foreach ($files as $file) {
-        ug_enqueue_script((string) $file, ['jquery']);
-    }
-}
-
 // До Flatsome, на прежнем месте хэндлов Inter-font, fonts-configuration и
 // custom-form-style: @font-face Inter и PT Serif (fonts/fonts.css) и ug-base
 // (assets/css/base.css — стили, которые Flatsome и custom-css должны

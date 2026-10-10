@@ -92,7 +92,7 @@ function akciya_block_shortcode($atts)
 
 
     }
-    umbrella_add_custom_css_files(['/assets/css/blocks/block-akciya.css']);
+    ug_enqueue_style('/assets/css/blocks/block-akciya.css');
     return $block;
 }
 

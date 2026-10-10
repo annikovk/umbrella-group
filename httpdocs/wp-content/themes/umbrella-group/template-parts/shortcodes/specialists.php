@@ -59,7 +59,9 @@ class specialists
             $tiles .= $this->get_tile($post);
         }
         $tiles .= $this->get_advantages($this->category);
-        umbrella_add_custom_css_files($this->css_file);
+        foreach ($this->css_file as $rel) {
+            ug_enqueue_style($rel);
+        }
         return $tiles;
     }
 

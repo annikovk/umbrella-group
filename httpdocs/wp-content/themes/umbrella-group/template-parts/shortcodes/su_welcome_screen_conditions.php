@@ -33,7 +33,10 @@ class SU_welcome_screen_conditions
         }
         $this->columns_number = $j;
         if (strlen($this->err) > $err_initial_len) {
-            $this->err .= '</ul>' . umbrella_add_custom_css_files($this->css_files);
+            $this->err .= '</ul>';
+            foreach ($this->css_files as $rel) {
+                ug_enqueue_style($rel);
+            }
             return false;
         } else {
             return true;
@@ -102,8 +105,12 @@ class SU_welcome_screen_conditions
             EOHTML;
             $columns .= $column;
         }
-        umbrella_add_custom_css_files($this->css_files);
-        umbrella_add_custom_js_files($this->js_files);
+        foreach ($this->css_files as $rel) {
+            ug_enqueue_style($rel);
+        }
+        foreach ($this->js_files as $rel) {
+            ug_enqueue_script($rel, ['jquery']);
+        }
         return <<<EOHTML
                [row col_style="solid" class="su_welcome_screen_conditions"]
                 $columns

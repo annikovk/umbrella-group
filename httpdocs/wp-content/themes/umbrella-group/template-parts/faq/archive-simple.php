@@ -85,5 +85,5 @@ function umbrella_draw_faq_tiles($posts)
         [/lightbox]
     EOHTML;
     echo do_shortcode($template);
-    umbrella_add_custom_css_files(['/assets/css/pages/faq.css']);
+    ug_enqueue_style('/assets/css/pages/faq.css');
 }

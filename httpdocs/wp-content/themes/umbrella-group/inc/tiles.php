@@ -108,7 +108,7 @@ function umbrella_draw_tiles($posts, $type)
         $tiles = '[row_inner padding="0px 0 0px 0" style="normal" v_align="top" ]' . $tile . '[/row_inner]';
         echo do_shortcode($tiles);
         echo '</div>';
-        umbrella_add_custom_css_files(['/assets/css/blocks/cases-tiles.css']);
+        ug_enqueue_style('/assets/css/blocks/cases-tiles.css');
     } elseif ($type == 'clients') {
         foreach ($posts as $post) {
 
@@ -380,7 +380,7 @@ function umbrella_draw_akcii_tiles($posts)
     $tiles = '[row_inner padding="0px 0 0px 0" style="normal" v_align="top" ]' . $tile . '[/row_inner]';
     echo do_shortcode($tiles);
     echo '</div>';
-    umbrella_add_custom_css_files(['/assets/css/blocks/cases-tiles.css']);
+    ug_enqueue_style('/assets/css/blocks/cases-tiles.css');
 }
 
 /**

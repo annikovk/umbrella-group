@@ -46,8 +46,12 @@ class komanda_specialistov
         [/section]    
         EOHTML;
 
-        umbrella_add_custom_css_files($this->css_file);
-        umbrella_add_custom_js_files($this->js_file);
+        foreach ($this->css_file as $rel) {
+            ug_enqueue_style($rel);
+        }
+        foreach ($this->js_file as $rel) {
+            ug_enqueue_script($rel, ['jquery']);
+        }
         return $html;
     }
 

@@ -21,7 +21,7 @@
                 ?>
                 <?php
                 get_template_part( 'template-parts/posts/content', 'single-akcii' );
-                umbrella_add_custom_css_files(['/assets/css/blocks/akcii.css']);
+                ug_enqueue_style('/assets/css/blocks/akcii.css');
                 ?>
             </div><!-- .article-inner -->
         </article><!-- #-<?php the_ID(); ?> -->

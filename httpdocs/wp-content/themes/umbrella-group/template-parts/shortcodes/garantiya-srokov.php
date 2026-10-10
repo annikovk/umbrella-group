@@ -77,8 +77,8 @@ class garantiya_srokov
            [lightbox id="garantiya-srokov-dogovor-audita"  padding="0px"]<img src="/wp-content/uploads/garantiya-srokov-dogovor-audita.webp" alt="garantiya-srokov-dogovor-audita"> [/lightbox]
          [/section]
         EOHTML;
-        umbrella_add_custom_css_files(['/assets/css/blocks/garantiya_srokov.css']);
-        umbrella_add_custom_js_files(["/assets/js/blocks/garantiya_srokov.js"]);
+        ug_enqueue_style('/assets/css/blocks/garantiya_srokov.css');
+        ug_enqueue_script('/assets/js/blocks/garantiya_srokov.js', ['jquery']);
         return $html;
     }
 

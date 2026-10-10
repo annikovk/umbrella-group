@@ -26,8 +26,8 @@ class request_call_back
            [/row]
         [/section]
         EOHTML;
-        umbrella_add_custom_css_files(['/assets/css/blocks/request_call_back.css']);
-        umbrella_add_custom_js_files(['/assets/js/blocks/request_call_back.js']);
+        ug_enqueue_style('/assets/css/blocks/request_call_back.css');
+        ug_enqueue_script('/assets/js/blocks/request_call_back.js', ['jquery']);
         return $html;
     }
 

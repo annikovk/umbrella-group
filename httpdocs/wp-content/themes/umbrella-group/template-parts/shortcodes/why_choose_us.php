@@ -200,8 +200,7 @@ class why_choose_us
            [/row]
            </noindex>
         EOHTML;
-        umbrella_add_custom_css_files(['/assets/css/blocks/block-laurels.css']);
-        umbrella_add_custom_js_files(['/assets/js/blocks/block-laurels.js']);
+        ug_enqueue_style('/assets/css/blocks/block-laurels.css');
         return $html;
     }
 
