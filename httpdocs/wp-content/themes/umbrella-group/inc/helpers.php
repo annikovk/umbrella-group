@@ -40,6 +40,18 @@ function ug_ru_date(string $format, DateTimeInterface|int|string $date = 'now'):
     return strtr($date->format($format), UG_RU_MONTHS_GENITIVE);
 }
 
+/**
+ * Срок акций «до 01.ММ.ГГГГ» — первое число следующего месяца по времени
+ * сайта. Один источник для блока [akciya_block], плиток архива /akcii/ и
+ * шапки записи акции: прежняя склейка «месяц+1 / 01 / год» 31-го числа
+ * перескакивала месяц, а в декабре давала январь прошедшего года (в плитках
+ * и шапке год был ещё и зашит — 2026).
+ */
+function ug_akcii_deadline(): string
+{
+    return ug_ru_date('d.m.Y', new DateTimeImmutable('first day of next month midnight', wp_timezone()));
+}
+
 /** Путь текущего запроса без query string («/services/licensing/»). */
 function ug_request_path(): string
 {

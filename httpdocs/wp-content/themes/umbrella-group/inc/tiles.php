@@ -344,7 +344,7 @@ function ug_get_posts_by_ids(array $ids, string $post_type = 'post'): array
 /**
  * Плитки архива акций /akcii/ (бывш. template-parts/akcii/archive-2-col.php).
  *
- * Срок «До 01.ММ.2026» — первое число следующего месяца, год зашит в шаблоне.
+ * Срок «До 01.ММ.ГГГГ» — первое число следующего месяца (ug_akcii_deadline()).
  * Ветка «+12 месяцев» для акции 26853 в старом коде не срабатывала никогда:
  * сравнивался объект WP_Post с числом ($post == 26853 → false и PHP Notice),
  * поэтому её нет и здесь — вывод тот же.
@@ -355,7 +355,7 @@ function umbrella_draw_akcii_tiles($posts)
     $tile = "";
 
     foreach ($posts as $post) {
-        $date = "До " . date("d.m.Y", strtotime(date('m', strtotime('+1 month')).'/1/'.date('2026').' 00:00:00'));
+        $date = "До " . ug_akcii_deadline();
 
         $date_and_tag = '<div class="case-item-date-and-tag">' . $date . '</div>';
 

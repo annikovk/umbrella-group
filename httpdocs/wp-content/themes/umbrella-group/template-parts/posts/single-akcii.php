@@ -15,7 +15,7 @@
                     if(get_the_ID() == 23068) {
                         echo "<div style='font-weight: bolder;font-size: 18px;'> <span style='text-transform: uppercase; color: #ec1c23;'>Специальное предложение </span> до ".date("d.m.Y", strtotime(date('m', strtotime('+0 month')).'/26/'.date('Y').' 00:00:00')). '</div>';
                     }else{
-                        echo "<div style='font-weight: bolder;font-size: 18px;'> <span style='text-transform: uppercase; color: #ec1c23;'>Специальное предложение </span> до ".date("d.m.Y", strtotime(date('m', strtotime('+1 month')).'/1/'.date('2026').' 00:00:00')). '</div>';
+                        echo "<div style='font-weight: bolder;font-size: 18px;'> <span style='text-transform: uppercase; color: #ec1c23;'>Специальное предложение </span> до ".ug_akcii_deadline(). '</div>';
                     }
                 }
                 ?>

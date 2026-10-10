@@ -48,9 +48,7 @@ function akciya_block_shortcode($atts)
     } else {
         $button_text = "Узнать подробнее";
     }
-    // «До 1-го числа следующего месяца»: прежняя склейка «месяц+1 / 01 / текущий год»
-    // в декабре давала 01.01 уже прошедшего года, а 31-го числа перескакивала месяц
-    $date = "До " . ug_ru_date('d.m.Y', new DateTimeImmutable('first day of next month midnight', wp_timezone()));
+    $date = "До " . ug_akcii_deadline();
     $button = do_shortcode('[button text="' . $button_text . '" color="white" style="outline" link="' . urldecode(get_permalink($post->ID)) . '"]');
 
     $block = <<<EOV
