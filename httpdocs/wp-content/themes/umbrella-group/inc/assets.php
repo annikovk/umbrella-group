@@ -381,6 +381,21 @@ add_action('after_setup_theme', function (): void {
     remove_action('wp_enqueue_scripts', 'flatsome_google_fonts', 9999);
 });
 
+// CSS плагина wp-add-custom-css (wpacc_settings.main_custom_style, 151 Б)
+// скопирован в assets/css/base.css. Его <link href="/?display_custom_css=css">
+// — блокирующий запрос через полную загрузку WordPress ради тех же правил:
+// снимаем, пока текст в настройках совпадает с копией. Правила там — cursor
+// и padding-bottom с !important, поэтому место в каскаде им не важно.
+// Поправят CSS в админке — хэш не совпадёт, и ссылка плагина вернётся сама.
+const UG_WPACC_COPIED_MD5 = 'eb6b7829da2bc638ab58a2ca88ea426c';
+
+add_action('wp_enqueue_scripts', function (): void {
+    $css = get_option('wpacc_settings')['main_custom_style'] ?? null;
+    if (is_string($css) && md5(str_replace("\r\n", "\n", $css)) === UG_WPACC_COPIED_MD5) {
+        wp_dequeue_style('wp-add-custom-css');
+    }
+}, 10000);
+
 // Основное начертание текста — preload: качается до разбора CSS.
 add_action('wp_head', function (): void {
     printf(
