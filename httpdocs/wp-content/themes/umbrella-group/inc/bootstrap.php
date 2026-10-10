@@ -12,7 +12,7 @@
  *
  * Владельцы файлов по пакетам спеки 1 (§5): helpers — WS-4; cf7, attribution,
  * cookie-notice, legacy-stubs — WS-1; setup, assets — WS-2;
- * post-types, shortcodes, tiles — WS-6; acf — WS-5; layout — WS-3.
+ * post-types, shortcodes, tiles — WS-6; acf — WS-5; layout — WS-3; snippets — WS-8.
  * Новый файл inc/ добавляется строкой сюда тем пакетом, который его создаёт.
  */
 
@@ -29,4 +29,5 @@ require __DIR__ . '/layout.php';
 require __DIR__ . '/tiles.php';
 require __DIR__ . '/post-types.php';
 require __DIR__ . '/shortcodes.php';
+require __DIR__ . '/snippets.php';
 require __DIR__ . '/cookie-notice.php';
