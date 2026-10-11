@@ -7,8 +7,8 @@
  *  - [omatraffic] / [omacid] в шаблоне формы → пустой <input type="hidden">
  *    (раньше — do_shortcode по всей форме и строка атрибуции прямо в HTML:
  *    XSS через utm_*, а кэш раздавал всем атрибуцию первого посетителя);
- *  - остальные шорткоды в форме — только из белого списка (сейчас
- *    wbcr_php_snippet: заголовки 22 форм — сниппеты insert-php);
+ *  - остальные шорткоды в форме — только из белого списка (заголовки форм —
+ *    ug_* из inc/snippets.php, бывшие сниппеты insert-php);
  *  - при отправке оба поля очищаются, а если JS не отработал (поля нет или оно
  *    пустое) — берутся из cookie ug_src / _gaexp. Шаблоны писем ссылаются на
  *    [omatraffic] / [omacid], CF7 подставляет их как поля формы — строка
@@ -38,13 +38,13 @@ add_action('wp_enqueue_scripts', static function (): void {
 
 /**
  * Шорткоды, которые разрешено исполнять внутри шаблона формы CF7.
- * WS-8 (сниппеты → тема) добавляет сюда свои ug_* через фильтр.
+ * Шорткоды сниппетов добавляет inc/snippets.php через фильтр.
  *
  * @return string[]
  */
 function ug_cf7_form_shortcodes(): array
 {
-    return (array) apply_filters('ug_cf7_form_shortcodes', ['wbcr_php_snippet']);
+    return (array) apply_filters('ug_cf7_form_shortcodes', []);
 }
 
 add_filter('wpcf7_form_elements', static function ($html) {
