@@ -16,6 +16,7 @@ function ug_snippet_service_tiles_tax(array $a): void
         'https://taxlab.ru/services/services-le/razreshenie-nalogovyih-sporov/',
         'https://taxlab.ru/services/services-le/strukturirovanie-biznesa/',
         'https://taxlab.ru/services/services-le/soprovozhdenie-nalogovoy-proverki/',
+        'https://taxlab.ru/services/services-le/lichnyj-fond/',
         'https://taxlab.ru/services/audit/nalogovyiy/'
     ));
 }
