@@ -201,11 +201,16 @@ function ws8_render(string $shortcode, ?WP_Post $post, string $uri): string
  *  - id меню: wp_nav_menu раздаёт id один раз за процесс (второй рендер того же
  *    меню получает «menu-main-menu-1» и <li> без id) — артефакт двух рендеров
  *    в одном процессе, на странице меню рендерится один раз;
- *  - номер формы CF7 на странице (wpcf7-f1301-o3) — счётчик за процесс.
+ *  - номер формы CF7 на странице (wpcf7-f1301-o3) — счётчик за процесс;
+ *  - href без кавычек против href='…': тема экранирует ссылку и берёт её в
+ *    кавычки (кнопки памяток 10644/24189), значение то же;
+ *  - вывод var_dump(): в сниппете 9309 он печатался в HTML, в теме убран
+ *    по решению владельца (коммит f45dc69).
  */
 function ws8_loose(string $html): string
 {
     $html = str_replace("\r", '', $html);
+    $html = (string) preg_replace('/array\(\d+\) \{\n.*?\n\}\n?/s', '', $html);
     $seen = [];
     $html = (string) preg_replace_callback(
         '/\b((?:section|row|col|banner|image|text-box|gap|stack|slider|button|accordion|tabs|panel|ux)[_-])(\d{5,})\b|\b[0-9a-f]{13}\b/',
@@ -219,6 +224,7 @@ function ws8_loose(string $html): string
     $html = (string) preg_replace('/ id="menu-item-\d+"/', '', $html);
     $html = (string) preg_replace('/(wpcf7-f\d+(?:-p\d+)?-o)\d+/', '$1N', $html);
     $html = (string) preg_replace('/ id="(menu-[a-z-]+?)(?:-\d+)?"/', ' id="$1"', $html);
+    $html = (string) preg_replace('/\bhref=([^\s\'">]+)/u', "href='$1'", $html);
     return trim((string) preg_replace('/\s+/', ' ', $html));
 }
 
