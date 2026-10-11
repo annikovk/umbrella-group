@@ -3,11 +3,6 @@
  * Сниппет insert-php #9309 «Иконка рейтинга» → [ug_rating_badge]: плашка
  * рейтинга раздела (umbrella_get_ratings) в UX-блоке 9312, который стоит на
  * /services/ (10) и /services/audit/ (34).
- *
- * var_dump($rating) — из сниппета, печатается в HTML и сейчас скрыт обрезкой
- * .laurel-description (height: 64px; overflow: hidden). Убрать — видимое
- * изменение для владельца (третья строка может попасть в бокс на узких
- * экранах), не часть переноса.
  */
 
 declare(strict_types=1);
@@ -46,7 +41,6 @@ EOD;
     <div class="laurel-description">
         <div class="laurel-badge-title"><?php echo $rating['header']; ?></div>
         <div class="laurel-badge-subtitle"><?php echo $rating['subheader']; ?></div>
-		<?php var_dump($rating)?>
     </div>
 </div>
 <style>
