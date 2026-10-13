@@ -70,6 +70,37 @@ class new_main_first_screen
                 'modifier' => 'promo-slide-pasport',
             ],
 
+            [
+                'sub_header' => 'Экспертное сопровождение бизнеса в Новосибирске',
+                'title' => 'ООО в подарок<br>за оформление лицензии<span class="accent">Регистрация ООО = 0&nbsp;руб.!</span>',
+                'descriptions' => [
+                    'Нужна лицензия для бизнеса, но предприятие еще не зарегистрировано? Сэкономьте на регистрации компании — при оформлении лицензии регистрация ООО бесплатно!',
+                ],
+                'features' => [
+                    [
+                        'icon' => 'document',
+                        'title' => 'Подготовим<br>документы',
+                        'text' => 'Соберем пакет документов на регистрацию компании',
+                    ],
+                    [
+                        'icon' => 'users',
+                        'title' => 'Зарегистрируем<br>ООО',
+                        'text' => 'Оформим компанию без лишних хлопот',
+                    ],
+                    [
+                        'icon' => 'shield',
+                        'title' => 'Сопроводим<br>под ключ',
+                        'text' => 'Сопроводим услугу до результата',
+                    ],
+                ],
+                'button_text' => 'Получить ООО в подарок',
+                'button_link' => '/akcii/ooo-v-podarok-za-litsenziyu/',
+                'image' => '/wp-content/uploads/ooo-v-podarok-banner.png',
+                'image_webp' => '/wp-content/uploads/ooo-v-podarok-banner.webp',
+                'image_alt' => 'Регистрация ООО за 0 рублей при оформлении лицензии',
+                'modifier' => 'promo-slide-ooo',
+            ],
+
             /* Слайд «Сибирский налоговый семинар 2027» — снят с главной 22.09.2026,
                оставлен на случай, если акцию вернут в ротацию.
             [
@@ -109,6 +140,7 @@ class new_main_first_screen
             'search' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="11" cy="11" r="6.25" stroke="currentColor" stroke-width="1.8"/><path d="M15.7 15.7 20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
             'document' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 3.75H7A1.25 1.25 0 0 0 5.75 5v14A1.25 1.25 0 0 0 7 20.25h10A1.25 1.25 0 0 0 18.25 19V8L14 3.75Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M13.75 4v4.25H18" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.75 12.5h6.5M8.75 16h4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
             'shield' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 3.5 5 6.2v5.4c0 4.1 2.8 7.4 7 8.9 4.2-1.5 7-4.8 7-8.9V6.2L12 3.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+            'users' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="9" cy="8.5" r="3.25" stroke="currentColor" stroke-width="1.8"/><path d="M3.75 19.25c0-2.9 2.35-5 5.25-5s5.25 2.1 5.25 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M15.5 5.6a3.25 3.25 0 0 1 0 5.8M17.25 14.6c1.8.6 3 2.4 3 4.65" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
             'medical' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9.5 3.75h5V9.5h5.75v5H14.5v5.75h-5V14.5H3.75v-5H9.5V3.75Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
             'shop' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4.75 8.4h14.5v9.85a2.5 2.5 0 0 1-2.5 2.5h-9.5a2.5 2.5 0 0 1-2.5-2.5V8.4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.5 8.4V6.9a3.5 3.5 0 0 1 7 0v1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
             'pill' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g transform="rotate(-45 12 12)"><rect x="2.4" y="8.4" width="19.2" height="7.2" rx="3.6" stroke="currentColor" stroke-width="1.8"/><path d="M12 8.4v7.2" stroke="currentColor" stroke-width="1.8"/></g></svg>',
