@@ -264,6 +264,68 @@
     right: 0;
 }
 
+/* Точки под слайдером: активная вытягивается в полоску, которая заполняется
+   до автоперелистывания (длительность — из JS, --promo-autoplay). */
+.promo-slider-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 32px;
+}
+
+.promo-slider-dot {
+    position: relative;
+    width: 10px;
+    /* у кнопок Flatsome min-width 24px — точка растягивалась в овал */
+    min-width: 0;
+    height: 10px;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 5px;
+    background-color: #D9D9D9;
+    overflow: hidden;
+    cursor: pointer;
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.promo-slider-dot:hover {
+    background-color: #F3B9BB;
+}
+
+.promo-slider-dot span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    background-color: #EC1C23;
+}
+
+.promo-slider-dot.is-active {
+    width: 40px;
+    background-color: #F9D2D3;
+}
+
+.promo-slider-dot.is-active span {
+    width: 100%;
+}
+
+.promo-slider-dot.is-active.is-running span {
+    animation: promo-dot-fill var(--promo-autoplay, 7000ms) linear;
+}
+
+@keyframes promo-dot-fill {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
 /* На широком экране стрелки уходят на поля, и картинке достаётся вся ширина
    контейнера; на экранах поуже они внутри, а картинка становится компактнее. */
 @media screen and (min-width: 1600px) {
@@ -386,6 +448,10 @@
        текста и перекрывают его. */
     .promo-slider {
         padding: 0 0 64px;
+    }
+
+    .promo-slider-dots {
+        margin: 24px 0 20px;
     }
 
     .promo-slider-arrow {

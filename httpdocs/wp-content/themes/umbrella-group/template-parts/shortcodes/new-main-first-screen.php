@@ -487,8 +487,17 @@ class new_main_first_screen
             <button type="button" class="promo-slider-arrow promo-slider-next" data-promo-next aria-label="Следующая акция">$arrow_right</button>
             EOT;
 
+        // Точки: сколько слайдов и какой сейчас; у активной полоска заполняется
+        // до автоперелистывания.
+        $dots = '<div class="promo-slider-dots">';
+        foreach ($slides as $index => $slide) {
+            $dots .= '<button type="button" class="promo-slider-dot' . ($index === 0 ? ' is-active' : '') . '" data-promo-dot="' . $index . '" aria-label="Слайд ' . ($index + 1) . ' из ' . count($slides) . '"><span></span></button>';
+        }
+        $dots .= '</div>';
+
         if (count($slides) < 2) {
             $arrows = '';
+            $dots = '';
         }
 
         return <<<EOT
@@ -496,6 +505,7 @@ class new_main_first_screen
                 <div class="promo-slider-viewport">
                     $slides_html
                 </div>
+                $dots
                 $arrows
             </div>
             EOT;
