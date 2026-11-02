@@ -470,18 +470,20 @@
     }
 }
 
-/* «ООО в подарок», «Аудит», «Бухгалтерия»: заголовок длиннее остальных — без уменьшения «лицензии»
+/* Слайды «ООО в подарок», «Аудит», «Бухгалтерия», «Лицензирование»: заголовок длиннее остальных — без уменьшения «лицензии»
    уходит на третью строку, а красная строка наезжает на картинку. */
 @media screen and (min-width: 850px) {
     .promo-slide-ooo .main-banner-content .text-like-h1,
     .promo-slide-audit .main-banner-content .text-like-h1,
-    .promo-slide-buh .main-banner-content .text-like-h1 {
+    .promo-slide-buh .main-banner-content .text-like-h1,
+    .promo-slide-lic .main-banner-content .text-like-h1 {
         font-size: 46px;
     }
 
     .promo-slide-ooo .main-banner-content .text-like-h1 .accent,
     .promo-slide-audit .main-banner-content .text-like-h1 .accent,
-    .promo-slide-buh .main-banner-content .text-like-h1 .accent {
+    .promo-slide-buh .main-banner-content .text-like-h1 .accent,
+    .promo-slide-lic .main-banner-content .text-like-h1 .accent {
         font-size: 40px;
     }
 }

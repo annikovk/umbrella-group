@@ -166,6 +166,35 @@ class new_main_first_screen
                 'modifier' => 'promo-slide-buh',
             ],
 
+            [
+                'sub_header' => 'Экспертное сопровождение бизнеса в Новосибирске',
+                'title' => 'Лицензирование<br>деятельности под ключ<span class="accent">От подготовки документов до получения лицензии</span>',
+                'descriptions' => [
+                    'Поможем оформить лицензии на медицинскую, образовательную, фармацевтическую и другие виды деятельности, а также разработать паспорта безопасности объектов. Проверим соответствие требованиям и сопроводим процедуру оформления.',
+                ],
+                'features' => [
+                    [
+                        'icon' => 'clipboard-check',
+                        'title' => 'Проверим<br>готовность',
+                        'text' => 'Оценим соответствие установленным требованиям',
+                    ],
+                    [
+                        'icon' => 'copy',
+                        'title' => 'Подготовим<br>документы',
+                        'text' => 'Оформим лицензии и паспорта безопасности',
+                    ],
+                    [
+                        'icon' => 'shield-check',
+                        'title' => 'Сопроводим<br>под ключ',
+                        'text' => 'Поможем пройти проверки и согласования',
+                    ],
+                ],
+                'button_text' => 'Подробнее о лицензировании',
+                'button_link' => '/services/licensing/',
+                'image_alt' => 'Лицензирование деятельности под ключ',
+                'modifier' => 'promo-slide-lic',
+            ],
+
             /* Слайд «Сибирский налоговый семинар 2027» — снят с главной 22.09.2026,
                оставлен на случай, если акцию вернут в ротацию.
             [
@@ -211,6 +240,8 @@ class new_main_first_screen
             'clipboard' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 4.75H7A1.25 1.25 0 0 0 5.75 6v13A1.25 1.25 0 0 0 7 20.25h10A1.25 1.25 0 0 0 18.25 19V6A1.25 1.25 0 0 0 17 4.75h-2" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><rect x="9" y="3.25" width="6" height="3" rx="1" stroke="currentColor" stroke-width="1.8"/><path d="M9 11h6M9 14.5h6M9 18h3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
             'calculator' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="5.75" y="3.75" width="12.5" height="16.5" rx="1.5" stroke="currentColor" stroke-width="1.8"/><path d="M8.75 7.25h6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M9 11.5h.01M12 11.5h.01M15 11.5h.01M9 14.5h.01M12 14.5h.01M15 14.5h.01M9 17.5h.01M12 17.5h.01M15 17.5h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
             'chat' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5 4.75h14A1.25 1.25 0 0 1 20.25 6v9.5A1.25 1.25 0 0 1 19 16.75H10l-4.25 3.5v-3.5H5A1.25 1.25 0 0 1 3.75 15.5V6A1.25 1.25 0 0 1 5 4.75Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 9.25h8M8 12.5h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+            'clipboard-check' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 4.75H7A1.25 1.25 0 0 0 5.75 6v13A1.25 1.25 0 0 0 7 20.25h10A1.25 1.25 0 0 0 18.25 19V6A1.25 1.25 0 0 0 17 4.75h-2" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><rect x="9" y="3.25" width="6" height="3" rx="1" stroke="currentColor" stroke-width="1.8"/><path d="m9 13.5 2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+            'copy' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="8.75" y="8.75" width="11.5" height="11.5" rx="1.5" stroke="currentColor" stroke-width="1.8"/><path d="M15.25 5.25v-.5A1.25 1.25 0 0 0 14 3.5H5A1.25 1.25 0 0 0 3.75 4.75V14A1.25 1.25 0 0 0 5 15.25h.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
             'medical' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9.5 3.75h5V9.5h5.75v5H14.5v5.75h-5V14.5H3.75v-5H9.5V3.75Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
             'shop' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4.75 8.4h14.5v9.85a2.5 2.5 0 0 1-2.5 2.5h-9.5a2.5 2.5 0 0 1-2.5-2.5V8.4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.5 8.4V6.9a3.5 3.5 0 0 1 7 0v1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
             'pill' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g transform="rotate(-45 12 12)"><rect x="2.4" y="8.4" width="19.2" height="7.2" rx="3.6" stroke="currentColor" stroke-width="1.8"/><path d="M12 8.4v7.2" stroke="currentColor" stroke-width="1.8"/></g></svg>',
