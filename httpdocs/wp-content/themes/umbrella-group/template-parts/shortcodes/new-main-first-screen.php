@@ -11,6 +11,8 @@ class new_main_first_screen
     public static function get_slides()
     {
         return [
+            /* Слайды «Товарный знак −15%» и «Паспорт безопасности −10 000 ₽» — акции
+               закончились, сняты с главной 02.11.2026. Оставлены на случай повтора.
             [
                 'sub_header' => 'Экспертное сопровождение бизнеса в Новосибирске',
                 'title' => 'Ваш бренд работает<br>на вас.<span class="accent">А кому принадлежат<br>права на него?</span>',
@@ -69,6 +71,7 @@ class new_main_first_screen
                 'image_alt' => 'Паспорт антитеррористической защищённости объекта — скидка 10 000 рублей',
                 'modifier' => 'promo-slide-pasport',
             ],
+            */
 
             [
                 'sub_header' => 'Экспертное сопровождение бизнеса в Новосибирске',
@@ -248,13 +251,17 @@ class new_main_first_screen
             $slides_html .= $this->render_slide($slide, $index);
         }
 
-        // Стрелки показываем всегда — место под вторую акцию видно сразу.
+        // Стрелки — только когда есть что листать.
         $arrow_left = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 4l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
         $arrow_right = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8 4l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
         $arrows = <<<EOT
             <button type="button" class="promo-slider-arrow promo-slider-prev" data-promo-prev aria-label="Предыдущая акция">$arrow_left</button>
             <button type="button" class="promo-slider-arrow promo-slider-next" data-promo-next aria-label="Следующая акция">$arrow_right</button>
             EOT;
+
+        if (count($slides) < 2) {
+            $arrows = '';
+        }
 
         return <<<EOT
             <div class="promo-slider" data-promo-slider>
@@ -278,7 +285,7 @@ class new_main_first_screen
                     <li><a href="/services/licensing/">Лицензирование</a></li>
                     <li><a href="/services/register-elimination/">Регистрация</a></li>
                     <li><a href="/services/register-elimination/likvidatsiya-ooo/">Ликвидация</a></li>
-                    <li><a href="/services/licensing/registracija-tovarnogo-znaka/">Товарный знак</a></li>
+                    <li><a href="/services/intellektualnoe-pravo/registracija-tovarnogo-znaka/">Товарный знак</a></li>
                     <li><a href="/services/services-le/">Юридические услуги</a></li>
                 </ul>
             </div>
