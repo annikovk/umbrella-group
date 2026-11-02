@@ -160,7 +160,9 @@ class new_main_first_screen
                 ],
                 'button_text' => 'Подробнее об услугах',
                 'button_link' => '/services/bukhgalterskie-uslugi/',
-                'image_alt' => 'Бухгалтерские услуги для бизнеса',
+                'image' => '/wp-content/uploads/buhgalteriya-banner.png',
+                'image_webp' => '/wp-content/uploads/buhgalteriya-banner.webp',
+                'image_alt' => 'Папка «Бухгалтерия», отчёты с графиками и калькулятор — бухгалтерские услуги для бизнеса',
                 'modifier' => 'promo-slide-buh',
             ],
 
