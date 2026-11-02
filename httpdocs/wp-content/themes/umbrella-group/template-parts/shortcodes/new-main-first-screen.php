@@ -104,6 +104,36 @@ class new_main_first_screen
                 'modifier' => 'promo-slide-ooo',
             ],
 
+            [
+                'sub_header' => 'Экспертное сопровождение бизнеса в Новосибирске',
+                'title' => 'Аудиторские услуги<br>для бизнеса<span class="accent">Проверьте учёт сегодня, чтобы избежать проблем завтра</span>',
+                'descriptions' => [
+                    'Обязательный и инициативный аудит, проверка налоговых рисков и отдельных участков учёта. Поможем выявить ошибки, оценить их последствия и разобраться, что требует внимания.',
+                ],
+                'features' => [
+                    [
+                        'icon' => 'doc-check',
+                        'title' => 'Проверим<br>учёт',
+                        'text' => 'Оценим достоверность отчётности и корректность учёта',
+                    ],
+                    [
+                        'icon' => 'shield-check',
+                        'title' => 'Выявим<br>риски',
+                        'text' => 'Найдём ошибки и возможные<br>налоговые последствия',
+                    ],
+                    [
+                        'icon' => 'clipboard',
+                        'title' => 'Предложим<br>решения',
+                        'text' => 'Дадим рекомендации<br>по устранению нарушений',
+                    ],
+                ],
+                'button_text' => 'Подробнее об аудите',
+                'button_link' => '/services/audit/',
+                'image' => '',
+                'image_alt' => 'Аудиторские услуги для бизнеса',
+                'modifier' => 'promo-slide-audit',
+            ],
+
             /* Слайд «Сибирский налоговый семинар 2027» — снят с главной 22.09.2026,
                оставлен на случай, если акцию вернут в ротацию.
             [
@@ -144,6 +174,9 @@ class new_main_first_screen
             'document' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 3.75H7A1.25 1.25 0 0 0 5.75 5v14A1.25 1.25 0 0 0 7 20.25h10A1.25 1.25 0 0 0 18.25 19V8L14 3.75Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M13.75 4v4.25H18" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.75 12.5h6.5M8.75 16h4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
             'shield' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 3.5 5 6.2v5.4c0 4.1 2.8 7.4 7 8.9 4.2-1.5 7-4.8 7-8.9V6.2L12 3.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
             'users' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="9" cy="8.5" r="3.25" stroke="currentColor" stroke-width="1.8"/><path d="M3.75 19.25c0-2.9 2.35-5 5.25-5s5.25 2.1 5.25 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M15.5 5.6a3.25 3.25 0 0 1 0 5.8M17.25 14.6c1.8.6 3 2.4 3 4.65" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+            'doc-check' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 3.75H7A1.25 1.25 0 0 0 5.75 5v14A1.25 1.25 0 0 0 7 20.25h10A1.25 1.25 0 0 0 18.25 19V8L14 3.75Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M13.75 4v4.25H18" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m9 14 2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+            'shield-check' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 3.5 5 6.2v5.4c0 4.1 2.8 7.4 7 8.9 4.2-1.5 7-4.8 7-8.9V6.2L12 3.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+            'clipboard' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 4.75H7A1.25 1.25 0 0 0 5.75 6v13A1.25 1.25 0 0 0 7 20.25h10A1.25 1.25 0 0 0 18.25 19V6A1.25 1.25 0 0 0 17 4.75h-2" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><rect x="9" y="3.25" width="6" height="3" rx="1" stroke="currentColor" stroke-width="1.8"/><path d="M9 11h6M9 14.5h6M9 18h3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
             'medical' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9.5 3.75h5V9.5h5.75v5H14.5v5.75h-5V14.5H3.75v-5H9.5V3.75Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
             'shop' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4.75 8.4h14.5v9.85a2.5 2.5 0 0 1-2.5 2.5h-9.5a2.5 2.5 0 0 1-2.5-2.5V8.4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.5 8.4V6.9a3.5 3.5 0 0 1 7 0v1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
             'pill' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g transform="rotate(-45 12 12)"><rect x="2.4" y="8.4" width="19.2" height="7.2" rx="3.6" stroke="currentColor" stroke-width="1.8"/><path d="M12 8.4v7.2" stroke="currentColor" stroke-width="1.8"/></g></svg>',
@@ -206,8 +239,8 @@ class new_main_first_screen
 
         $button_desktop = $this->render_button($slide, 'hide-for-small');
         $button_mobile = $this->render_button($slide, 'show-for-small');
-        $image = $slide['image'];
-        $image_alt = $slide['image_alt'];
+        $image = isset($slide['image']) ? $slide['image'] : '';
+        $image_alt = isset($slide['image_alt']) ? $slide['image_alt'] : '';
         // Первый слайд — LCP главной: грузится сразу и первым (мимо lazy-load
         // Flatsome, см. ug_eager_img), остальные скрыты до клика — в конец очереди.
         $loading = $index === 0 ? ' fetchpriority="high"' : ' loading="lazy" fetchpriority="low"';
@@ -222,6 +255,8 @@ class new_main_first_screen
         if (!empty($slide['image_webp'])) {
             $picture = '<picture><source srcset="' . $slide['image_webp'] . '" type="image/webp">' . $picture . '</picture>';
         }
+        // Слайд без картинки — без правой колонки.
+        $right = $image === '' ? '' : '<div class="right">' . $picture . '</div>';
 
         return <<<EOT
             <div class="promo-slide$active$modifier" data-promo-slide="$index">
@@ -234,9 +269,7 @@ class new_main_first_screen
                         $features
                         $button_desktop
                     </div>
-                    <div class="right">
-                        $picture
-                    </div>
+                    $right
                     $button_mobile
                 </div>
             </div>

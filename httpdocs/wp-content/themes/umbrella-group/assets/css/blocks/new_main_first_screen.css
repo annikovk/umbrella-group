@@ -205,12 +205,19 @@
     padding: 0 48px;
 }
 
+/* Слайды лежат стопкой в одной ячейке сетки: высота слайдера — по самому
+   высокому, и при автолистании страница под ним не прыгает. */
+.promo-slider-viewport {
+    display: grid;
+}
+
 .promo-slide {
-    display: none;
+    grid-area: 1 / 1;
+    visibility: hidden;
 }
 
 .promo-slide.is-active {
-    display: block;
+    visibility: visible;
 }
 
 .promo-slider-arrow {
@@ -463,14 +470,16 @@
     }
 }
 
-/* «ООО в подарок»: заголовок длиннее остальных — без уменьшения «лицензии»
+/* «ООО в подарок» и «Аудит»: заголовок длиннее остальных — без уменьшения «лицензии»
    уходит на третью строку, а красная строка наезжает на картинку. */
 @media screen and (min-width: 850px) {
-    .promo-slide-ooo .main-banner-content .text-like-h1 {
+    .promo-slide-ooo .main-banner-content .text-like-h1,
+    .promo-slide-audit .main-banner-content .text-like-h1 {
         font-size: 46px;
     }
 
-    .promo-slide-ooo .main-banner-content .text-like-h1 .accent {
+    .promo-slide-ooo .main-banner-content .text-like-h1 .accent,
+    .promo-slide-audit .main-banner-content .text-like-h1 .accent {
         font-size: 40px;
     }
 }

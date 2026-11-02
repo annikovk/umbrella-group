@@ -1,4 +1,5 @@
-/* Слайдер акций на первом экране главной: стрелки влево/вправо, свайп на телефоне.
+/* Слайдер акций на первом экране главной: стрелки влево/вправо, свайп на телефоне,
+   автолистание.
    Скрипт в подвале с defer — DOM к этому моменту уже готов. */
 (function () {
     var sliders = document.querySelectorAll('[data-promo-slider]');
@@ -15,8 +16,36 @@
 
         var current = 0;
 
+        // Автолистание: следующий слайд раз в AUTOPLAY_MS. Курсор над слайдером
+        // ставит на паузу, ручное листание начинает отсчёт заново.
+        var AUTOPLAY_MS = 7000;
+        var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var timer = null;
+        var hovered = false;
+
+        function restartAutoplay() {
+            clearTimeout(timer);
+            if (reduceMotion || hovered || document.hidden) {
+                return;
+            }
+            timer = setTimeout(function () {
+                show(current + 1);
+            }, AUTOPLAY_MS);
+        }
+
+        slider.addEventListener('mouseenter', function () {
+            hovered = true;
+            clearTimeout(timer);
+        });
+        slider.addEventListener('mouseleave', function () {
+            hovered = false;
+            restartAutoplay();
+        });
+        document.addEventListener('visibilitychange', restartAutoplay);
+
         function show(index) {
             current = (index + slides.length) % slides.length;
+            restartAutoplay();
             for (var i = 0; i < slides.length; i++) {
                 if (i === current) {
                     slides[i].classList.add('is-active');
@@ -61,5 +90,7 @@
             startX = null;
             startY = null;
         }, {passive: true});
+
+        restartAutoplay();
     }
 })();
