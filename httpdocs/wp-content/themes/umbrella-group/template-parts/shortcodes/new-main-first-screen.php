@@ -253,7 +253,9 @@ class new_main_first_screen
                 ],
                 'button_text' => 'Подробнее об услугах',
                 'button_link' => '/services/register-elimination/',
-                'image_alt' => 'Регистрация и ликвидация компаний',
+                'image' => '/wp-content/uploads/registraciya-likvidaciya-banner.png',
+                'image_webp' => '/wp-content/uploads/registraciya-likvidaciya-banner.webp',
+                'image_alt' => 'Ноутбук, документы ЕГРЮЛ и печать — регистрация и ликвидация компаний',
                 'modifier' => 'promo-slide-reg',
             ],
 
