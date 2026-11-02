@@ -17,9 +17,9 @@ function ug_snippet_callback_subtitle(array $a): void
         echo "Ведущий бухгалтер позвонит Вам в ближайшее время и проконсультирует! Режим работы: с 09:00 до 18:00 по Новосибирску.";
     } else if (strpos($uri, "services/licensing/litsenziya-na-meditsinskuyu-deyatelnost") !== false) {
         echo "Заполните онлайн-форму, и наши специалисты свяжутся с Вами";
-    } else if (strpos($uri, "services/licensing/registracija-tovarnogo-znaka") !== false) {
+    } else if (strpos($uri, "services/licensing/registracija-tovarnogo-znaka") !== false || strpos($uri, "services/intellektualnoe-pravo/registracija-tovarnogo-znaka") !== false) {
         echo "Заполните онлайн-форму, и наши специалисты свяжутся с Вами";
-    } else if (strpos($uri, "services/licensing/") !== false) {
+    } else if (strpos($uri, "services/licensing/") !== false || preg_match('~services/intellektualnoe-pravo/[^/?]~', $uri)) {
         echo "Специалист по лицензированию позвонит Вам в ближайшее время и проконсультирует! Режим работы: с 09:00 до 18:00 по Новосибирску.";
     } else if (strpos($uri, "services/services-le") !== false) {
         echo "Наш юрист позвонит Вам в ближайшее время и проконсультирует! Режим работы: с 09:00 до 18:00 по Новосибирску.";

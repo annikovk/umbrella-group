@@ -161,7 +161,8 @@ if ($ug_quiz === null) {
     if (str_contains($ug_uri, 'register-elimination')) {
         // Как было: загрузчик стартует по DOMContentLoaded.
         $ug_quiz = ['init' => $ug_quiz_602, 'on_ready' => true];
-    } elseif (!str_contains($ug_uri, 'licensing')) {
+    } elseif (!str_contains($ug_uri, 'licensing') && !preg_match('~/services/intellektualnoe-pravo/[^/?]~', $ug_uri)) {
+        // страницы, перенесённые из «Лицензирования» в «Интеллектуальное право» (2026-10-23), — без квиза, как раньше
         $ug_quiz = ['init' => $ug_quiz_default];
     }
 }

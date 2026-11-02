@@ -10,7 +10,7 @@ function business_direction_shortcode($atts){
                     <li><a href="/services/licensing/">Лицензирование</a></li>
                     <li><a href="/services/register-elimination/">Регистрация</a></li>
                     <li><a href="/services/register-elimination/likvidatsiya-ooo/">Ликвидация</a></li>
-                    <li><a href="/services/licensing/registracija-tovarnogo-znaka/">Товарный знак</a></li>
+                    <li><a href="/services/intellektualnoe-pravo/registracija-tovarnogo-znaka/">Товарный знак</a></li>
                     <li><a href="/services/services-le/">Юридические услуги</a></li>
                 </ul>
             </div>

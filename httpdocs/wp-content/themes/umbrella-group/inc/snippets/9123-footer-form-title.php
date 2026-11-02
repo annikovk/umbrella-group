@@ -24,7 +24,7 @@ function ug_snippet_footer_form_title(array $a): void
         echo $subheader . "Получите оценку стоимости <br/> и сроков аудита" . $p_end;
     } else if (strpos($uri, "services/bukhgalterskie-uslugi/") !== false) {
         echo $subheader . "Бесплатная консультация ведущего бухгалтера" . $p_end;
-    } else if (strpos($uri, "services/licensing/") !== false) {
+    } else if (strpos($uri, "services/licensing/") !== false || preg_match('~services/intellektualnoe-pravo/[^/?]~', $uri)) {
         echo $subheader . "Бесплатная консультация специалиста по лицензированию" . $p_end;
     } else if (strpos($uri, "services/services-le") !== false) {
         echo $subheader . "Консультация юриста" . $p_end;

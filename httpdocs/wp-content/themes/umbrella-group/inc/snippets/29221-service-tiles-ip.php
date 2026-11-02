@@ -69,9 +69,9 @@ function ug_snippet_service_tiles_by_url(array $service_urls): void
 function ug_snippet_service_tiles_ip(array $a): void
 {
     ug_snippet_service_tiles_by_url(array(
-        'https://taxlab.ru/services/licensing/obsluzhivane-tovarnyh-znakov/',
-        'https://taxlab.ru/services/licensing/registracija-tovarnogo-znaka/',
-        'https://taxlab.ru/services/licensing/registratsiya-litsenzionnogo-dogovora/',
+        'https://taxlab.ru/services/intellektualnoe-pravo/obsluzhivane-tovarnyh-znakov/',
+        'https://taxlab.ru/services/intellektualnoe-pravo/registracija-tovarnogo-znaka/',
+        'https://taxlab.ru/services/intellektualnoe-pravo/registratsiya-litsenzionnogo-dogovora/',
         'https://taxlab.ru/services/services-le/sporyi-v-sfere-intellektualnyih-prav/'
     ));
 }
