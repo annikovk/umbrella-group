@@ -315,7 +315,9 @@ class new_main_first_screen
                 ],
                 'button_text' => 'Подробнее об услугах',
                 'button_link' => '/services/services-le/',
-                'image_alt' => 'Юридические услуги для бизнеса',
+                'image' => '/wp-content/uploads/yuridicheskie-uslugi-banner.png',
+                'image_webp' => '/wp-content/uploads/yuridicheskie-uslugi-banner.webp',
+                'image_alt' => 'Договоры, судейский молоток и весы правосудия — юридические услуги для бизнеса',
                 'modifier' => 'promo-slide-law',
             ],
 
@@ -557,10 +559,6 @@ class new_main_first_screen
             </div>
             [lightbox width="400px" padding="0" id="main-banner-contact-form-lightbox"]
             [contact-form-7 id="13619" title="Форма на главной (узнать стоимость услуг)"]
-            [/lightbox]
-
-            [lightbox width="400px" padding="0" id="main-banner-contact-form-lightbox-seminar"]
-            [contact-form-7 id="080e72d" title="Форма для семинара"]
             [/lightbox]
 
             [lightbox width="400px" padding="0" id="main-banner-contact-form-lightboxx"]
