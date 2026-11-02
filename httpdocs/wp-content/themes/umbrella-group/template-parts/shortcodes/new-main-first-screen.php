@@ -135,6 +135,35 @@ class new_main_first_screen
                 'modifier' => 'promo-slide-audit',
             ],
 
+            [
+                'sub_header' => 'Экспертное сопровождение бизнеса в Новосибирске',
+                'title' => 'Бухгалтерские услуги<br>для бизнеса<span class="accent">Ваш учёт — под контролем профессионалов</span>',
+                'descriptions' => [
+                    'Ведение и восстановление бухгалтерского учёта, подготовка отчётности, расчёт налогов и консультации. Возьмём на себя бухгалтерские задачи, чтобы вы могли сосредоточиться на развитии бизнеса.',
+                ],
+                'features' => [
+                    [
+                        'icon' => 'calculator',
+                        'title' => 'Ведём<br>учёт',
+                        'text' => 'От первичных документов до отчётности',
+                    ],
+                    [
+                        'icon' => 'doc-check',
+                        'title' => 'Рассчитываем<br>налоги',
+                        'text' => 'Следим за сроками и корректностью расчётов',
+                    ],
+                    [
+                        'icon' => 'chat',
+                        'title' => 'Консультируем',
+                        'text' => 'Помогаем разобраться в сложных вопросах учёта',
+                    ],
+                ],
+                'button_text' => 'Подробнее об услугах',
+                'button_link' => '/services/bukhgalterskie-uslugi/',
+                'image_alt' => 'Бухгалтерские услуги для бизнеса',
+                'modifier' => 'promo-slide-buh',
+            ],
+
             /* Слайд «Сибирский налоговый семинар 2027» — снят с главной 22.09.2026,
                оставлен на случай, если акцию вернут в ротацию.
             [
@@ -178,6 +207,8 @@ class new_main_first_screen
             'doc-check' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 3.75H7A1.25 1.25 0 0 0 5.75 5v14A1.25 1.25 0 0 0 7 20.25h10A1.25 1.25 0 0 0 18.25 19V8L14 3.75Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M13.75 4v4.25H18" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m9 14 2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
             'shield-check' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 3.5 5 6.2v5.4c0 4.1 2.8 7.4 7 8.9 4.2-1.5 7-4.8 7-8.9V6.2L12 3.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
             'clipboard' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 4.75H7A1.25 1.25 0 0 0 5.75 6v13A1.25 1.25 0 0 0 7 20.25h10A1.25 1.25 0 0 0 18.25 19V6A1.25 1.25 0 0 0 17 4.75h-2" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><rect x="9" y="3.25" width="6" height="3" rx="1" stroke="currentColor" stroke-width="1.8"/><path d="M9 11h6M9 14.5h6M9 18h3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+            'calculator' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="5.75" y="3.75" width="12.5" height="16.5" rx="1.5" stroke="currentColor" stroke-width="1.8"/><path d="M8.75 7.25h6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M9 11.5h.01M12 11.5h.01M15 11.5h.01M9 14.5h.01M12 14.5h.01M15 14.5h.01M9 17.5h.01M12 17.5h.01M15 17.5h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
+            'chat' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5 4.75h14A1.25 1.25 0 0 1 20.25 6v9.5A1.25 1.25 0 0 1 19 16.75H10l-4.25 3.5v-3.5H5A1.25 1.25 0 0 1 3.75 15.5V6A1.25 1.25 0 0 1 5 4.75Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 9.25h8M8 12.5h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
             'medical' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9.5 3.75h5V9.5h5.75v5H14.5v5.75h-5V14.5H3.75v-5H9.5V3.75Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
             'shop' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4.75 8.4h14.5v9.85a2.5 2.5 0 0 1-2.5 2.5h-9.5a2.5 2.5 0 0 1-2.5-2.5V8.4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.5 8.4V6.9a3.5 3.5 0 0 1 7 0v1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
             'pill' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g transform="rotate(-45 12 12)"><rect x="2.4" y="8.4" width="19.2" height="7.2" rx="3.6" stroke="currentColor" stroke-width="1.8"/><path d="M12 8.4v7.2" stroke="currentColor" stroke-width="1.8"/></g></svg>',
