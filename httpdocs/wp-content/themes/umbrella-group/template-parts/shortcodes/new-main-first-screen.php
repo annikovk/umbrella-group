@@ -199,7 +199,7 @@ class new_main_first_screen
 
             [
                 'sub_header' => 'Экспертное сопровождение бизнеса в Новосибирске',
-                'title' => 'Защита интеллектуальной<br>собственности<span class="accent">Ваш бренд, идеи и разработки — под&nbsp;правовой защитой</span>',
+                'title' => 'Защита интеллектуальной<br>собственности<span class="accent">Ваш бренд, идеи и разработки&nbsp;—<br>под правовой защитой</span>',
                 'descriptions' => [
                     'Поможем зарегистрировать товарный знак, защитить права на интеллектуальную собственность и разобраться с вопросами её использования. От проверки обозначений до оформления документов и сопровождения регистрации.',
                 ],
@@ -222,7 +222,9 @@ class new_main_first_screen
                 ],
                 'button_text' => 'Подробнее об услугах',
                 'button_link' => '/services/intellektualnoe-pravo/',
-                'image_alt' => 'Защита интеллектуальной собственности',
+                'image' => '/wp-content/uploads/intellektualnoe-pravo-banner.png',
+                'image_webp' => '/wp-content/uploads/intellektualnoe-pravo-banner.webp',
+                'image_alt' => 'Папка «Интеллектуальное право», товарный знак и щит TM — защита интеллектуальной собственности',
                 'modifier' => 'promo-slide-ip',
             ],
 

@@ -490,3 +490,11 @@
         font-size: 40px;
     }
 }
+
+/* «Интеллектуальное право»: красная строка длиннее остальных — при 40px
+   «Ваш бренд, идеи и разработки —» не помещается в колонку рядом с картинкой. */
+@media screen and (min-width: 850px) {
+    .promo-slide-ip .main-banner-content .text-like-h1 .accent {
+        font-size: 36px;
+    }
+}
