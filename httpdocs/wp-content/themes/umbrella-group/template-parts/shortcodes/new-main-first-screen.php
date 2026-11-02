@@ -228,6 +228,35 @@ class new_main_first_screen
                 'modifier' => 'promo-slide-ip',
             ],
 
+            [
+                'sub_header' => 'Экспертное сопровождение бизнеса в Новосибирске',
+                'title' => 'Регистрация и ликвидация<br>компаний<span class="accent">От открытия бизнеса до завершения его деятельности</span>',
+                'descriptions' => [
+                    'Поможем зарегистрировать ООО или ИП, внести изменения в учредительные документы, провести реорганизацию или ликвидацию компании. Возьмём на себя подготовку документов и юридическое сопровождение всех процедур.',
+                ],
+                'features' => [
+                    [
+                        'icon' => 'building',
+                        'title' => 'Зарегистрируем<br>бизнес',
+                        'text' => 'Подготовим документы для открытия ООО или ИП',
+                    ],
+                    [
+                        'icon' => 'edit',
+                        'title' => 'Оформим<br>изменения',
+                        'text' => 'Сопроводим изменения в ЕГРЮЛ и учредительных документах',
+                    ],
+                    [
+                        'icon' => 'clipboard-check',
+                        'title' => 'Проведём<br>ликвидацию',
+                        'text' => 'Поможем завершить деятельность компании с соблюдением требований закона',
+                    ],
+                ],
+                'button_text' => 'Подробнее об услугах',
+                'button_link' => '/services/register-elimination/',
+                'image_alt' => 'Регистрация и ликвидация компаний',
+                'modifier' => 'promo-slide-reg',
+            ],
+
             /* Слайд «Сибирский налоговый семинар 2027» — снят с главной 22.09.2026,
                оставлен на случай, если акцию вернут в ротацию.
             [
@@ -275,6 +304,8 @@ class new_main_first_screen
             'chat' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5 4.75h14A1.25 1.25 0 0 1 20.25 6v9.5A1.25 1.25 0 0 1 19 16.75H10l-4.25 3.5v-3.5H5A1.25 1.25 0 0 1 3.75 15.5V6A1.25 1.25 0 0 1 5 4.75Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 9.25h8M8 12.5h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
             'clipboard-check' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 4.75H7A1.25 1.25 0 0 0 5.75 6v13A1.25 1.25 0 0 0 7 20.25h10A1.25 1.25 0 0 0 18.25 19V6A1.25 1.25 0 0 0 17 4.75h-2" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><rect x="9" y="3.25" width="6" height="3" rx="1" stroke="currentColor" stroke-width="1.8"/><path d="m9 13.5 2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
             'copy' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="8.75" y="8.75" width="11.5" height="11.5" rx="1.5" stroke="currentColor" stroke-width="1.8"/><path d="M15.25 5.25v-.5A1.25 1.25 0 0 0 14 3.5H5A1.25 1.25 0 0 0 3.75 4.75V14A1.25 1.25 0 0 0 5 15.25h.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+            'building' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4.75 20.25V5A1.25 1.25 0 0 1 6 3.75h7A1.25 1.25 0 0 1 14.25 5v15.25M14.25 9.75H18A1.25 1.25 0 0 1 19.25 11v9.25M3 20.25h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 7.75h3M8 11h3M8 14.25h3M17 13.5v.01M17 16.75v.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+            'edit' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M11 4.75H6A1.25 1.25 0 0 0 4.75 6v12A1.25 1.25 0 0 0 6 19.25h12A1.25 1.25 0 0 0 19.25 18v-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M17.5 3.9a1.9 1.9 0 0 1 2.6 2.6L12 14.6l-3.25.65L9.4 12l8.1-8.1Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
             'medical' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9.5 3.75h5V9.5h5.75v5H14.5v5.75h-5V14.5H3.75v-5H9.5V3.75Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
             'shop' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4.75 8.4h14.5v9.85a2.5 2.5 0 0 1-2.5 2.5h-9.5a2.5 2.5 0 0 1-2.5-2.5V8.4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.5 8.4V6.9a3.5 3.5 0 0 1 7 0v1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
             'pill' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g transform="rotate(-45 12 12)"><rect x="2.4" y="8.4" width="19.2" height="7.2" rx="3.6" stroke="currentColor" stroke-width="1.8"/><path d="M12 8.4v7.2" stroke="currentColor" stroke-width="1.8"/></g></svg>',
