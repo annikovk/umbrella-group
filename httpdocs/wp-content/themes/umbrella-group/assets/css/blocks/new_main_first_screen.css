@@ -314,7 +314,7 @@
 }
 
 .promo-slider-dot.is-active.is-running span {
-    animation: promo-dot-fill var(--promo-autoplay, 7000ms) linear;
+    animation: promo-dot-fill var(--promo-autoplay, 9000ms) linear;
 }
 
 @keyframes promo-dot-fill {
@@ -480,20 +480,36 @@
         margin-left: 0;
     }
 
+    /* Пункты — в один ряд, только иконка и название: столбиком с пояснениями
+       слайд занимал три экрана и кнопка уходила далеко вниз. */
     .promo-features {
-        flex-direction: column;
-        align-items: center;
-        gap: 24px;
-        margin: 24px 0 8px;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 12px;
+        margin: 20px 0 8px;
         text-align: center;
     }
 
     .promo-feature {
-        max-width: 260px;
+        flex: 1 1 0;
+        max-width: 110px;
     }
 
     .promo-feature-icon {
-        margin: 0 auto 12px;
+        width: 40px;
+        height: 40px;
+        margin: 0 auto 8px;
+    }
+
+    .promo-feature-title {
+        font-size: 13px;
+        line-height: 130%;
+        margin-bottom: 0;
+    }
+
+    .promo-feature-text {
+        display: none;
     }
 
     .main-banner-content .banner-button {
@@ -567,14 +583,10 @@
     .promo-slide-reg .main-banner-content .text-like-h1 .accent,
     .promo-slide-tax .main-banner-content .text-like-h1 .accent,
     .promo-slide-law .main-banner-content .text-like-h1 .accent {
-        font-size: 40px;
+        /* заметно мельче заголовка (46px), чтобы не спорила с ним */
+        font-size: 30px;
+        line-height: 1.2;
+        margin-top: 8px;
     }
 }
 
-/* «Интеллектуальное право»: красная строка длиннее остальных — при 40px
-   «Ваш бренд, идеи и разработки —» не помещается в колонку рядом с картинкой. */
-@media screen and (min-width: 850px) {
-    .promo-slide-ip .main-banner-content .text-like-h1 .accent {
-        font-size: 36px;
-    }
-}

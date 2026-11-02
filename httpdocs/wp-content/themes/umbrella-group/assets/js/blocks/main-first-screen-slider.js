@@ -18,7 +18,7 @@
 
         // Автолистание: следующий слайд раз в AUTOPLAY_MS. Курсор над слайдером
         // ставит на паузу, ручное листание начинает отсчёт заново.
-        var AUTOPLAY_MS = 7000;
+        var AUTOPLAY_MS = 9000;
         var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         var timer = null;
         var hovered = false;
