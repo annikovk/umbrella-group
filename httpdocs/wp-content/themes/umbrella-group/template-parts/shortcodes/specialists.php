@@ -140,6 +140,12 @@ class specialists
             'post_type' => 'specialist',
             'meta_key' => 'specialist_branch',
             'meta_query' => array(
+                // Специалисты «только для страницы Команда» ([team_page]) сюда не идут.
+                [
+                    'relation' => 'OR',
+                    ['key' => 'specialist_team_only', 'compare' => 'NOT EXISTS'],
+                    ['key' => 'specialist_team_only', 'value' => 'Да', 'compare' => '!='],
+                ],
                 array(
                     'key' => 'specialist_branch',
                     'value' => $category,

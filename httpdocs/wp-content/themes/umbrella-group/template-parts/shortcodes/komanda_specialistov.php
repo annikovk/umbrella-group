@@ -187,6 +187,12 @@ class komanda_specialistov
                 )
             );
         }
+        // Специалисты «только для страницы Команда» ([team_page]) сюда не идут.
+        $args['meta_query'][] = [
+            'relation' => 'OR',
+            ['key' => 'specialist_team_only', 'compare' => 'NOT EXISTS'],
+            ['key' => 'specialist_team_only', 'value' => 'Да', 'compare' => '!='],
+        ];
         return get_posts($args);
     }
 

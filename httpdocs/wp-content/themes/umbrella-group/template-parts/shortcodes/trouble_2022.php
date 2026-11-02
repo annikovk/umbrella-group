@@ -14,31 +14,36 @@ class trouble_2022
         EOHTML;
 
          } else {
+        // Кейсы-примеры: выездная проверка −63 млн и камеральная по УСН. Своих страниц
+        // у кейсов нет (/case/… редиректит на главную) — ведём в список кейсов, на
+        // вкладку «Юридические услуги» (хэш разбирает cases.js).
+        $case_tax = $case_usn = '/about/cases/#Yuridicheskie_uslugi';
         $html = <<<EOHTML
          [section id='trouble_2022'  padding="0px"]
            [row]
             [col  span="12" span__sm="12" margin="0px 0px 0px 0px"]
                 <div class="padding_trouble_2022">
                     <div class="title_trouble_2022">
-                        <div class="title-h1-text-common">Выручаем от&nbsp;неприятностей 2020 и&nbsp;2022 годов</div>
-                        <div class="main-text-common">Помогаем клиентам адаптироваться во&nbsp;время кризисов.</div>
+                        <div class="title-h1-text-common">Помогаем бизнесу пройти через перемены</div>
+                        <div class="main-text-common">Новые законы, проверки, изменения в&nbsp;компании&nbsp;&mdash; берём это на&nbsp;себя.</div>
                     </div>
                     <div class="content_trouble_2022">
                         <div class="padding-bottom_trouble_2022 mobile-content_trouble_2022">
                             <div id="spoiler-trouble-2022" style="display: none">
                                 <div class="main-text-common">
-                                    <span class="main-text-accent-common">Во&nbsp;время пандемии COVID-19&nbsp;</span>
-                                    мы сделали скидки для пострадавших отраслей. 
-                                    Например, &minus;50% на&nbsp;бухгалтерское обслуживание туристическим фирмам. 
-                                    Аудиты проводили дистанционно. Оповещали клиентов о&nbsp;ковидных ограничениях и&nbsp;помогали соблюсти закон.
+                                    <span class="main-text-accent-common">Когда меняются правила.</span>
+                                    Следим за&nbsp;изменениями в&nbsp;налоговом и&nbsp;корпоративном законодательстве и&nbsp;заранее подсказываем клиентам, что и&nbsp;к&nbsp;какому сроку нужно сделать.
                                     <br>
                                     <br>
-                                    <span class="main-text-accent-common">В&nbsp;2022</span> 
-                                    помогали нашим клиентам наладить цепочки поставок, заключать договоры с&nbsp;защитой 
-                                    от&nbsp;скачков доллара и&nbsp;спекуляций. Регистрируем фирмы в&nbsp;Казахстане.
+                                    <span class="main-text-accent-common">Когда приходит проверка.</span>
+                                    Сопровождаем налоговые проверки, готовим возражения и&nbsp;отстаиваем позицию клиента в&nbsp;налоговой и&nbsp;в&nbsp;суде.
                                     <br>
                                     <br>
-                                    В&nbsp;телеграм-канале информируем о&nbsp;новых положениях, постановлениях и&nbsp;льготах, 
+                                    <span class="main-text-accent-common">Когда меняется бизнес.</span>
+                                    Помогаем заключать договоры с&nbsp;защитой от&nbsp;рисков, реорганизовать компанию, получить лицензию или сменить систему налогообложения.
+                                    <br>
+                                    <br>
+                                    В&nbsp;<a class="action-text-common" href="https://t.me/umbrella_club_nsk" target="_blank" rel="noopener">телеграм-канале</a> информируем о&nbsp;новых положениях, постановлениях и&nbsp;льготах, 
                                     а&nbsp;также анонсируем все полезные события и&nbsp;обучающие мероприятия.
                                 </div>
                             </div>
@@ -58,13 +63,12 @@ class trouble_2022
                                     <ul>
                                     <li>
                                         <span class="main-text-common">
-                                            За&nbsp;время пандемии помогли сократить налоги на&nbsp;140&nbsp;000&nbsp;000&nbsp;руб.
+                                            <a class="action-text-common" href="$case_tax">Уменьшили доначисления</a> по&nbsp;выездной налоговой проверке на&nbsp;63&nbsp;млн&nbsp;руб.
                                         </span>
                                     </li>
                                     <li>
                                         <span class="main-text-common">
-                                            <a class="action-text-common" href="/services/register-elimination/registracija-kommercheskoj-organizacii/registracija-ooo/">Зарегистрировали для клиента юрлицо</a> в&nbsp;Казахстане для импорта немецких запчастей 
-                                            после ухода поставщика с&nbsp;рынка&nbsp;РФ из-за санкций 2022.
+                                            <a class="action-text-common" href="$case_usn">Добились отмены решения</a> налоговой по&nbsp;камеральной проверке декларации по&nbsp;УСН.
                                         </span>
                                     </li>
                                 </ul>
@@ -73,18 +77,19 @@ class trouble_2022
                         </div>
                         <div class="card_trouble_2022 content-desktop_trouble-2022">
                             <div class="main-text-common">
-                                <span class="main-text-accent-common">Во&nbsp;время пандемии COVID-19&nbsp;</span>
-                                мы сделали скидки для пострадавших отраслей. 
-                                Например, &minus;50% на&nbsp;бухгалтерское обслуживание туристическим фирмам. 
-                                Аудиты проводили дистанционно. Оповещали клиентов о&nbsp;ковидных ограничениях и&nbsp;помогали соблюсти закон.
+                                <span class="main-text-accent-common">Когда меняются правила.</span>
+                                Следим за&nbsp;изменениями в&nbsp;налоговом и&nbsp;корпоративном законодательстве и&nbsp;заранее подсказываем клиентам, что и&nbsp;к&nbsp;какому сроку нужно сделать.
                                 <br>
                                 <br>
-                                <span class="main-text-accent-common">В&nbsp;2022</span> 
-                                помогали нашим клиентам наладить цепочки поставок, <a class="action-text-common" href="/services/services-le/sostavlenie-dogovorov/">заключать договоры</a> с&nbsp;защитой 
-                                от&nbsp;скачков доллара и&nbsp;спекуляций. Регистрируем фирмы в&nbsp;Казахстане.
+                                <span class="main-text-accent-common">Когда приходит проверка.</span>
+                                Сопровождаем налоговые проверки, готовим возражения и&nbsp;отстаиваем позицию клиента в&nbsp;налоговой и&nbsp;в&nbsp;суде.
                                 <br>
                                 <br>
-                                В&nbsp;телеграм-канале информируем о&nbsp;новых положениях, постановлениях и&nbsp;льготах, 
+                                <span class="main-text-accent-common">Когда меняется бизнес.</span>
+                                Помогаем <a class="action-text-common" href="/services/services-le/sostavlenie-dogovorov/">заключать договоры</a> с&nbsp;защитой от&nbsp;рисков, реорганизовать компанию, получить лицензию или сменить систему налогообложения.
+                                <br>
+                                <br>
+                                В&nbsp;<a class="action-text-common" href="https://t.me/umbrella_club_nsk" target="_blank" rel="noopener">телеграм-канале</a> информируем о&nbsp;новых положениях, постановлениях и&nbsp;льготах, 
                                 а&nbsp;также анонсируем все полезные события и&nbsp;обучающие мероприятия.
                             </div>
                         </div>

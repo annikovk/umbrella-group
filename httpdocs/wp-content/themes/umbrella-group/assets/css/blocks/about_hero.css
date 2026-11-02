@@ -1,0 +1,1292 @@
+/* [about_hero] — первый экран страницы «О компании» */
+
+.about-hero {
+    position: relative;
+    overflow: hidden;
+    background: #fafafa;
+}
+
+/* Знак логотипа серым за правой колонкой: срезан верхним краем экрана,
+   левая ножка и низ чаши растворяются в фоне */
+.about-hero::before {
+    content: '';
+    position: absolute;
+    top: -56px;
+    left: calc(50% + 173px);
+    width: 488px;
+    height: 488px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 225 225'%3E%3Cpath d='M0 0h45v113a67.5 67.5 0 0 0 135 0V45h-45v68a22.5 22.5 0 0 1-45 0V0h135v113A112.5 112.5 0 0 1 0 113Z' fill='%23f0f0f0'/%3E%3C/svg%3E") no-repeat;
+    -webkit-mask-image: linear-gradient(to bottom left, #000 50%, transparent 86%);
+    mask-image: linear-gradient(to bottom left, #000 50%, transparent 86%);
+    pointer-events: none;
+}
+
+.about-hero__inner {
+    position: relative;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 28px 15px 56px;
+}
+
+.about-hero .breadcrumbs {
+    font-weight: 300;
+    margin-bottom: 32px;
+}
+
+.about-hero__body {
+    display: flex;
+    justify-content: space-between;
+    gap: 48px;
+}
+
+.about-hero__text {
+    flex: 0 1 560px;
+}
+
+.about-hero__today {
+    flex: 0 1 490px;
+    padding-top: 64px;
+}
+
+/* Красная черта над заголовками, как в [team_page] */
+.about-hero__title,
+.about-hero__heading {
+    position: relative;
+    padding-top: 22px;
+    font-family: "PT Serif", sans-serif;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.about-hero__title::before,
+.about-hero__heading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 3px;
+    background: #ec1c23;
+}
+
+.about-hero__title {
+    margin: 0 0 24px;
+    font-size: 60px;
+    line-height: 1.08;
+}
+
+.about-hero__lead {
+    max-width: 500px;
+    margin: 0 0 24px;
+    font-size: 22px;
+    line-height: 1.4;
+    color: #444;
+}
+
+.about-hero__desc {
+    max-width: 530px;
+    margin: 0 0 32px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+}
+
+.about-hero__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 22px;
+    border-radius: 4px;
+    background: #ec1c23;
+    font-size: 16px;
+    color: #fff;
+    transition: background .2s;
+}
+
+.about-hero__btn::after {
+    content: '→';
+    font-size: 20px;
+    line-height: 1;
+}
+
+.about-hero__btn:hover,
+.about-hero__btn:focus {
+    background: #c9151b;
+    color: #fff;
+}
+
+.about-hero__heading {
+    margin: 0 0 14px;
+    font-size: 26px;
+    line-height: 1.25;
+}
+
+.about-hero__today-text {
+    margin: 0 0 28px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* Цифры: три в первом ряду, две во втором, между соседями — тонкая черта */
+.about-hero__stats {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: start;
+    row-gap: 32px;
+}
+
+.about-hero__stat {
+    padding: 0 28px;
+    border-left: 1px solid #ddd;
+}
+
+.about-hero__stat:nth-child(3n + 1) {
+    padding-left: 0;
+    border-left: 0;
+}
+
+.about-hero__stat b {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 1.1;
+    white-space: nowrap;
+    color: #ec1c23;
+}
+
+.about-hero__stat span {
+    display: block;
+    white-space: nowrap;
+    font-size: 14px;
+    line-height: 1.35;
+    color: #555;
+}
+
+.about-hero__cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 48px;
+}
+
+.about-hero__card {
+    padding: 28px 28px 32px;
+    border: 1px solid #ececec;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.about-hero__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    background: #fdeaea;
+    color: #ec1c23;
+}
+
+.about-hero__card-title {
+    margin: 0 0 12px;
+    font-family: "PT Serif", sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.25;
+    color: #1a1a1a;
+}
+
+.about-hero__card-text {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #555;
+}
+
+@media (max-width: 1100px) {
+    .about-hero__body {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .about-hero__text,
+    .about-hero__today {
+        flex: none;
+        max-width: 640px;
+    }
+
+    .about-hero__today {
+        padding-top: 0;
+    }
+
+    .about-hero::before {
+        left: auto;
+        right: -120px;
+    }
+
+    .about-hero__cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 849px) {
+    .about-hero__inner {
+        padding: 20px 15px 40px;
+    }
+
+    .about-hero::before {
+        display: none;
+    }
+
+    .about-hero__title {
+        font-size: 38px;
+    }
+
+    .about-hero__lead {
+        font-size: 18px;
+    }
+
+    .about-hero__heading {
+        font-size: 24px;
+    }
+
+    .about-hero__stats {
+        grid-template-columns: repeat(2, auto);
+        row-gap: 24px;
+    }
+
+    .about-hero__stat,
+    .about-hero__stat:nth-child(3n + 1) {
+        padding: 0 20px;
+        border-left: 1px solid #ddd;
+    }
+
+    .about-hero__stat:nth-child(2n + 1) {
+        padding-left: 0;
+        border-left: 0;
+    }
+
+    .about-hero__stat b {
+        font-size: 28px;
+    }
+
+    .about-hero__cards {
+        grid-template-columns: 1fr;
+        margin-top: 32px;
+    }
+
+    .about-hero__card {
+        padding: 24px;
+    }
+}
+
+/* [about_specialization] — «Наша специализация»: вкладки слева, панель справа */
+
+.about-spec__inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 64px 15px 72px;
+}
+
+.about-spec__heading,
+.about-spec__title {
+    position: relative;
+    padding-top: 26px;
+    font-family: "PT Serif", sans-serif;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.about-spec__heading::before,
+.about-spec__title::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 34px;
+    height: 3px;
+    background: #ec1c23;
+}
+
+.about-spec__heading {
+    margin: 0 0 20px;
+    font-size: 60px;
+    line-height: 1.1;
+}
+
+.about-spec__lead {
+    max-width: 690px;
+    margin: 0 0 40px;
+    font-size: 20px;
+    line-height: 1.45;
+    color: #555;
+}
+
+.about-spec__body {
+    display: flex;
+    align-items: stretch;
+    gap: 16px;
+}
+
+.about-spec__tabs {
+    position: relative;
+    container-type: size;
+    flex: 0 0 336px;
+    border: 1px solid #ececec;
+    border-radius: 8px;
+    background: #fff;
+}
+
+/* Список вкладок не растягивает блок: занимает высоту панели и листается сам.
+   Полоса прокрутки видна всегда — чтобы было понятно, что ниже есть ещё разделы */
+.about-spec__tabs-scroll {
+    position: absolute;
+    inset: 0;
+    overflow-y: auto;
+    padding: 8px 6px 8px 8px;
+    border-radius: 8px;
+}
+
+/* Стандартные свойства — только Firefox: в Chrome они отключают стили ниже,
+   и на Mac полоса снова прячется до начала прокрутки */
+@supports not selector(::-webkit-scrollbar) {
+    .about-spec__tabs-scroll {
+        scrollbar-width: thin;
+        scrollbar-color: #cfcfcf #f4f4f4;
+    }
+
+    .about-spec__tabs-scroll:hover {
+        scrollbar-color: #fdf1f1 #f4f4f4;
+    }
+}
+
+.about-spec__tabs-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.about-spec__tabs-scroll::-webkit-scrollbar-track {
+    margin: 12px 0;
+    border-radius: 3px;
+    background: #f4f4f4;
+}
+
+/* Бегунок серый, под курсором — розовый, как фон выбранной вкладки */
+.about-spec__tabs-scroll::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background: #cfcfcf;
+}
+
+.about-spec__tabs-scroll::-webkit-scrollbar-thumb:hover,
+.about-spec__tabs-scroll::-webkit-scrollbar-thumb:active {
+    background: #fdf1f1;
+}
+
+.about-spec__tab {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    width: 100%;
+    min-height: 106px;
+    /* В окне списка ровно пять вкладок, остальные — под прокруткой */
+    min-height: calc((100cqh - 16px) / 5);
+    margin: 0;
+    padding: 12px 52px 12px 22px;
+    border: 0;
+    border-bottom: 1px solid #ececec;
+    border-radius: 0;
+    background: none;
+    text-align: left;
+    text-transform: none;
+    letter-spacing: 0;
+    font-family: "PT Serif", sans-serif;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 1.25;
+    color: #1a1a1a;
+    cursor: pointer;
+    transition: background .2s;
+}
+
+.about-spec__tab:last-child {
+    border-bottom: 0;
+}
+
+/* Стрелка справа */
+.about-spec__tab::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 24px;
+    width: 9px;
+    height: 9px;
+    border-top: 1.5px solid #888;
+    border-right: 1.5px solid #888;
+    transform: translateY(-50%) rotate(45deg);
+}
+
+.about-spec__tab:hover {
+    background: #fbf6f6;
+}
+
+.about-spec__tab.is-active {
+    border-radius: 8px;
+    border-bottom-color: transparent;
+    background: #fdf1f1;
+    font-weight: 700;
+}
+
+/* Красная полоса у активной вкладки — по левому краю карточки */
+.about-spec__tab.is-active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -8px;
+    width: 4px;
+    border-radius: 2px;
+    background: #ec1c23;
+}
+
+.about-spec__tab.is-active::after {
+    border-color: #ec1c23;
+}
+
+.about-spec__tab-icon {
+    display: flex;
+    flex: 0 0 30px;
+    color: #ec1c23;
+}
+
+.about-spec__panels {
+    display: grid;
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 28px 32px 36px 38px;
+    border: 1px solid #ececec;
+    border-radius: 8px;
+    background: #fff;
+}
+
+/* Панели стопкой в одной ячейке: высота — по самой длинной, вкладки не дёргают страницу */
+.about-spec__panel {
+    grid-area: 1 / 1;
+}
+
+.about-spec__panel[hidden] {
+    display: block;
+    visibility: hidden;
+}
+
+.about-spec__title {
+    margin: 0 0 18px;
+    font-size: 44px;
+    line-height: 1.15;
+}
+
+.about-spec__text {
+    max-width: 540px;
+    margin: 0 0 24px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+}
+
+.about-spec__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #ececec;
+}
+
+.about-spec__tag {
+    padding: 7px 18px;
+    border-radius: 999px;
+    background: #f3f3f3;
+    font-size: 14px;
+    line-height: 1.3;
+    color: #555;
+}
+
+.about-spec__items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 20px 0 28px;
+}
+
+.about-spec__item {
+    padding: 0 24px;
+    border-left: 1px solid #ececec;
+}
+
+.about-spec__item:first-child {
+    padding-left: 0;
+    border-left: 0;
+}
+
+.about-spec__item-head {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    min-height: 52px;
+    margin-bottom: 14px;
+}
+
+.about-spec__item-icon {
+    display: flex;
+    flex: 0 0 52px;
+    align-items: center;
+    justify-content: center;
+    height: 52px;
+    border-radius: 50%;
+    background: #fdeaea;
+    color: #ec1c23;
+}
+
+.about-spec__item-title {
+    font-family: "PT Serif", sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 1.25;
+    color: #1a1a1a;
+}
+
+.about-spec__item-text {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: #555;
+}
+
+/* «Подробнее» — небольшая контурная кнопка на раздел над красной кнопкой */
+.about-spec__more {
+    display: table;
+    margin: -4px 0 16px;
+    padding: 8px 16px;
+    border: 1px solid rgba(236, 28, 35, .4);
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #ec1c23;
+    transition: background .2s, border-color .2s;
+}
+
+.about-spec__more::after {
+    content: ' →';
+}
+
+.about-spec__more:hover,
+.about-spec__more:focus {
+    border-color: #ec1c23;
+    background: #fdf1f1;
+    color: #ec1c23;
+}
+
+@media (max-width: 1100px) {
+    .about-spec__tabs {
+        flex-basis: 280px;
+    }
+
+    .about-spec__tab {
+        gap: 16px;
+        min-height: 88px;
+        min-height: calc((100cqh - 16px) / 5);
+        padding-left: 16px;
+        font-size: 17px;
+    }
+
+    .about-spec__items {
+        grid-template-columns: 1fr;
+        row-gap: 20px;
+    }
+
+    .about-spec__item,
+    .about-spec__item:first-child {
+        padding: 0;
+        border-left: 0;
+    }
+}
+
+@media (max-width: 849px) {
+    .about-spec__inner {
+        padding: 40px 15px 48px;
+    }
+
+    .about-spec__heading {
+        font-size: 36px;
+    }
+
+    .about-spec__lead {
+        margin-bottom: 28px;
+        font-size: 17px;
+    }
+
+    .about-spec__body {
+        flex-direction: column;
+    }
+
+    .about-spec__tabs {
+        container-type: normal;
+        flex: none;
+    }
+
+    /* На телефоне список над панелью — все вкладки сразу, без прокрутки */
+    .about-spec__tabs-scroll {
+        position: static;
+        overflow: visible;
+    }
+
+    .about-spec__tab {
+        min-height: 64px;
+    }
+
+    .about-spec__panels {
+        padding: 24px 20px 28px;
+    }
+
+    .about-spec__title {
+        font-size: 30px;
+    }
+}
+
+/* [about_mission] — «Миссия и принципы»: цитата слева, три принципа справа */
+
+.about-mission {
+    background: #fafafa;
+}
+
+.about-mission__inner {
+    display: flex;
+    gap: 64px;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 64px 15px;
+}
+
+.about-mission__intro {
+    flex: 0 0 440px;
+}
+
+.about-mission__heading {
+    margin-bottom: 40px;
+}
+
+/* Кавычки — розовые, слева сверху и после текста */
+.about-mission__quote {
+    position: relative;
+    margin: 0;
+    padding: 0 0 0 38px;
+    border: 0;
+    font-family: "PT Serif", serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 1.4;
+    color: #333;
+}
+
+.about-mission__quote::before,
+.about-mission__quote::after {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 56px;
+    line-height: 1;
+    color: #f5b8ba;
+}
+
+.about-mission__quote::before {
+    content: '“';
+    position: absolute;
+    top: -14px;
+    left: 0;
+}
+
+.about-mission__quote::after {
+    content: '”';
+    position: relative;
+    top: 22px;
+    margin-left: 14px;
+    line-height: 0;
+}
+
+.about-mission__list {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+}
+
+.about-mission__item {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    padding: 28px 28px 28px 30px;
+    border: 1px solid #ececec;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.about-mission__num {
+    display: flex;
+    flex: 0 0 76px;
+    align-items: center;
+    justify-content: center;
+    height: 76px;
+    border-radius: 50%;
+    background: #fdeaea;
+    font-family: "PT Serif", serif;
+    font-weight: 700;
+    font-size: 32px;
+    color: #ec1c23;
+}
+
+/* Черта между номером и текстом */
+.about-mission__body {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding-left: 36px;
+    border-left: 1px solid #e4e4e4;
+}
+
+.about-mission__title {
+    margin-bottom: 10px;
+    font-family: "PT Serif", serif;
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 1.25;
+    color: #1a1a1a;
+}
+
+.about-mission__text {
+    max-width: 380px;
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: #666;
+}
+
+.about-mission__icon {
+    display: flex;
+    flex: 0 0 72px;
+    align-items: center;
+    justify-content: center;
+    height: 72px;
+    border-radius: 50%;
+    background: #f3f3f3;
+    color: #1a1a1a;
+}
+
+@media (max-width: 1100px) {
+    .about-mission__inner {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .about-mission__intro {
+        flex: none;
+        max-width: 640px;
+    }
+}
+
+@media (max-width: 849px) {
+    .about-mission__inner {
+        padding: 40px 15px 48px;
+    }
+
+    .about-mission__heading {
+        margin-bottom: 28px;
+    }
+
+    .about-mission__quote {
+        padding-left: 30px;
+        font-size: 21px;
+    }
+
+    .about-mission__quote::before,
+    .about-mission__quote::after {
+        font-size: 44px;
+    }
+
+    .about-mission__item {
+        align-items: flex-start;
+        gap: 16px;
+        padding: 20px;
+    }
+
+    .about-mission__num {
+        flex-basis: 52px;
+        height: 52px;
+        font-size: 22px;
+    }
+
+    .about-mission__body {
+        padding-left: 0;
+        border-left: 0;
+    }
+
+    .about-mission__title {
+        font-size: 17px;
+    }
+
+    .about-mission__title br {
+        display: none;
+    }
+
+    .about-mission__icon {
+        display: none;
+    }
+}
+
+/* [about_history] — «История компании» деревом: корни 1990, ветки по годам, крона 2025 */
+
+.about-history__inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 64px 15px 72px;
+}
+
+.about-history__tree {
+    position: relative;
+    max-width: 1100px;
+    margin: 60px auto 0;
+    aspect-ratio: 1000 / 840;
+}
+
+/* :not(:root) — чтобы перебить svg:not(:root) { overflow: hidden } из Flatsome: листья макушки выходят за viewBox */
+.about-history__svg:not(:root) {
+    display: block;
+    overflow: visible;
+    width: 100%;
+    height: 100%;
+}
+
+.about-history__node {
+    position: absolute;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+}
+
+.about-history__node:hover,
+.about-history__node:focus-within,
+.about-history__node.is-open {
+    z-index: 3;
+}
+
+.about-history__year {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    margin: 0;
+    padding: 0;
+    border: 3px solid #1a1a1a;
+    border-radius: 50%;
+    background: #ec1c23;
+    /* Белое кольцо и чёрный ободок вокруг — плод отделяется от листвы */
+    box-shadow: 0 0 0 6px #fff, 0 0 0 9px #1a1a1a, 5px 6px 0 9px #1a1a1a;
+    font-family: "PT Serif", serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1;
+    letter-spacing: 0;
+    text-transform: none;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s, color .2s, transform .2s;
+}
+
+/* Плод: черенок и розовый листик сверху */
+.about-history__year::before {
+    content: '';
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    width: 4px;
+    height: 17px;
+    border-radius: 2px;
+    background: #1a1a1a;
+    transform: translateX(-50%) rotate(12deg);
+}
+
+.about-history__year::after {
+    content: '';
+    position: absolute;
+    top: -21px;
+    left: calc(50% + 4px);
+    width: 28px;
+    height: 15px;
+    border: 3px solid #1a1a1a;
+    border-radius: 0 100% 0 100%;
+    background: #f7b2b5;
+    transform: rotate(-12deg);
+}
+
+.about-history__node:hover .about-history__year,
+.about-history__year:focus-visible,
+.about-history__node.is-open .about-history__year {
+    background: #fff;
+    color: #ec1c23;
+    transform: scale(1.08);
+}
+
+/* Окно с событиями: у левых веток — справа от года, у правых — слева,
+   у корней — над годом, у кроны — под ним */
+.about-history__card {
+    position: absolute;
+    top: 50%;
+    left: calc(100% + 18px);
+    width: 360px;
+    padding: 22px 24px 20px;
+    border: 2px solid #1a1a1a;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 5px 5px 0 #1a1a1a;
+    text-align: left;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-50%);
+    transition: opacity .2s, visibility .2s;
+}
+
+/* Мостик под курсор между годом и окном */
+.about-history__card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -20px;
+    width: 20px;
+}
+
+.about-history__node.is-right .about-history__card {
+    left: auto;
+    right: calc(100% + 18px);
+}
+
+.about-history__node.is-right .about-history__card::before {
+    left: auto;
+    right: -20px;
+}
+
+.about-history__node.is-center .about-history__card {
+    top: calc(100% + 18px);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.about-history__node.is-center.is-low .about-history__card {
+    top: auto;
+    bottom: calc(100% + 18px);
+}
+
+.about-history__node.is-center .about-history__card::before {
+    top: -20px;
+    bottom: auto;
+    left: 0;
+    width: 100%;
+    height: 20px;
+}
+
+.about-history__node.is-center.is-low .about-history__card::before {
+    top: auto;
+    bottom: -20px;
+}
+
+.about-history__node:hover .about-history__card,
+.about-history__node:focus-within .about-history__card,
+.about-history__node.is-open .about-history__card {
+    opacity: 1;
+    visibility: visible;
+}
+
+.about-history__card-year {
+    position: relative;
+    margin-bottom: 4px;
+    padding-top: 14px;
+    font-family: "PT Serif", serif;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 1.1;
+    color: #ec1c23;
+}
+
+.about-history__card-year::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 3px;
+    background: #ec1c23;
+}
+
+.about-history__card-title {
+    margin-bottom: 12px;
+    font-family: "PT Serif", serif;
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 1.25;
+    color: #1a1a1a;
+}
+
+.about-history__events {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.about-history__events li {
+    position: relative;
+    margin: 0 0 8px;
+    padding-left: 16px;
+    font-size: 14.5px;
+    line-height: 1.45;
+    color: #555;
+}
+
+.about-history__events li:last-child {
+    margin-bottom: 0;
+}
+
+.about-history__events li::before {
+    content: '';
+    position: absolute;
+    top: .55em;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #ec1c23;
+}
+
+/* Лента для телефона — на десктопе не видна */
+.about-history__list {
+    display: none;
+}
+
+@media (max-width: 1100px) {
+    .about-history__card {
+        width: 300px;
+    }
+}
+
+@media (max-width: 849px) {
+    .about-history__inner {
+        padding: 40px 15px 48px;
+    }
+
+    .about-history__tree,
+    .about-history__hint {
+        display: none;
+    }
+
+    /* Ствол — красная линия слева, годы на ней снизу вверх: свежие сверху */
+    .about-history__list {
+        position: relative;
+        display: block;
+        margin: 0;
+        padding: 0 0 0 28px;
+        list-style: none;
+    }
+
+    .about-history__list::before {
+        content: '';
+        position: absolute;
+        top: 8px;
+        bottom: 8px;
+        left: 6px;
+        width: 2px;
+        background: #1a1a1a;
+    }
+
+    .about-history__step {
+        position: relative;
+        margin: 0 0 28px;
+    }
+
+    .about-history__step:last-child {
+        margin-bottom: 0;
+    }
+
+    .about-history__step::before {
+        content: '';
+        position: absolute;
+        top: 8px;
+        left: -28px;
+        width: 14px;
+        height: 14px;
+        border: 2px solid #ec1c23;
+        border-radius: 50%;
+        background: #fff;
+    }
+
+    .about-history__step-year {
+        margin-bottom: 2px;
+        font-family: "PT Serif", serif;
+        font-weight: 700;
+        font-size: 26px;
+        line-height: 1.2;
+        color: #ec1c23;
+    }
+}
+
+/* [about_experience] — «Более 35 лет опыта»: текст с кнопкой слева, карточка «35+» справа */
+
+.about-exp {
+    background: #fafafa;
+}
+
+.about-exp__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 64px;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 80px 15px;
+}
+
+.about-exp__text {
+    flex: 0 1 640px;
+}
+
+.about-exp__heading {
+    position: relative;
+    margin: 0 0 32px;
+    padding-top: 26px;
+    font-family: "PT Serif", serif;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 1.2;
+    color: #1a1a1a;
+}
+
+.about-exp__heading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 34px;
+    height: 3px;
+    background: #ec1c23;
+}
+
+.about-exp__text p {
+    margin: 0 0 22px;
+    font-size: 17px;
+    line-height: 1.55;
+    color: #444;
+}
+
+.about-exp__btn {
+    margin-top: 14px;
+    padding: 16px 30px;
+    font-size: 17px;
+}
+
+.about-exp__card {
+    position: relative;
+    flex: 0 0 440px;
+    padding: 44px 40px 52px 84px;
+    border: 1px solid #ececec;
+    border-radius: 8px;
+    background: #fff;
+}
+
+/* Тонкая вертикальная черта у левого края карточки */
+.about-exp__card::before {
+    content: '';
+    position: absolute;
+    top: 36px;
+    bottom: 36px;
+    left: 40px;
+    width: 1px;
+    background: #d6d6d6;
+}
+
+/* Тем же шрифтом сайта и жирностью, что цифры первого экрана */
+.about-exp__num {
+    font-weight: 700;
+    font-size: 132px;
+    line-height: 1;
+    letter-spacing: -2px;
+    color: #ec1c23;
+}
+
+.about-exp__caption {
+    position: relative;
+    margin: 12px 0 46px;
+    font-family: "PT Serif", serif;
+    font-size: 32px;
+    line-height: 1.2;
+    color: #1a1a1a;
+}
+
+.about-exp__caption::after {
+    content: '';
+    position: absolute;
+    bottom: -24px;
+    left: 0;
+    width: 36px;
+    height: 2px;
+    background: #ec1c23;
+}
+
+.about-exp__note {
+    margin: 0;
+    font-size: 15.5px;
+    line-height: 1.5;
+    color: #555;
+}
+
+@media (max-width: 1100px) {
+    .about-exp__inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 40px;
+    }
+
+    .about-exp__text,
+    .about-exp__card {
+        flex: none;
+        max-width: 640px;
+    }
+}
+
+@media (max-width: 849px) {
+    .about-exp__inner {
+        padding: 48px 15px;
+    }
+
+    .about-exp__heading {
+        font-size: 28px;
+    }
+
+    .about-exp__text p {
+        font-size: 16px;
+    }
+
+    .about-exp__card {
+        width: 100%;
+        padding: 32px 24px 36px 52px;
+    }
+
+    .about-exp__card::before {
+        left: 26px;
+    }
+
+    .about-exp__num {
+        font-size: 96px;
+    }
+
+    .about-exp__caption {
+        font-size: 26px;
+    }
+}

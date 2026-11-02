@@ -18,12 +18,17 @@ do_action('flatsome_before_page'); ?>
     <div id="content" class="content-area page-wrapper" role="main">
         <?php
         // Без шапки с хлебными крошками — разделы услуг (26, 28, 30, 32, 34,
-        // 12792) на первых двух уровнях вложенности и главная.
-        $ug_sections = [26, 28, 32, 30, 34, 12792];
+        // 12792, 29220 «Интеллектуальное право») на первых двух уровнях вложенности, главная и страницы с
+        // [team_page] и [about_hero], а также /about/cases/ ([cases] рисует
+        // ug_cases_hero()) — у них крошки и h1 в первом экране.
+        $ug_sections = [26, 28, 32, 30, 34, 12792, 29220];
         $ug_parent   = (int) get_queried_object()->post_parent;
         $ug_grand    = $ug_parent ? (int) get_post_field('post_parent', $ug_parent) : 0;
+        $ug_content  = (string) get_queried_object()->post_content;
+        $ug_own_hero = has_shortcode($ug_content, 'team_page') || has_shortcode($ug_content, 'about_hero')
+            || str_contains(ug_request_path(), '/about/cases/');
 
-        if (!in_array($ug_parent, $ug_sections, true) && !in_array($ug_grand, $ug_sections, true) && (!is_front_page() || is_paged())) {
+        if (!$ug_own_hero && !in_array($ug_parent, $ug_sections, true) && !in_array($ug_grand, $ug_sections, true) && (!is_front_page() || is_paged())) {
             echo umbrella_draw_header_with_breadcrumbs();
         } ?>
 

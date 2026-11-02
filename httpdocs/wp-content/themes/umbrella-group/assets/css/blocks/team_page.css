@@ -1,0 +1,1144 @@
+/* [team_page] — страница «Команда» */
+
+.team-hero__inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 28px 15px 40px;
+}
+
+.team-hero .breadcrumbs {
+    font-weight: 300;
+    margin-bottom: 32px;
+}
+
+/* Текст слева, фото справа — до края контента, на одной линии с вкладками */
+.team-hero__body {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.team-hero__text {
+    flex: 0 0 470px;
+}
+
+.team-hero__photo {
+    position: relative;
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.team-hero__img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* Левый край фото плавно уходит в белый — узко, чтобы не задеть людей */
+.team-hero__photo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 14%;
+    background: linear-gradient(90deg, #fff 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.team-hero__title {
+    position: relative;
+    margin: 0 0 20px;
+    padding-top: 22px;
+    font-family: "PT Serif", sans-serif;
+    font-weight: 700;
+    font-size: 52px;
+    line-height: 1.1;
+    color: #1a1a1a;
+}
+
+.team-hero__title::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 3px;
+    background: #ec1c23;
+}
+
+.team-hero__lead {
+    margin: 0 0 32px;
+    font-size: 20px;
+    line-height: 1.35;
+    color: #444;
+}
+
+.team-hero__stats {
+    display: flex;
+}
+
+.team-hero__stat {
+    padding: 0 28px;
+    border-left: 1px solid #ddd;
+}
+
+.team-hero__stat:first-child {
+    padding-left: 0;
+    border-left: 0;
+}
+
+.team-hero__stat b {
+    display: block;
+    font-family: "PT Serif", sans-serif;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 1.2;
+    color: #1a1a1a;
+}
+
+.team-hero__stat span {
+    display: block;
+    white-space: nowrap;
+    font-size: 14px;
+    line-height: 1.3;
+    color: #555;
+}
+
+.team-leads__inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 32px 15px 56px;
+}
+
+.team-leads__head {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    margin-bottom: 24px;
+}
+
+.team-leads__heading {
+    position: relative;
+    flex: 1 1 auto;
+    margin: 0;
+    padding-left: 44px;
+    font-size: 36px;
+    line-height: 1.2;
+}
+
+.team-leads__heading::before {
+    content: '';
+    position: absolute;
+    top: 0.2em;
+    left: 0;
+    width: 28px;
+    height: 3px;
+    background: #ec1c23;
+}
+
+
+/* Красные кнопки по бокам карусели, по центру фото (фото = 5/8 ширины карточки) */
+.team-leads__viewport {
+    position: relative;
+    container-type: inline-size;
+}
+
+.team-leads__arrow {
+    position: absolute;
+    z-index: 2;
+    top: calc((100cqw - 48px) / 3 * 0.3125);
+    left: -60px;
+    width: 44px;
+    height: 44px;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: #ec1c23;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+    transform: translateY(-50%);
+    cursor: pointer;
+    transition: background-color .15s, opacity .15s;
+}
+
+.team-leads__arrow--next {
+    left: auto;
+    right: -60px;
+}
+
+.team-leads__arrow::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    border-left: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: translate(-30%, -50%) rotate(45deg);
+}
+
+.team-leads__arrow--next::before {
+    transform: translate(-70%, -50%) rotate(-135deg);
+}
+
+.team-leads__arrow:hover:not(:disabled) {
+    background: #bd161c;
+}
+
+.team-leads__arrow:disabled {
+    opacity: .4;
+    cursor: default;
+}
+
+.team-leads__track {
+    display: flex;
+    gap: 24px;
+    /* Запас под подъём и тень карточки при наведении: overflow-x режет и по вертикали */
+    padding: 10px 0 28px;
+    margin: -10px 0 -28px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+}
+
+.team-leads__track::-webkit-scrollbar {
+    display: none;
+}
+
+.team-leads__card[hidden],
+.team-leads__arrow[hidden] {
+    display: none;
+}
+
+.team-leads__card {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 calc((100% - 48px) / 3);
+    scroll-snap-align: start;
+    border: 1px solid #ececec;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;    transition: transform .2s, box-shadow .2s, border-color .2s;
+}
+
+.team-leads__card:hover {
+    transform: translateY(-6px);
+    border-color: #e2e2e2;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, .1);
+}
+
+/* Кадр 800 × 500 */
+.team-leads__photo {
+    position: relative;
+    flex: none;
+    aspect-ratio: 8 / 5;
+    overflow: hidden;
+    background: #f4f4f4;
+}
+
+/* Абсолютно: иначе в колонке flex картинка распирает aspect-ratio своей высотой */
+.team-leads__img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 8%;
+}
+
+.team-leads__body {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 22px 22px;
+}
+
+.team-leads__card.has-more {
+    cursor: pointer;
+}
+
+/* «Подробнее →» прижата к низу карточки */
+.team-leads__more {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: auto 0 0;
+    padding: 18px 0 0;
+    min-height: 0;
+    border: 0;
+    background: none;
+    font-family: Inter, sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: 0;
+    text-transform: none;
+    color: #1a1a1a;
+    cursor: pointer;
+    transition: color .15s;
+}
+
+.team-leads__more::after {
+    content: '→';
+    color: #ec1c23;
+    font-size: 18px;
+    line-height: 1;
+    transition: transform .2s;
+}
+
+.team-leads__more:hover,
+.team-leads__more:focus-visible {
+    color: #ec1c23;
+}
+
+.team-leads__card:hover .team-leads__more::after {
+    transform: translateX(4px);
+}
+
+.team-leads__name {
+    font-family: "PT Serif", sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.25;
+    color: #1a1a1a;
+}
+
+.team-leads__title {
+    margin-top: 8px;
+    font-size: 15px;
+    line-height: 1.4;
+    color: #555;
+}
+
+.team-leads__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.team-leads__tag {
+    padding: 6px 12px;
+    border-radius: 6px;
+    background: #f3f3f3;
+    font-size: 13px;
+    line-height: 1.2;
+    color: #333;
+}
+
+.team-list__inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 56px 15px 0;
+}
+
+/* Строка вкладок: серая плашка, по краям стрелки, если вкладки не влезли */
+.team-tabs {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px;
+    background: #f3f3f3;
+    border-radius: 10px;
+}
+
+.team-tabs__track {
+    display: flex;
+    flex: 1 1 auto;
+    gap: 4px;
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.team-tabs__track::-webkit-scrollbar {
+    display: none;
+}
+
+.team-tabs__btn {
+    position: relative;
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 12px 20px;
+    min-height: 0;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    font-family: Inter, sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0;
+    text-transform: none;
+    color: #222;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color .15s, color .15s;
+}
+
+/* Наведение: серая подложка и красное подчёркивание */
+.team-tabs__btn::after {
+    content: '';
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 6px;
+    height: 2px;
+    background: #ec1c23;
+    transform: scaleX(0);
+    transition: transform .15s;
+}
+
+.team-tabs__btn:hover {
+    background: #e6e6e6;
+}
+
+.team-tabs__btn:hover::after {
+    transform: scaleX(1);
+}
+
+.team-tabs__btn.is-active {
+    background: #ec1c23;
+    color: #fff;
+}
+
+.team-tabs__btn.is-active::after {
+    display: none;
+}
+
+.team-tabs__arrow {
+    position: relative;
+    flex: 0 0 36px;
+    width: 36px;
+    height: 36px;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: #ec1c23;
+    cursor: pointer;
+    transition: background-color .15s, opacity .15s;
+}
+
+.team-tabs__arrow[hidden] {
+    display: none;
+}
+
+.team-tabs__arrow::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    border-left: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: translate(-30%, -50%) rotate(45deg);
+}
+
+.team-tabs__arrow--next::before {
+    transform: translate(-70%, -50%) rotate(-135deg);
+}
+
+.team-tabs__arrow:hover:not(:disabled) {
+    background: #bd161c;
+}
+
+.team-tabs__arrow:disabled {
+    opacity: .4;
+    cursor: default;
+}
+
+/* «Работаем командой» — серая полоса после карусели */
+.team-together {
+    background: #f6f6f6;
+}
+
+.team-together__inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 48px;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 56px 15px;
+}
+
+.team-together__heading {
+    position: relative;
+    flex: 0 0 360px;
+    margin: 0;
+    padding-left: 44px;
+    font-size: 36px;
+    line-height: 1.2;
+}
+
+.team-together__heading::before {
+    content: '';
+    position: absolute;
+    top: 0.2em;
+    left: 0;
+    width: 28px;
+    height: 3px;
+    background: #ec1c23;
+}
+
+.team-together__main {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.team-together__lead {
+    max-width: 640px;
+    margin: 0 0 32px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #555;
+}
+
+.team-together__items {
+    display: flex;
+    align-items: flex-start;
+}
+
+.team-together__item {
+    flex: 1 1 0;
+    text-align: center;
+}
+
+.team-together__icon {
+    color: #1a1a1a;
+    line-height: 0;
+}
+
+.team-together__title {
+    margin-top: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.team-together__text {
+    margin-top: 6px;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #666;
+}
+
+.team-together__plus {
+    flex: 0 0 auto;
+    padding: 4px 8px 0;
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 1;
+    color: #999;
+}
+
+/* Баннер «Не знаете, какой специалист нужен?»: фото справа (кадр 1500 × 560) */
+.team-cta__inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 15px 56px;
+}
+
+.team-cta__box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 280px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f6f6f6;
+}
+
+.team-cta__photo {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 62%;
+    background: #ececec;
+}
+
+.team-cta__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Левый край фото уходит в фон плашки */
+.team-cta__photo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 35%;
+    background: linear-gradient(90deg, #f6f6f6 0%, rgba(246, 246, 246, 0) 100%);
+}
+
+.team-cta__text {
+    position: relative;
+    max-width: 520px;
+    padding: 40px 0 40px 48px;
+}
+
+.team-cta__heading {
+    position: relative;
+    margin: 0 0 14px;
+    padding-left: 44px;
+    font-size: 30px;
+    line-height: 1.2;
+}
+
+.team-cta__heading::before {
+    content: '';
+    position: absolute;
+    top: 0.2em;
+    left: 0;
+    width: 28px;
+    height: 3px;
+    background: #ec1c23;
+}
+
+.team-cta__lead {
+    margin: 0 0 24px 44px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #555;
+}
+
+.team-cta__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: 44px;
+    padding: 14px 24px;
+    border-radius: 8px;
+    background: #ec1c23;
+    font-size: 15px;
+    line-height: 1.2;
+    color: #fff;
+    transition: background-color .15s;
+}
+
+.team-cta__btn::after {
+    content: '→';
+    font-size: 18px;
+    line-height: 1;
+}
+
+.team-cta__btn:hover {
+    background: #bd161c;
+    color: #fff;
+}
+
+/* Окно «Подробнее» */
+.team-modal-open {
+    overflow: hidden;
+}
+
+.team-modal {
+    position: fixed;
+    inset: 0;
+    /* Выше плавающих виджетов чата и звонка */
+    z-index: 2147483000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(26, 26, 26, .55);
+}
+
+.team-modal[hidden] {
+    display: none;
+}
+
+/* Размер окна одинаковый у всех; длинный текст прокручивается внутри */
+.team-modal__dialog {
+    position: relative;
+    display: flex;
+    width: 100%;
+    max-width: 920px;
+    height: min(580px, calc(100vh - 48px));
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .25);
+}
+
+.team-modal__photo {
+    position: relative;
+    flex: 0 0 38%;
+    overflow: hidden;
+    background: #f4f4f4;
+}
+
+.team-modal__photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
+
+.team-modal__body {
+    flex: 1 1 auto;
+    padding: 36px 40px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #c4c4c4 transparent;
+}
+
+/* Бегунок виден всегда, в том числе на macOS со скрытыми полосами прокрутки */
+.team-modal__body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.team-modal__body::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background: #c4c4c4;
+}
+
+.team-modal__close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 1;
+    width: 40px;
+    height: 40px;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: #f3f3f3;
+    cursor: pointer;
+}
+
+.team-modal__close::before,
+.team-modal__close::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 2px;
+    background: #1a1a1a;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.team-modal__close::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.team-modal__close:hover {
+    background: #e6e6e6;
+}
+
+.team-modal__name {
+    padding-right: 40px;
+    font-family: "PT Serif", sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 1.2;
+    color: #1a1a1a;
+}
+
+.team-modal__title {
+    margin-top: 8px;
+    font-size: 16px;
+    color: #555;
+}
+
+.team-modal__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.team-modal__content {
+    margin-top: 20px;
+    font-size: 15px;
+    line-height: 1.55;
+    color: #333;
+}
+
+.team-modal__content p {
+    margin: 0 0 16px;
+}
+
+.team-modal__exp {
+    margin-bottom: 16px;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.team-modal__quote {
+    margin: 0 0 20px;
+    padding: 2px 0 2px 16px;
+    border-left: 3px solid #ec1c23;
+    font-family: "PT Serif Caption", "PT Serif", serif;
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.5;
+    color: #1a1a1a;
+}
+
+.team-modal__label {
+    margin-bottom: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: #999;
+}
+
+
+/* Заглушка «В работе» вместо недостающего текста */
+.team-modal .team-modal__todo {
+    font-family: Inter, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    color: #aaa;
+}
+
+.team-modal__quote.team-modal__todo {
+    font-size: 15px;
+}
+
+.team-modal__btn {
+    margin: 8px 0 0;
+}
+
+/* [team_benefits] — «Что получает бизнес…» */
+.team-benefits {
+    background: #f6f6f6;
+}
+
+.team-benefits__inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 56px 15px;
+}
+
+.team-benefits__heading {
+    position: relative;
+    max-width: 760px;
+    margin: 0 0 16px;
+    padding-top: 22px;
+    font-size: 40px;
+    line-height: 1.15;
+}
+
+.team-benefits__heading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 3px;
+    background: #ec1c23;
+}
+
+.team-benefits__lead {
+    max-width: 760px;
+    margin: 0 0 32px;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #666;
+}
+
+.team-benefits__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.team-benefits__item {
+    display: flex;
+    gap: 24px;
+    padding: 28px;
+    border: 1px solid #ececec;
+    border-radius: 12px;
+    background: #fff;
+}
+
+.team-benefits__icon {
+    display: flex;
+    flex: 0 0 64px;
+    align-items: center;
+    justify-content: center;
+    height: 64px;
+    border-radius: 50%;
+    background: #fdeaea;
+    color: #ec1c23;
+}
+
+.team-benefits__icon svg {
+    width: 34px;
+    height: 34px;
+}
+
+.team-benefits__title {
+    font-family: "PT Serif", sans-serif;
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 1.3;
+    color: #1a1a1a;
+}
+
+.team-benefits__text {
+    margin: 12px 0 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #555;
+}
+
+/* Сбоку от контейнера места нет — сужаем карусель, кнопки встают в отступы */
+@media (max-width: 1370px) {
+    .team-leads__viewport {
+        padding: 0 56px;
+    }
+
+    .team-leads__arrow {
+        left: 0;
+    }
+
+    .team-leads__arrow--next {
+        left: auto;
+        right: 0;
+    }
+}
+
+@media (max-width: 1100px) {
+    .team-together__inner {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .team-together__heading {
+        flex: none;
+    }
+
+    .team-leads__card {
+        flex-basis: calc((100% - 24px) / 2);
+    }
+
+    .team-leads__arrow {
+        top: calc((100cqw - 24px) / 2 * 0.3125);
+    }
+}
+
+@media (max-width: 849px) {
+    .team-hero__body {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 24px;
+    }
+
+    .team-hero__text {
+        flex: none;
+    }
+
+    .team-hero__photo {
+        margin: 0 -15px;
+    }
+
+    .team-hero__photo::before {
+        display: none;
+    }
+
+    .team-hero__inner {
+        padding-bottom: 8px;
+    }
+
+    .team-hero .breadcrumbs {
+        margin-bottom: 24px;
+    }
+
+    .team-hero__title {
+        font-size: 36px;
+    }
+
+    .team-hero__lead {
+        font-size: 17px;
+        margin-bottom: 24px;
+    }
+
+    .team-hero__stat {
+        padding: 0 12px;
+    }
+
+    .team-hero__stat b {
+        font-size: 26px;
+    }
+
+    .team-hero__stat span {
+        font-size: 12px;
+        white-space: normal;
+    }
+
+    .team-leads__head {
+        flex-wrap: wrap;
+        gap: 12px 16px;
+    }
+
+    .team-leads__heading {
+        font-size: 26px;
+        padding-left: 36px;
+    }
+
+
+    /* На телефоне листают свайпом */
+    .team-leads__arrow {
+        display: none;
+    }
+
+    .team-leads__viewport {
+        padding: 0;
+    }
+
+    .team-leads__track {
+        gap: 12px;
+    }
+
+    .team-leads__card {
+        flex-basis: 82%;
+    }
+
+    .team-leads__name {
+        font-size: 18px;
+    }
+
+    .team-leads__title {
+        font-size: 14px;
+    }
+
+    .team-tabs__btn {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+
+    .team-tabs__btn::after {
+        left: 16px;
+        right: 16px;
+    }
+
+    /* На телефоне вкладки листают свайпом */
+    .team-tabs__arrow {
+        display: none;
+    }
+
+    .team-together__inner {
+        padding: 40px 15px;
+    }
+
+    .team-together__heading {
+        font-size: 26px;
+        padding-left: 36px;
+    }
+
+    .team-together__items {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px 12px;
+    }
+
+    .team-together__plus {
+        display: none;
+    }
+
+    .team-cta__box {
+        flex-direction: column;
+        align-items: stretch;
+        min-height: 0;
+    }
+
+    .team-cta__photo {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 2 / 1;
+    }
+
+    .team-cta__photo::before {
+        display: none;
+    }
+
+    .team-cta__text {
+        padding: 24px 20px 28px;
+    }
+
+    .team-cta__heading {
+        font-size: 24px;
+        padding-left: 36px;
+    }
+
+    .team-cta__lead,
+    .team-cta__btn {
+        margin-left: 0;
+    }
+
+    /* Окно на телефоне — лист снизу на весь экран, фото сверху */
+    .team-modal {
+        align-items: flex-end;
+        padding: 0;
+    }
+
+    .team-modal__dialog {
+        flex-direction: column;
+        height: 88vh;
+        border-radius: 16px 16px 0 0;
+    }
+
+    .team-modal__photo {
+        flex: none;
+        height: 38%;
+    }
+
+    .team-modal__body {
+        min-height: 0;
+        padding: 24px 20px 28px;
+    }
+
+    .team-modal__name {
+        font-size: 22px;
+    }
+
+    .team-benefits__inner {
+        padding: 40px 15px;
+    }
+
+    .team-benefits__heading {
+        font-size: 28px;
+    }
+
+    .team-benefits__lead {
+        font-size: 16px;
+    }
+
+    .team-benefits__grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .team-benefits__item {
+        gap: 16px;
+        padding: 20px;
+    }
+
+    .team-benefits__icon {
+        flex-basis: 48px;
+        height: 48px;
+    }
+
+    .team-benefits__title {
+        font-size: 18px;
+    }
+}

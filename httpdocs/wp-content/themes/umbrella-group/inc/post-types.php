@@ -390,6 +390,12 @@ function ug_meta_box_schema(): array
                 'specialist_achievements' => ['label' => 'Достижения', 'sanitize' => 'html'],
                 'specialist_office' => ['label' => 'Офис'],
                 'specialist_main' => ['label' => 'Ведущий', 'type' => 'select', 'options' => UG_YES_NO],
+                // Страница «Команда» ([team_page]): без них — изображение записи.
+                'specialist_photo_card' => ['label' => 'Фото для карточки', 'description' => 'ID картинки 800 × 500 из медиатеки — карусель на странице «Команда»'],
+                'specialist_photo_full' => ['label' => 'Фото для окна «Подробнее»', 'description' => 'ID картинки 1200 × 1600 из медиатеки'],
+                'specialist_team_tags' => ['label' => 'Теги на «Команде»', 'description' => 'Через запятую; без них — направление'],
+                'specialist_team_tabs' => ['label' => 'Доп. вкладки на «Команде»', 'description' => 'Названия вкладок через запятую, например: Налоговое право'],
+                'specialist_team_only' => ['label' => 'Только для страницы «Команда»', 'type' => 'select', 'options' => ['', 'Да'], 'description' => '«Да» — не показывать в блоках специалистов на страницах услуг; должность на «Команде» — из поля «Должность»'],
             ]],
         ],
         'case' => [
@@ -407,6 +413,10 @@ function ug_meta_box_schema(): array
                 'case_feedback_text' => ['label' => 'Текст ссылки отзыва'],
                 'case_feedback_url' => ['label' => 'Ссылка на отзыв', 'sanitize' => 'html'],
                 'case_common' => ['label' => 'Для общего', 'type' => 'select', 'options' => UG_YES_NO],
+                // Окно «Подробнее о кейсе» на /about/cases/: без «Что мы сделали» — короткое окно
+                'case_service' => ['label' => 'Услуга', 'description' => 'Строка «Услуга» в окне «Подробнее» на странице «Кейсы», например: Аудиторская проверка'],
+                'case_steps' => ['label' => 'Что мы сделали', 'type' => 'textarea', 'sanitize' => 'html', 'description' => 'Ровно 3 шага, по шагу в строке'],
+                'case_outcome' => ['label' => 'Итог', 'type' => 'textarea', 'sanitize' => 'html', 'description' => 'Одна фраза для плашки в окне «Подробнее»'],
             ]],
         ],
         'feedback' => [

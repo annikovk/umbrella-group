@@ -1,0 +1,129 @@
+/* Первый экран /about/cases/ (ug_cases_hero) */
+
+.cases-hero {
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+}
+
+/* Картинка справа во всю высоту экрана и без обрезки: кончается там же, где
+   главное меню (на 25px раньше края контента), левые 40% плавно уходят в белый
+   фон — текст слева стоит на белом */
+.cases-hero__image {
+    position: absolute;
+    top: 0;
+    right: 45px;
+    bottom: 0;
+    aspect-ratio: 1500 / 740;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, rgba(0, 0, 0, .35) 18%, #000 40%);
+    mask-image: linear-gradient(to right, transparent 0, rgba(0, 0, 0, .35) 18%, #000 40%);
+}
+
+.cases-hero__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: right center;
+}
+
+.cases-hero__stub {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding-left: 20%;
+    background: repeating-linear-gradient(-45deg, #e9e9e9 0 14px, #e2e2e2 14px 28px);
+    font-size: 22px;
+    color: #888;
+}
+
+.cases-hero__inner {
+    position: relative;
+    max-width: 1240px;
+    min-height: 330px;
+    margin: 0 auto;
+    padding: 28px 20px 32px;
+}
+
+.cases-hero__inner > :not(.cases-hero__image) {
+    position: relative;
+}
+
+.cases-hero .breadcrumbs {
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+
+.cases-hero__title {
+    margin: 0 0 10px;
+    font-family: "PT Serif", sans-serif;
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 1.08;
+    color: #1a1a1a;
+}
+
+.cases-hero__lead {
+    max-width: 560px;
+    margin: 0 0 14px;
+    font-family: "PT Serif", sans-serif;
+    font-size: 28px;
+    line-height: 1.25;
+    color: #1a1a1a;
+}
+
+.cases-hero__desc {
+    max-width: 470px;
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666;
+}
+
+/* Узкий десктоп: картинка не влезает целиком — режется слева, а не наезжает на текст */
+@media (min-width: 850px) and (max-width: 1199px) {
+    .cases-hero__image {
+        left: 58%;
+        aspect-ratio: auto;
+    }
+}
+
+@media (max-width: 849px) {
+    .cases-hero__inner {
+        min-height: 0;
+        padding-bottom: 24px;
+    }
+
+    .cases-hero__title {
+        font-size: 40px;
+    }
+
+    .cases-hero__lead {
+        font-size: 22px;
+    }
+
+    .cases-hero__desc {
+        font-size: 16px;
+    }
+
+    /* На телефоне картинка — полосой под текстом во всю ширину */
+    .cases-hero__inner {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .cases-hero__image {
+        position: relative;
+        inset: auto;
+        order: 9;
+        margin: 24px -20px -24px;
+        aspect-ratio: 1500 / 740;
+        -webkit-mask-image: none;
+        mask-image: none;
+    }
+
+    .cases-hero__stub {
+        padding-left: 0;
+        font-size: 16px;
+    }
+}
