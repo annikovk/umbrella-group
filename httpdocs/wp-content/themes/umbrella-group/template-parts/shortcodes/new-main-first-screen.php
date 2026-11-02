@@ -191,7 +191,9 @@ class new_main_first_screen
                 ],
                 'button_text' => 'Подробнее о лицензировании',
                 'button_link' => '/services/licensing/',
-                'image_alt' => 'Лицензирование деятельности под ключ',
+                'image' => '/wp-content/uploads/licenzirovanie-banner.png',
+                'image_webp' => '/wp-content/uploads/licenzirovanie-banner.webp',
+                'image_alt' => 'Лицензия, паспорт безопасности и печать — лицензирование деятельности под ключ',
                 'modifier' => 'promo-slide-lic',
             ],
 
