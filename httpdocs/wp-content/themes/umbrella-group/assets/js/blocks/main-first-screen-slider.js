@@ -1,5 +1,5 @@
 /* Слайдер акций на первом экране главной: стрелки влево/вправо, свайп на телефоне,
-   автолистание.
+   автолистание, сдвиг слайдов как в карусели.
    Скрипт в подвале с defer — DOM к этому моменту уже готов. */
 (function () {
     var sliders = document.querySelectorAll('[data-promo-slider]');
@@ -29,7 +29,7 @@
                 return;
             }
             timer = setTimeout(function () {
-                show(current + 1);
+                show(current + 1, 1);
             }, AUTOPLAY_MS);
         }
 
@@ -43,16 +43,54 @@
         });
         document.addEventListener('visibilitychange', restartAutoplay);
 
-        function show(index) {
-            current = (index + slides.length) % slides.length;
+        // Сдвиг, как в карусели: вперёд — уходящий слайд уезжает влево, новый
+        // въезжает справа; назад — наоборот. Длительность — в CSS (.promo-slide).
+        var SLIDE_MS = 600;
+        var cleanup = [];
+
+        function show(index, dir) {
+            var target = (index + slides.length) % slides.length;
             restartAutoplay();
+            if (target === current) {
+                return;
+            }
+            dir = dir || 1;
+            var leaving = slides[current];
+            var entering = slides[target];
+            current = target;
+
+            // Прошлый сдвиг ещё не доехал — дочищаем его сразу.
+            while (cleanup.length) {
+                clearTimeout(cleanup.pop());
+            }
             for (var i = 0; i < slides.length; i++) {
-                if (i === current) {
-                    slides[i].classList.add('is-active');
-                } else {
-                    slides[i].classList.remove('is-active');
+                if (slides[i] !== leaving && slides[i] !== entering) {
+                    slides[i].style.transition = '';
+                    slides[i].style.transform = '';
+                    slides[i].style.visibility = '';
                 }
             }
+
+            // Новый слайд — за краем без анимации, затем въезжает на место.
+            entering.style.transition = 'none';
+            entering.style.transform = 'translateX(' + (dir * 100) + '%)';
+            entering.style.visibility = 'visible';
+            void entering.offsetWidth;
+            entering.style.transition = '';
+            entering.style.transform = '';
+            entering.classList.add('is-active');
+
+            // Старый остаётся видимым, пока уезжает.
+            leaving.classList.remove('is-active');
+            leaving.style.visibility = 'visible';
+            leaving.style.transform = 'translateX(' + (-dir * 100) + '%)';
+
+            cleanup.push(setTimeout(function () {
+                entering.style.visibility = '';
+                leaving.style.visibility = '';
+                leaving.style.transition = 'none';
+                leaving.style.transform = '';
+            }, reduceMotion ? 0 : SLIDE_MS + 50));
         }
 
         var prev = slider.querySelector('[data-promo-prev]');
@@ -60,12 +98,12 @@
 
         if (prev) {
             prev.addEventListener('click', function () {
-                show(current - 1);
+                show(current - 1, -1);
             });
         }
         if (next) {
             next.addEventListener('click', function () {
-                show(current + 1);
+                show(current + 1, 1);
             });
         }
 
@@ -85,7 +123,7 @@
             var deltaX = event.changedTouches[0].clientX - startX;
             var deltaY = event.changedTouches[0].clientY - startY;
             if (Math.abs(deltaX) > 50 && Math.abs(deltaX) > Math.abs(deltaY)) {
-                show(deltaX < 0 ? current + 1 : current - 1);
+                show(deltaX < 0 ? current + 1 : current - 1, deltaX < 0 ? 1 : -1);
             }
             startX = null;
             startY = null;

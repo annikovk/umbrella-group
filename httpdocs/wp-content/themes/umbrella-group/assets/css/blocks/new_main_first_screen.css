@@ -209,11 +209,20 @@
    высокому, и при автолистании страница под ним не прыгает. */
 .promo-slider-viewport {
     display: grid;
+    /* слайды въезжают из-за края — за краем их не видно */
+    overflow: hidden;
 }
 
 .promo-slide {
     grid-area: 1 / 1;
     visibility: hidden;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .promo-slide {
+        transition: none;
+    }
 }
 
 .promo-slide.is-active {
