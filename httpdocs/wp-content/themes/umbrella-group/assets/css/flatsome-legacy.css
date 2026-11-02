@@ -1,0 +1,338 @@
+/*
+ * Правки Flatsome, которые до обновления на 3.20.11 жили прямо в
+ * flatsome/assets/css/flatsome.css (шесть правил исправлены на месте, блок
+ * стилей контента дописан в конец), и то, чем 3.20 разошлась с 3.13 так, что
+ * это видно на сайте (сверено скриншотами стенда «до/после»). Подключается
+ * сразу после flatsome.css, до style.css дочерней темы — там, где этот CSS
+ * стоял в каскаде раньше (inc/flatsome-legacy.php).
+ */
+
+/* Правила flatsome.css 3.13.4, исправленные на месте (в скобках — значение Flatsome). */
+.nav>li>a>i.icon-menu{font-size:1.2em} /* 1.9em */
+.nav>li.has-icon>a>i{margin:auto 5px} /* без margin */
+.dark,.dark p,.dark td{color:#FFF} /* #f1f1f1 */
+.header.show-on-scroll .hide-for-sticky,.stuck .hide-for-sticky{display:block} /* none */
+.wpcf7 .wpcf7-form-control-wrap{display:inline-block} /* block */
+.nav-dark .social-icons,.dark .social-icons{color:#1a1a1a} /* #FFF */
+
+/* Шапка до 849px. С 3.20 у header-inner класс medium-logo-left, и Flatsome даёт
+ * всем flex-left/flex-right flex:1 1 0 — колонка с иконками Max/Telegram
+ * сжимается вдвое, иконки слипаются. В 3.13 растягивалась только .flex-grow. */
+@media screen and (max-width:849px){
+.medium-logo-left .flex-left,.medium-logo-left .flex-right{flex:0 1 auto}
+.medium-logo-left .flex-left.flex-grow{flex:1 1 0%}
+}
+
+/* Правило 3.13, которого нет в 3.20: в мобильном меню (off-canvas) элементы
+ * с hide-for-medium/hide-for-small показываются — так виден блок контактов
+ * #header-contact-mobile (телефон, почта, адрес, «Обратный звонок»). */
+.off-canvas .hide-for-small,.off-canvas .hide-for-medium{display:inline-block !important}
+
+/* Поля форм до 849px: 3.20 ставит им font-size:1rem (16px, против зума iOS),
+ * и поля CF7 становятся ниже (40px вместо 44px). В 3.13 было .97em — 17.5px
+ * при шрифте страницы 18px, iOS и так не зумит. */
+@media(max-width:849px){
+.select-resize-ghost,.select2-container .select2-choice,.select2-container .select2-selection,input[type=date],input[type=email],input[type=number],input[type=password],input[type=search],input[type=tel],input[type=text],input[type=url],select,textarea{font-size:.97em}
+}
+
+/* Блок, дописанный в конец flatsome.css, — без изменений. */
+.container-litsenziya-farmatsevticheskaya {
+    width: 100%;
+    padding-right: 3px;
+    padding-left: 3px;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 14px;
+}
+@media (min-width: 1200px) {
+    .container-litsenziya-farmatsevticheskaya {
+        max-width: 1640px;
+    }
+}
+.cards-litsenziya-farmatsevticheskaya {
+    display: grid;
+    grid-template-columns: repeat(4, 220px);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 15px;
+    box-sizing: border-box;
+}
+@media (min-width: 700px) {
+    .card-litsenziya-farmatsevticheskaya {
+        max-width: 320px;
+        margin-right: 20px;
+        margin-bottom: 20px;
+    }
+}
+.card-litsenziya-farmatsevticheskaya {
+    min-width: 20%;
+    position: relative;
+    margin-bottom: 10px;
+    background: #ec1c23;
+    color: #363636;
+    text-decoration: none;
+    box-shadow: rgba(0, 0, 0, 0.19) 0 0 8px 0;
+    border-radius: 4px;
+}
+.card-litsenziya-farmatsevticheskaya .card-litsenziya-farmatsevticheskaya-header {
+    position: relative;
+    height: 175px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(255, 255, 255, 0.15);
+    background-blend-mode: overlay;
+    border-radius: 4px 4px 0 0;
+}
+.card-litsenziya-farmatsevticheskaya span {
+    display: block;
+}
+.card-litsenziya-farmatsevticheskaya .card-title-litsenziya-farmatsevticheskaya {
+    background: #ec1c23;
+    padding: 3.5% 0 2.5% 0;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 40px; 
+    padding: 10px 10px;
+}
+.card-litsenziya-farmatsevticheskaya .card-litsenziya-farmatsevticheskaya-title h3 {
+    font-size: 1em;
+    line-height: 1.2;
+    padding: 0 3.5%;
+    margin: 0;
+}
+a.card-litsenziya-farmatsevticheskaya {
+    width: 175px;
+}
+@media (max-width: 700px) { .cards-litsenziya-farmatsevticheskaya {
+    display: block;
+}
+}
+
+    .service__at-last {
+    position: relative;
+    overflow: hidden;
+    margin: 35px 0;
+    border-radius: 10px;
+    padding: 40px 130px 45px 45px;
+    box-shadow: 0px 1px 27px 3px rgba(0, 0, 0, 0.35);
+    background-color: #fff;
+      
+    }
+.service__at-last::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    z-index: 0;
+    border-radius: 100%;
+    width: 200px;
+    height: 200px;
+    background-color: #EC1C23;
+}
+
+.service__at-last p {
+    margin: 0;
+    font-family: var(--font-family-main);
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--grey-dark);
+}
+.service__at-last .service__at-last--title {
+    margin: 0;
+    margin-bottom: 17px;
+    font-weight: 500;
+    font-size: 22px;
+}
+.service__at-last::after {
+    content: '';
+    position: absolute;
+    top: 16px;
+    right: 28px;
+    z-index: 1;
+    width: 31px;
+    height: 39px;
+    background-image: url(/wp-content/uploads/russia.png);
+    background-size: 31px 39px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.flex-block {
+	display: flex;
+}
+.buttonnew {
+	display: flex;
+    background: #EC1C23;
+    color: white;
+    font-size: 18px;
+    font-weight: 400;
+    justify-content: center;
+    padding: 9px 18px;
+    cursor: pointer;
+    margin-right: 25px;
+}
+.buttonnew:hover {
+	color:#fff;
+}
+
+.main-aksii li {
+	margin-left: 1.3em;
+	 margin-bottom: .6em;
+}
+
+@media (max-width: 500px) { 
+	.flex-block {
+	display: block;
+}
+.buttonnew {
+	margin-bottom: 20px;
+}
+}
+.price-link h2 {
+	color: #1a1a1a;
+
+} 
+.price-link h2:hover {
+	color: #EC1C23;
+    
+} 
+.chekbox_style {
+	margin-bottom: 5px;
+
+}
+.lightbox-form {
+    padding-top: 58px !important;
+    height: 630px !important;
+    position: relative;
+    background-color: #fff;
+}
+.footer-form {
+    padding-top: 50px !important;
+    height: 550px !important;
+    background-color: #fff;
+}
+.cf7-legal-notice {
+    padding-top: 10px;
+}
+/* ===== CTA-плашки на страницах услуг ===== */
+/* ===== CTA-плашки ===== */
+.cta-plate {
+    padding: 0 30px;
+    border-radius: 6px;
+}
+
+/* Основной градиент: тёмно-серый → красный */
+.cta-plate--gradient {
+    background: linear-gradient(122deg, #4c2021, #ec1c24) !important;
+}
+
+/* Более плавный вариант с чёрным началом */
+.cta-plate--gradient-soft {
+    background: linear-gradient(90deg, #1a1a1a 0%, #4a1a1e 60%, #e30613 100%) !important;
+}
+
+.cta-plate__title {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    font-size: 22px !important;
+    margin-bottom: 8px !important;
+}
+
+.cta-plate__text {
+    color: #f2f2f2 !important;
+    font-size: 15px !important;
+    margin-bottom: 0 !important;
+}
+
+.cta-plate .button {
+    background: #ffffff !important;
+    color: #e30613 !important;
+    font-weight: 700 !important;
+    border-radius: 4px !important;
+}
+
+.cta-plate .button:hover {
+    background: #f2f2f2 !important;
+    color: #b3050f !important;
+}
+
+@media (max-width: 767px) {
+    .cta-plate { padding: 20px !important; }
+    .cta-plate__title { font-size: 18px !important; }
+    .cta-plate--gradient {
+        background: linear-gradient(122deg, #4c2021, #ec1c24) !important;
+    }
+}
+
+
+/* Кнопка на плашке */
+.cta-plate .button {
+    background: #ffffff !important;
+    color: #e30613 !important;
+    border: 2px solid #ffffff !important;
+    font-weight: 700 !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+    padding: 12px 26px !important;
+    border-radius: 4px !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    transition: all 0.2s ease;
+}
+
+.cta-plate .button:hover {
+    background: transparent !important;
+    color: #ffffff !important;
+    border-color: #ffffff !important;
+}
+
+/* Вариант с контурной кнопкой (для градиентной плашки) */
+.cta-plate--gradient .button {
+    background: transparent !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
+}
+
+.cta-plate--gradient .button:hover {
+    background: #ffffff !important;
+    color: #e30613 !important;
+}
+
+/* Выравнивание колонок */
+.cta-plate .col-inner {
+    padding: 0 !important;
+}
+
+.cta-plate .cta-plate__btn-col {
+    text-align: right;
+}
+
+/* Мобильная адаптация */
+@media (max-width: 767px) {
+    .cta-plate {
+        padding: 20px !important;
+        margin: 20px 0 !important;
+    }
+    .cta-plate__title {
+        font-size: 18px !important;
+    }
+    .cta-plate__text {
+        font-size: 13px !important;
+    }
+    .cta-plate .cta-plate__btn-col {
+        text-align: center;
+        margin-top: 14px;
+    }
+    .cta-plate .button {
+        padding: 12px 20px !important;
+        font-size: 14px !important;
+        width: 100%;
+        max-width: 320px;
+    }
+}
+.cta-col {
+  padding: 30px 30px!important;
+}

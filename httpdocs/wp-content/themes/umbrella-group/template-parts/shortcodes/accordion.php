@@ -24,7 +24,9 @@ function accordion_umbrella($atts, $content = null)
     if ($class) $classes[] = $class;
 
     if ($title) $title = '<h3 class="accordion_title">' . $title . '</h3>';
-    return $title . '<div class="' . implode(' ', $classes) . '" rel="' . $open . '">' . flatsome_contentfix($content) . '</div>';
+    // flatsome_contentfix() до 3.20 сам звал do_shortcode(), с 3.20 — нет: без него
+    // вложенные [accordion-item] выводятся сырым текстом.
+    return $title . '<div class="' . implode(' ', $classes) . '" rel="' . $open . '">' . do_shortcode(flatsome_contentfix($content)) . '</div>';
 }
 
 function accordion_item_umbrella($atts, $content = '', $code = '')
@@ -55,7 +57,7 @@ function accordion_item_umbrella($atts, $content = '', $code = '')
         '</div>'
         . $subtitle . '</a>' .
 
-        '<div class="accordion-inner">' . flatsome_contentfix($content) . '</div>' .
+        '<div class="accordion-inner">' . do_shortcode(flatsome_contentfix($content)) . '</div>' .
         '</div>';
 
 }

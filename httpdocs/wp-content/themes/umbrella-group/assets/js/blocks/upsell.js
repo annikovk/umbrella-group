@@ -21,14 +21,20 @@ document.addEventListener('wpcf7mailsent', function (event) {
     box.style.maxWidth = '400px';
     box.appendChild(template.content.cloneNode(true));
 
-    if (!window.jQuery || !jQuery.magnificPopup) {
+    const open = function () {
+        jQuery.magnificPopup.open({
+            removalDelay: 300,
+            closeBtnInside: window.flatsomeVars ? flatsomeVars.lightbox.close_btn_inside : true,
+            closeMarkup: window.flatsomeVars ? flatsomeVars.lightbox.close_markup : undefined,
+            items: {src: box, type: 'inline'}
+        });
+    };
+    if (window.jQuery && jQuery.magnificPopup) {
+        open();
+    } else if (window.jQuery && jQuery.loadMagnificPopup) {
+        // Flatsome 3.20 грузит magnific лениво — до первого попапа его нет
+        jQuery.loadMagnificPopup().then(open, function () { container.appendChild(box); });
+    } else {
         container.appendChild(box);
-        return;
     }
-    jQuery.magnificPopup.open({
-        removalDelay: 300,
-        closeBtnInside: window.flatsomeVars ? flatsomeVars.lightbox.close_btn_inside : true,
-        closeMarkup: window.flatsomeVars ? flatsomeVars.lightbox.close_markup : undefined,
-        items: {src: box, type: 'inline'}
-    });
 });
