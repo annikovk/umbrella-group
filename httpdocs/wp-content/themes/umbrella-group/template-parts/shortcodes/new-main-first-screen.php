@@ -284,7 +284,9 @@ class new_main_first_screen
                 ],
                 'button_text' => 'Подробнее об услугах',
                 'button_link' => '/services/nalogovoe-pravo/',
-                'image_alt' => 'Налоговое право для бизнеса',
+                'image' => '/wp-content/uploads/nalogovoe-pravo-banner.png',
+                'image_webp' => '/wp-content/uploads/nalogovoe-pravo-banner.webp',
+                'image_alt' => 'Книга «Налоговое право», анализ налоговых рисков и калькулятор — налоговое право для бизнеса',
                 'modifier' => 'promo-slide-tax',
             ],
 
