@@ -479,7 +479,8 @@
     .promo-slide-lic .main-banner-content .text-like-h1,
     .promo-slide-ip .main-banner-content .text-like-h1,
     .promo-slide-reg .main-banner-content .text-like-h1,
-    .promo-slide-tax .main-banner-content .text-like-h1 {
+    .promo-slide-tax .main-banner-content .text-like-h1,
+    .promo-slide-law .main-banner-content .text-like-h1 {
         font-size: 46px;
     }
 
@@ -489,7 +490,8 @@
     .promo-slide-lic .main-banner-content .text-like-h1 .accent,
     .promo-slide-ip .main-banner-content .text-like-h1 .accent,
     .promo-slide-reg .main-banner-content .text-like-h1 .accent,
-    .promo-slide-tax .main-banner-content .text-like-h1 .accent {
+    .promo-slide-tax .main-banner-content .text-like-h1 .accent,
+    .promo-slide-law .main-banner-content .text-like-h1 .accent {
         font-size: 40px;
     }
 }
