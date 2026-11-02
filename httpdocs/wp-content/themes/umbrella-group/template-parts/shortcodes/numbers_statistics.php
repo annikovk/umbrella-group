@@ -18,7 +18,7 @@ class numbers_statistics
                         Перед встречей мы&nbsp;тщательно изучаем ваш вопрос и&nbsp;собираем команду
                         из&nbsp;специалистов так, чтобы комплексно решить вашу задачу. Например, за&nbsp;1&nbsp;визит
                         вы&nbsp;можете навестить вашего бухгалтера или специалиста по&nbsp;кадрам, задать вопросы
-                        юристу, получить консультацию по&nbsp;<a class="action-text-common" href="/services/licensing/registracija-tovarnogo-znaka/">регистрации товарного знака</a>.
+                        юристу, получить консультацию по&nbsp;<a class="action-text-common" href="/services/intellektualnoe-pravo/registracija-tovarnogo-znaka/">регистрации товарного знака</a>.
                         <br>
                         <br>
                         ГК&nbsp;Umbrella Group&nbsp;&mdash;&nbsp;это:
@@ -26,11 +26,11 @@ class numbers_statistics
                     <div class="container_numbers_statistics">
                         <div class="numbers_statistics_block_array">
                             <div class="numbers_statistics_block text-align_numbers-statistics">
-                                <div class="number_statistics_item">19</div>   
+                                <div class="number_statistics_item">15</div>   
                                 <div class="main-text-common">юристов</div>
                             </div> 
                             <div class="numbers_statistics_block text-align_numbers-statistics">
-                                <div class="number_statistics_item">15</div>   
+                                <div class="number_statistics_item">25</div>   
                                 <div class="main-text-common">бухгалтеров</div>
                             </div>
                             <div class="numbers_statistics_block text-align_numbers-statistics">
@@ -38,8 +38,8 @@ class numbers_statistics
                                 <div class="main-text-common">аудиторов</div>
                             </div>             
                             <div class="numbers_statistics_block text-align_numbers-statistics">
-                                <div class="number_statistics_item">4</div>   
-                                <div class="main-text-common center-text_numbers-statistics">налоговых<br>консультанта</div>
+                                <div class="number_statistics_item">5</div>   
+                                <div class="main-text-common center-text_numbers-statistics">налоговых<br>консультантов</div>
                             </div>
                         </div>
                         <div class="number_statistics_text numbers_statistics_footer">

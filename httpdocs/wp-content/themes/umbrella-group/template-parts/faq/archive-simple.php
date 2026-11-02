@@ -8,6 +8,8 @@ while (have_posts()) : the_post();
 endwhile;
 $posts = get_faq_by_ids($ids);
 umbrella_draw_faq_tiles($posts);
+umbrella_faq_schema($posts);
+
 function get_faq_by_ids($ids)
 {
     $args = array(
@@ -19,6 +21,7 @@ function get_faq_by_ids($ids)
     );
     return get_posts($args);
 }
+
 function umbrella_draw_faq_tiles($posts)
 {
     $metas = [];
@@ -55,7 +58,7 @@ function umbrella_draw_faq_tiles($posts)
                 [section label="$meta" padding="0px"]
                     [scroll_to title="$meta" link="$i" bullet="false"]
                     <h2>$meta</h2>
-                    <div class="faq-tabs">[accordion]
+                    <div 13 class="faq-tabs">[accordion]
                         $accordion_element[$meta]
                     [/accordion]</div>
                     [gap]
@@ -86,4 +89,42 @@ function umbrella_draw_faq_tiles($posts)
     EOHTML;
     echo do_shortcode($template);
     ug_enqueue_style('/assets/css/pages/faq.css');
+}
+
+function umbrella_faq_schema($posts)
+{
+    $main_entity = [];
+
+    foreach ($posts as $post) {
+        $answer_html = do_shortcode($post->post_content);
+        $answer_text = wp_strip_all_tags($answer_html);
+        $answer_text = trim(preg_replace('/\s+/', ' ', $answer_text));
+
+        if ($post->post_title === '' || $answer_text === '') {
+            continue;
+        }
+
+        $main_entity[] = [
+            '@type' => 'Question',
+            'name' => wp_strip_all_tags($post->post_title),
+            'acceptedAnswer' => [
+                '@type' => 'Answer',
+                'text' => $answer_text,
+            ],
+        ];
+    }
+
+    if (empty($main_entity)) {
+        return;
+    }
+
+    $schema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'FAQPage',
+        'mainEntity' => $main_entity,
+    ];
+
+    echo '<script type="application/ld+json">' .
+        wp_json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) .
+        '</script>';
 }
