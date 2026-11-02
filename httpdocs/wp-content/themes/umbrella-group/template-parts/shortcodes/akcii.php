@@ -73,7 +73,23 @@ function akciya_block_shortcode($atts)
         </div>
     </div>
     EOV;
-    if (isset($atts['new'])) {
+    if (isset($atts['new']) && isset($atts['featured'])) {
+        // акцентная акция во всю ширину секции [stock] на главной: стили в stock.css
+        $button = do_shortcode('[button text="' . $button_text . '" style="primary" class="stock-featured__button" link="' . urldecode(get_permalink($post->ID)) . '"]');
+        $block = <<<EOHTML
+            <div class="stock-featured">
+                  <div class="stock-featured__main">
+                      <div class="stock-featured__label">Акция</div>
+                      <div class="stock-featured__title">$title</div>
+                      <div class="main-text-common stock-featured__excerpt">$excerpt</div>
+                  </div>
+                  <div class="stock-featured__side">
+                      <div class="stock-featured__date">$date</div>
+                      $button
+                  </div>
+            </div>
+        EOHTML;
+    } elseif (isset($atts['new'])) {
         $block = <<<EOHTML
             <div class="red_border_stock card-shadow-common">
                   <div class="position-card-legend_stock">
