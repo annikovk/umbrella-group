@@ -119,18 +119,19 @@ class new_main_first_screen
                     [
                         'icon' => 'shield-check',
                         'title' => 'Выявим<br>риски',
-                        'text' => 'Найдём ошибки и возможные<br>налоговые последствия',
+                        'text' => 'Найдём ошибки и возможные налоговые последствия',
                     ],
                     [
                         'icon' => 'clipboard',
                         'title' => 'Предложим<br>решения',
-                        'text' => 'Дадим рекомендации<br>по устранению нарушений',
+                        'text' => 'Дадим рекомендации по устранению нарушений',
                     ],
                 ],
                 'button_text' => 'Подробнее об аудите',
                 'button_link' => '/services/audit/',
-                'image' => '',
-                'image_alt' => 'Аудиторские услуги для бизнеса',
+                'image' => '/wp-content/uploads/audit-banner.png',
+                'image_webp' => '/wp-content/uploads/audit-banner.webp',
+                'image_alt' => 'Аудиторское заключение, бухгалтерская отчётность и калькулятор — аудит для бизнеса',
                 'modifier' => 'promo-slide-audit',
             ],
 
