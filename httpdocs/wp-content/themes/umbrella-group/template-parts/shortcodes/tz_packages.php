@@ -21,6 +21,8 @@ defined('ABSPATH') || exit;
 
 const UG_TZ_FORM = '#calculate-price-contact-form-lightbox';
 const UG_TZ_ASK  = '#ask-question-contact-form-lightbox';
+// Памятка по товарному знаку — вложение 31306 в медиатеке.
+const UG_TZ_MEMO = '/wp-content/uploads/tovarnyj-znak-pamyatka.pdf';
 
 /** Пункты состава пакетов. */
 const UG_TZ_ITEMS = [
@@ -185,6 +187,7 @@ function ug_tz_packages_shortcode(): string
         . '</div>';
 
     $ask = UG_TZ_ASK;
+    $memo = esc_url(home_url(UG_TZ_MEMO));
     $chat = ug_tz_icon('chat', 30);
     $info = ug_tz_icon('doc', 20);
 
@@ -226,6 +229,7 @@ function ug_tz_packages_shortcode(): string
                 <div class="tzp__fees">
                     <p><b>Госпошлины Роспатента</b> в&nbsp;стоимость услуг не&nbsp;входят и&nbsp;оплачиваются отдельно. Их&nbsp;размер зависит от&nbsp;числа классов МКТУ.</p>
                     <a href="#tz-fees" class="tzp-link">Сроки и&nbsp;размеры пошлин&nbsp;→</a>
+                    <a href="$memo" class="tzp-btn tzp__fees-btn" target="_blank" rel="noopener">Скачать памятку</a>
                 </div>
             </div>
         </div>

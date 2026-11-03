@@ -11,6 +11,10 @@
  * //quiz.marquiz.ru и //counter.yadro.ru → https://; jQuery-блок ROISTAT из
  * начала <body> — defer-файл assets/js/roistat-links.js (inc/layout.php).
  *
+ * Загрузка внешних скриптов (gtag.js, gtm.js, marquiz v2.js) — через
+ * ugLater() из inc/perf.php: по первому действию посетителя или через 2 с
+ * после load. dataLayer, gtag() и gtm.start объявляются сразу, как раньше.
+ *
  * Не здесь (настройки Flatsome в theme_mods, печатает Flatsome): GTM-WW2PFC,
  * Pixel VK, Метрика, ROISTAT-счётчик, venyoo, qoopler.
  *
@@ -44,8 +48,8 @@ endif;
 
 if ($ug_variant === 'business') : ?>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-168903290-1"></script>
     <script>
+        (window.ugLater || function (f) { f(); })(function () { var j = document.createElement('script'); j.async = true; j.src = 'https://www.googletagmanager.com/gtag/js?id=UA-168903290-1'; document.head.appendChild(j); });
         window.dataLayer = window.dataLayer || [];
         function gtag() {
             dataLayer.push(arguments);
@@ -64,8 +68,8 @@ if ($ug_variant === 'business') : ?>
     </script>
 <?php else : ?>
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1SYSHHPK5"></script>
     <script>
+        (window.ugLater || function (f) { f(); })(function () { var j = document.createElement('script'); j.async = true; j.src = 'https://www.googletagmanager.com/gtag/js?id=G-L1SYSHHPK5'; document.head.appendChild(j); });
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
@@ -84,12 +88,15 @@ if ($ug_variant === 'business') : ?>
                 'gtm.start':
                     new Date().getTime(), event: 'gtm.js'
             });
-            var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
-            j.async = true;
-            j.src =
-                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-            f.parentNode.insertBefore(j, f);
+            // сам gtm.js — через ugLater (inc/perf.php): gtm.start выше фиксирует время сразу
+            (w.ugLater || function (f) { f(); })(function () {
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+                j.async = true;
+                j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+                f.parentNode.insertBefore(j, f);
+            });
         })(window, document, 'script', 'dataLayer', 'GTM-TRFKKFL');
     </script>
     <!-- End Google Tag Manager -->
@@ -185,8 +192,11 @@ if ($ug_quiz !== null) :
                 };
                 d.head.insertBefore(j, d.head.firstElementChild);
             }
-            if (ready) d.addEventListener('DOMContentLoaded', load);
-            else load();
+            // загрузчик квиза — через ugLater (inc/perf.php), он и так позже DOMContentLoaded
+            (w.ugLater || function (f) { f(); })(function () {
+                if (ready && d.readyState === 'loading') d.addEventListener('DOMContentLoaded', load);
+                else load();
+            });
         })(window, document, 'script', <?php echo $ug_json($ug_quiz['init']); ?>, <?php echo empty($ug_quiz['on_ready']) ? 'false' : 'true'; ?>);
 <?php if (isset($ug_quiz['pop'])) : ?>
         (function (t, p) {

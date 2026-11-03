@@ -27,6 +27,7 @@ require __DIR__ . '/attribution.php';
 require __DIR__ . '/setup.php';
 require __DIR__ . '/legacy-stubs.php';
 require __DIR__ . '/assets.php';
+require __DIR__ . '/perf.php';
 require __DIR__ . '/flatsome-legacy.php';
 require __DIR__ . '/layout.php';
 require __DIR__ . '/tiles.php';

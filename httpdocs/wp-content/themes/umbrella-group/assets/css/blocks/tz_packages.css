@@ -593,7 +593,7 @@
 .tzp__fees {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 12px;
     padding: 24px 28px;
     border-radius: 8px;
@@ -609,6 +609,12 @@
 
 .tzp__fees .tzp-link {
     align-self: flex-start;
+}
+
+/* Кнопка памятки прижата к низу плашки, тексты — к верху */
+.tzp__fees-btn {
+    align-self: flex-start;
+    margin-top: auto;
 }
 
 /* ── [tz_check] ──────────────────────────────────────────────────────────── */
@@ -985,6 +991,11 @@
 
     .tzp__fees {
         padding: 20px;
+    }
+
+    .tzp__fees-btn {
+        align-self: stretch;
+        margin-top: 8px;
     }
 
     .tzc-compare__row {

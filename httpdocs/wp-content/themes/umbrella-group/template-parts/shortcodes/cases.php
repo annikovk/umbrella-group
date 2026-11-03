@@ -320,7 +320,7 @@ class cases
     private static function page_cta(): string
     {
         $image = UG_CASES_CTA_IMAGE
-            ? '<img src="' . esc_url(home_url(UG_CASES_CTA_IMAGE)) . '" alt="">'
+            ? '<img src="' . esc_url(home_url(UG_CASES_CTA_IMAGE)) . '" alt="Рабочий стол с ноутбуком и документами у окна с видом на город">'
             : '<span class="cases-cta__stub">Картинка 1400&nbsp;×&nbsp;600</span>';
         $arrow = self::page_icon('arrow', 20);
         return <<<EOHTML
@@ -929,7 +929,7 @@ const UG_CASES_HERO_IMAGE = '/wp-content/themes/umbrella-group/assets/img/cases-
  * корня сайта, пусто — заглушка. Файл 1400 × 600, тёмный; левая четверть
  * растворяется в фоне баннера, на телефоне кадр режется по центру.
  */
-const UG_CASES_CTA_IMAGE = '';
+const UG_CASES_CTA_IMAGE = '/wp-content/themes/umbrella-group/assets/img/cases-cta-office.jpg';
 
 /**
  * Первый экран /about/cases/: крошки, h1, подзаголовок, абзац и картинка справа.

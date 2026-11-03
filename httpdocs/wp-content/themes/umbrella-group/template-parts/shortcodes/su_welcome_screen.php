@@ -107,9 +107,8 @@ class SU_welcome_screen
     // фон первого экрана — LCP страниц услуг: сразу, с высоким приоритетом и размерами
     private function get_background(): string
     {
-        $src = wp_get_attachment_image_src($this->background, 'full');
-        $size = ($src && $src[1] && $src[2]) ? ' width="' . $src[1] . '" height="' . $src[2] . '"' : '';
-        return ug_eager_img('<img src="' . esc_url($src[0] ?? '') . '"' . $size . ' loading="eager" fetchpriority="high" decoding="async"  />');
+        // <picture> с webp (кроп под телефон и полный), если варианты лежат рядом с файлом — inc/perf.php
+        return ug_eager_img(ug_hero_picture((int) $this->background));
     }
 
     private function get_specialist_text()
@@ -221,8 +220,6 @@ add_action('wp_head', function () {
         || !preg_match('/\[su_welcome_screen\s[^\]]*?background=[\'"]?(\d+)/', $content, $m)) {
         return;
     }
-    $src = wp_get_attachment_image_src((int) $m[1], 'full');
-    if ($src) {
-        echo '<link rel="preload" as="image" href="' . esc_url($src[0]) . '" fetchpriority="high">' . "\n";
-    }
+    // тот же выбор источника, что у <picture> в get_background() — inc/perf.php
+    echo ug_hero_preload((int) $m[1]);
 }, 2);
