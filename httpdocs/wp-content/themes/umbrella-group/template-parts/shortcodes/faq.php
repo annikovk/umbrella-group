@@ -38,6 +38,13 @@ class umbrella_faq
         return $accordion;
     }
 
+    /** Те же 5 вопросов, что выведет шорткод, — для JSON-LD FAQPage (inc/schema.php). */
+    public function faq_posts(): array
+    {
+        $this->fill_attributes();
+        return $this->get_5_faq_posts($this->category);
+    }
+
     private function get_main_block(): string
     {
         $tabs_content['pre'] = '[tabgroup style="line-bottom" type="vertical" nav_style="normal" class="faq-tabs"]';

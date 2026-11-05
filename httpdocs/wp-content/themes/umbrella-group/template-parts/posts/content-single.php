@@ -2,8 +2,12 @@
 
 
     <?php
-    echo ' <p class="big">'. get_the_excerpt() . '</p>';?>
-	<?php the_content(); ?>
+    echo ' <p class="big">'. get_the_excerpt() . '</p>';
+	// the_content() в строку: перед первым <h2> — строка «Услуга по теме» (inc/post-service-cta.php)
+	ob_start();
+	the_content();
+	echo ug_post_content_with_service_cta( get_the_ID(), (string) ob_get_clean() );
+	?>
 
 	<?php
 	wp_link_pages( array(
@@ -11,6 +15,8 @@
 		'after'  => '</div>',
 	) );
 	?>
+
+	<?php echo ug_post_service_cta( get_the_ID() ); // «Заказать услугу» / общая заявка ?>
 
 	<?php if ( get_theme_mod( 'blog_share', 1 ) ) {
 		// SHARE ICONS
@@ -32,6 +38,15 @@
 
 
         $date = get_the_date('j F Y');
+        // Статьи блога: «Обновлено», когда правили позже публикации больше чем на
+        // сутки; та же post_modified, что dateModified в JSON-LD Article от AIOSEO.
+        // Шаблон рисует и одиночные faq, business_calculation и т.п. — там как было.
+        if ( get_post_type() === 'post' ) {
+            $date = '<time datetime="' . esc_attr( get_the_date( 'c' ) ) . '">' . $date . '</time>';
+            if ( (int) get_post_modified_time( 'U', true ) - (int) get_post_time( 'U', true ) > DAY_IN_SECONDS ) {
+                $date .= '&emsp;&emsp;Обновлено: <time datetime="' . esc_attr( get_the_modified_date( 'c' ) ) . '">' . get_the_modified_date( 'j F Y' ) . '</time>';
+            }
+        }
 
         $date_and_tag = '<div style="font-size: 0.8em; color: #b2b2b2">'. $date .'&emsp;&emsp;&emsp;&emsp; Тэги: '. $tag_list . '</div>';
 

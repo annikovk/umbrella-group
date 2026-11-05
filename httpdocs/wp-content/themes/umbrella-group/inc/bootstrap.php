@@ -36,3 +36,4 @@ require __DIR__ . '/shortcodes.php';
 require __DIR__ . '/snippets.php';
 require __DIR__ . '/cookie-notice.php';
 require __DIR__ . '/schema.php';
+require __DIR__ . '/post-service-cta.php';
