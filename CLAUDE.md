@@ -61,6 +61,11 @@ tools/shot.mjs --url /services/... --out /tmp/A- 1280 1440 1600 1920 390m
 стенд из `TAXLAB_BASE` (по умолчанию `http://localhost:8088`) — так же
 проверяются полосы `tools/lane.sh`: `TAXLAB_BASE=http://localhost:8092 tools/shots-set.sh /tmp/x`.
 
+**Критический CSS.** У 13 страниц (главные БО и др.) первый экран рисуется
+встроенным CSS из `assets/css/critical/page-<ID>.json`, его подставляет
+`inc/perf.php`. Правишь CSS темы или Flatsome на этих страницах — перегенерируй
+`tools/critical-css.mjs` (как — в его шапке). Сверить без него: `?ug-nocritical`.
+
 ⚠️ **Не снимай через `chrome --screenshot --virtual-time-budget`.** На десктопной
 вёрстке этого сайта хром пишет PNG за 6 секунд и после этого не выходит никогда
 (бюджет виртуального времени не истекает; кто его держит, не установлено —

@@ -25,7 +25,19 @@
  *    HTML прода): ни один встроенный скрипт до скриптов подвала jQuery не
  *    зовёт. Если шорткод/сниппет начнёт печатать в body инлайн с jQuery(…) —
  *    раздел отсюда убрать. Скрипт в <head>, зависящий от jquery, сам вернёт
- *    его в <head> (группы зависимостей в WP_Scripts).
+ *    его в <head> (группы зависимостей в WP_Scripts). Там же снимается
+ *    prefetch чанков Flatsome (см. ниже).
+ *
+ * 6. Критический CSS первого экрана (страницы с файлом
+ *    assets/css/critical/page-<ID>.json, генератор tools/critical-css.mjs):
+ *    каждый <link> в <head>, для которого в файле есть ключ-хэндл, заменяется
+ *    на <style> с его правилами первого экрана + тот же <link> с
+ *    media="print" и onload → all (noscript — обычная ссылка). Ссылки стоят
+ *    на своих местах, поэтому после загрузки каскад тот же, что был; до
+ *    загрузки — тот же порядок, только правила первого экрана. Когда все
+ *    такие стили загрузились, шлём resize: слайдеры Flickity и прочее, что
+ *    мерило вёрстку раньше полного CSS, пересчитываются. ?ug-nocritical —
+ *    отключить на один запрос (сравнение). Откат: удалить JSON-файлы.
  *
  * Откат: убрать require этого файла из inc/bootstrap.php (п. 1–3), ug_hero_*
  * вызываются из su_welcome_screen.php и без webp-файлов отдают оригинал.
@@ -86,7 +98,7 @@ function ug_defer_inline_loaders($html)
         $attrs = $m[1];
         $body = trim($m[2]);
         // только встроенные IIFE-загрузчики: внешние src и скрипты с глобальными
-        // объявлениями (getCookie / jivo_onLoadCallback для Jivo) — как есть
+        // объявлениями var/function (их обёртка сделала бы локальными) — как есть
         if (stripos($attrs, 'src=') !== false || !preg_match('~^(?:\(\s*function\b|!\s*function\b)~', $body)) {
             return $m[0];
         }
@@ -222,10 +234,117 @@ add_action('wp_enqueue_scripts', function (): void {
     if (!ug_perf_frontend() || !is_page() || !in_array(ug_current_service_section(), UG_JQUERY_FOOTER_SECTIONS, true)) {
         return;
     }
+    // prefetch Flatsome (wp_resource_hints): неминифицированный flatsome.js —
+    // другой адрес, чем отдаёт WP Rocket, качался второй раз, а чанки
+    // слайдера/попапов Flatsome всё равно грузит сам, когда они нужны; все
+    // ~50 КБ делили канал с картинкой первого экрана
+    remove_filter('wp_resource_hints', 'flatsome_prefetch_scripts', 10);
     $scripts = wp_scripts();
     foreach (['jquery', 'jquery-core', 'jquery-migrate'] as $handle) {
         if (isset($scripts->registered[$handle])) {
             $scripts->add_data($handle, 'group', 1);
         }
+    }
+}, 1000);
+
+// ── 6. критический CSS первого экрана ───────────────────────────────────────
+/** Критический CSS текущей страницы: [handle => css] или []. */
+function ug_critical_css(): array
+{
+    static $map = null;
+    if ($map !== null) {
+        return $map;
+    }
+    $map = [];
+    if (!ug_perf_frontend() || !is_page() || isset($_GET['ug-nocritical'])) {
+        return $map;
+    }
+    $file = get_theme_file_path('assets/css/critical/page-' . get_queried_object_id() . '.json');
+    if (is_file($file)) {
+        $data = json_decode((string) file_get_contents($file), true);
+        if (is_array($data)) {
+            $map = array_filter($data, 'is_string');
+        }
+    }
+    return $map;
+}
+
+add_filter('style_loader_tag', function ($tag, $handle) {
+    // только <head>: late styles подвала (wp_footer) печатаются как есть
+    if (did_action('wp_footer') || doing_action('wp_footer') || !is_string($tag)) {
+        return $tag;
+    }
+    $map = ug_critical_css();
+    if (!array_key_exists($handle, $map) || !preg_match("~<link\b[^>]*rel=['\"]stylesheet['\"]~", $tag)) {
+        return $tag;
+    }
+    ug_critical_used($handle);
+    $async = (string) preg_replace('~\smedia=([\'"])[^\'"]*\1~', '', $tag);
+    $async = (string) preg_replace('~\s*/?>\s*$~', " media='print' onload=\"this.media='all';this.onload=null;window.ugCssDone&&ugCssDone()\" />", trim($async), 1);
+    $css = str_replace('</style', '<\\/style', $map[$handle]);
+    $style = $css !== '' ? "<style id='" . esc_attr($handle) . "-critical-css'>" . $css . "</style>\n" : '';
+    return $style . $async . "\n<noscript>" . trim($tag) . "</noscript>\n";
+}, 20, 2);
+
+add_action('wp_head', function (): void {
+    if (ug_critical_css() === []) {
+        return;
+    }
+    ?>
+<script>
+(function (w, d) {
+    // все асинхронные стили загрузились → resize, чтобы слайдеры и прочее пересчитали размеры
+    var fired = 0;
+    w.ugCssDone = function () {
+        if (fired || d.querySelector('link[rel=stylesheet][media=print][onload]')) return;
+        fired = 1;
+        var go = function () { w.dispatchEvent(new Event('resize')); };
+        d.readyState === 'loading' ? d.addEventListener('DOMContentLoaded', function () { setTimeout(go, 0); }) : setTimeout(go, 0);
+    };
+})(window, document);
+</script>
+<?php
+}, 1);
+
+// Якорь каскада ug-main в конце <body> (inc/assets.php, wp_footer:19) перекрывает
+// инлайн-стили разметки (шапка из theme_mods и т.п.). Пока полный CSS не
+// пришёл, ту же роль играет критическая часть — печатаем её прямо перед якорем.
+add_action('wp_footer', function (): void {
+    $map = ug_critical_css();
+    if ($map === [] || !did_action('ug_head_styles_printed')) {
+        return;
+    }
+    foreach (ug_head_styles() as $handle) {
+        if (($map[$handle] ?? '') !== '') {
+            echo "<style id='" . esc_attr($handle) . "-tail-critical-css'>" . str_replace('</style', '<\/style', $map[$handle]) . "</style>\n";
+        }
+    }
+}, 18);
+
+/** Хэндлы, чья критическая часть уже напечатана на месте своего <link> в <head>. */
+function ug_critical_used(?string $handle = null): array
+{
+    static $used = [];
+    if ($handle !== null) {
+        $used[$handle] = true;
+    }
+    return $used;
+}
+
+// CSS блоков (late styles в конце <body>) раньше успевал загрузиться, пока
+// страница ждала блокирующий CSS в <head>; теперь первый кадр раньше, поэтому
+// правила первого экрана из этих файлов — в конце <head>. Сами файлы печатаются
+// в подвале как прежде, после загрузки каскад тот же.
+add_action('wp_head', function (): void {
+    $map = ug_critical_css();
+    if ($map === []) {
+        return;
+    }
+    $used = ug_critical_used();
+    foreach ($map as $handle => $css) {
+        if ($css === '' || isset($used[$handle]) || in_array($handle, ug_head_styles(), true)) {
+            continue;
+        }
+        echo "<style id='" . esc_attr($handle) . "-late-critical-css'>" . str_replace('</style', '<\/style', $css) . "</style>\n";
     }
 }, 1000);

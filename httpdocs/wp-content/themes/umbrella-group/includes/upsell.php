@@ -17,6 +17,14 @@ const UMBRELLA_UPSELL_BOOKKEEPING = array(
     'services/register-elimination' => 'Корпоративные услуги',
 );
 
+// Общая подборка для «Банкротства» и его страниц для кредиторов и должников.
+const UMBRELLA_UPSELL_BANKRUPTCY = array(
+    'services/services-le/vzyskanie-dolgov',
+    'services/services-le/predstavitelstvo-v-arbitrazhnom-sude',
+    'services/register-elimination/likvidatsiya-ooo',
+    'services/bukhgalterskie-uslugi/vosstanovleniya-ucheta',
+);
+
 const UMBRELLA_UPSELL_MAP = array(
     'services/licensing/litsenziya-na-obrazovatelnuyu-deyatelnost' => array(
         'services/licensing/pasport-antiterroristicheskoy-zaschischennosti',
@@ -349,6 +357,69 @@ const UMBRELLA_UPSELL_MAP = array(
         'services/services-le/yuridicheskoe-obsluzhivanie-organizatsiy',
         'services/register-elimination/konsultaciya-po-korporativnomu-pravu',
     ),
+    'services/services-le/yuridicheskoe-obsluzhivanie-organizatsiy' => array(
+        'services/bukhgalterskie-uslugi/obsluzhivanie',
+        'services/services-le/sostavlenie-dogovorov',
+        'services/services-le/predstavitelstvo-v-arbitrazhnom-sude',
+        'services/services-le/pravovoj-audit',
+    ),
+    'services/services-le/yuridicheskaya-konsultatsiya' => array(
+        'services/services-le/yuridicheskoe-obsluzhivanie-organizatsiy',
+        'services/services-le/sostavlenie-dogovorov',
+        'services/services-le/ocenka-nalogovyh-riskov',
+        'services/register-elimination/konsultaciya-po-korporativnomu-pravu',
+    ),
+    'services/services-le/sostavlenie-dogovorov' => array(
+        'services/services-le/yuridicheskoe-obsluzhivanie-organizatsiy',
+        'services/intellektualnoe-pravo/registracija-tovarnogo-znaka',
+        'services/services-le/vzyskanie-dolgov',
+        'services/services-le/predstavitelstvo-v-arbitrazhnom-sude',
+    ),
+    'services/services-le/predstavitelstvo-v-arbitrazhnom-sude' => array(
+        'services/services-le/vzyskanie-dolgov',
+        'services/services-le/korporativniy-yurist',
+        'services/services-le/razreshenie-nalogovyih-sporov',
+        'services/services-le/yuridicheskoe-obsluzhivanie-organizatsiy',
+    ),
+    'services/services-le/korporativniy-yurist' => array(
+        'services/services-le/predstavitelstvo-v-arbitrazhnom-sude',
+        'services/register-elimination/konsultaciya-po-korporativnomu-pravu',
+        'services/register-elimination/vnesenie-izmenenij-v-uchreditelnye-dokumenty/vkhod-uchastnikov-ooo',
+        'services/services-le/strukturirovanie-biznesa',
+    ),
+    'services/services-le/oformlenie-prikrytogo-skrytogo-vladeniya-biznesom' => array(
+        'services/services-le/strukturirovanie-biznesa',
+        'services/services-le/lichnyj-fond',
+        'services/register-elimination/konsultaciya-po-korporativnomu-pravu',
+        'services/services-le/ocenka-nalogovyh-riskov',
+    ),
+    'services/services-le/vzyskanie-dolgov' => array(
+        'services/services-le/predstavitelstvo-v-arbitrazhnom-sude',
+        'services/services-le/soprovozhdenie-procedury-bankrotstva',
+        'services/services-le/sostavlenie-dogovorov',
+        'services/services-le/yuridicheskoe-obsluzhivanie-organizatsiy',
+    ),
+    'services/services-le/pravovoj-audit' => array(
+        'services/audit/due-diligence',
+        'services/services-le/ocenka-nalogovyh-riskov',
+        'services/services-le/yuridicheskoe-obsluzhivanie-organizatsiy',
+        'services/services-le/sostavlenie-dogovorov',
+    ),
+    'services/services-le/obuchenie-menedgerov-pravu' => array(
+        'services/services-le/yuridicheskoe-obsluzhivanie-organizatsiy',
+        'services/services-le/sostavlenie-dogovorov',
+        'services/audit/audit-kadrovyih-dokumentov',
+        'services/services-le/yuridicheskaya-konsultatsiya',
+    ),
+    'services/register-elimination/vnesenie-izmenenij-v-uchreditelnye-dokumenty/smena-yuridicheskogo-adresa-ooo' => array(
+        'services/register-elimination/konsultaciya-po-korporativnomu-pravu',
+        'services/bukhgalterskie-uslugi/express-proverka-bukhgalterskogo-uchyeta',
+        'services/register-elimination/uvedomlenie-rkn',
+        'services/register-elimination/reorganizacija',
+    ),
+    'services/services-le/soprovozhdenie-procedury-bankrotstva' => UMBRELLA_UPSELL_BANKRUPTCY,
+    'services/services-le/soprovozhdenie-procedury-bankrotstva/uslugi-kreditoram' => UMBRELLA_UPSELL_BANKRUPTCY,
+    'services/services-le/soprovozhdenie-procedury-bankrotstva/uslugi-dolzhnikam' => UMBRELLA_UPSELL_BANKRUPTCY,
 );
 
 function umbrella_upsell_current_paths()
