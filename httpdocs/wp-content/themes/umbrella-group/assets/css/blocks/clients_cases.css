@@ -1,0 +1,411 @@
+/* [clients_cases] — «Кейсы Umbrella Group» внизу страницы «Клиенты».
+   Фон и ширина — .clients-bottom из clients_tasks.css; радиусы, отступы
+   и шрифты — как у [clients_tasks] и [clients_cta] */
+
+/* Отдельно (страницы услуг): прозрачный фон, свои поля сверху и снизу.
+   [cases] на части страниц стоит прямо в [row] Flatsome (flex): без
+   flex-basis и min-width лента карточек на телефоне распирает блок */
+.clients-bottom--cases {
+    flex: 0 0 100%;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    padding-top: 48px;
+    background: none;
+}
+
+.clients-bottom--cases .clients-bottom__inner {
+    padding-bottom: 64px;
+}
+
+/* «Клиенты»: сразу под [clients_cta] — его серый фон, а из 72px его нижнего
+   поля оставляем 24px, как между плашкой задач и баннером; 72px — вниз себе */
+.clients-bottom--cta + .clients-bottom--cases {
+    margin-top: -48px;
+    padding-top: 0;
+    background: #f7f5f6;
+}
+
+.clients-bottom--cta + .clients-bottom--cases .clients-bottom__inner {
+    padding-bottom: 72px;
+}
+
+.clients-cases__title {
+    margin: 0;
+    font-family: "PT Serif", sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: #1a1a1a;
+}
+
+.clients-cases__lead {
+    margin: 10px 0 0;
+    font-size: 17px;
+    line-height: 1.5;
+    color: #666;
+}
+
+/* ===== Вариант «cards» ===== */
+
+.clients-cases--cards {
+    padding: 40px 44px 44px;
+    border-radius: 20px;
+    background: #efedee;
+}
+
+.clients-cases__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 28px;
+}
+
+.clients-cases__all {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #1a1a1a;
+    transition: color .2s;
+}
+
+.clients-cases__all svg {
+    color: #ec1c23;
+    transition: transform .2s;
+}
+
+.clients-cases__all:hover {
+    color: #ec1c23;
+}
+
+.clients-cases__all:hover svg {
+    transform: translateX(4px);
+}
+
+.clients-cases__list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+/* Карточка — как .case-card на /about/cases/: белая, рамка, мягкая тень,
+   наведение — чуть вверх */
+.clients-cases__card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px 24px 20px;
+    border: 1px solid #eee;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, .05);
+    color: #1a1a1a;
+    transition: transform .2s, box-shadow .2s, border-color .2s;
+}
+
+.clients-cases__card:hover {
+    transform: translateY(-6px);
+    border-color: #e2e2e2;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, .1);
+    color: #1a1a1a;
+}
+
+/* Таблетка услуги — как .case-card__tag, на сером */
+.clients-cases__tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 100%;
+    margin-bottom: 18px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: #f3f1f2;
+    font-size: 14px;
+    line-height: 1.2;
+    color: #222;
+}
+
+.clients-cases__tag svg {
+    flex: none;
+    color: #ec1c23;
+}
+
+.clients-cases__name {
+    /* Забирает свободную высоту: черта и «Результат» во всех трёх карточках на одном уровне */
+    flex-grow: 1;
+    margin-bottom: 18px;
+    font-family: "PT Serif", sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.3;
+    transition: color .2s;
+}
+
+.clients-cases__card:hover .clients-cases__name {
+    color: #8b1a2b;
+}
+
+.clients-cases__result {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 20px;
+    padding-top: 16px;
+    border-top: 1px solid #eee;
+    font-size: 15px;
+    line-height: 1.45;
+    color: #444;
+}
+
+.clients-cases__result svg {
+    flex: none;
+    color: #ec1c23;
+}
+
+.clients-cases__result b {
+    display: block;
+    margin-bottom: 2px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    color: #999;
+}
+
+.clients-cases__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: auto;
+    font-size: 14px;
+    color: #888;
+}
+
+.clients-cases__foot svg {
+    color: #ec1c23;
+    transition: transform .2s;
+}
+
+.clients-cases__card:hover .clients-cases__foot svg {
+    transform: translateX(4px);
+}
+
+/* ===== Вариант «banner» ===== */
+
+.clients-cases--banner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 40px;
+    padding: 44px 56px 44px 44px;
+    border-radius: 20px;
+    background: #efedee;
+}
+
+.clients-cases--banner .clients-cases__lead {
+    max-width: 560px;
+    margin-bottom: 28px;
+}
+
+/* Кнопка — красная, как основные кнопки сайта (.case-full__btn--primary) */
+.clients-cases__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 28px;
+    padding: 15px 28px;
+    border-radius: 12px;
+    background: #ec1c23;
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    transition: background .2s;
+}
+
+.clients-cases__btn svg {
+    transition: transform .2s;
+}
+
+.clients-cases__btn:hover,
+.clients-cases__btn:focus {
+    background: #c9151b;
+    color: #fff;
+}
+
+.clients-cases__btn:hover svg {
+    transform: translateX(4px);
+}
+
+/* Цифры — как в шапке (.team-hero__stat), крупнее: черта слева у каждой */
+.clients-cases__stats {
+    display: flex;
+}
+
+.clients-cases__stat {
+    padding: 4px 0 4px 36px;
+    margin-left: 36px;
+    border-left: 1px solid #d6d2d4;
+}
+
+.clients-cases__stat:first-child {
+    margin-left: 0;
+}
+
+.clients-cases__stat b {
+    display: block;
+    font-family: "PT Serif", sans-serif;
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: #1a1a1a;
+}
+
+.clients-cases__stat span {
+    display: block;
+    margin-top: 6px;
+    white-space: nowrap;
+    font-size: 15px;
+    line-height: 1.35;
+    color: #555;
+}
+
+@media (max-width: 1199px) {
+    .clients-cases__list {
+        gap: 16px;
+    }
+
+    .clients-cases__card {
+        padding: 20px 20px 18px;
+    }
+}
+
+@media (max-width: 849px) {
+    .clients-bottom--cases {
+        padding-top: 32px;
+    }
+
+    .clients-bottom--cases .clients-bottom__inner,
+    .clients-bottom--cta + .clients-bottom--cases .clients-bottom__inner {
+        padding-bottom: 48px;
+    }
+
+    .clients-bottom--cta + .clients-bottom--cases {
+        margin-top: -24px;
+        padding-top: 0;
+    }
+
+    .clients-cases__title {
+        font-size: 25px;
+    }
+
+    .clients-cases__lead {
+        font-size: 16px;
+    }
+
+    /* Карточки — лентой с прокруткой вбок до края экрана */
+    .clients-cases--cards {
+        padding: 28px 0 28px 22px;
+        border-radius: 16px;
+        overflow: hidden;
+    }
+
+    .clients-cases__head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        margin-bottom: 22px;
+        padding-right: 22px;
+    }
+
+    .clients-cases__list {
+        display: flex;
+        gap: 12px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-padding-left: 22px;
+        margin-left: -22px;
+        padding: 0 22px 8px;
+        scrollbar-width: none;
+    }
+
+    .clients-cases__list::-webkit-scrollbar {
+        display: none;
+    }
+
+    .clients-cases__card {
+        flex: 0 0 84%;
+        scroll-snap-align: start;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, .05);
+    }
+
+    .clients-cases__card:hover {
+        transform: none;
+    }
+
+    /* В ленте карточки одной высоты: свободное место — над направлением, не под заголовком */
+    .clients-cases__name {
+        flex-grow: 0;
+        font-size: 18px;
+    }
+
+    .clients-cases--banner {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+        padding: 28px 22px;
+        border-radius: 16px;
+    }
+
+    .clients-cases--banner .clients-cases__lead {
+        margin-bottom: 0;
+    }
+
+    .clients-cases__text {
+        display: contents;
+    }
+
+    /* На телефоне: заголовок, текст, цифры, кнопка во всю ширину */
+    .clients-cases--banner .clients-cases__title {
+        order: 1;
+    }
+
+    .clients-cases--banner .clients-cases__lead {
+        order: 2;
+        margin-top: -14px;
+    }
+
+    .clients-cases__stats {
+        order: 3;
+        padding-top: 22px;
+        border-top: 1px solid #d6d2d4;
+    }
+
+    .clients-cases__btn {
+        order: 4;
+        justify-content: space-between;
+    }
+
+    .clients-cases__stat {
+        flex: 1;
+        padding-left: 20px;
+        margin-left: 20px;
+    }
+
+    .clients-cases__stat:first-child {
+        padding-left: 0;
+        border-left: 0;
+    }
+
+    .clients-cases__stat b {
+        font-size: 36px;
+    }
+
+    .clients-cases__stat span {
+        font-size: 14px;
+        white-space: normal;
+    }
+}

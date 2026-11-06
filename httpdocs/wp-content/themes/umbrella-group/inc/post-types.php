@@ -342,7 +342,8 @@ const UG_YES_NO              = ['Нет', 'Да'];
 /**
  * Схема мета-боксов: тип => список боксов. Поле:
  *   type     — text | url | textarea | select (по умолчанию text);
- *   sanitize — text (sanitize_text_field) | url (esc_url_raw) | html (wp_kses_post);
+ *   sanitize — text (sanitize_text_field) | url (esc_url_raw) | html (wp_kses_post)
+ *              | lines (sanitize_textarea_field: текст по строкам, переводы строк целы);
  *              select проверяется по options. Где сейчас в БД лежит HTML или
  *              переводы строк (авторы с <br/>, описания), — html: wp_kses_post
  *              не меняет ни одного сохранённого значения (проверено по всем записям).
@@ -362,6 +363,12 @@ function ug_meta_box_schema(): array
             ['id' => 'umbrella_feedback_scan_box', 'title' => __('Скан отзыва (ID вложения)'), 'fields' => [
                 'umbrella_feedback_scan' => ['placeholder' => 'ID изображения из медиатеки',
                     'description' => 'ID вложения (изображения) скана отзыва. ID можно увидеть в URL медиафайла в админке.'],
+            ]],
+            // Таблетки услуг на /about/clients/ ([ug_client_tiles], ug_client_tiles_service_list)
+            ['id' => 'umbrella_client_services_box', 'title' => __('Услуги на плитке клиента'), 'fields' => [
+                'umbrella_client_services' => ['type' => 'textarea', 'sanitize' => 'lines',
+                    'placeholder' => "Юридическое обслуживание | /services/services-le/yuridicheskoe-obsluzhivanie-organizatsiy/\nБухгалтерское обслуживание | /services/bukhgalterskie-uslugi/obsluzhivanie/",
+                    'description' => 'По одной услуге на строку: Название | ссылка. Без ссылки — просто текст; «Название | #form» — кнопка, открывающая форму заявки (как «Обсудить задачу»). Пусто — услуги из рубрик «Отображать на».'],
             ]],
         ],
         'akcii' => [
@@ -491,6 +498,7 @@ function ug_sanitize_meta_field(string $raw, array $field): ?string
     return match ($field['sanitize'] ?? 'text') {
         'url'  => esc_url_raw(trim($raw)),
         'html' => wp_kses_post($raw),
+        'lines' => sanitize_textarea_field($raw),
         default => sanitize_text_field($raw),
     };
 }
@@ -513,7 +521,8 @@ function ug_render_meta_fields(WP_Post $post, array $fields): void
             }
             echo '</select>';
         } elseif ($type === 'textarea') {
-            echo '<textarea id="' . $id . '" name="' . $id . '" rows="4" style="width:100%;">' . esc_textarea($value) . '</textarea>';
+            echo '<textarea id="' . $id . '" name="' . $id . '" rows="4" style="width:100%;"'
+                . (isset($field['placeholder']) ? ' placeholder="' . esc_attr($field['placeholder']) . '"' : '') . '>' . esc_textarea($value) . '</textarea>';
         } else {
             echo '<input id="' . $id . '" type="' . ($type === 'url' ? 'url' : 'text') . '" name="' . $id . '" value="' . esc_attr($value) . '" style="width:100%;"'
                 . (isset($field['placeholder']) ? ' placeholder="' . esc_attr($field['placeholder']) . '"' : '') . '>';

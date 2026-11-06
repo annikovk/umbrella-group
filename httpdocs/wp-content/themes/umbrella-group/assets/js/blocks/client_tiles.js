@@ -23,6 +23,24 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+// Форма заявки из шапки (лайтбокс Flatsome) — её открывает нажатие на ссылку
+// шапки. Таблетка-кнопка [data-ug-form] на карточке (услуга «… | #form»)
+// стоит поверх ссылки карточки на сайт клиента: клик по ней — только форма
+window.ugClientOpenForm = function () {
+    var header = document.querySelector('a[href="#header-contact-form-lightbox"]:not(.client-review a)');
+    if (header) {
+        header.click();
+    }
+};
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.client-tiles [data-ug-form]').forEach(function (button) {
+        button.addEventListener('click', function (e) {
+            e.preventDefault();
+            window.ugClientOpenForm();
+        });
+    });
+});
+
 // Окно отзыва клиента (<dialog class="client-review">, ug_client_review в
 // 1031-client-tiles.php): открывается по клику на карточку и по #client-feedback-<ID>
 // в адресе; закрывается крестиком, Esc и кликом по затемнению. Скан письма —
@@ -81,11 +99,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 zoom.focus();
             }
         });
-        // «Обсудить задачу» — форма из шапки, лайтбокс Flatsome. Поверх <dialog>
-        // он не встанет: закрыть отзыв и нажать ссылку шапки (как в cases_page.js).
-        // Capture и stopPropagation — чтобы Flatsome не открыл форму под окном
+        // «Обсудить задачу» и таблетка-кнопка формы [data-ug-form] — форма из
+        // шапки, лайтбокс Flatsome. Поверх <dialog> он не встанет: закрыть отзыв
+        // и нажать ссылку шапки (как в cases_page.js). Capture и stopPropagation —
+        // чтобы Flatsome не открыл форму под окном
         dialog.addEventListener('click', function (e) {
-            var link = e.target.closest('a[href="#header-contact-form-lightbox"]');
+            var link = e.target.closest('a[href="#header-contact-form-lightbox"], [data-ug-form]');
             if (!link) {
                 return;
             }
@@ -93,12 +112,7 @@ document.addEventListener('DOMContentLoaded', function () {
             e.stopPropagation();
             lastCard = null;
             dialog.close();
-            var header = document.querySelector('a[href="#header-contact-form-lightbox"]:not(.client-review a)');
-            if (header) {
-                setTimeout(function () {
-                    header.click();
-                }, 0);
-            }
+            setTimeout(window.ugClientOpenForm, 0);
         }, true);
     });
 

@@ -1,0 +1,339 @@
+/* [contacts_page] — «Контакты»: крошки, h1, полоса телефон / почта / кнопка,
+   карточки офисов и карта 2ГИС. Заголовки — PT Serif, как шапки «Кейсов»,
+   «Команды» и «Клиентов». */
+
+.contacts-page {
+    --red: #ec1c23;
+    --red-dark: #c9151b;
+    color: #1a1a1a;
+}
+
+.contacts-page__inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 28px 15px 56px;
+}
+
+.contacts-page .breadcrumbs {
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+
+.contacts-page__title {
+    margin: 0 0 14px;
+    font-family: "PT Serif", serif;
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: #1a1a1a;
+}
+
+.contacts-page__lead {
+    margin: 0 0 40px;
+    font-size: 20px;
+    line-height: 1.35;
+    color: #555;
+}
+
+/* ── полоса: телефон | почта | кнопка ────────────────────────────────────── */
+
+.contacts-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    padding: 0 0 36px;
+    margin-bottom: 32px;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.contacts-strip__col {
+    padding: 2px 36px;
+    border-left: 1px solid #e3e3e3;
+}
+
+.contacts-strip__col:first-child {
+    padding-left: 36px;
+    border-left: 0;
+}
+
+.contacts-strip__col--mail {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    justify-content: center;
+}
+
+.contacts-strip__col--cta {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.contacts-strip__icon {
+    flex: none;
+    color: var(--red);
+}
+
+.contacts-strip__label,
+.contacts-strip__note {
+    display: block;
+    font-size: 15px;
+    line-height: 1.3;
+    color: #444;
+}
+
+.contacts-strip__value {
+    display: block;
+    margin: 2px 0 4px;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 1.2;
+    white-space: nowrap;
+    color: #1a1a1a;
+}
+
+.contacts-strip__value--phone {
+    font-family: "PT Serif", serif;
+    font-size: 34px;
+    font-weight: 700;
+}
+
+.contacts-strip__value:hover {
+    color: var(--red);
+}
+
+.contacts-strip__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 34px;
+    border-radius: 6px;
+    background: var(--red);
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.3;
+    white-space: nowrap;
+    color: #fff;
+    transition: background .2s;
+}
+
+.contacts-strip__btn svg {
+    transition: transform .2s;
+}
+
+.contacts-strip__btn:hover,
+.contacts-strip__btn:focus {
+    background: var(--red-dark);
+    color: #fff;
+}
+
+.contacts-strip__btn:hover svg {
+    transform: translateX(4px);
+}
+
+/* ── офисы ───────────────────────────────────────────────────────────────── */
+
+.contacts-offices {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 28px;
+}
+
+.contacts-office {
+    display: flex;
+    gap: 22px;
+    padding: 26px 34px 24px;
+    border-radius: 14px;
+    background: #f4f4f4;
+    box-shadow: inset 0 0 0 1px transparent;
+    transition: box-shadow .2s;
+}
+
+.contacts-office.is-active {
+    box-shadow: inset 0 0 0 1px #f3b9bb;
+}
+
+.contacts-office__pin {
+    flex: none;
+    margin-top: 2px;
+    color: var(--red);
+}
+
+.contacts-office__title {
+    margin: 0 0 10px;
+    font-family: "PT Serif", serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #1a1a1a;
+}
+
+.contacts-office__street {
+    margin: 0 0 4px;
+    font-size: 22px;
+    line-height: 1.3;
+}
+
+.contacts-office__city {
+    margin: 0 0 12px;
+    font-size: 17px;
+    line-height: 1.3;
+    color: #666;
+}
+
+.contacts-office__map {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    line-height: 1.3;
+    color: var(--red);
+}
+
+.contacts-office__map svg {
+    transition: transform .2s;
+}
+
+.contacts-office__map:hover {
+    color: var(--red-dark);
+}
+
+.contacts-office__map:hover svg {
+    transform: translateX(4px);
+}
+
+/* ── карта ───────────────────────────────────────────────────────────────── */
+
+.contacts-map__frame {
+    display: block;
+    width: 100%;
+    height: 420px;
+    border: 1px solid #d6d6d6;
+    box-sizing: border-box;
+}
+
+/* Узкий десктоп: колонки полосы сжимаются, цифры меньше */
+@media (max-width: 1199px) {
+    .contacts-strip__col,
+    .contacts-strip__col:first-child {
+        padding: 2px 20px;
+    }
+
+    .contacts-strip__col:first-child {
+        padding-left: 0;
+    }
+
+    .contacts-strip__value {
+        font-size: 24px;
+    }
+
+    .contacts-strip__value--phone {
+        font-size: 28px;
+    }
+
+    .contacts-strip__btn {
+        padding: 14px 24px;
+        font-size: 18px;
+    }
+}
+
+/* Планшет и телефон: всё в столбик, разделители — горизонтальные */
+@media (max-width: 849px) {
+    .contacts-page__inner {
+        padding: 24px 15px 40px;
+    }
+
+    .contacts-page .breadcrumbs {
+        margin-bottom: 14px;
+    }
+
+    .contacts-page__title {
+        margin-bottom: 10px;
+        font-size: 36px;
+    }
+
+    .contacts-page__lead {
+        margin-bottom: 24px;
+        font-size: 17px;
+    }
+
+    .contacts-strip {
+        grid-template-columns: minmax(0, 1fr);
+        padding-bottom: 24px;
+        margin-bottom: 24px;
+    }
+
+    .contacts-strip__col,
+    .contacts-strip__col:first-child {
+        padding: 18px 0;
+        border-left: 0;
+        border-top: 1px solid #e3e3e3;
+    }
+
+    .contacts-strip__col:first-child {
+        padding-top: 0;
+        border-top: 0;
+    }
+
+    .contacts-strip__col--mail {
+        justify-content: flex-start;
+        gap: 14px;
+    }
+
+    .contacts-strip__col--cta {
+        padding-bottom: 0;
+        border-top: 0;
+        justify-content: stretch;
+    }
+
+    .contacts-strip__btn {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .contacts-strip__value {
+        font-size: 22px;
+        white-space: normal;
+    }
+
+    .contacts-strip__value--phone {
+        font-size: 30px;
+    }
+
+    .contacts-offices {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 14px;
+        margin-bottom: 20px;
+    }
+
+    .contacts-office {
+        gap: 14px;
+        padding: 20px 20px 18px;
+    }
+
+    .contacts-office__pin {
+        width: 26px;
+        height: 26px;
+    }
+
+    .contacts-office__title {
+        margin-bottom: 8px;
+        font-size: 22px;
+    }
+
+    .contacts-office__street {
+        font-size: 18px;
+    }
+
+    .contacts-office__city {
+        font-size: 15px;
+    }
+
+    .contacts-office__map {
+        font-size: 16px;
+    }
+
+    .contacts-map__frame {
+        height: 360px;
+    }
+}

@@ -12,9 +12,10 @@
  * с кейсами: cases_tabs.js, cases_tabs.css.
  *
  * Карточка: логотип (серый, цвет на наведении), название, «индивидуальная
- * отрасль», внизу «таблетки» услуг и стрелка. Услуги — client_category клиента
- * без служебной «Главная» (в админке «Отображать на»: Юридические услуги,
- * Аудит). Карточка целиком ведёт туда же, куда раньше плитка: есть отрывок —
+ * отрасль», внизу «таблетки» услуг и стрелка. Услуги — поле «Услуги на плитке
+ * клиента» (umbrella_client_services, ug_client_tiles_service_list), пустое —
+ * client_category клиента без служебной «Главная» (в админке «Отображать на»:
+ * Юридические услуги, Аудит). Карточка целиком ведёт туда же, куда раньше плитка: есть отрывок —
  * окно с отзывом и сканом (<dialog>, ug_client_review), нет — сайт клиента.
  */
 
@@ -28,10 +29,46 @@ const UG_CLIENT_TILES_NOT_SERVICE = ['main'];
 /**
  * Вкладка «Другие клиенты компании» — последняя: клиенты без отрасли
  * (client_industry). Термина такого нет; нет таких клиентов — вкладки нет,
- * как у пустых отраслей. Серая подпись с тем же текстом на карточке — другое
- * условие: у клиента нет услуги (см. ug_client_tiles_card).
+ * как у пустых отраслей.
  */
 const UG_CLIENT_TILES_OTHER = ['slug' => 'other-clients', 'name' => 'Другие клиенты компании'];
+
+/**
+ * Таблетки услуг клиента: поле umbrella_client_services (мета-бокс «Услуги на
+ * плитке клиента»: по строке на услугу, «Название | ссылка», ссылка
+ * необязательна; «#form» вместо ссылки — таблетка-кнопка формы заявки, той
+ * же, что у «Обсудить задачу»). Поле пустое — названия рубрик client_category
+ * без ссылок, как было. Рубрики остаются и для вопроса внизу окна отзыва
+ * (UG_CLIENT_REVIEW_QUESTION), и для фильтра «Отображать на».
+ *
+ * @param WP_Term[] $terms ug_client_tiles_services()
+ * @return list<array{name: string, url: string, form: bool}>
+ */
+function ug_client_tiles_service_list(WP_Post $post, array $terms): array
+{
+    $list = [];
+    foreach (preg_split('/\R/u', (string) get_post_meta($post->ID, 'umbrella_client_services', true)) as $line) {
+        [$name, $url] = array_map('trim', explode('|', $line, 2) + [1 => '']);
+        if ($name !== '') {
+            $form = $url === UG_CLIENT_SERVICE_FORM;
+            $list[] = ['name' => $name, 'url' => $form ? '' : $url, 'form' => $form];
+        }
+    }
+    return $list ?: array_map(static fn($t) => ['name' => $t->name, 'url' => '', 'form' => false], $terms);
+}
+
+/** «Ссылка» услуги, которая открывает форму заявки, а не страницу (см. выше). */
+const UG_CLIENT_SERVICE_FORM = '#form';
+
+/**
+ * Таблетка-кнопка формы заявки (на карточке и в окне отзыва): форму из шапки
+ * открывает client_tiles.js по data-ug-form.
+ */
+function ug_client_service_form_button(string $class, string $name): string
+{
+    return '<button type="button" class="' . $class . ' ' . $class . '--form" data-ug-form aria-haspopup="dialog"'
+        . ' aria-label="' . esc_attr($name . ' — оставить заявку') . '">' . esc_html($name) . '</button>';
+}
 
 /** Услуги клиента — термины client_category без служебных. @return WP_Term[] */
 function ug_client_tiles_services(WP_Post $post): array
@@ -126,19 +163,33 @@ function ug_client_tiles_card(WP_Post $post, array $industries, array $services)
     }
     $tag = $attrs !== '' ? 'a' : 'div';
 
+    // Текстом, не ссылкой: кликабельна вся карточка. Кнопка формы внутри <a>
+    // была бы вложенным интерактивом — такая карточка становится <div>, а её
+    // ссылка — пустым <a> во всю карточку (client-tiles__link), кнопка поверх
+    $list = ug_client_tiles_service_list($post, $services);
+    $has_form = (bool) array_filter($list, static fn($s) => $s['form']);
+    $overlay = '';
+    $class = 'client-tiles__card' . ($tag === 'a' ? ' client-tiles__card--link' : '');
+    if ($tag === 'a' && $has_form) {
+        $overlay = '<a class="client-tiles__link"' . $attrs . '></a>';
+        $attrs = '';
+        $tag = 'div';
+        $class .= ' client-tiles__card--overlay';
+    }
+
     $logo = ug_client_tiles_logo($post);
-    // Логотипа нет (Дамаст, БИТ-2000) — серый значок здания, чтобы ряд не прыгал
-    $logo = $logo !== '' ? $logo : '<svg class="client-tiles__no-logo" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M4.75 20.25V5.5c0-.4.35-.75.75-.75h8c.4 0 .75.35.75.75v14.75M14.25 9.75h4.25c.4 0 .75.35.75.75v9.75M3.25 20.25h17.5M8 8.25h3M8 11.75h3M8 15.25h3M16.75 13.25h0M16.75 16.25h0" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    // Логотипа нет — знак «U» Umbrella Group из логотипа шапки (logo-2020-new.svg):
+    // серый, красный на наведении (client_tiles.css), чтобы ряд не прыгал
+    $logo = $logo !== '' ? $logo : '<svg class="client-tiles__no-logo" width="72" height="72" viewBox="0 0 54 54" fill="currentColor" aria-hidden="true"><path d="M53.83 0v26.91C53.83 41.78 41.78 53.83 26.91 53.83 12.05 53.83 0 41.78 0 26.91V0h10.77v26.91c0 8.92 7.23 16.15 16.14 16.15 8.92 0 16.15-7.23 16.15-16.15V10.77H32.3v16.14a5.38 5.38 0 0 1-10.77 0V0z"/></svg>';
 
     $pills = '';
-    foreach ($services as $term) {
-        $pills .= '<span class="client-tiles__service">' . esc_html($term->name) . '</span>';
+    foreach ($list as $service) {
+        $pills .= $service['form']
+            ? ug_client_service_form_button('client-tiles__service', $service['name'])
+            : '<span class="client-tiles__service">' . esc_html($service['name']) . '</span>';
     }
-    // Клиент без услуги — общая подпись, чтобы низ карточки не пустовал
-    if ($pills === '') {
-        $pills = '<span class="client-tiles__service">' . esc_html(UG_CLIENT_TILES_OTHER['name']) . '</span>';
-    }
-    $arrow = $tag === 'a'
+    // Клиент без услуги — таблеток нет, низ карточки со стрелкой остаётся
+    $arrow = ($tag === 'a' || $overlay !== '')
         ? '<svg class="client-tiles__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4.5 12h15M14 6.5l5.5 5.5-5.5 5.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
         : '';
     $foot = ($pills !== '' || $arrow !== '')
@@ -147,7 +198,8 @@ function ug_client_tiles_card(WP_Post $post, array $industries, array $services)
 
     $title = esc_html($post->post_title);
     $activity = esc_html(ug_client_tiles_activity($post));
-    $card = '<' . $tag . ' class="client-tiles__card" data-branch="' . esc_attr($branches) . '"' . $attrs . '>'
+    $card = '<' . $tag . ' class="' . $class . '" data-branch="' . esc_attr($branches) . '"' . $attrs . '>'
+        . $overlay
         . '<span class="client-tiles__logo">' . $logo . '</span>'
         . '<span class="client-tiles__name">' . $title . '</span>'
         . ($activity !== '' ? '<span class="client-tiles__activity">' . $activity . '</span>' : '')
@@ -280,8 +332,13 @@ function ug_client_review(WP_Post $post, string $id, array $services): string
     $pills = '';
     $question = UG_CLIENT_REVIEW_QUESTION['default'];
     $slugs = array_map(static fn($t) => $t->slug, $services);
-    foreach ($services as $term) {
-        $pills .= '<span class="client-review__service">' . esc_html($term->name) . '</span>';
+    // Таблетка со ссылкой ведёт на страницу услуги (в той же вкладке)
+    foreach (ug_client_tiles_service_list($post, $services) as $service) {
+        $pills .= $service['form']
+            ? ug_client_service_form_button('client-review__service', $service['name'])
+            : ($service['url'] !== ''
+            ? '<a class="client-review__service client-review__service--link" href="' . esc_url($service['url']) . '">' . esc_html($service['name']) . '</a>'
+            : '<span class="client-review__service">' . esc_html($service['name']) . '</span>');
     }
     foreach (UG_CLIENT_REVIEW_QUESTION as $slug => $text) {
         if (in_array($slug, $slugs, true)) {

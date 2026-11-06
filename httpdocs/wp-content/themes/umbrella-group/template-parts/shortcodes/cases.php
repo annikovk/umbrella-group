@@ -57,6 +57,13 @@ class cases
     {
         $this->is_cases_category_page = $this->category == "cases";
 
+        // Везде, кроме /about/cases/, — сквозной блок «Кейсы Umbrella Group»
+        // тремя плитками, как [clients_cases variant="cards"] (clients_cases.php).
+        // Старые слайдер и вкладки ниже больше не выводятся
+        if (!$this->is_cases_category_page) {
+            return ug_clients_cases_cards($this->cards_tab(), $this->filter_ids, $this->filter_category);
+        }
+
         // В плоском режиме заголовок по branch не выводим
         $title = $this->is_flat_mode ? "" : $this->get_title($this->category);
 
@@ -153,9 +160,31 @@ class cases
     }
 
     /**
+     * Вкладка /about/cases/ для плиток [cases]: branch="…" (или раздел по URL)
+     * сводится во вкладку, как в page_tab(); category="Товарный знак" —
+     * «Интеллектуальное право»; «Общий» и пусто — вкладка раздела услуг
+     * страницы (UG_CLIENTS_CASES_SECTIONS), вне раздела — без направления.
+     */
+    private function cards_tab(): string
+    {
+        if ($this->filter_category === 'Товарный знак') {
+            return 'Интеллектуальное право';
+        }
+        $branch = trim($this->category);
+        if (in_array($branch, ['Регистрация', 'Ликвидация', 'Регистрация и ликвидация'], true)) {
+            return 'Корпоративное право';
+        }
+        if (isset(self::PAGE_TABS[$branch])) {
+            return $branch;
+        }
+        return UG_CLIENTS_CASES_SECTIONS[ug_current_service_section() ?? ''] ?? '';
+    }
+
+    /**
      * Вкладки /about/cases/ по порядку, и в нём же идут «Все кейсы». Вкладка —
      * не case_branch: по нему кейсы выбирают блоки на страницах услуг, поэтому
-     * направления сводятся во вкладки здесь, см. page_tab().
+     * направления сводятся во вкладки здесь, см. page_tab(). page_tab() и
+     * PAGE_EXTRA_TABS публичные — их берёт [clients_cases] на /about/clients/.
      * Вкладка => [ID раздела услуг для ссылки под кейсом, подпись ссылки].
      */
     private const PAGE_TABS = [
@@ -180,10 +209,10 @@ class cases
      * в своей вкладке. 12697 — налоги транспортной компании: бухгалтерия вместе
      * с Демиденко.
      */
-    private const PAGE_EXTRA_TABS = [12697 => 'Налоговое право'];
+    public const PAGE_EXTRA_TABS = [12697 => 'Налоговое право'];
 
     /** Вкладка кейса: регистрация и ликвидация — корпоративное право, товарные знаки — интеллектуальное. */
-    private static function page_tab(int $id, string $branch, string $category): string
+    public static function page_tab(int $id, string $branch, string $category): string
     {
         if (in_array($id, self::PAGE_TAX_IDS, true)) {
             return 'Налоговое право';

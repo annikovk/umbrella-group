@@ -1,6 +1,6 @@
 <?php
 /**
- * [clients_hero] — первый экран страницы «Клиенты» (/about/clients/, page 1000).
+ * [clients_hero] — первый экран страницы «Клиенты и отзывы» (/about/clients/, page 1000).
  *
  * Слева хлебные крошки, заголовок в две строки, подзаголовок и три цифры
  * с вертикальными разделителями; справа картинка. Фильтры по отраслям и плитки
@@ -57,7 +57,7 @@ function ug_clients_hero_shortcode(): string
         <div class="clients-hero__inner">
             <div class="clients-hero__image">$image</div>
             <div class="breadcrumbs">$breadcrumbs</div>
-            <h1 class="team-hero__title clients-hero__title">Клиенты<br>Umbrella&nbsp;Group</h1>
+            <h1 class="team-hero__title clients-hero__title">Клиенты и&nbsp;отзывы<br>Umbrella&nbsp;Group</h1>
             <p class="team-hero__lead clients-hero__lead">Работаем с&nbsp;компаниями из&nbsp;разных отраслей&nbsp;— от&nbsp;производства и&nbsp;энергетики до&nbsp;недвижимости и&nbsp;сферы услуг.</p>
             <div class="team-hero__stats">$stats</div>
         </div>
