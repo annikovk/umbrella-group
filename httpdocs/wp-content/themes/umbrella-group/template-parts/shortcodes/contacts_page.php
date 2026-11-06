@@ -20,7 +20,7 @@
 
 defined('ABSPATH') || exit;
 
-const UG_CONTACTS_PHONE = ['+73833731717', '+7&nbsp;(383)&nbsp;373-17-17'];
+const UG_CONTACTS_PHONE = ['+73833731717', '+7 (383) 373-17-17'];
 const UG_CONTACTS_EMAIL = 'contact@taxlab.ru';
 
 /**
