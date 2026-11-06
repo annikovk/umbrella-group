@@ -1,0 +1,628 @@
+/* [ug_client_tiles] — карточки клиентов на /about/clients/ по макету;
+   вкладки и листалка над/под ними — cases_tabs.css */
+
+/* Светло-серый фон во всю ширину окна — как у шапки. Блок стоит внутри
+   колонки Flatsome, поэтому фон — тенью, обрезанной clip-path: вёрстку
+   колонки не трогает. Сверху фон заходит на 32px отступа под шапкой */
+.client-tiles {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding-bottom: 64px;
+    background: #f7f5f6;
+    box-shadow: 0 0 0 100vmax #f7f5f6;
+    clip-path: inset(-32px -100vmax 0);
+}
+
+.client-tiles__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.client-tiles__card {
+    display: flex;
+    flex-direction: column;
+    padding: 22px 26px 22px;
+    border: 1px solid #ebe8e9;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(40, 20, 25, .035);
+    color: #111;
+    transition: transform .2s, box-shadow .2s, border-color .2s;
+}
+
+.client-tiles__card[hidden] {
+    display: none;
+}
+
+a.client-tiles__card:hover {
+    transform: translateY(-4px);
+    border-color: #e2dddf;
+    box-shadow: 0 12px 28px rgba(40, 20, 25, .08);
+    color: #111;
+}
+
+/* Зона логотипа одной высоты у всех; размер картинки считает PHP
+   (ug_client_tiles_logo: площадь ~13000 px², не больше 270 × 110). Логотипы приходят цветными —
+   в сетке монохром, цвет возвращается на наведении */
+.client-tiles__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 116px;
+    margin-bottom: 14px;
+}
+
+.client-tiles__logo img {
+    max-width: 82%;
+    height: auto;
+    max-height: 110px;
+    object-fit: contain;
+    /* Тёмно-серый монохром, как на макете: серые логотипы (ENETRA, АМиС)
+       темнеют, белый фон jpg-файлов остаётся белым (contrast выбивает его в 255) */
+    filter: grayscale(1) brightness(.92) contrast(1.6);
+    transition: filter .2s;
+}
+
+a.client-tiles__card:hover .client-tiles__logo img {
+    filter: none;
+}
+
+/* Логотипа нет — значок здания */
+.client-tiles__no-logo {
+    color: #d0cbcd;
+}
+
+.client-tiles__name {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #111;
+}
+
+/* Описание — не больше двух строк, место под две строки есть всегда:
+   низ карточек ряда на одной линии */
+.client-tiles__activity {
+    display: -webkit-box;
+    min-height: 2.9em;
+    margin-top: 6px;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    font-size: 15px;
+    line-height: 1.45;
+    color: #5c5c5c;
+}
+
+.client-tiles__foot {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 50px;
+    margin-top: auto;
+    padding-top: 16px;
+}
+
+.client-tiles__services {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    min-width: 0;
+}
+
+.client-tiles__service {
+    padding: 7px 16px;
+    border-radius: 999px;
+    background: #efedee;
+    font-size: 14px;
+    line-height: 1.3;
+    color: #2b2b2b;
+}
+
+.client-tiles__arrow {
+    flex: none;
+    margin-left: auto;
+    color: #8b1a2b;
+    transition: transform .2s;
+}
+
+a.client-tiles__card:hover .client-tiles__arrow {
+    transform: translateX(4px);
+}
+
+@media (max-width: 849px) {
+    .client-tiles {
+        padding-bottom: 48px;
+    }
+
+    .client-tiles__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .client-tiles__card {
+        padding: 20px 22px;
+    }
+}
+
+@media (max-width: 549px) {
+    .client-tiles__grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 14px;
+    }
+
+    .client-tiles__logo {
+        height: 104px;
+        margin-bottom: 12px;
+    }
+
+    .client-tiles__name {
+        font-size: 18px;
+    }
+}
+
+/* ── Окно отзыва клиента (<dialog class="client-review">, ug_client_review) ──
+   По макету: белое окно со скруглением, шапка с логотипом, слева отзыв,
+   справа скан письма, внизу вопрос и кнопка. Шрифт — Inter, как карточки
+   и текст страницы; первый абзац отзыва — PT Serif, как заголовки страницы */
+.client-review-open {
+    overflow: hidden;
+}
+
+.client-review {
+    width: min(1020px, calc(100vw - 48px));
+    max-width: none;
+    max-height: calc(100vh - 48px);
+    max-height: calc(100dvh - 48px);
+    margin: auto;
+    padding: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border: 0;
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 0 24px 64px rgba(20, 10, 12, .22);
+    color: #1a1a1a;
+}
+
+.client-review::backdrop {
+    background: rgba(26, 26, 26, .55);
+}
+
+.client-review__box {
+    position: relative;
+    padding: 32px 36px 0;
+    outline: none;
+}
+
+.client-review__close,
+.client-review-zoom__close {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    width: 40px;
+    height: 40px;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: #1a1a1a;
+    cursor: pointer;
+    transition: background .2s;
+}
+
+.client-review__close::before,
+.client-review__close::after,
+.client-review-zoom__close::before,
+.client-review-zoom__close::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 24px;
+    height: 2px;
+    border-radius: 1px;
+    background: currentColor;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.client-review__close::after,
+.client-review-zoom__close::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.client-review__close:hover {
+    background: #f3f1f2;
+}
+
+/* Шапка: логотип | название, ниже отрасль и таблетки услуг */
+.client-review__head {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 0 56px 26px 0;
+    border-bottom: 1px solid #e6e3e4;
+}
+
+.client-review__logo {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    min-height: 64px;
+    padding-right: 28px;
+    border-right: 1px solid #e6e3e4;
+}
+
+.client-review__logo img {
+    max-width: 100%;
+    max-height: 72px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+.client-review__who {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+}
+
+.client-review__name {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.client-review__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+}
+
+.client-review__activity {
+    margin-right: 6px;
+    font-size: 15px;
+    line-height: 1.4;
+    color: #7a7a7a;
+}
+
+.client-review__service {
+    padding: 5px 14px;
+    border-radius: 999px;
+    background: #fde6e7;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.3;
+    color: #c8161d;
+}
+
+/* Отзыв и письмо */
+.client-review__body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 40px;
+    padding: 28px 0 30px;
+}
+
+.client-review--no-doc .client-review__body {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.client-review__label {
+    margin: 0 0 14px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    line-height: 1.3;
+    text-transform: uppercase;
+    color: #8a8a8a;
+}
+
+.client-review__quote {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 16px;
+    font-style: normal;
+    line-height: 1.6;
+    color: #2b2b2b;
+}
+
+/* Первый абзац — отрывок отзыва (post_excerpt), с красной кавычкой слева.
+   Заголовка отзыва в данных нет, а отрывок длинный (до 620 знаков) —
+   поэтому не жирный, как заголовок на макете, а обычный PT Serif */
+.client-review__lead {
+    position: relative;
+    margin: 0 0 16px;
+    padding-left: 52px;
+    font-family: "PT Serif", serif;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #1a1a1a;
+}
+
+.client-review__lead::before {
+    content: "\201C";
+    position: absolute;
+    top: -6px;
+    left: 0;
+    font-family: Georgia, "PT Serif", serif;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1;
+    color: #ec1c24;
+}
+
+.client-review__text p,
+.client-review__text ul {
+    margin: 0 0 12px;
+}
+
+.client-review__text ul {
+    padding-left: 22px;
+}
+
+.client-review__text li {
+    margin-bottom: 4px;
+}
+
+.client-review__text em,
+.client-review__text i {
+    font-style: normal;
+}
+
+/* Подпись бывает таблицей с шириной из редактора — без рамок и ширины */
+.client-review__text table,
+.client-review__text td {
+    width: auto !important;
+    height: auto !important;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: inherit;
+    color: #7a7a7a;
+}
+
+.client-review__text > :last-child {
+    margin-bottom: 0;
+}
+
+/* Скан письма */
+.client-review__doc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: start;
+    padding: 22px 24px 20px;
+    border-radius: 16px;
+    background: #f3f2f3;
+}
+
+.client-review__doc-title {
+    margin: 0 0 14px;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #1a1a1a;
+}
+
+.client-review__scan {
+    display: block;
+    width: 100%;
+    max-width: 230px;
+    background: #fff;
+    box-shadow: 0 4px 14px rgba(20, 10, 12, .12);
+    cursor: zoom-in;
+    transition: box-shadow .2s, transform .2s;
+}
+
+.client-review__scan:hover {
+    box-shadow: 0 10px 26px rgba(20, 10, 12, .2);
+    transform: translateY(-2px);
+}
+
+.client-review__scan img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.client-review__zoom {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 16px;
+    font-size: 15px;
+    line-height: 1.3;
+    color: #ec1c24;
+}
+
+.client-review__zoom span {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.client-review__zoom:hover,
+.client-review__zoom:focus {
+    color: #b8121a;
+}
+
+/* Низ: вопрос и кнопка */
+.client-review__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px 0 24px;
+    border-top: 1px solid #e6e3e4;
+    background: #fff;
+}
+
+.client-review__question {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.client-review__btn {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: 22px;
+    padding: 13px 26px;
+    border-radius: 12px;
+    background: #ec1c24;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: #fff;
+    transition: background .2s;
+}
+
+.client-review__btn:hover,
+.client-review__btn:focus {
+    background: #c8161d;
+    color: #fff;
+}
+
+.client-review__btn svg {
+    transition: transform .2s;
+}
+
+.client-review__btn:hover svg {
+    transform: translateX(4px);
+}
+
+/* Крупный скан поверх окна отзыва; длинный документ прокручивается */
+.client-review-zoom {
+    width: 100vw;
+    max-width: none;
+    height: 100vh;
+    height: 100dvh;
+    max-height: none;
+    margin: 0;
+    padding: 56px 24px 32px;
+    overflow-y: auto;
+    border: 0;
+    background: transparent;
+    outline: none;
+    cursor: zoom-out;
+}
+
+.client-review-zoom::backdrop {
+    background: rgba(15, 12, 13, .88);
+}
+
+.client-review-zoom__img {
+    display: block;
+    width: min(900px, 100%);
+    height: auto;
+    margin: 0 auto;
+    background: #fff;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, .4);
+    cursor: default;
+}
+
+.client-review-zoom__close {
+    position: fixed;
+    top: 12px;
+    right: 16px;
+    color: #fff;
+}
+
+.client-review-zoom__close:hover {
+    background: rgba(255, 255, 255, .12);
+}
+
+@media (max-width: 849px) {
+    .client-review {
+        width: calc(100vw - 24px);
+        max-height: calc(100vh - 24px);
+        max-height: calc(100dvh - 24px);
+        border-radius: 16px;
+    }
+
+    .client-review__box {
+        padding: 20px 20px 0;
+    }
+
+    .client-review__close {
+        top: 10px;
+        right: 10px;
+    }
+
+    .client-review__head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 0 36px 20px 0;
+    }
+
+    .client-review__logo {
+        justify-content: flex-start;
+        width: auto;
+        min-height: 0;
+        padding-right: 0;
+        border-right: 0;
+    }
+
+    .client-review__logo img {
+        max-width: 140px;
+        max-height: 56px;
+    }
+
+    .client-review__name {
+        font-size: 20px;
+    }
+
+    .client-review__body {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+        padding: 22px 0 24px;
+    }
+
+    .client-review__lead {
+        padding-left: 40px;
+        font-size: 17px;
+    }
+
+    .client-review__lead::before {
+        font-size: 52px;
+    }
+
+    .client-review__quote {
+        font-size: 15px;
+    }
+
+    /* Кнопка всегда на виду: низ окна прилипает к краю при прокрутке */
+    .client-review__foot {
+        position: sticky;
+        bottom: 0;
+        z-index: 1;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 14px 0 16px;
+        box-shadow: 0 -8px 16px -8px rgba(20, 10, 12, .08);
+    }
+
+    .client-review__question {
+        font-size: 16px;
+    }
+
+    .client-review__btn {
+        justify-content: center;
+    }
+
+    .client-review-zoom {
+        padding: 56px 8px 16px;
+    }
+}

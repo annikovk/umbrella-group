@@ -290,8 +290,11 @@ class cases
 
         // team_page.css — типографика карточки специалиста (team-modal__*, team-leads__tag)
         ug_enqueue_style('assets/css/blocks/team_page.css');
+        // Вкладки и листалка — общие с [ug_client_tiles] на /about/clients/ (раньше в cases_page.css/js)
+        ug_enqueue_style('assets/css/blocks/cases_tabs.css');
         ug_enqueue_style('assets/css/blocks/cases_page.css');
-        ug_enqueue_script('assets/js/blocks/cases_page.js');
+        ug_enqueue_script('assets/js/blocks/cases_tabs.js');
+        ug_enqueue_script('assets/js/blocks/cases_page.js', [ug_style_handle('assets/js/blocks/cases_tabs.js')]);
 
         $hero = ug_cases_hero();
         $cta = self::page_cta();
@@ -942,6 +945,8 @@ function ug_cases_hero(): string
         ? '<img src="' . esc_url(home_url(UG_CASES_HERO_IMAGE)) . '" alt="" loading="eager">'
         : '<span class="cases-hero__stub">Картинка 1500&nbsp;×&nbsp;740</span>';
 
+    // Заголовок с чертой и подзаголовок — классы первого экрана «Команды» (team_hero_type.css)
+    ug_enqueue_style('assets/css/blocks/team_hero_type.css');
     ug_enqueue_style('assets/css/blocks/cases_hero.css');
 
     return <<<EOHTML
@@ -949,8 +954,8 @@ function ug_cases_hero(): string
         <div class="cases-hero__inner">
             <div class="cases-hero__image">$image</div>
             <div class="breadcrumbs">$breadcrumbs</div>
-            <h1 class="cases-hero__title">Кейсы</h1>
-            <p class="cases-hero__lead">Реальные задачи. Конкретные решения. Измеримый результат.</p>
+            <h1 class="team-hero__title cases-hero__title">Кейсы</h1>
+            <p class="team-hero__lead cases-hero__lead">Реальные задачи. Конкретные решения.<br> Измеримый результат.</p>
             <p class="cases-hero__desc">Показываем, как помогаем бизнесу снижать риски, экономить деньги и&nbsp;наводить порядок в&nbsp;учёте, документах и&nbsp;процессах.</p>
         </div>
     </section>

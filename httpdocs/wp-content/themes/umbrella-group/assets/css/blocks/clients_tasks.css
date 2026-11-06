@@ -1,0 +1,277 @@
+/* [clients_tasks] и [clients_cta] — нижние блоки страницы «Клиенты» */
+
+/* Фон секций — тот же светло-серый, что под плитками ([ug_client_tiles]).
+   Над первой — 30px белого нижнего отступа колонки Flatsome, в которой
+   стоят плитки: наезжаем на него (и на часть нижнего поля плиток — тот же
+   фон), чтобы фон шёл без шва, а плашка не отрывалась от листалки */
+.clients-bottom {
+    position: relative;
+    background: #f7f5f6;
+}
+
+.clients-bottom--tasks {
+    margin-top: -60px;
+    padding-top: 30px;
+}
+
+.clients-bottom__inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 15px 24px;
+}
+
+.clients-bottom--cta .clients-bottom__inner {
+    padding-bottom: 72px;
+}
+
+/* Плашка «Не просто работаем…»: заголовок | черта | три направления */
+.clients-tasks {
+    display: grid;
+    grid-template-columns: minmax(0, 420px) minmax(0, 1fr);
+    align-items: center;
+    padding: 40px 44px;
+    border-radius: 20px;
+    background: #efedee;
+}
+
+.clients-tasks__title {
+    margin: 0;
+    padding-right: 36px;
+    font-family: "PT Serif", sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: #1a1a1a;
+}
+
+.clients-tasks__items {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+    padding-left: 40px;
+    border-left: 1px solid #d6d2d4;
+}
+
+.clients-tasks__item {
+    display: flex;
+    flex-direction: column;
+    color: #1a1a1a;
+}
+
+.clients-tasks__icon {
+    margin-bottom: 16px;
+    color: #8b1a2b;
+}
+
+.clients-tasks__name {
+    margin-bottom: 10px;
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.25;
+    transition: color .2s;
+}
+
+.clients-tasks__item:hover .clients-tasks__name {
+    color: #8b1a2b;
+}
+
+.clients-tasks__text {
+    font-size: 15px;
+    line-height: 1.45;
+    color: #666;
+}
+
+/* Баннер «Задачи у бизнеса разные…»: картинка заказчика — фон всего
+   баннера (cover, прижата вправо), текст слева на её пустой бордовой части.
+   Подложка — цвет левого края картинки (сверху вниз), на случай если кадр
+   не дотянется: шва с ней не видно */
+.clients-cta {
+    position: relative;
+    min-height: 340px;
+    overflow: hidden;
+    border-radius: 20px;
+    background: linear-gradient(to bottom, #25090e 0%, #360811 50%, #3e0711 75%, #320a0e 100%);
+}
+
+/* Уже ~1300px окна баннер уже 1210px, и рукоять зонта подходит к концу
+   заголовка — кадр уезжает вправо (режется край папки), слева открывается
+   подложка того же цвета. Больше 110px не сдвигаем */
+.clients-cta__image {
+    position: absolute;
+    inset: 0;
+    transform: translateX(clamp(0px, (1300px - 100vw) * .45, 110px));
+}
+
+.clients-cta__image picture {
+    display: block;
+    height: 100%;
+}
+
+.clients-cta__image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: right center;
+}
+
+.clients-cta__stub {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding-left: 15%;
+    background: repeating-linear-gradient(-45deg, #3a1c20 0 14px, #331a1d 14px 28px);
+    font-size: 20px;
+    color: #a88;
+}
+
+.clients-cta__text {
+    position: relative;
+    max-width: 720px;
+    padding: 44px 0 44px 56px;
+}
+
+.clients-cta__title {
+    margin: 0 0 18px;
+    font-family: "PT Serif", sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.22;
+    color: #fff;
+}
+
+.clients-cta__desc {
+    margin: 0 0 30px;
+    font-size: 17px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, .88);
+}
+
+.clients-cta__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 28px;
+    padding: 15px 28px;
+    border-radius: 12px;
+    background: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    color: #1a1a1a;
+    transition: background .2s, color .2s;
+}
+
+.clients-cta__btn svg {
+    color: #8b1a2b;
+    transition: transform .2s;
+}
+
+.clients-cta__btn:hover,
+.clients-cta__btn:focus {
+    background: #f3eeef;
+    color: #1a1a1a;
+}
+
+.clients-cta__btn:hover svg {
+    transform: translateX(4px);
+}
+
+/* Узкий десктоп и планшет: направления плотнее */
+@media (max-width: 1199px) {
+    .clients-tasks {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 28px;
+    }
+
+    .clients-tasks__title {
+        padding-right: 0;
+    }
+
+    .clients-tasks__items {
+        padding: 28px 0 0;
+        border-top: 1px solid #d6d2d4;
+        border-left: 0;
+    }
+}
+
+@media (max-width: 849px) {
+    .clients-tasks {
+        padding: 28px 22px;
+        border-radius: 16px;
+    }
+
+    .clients-tasks__title {
+        font-size: 25px;
+    }
+
+    .clients-tasks__items {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 22px;
+    }
+
+    .clients-tasks__item {
+        display: grid;
+        grid-template-columns: 38px minmax(0, 1fr);
+        column-gap: 16px;
+    }
+
+    .clients-tasks__icon {
+        grid-row: span 2;
+        margin-bottom: 0;
+    }
+
+    .clients-tasks__name {
+        margin-bottom: 4px;
+        font-size: 18px;
+    }
+
+    .clients-bottom--cta .clients-bottom__inner {
+        padding-bottom: 48px;
+    }
+
+    .clients-cta {
+        display: flex;
+        flex-direction: column;
+        border-radius: 16px;
+    }
+
+    .clients-cta__text {
+        padding: 28px 22px 24px;
+    }
+
+    .clients-cta__title {
+        font-size: 25px;
+    }
+
+    .clients-cta__desc {
+        font-size: 16px;
+    }
+
+    .clients-cta__title br,
+    .clients-cta__desc br {
+        display: none;
+    }
+
+    /* На телефоне картинка — кадр с зонтом и папкой (-m, 1100 × 821)
+       под текстом. Подложка текста к низу — цвет верха этого кадра,
+       верх кадра растушёван в неё: шва нет */
+    .clients-cta {
+        background: linear-gradient(to bottom, #3a0912 0%, #2c0a10 60%, #230a0e 100%);
+    }
+
+    .clients-cta__image {
+        position: relative;
+        inset: auto;
+        transform: none;
+        order: 2;
+        aspect-ratio: 1100 / 821;
+        margin-top: -24px;
+        -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 22%);
+        mask-image: linear-gradient(to bottom, transparent 0, #000 22%);
+    }
+
+    .clients-cta__stub {
+        padding-left: 0;
+        font-size: 15px;
+    }
+}

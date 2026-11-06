@@ -1,0 +1,1287 @@
+/* [docs_folder] — «Документы компании».
+ *
+ * Закрытая папка — картинка из макета (__photo, 850 × 464) с кнопками-ярлыками
+ * поверх. Под курсором и при открытии обложка картинки (__lid — та же
+ * картинка, обрезанная clip-path по контуру обложки) поднимается вокруг
+ * корешка rotate3d, под ней — светлый лист (__photo-pages), рядом стрелка.
+ * Затем картинка гаснет, и проявляется открытая папка, нарисованная CSS
+ * (__binder): задник с кольцами и файлами, корешок, слева изнанка обложки
+ * с «Содержанием». Закрытая — .docs-folder без классов, подъём — .is-lifting,
+ * открытая — .is-open (+ .is-opened, когда переходы кончились).
+ *
+ * Фон секции подобран под фон макета (≈ #f9f7f7): тень у картинки — чёрная
+ * с альфой, посчитанная от этого фона.
+ */
+
+.docs-folder {
+    --red: #ec1c23;
+    --red-dark: #c9151b;
+    --W: 460px;                 /* открытая: ширина обложки и задника */
+    --H: 566px;                 /* открытая: высота */
+    --T: 44px;                  /* открытая: ширина корешка */
+    --tab: 128px;               /* открытая: сколько ярлыки торчат справа */
+    --C: min(1210px, 100vw - 30px);
+    --pw: 720px;                /* ширина картинки закрытой папки */
+    --pr: min(44px, (100vw - var(--C)) / 2);   /* насколько она выходит за контейнер справа */
+    --pt: -34px;                /* и вверх, к верху секции */
+    --ease: cubic-bezier(.45, .05, .25, 1);
+    --leather-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -.9 .62'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    position: relative;
+    overflow: hidden;
+    overflow: clip;
+    background: linear-gradient(180deg, #faf9f9 0%, #f7f5f5 100%);
+    color: #1a1a1a;
+}
+
+.docs-folder__inner {
+    position: relative;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 28px 15px 40px;
+}
+
+.docs-folder .breadcrumbs {
+    position: relative;
+    z-index: 3;
+    font-weight: 300;
+    margin-bottom: 12px;
+}
+
+.docs-folder__body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) calc(var(--W) + var(--tab));
+    align-items: start;
+}
+
+/* ── текст слева ─────────────────────────────────────────────────────────── */
+
+.docs-folder__text {
+    position: relative;
+    z-index: 3;
+    padding-top: 30px;
+    transition: opacity .4s ease, visibility 0s linear 0s;
+}
+
+.docs-folder__title {
+    margin: 0 0 14px;
+    font-family: "PT Serif", serif;
+    font-size: 47px;
+    font-weight: 700;
+    line-height: 1.08;
+    white-space: nowrap;
+    color: #1a1a1a;
+}
+
+.docs-folder__lead {
+    max-width: 600px;
+    margin: 0 0 54px;
+    font-size: 18px;
+    line-height: 1.45;
+    color: #555;
+}
+
+.docs-folder__hint {
+    max-width: 330px;
+    margin: 0 0 34px 2px;
+    padding: 2px 0 2px 32px;
+    border-left: 3px solid var(--red);
+    font-family: "PT Serif", serif;
+    font-size: 23px;
+    line-height: 1.35;
+    color: #2b2b2b;
+}
+
+.docs-folder__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    margin-left: 36px;
+    padding: 15px 30px 15px 32px;
+    border-radius: 6px;
+    background: var(--red);
+    box-shadow: 0 10px 22px rgba(236, 28, 35, .22);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: #fff;
+    transition: background .2s, box-shadow .2s;
+}
+
+.docs-folder__btn::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border: solid currentColor;
+    border-width: 2px 2px 0 0;
+    transform: rotate(45deg);
+}
+
+.docs-folder__btn:hover,
+.docs-folder__btn:focus-visible {
+    background: var(--red-dark);
+    color: #fff;
+}
+
+.docs-folder.is-open .docs-folder__btn::after {
+    transform: rotate(-135deg);
+}
+
+/* Без JS — простой список ссылок под кнопкой */
+.docs-folder__fallback {
+    display: none;
+    margin: 28px 0 0 36px;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.docs-folder--nojs .docs-folder__fallback {
+    display: block;
+}
+
+.docs-folder__fallback a {
+    color: var(--red);
+}
+
+/* ── сцена ───────────────────────────────────────────────────────────────── */
+
+.docs-folder__stage {
+    position: relative;
+    z-index: 2;
+    transition: transform .6s var(--ease);
+}
+
+/* ── закрытая папка: картинка ────────────────────────────────────────────── */
+
+.docs-folder__photo {
+    position: relative;
+    z-index: 2;
+    width: var(--pw);
+    margin: var(--pt) calc(-1 * var(--pr)) 0 calc(100% + var(--pr) - var(--pw));
+    aspect-ratio: 1374 / 884;
+    transition: opacity .45s ease, visibility 0s linear 0s;
+}
+
+.docs-folder__photo picture,
+.docs-folder__photo-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    -webkit-user-drag: none;
+    user-select: none;
+}
+
+/* Тени в картинке нет — мягкая тень под фон секции */
+.docs-folder__photo-img {
+    filter: drop-shadow(0 26px 26px rgba(70, 14, 16, .22)) drop-shadow(0 8px 10px rgba(40, 0, 0, .16));
+}
+
+.docs-folder__photo-pages,
+.docs-folder__photo-top,
+.docs-folder__lid-shadow,
+.docs-folder__lid {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.docs-folder__photo-pages,
+.docs-folder__lid-shadow {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.docs-folder__photo-top {
+    overflow: visible;
+    pointer-events: none;
+}
+
+.docs-folder__lid-shadow {
+    perspective: 1500px;
+    perspective-origin: 30% 60%;
+}
+
+/* Обложка: та же картинка, обрезанная по контуру обложки (clip-path — в
+   разметке, из UG_DOCS_PHOTO_COVER). Ось вращения — левый край обложки. */
+.docs-folder__lid {
+    background: url("../../img/docs-folder.webp") 0 0 / 100% 100% no-repeat;
+    background-image: -webkit-image-set(url("../../img/docs-folder.webp") 1x, url("../../img/docs-folder-2x.webp") 2x);
+    background-image: image-set(url("../../img/docs-folder.webp") type("image/webp") 1x, url("../../img/docs-folder-2x.webp") type("image/webp") 2x);
+    transform-origin: 1.16% 79.2%;
+    transform: rotate3d(.394, -.919, 0, var(--lift, 0deg));
+    transition: transform .45s var(--ease);
+}
+
+.docs-folder__photo-hit {
+    fill: transparent;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+/* Стрелка-подсказка, как на кадре 01 макета */
+.docs-folder__hint-arrow {
+    fill: none;
+    stroke: var(--red);
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0;
+    transform: translate(10px, 8px);
+    transition: opacity .25s ease, transform .35s var(--ease);
+}
+
+/* Ярлыки на картинке — вырезанные слои поверх целой картинки, ровно по
+   месту. Под курсором ярлык выезжает вперёд — вправо и наружу — и чуть
+   растёт; под ним остаётся нарисованный ярлык основной картинки, дыры нет. */
+.docs-folder__hit {
+    position: absolute;
+    z-index: 3;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    transform-origin: 0 50%;
+    transition: transform .28s cubic-bezier(.3, .7, .3, 1), filter .28s ease;
+    cursor: pointer;
+}
+
+.docs-folder__hit img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    -webkit-user-drag: none;
+}
+
+@media (hover: hover) {
+    .docs-folder:not(.is-open) .docs-folder__hit:hover {
+        transform: translate(4.5%, -1.5%) scale(1.08);
+        filter: drop-shadow(4px 8px 10px rgba(60, 10, 12, .28));
+    }
+}
+
+.docs-folder__hit:focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 2px;
+    transform: translate(4.5%, -1.5%) scale(1.08);
+}
+
+.docs-folder--nojs .docs-folder__hit,
+.docs-folder--nojs .docs-folder__photo-hit {
+    pointer-events: none;
+}
+
+/* Подъём обложки: под курсором — чуть-чуть, при открытии — на 58° */
+@media (hover: hover) {
+    .docs-folder:not(.is-open):not(.docs-folder--nojs) .docs-folder__photo:hover:not(:has(.docs-folder__hit:hover)) {
+        --lift: 9deg;
+    }
+}
+
+@media (hover: hover) {
+    .docs-folder:not(.docs-folder--nojs) .docs-folder__photo:hover:not(:has(.docs-folder__hit:hover)) .docs-folder__lid-shadow,
+    .docs-folder:not(.docs-folder--nojs) .docs-folder__photo:hover:not(:has(.docs-folder__hit:hover)) .docs-folder__photo-pages {
+        opacity: 1;
+    }
+
+    .docs-folder:not(.docs-folder--nojs) .docs-folder__photo:hover:not(:has(.docs-folder__hit:hover)) .docs-folder__lid-shadow {
+        filter: drop-shadow(-6px 16px 14px rgba(70, 8, 12, .32));
+    }
+
+    .docs-folder:not(.docs-folder--nojs) .docs-folder__photo:hover:not(:has(.docs-folder__hit:hover)) .docs-folder__hint-arrow {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.docs-folder.is-lifting .docs-folder__lid-shadow,
+.docs-folder.is-lifting .docs-folder__photo-pages {
+    opacity: 1;
+}
+
+.docs-folder.is-lifting .docs-folder__lid-shadow {
+    filter: drop-shadow(-6px 16px 14px rgba(70, 8, 12, .32));
+}
+
+.docs-folder.is-lifting .docs-folder__hint-arrow {
+    opacity: 1;
+    transform: none;
+}
+
+.docs-folder.is-lifting .docs-folder__photo {
+    --lift: 58deg;
+}
+
+.docs-folder.is-lifting .docs-folder__lid {
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(.5, 0, .75, .4);
+}
+
+/* ── открытая папка: CSS ─────────────────────────────────────────────────── */
+
+.docs-folder__binder {
+    position: relative;
+    width: var(--W);
+    height: var(--H);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.docs-folder__back {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: 4px 14px 14px 4px;
+    background:
+        var(--leather-grain),
+        radial-gradient(120% 80% at 70% 10%, #a5121a 0%, #860d14 60%, #6c0a10 100%);
+    box-shadow:
+        inset 0 0 0 1px rgba(0, 0, 0, .25),
+        0 30px 50px -18px rgba(70, 10, 12, .55),
+        0 12px 22px -12px rgba(0, 0, 0, .4);
+}
+
+/* Строчка по краю задника */
+.docs-folder__back::before {
+    content: '';
+    position: absolute;
+    inset: 11px;
+    border: 1.5px dashed rgba(255, 205, 205, .32);
+    border-radius: 3px 9px 9px 3px;
+    pointer-events: none;
+}
+
+.docs-folder__spine {
+    position: absolute;
+    top: 0;
+    left: calc(-1 * var(--T));
+    z-index: 1;
+    width: var(--T);
+    height: 100%;
+    background:
+        var(--leather-grain),
+        linear-gradient(90deg, #5e080d 0%, #8f0f16 30%, #a8141c 55%, #7b0c12 100%);
+    border-radius: 3px;
+    box-shadow: 0 30px 50px -18px rgba(70, 10, 12, .55);
+}
+
+.docs-folder__cover {
+    position: absolute;
+    top: 0;
+    right: 100%;
+    width: var(--W);
+    height: 100%;
+}
+
+.docs-folder__cover-in {
+    position: absolute;
+    inset: 0;
+}
+
+.docs-folder__cover-in {
+    border-radius: 16px 4px 4px 16px;
+    background:
+        var(--leather-grain),
+        radial-gradient(120% 80% at 40% 10%, #a5121a 0%, #860d14 60%, #6c0a10 100%);
+    box-shadow:
+        inset 0 0 0 1px rgba(0, 0, 0, .25),
+        inset -14px 0 18px -10px rgba(0, 0, 0, .45),
+        0 30px 50px -18px rgba(70, 10, 12, .55);
+    color: #fff;
+}
+
+.docs-folder__cover-in::before {
+    content: '';
+    position: absolute;
+    inset: 11px;
+    border: 1.5px dashed rgba(255, 205, 205, .32);
+    border-radius: 9px 3px 3px 9px;
+    pointer-events: none;
+}
+
+/* «Закрыть папку» — в левом нижнем углу изнанки обложки; перевёрнутые листы
+   ложатся правее (от колец влево на ширину листа), угол остаётся свободным.
+   Кнопка поверх всего, чтобы оставаться доступной и при толстой стопке. */
+.docs-folder__close {
+    position: absolute;
+    left: calc(24px - var(--W) - var(--T));
+    bottom: 22px;
+    z-index: 6;
+    margin: 0;
+    padding: 6px 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    font-size: 13px;
+    line-height: 1.3;
+    text-transform: none;
+    letter-spacing: 0;
+    white-space: nowrap;
+    color: rgba(255, 255, 255, .78);
+    cursor: pointer;
+    min-height: 0;
+}
+
+.docs-folder__close::before {
+    content: '‹';
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+.docs-folder__close:hover,
+.docs-folder__close:focus-visible {
+    color: #fff;
+}
+
+/* ── ярлыки-закладки ─────────────────────────────────────────────────────── */
+
+.docs-folder__tabs {
+    position: absolute;
+    top: 58px;
+    left: calc(100% - 22px);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: calc(var(--tab) + 22px);
+    z-index: 1;
+}
+
+.docs-folder__tab {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 13px 16px 13px 38px;
+    border: 0;
+    border-radius: 0 9px 9px 0;
+    background: linear-gradient(180deg, #ffffff 0%, #f1efee 100%);
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, .9) inset,
+        0 3px 7px rgba(60, 20, 20, .22),
+        0 1px 2px rgba(0, 0, 0, .18);
+    font-family: "PT Serif", serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.2;
+    text-align: left;
+    text-transform: none;
+    letter-spacing: 0;
+    white-space: nowrap;
+    color: #2a2a2a;
+    cursor: pointer;
+    transition: transform .2s, color .2s;
+    min-height: 0;
+}
+
+/* Красная кромка активного ярлыка */
+.docs-folder__tab::after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    right: 0;
+    bottom: 6px;
+    width: 3px;
+    border-radius: 2px 0 0 2px;
+    background: var(--red);
+    opacity: 0;
+    transition: opacity .2s;
+}
+
+.docs-folder__tab:hover,
+.docs-folder__tab:focus-visible {
+    color: var(--red);
+    transform: translateX(4px);
+}
+
+.docs-folder__tab.is-current::after {
+    opacity: 1;
+}
+
+.docs-folder__tab.is-current {
+    color: #1a1a1a;
+}
+
+/* ── кольца и файлы ──────────────────────────────────────────────────────── */
+
+.docs-folder__pocket {
+    position: absolute;
+    inset: 22px 22px 22px 8px;
+}
+
+.docs-folder__rings {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 5;
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    align-items: center;
+    width: 60px;
+    pointer-events: none;
+}
+
+/* Планка механизма */
+.docs-folder__rings::before {
+    content: '';
+    position: absolute;
+    top: 4%;
+    bottom: 4%;
+    left: 6px;
+    width: 18px;
+    border-radius: 9px;
+    background: linear-gradient(90deg, #7d838b 0%, #eef0f3 38%, #c3c8ce 62%, #858b93 100%);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .45), inset 0 0 0 1px rgba(0, 0, 0, .15);
+}
+
+/* Кольцо: верхняя дуга над файлом, уходит в отверстие */
+.docs-folder__rings i {
+    position: relative;
+    display: block;
+    width: 52px;
+    height: 26px;
+    margin-left: 6px;
+    border: 5px solid;
+    border-color: #f4f5f7 #9aa0a8 transparent #d8dce1;
+    border-radius: 50%;
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .4));
+    transform: translateY(-6px);
+}
+
+.docs-folder__sheets {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 40px;
+    right: 0;
+    perspective: 2000px;
+    perspective-origin: 0 50%;
+    touch-action: pan-y;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.docs-folder__sheet {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    transform-origin: -12px 50%;
+    transform-style: preserve-3d;
+    z-index: 1;             /* порядок в стопках ставит JS */
+    --shade: 0;
+}
+
+.docs-folder__face {
+    position: absolute;
+    inset: 0;
+    border-radius: 3px 7px 7px 3px;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    /* прозрачный пластиковый файл */
+    background:
+        radial-gradient(circle at 12px 50%, rgba(70, 8, 12, .55) 0 5px, rgba(255, 255, 255, .5) 6px, transparent 7px) 0 0 / 24px 25% repeat-y,
+        linear-gradient(135deg, rgba(255, 255, 255, .82) 0%, rgba(238, 241, 245, .72) 100%);
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, .85),
+        0 1px 2px rgba(0, 0, 0, .2),
+        3px 4px 10px rgba(40, 0, 0, .28);
+}
+
+/* Блик и затенение при подъёме листа */
+.docs-folder__face::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background:
+        linear-gradient(rgba(0, 0, 0, var(--shade)), rgba(0, 0, 0, var(--shade))),
+        linear-gradient(118deg, rgba(255, 255, 255, 0) 28%, rgba(255, 255, 255, .42) 36%, rgba(255, 255, 255, 0) 44%, rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, .22) 77%, rgba(255, 255, 255, 0) 83%);
+    pointer-events: none;
+}
+
+.docs-folder__face--back {
+    transform: rotateY(180deg);
+    border-radius: 7px 3px 3px 7px;
+    background:
+        radial-gradient(circle at calc(100% - 12px) 50%, rgba(70, 8, 12, .55) 0 5px, rgba(255, 255, 255, .5) 6px, transparent 7px) 100% 0 / 24px 25% repeat-y,
+        linear-gradient(225deg, #fdfdfd 0%, #eef0f3 100%);
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, .85),
+        0 1px 2px rgba(0, 0, 0, .2),
+        -3px 4px 10px rgba(40, 0, 0, .28);
+}
+
+/* Видимую сторону переключает JS (is-back) — см. applyFlip() */
+.docs-folder__face--back,
+.docs-folder__sheet.is-back .docs-folder__face--front {
+    visibility: hidden;
+}
+
+.docs-folder__sheet.is-back .docs-folder__face--back {
+    visibility: visible;
+}
+
+/* Оборот: тот же лист с обратной стороны — бумага, скан едва просвечивает */
+.docs-folder__paper--back {
+    inset: 14px 30px 14px 14px;
+    cursor: inherit;
+}
+
+.docs-folder__paper--back img {
+    transform: scaleX(-1);
+    opacity: .13;
+    box-shadow: none;
+}
+
+.docs-folder__paper {
+    position: absolute;
+    inset: 14px 14px 14px 30px;
+    display: grid;
+    place-items: center;
+    -webkit-user-drag: none;
+    cursor: zoom-in;
+}
+
+.docs-folder__paper img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .25);
+    -webkit-user-drag: none;
+    pointer-events: none;
+}
+
+.docs-folder.is-opened .docs-folder__sheets {
+    cursor: grab;
+}
+
+.docs-folder.is-dragging .docs-folder__sheets,
+.docs-folder.is-dragging .docs-folder__paper {
+    cursor: grabbing;
+}
+
+/* ── подпись и кнопки под листом ─────────────────────────────────────────── */
+
+.docs-folder__panel {
+    width: calc(2 * var(--W) + var(--T));
+    margin: 30px 0 0 calc(-1 * (var(--W) + var(--T)));
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: opacity .35s ease, transform .35s ease, visibility 0s linear .35s;
+}
+
+.docs-folder__caption {
+    margin: 0 0 14px;
+    font-size: 15px;
+    line-height: 1.4;
+    color: #777;
+}
+
+.docs-folder__caption b {
+    display: block;
+    margin-bottom: 2px;
+    font-family: "PT Serif", serif;
+    font-size: 21px;
+    font-weight: 400;
+    color: #1a1a1a;
+}
+
+.docs-folder__controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 12px 14px;
+}
+
+.docs-folder__pager {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-right: 10px;
+}
+
+.docs-folder__arrow {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #e1dfdf;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .06);
+    color: #1a1a1a;
+    cursor: pointer;
+    transition: border-color .2s, color .2s, opacity .2s;
+}
+
+.docs-folder__arrow:hover:not(:disabled),
+.docs-folder__arrow:focus-visible {
+    border-color: var(--red);
+    color: var(--red);
+}
+
+.docs-folder__arrow:disabled {
+    opacity: .4;
+    cursor: default;
+}
+
+.docs-folder__count {
+    min-width: 56px;
+    font-size: 16px;
+    color: #333;
+    font-variant-numeric: tabular-nums;
+}
+
+.docs-folder__action {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border: 1px solid #e1dfdf;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .05);
+    font-size: 15px;
+    line-height: 1.2;
+    color: #1a1a1a;
+    transition: border-color .2s, color .2s;
+}
+
+.docs-folder__action svg {
+    color: var(--red);
+}
+
+.docs-folder__action:hover,
+.docs-folder__action:focus-visible {
+    border-color: var(--red);
+    color: var(--red);
+}
+
+/* ── состояния ───────────────────────────────────────────────────────────── */
+
+/* Закрыта: открытой папки и подписи нет в потоке */
+.docs-folder__binder,
+.docs-folder__panel {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .45s ease, transform .55s var(--ease), visibility 0s linear .45s;
+}
+
+.docs-folder:not(.is-open) .docs-folder__binder,
+.docs-folder:not(.is-open) .docs-folder__panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+.docs-folder:not(.is-open) .docs-folder__binder {
+    transform: scale(.96) translateY(10px);
+}
+
+.docs-folder:not(.is-open) .docs-folder__panel {
+    transform: translateY(12px);
+}
+
+.docs-folder.is-open .docs-folder__binder,
+.docs-folder.is-open .docs-folder__panel {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: opacity .45s ease .2s, transform .55s var(--ease) .2s, visibility 0s linear 0s;
+}
+
+.docs-folder.is-open .docs-folder__panel {
+    transition-delay: .4s;
+}
+
+/* Открыта: картинка уходит из потока на то же место и гаснет */
+.docs-folder.is-open .docs-folder__photo {
+    position: absolute;
+    top: var(--pt);
+    left: calc(100% + var(--pr) - var(--pw));
+    margin: 0;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .4s ease .1s, visibility 0s linear .5s;
+}
+
+.docs-folder.is-open .docs-folder__stage {
+    transform: translateX(calc((var(--C) - 2 * var(--W) - var(--T) - var(--tab)) / -2));
+}
+
+.docs-folder.is-open .docs-folder__text {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .3s ease, visibility 0s linear .3s;
+}
+
+/* Для снимков и тестов: без переходов */
+.docs-folder.is-instant,
+.docs-folder.is-instant * {
+    transition: none !important;
+}
+
+/* ── лайтбокс ────────────────────────────────────────────────────────────── */
+
+.docs-folder__lightbox {
+    max-width: none;
+    max-height: none;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #fff;
+}
+
+.docs-folder__lightbox[open] {
+    display: grid;
+    place-items: center;
+}
+
+.docs-folder__lightbox::backdrop {
+    background: rgba(22, 18, 18, .86);
+}
+
+.docs-folder__lightbox-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 56px 16px 20px;
+    max-height: 100%;
+}
+
+.docs-folder__lightbox-body img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: min(92vw, 1000px);
+    max-height: calc(100vh - 140px);
+    max-height: calc(100dvh - 140px);
+    background: #fff;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .5);
+}
+
+.docs-folder__lightbox-body figcaption {
+    max-width: 640px;
+    margin-top: 16px;
+    font-size: 16px;
+    line-height: 1.4;
+    text-align: center;
+    color: rgba(255, 255, 255, .9);
+}
+
+.docs-folder__lightbox-close {
+    position: fixed;
+    top: 14px;
+    right: 14px;
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .12);
+    color: #fff;
+    cursor: pointer;
+}
+
+.docs-folder__lightbox-close:hover {
+    background: var(--red);
+}
+
+.docs-folder__lightbox-close:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+/* ── планшет ─────────────────────────────────────────────────────────────── */
+
+@media (max-width: 1239px) {
+    .docs-folder {
+        --W: min(460px, (var(--C) - var(--T) - var(--tab)) / 2);
+        --H: calc(var(--W) * 1.255);
+        --pw: min(720px, 54vw);
+    }
+
+    .docs-folder__title {
+        font-size: 42px;
+        white-space: normal;
+    }
+
+    .docs-folder__lead {
+        margin-bottom: 40px;
+    }
+
+    .docs-folder__tab {
+        padding-left: 34px;
+        font-size: 14px;
+    }
+}
+
+/* ── телефон ─────────────────────────────────────────────────────────────── */
+
+@media (max-width: 849px) {
+    .docs-folder {
+        --T: 22px;
+        --tab: 0px;
+        --W: calc(100vw - 30px - 14px);
+        --H: calc(var(--W) * 1.3);
+        --pw: 100vw;
+        --pr: 15px;
+        --pt: 0px;
+    }
+
+    .docs-folder__inner {
+        padding: 18px 15px 32px;
+    }
+
+    .docs-folder .breadcrumbs {
+        margin-bottom: 10px;
+    }
+
+    .docs-folder__body {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .docs-folder__text {
+        padding-top: 4px;
+    }
+
+    .docs-folder__title {
+        margin-bottom: 10px;
+        font-size: 34px;
+    }
+
+    .docs-folder__lead {
+        margin-bottom: 22px;
+        font-size: 16px;
+    }
+
+    .docs-folder__hint {
+        margin-bottom: 20px;
+        padding-left: 18px;
+        font-size: 19px;
+    }
+
+    .docs-folder__btn {
+        margin-left: 0;
+        padding: 13px 24px;
+        font-size: 16px;
+    }
+
+    .docs-folder__fallback {
+        margin-left: 0;
+    }
+
+    /* На телефоне текст остаётся над папкой */
+    .docs-folder.is-open .docs-folder__text {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .docs-folder__stage {
+        margin: 14px 0 0 14px;
+    }
+
+    .docs-folder.is-open .docs-folder__stage {
+        margin-top: 62px;
+        transform: translateX(-7px);
+    }
+
+    /* Две половины не помещаются: видна правая, а от левой — корешок и край
+       стопки перевёрнутых листов у левого края экрана. Закрыть — кнопкой над папкой. */
+    .docs-folder__close {
+        display: none;
+    }
+
+    .docs-folder__tabs {
+        top: auto;
+        bottom: calc(100% - 10px);
+        left: 18px;
+        right: 14px;
+        flex-direction: row;
+        gap: 5px;
+        width: auto;
+    }
+
+    .docs-folder__tab {
+        flex: 1 1 0;
+        min-width: 0;
+        padding: 9px 4px 16px;
+        border-radius: 9px 9px 0 0;
+        font-size: 12.5px;
+        text-align: center;
+        white-space: normal;
+        box-shadow: 0 -2px 6px rgba(60, 20, 20, .16), 0 -1px 1px rgba(0, 0, 0, .1);
+    }
+
+    .docs-folder__tab::after {
+        top: 0;
+        left: 8px;
+        right: 8px;
+        bottom: auto;
+        width: auto;
+        height: 3px;
+        border-radius: 0 0 2px 2px;
+    }
+
+    .docs-folder__tab:hover,
+    .docs-folder__tab:focus-visible {
+        transform: translateY(-3px);
+    }
+
+    .docs-folder__pocket {
+        inset: 16px 14px 16px 4px;
+    }
+
+    .docs-folder__sheets {
+        left: 32px;
+    }
+
+    .docs-folder__rings {
+        width: 48px;
+    }
+
+    .docs-folder__rings::before {
+        left: 4px;
+        width: 14px;
+    }
+
+    .docs-folder__rings i {
+        width: 42px;
+        height: 22px;
+        margin-left: 3px;
+        border-width: 4px;
+    }
+
+    .docs-folder__paper {
+        inset: 10px 10px 10px 26px;
+    }
+
+    .docs-folder__panel {
+        width: auto;
+        margin: 22px 0 0 -14px;
+    }
+
+    .docs-folder__caption b {
+        font-size: 18px;
+    }
+
+    .docs-folder__pager {
+        margin-right: 0;
+    }
+
+    .docs-folder__controls {
+        gap: 12px 10px;
+    }
+
+    .docs-folder__action {
+        padding: 10px 14px;
+    }
+}
+
+/* ── «Что хранится в папке» ──────────────────────────────────────────────── */
+
+.docs-folder__contents {
+    position: relative;
+    z-index: 3;
+    margin-top: 56px;
+    padding-bottom: 16px;
+}
+
+.docs-folder__contents-title {
+    position: relative;
+    margin: 0 0 8px;
+    padding-left: 52px;
+    font-family: "PT Serif", serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #1a1a1a;
+}
+
+/* Красная черта слева от заголовка, как на макете */
+.docs-folder__contents-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 36px;
+    height: 2px;
+    background: var(--red);
+}
+
+.docs-folder__contents-lead {
+    margin: 0 0 28px 52px;
+    font-size: 17px;
+    line-height: 1.45;
+    color: #666;
+}
+
+.docs-folder__cards {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.docs-folder__card {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    padding: 28px 26px 26px;
+    border: 1px solid #e7e4e4;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(30, 10, 10, .04);
+    color: #1a1a1a;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.docs-folder__card-icon {
+    display: block;
+    color: var(--red);
+    line-height: 0;
+}
+
+.docs-folder__card-icon svg {
+    stroke-width: 1.3;
+}
+
+.docs-folder__card-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.docs-folder__card-title {
+    margin-bottom: 10px;
+    font-family: "PT Serif", serif;
+    font-size: 23px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.docs-folder__card-text {
+    margin-bottom: 22px;
+    font-size: 15.5px;
+    line-height: 1.45;
+    color: #666;
+}
+
+.docs-folder__card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: auto;
+    font-size: 15.5px;
+    color: var(--red);
+}
+
+.docs-folder__card-link svg {
+    transition: transform .25s ease;
+}
+
+@media (hover: hover) {
+    .docs-folder__card:hover {
+        transform: translateY(-4px);
+        border-color: #ecd3d4;
+        box-shadow: 0 14px 28px rgba(70, 14, 16, .1);
+        color: #1a1a1a;
+    }
+
+    .docs-folder__card:hover .docs-folder__card-link svg {
+        transform: translateX(5px);
+    }
+}
+
+.docs-folder__card:focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 2px;
+}
+
+@media (max-width: 1239px) {
+    .docs-folder__cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Телефон: одна колонка, иконка слева — компактно и без переносов по слову */
+@media (max-width: 849px) {
+    .docs-folder__contents {
+        margin-top: 40px;
+    }
+
+    .docs-folder__contents-title {
+        padding-left: 40px;
+        font-size: 26px;
+    }
+
+    .docs-folder__contents-title::before {
+        width: 26px;
+    }
+
+    .docs-folder__contents-lead {
+        margin: 0 0 20px 40px;
+        font-size: 15px;
+    }
+
+    .docs-folder__cards {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 12px;
+    }
+
+    .docs-folder__card {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 18px 18px 16px;
+    }
+
+    .docs-folder__card-icon svg {
+        width: 38px;
+        height: 38px;
+    }
+
+    .docs-folder__card-title {
+        margin-bottom: 6px;
+        font-size: 20px;
+    }
+
+    .docs-folder__card-text {
+        margin-bottom: 12px;
+        font-size: 14.5px;
+    }
+
+    .docs-folder__card-link {
+        font-size: 14.5px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .docs-folder *,
+    .docs-folder {
+        transition-duration: .01s !important;
+        transition-delay: 0s !important;
+    }
+
+    .docs-folder.is-lifting .docs-folder__photo {
+        --lift: 0deg;
+    }
+}

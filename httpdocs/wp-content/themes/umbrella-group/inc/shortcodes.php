@@ -35,6 +35,8 @@ require get_theme_file_path() . '/template-parts/shortcodes/su_welcome_screen_co
 require get_theme_file_path() . '/template-parts/shortcodes/komanda_specialistov.php';
 require get_theme_file_path() . '/template-parts/shortcodes/team_page.php';
 require get_theme_file_path() . '/template-parts/shortcodes/about_hero.php';
+require get_theme_file_path() . '/template-parts/shortcodes/clients_hero.php';
+require get_theme_file_path() . '/template-parts/shortcodes/clients_tasks.php';
 require get_theme_file_path() . '/template-parts/shortcodes/why_choose_us.php';
 require get_theme_file_path() . '/template-parts/shortcodes/new-main-first-screen.php';
 require get_theme_file_path() . '/template-parts/shortcodes/umbrella_footer.php';
@@ -56,4 +58,5 @@ require get_theme_file_path() . '/template-parts/shortcodes/form_bottom_business
 require get_theme_file_path() . '/template-parts/shortcodes/akciya_tz.php';
 require get_theme_file_path() . '/template-parts/shortcodes/akciya_pb.php';
 require get_theme_file_path() . '/template-parts/shortcodes/tz_packages.php';
+require get_theme_file_path() . '/template-parts/shortcodes/docs_folder.php';
 require get_theme_file_path() . '/includes/upsell.php';

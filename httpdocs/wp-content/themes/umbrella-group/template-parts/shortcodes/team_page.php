@@ -434,6 +434,8 @@ function ug_team_page_shortcode($atts): string
     $breadcrumbs = get_breadcrumbs();
     $together    = ug_team_page_together();
 
+    // Типографика первого экрана — общая с [clients_hero], раньше в team_page.css: каскад тот же
+    ug_enqueue_style('assets/css/blocks/team_hero_type.css');
     ug_enqueue_style('assets/css/blocks/team_page.css');
     ug_enqueue_script('assets/js/blocks/team_page.js');
 

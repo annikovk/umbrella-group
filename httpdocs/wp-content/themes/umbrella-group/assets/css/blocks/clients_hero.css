@@ -1,0 +1,104 @@
+/* [clients_hero] — первый экран страницы «Клиенты» */
+
+.clients-hero {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 32px;
+    /* Цвет левого края картинки: на экранах шире кадра шва нет */
+    background: linear-gradient(to bottom, #e9e6e6, #f0edee);
+}
+
+.clients-hero__inner {
+    position: relative;
+    max-width: 1240px;
+    min-height: 480px;
+    margin: 0 auto;
+    padding: 28px 15px 48px;
+}
+
+.clients-hero__inner > :not(.clients-hero__image) {
+    position: relative;
+}
+
+/* Баннер 3 : 1 — в ширину контента, как картинки первых экранов остальных
+   страниц (/about/cases/): от левого до правого края контента (край плиток),
+   фон секции — во всю ширину окна. Кадр вписан по высоте (лишнее по бокам
+   режется, см. object-position ниже); растушёвка слева прячет край в фоне,
+   правый край — резкий, ровно по краю контента. Уже 1300px окна кадр уезжает
+   вправо (режутся кофе и визитница), чтобы блокнот не заходил под цифры;
+   больше 190px не сдвигаем — начнёт резаться сам блокнот */
+.clients-hero__image {
+    position: absolute;
+    top: 0;
+    right: calc(15px - clamp(0px, (1300px - 100vw) * 0.6, 190px));
+    bottom: 0;
+    left: 15px;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 18%);
+    mask-image: linear-gradient(to right, transparent 0, #000 18%);
+}
+
+.clients-hero__image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Кадр 3 : 1 выше и уже контейнера (≈2,3 : 1) — по бокам режется ~400px.
+       Срез 60/40: слева пустой фон, справа край кофе и визитницы, как на
+       макете; иначе бумаги под блокнотом заходят под цифры */
+    object-position: 60% center;
+}
+
+.clients-hero__stub {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background: repeating-linear-gradient(-45deg, #e9e9e9 0 14px, #e2e2e2 14px 28px);
+    font-size: 22px;
+    color: #888;
+}
+
+.clients-hero .breadcrumbs {
+    font-weight: 300;
+    margin-bottom: 32px;
+}
+
+/* Заголовок, подзаголовок и цифры — классы «Команды» (team_hero_type.css);
+   здесь только ширина текста — как колонка текста там (470px) */
+.clients-hero__title,
+.clients-hero__lead {
+    max-width: 470px;
+}
+
+@media (max-width: 849px) {
+    .clients-hero__inner {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        padding: 28px 15px 0;
+    }
+
+    .clients-hero .breadcrumbs {
+        margin-bottom: 24px;
+    }
+
+    /* На телефоне картинка — полосой под текстом во всю ширину: правая часть
+       кадра (clients-hero-m.*, 1100 × 626) с блокнотом и кофе */
+    .clients-hero__image {
+        position: relative;
+        inset: auto;
+        order: 9;
+        aspect-ratio: 1100 / 626;
+        margin: 20px -15px 0;
+        -webkit-mask-image: linear-gradient(to top, transparent 0, #000 12%);
+        mask-image: linear-gradient(to top, transparent 0, #000 12%);
+    }
+
+    .clients-hero__image img {
+        object-position: 70% center;
+    }
+
+    .clients-hero__stub {
+        font-size: 16px;
+    }
+}
