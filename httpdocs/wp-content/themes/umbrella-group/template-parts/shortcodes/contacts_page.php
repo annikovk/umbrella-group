@@ -108,12 +108,12 @@ function ug_contacts_page_shortcode(): string
             <p class="contacts-page__lead">Позвоните, напишите или&nbsp;выберите удобный офис в&nbsp;Новосибирске</p>
 
             <div class="contacts-strip">
-                <div class="contacts-strip__col contacts-strip__col--phone">
+                <div class="contacts-strip__col contacts-strip__col--phone contacts-text">
                     <span class="contacts-strip__label">Телефон</span>
                     <a class="contacts-strip__value contacts-strip__value--phone" href="tel:$tel">$phone</a>
                     <span class="contacts-strip__note">Пн–пт, 09:00–18:00 · Новосибирск</span>
                 </div>
-                <div class="contacts-strip__col contacts-strip__col--mail">
+                <div class="contacts-strip__col contacts-strip__col--mail contacts-text">
                     $mail
                     <div>
                         <span class="contacts-strip__label">Электронная почта</span>
