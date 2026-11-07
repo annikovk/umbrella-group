@@ -11,7 +11,7 @@ function business_footer_shortcode($atts)
                                 [gap height="39px"]
                             <p><span itemscope itemtype="http://schema.org/Organization"><br /><meta itemprop="name" content="Taxlab"></p>
                                 <p class="footer-sub-text" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><span itemprop="postalCode">630099</span>, г. <span itemprop="addressLocality">Новосибирск</span>, <br /> <span itemprop="streetAddress">ул. Максима Горького, д. 34</span><br />площадь Труда, д. 1</p>
-                                <p><meta itemprop="telephone" content="+7 (383) 230-97-45" ><br /><meta itemprop="email" content="contact@taxlab.ru" ><br />
+                                <p><meta itemprop="telephone" content="+7 (383) 373-17-17" ><br /><meta itemprop="email" content="contact@taxlab.ru" ><br />
                                 </span></p>
                             [gap height="39px"]<p class="footer-sub-text">1990 - 2025 © Umbrella Group</p>[/col_inner]
                             [col_inner span="2" span__sm="12" visibility="hide-for-medium"]
