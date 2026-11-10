@@ -86,7 +86,7 @@ class new_main_first_screen
                     [
                         'icon' => 'clipboard',
                         'title' => 'Ведение<br>учёта',
-                        'text' => 'Без ошибок и штрафов',
+                        'text' => 'Без ошибок и штрафов',
                     ],
                     [
                         'icon' => 'shield-check',
@@ -96,7 +96,7 @@ class new_main_first_screen
                     [
                         'icon' => 'headset',
                         'title' => 'Поддержка<br>экспертов',
-                        'text' => 'По всем вопросам вашего бизнеса',
+                        'text' => 'По всем вопросам вашего бизнеса',
                     ],
                 ],
                 'button_text' => 'Подробнее об акции',
