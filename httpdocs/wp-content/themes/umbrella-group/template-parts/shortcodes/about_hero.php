@@ -10,9 +10,9 @@
 
 defined('ABSPATH') || exit;
 
-/** Цифры справа: [число, подпись]. Первые три — те же, что в [team_page]. */
+/** Цифры справа: [число, подпись]. Первые три — те же, что в [team_page]; у первой к «35+» добавлено «лет», а в подписи — год основания. */
 const UG_ABOUT_STATS = [
-    ['35+', 'лет на&nbsp;рынке<br>консалтинговых услуг'],
+    ['35+&nbsp;лет', 'с&nbsp;1990&nbsp;г. на&nbsp;рынке<br>консалтинговых услуг'],
     ['55+', 'специалистов<br>в&nbsp;штате'],
     ['7', 'направлений<br>экспертизы'],
     ['7&nbsp;845+', 'клиентов<br>доверяют нам'],
@@ -544,3 +544,41 @@ function ug_about_experience_shortcode(): string
 }
 
 add_shortcode('about_experience', 'ug_about_experience_shortcode');
+
+/**
+ * [about_umbrella] — «Почему Umbrella Group» сразу под первым экраном «О компании»:
+ * что значит название и слоган из логотипа «защитим от непогоды». Слева заголовок
+ * и перевод, справа карточка с зонтом и текстом (текст — дословно от контент-менеджера).
+ */
+function ug_about_umbrella_shortcode(): string
+{
+    ug_enqueue_style('assets/css/blocks/about_hero.css');
+
+    // Зонт в манере иконок страницы: контурный, на сетке 24 × 24.
+    $umbrella = '<svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+        . '<path d="M3 12.5a9 9 0 0 1 18 0a3 1.5 0 0 0-6 0a3 1.5 0 0 0-6 0a3 1.5 0 0 0-6 0Z" fill="#fff"/>'
+        . '<path d="M12 3.5c-2 2.2-3 5.2-3 9M12 3.5c2 2.2 3 5.2 3 9M12 3.5V2.25"/>'
+        . '<path d="M12 12.5v6.25a1.75 1.75 0 0 1-3.5 0"/>'
+        . '</svg>';
+
+    return <<<EOHTML
+    <section class="about-umbrella" id="why-umbrella">
+        <div class="about-umbrella__inner">
+            <div class="about-umbrella__intro">
+                <h2 class="about-spec__heading about-umbrella__heading">Почему Umbrella&nbsp;Group</h2>
+                <p class="about-umbrella__lead">Umbrella по-английски&nbsp;— «зонт».</p>
+                <p class="about-umbrella__lead">Под одним зонтом и&nbsp;одним именем у&nbsp;нас собраны бухгалтерия, аудит, налоговое и&nbsp;юридическое сопровождение, регистрация компаний, лицензирование и&nbsp;интеллектуальное право&nbsp;— всё, что нужно&nbsp;бизнесу.</p>
+            </div>
+            <div class="about-umbrella__card">
+                <span class="about-umbrella__icon">$umbrella</span>
+                <div class="about-umbrella__body">
+                    <p class="about-umbrella__text">Бизнес&nbsp;— это не&nbsp;всегда солнце. Иногда бывает облачно, иногда&nbsp;— ливни или град. Но&nbsp;мы&nbsp;здесь, чтобы защитить вас «от&nbsp;непогоды».</p>
+                    <p class="about-umbrella__slogan"><b>Защитим от&nbsp;непогоды</b>&nbsp;— так и&nbsp;звучит наш слоган.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    EOHTML;
+}
+
+add_shortcode('about_umbrella', 'ug_about_umbrella_shortcode');

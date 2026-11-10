@@ -1290,3 +1290,152 @@
         font-size: 26px;
     }
 }
+
+/* [about_umbrella] — «Почему Umbrella Group»: заголовок слева, карточка с зонтом справа.
+   Карточка тянется на высоту левой колонки: верх — по красной черте, низ — по последней
+   строке текста; её содержимое стоит по центру, так что под текстом слева пустоты нет */
+
+.about-umbrella__inner {
+    display: flex;
+    align-items: stretch;
+    gap: 64px;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 64px 15px 8px;
+}
+
+.about-umbrella__intro {
+    flex: 0 0 440px;
+}
+
+.about-umbrella__heading {
+    margin-bottom: 20px;
+}
+
+.about-umbrella__lead {
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.45;
+    color: #555;
+}
+
+/* Второй абзац — про направления под одним «зонтом», шрифтом основного текста */
+.about-umbrella__lead + .about-umbrella__lead {
+    margin-top: 14px;
+    font-size: 17px;
+    line-height: 1.55;
+}
+
+.about-umbrella__card {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    gap: 40px;
+    min-width: 0;
+    padding: 40px 48px 40px 40px;
+    border: 1px solid #ececec;
+    border-radius: 8px;
+    background: #fff;
+}
+
+/* Зонт — красным в розовом круге, как номера принципов ниже */
+.about-umbrella__icon {
+    display: flex;
+    flex: 0 0 120px;
+    align-items: center;
+    justify-content: center;
+    height: 120px;
+    border-radius: 50%;
+    background: #fdeaea;
+    color: #ec1c23;
+}
+
+.about-umbrella__body {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding-left: 40px;
+    border-left: 1px solid #e4e4e4;
+}
+
+.about-umbrella__text {
+    margin: 0 0 20px;
+    font-family: "PT Serif", serif;
+    font-style: italic;
+    font-size: 24px;
+    line-height: 1.45;
+    color: #333;
+}
+
+/* Слоган — красным, как подпись под логотипом */
+.about-umbrella__slogan {
+    margin: 0;
+    font-size: 15.5px;
+    line-height: 1.5;
+    color: #666;
+}
+
+.about-umbrella__slogan b {
+    font-weight: 600;
+    color: #ec1c23;
+}
+
+@media (max-width: 1100px) {
+    .about-umbrella__inner {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 32px;
+    }
+
+    .about-umbrella__intro {
+        flex: none;
+        max-width: 640px;
+    }
+}
+
+@media (max-width: 849px) {
+    .about-umbrella__inner {
+        gap: 24px;
+        padding: 40px 15px 0;
+    }
+
+    .about-umbrella__heading {
+        margin-bottom: 16px;
+    }
+
+    .about-umbrella__lead {
+        font-size: 17px;
+    }
+
+    .about-umbrella__lead + .about-umbrella__lead {
+        margin-top: 12px;
+        font-size: 16px;
+    }
+
+    .about-umbrella__card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        padding: 24px 20px 28px;
+    }
+
+    .about-umbrella__icon {
+        flex-basis: 72px;
+        width: 72px;
+        height: 72px;
+    }
+
+    .about-umbrella__icon svg {
+        width: 40px;
+        height: 40px;
+    }
+
+    .about-umbrella__body {
+        padding-left: 0;
+        border-left: 0;
+    }
+
+    .about-umbrella__text {
+        margin-bottom: 16px;
+        font-size: 20px;
+    }
+}
