@@ -34,7 +34,7 @@ if (
     <div class="sidebar-menu no-scrollbar <?php if ($flatsome_mobile_overlay == 'center') echo 'text-center'; ?>">
         <ul class="<?php echo esc_attr(implode(' ', $flatsome_nav_classes)); ?>">
             <?php flatsome_header_elements('mobile_sidebar', 'sidebar'); ?>
-            <?php // рейтинг и мессенджеры, убранные из мобильной шапки (header-site.php)
+            <?php // мессенджеры, убранные из мобильной шапки (header-site.php)
             get_template_part('template-parts/header/partials/element', 'sidebar-extra'); ?>
         </ul>
     </div>

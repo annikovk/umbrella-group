@@ -34,7 +34,7 @@
 .ugh-top__inner {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between;   /* равные зазоры между всеми элементами ряда */
     gap: 16px;
     min-height: 112px;
     transition: min-height .2s;
@@ -68,33 +68,6 @@
     align-self: center;
     height: 56px;
     background: var(--ugh-line);
-}
-
-/* рейтинг */
-.ugh-rating {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex: 0 0 auto;
-}
-.ugh-laurel {
-    flex: 0 0 auto;
-    display: block;
-}
-.ugh-rating__text {
-    display: flex;
-    flex-direction: column;
-    font-size: 14px;
-    line-height: 1.32;
-    color: var(--ugh-text);
-    white-space: nowrap;
-}
-.ugh-rating__text b {
-    font-weight: 600;
-}
-.ugh-rating__text span {
-    font-size: 13px;
-    color: var(--ugh-muted);
 }
 
 /* мессенджеры */
@@ -186,49 +159,47 @@
     object-fit: contain;
 }
 
-/* телефон, город, часы */
-.ugh-contact {
-    display: grid;
-    grid-template-columns: 20px auto;
-    column-gap: 12px;
-    row-gap: 8px;
-    align-items: start;
+/* город с часами и телефон — отдельные элементы ряда */
+.ugh-place,
+.ugh-tel {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     flex: 0 0 auto;
     color: var(--ugh-text);
+    white-space: nowrap;
 }
-.ugh-contact__icon {
+.ugh-ico {
+    flex: 0 0 auto;
     color: var(--ugh-red);
-    margin-top: 1px;
 }
-.ugh-contact .ugh-phone {
+.ugh-place__text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    font-size: 15px;
+    line-height: 20px;
+}
+.ugh-place__text b {
+    font-weight: 600;
+}
+.ugh-place__text span {
+    font-size: 14px;
+    color: var(--ugh-muted);
+}
+.ugh-tel .ugh-phone {
     color: var(--ugh-text);
     font-size: 17px;
     font-weight: 700;
     line-height: 22px;
-    white-space: nowrap;
 }
-.ugh-contact .ugh-phone:hover {
+.ugh-tel .ugh-phone:hover {
     color: var(--ugh-red);
 }
 /* «Показать» — и наш span, и тот, что ставит тег GTM (у него инлайн-пунктир) */
-.ugh-contact .ugh-phone .phoneShow {
+.ugh-tel .ugh-phone .phoneShow {
     border-bottom: 0 !important;
     cursor: pointer;
-}
-.ugh-contact__place {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    font-size: 15px;
-    line-height: 20px;
-    white-space: nowrap;
-}
-.ugh-contact__place b {
-    font-weight: 600;
-}
-.ugh-contact__place span {
-    font-size: 14px;
-    color: var(--ugh-muted);
 }
 
 /* «Заказать звонок» */
@@ -408,17 +379,24 @@
     .ugh-menu--svc .ugh-menu__link { font-size: 13px; }
     .ugh-callback { padding: 0 20px; }
 }
+/* ряд ужимается по очереди: сначала часы, потом город целиком —
+   подпись «Связаться в мессенджере» остаётся до 850px */
 @media (max-width: 1129px) {
-    .ugh-rating__text { display: none; }
+    .ugh-place__text span { display: none; }
     .ugh-menu { column-gap: 26px; }
+    /* пилюля «Акции» выступает за текст меньше, чем шаг меню: соседи не касаются */
+    .ugh-nav .ugh-menu__item--accent > .ugh-menu__link { margin: 0 -4px; padding: 6px 16px; }
     .ugh-menu__link { font-size: 15px; }
     .ugh-menu--svc { column-gap: 12px; }
 }
+@media (max-width: 1049px) {
+    .ugh-place,
+    .ugh-sep--place { display: none; }
+}
 @media (max-width: 999px) {
-    .ugh-msg__label { display: none; }
-    .ugh-msg__toggle { gap: 8px; padding: 0 12px; }
     .ugh-msg__list { left: auto; right: auto; }
     .ugh-menu { column-gap: 18px; }
+    .ugh-nav .ugh-menu__item--accent > .ugh-menu__link { margin: 0; padding: 6px 12px; }
     .ugh-menu__link { font-size: 14px; }
 }
 
@@ -464,7 +442,7 @@
     }
 }
 
-/* ── мобильная панель (#main-menu): рейтинг и мессенджеры ────────────────── */
+/* ── мобильная панель (#main-menu): мессенджеры ────────────────── */
 .ugh-side,
 .nav-sidebar > li.ugh-side {
     margin-top: 10px;
@@ -473,18 +451,8 @@
     font-family: Inter, sans-serif;
     text-transform: none;
 }
-.ugh-side__rating {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-.ugh-side .ugh-rating__text {
-    display: flex;
-    white-space: normal;
-    font-size: 14px;
-}
 .ugh-side__title {
-    margin: 18px 0 6px;
+    margin: 0 0 6px;
     color: var(--ugh-muted, #4a4a4a);
     font-size: 14px;
     font-weight: 600;

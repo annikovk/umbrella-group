@@ -1,17 +1,17 @@
 <?php
 /**
- * Шапка сайта (вариант default; у business своя — header-main + header-bus-bottom).
+ * Шапка сайта — у всех страниц, включая «Открытие бизнеса под ключ» (14148).
  *
  * Сверху вниз (макет 2026-11, вариант C): строка меню (.ugh-nav, «Акции» —
- * красной пилюлей); ряд с логотипом, рейтингом «Делового квартала»,
- * выпадашкой мессенджеров, телефоном с «Показать» и «Заказать звонок»
+ * красной пилюлей); ряд в одну строку: логотип | город и часы | выпадашка
+ * мессенджеров | телефон с «Показать» и «Заказать звонок»
  * (#masthead); под ними — серая полоса разделов услуг (.ugh-svc: меню
  * primary с выпадашками, вместо прежней чёрной #wide-nav Flatsome), поэтому
  * «Услуги» в строке меню — простая ссылка без своей панели. В залипании
  * строка меню прячется: остаются компактный ряд с логотипом и полоса услуг.
  * CSS — assets/css/header-site.css, JS — assets/js/header-site.js
  * (inc/layout.php). На ≤ 849px верхний ряд — логотип, телефон и бургер
- * (#main-menu Flatsome), рейтинг и мессенджеры — в мобильной панели
+ * (#main-menu Flatsome), мессенджеры — в мобильной панели
  * (template-parts/overlays/overlay-menu.php → element-sidebar-extra).
  *
  * ⚠️ Подмена номеров — тег GTM (calltracking): ищет a[href*="tel:"] внутри
@@ -134,16 +134,17 @@ $ug_chevron = '<svg class="ugh-chevron" width="10" height="6" viewBox="0 0 10 6"
             <?php endif; ?>
         </a>
 
-        <span class="ugh-sep ugh-desktop" aria-hidden="true"></span>
+        <span class="ugh-sep ugh-sep--place ugh-desktop" aria-hidden="true"></span>
 
-        <div class="ugh-rating ugh-desktop">
-            <?php get_template_part('template-parts/header/partials/element', 'laurel'); ?>
-            <div class="ugh-rating__text">
-                <b>1 место в отрасли</b>
-                <b>«Корпоративное право»</b>
-                <span>рейтинг «Делового квартала», 2025</span>
+        <div class="ugh-place ugh-desktop">
+            <svg class="ugh-ico" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.6 7-12.3A7 7 0 0 0 5 9.7C5 15.4 12 22 12 22z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="9.6" r="2.6" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
+            <div class="ugh-place__text">
+                <b>Новосибирск</b>
+                <span>Пн–Пт: 09:00–18:00</span>
             </div>
         </div>
+
+        <span class="ugh-sep ugh-desktop" aria-hidden="true"></span>
 
         <div class="ugh-msg ugh-desktop" data-ugh-dropdown>
             <button type="button" class="ugh-msg__toggle" aria-expanded="false" aria-controls="ugh-msg-list" aria-haspopup="true">
@@ -158,16 +159,9 @@ $ug_chevron = '<svg class="ugh-chevron" width="10" height="6" viewBox="0 0 10 6"
 
         <span class="ugh-sep ugh-desktop" aria-hidden="true"></span>
 
-        <div class="ugh-contact ugh-desktop">
-            <svg class="ugh-contact__icon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 2.8l2.6 3.9c.4.6.3 1.4-.2 1.9L7.5 10c1.3 2.7 3.6 5 6.4 6.4l1.4-1.5c.5-.5 1.3-.6 1.9-.2l3.9 2.6c.7.5.9 1.4.4 2.1l-1.3 1.9c-.7 1-1.9 1.5-3.1 1.2C10 20.9 3.1 14 1.5 6.9c-.3-1.2.2-2.4 1.2-3.1l1.9-1.3c.7-.5 1.6-.3 2 .3z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
-            <div class="ugh-contact__phone">
-                <a class="ugh-phone" href="<?php echo esc_attr($ug_phone_href); ?>">+7 (383) <span class="phoneShow" phonevalue="<?php echo esc_attr($ug_phone); ?>">Показать</span></a>
-            </div>
-            <svg class="ugh-contact__icon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.6 7-12.3A7 7 0 0 0 5 9.7C5 15.4 12 22 12 22z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="9.6" r="2.6" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
-            <div class="ugh-contact__place">
-                <b>Новосибирск</b>
-                <span>Пн–Пт: 09:00–18:00</span>
-            </div>
+        <div class="ugh-tel ugh-desktop">
+            <svg class="ugh-ico" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 2.8l2.6 3.9c.4.6.3 1.4-.2 1.9L7.5 10c1.3 2.7 3.6 5 6.4 6.4l1.4-1.5c.5-.5 1.3-.6 1.9-.2l3.9 2.6c.7.5.9 1.4.4 2.1l-1.3 1.9c-.7 1-1.9 1.5-3.1 1.2C10 20.9 3.1 14 1.5 6.9c-.3-1.2.2-2.4 1.2-3.1l1.9-1.3c.7-.5 1.6-.3 2 .3z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+            <a class="ugh-phone" href="<?php echo esc_attr($ug_phone_href); ?>">+7 (383) <span class="phoneShow" phonevalue="<?php echo esc_attr($ug_phone); ?>">Показать</span></a>
         </div>
 
         <a class="ugh-callback ugh-desktop" href="#header-contact-form-lightbox">Заказать звонок</a>
