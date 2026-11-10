@@ -178,7 +178,7 @@
 .ugh-place__toggle,
 .ugh-tel {
     display: flex;
-    align-items: center;
+    align-items: flex-start;   /* булавка — на строке «Новосибирск», не посередине */
     gap: 10px;
     flex: 0 0 auto;
     color: var(--ugh-text);
@@ -202,11 +202,20 @@
     flex: 0 0 auto;
     color: var(--ugh-red);
 }
-.ugh-place__text,
-.ugh-tel__text {
+.ugh-place__text {
     display: flex;
     flex-direction: column;
     gap: 3px;
+}
+/* телефон и почта — две строки, у каждой своя иконка по центру своей строки */
+.ugh-tel {
+    flex-direction: column;
+    gap: 3px;
+}
+.ugh-tel__row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 .ugh-place__text {
     font-size: 15px;
@@ -295,9 +304,6 @@
     padding-top: 10px;
     color: var(--ugh-muted);
     font-size: 13px;
-}
-.ugh-tel__text {
-    line-height: 20px;
 }
 /* почта под телефоном; её подменяет тег GTM (.contacts-text a[href*="mailto:"]),
    «Показать» у подменной — его span.mailShow с инлайн-пунктиром */

@@ -182,9 +182,13 @@ $ug_chevron = '<svg class="ugh-chevron" width="10" height="6" viewBox="0 0 10 6"
         <span class="ugh-sep ugh-desktop" aria-hidden="true"></span>
 
         <div class="ugh-tel ugh-desktop">
-            <svg class="ugh-ico" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 2.8l2.6 3.9c.4.6.3 1.4-.2 1.9L7.5 10c1.3 2.7 3.6 5 6.4 6.4l1.4-1.5c.5-.5 1.3-.6 1.9-.2l3.9 2.6c.7.5.9 1.4.4 2.1l-1.3 1.9c-.7 1-1.9 1.5-3.1 1.2C10 20.9 3.1 14 1.5 6.9c-.3-1.2.2-2.4 1.2-3.1l1.9-1.3c.7-.5 1.6-.3 2 .3z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
-            <div class="ugh-tel__text">
+            <?php // иконки — вне ссылок: их содержимое целиком переписывает тег подмены GTM ?>
+            <div class="ugh-tel__row">
+                <svg class="ugh-ico" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 2.8l2.6 3.9c.4.6.3 1.4-.2 1.9L7.5 10c1.3 2.7 3.6 5 6.4 6.4l1.4-1.5c.5-.5 1.3-.6 1.9-.2l3.9 2.6c.7.5.9 1.4.4 2.1l-1.3 1.9c-.7 1-1.9 1.5-3.1 1.2C10 20.9 3.1 14 1.5 6.9c-.3-1.2.2-2.4 1.2-3.1l1.9-1.3c.7-.5 1.6-.3 2 .3z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
                 <a class="ugh-phone" href="<?php echo esc_attr($ug_phone_href); ?>">+7 (383)<span class="phoneShow" phonevalue="<?php echo esc_attr($ug_phone); ?>" data-ugh-fallback>Показать</span></a>
+            </div>
+            <div class="ugh-tel__row">
+                <svg class="ugh-ico" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.8" y="5.2" width="18.4" height="13.6" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.6 6.6l8.4 6.6 8.4-6.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
                 <?php // .contacts-text — контейнер, где тег GTM подменяет почту (a[href*="mailto:"]); в #masthead почту он не ищет ?>
                 <span class="ugh-mail contacts-text"><a href="mailto:<?php echo esc_attr($ug_email); ?>"><?php echo esc_html(strstr($ug_email, '@', true)); ?>@<span class="mailShow" mailvalue="<?php echo esc_attr($ug_email); ?>" data-ugh-fallback>Показать</span></a></span>
             </div>
