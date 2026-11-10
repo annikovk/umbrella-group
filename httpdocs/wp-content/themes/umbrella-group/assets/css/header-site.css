@@ -127,6 +127,15 @@
     border-radius: 14px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, .14);
 }
+/* мостик через зазор 8px до кнопки: курсор по пути вниз не «уходит» с выпадашки */
+.ugh-msg__list::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 100%;
+    height: 10px;
+}
 .ugh-msg__list[hidden] {
     display: none;
 }
