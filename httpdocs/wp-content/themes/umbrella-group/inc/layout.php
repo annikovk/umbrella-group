@@ -13,9 +13,10 @@
  *    Flatsome на wp_head:1 — оба запрещали масштаб;
  *  - ссылки «Скачать анкету/памятку» → roistat.event.send: бывший
  *    jQuery-блок в начале <body>, теперь defer-файл после jQuery;
- *  - кнопки Telegram/Max — в подвале на flatsome_footer:99 (были вписаны
- *    руками в вендорный flatsome/footer.php, который не в git); их CSS — в
- *    assets/css/main.css (ug-main, WS-2).
+ *  - плавающих кнопок Telegram/Max справа внизу больше нет (2026-11-10):
+ *    мессенджеры — в выпадашке шапки и в мобильной панели (header-site.php,
+ *    element-sidebar-extra.php). Их CSS .telegram-button/.max-button остался
+ *    в assets/css/main.css без разметки.
  */
 
 declare(strict_types=1);
@@ -35,6 +36,24 @@ add_action('wp_enqueue_scripts', static function (): void {
     }
 }, 0);
 
+// Шапка default (template-parts/header/header-site.php): CSS в <head> сразу
+// после ug-main и тем же якорем в конце <body> — перекрывает custom-css
+// Flatsome из theme_mods; JS — defer в подвале.
+add_action('wp_enqueue_scripts', static function (): void {
+    if (ug_header_variant() !== 'default') {
+        return;
+    }
+    if (is_404()) {
+        // 404.php без get_footer(): ни якоря в <body>, ни скриптов подвала —
+        // CSS обычной ссылкой в <head>, JS туда же (defer)
+        wp_enqueue_style('ug-header-site', get_theme_file_uri('assets/css/header-site.css'), [], ug_asset_ver('assets/css/header-site.css'));
+        wp_enqueue_script('ug-header-site-js', get_theme_file_uri('assets/js/header-site.js'), [], ug_asset_ver('assets/js/header-site.js'), ['in_footer' => false, 'strategy' => 'defer']);
+        return;
+    }
+    ug_head_style('assets/css/header-site.css');
+    ug_enqueue_script('assets/js/header-site.js', [], ['in_footer' => true, 'strategy' => 'defer']);
+});
+
 add_action('wp_enqueue_scripts', static function (): void {
     wp_enqueue_script(
         'ug-roistat-links',
@@ -45,6 +64,3 @@ add_action('wp_enqueue_scripts', static function (): void {
     );
 });
 
-add_action('flatsome_footer', static function (): void {
-    get_template_part('template-parts/blocks/messenger-buttons');
-}, 99);

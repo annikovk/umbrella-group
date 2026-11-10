@@ -73,7 +73,7 @@ const EXTRACT = String.raw`(() => {
   const abs = (css, base) => css.replace(/url\(\s*(['"]?)([^'")]+)\1\s*\)/g, (m, q, u) => { if (/^(data:|#)/.test(u)) return m; try { const x = new URL(u, base); return 'url("' + (x.origin === location.origin ? x.pathname + x.search : x.href) + '")'; } catch (e) { return m; } });
   const res = {};
   for (const link of document.querySelectorAll('link[rel=stylesheet][id]')) {
-    if (link.closest('noscript') || link.id === 'ug-main-tail-css') continue;
+    if (link.closest('noscript') || /-tail-css$/.test(link.id)) continue;   // якоря каскада в конце <body> (ug-main-tail, ug-header-site-tail…) — копии хэндлов из <head>
     const sheet = link.sheet; if (!sheet) continue;
     const handle = link.id.replace(/-css$/, '');
     const keep = {};
