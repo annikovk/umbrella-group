@@ -231,7 +231,8 @@ function umbrella_akciya_has_own_hero($post = null)
 {
     $post = get_post($post);
     return $post && (has_shortcode($post->post_content, 'akciya_tz_hero')
-        || has_shortcode($post->post_content, 'akciya_pb_hero'));
+        || has_shortcode($post->post_content, 'akciya_pb_hero')
+        || has_shortcode($post->post_content, 'akciya_buh_hero'));
 }
 
 /** Крошки без заголовка — для страниц акций со своим первым экраном. */

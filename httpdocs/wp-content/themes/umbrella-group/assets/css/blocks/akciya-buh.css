@@ -1,0 +1,992 @@
+/* Блоки страницы акции «−50% на первый месяц бухгалтерского обслуживания»
+   (akciya_buh.php). Язык — как у акций akciya-tz / akciya-pb: PT Serif
+   в заголовках, Inter в тексте, красный #ec1c23, серые подложки #f7f7f7. */
+
+/* ── Первый экран ─────────────────────────────────────────────────────── */
+
+.akciya-buh-hero {
+    padding: 16px 0 48px;
+}
+
+.akciya-buh-hero__main {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 24px;
+}
+
+.akciya-buh-hero__text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
+}
+
+.akciya-buh-hero__badge {
+    font-family: Inter, sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 100%;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #ec1c23;
+    border-radius: 999px;
+    padding: 9px 18px 8px;
+    margin-bottom: 24px;
+}
+
+.akciya-buh-hero__title {
+    font-family: "PT Serif", sans-serif;
+    font-size: 36px;
+    line-height: 112%;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+}
+
+.akciya-buh-hero__title-accent {
+    display: block;
+    margin-top: 6px;
+    color: #ec1c23;
+}
+
+.akciya-buh-hero__lead {
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    line-height: 150%;
+    color: #4a4a4a;
+    margin-bottom: 28px;
+}
+
+.akciya-buh-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 24px;
+}
+
+.akciya-buh-hero__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    background-color: #ec1c23;
+    border-radius: 4px;
+    padding: 18px 28px;
+    white-space: nowrap;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 100%;
+    color: #fff;
+}
+
+.akciya-buh-hero__button:hover,
+.akciya-buh-hero__button:focus {
+    background-color: #d0141b;
+    color: #fff;
+}
+
+.akciya-buh-hero__more {
+    font-family: Inter, sans-serif;
+    font-size: 15px;
+    color: #1a1a1a;
+    text-decoration: underline;
+    text-decoration-color: rgba(236, 28, 35, 0.5);
+    text-underline-offset: 4px;
+}
+
+.akciya-buh-hero__more:hover {
+    color: #ec1c23;
+}
+
+.akciya-buh-hero__image {
+    min-width: 0;
+}
+
+.akciya-buh-hero__picture img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* Факты о компании — полоса под первым экраном. */
+.akciya-buh-hero__facts {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    list-style: none;
+    margin: 28px 0 0;
+    padding: 22px 0 0;
+    border-top: 1px solid #ececec;
+}
+
+.akciya-buh-hero__fact {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 0;
+}
+
+.akciya-buh-hero__fact b {
+    font-family: "PT Serif", sans-serif;
+    font-size: 30px;
+    line-height: 100%;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.akciya-buh-hero__fact span {
+    font-family: Inter, sans-serif;
+    font-size: 13px;
+    line-height: 140%;
+    color: #707070;
+}
+
+.akciya-buh-hero__fact sup {
+    color: #ec1c23;
+}
+
+.akciya-buh-hero__footnote {
+    font-family: Inter, sans-serif;
+    font-size: 11px;
+    line-height: 140%;
+    color: #9a9a9a;
+    margin: 14px 0 0;
+}
+
+@media screen and (max-width: 1099px) {
+    .akciya-buh-hero__title {
+        font-size: 30px;
+    }
+
+    .akciya-buh-hero__button {
+        white-space: normal;
+    }
+
+    .akciya-buh-hero__facts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px 16px;
+    }
+}
+
+@media screen and (max-width: 849px) {
+    .akciya-buh-hero {
+        padding: 8px 0 32px;
+    }
+
+    .akciya-buh-hero__main {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 8px;
+    }
+
+    .akciya-buh-hero__title {
+        font-size: 28px;
+    }
+
+    .akciya-buh-hero__lead {
+        font-size: 15px;
+        margin-bottom: 24px;
+    }
+
+    .akciya-buh-hero__actions {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        text-align: center;
+    }
+
+    .akciya-buh-hero__button {
+        justify-content: center;
+        padding: 18px 20px;
+    }
+
+    .akciya-buh-hero__image {
+        order: -1;
+        margin: 0 -8px;
+    }
+
+    .akciya-buh-hero__fact b {
+        font-size: 26px;
+    }
+}
+
+/* ── Общее у секций на серой подложке ─────────────────────────────────── */
+
+.akciya-buh-anchor {
+    display: block;
+    position: relative;
+    top: -24px;
+}
+
+.akciya-buh-conditions,
+.akciya-buh-included,
+.akciya-buh-steps,
+.akciya-buh-faq {
+    background-color: #f7f7f7;
+    border-radius: 16px;
+    padding: 36px 32px 36px;
+    margin-bottom: 48px;
+}
+
+.akciya-buh-conditions__head,
+.akciya-buh-included__head,
+.akciya-buh-steps__head-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 32px;
+    margin-bottom: 28px;
+}
+
+.akciya-buh-conditions__head-left,
+.akciya-buh-included__head-left,
+.akciya-buh-steps__head-left {
+    flex: 1 1 55%;
+    min-width: 0;
+}
+
+.akciya-buh-conditions__kicker,
+.akciya-buh-included__kicker,
+.akciya-buh-steps__kicker,
+.akciya-buh-audience__kicker,
+.akciya-buh-faq__kicker,
+.akciya-buh-cta__eyebrow {
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 140%;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #8c8c8c;
+    margin-bottom: 8px;
+}
+
+.akciya-buh-conditions__title,
+.akciya-buh-included__title,
+.akciya-buh-steps__title,
+.akciya-buh-audience__title,
+.akciya-buh-faq__title,
+.akciya-buh-reviews__title {
+    font-family: "PT Serif", sans-serif;
+    font-size: 30px;
+    line-height: 115%;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 0;
+}
+
+.akciya-buh-conditions__lead,
+.akciya-buh-included__lead,
+.akciya-buh-steps__lead {
+    flex: 1 1 45%;
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    line-height: 155%;
+    color: #707070;
+    margin-bottom: 0;
+}
+
+/* Карточки (условия, что входит) */
+.akciya-buh-conditions__cards,
+.akciya-buh-included__cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.akciya-buh-conditions__card,
+.akciya-buh-included__card {
+    background-color: #fff;
+    border: 1px solid #ececec;
+    border-radius: 12px;
+    padding: 20px 20px 24px;
+}
+
+.akciya-buh-conditions__icon,
+.akciya-buh-included__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 10px;
+    background-color: rgba(236, 28, 35, 0.1);
+    color: #ec1c23;
+    margin-bottom: 18px;
+}
+
+.akciya-buh-conditions__card-title,
+.akciya-buh-included__card-title {
+    font-family: "PT Serif", sans-serif;
+    font-size: 18px;
+    line-height: 130%;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+}
+
+.akciya-buh-conditions__card-text,
+.akciya-buh-included__card-text {
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    line-height: 150%;
+    color: #707070;
+    margin-bottom: 0;
+}
+
+/* Условия — красная рамка у главной карточки со скидкой. */
+.akciya-buh-conditions__card:first-child {
+    border-color: #ec1c23;
+    box-shadow: 0 10px 30px rgba(236, 28, 35, 0.08);
+}
+
+.akciya-buh-conditions__card:first-child .akciya-buh-conditions__card-title {
+    color: #ec1c23;
+    font-size: 22px;
+}
+
+.akciya-buh-conditions__note {
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    line-height: 150%;
+    color: #4a4a4a;
+    margin: 20px 0 0;
+    padding-left: 16px;
+    border-left: 2px solid #ec1c23;
+}
+
+/* «Что входит» — на белом, а не на серой подложке: чтобы серые блоки не шли подряд. */
+.akciya-buh-included {
+    background-color: transparent;
+    padding: 0;
+}
+
+.akciya-buh-included__card {
+    background-color: #f7f7f7;
+    border-color: #f7f7f7;
+}
+
+@media screen and (max-width: 1099px) {
+    .akciya-buh-conditions__head,
+    .akciya-buh-included__head,
+    .akciya-buh-steps__head-row {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .akciya-buh-included__cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media screen and (max-width: 849px) {
+    .akciya-buh-conditions,
+    .akciya-buh-steps,
+    .akciya-buh-faq {
+        border-radius: 12px;
+        padding: 28px 20px;
+        margin-bottom: 32px;
+    }
+
+    .akciya-buh-included {
+        margin-bottom: 32px;
+    }
+
+    .akciya-buh-conditions__title,
+    .akciya-buh-included__title,
+    .akciya-buh-steps__title,
+    .akciya-buh-audience__title,
+    .akciya-buh-faq__title,
+    .akciya-buh-reviews__title {
+        font-size: 26px;
+    }
+
+    .akciya-buh-conditions__cards,
+    .akciya-buh-included__cards {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 12px;
+    }
+
+    .akciya-buh-conditions__icon,
+    .akciya-buh-included__icon {
+        width: 46px;
+        height: 46px;
+        margin-bottom: 14px;
+    }
+}
+
+/* ── Кому выгодна акция ───────────────────────────────────────────────── */
+
+.akciya-buh-audience {
+    margin-bottom: 48px;
+}
+
+.akciya-buh-audience__title {
+    margin-bottom: 20px;
+}
+
+.akciya-buh-audience__item {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 0.8fr) minmax(0, 1.2fr);
+    align-items: start;
+    gap: 0 20px;
+    padding: 22px 0;
+    border-top: 1px solid #ececec;
+}
+
+.akciya-buh-audience__item:last-child {
+    border-bottom: 1px solid #ececec;
+}
+
+.akciya-buh-audience__number {
+    font-family: "PT Serif", sans-serif;
+    font-size: 30px;
+    line-height: 100%;
+    font-weight: 700;
+    color: rgba(236, 28, 35, 0.35);
+}
+
+.akciya-buh-audience__item-title {
+    font-family: "PT Serif", sans-serif;
+    font-size: 18px;
+    line-height: 130%;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 0;
+}
+
+.akciya-buh-audience__item-text {
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    line-height: 155%;
+    color: #4a4a4a;
+    margin-bottom: 0;
+}
+
+.akciya-buh-audience__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: #ec1c23;
+}
+
+.akciya-buh-audience__link:hover {
+    color: #c9151b;
+}
+
+@media screen and (max-width: 849px) {
+    .akciya-buh-audience {
+        margin-bottom: 32px;
+    }
+
+    .akciya-buh-audience__item {
+        grid-template-columns: 44px minmax(0, 1fr);
+        gap: 8px 12px;
+        padding: 18px 0;
+    }
+
+    .akciya-buh-audience__number {
+        font-size: 24px;
+    }
+
+    .akciya-buh-audience__body {
+        grid-column: 2;
+    }
+}
+
+/* ── Как подключиться ─────────────────────────────────────────────────── */
+
+.akciya-buh-steps {
+    border-radius: 16px 16px 0 0;
+    margin-bottom: 0;
+    padding-bottom: 40px;
+}
+
+.akciya-buh-steps__items {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 28px 20px;
+}
+
+.akciya-buh-steps__head {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.akciya-buh-steps__badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ec1c23;
+    font-family: "PT Serif", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: #fff;
+    flex-shrink: 0;
+}
+
+.akciya-buh-steps__line {
+    display: flex;
+    align-items: center;
+    flex: 1 1 auto;
+    min-width: 24px;
+    margin-left: 14px;
+}
+
+.akciya-buh-steps__line::before {
+    content: '';
+    flex: 1 1 auto;
+    height: 1px;
+    background-color: rgba(236, 28, 35, 0.35);
+    margin-right: 8px;
+}
+
+.akciya-buh-steps__item:last-child .akciya-buh-steps__line {
+    display: none;
+}
+
+.akciya-buh-steps__item-title {
+    font-family: "PT Serif", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 135%;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+}
+
+.akciya-buh-steps__item-text {
+    font-family: Inter, sans-serif;
+    font-size: 13px;
+    line-height: 155%;
+    color: #707070;
+    margin-bottom: 0;
+}
+
+/* Красная полоса со скидкой — продолжение блока шагов. */
+.akciya-buh-saving {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+    background-color: #ec1c23;
+    border-radius: 12px;
+    padding: 22px 28px;
+    margin-bottom: 48px;
+}
+
+.akciya-buh-saving__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border: 1.5px solid rgba(255, 255, 255, 0.85);
+    border-radius: 50%;
+    color: #fff;
+    flex-shrink: 0;
+}
+
+.akciya-buh-saving__text {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding-left: 24px;
+    border-left: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.akciya-buh-saving__title {
+    font-family: "PT Serif", sans-serif;
+    font-size: 24px;
+    line-height: 115%;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+.akciya-buh-saving__sum {
+    font-size: 1.4em;
+    white-space: nowrap;
+}
+
+.akciya-buh-saving__caption {
+    font-family: Inter, sans-serif;
+    font-size: 15px;
+    line-height: 140%;
+    color: #fff;
+    margin-bottom: 0;
+}
+
+.akciya-buh-saving__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 16px 28px;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 100%;
+    color: #1a1a1a;
+    white-space: nowrap;
+}
+
+.akciya-buh-saving__button:hover,
+.akciya-buh-saving__button:focus {
+    background-color: #f5f5f5;
+    color: #1a1a1a;
+}
+
+@media screen and (max-width: 1099px) {
+    .akciya-buh-steps__items {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .akciya-buh-steps__item:nth-child(2n) .akciya-buh-steps__line {
+        display: none;
+    }
+
+    .akciya-buh-saving {
+        flex-wrap: wrap;
+    }
+
+    .akciya-buh-saving__text {
+        flex-basis: calc(100% - 84px);
+    }
+
+    .akciya-buh-saving__button {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 849px) {
+    .akciya-buh-steps {
+        border-radius: 12px 12px 0 0;
+        margin-bottom: 0;
+    }
+
+    .akciya-buh-steps__items {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+    }
+
+    .akciya-buh-steps__line {
+        display: none;
+    }
+
+    .akciya-buh-saving {
+        gap: 16px;
+        padding: 20px;
+        margin-bottom: 32px;
+    }
+
+    .akciya-buh-saving__icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .akciya-buh-saving__text {
+        flex-basis: calc(100% - 64px);
+        padding-left: 16px;
+    }
+
+    .akciya-buh-saving__title {
+        font-size: 19px;
+    }
+
+    .akciya-buh-saving__caption {
+        font-size: 14px;
+    }
+}
+
+/* ── Кейсы ([cases] → «Кейсы Umbrella Group») в колонке акции ─────────── */
+
+.single-akcii .clients-bottom--cases {
+    padding-top: 0;
+}
+
+.single-akcii .clients-bottom--cases .clients-bottom__inner {
+    padding: 0 0 48px;
+}
+
+/* ── Отзывы ───────────────────────────────────────────────────────────── */
+
+.akciya-buh-reviews {
+    margin-bottom: 48px;
+}
+
+.akciya-buh-reviews__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.akciya-buh-reviews__lead {
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    line-height: 150%;
+    color: #707070;
+    margin: 8px 0 0;
+}
+
+.akciya-buh-reviews__all {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    color: #1a1a1a;
+}
+
+.akciya-buh-reviews__all:hover {
+    color: #ec1c23;
+}
+
+.akciya-buh-reviews__all svg {
+    color: #ec1c23;
+}
+
+@media screen and (max-width: 849px) {
+    .akciya-buh-reviews {
+        margin-bottom: 32px;
+    }
+
+    .akciya-buh-reviews__head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+}
+
+/* ── Частые вопросы ───────────────────────────────────────────────────── */
+
+.akciya-buh-faq__title {
+    margin-bottom: 20px;
+}
+
+.akciya-buh-faq__item {
+    background-color: #fff;
+    border-radius: 10px;
+    margin-bottom: 8px;
+}
+
+.akciya-buh-faq__item:last-child {
+    margin-bottom: 0;
+}
+
+.akciya-buh-faq__question {
+    position: relative;
+    list-style: none;
+    cursor: pointer;
+    padding: 18px 56px 18px 20px;
+    font-family: "PT Serif", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 135%;
+    color: #1a1a1a;
+}
+
+.akciya-buh-faq__question::-webkit-details-marker {
+    display: none;
+}
+
+/* Плюс, в открытом — минус */
+.akciya-buh-faq__question::before,
+.akciya-buh-faq__question::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 22px;
+    width: 14px;
+    height: 2px;
+    margin-top: -1px;
+    background-color: #ec1c23;
+    transition: transform .2s;
+}
+
+.akciya-buh-faq__question::after {
+    transform: rotate(90deg);
+}
+
+.akciya-buh-faq__item[open] .akciya-buh-faq__question::after {
+    transform: rotate(0deg);
+}
+
+.akciya-buh-faq__answer {
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    line-height: 155%;
+    color: #4a4a4a;
+    margin: 0;
+    padding: 0 20px 18px;
+}
+
+.akciya-buh-faq__answer a {
+    color: #ec1c23;
+    text-decoration: underline;
+}
+
+/* ── Финальный баннер с формой ────────────────────────────────────────── */
+
+.akciya-buh-cta {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    align-items: center;
+    gap: 32px;
+    overflow: hidden;
+    border-radius: 16px;
+    background: #141414;
+    padding: 40px 36px 40px 40px;
+    margin-bottom: 48px;
+}
+
+.akciya-buh-cta__image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 62%;
+    opacity: .55;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 45%);
+    mask-image: linear-gradient(to right, transparent 0, #000 45%);
+}
+
+.akciya-buh-cta__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.akciya-buh-cta__text,
+.akciya-buh-cta__form {
+    position: relative;
+    min-width: 0;
+}
+
+.akciya-buh-cta__eyebrow {
+    color: #ec1c23;
+    margin-bottom: 12px;
+}
+
+.akciya-buh-cta__title {
+    font-family: "PT Serif", sans-serif;
+    font-size: 30px;
+    line-height: 120%;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 14px;
+}
+
+.akciya-buh-cta__desc {
+    font-family: Inter, sans-serif;
+    font-size: 15px;
+    line-height: 155%;
+    color: #ddd;
+    margin: 0;
+}
+
+/*
+ * Форма акции (CF7 9878) — та же, что в боковой колонке, со стилями из
+ * main.css и akcii.css: здесь белая карточка в баннере. Заголовок и
+ * подзаголовок формы заменяет текст слева. Высоту и отступ сверху
+ * flatsome.css задаёт .footer-form с !important — перебиваем так же.
+ */
+.akciya-buh-cta #blog-side-contact-form.footer-form,
+.akciya-buh-cta #blog-side-contact-form.footer-form:hover {
+    position: static;
+    height: auto !important;
+    margin: 0;
+    padding: 22px 20px 16px !important;
+    border: none;
+    border-radius: 12px;
+    box-shadow: none;
+    background: #fff;
+}
+
+.akciya-buh-cta #blog-side-contact-form > p:nth-of-type(-n+2) {
+    display: none;
+}
+
+.akciya-buh-cta #blog-side-contact-form p {
+    margin-bottom: 0;
+}
+
+.akciya-buh-cta #blog-side-contact-form label br {
+    display: none;
+}
+
+.akciya-buh-cta #blog-side-contact-form.footer-form .cf7-footer-input {
+    width: 100%;
+    height: 48px;
+    margin: 0;
+    padding: 0 16px;
+    font-size: 15px;
+    background-color: #fff;
+    border: 1px solid #e2e2e2;
+    border-radius: 6px;
+}
+
+.akciya-buh-cta #blog-side-contact-form.footer-form .cf7-footer-input:focus {
+    border: 1px solid #ec1c23;
+}
+
+.akciya-buh-cta #blog-side-contact-form .cf7-submit-button {
+    margin: 12px 0 12px;
+}
+
+.akciya-buh-cta #blog-side-contact-form.footer-form .cf7-submit-button input {
+    width: 100%;
+    height: 50px;
+    margin: 0;
+    border-radius: 6px;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.akciya-buh-cta #blog-side-contact-form.footer-form .cf7-legal-notice {
+    font-size: 11px;
+    line-height: 150%;
+}
+
+@media screen and (max-width: 1099px) {
+    .akciya-buh-cta {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+    }
+
+    .akciya-buh-cta__image {
+        width: 100%;
+        opacity: .3;
+        -webkit-mask-image: linear-gradient(to bottom, #000 0, transparent 70%);
+        mask-image: linear-gradient(to bottom, #000 0, transparent 70%);
+    }
+}
+
+@media screen and (max-width: 849px) {
+    .akciya-buh-cta {
+        border-radius: 12px;
+        padding: 28px 20px 20px;
+        margin-bottom: 32px;
+    }
+
+    .akciya-buh-cta__title {
+        font-size: 24px;
+    }
+}

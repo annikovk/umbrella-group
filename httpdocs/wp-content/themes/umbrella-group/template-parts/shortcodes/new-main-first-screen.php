@@ -100,7 +100,7 @@ class new_main_first_screen
                     ],
                 ],
                 'button_text' => 'Подробнее об акции',
-                'button_link' => '/services/bukhgalterskie-uslugi/obsluzhivanie/',
+                'button_link' => '/akcii/buhgalterskoe-obsluzhivanie-skidka-50/',
                 'image' => '/wp-content/themes/umbrella-group/assets/img/promo-50-banner.png',
                 'image_webp' => '/wp-content/themes/umbrella-group/assets/img/promo-50-banner.webp',
                 'image_alt' => 'Бухгалтерская отчётность, книга «Бухучёт» и калькулятор — скидка 50% на первый месяц бухгалтерского обслуживания',

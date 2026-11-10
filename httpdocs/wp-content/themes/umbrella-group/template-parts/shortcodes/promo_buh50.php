@@ -6,7 +6,8 @@
  *   [buh50_promo] — информационный блок в контенте страницы
  *                   «Бухгалтерское обслуживание» (/services/bukhgalterskie-uslugi/obsluzhivanie/, page 50),
  *                   стоит перед секцией «Для чего используется бухгалтерский аутсорсинг»;
- *   всплывающее окно на /services/bukhgalterskie-uslugi/ (page 26) — через 4 с
+ *   всплывающее окно на /services/bukhgalterskie-uslugi/ (page 26) и на странице
+ *                   обслуживания (page 50) — через 4 с
  *                   после загрузки, печатается в wp_footer только на этой странице.
  *
  * Кнопки открывают лайтбокс #leave-request-contact-form-lightbox (CF7 2886,
@@ -24,7 +25,8 @@
 defined('ABSPATH') || exit;
 
 const UG_BUH50_UNTIL = '2026-12-31';          // последний день акции, включительно
-const UG_BUH50_POPUP_PAGE = 26;               // /services/bukhgalterskie-uslugi/
+const UG_BUH50_POPUP_PAGES = [26, 50];        // /services/bukhgalterskie-uslugi/ и …/obsluzhivanie/
+const UG_BUH50_LANDING = '/akcii/buhgalterskoe-obsluzhivanie-skidka-50/'; // страница акции, «Подробнее» в окне
 const UG_BUH50_FORM = '#leave-request-contact-form-lightbox';
 const UG_BUH50_IMG = '/wp-content/themes/umbrella-group/assets/img/promo-50-banner';
 
@@ -124,7 +126,7 @@ add_shortcode('buh50_promo', static function (): string {
 /* ── всплывающее окно на странице бухгалтерских услуг ───────────────────── */
 
 add_action('wp', static function (): void {
-    if (is_admin() || !is_page(UG_BUH50_POPUP_PAGE) || !ug_buh50_active()) {
+    if (is_admin() || !is_page(UG_BUH50_POPUP_PAGES) || !ug_buh50_active()) {
         return;
     }
     ug_enqueue_style('assets/css/blocks/promo_buh50.css');
@@ -142,6 +144,7 @@ function ug_buh50_print_popup(): void
     $note = ug_buh50_note();
     $arrow = ug_buh50_icon('arrow');
     $close = ug_buh50_icon('close');
+    $landing = UG_BUH50_LANDING;
 
     // Картинка без src: адрес подставляет JS при открытии окна (data-src),
     // чтобы 80 КБ не грузились тем, кто окна не увидит.
@@ -162,7 +165,7 @@ function ug_buh50_print_popup(): void
                     $features
                     <div class="ug-buh50__actions">
                         <a href="$form" class="button primary lowercase ug-buh50__button" data-buh50-cta>Получить скидку 50% $arrow</a>
-                        <a href="/services/bukhgalterskie-uslugi/obsluzhivanie/" class="ug-buh50__more">Подробнее об&nbsp;обслуживании</a>
+                        <a href="$landing" class="ug-buh50__more">Подробнее об&nbsp;акции</a>
                     </div>
                     $note
                 </div>

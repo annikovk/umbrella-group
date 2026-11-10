@@ -59,6 +59,7 @@ require get_theme_file_path() . '/template-parts/shortcodes/foooter_business_pag
 require get_theme_file_path() . '/template-parts/shortcodes/form_bottom_business.php';
 require get_theme_file_path() . '/template-parts/shortcodes/akciya_tz.php';
 require get_theme_file_path() . '/template-parts/shortcodes/akciya_pb.php';
+require get_theme_file_path() . '/template-parts/shortcodes/akciya_buh.php';
 require get_theme_file_path() . '/template-parts/shortcodes/tz_packages.php';
 require get_theme_file_path() . '/template-parts/shortcodes/docs_folder.php';
 require get_theme_file_path() . '/includes/upsell.php';
