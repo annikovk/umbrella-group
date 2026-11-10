@@ -162,9 +162,20 @@ $ug_quizzes = [
     ],
 ];
 
+/*
+ * Страницы совсем без квиза — по пути, без query string (иначе с ?utm=…
+ * подхватился бы квиз по умолчанию). /services/bukhgalterskie-uslugi/obsluzhivanie/ —
+ * с 2026-11-10 на время акции −50%: квиз открывался одновременно с окном акции
+ * (promo_buh50.php). Его настройки в $ug_quizzes оставлены — вернуть квиз =
+ * убрать адрес отсюда.
+ */
+$ug_no_quiz = ['/services/bukhgalterskie-uslugi/obsluzhivanie/'];
+
 $ug_uri  = (string) ($_SERVER['REQUEST_URI'] ?? '');
 $ug_quiz = $ug_quizzes[$ug_uri] ?? null;
-if ($ug_quiz === null) {
+if (in_array(ug_request_path(), $ug_no_quiz, true)) {
+    $ug_quiz = null;
+} elseif ($ug_quiz === null) {
     if (str_contains($ug_uri, 'register-elimination')) {
         // Как было: загрузчик стартует по DOMContentLoaded.
         $ug_quiz = ['init' => $ug_quiz_602, 'on_ready' => true];
