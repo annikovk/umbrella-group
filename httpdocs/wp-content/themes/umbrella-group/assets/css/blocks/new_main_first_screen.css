@@ -590,3 +590,75 @@
     }
 }
 
+/* Акция «−50% на первый месяц бухгалтерского обслуживания»: красная строка
+   крупнее, чем у слайдов-услуг, — она и есть предложение; под картинкой —
+   плашка с условиями. */
+@media screen and (min-width: 850px) {
+    .promo-slide-buh50 .main-banner-content .text-like-h1 {
+        font-size: 52px;
+    }
+
+    .promo-slide-buh50 .main-banner-content .text-like-h1 .accent {
+        font-size: 38px;
+        line-height: 1.15;
+        margin-top: 12px;
+    }
+
+    .promo-slide-buh50 .main-banner-content > .left .description {
+        max-width: 520px;
+    }
+}
+
+.promo-note {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 8px;
+    padding: 18px 24px;
+    border-radius: 16px;
+    background-color: #FDF1F2;
+    text-align: left;
+}
+
+.promo-note-icon {
+    flex: 0 0 auto;
+    display: flex;
+    color: #EC1C23;
+}
+
+.promo-note p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 140%;
+    color: #1A1A1A;
+}
+
+@media screen and (max-width: 849px) {
+    /* На телефоне плашке условий нужна вся ширина, картинка — как у остальных. */
+    .promo-slide-buh50 .main-banner-content > .right {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .promo-slide-buh50 .main-banner-content > .right img {
+        display: block;
+        width: 300px;
+        max-width: 85%;
+        margin: 0 auto;
+    }
+
+    .promo-note {
+        gap: 14px;
+        margin: 12px 0 0;
+        padding: 14px 16px;
+    }
+
+    .promo-note-icon svg {
+        width: 26px;
+        height: 26px;
+    }
+
+    .promo-note p {
+        font-size: 13px;
+    }
+}

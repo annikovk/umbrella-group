@@ -73,35 +73,39 @@ class new_main_first_screen
             ],
             */
 
+            /* Акция «−50% на первый месяц бухгалтерского обслуживания» — до 31.12.2026.
+               Иллюстрация — в теме, assets/img/promo-50-banner.webp (+ .png запасным
+               вариантом), прозрачный фон, 925×630; меняя картинку, обновить оба файла. */
             [
                 'sub_header' => 'Экспертное сопровождение бизнеса в Новосибирске',
-                'title' => 'Аудиторские услуги<br>для бизнеса<span class="accent">Проверьте учёт сегодня, чтобы избежать проблем завтра</span>',
+                'title' => 'Бухгалтерское<br>обслуживание<span class="accent">&minus;50% на&nbsp;первый месяц обслуживания</span>',
                 'descriptions' => [
-                    'Обязательный и инициативный аудит, проверка налоговых рисков и отдельных участков учёта. Поможем выявить ошибки, оценить их последствия и разобраться, что требует внимания.',
+                    'Передайте учёт экспертам и начните сотрудничество на выгодных условиях.',
                 ],
                 'features' => [
                     [
-                        'icon' => 'doc-check',
-                        'title' => 'Проверим<br>учёт',
-                        'text' => 'Оценим достоверность отчётности и корректность учёта',
+                        'icon' => 'clipboard',
+                        'title' => 'Ведение<br>учёта',
+                        'text' => 'Без ошибок и штрафов',
                     ],
                     [
                         'icon' => 'shield-check',
-                        'title' => 'Выявим<br>риски',
-                        'text' => 'Найдём ошибки и возможные налоговые последствия',
+                        'title' => 'Налоговый<br>контроль',
+                        'text' => 'С учётом актуальных требований',
                     ],
                     [
-                        'icon' => 'clipboard',
-                        'title' => 'Предложим<br>решения',
-                        'text' => 'Дадим рекомендации по устранению нарушений',
+                        'icon' => 'headset',
+                        'title' => 'Поддержка<br>экспертов',
+                        'text' => 'По всем вопросам вашего бизнеса',
                     ],
                 ],
-                'button_text' => 'Подробнее об аудите',
-                'button_link' => '/services/audit/',
-                'image' => '/wp-content/uploads/audit-banner.png',
-                'image_webp' => '/wp-content/uploads/audit-banner.webp',
-                'image_alt' => 'Аудиторское заключение, бухгалтерская отчётность и калькулятор — аудит для бизнеса',
-                'modifier' => 'promo-slide-audit',
+                'button_text' => 'Подробнее об акции',
+                'button_link' => '/services/bukhgalterskie-uslugi/obsluzhivanie/',
+                'image' => '/wp-content/themes/umbrella-group/assets/img/promo-50-banner.png',
+                'image_webp' => '/wp-content/themes/umbrella-group/assets/img/promo-50-banner.webp',
+                'image_alt' => 'Бухгалтерская отчётность, книга «Бухучёт» и калькулятор — скидка 50% на первый месяц бухгалтерского обслуживания',
+                'note' => 'Действует при заключении договора до&nbsp;31.12.2026 для клиентов, ранее не стоявших на бухгалтерском обслуживании в&nbsp;ГК&nbsp;Umbrella&nbsp;Group.',
+                'modifier' => 'promo-slide-buh50',
             ],
 
             [
@@ -133,6 +137,37 @@ class new_main_first_screen
                 'image_webp' => '/wp-content/uploads/buhgalteriya-banner.webp',
                 'image_alt' => 'Папка «Бухгалтерия», отчёты с графиками и калькулятор — бухгалтерские услуги для бизнеса',
                 'modifier' => 'promo-slide-buh',
+            ],
+
+            [
+                'sub_header' => 'Экспертное сопровождение бизнеса в Новосибирске',
+                'title' => 'Аудиторские услуги<br>для бизнеса<span class="accent">Проверьте учёт сегодня, чтобы избежать проблем завтра</span>',
+                'descriptions' => [
+                    'Обязательный и инициативный аудит, проверка налоговых рисков и отдельных участков учёта. Поможем выявить ошибки, оценить их последствия и разобраться, что требует внимания.',
+                ],
+                'features' => [
+                    [
+                        'icon' => 'doc-check',
+                        'title' => 'Проверим<br>учёт',
+                        'text' => 'Оценим достоверность отчётности и корректность учёта',
+                    ],
+                    [
+                        'icon' => 'shield-check',
+                        'title' => 'Выявим<br>риски',
+                        'text' => 'Найдём ошибки и возможные налоговые последствия',
+                    ],
+                    [
+                        'icon' => 'clipboard',
+                        'title' => 'Предложим<br>решения',
+                        'text' => 'Дадим рекомендации по устранению нарушений',
+                    ],
+                ],
+                'button_text' => 'Подробнее об аудите',
+                'button_link' => '/services/audit/',
+                'image' => '/wp-content/uploads/audit-banner.png',
+                'image_webp' => '/wp-content/uploads/audit-banner.webp',
+                'image_alt' => 'Аудиторское заключение, бухгалтерская отчётность и калькулятор — аудит для бизнеса',
+                'modifier' => 'promo-slide-audit',
             ],
 
             [
@@ -343,10 +378,10 @@ class new_main_first_screen
         ];
     }
 
-    /** [ширина, высота] картинки слайда из uploads по её пути или null (внешний URL, нет файла). */
+    /** [ширина, высота] картинки слайда из uploads или темы по её пути или null (внешний URL, нет файла). */
     private static function image_size($src)
     {
-        if (!is_string($src) || !str_starts_with($src, '/wp-content/uploads/')) {
+        if (!is_string($src) || !str_starts_with($src, '/wp-content/')) {
             return null;
         }
         $size = wp_getimagesize(ABSPATH . ltrim($src, '/'));
@@ -374,6 +409,8 @@ class new_main_first_screen
             'scales' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 3.75v16.5M8 20.25h8M5 6.75h14M12 6.75V5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="m5.5 7-2.75 6.25a2.9 2.9 0 0 0 5.5 0L5.5 7ZM18.5 7l-2.75 6.25a2.9 2.9 0 0 0 5.5 0L18.5 7Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
             'medical' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9.5 3.75h5V9.5h5.75v5H14.5v5.75h-5V14.5H3.75v-5H9.5V3.75Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
             'shop' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4.75 8.4h14.5v9.85a2.5 2.5 0 0 1-2.5 2.5h-9.5a2.5 2.5 0 0 1-2.5-2.5V8.4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.5 8.4V6.9a3.5 3.5 0 0 1 7 0v1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+            'headset' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4.75 14v-2a7.25 7.25 0 0 1 14.5 0v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><rect x="3.75" y="13" width="4" height="5.5" rx="1.25" stroke="currentColor" stroke-width="1.8"/><rect x="16.25" y="13" width="4" height="5.5" rx="1.25" stroke="currentColor" stroke-width="1.8"/><path d="M18.25 18.5v.25a2.5 2.5 0 0 1-2.5 2.5H13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+            'calendar' => '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="3.75" y="5.25" width="16.5" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3.75 9.75h16.5M8 3.5v3.5M16 3.5v3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M8 13.5h.01M12 13.5h.01M16 13.5h.01M8 16.75h.01M12 16.75h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
             'pill' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g transform="rotate(-45 12 12)"><rect x="2.4" y="8.4" width="19.2" height="7.2" rx="3.6" stroke="currentColor" stroke-width="1.8"/><path d="M12 8.4v7.2" stroke="currentColor" stroke-width="1.8"/></g></svg>',
         ];
         return isset($icons[$name]) ? $icons[$name] : '';
@@ -450,8 +487,10 @@ class new_main_first_screen
         if (!empty($slide['image_webp'])) {
             $picture = '<picture><source srcset="' . $slide['image_webp'] . '" type="image/webp">' . $picture . '</picture>';
         }
+        // Условия акции — плашкой под картинкой (текстом, не в картинке).
+        $note = empty($slide['note']) ? '' : '<div class="promo-note"><span class="promo-note-icon">' . $this->get_icon('calendar') . '</span><p>' . $slide['note'] . '</p></div>';
         // Слайд без картинки — без правой колонки.
-        $right = $image === '' ? '' : '<div class="right">' . $picture . '</div>';
+        $right = $image === '' ? '' : '<div class="right">' . $picture . $note . '</div>';
 
         return <<<EOT
             <div class="promo-slide$active$modifier" data-promo-slide="$index">
