@@ -376,12 +376,16 @@
 .ugh-menu--svc {
     flex-wrap: wrap;   /* 850–999px: в две строки, а не за край */
     justify-content: center;
-    column-gap: 32px;
+    column-gap: 28px;
+    width: fit-content;   /* красная линия — от «Аудита» до шеврона «Юридических услуг» */
+    max-width: 100%;
+    margin: 0 auto;
+    box-shadow: inset 0 -2px 0 var(--ugh-red);   /* по нижнему краю полосы, высоту не меняет */
 }
 .ugh-menu--svc .ugh-menu__link {
     height: 46px;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 600;
 }
 .ugh-menu--svc .ugh-drop {
     width: max-content;
