@@ -3,8 +3,9 @@
  * Шапка сайта — у всех страниц, включая «Открытие бизнеса под ключ» (14148).
  *
  * Сверху вниз (макет 2026-11, вариант C): строка меню (.ugh-nav, «Акции» —
- * красной пилюлей); ряд в одну строку: логотип | город и часы | выпадашка
- * мессенджеров | телефон с «Показать» и «Заказать звонок»
+ * красной пилюлей); ряд в одну строку: логотип | город и часы (по наведению —
+ * карточка двух офисов) | выпадашка мессенджеров | телефон с «Показать» и
+ * почтой под ним | «Заказать звонок»
  * (#masthead); под ними — серая полоса разделов услуг (.ugh-svc: меню
  * primary с выпадашками, вместо прежней чёрной #wide-nav Flatsome), поэтому
  * «Услуги» в строке меню — простая ссылка без своей панели. В залипании
@@ -14,13 +15,17 @@
  * (#main-menu Flatsome), мессенджеры — в мобильной панели
  * (template-parts/overlays/overlay-menu.php → element-sidebar-extra).
  *
- * ⚠️ Подмена номеров — тег GTM (calltracking): ищет a[href*="tel:"] внутри
- * #masthead. Ссылка с цифрами меняется целиком через .html() (только если в
- * тексте есть «+»), у иконки-ссылки — только href. Поэтому внутри <a> с
- * номером — только текст, иконки снаружи. «+7 (383) Показать» — та же
- * разметка, что ставит сам тег (span.phoneShow с phonevalue): с подменой тег
- * перерисует её своим номером и сам раскроет по клику, без подмены раскрывает
- * header-site.js.
+ * ⚠️ Подмена номеров и почты — тег GTM (calltracking): телефон ищет как
+ * a[href*="tel:"] внутри #masthead, почту — a[href*="mailto:"] внутри
+ * .contacts-text (в #masthead почту не ищет). Своё «Показать» у обоих —
+ * data-ugh-fallback: до подмены клик ждёт тег (header-site.js), раскрытие и
+ * цели («other_click_showphoneclass» / «…showmailclass») — его. Ссылка
+ * меняется целиком через .html() (телефон — только если в тексте есть «+»),
+ * у иконки-ссылки — только href. Поэтому внутри <a> — только текст, иконки
+ * снаружи. Разметка та же, что ставит сам тег (span.phoneShow с phonevalue,
+ * span.mailShow с mailvalue); вид «+7 (383)...Показать» / «contact@...Показать»
+ * — многоточие из CSS (::before), пробел перед span, который вставляет тег,
+ * убирает header-site.js.
  *
  * Меню: строка меню — здесь, в $ug_nav; выпадашка «О компании» — дети
  * пункта /about/ меню top_bar_nav; полоса услуг — дерево меню primary (оба
@@ -28,6 +33,7 @@
  */
 
 $ug_phone      = '+7 (383) 373-17-17';
+$ug_email      = defined('UG_CONTACTS_EMAIL') ? UG_CONTACTS_EMAIL : 'contact@taxlab.ru';
 $ug_phone_href = 'tel:+73833731717';
 $ug_logo       = (string) get_theme_mod('site_logo', '');
 $ug_site_name  = get_bloginfo('name', 'display');
@@ -136,23 +142,39 @@ $ug_chevron = '<svg class="ugh-chevron" width="10" height="6" viewBox="0 0 10 6"
 
         <span class="ugh-sep ugh-sep--place ugh-desktop" aria-hidden="true"></span>
 
-        <div class="ugh-place ugh-desktop">
-            <svg class="ugh-ico" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.6 7-12.3A7 7 0 0 0 5 9.7C5 15.4 12 22 12 22z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="9.6" r="2.6" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
-            <div class="ugh-place__text">
-                <b>Новосибирск</b>
-                <span>Пн–Пт: 09:00–18:00</span>
+        <div class="ugh-place ugh-desktop" data-ugh-dropdown>
+            <button type="button" class="ugh-place__toggle" data-ugh-toggle aria-expanded="false" aria-controls="ugh-offices" aria-haspopup="true">
+                <svg class="ugh-ico" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.6 7-12.3A7 7 0 0 0 5 9.7C5 15.4 12 22 12 22z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="9.6" r="2.6" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
+                <span class="ugh-place__text">
+                    <b>Новосибирск<?php echo $ug_chevron; ?></b>
+                    <span class="ugh-place__hours">Пн–Пт: 09:00–18:00</span>
+                </span>
+            </button>
+            <div class="ugh-offices" id="ugh-offices" data-ugh-list hidden>
+                <?php // офисы — те же, что на странице «Контакты» (template-parts/shortcodes/contacts_page.php) ?>
+                <?php foreach (defined('UG_CONTACTS_OFFICES') ? UG_CONTACTS_OFFICES : [] as $ug_office) : ?>
+                    <div class="ugh-office">
+                        <b class="ugh-office__title"><?php echo $ug_office['title']; ?></b>
+                        <span class="ugh-office__street"><?php echo $ug_office['street']; ?></span>
+                        <a class="ugh-office__map" href="<?php echo esc_url('https://2gis.ru/novosibirsk/firm/' . $ug_office['org']); ?>" target="_blank" rel="noopener">Показать на&nbsp;карте</a>
+                    </div>
+                <?php endforeach; ?>
+                <div class="ugh-offices__foot">
+                    <span>Пн–Пт: 09:00–18:00</span>
+                    <a href="<?php echo esc_url(home_url('/about/contacts/')); ?>">Все контакты</a>
+                </div>
             </div>
         </div>
 
         <span class="ugh-sep ugh-desktop" aria-hidden="true"></span>
 
         <div class="ugh-msg ugh-desktop" data-ugh-dropdown>
-            <button type="button" class="ugh-msg__toggle" aria-expanded="false" aria-controls="ugh-msg-list" aria-haspopup="true">
+            <button type="button" class="ugh-msg__toggle" data-ugh-toggle aria-expanded="false" aria-controls="ugh-msg-list" aria-haspopup="true">
                 <svg class="ugh-msg__icon" width="30" height="28" viewBox="0 0 30 28" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M11.5 2.5c5.2 0 9.5 3.4 9.5 7.7s-4.3 7.7-9.5 7.7c-1 0-2-.1-2.9-.4L4 19.6l1.2-4C3.5 14.3 2 12.4 2 10.2 2 5.9 6.3 2.5 11.5 2.5z"/><path d="M22.8 9.6c3.1 1.1 5.2 3.6 5.2 6.4 0 1.9-.9 3.6-2.4 4.8l1 3.5-4.1-1.9c-.8.2-1.7.3-2.6.3-3.4 0-6.3-1.5-7.8-3.7"/></g><g fill="currentColor"><circle cx="7.6" cy="10.2" r="1.2"/><circle cx="11.5" cy="10.2" r="1.2"/><circle cx="15.4" cy="10.2" r="1.2"/></g></svg>
                 <span class="ugh-msg__label">Связаться<br>в мессенджере</span>
                 <?php echo $ug_chevron; ?>
             </button>
-            <ul class="ugh-msg__list" id="ugh-msg-list" hidden>
+            <ul class="ugh-msg__list" id="ugh-msg-list" data-ugh-list hidden>
                 <?php get_template_part('template-parts/header/partials/element', 'messengers'); ?>
             </ul>
         </div>
@@ -161,7 +183,11 @@ $ug_chevron = '<svg class="ugh-chevron" width="10" height="6" viewBox="0 0 10 6"
 
         <div class="ugh-tel ugh-desktop">
             <svg class="ugh-ico" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 2.8l2.6 3.9c.4.6.3 1.4-.2 1.9L7.5 10c1.3 2.7 3.6 5 6.4 6.4l1.4-1.5c.5-.5 1.3-.6 1.9-.2l3.9 2.6c.7.5.9 1.4.4 2.1l-1.3 1.9c-.7 1-1.9 1.5-3.1 1.2C10 20.9 3.1 14 1.5 6.9c-.3-1.2.2-2.4 1.2-3.1l1.9-1.3c.7-.5 1.6-.3 2 .3z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
-            <a class="ugh-phone" href="<?php echo esc_attr($ug_phone_href); ?>">+7 (383) <span class="phoneShow" phonevalue="<?php echo esc_attr($ug_phone); ?>">Показать</span></a>
+            <div class="ugh-tel__text">
+                <a class="ugh-phone" href="<?php echo esc_attr($ug_phone_href); ?>">+7 (383)<span class="phoneShow" phonevalue="<?php echo esc_attr($ug_phone); ?>" data-ugh-fallback>Показать</span></a>
+                <?php // .contacts-text — контейнер, где тег GTM подменяет почту (a[href*="mailto:"]); в #masthead почту он не ищет ?>
+                <span class="ugh-mail contacts-text"><a href="mailto:<?php echo esc_attr($ug_email); ?>"><?php echo esc_html(strstr($ug_email, '@', true)); ?>@<span class="mailShow" mailvalue="<?php echo esc_attr($ug_email); ?>" data-ugh-fallback>Показать</span></a></span>
+            </div>
         </div>
 
         <a class="ugh-callback ugh-desktop" href="#header-contact-form-lightbox">Заказать звонок</a>

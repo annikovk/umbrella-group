@@ -127,14 +127,15 @@
     border-radius: 14px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, .14);
 }
-/* мостик через зазор 8px до кнопки: курсор по пути вниз не «уходит» с выпадашки */
-.ugh-msg__list::before {
+/* мостик через зазор до кнопки: курсор по пути вниз не «уходит» с выпадашки */
+.ugh-msg__list::before,
+.ugh-offices::before {
     content: "";
     position: absolute;
     left: 0;
     right: 0;
     bottom: 100%;
-    height: 10px;
+    height: 16px;
 }
 .ugh-msg__list[hidden] {
     display: none;
@@ -168,8 +169,13 @@
     object-fit: contain;
 }
 
-/* город с часами и телефон — отдельные элементы ряда */
-.ugh-place,
+/* город с часами (кнопка карточки офисов) и телефон с почтой — отдельные
+   элементы ряда */
+.ugh-place {
+    position: relative;
+    flex: 0 0 auto;
+}
+.ugh-place__toggle,
 .ugh-tel {
     display: flex;
     align-items: center;
@@ -178,23 +184,132 @@
     color: var(--ugh-text);
     white-space: nowrap;
 }
+.ugh-place__toggle {
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    line-height: inherit;
+    text-align: left;
+    text-transform: none;
+    letter-spacing: 0;
+    box-shadow: none;
+    cursor: pointer;
+}
 .ugh-ico {
     flex: 0 0 auto;
     color: var(--ugh-red);
 }
-.ugh-place__text {
+.ugh-place__text,
+.ugh-tel__text {
     display: flex;
     flex-direction: column;
     gap: 3px;
+}
+.ugh-place__text {
     font-size: 15px;
     line-height: 20px;
 }
 .ugh-place__text b {
+    display: flex;
+    align-items: center;
+    gap: 6px;
     font-weight: 600;
+    transition: color .2s;
 }
-.ugh-place__text span {
+.ugh-place__toggle:hover .ugh-place__text b,
+.ugh-place.is-open .ugh-place__text b {
+    color: var(--ugh-red);
+}
+.ugh-place__toggle:focus {
+    outline: none;
+}
+.ugh-place__toggle:focus-visible {
+    outline: 2px solid var(--ugh-red);
+    outline-offset: 6px;
+    border-radius: 6px;
+}
+.ugh-place .ugh-chevron {
+    transition: transform .2s;
+}
+.ugh-place.is-open .ugh-chevron {
+    transform: rotate(180deg);
+}
+.ugh-place__hours {
     font-size: 14px;
     color: var(--ugh-muted);
+}
+
+/* карточка офисов */
+.ugh-offices {
+    position: absolute;
+    top: calc(100% + 14px);
+    left: -16px;
+    z-index: 30;
+    width: 300px;
+    padding: 8px 16px 14px;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .14);
+    font-size: 14px;
+    line-height: 1.35;
+    white-space: normal;
+}
+.ugh-offices[hidden] {
+    display: none;
+}
+.ugh-office {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 10px 0;
+    border-bottom: 1px solid #ececec;
+}
+.ugh-office__title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ugh-text);
+}
+.ugh-office__street {
+    color: var(--ugh-text);
+}
+.ugh-office__map,
+.ugh-offices__foot a {
+    align-self: flex-start;
+    color: var(--ugh-red);
+    font-size: 13px;
+    font-weight: 500;
+}
+.ugh-office__map:hover,
+.ugh-offices__foot a:hover {
+    color: var(--ugh-red-dark);
+    text-decoration: underline;
+}
+.ugh-offices__foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding-top: 10px;
+    color: var(--ugh-muted);
+    font-size: 13px;
+}
+.ugh-tel__text {
+    line-height: 20px;
+}
+/* почта под телефоном; её подменяет тег GTM (.contacts-text a[href*="mailto:"]),
+   «Показать» у подменной — его span.mailShow с инлайн-пунктиром */
+.ugh-mail {
+    font-size: 14px;
+    line-height: 18px;
+}
+.ugh-mail a {
+    color: var(--ugh-muted);
+}
+.ugh-mail a:hover {
+    color: var(--ugh-red);
 }
 .ugh-tel .ugh-phone {
     color: var(--ugh-text);
@@ -206,9 +321,20 @@
     color: var(--ugh-red);
 }
 /* «Показать» — и наш span, и тот, что ставит тег GTM (у него инлайн-пунктир) */
-.ugh-tel .ugh-phone .phoneShow {
+.ugh-tel .phoneShow,
+.ugh-tel .mailShow {
     border-bottom: 0 !important;
     cursor: pointer;
+}
+/* «+7 (383)...Показать», «contact@...Показать» — и у нашего span, и у span тега */
+.ugh-tel .phoneShow::before,
+.ugh-tel .mailShow::before {
+    content: "...";
+}
+/* клик до подмены: ждём тег GTM (header-site.js) */
+.ugh-tel a.is-pending {
+    cursor: progress;
+    opacity: .6;
 }
 
 /* «Заказать звонок» */
@@ -391,7 +517,7 @@
 /* ряд ужимается по очереди: сначала часы, потом город целиком —
    подпись «Связаться в мессенджере» остаётся до 850px */
 @media (max-width: 1129px) {
-    .ugh-place__text span { display: none; }
+    .ugh-place__hours { display: none; }
     .ugh-menu { column-gap: 26px; }
     /* пилюля «Акции» выступает за текст меньше, чем шаг меню: соседи не касаются */
     .ugh-nav .ugh-menu__item--accent > .ugh-menu__link { margin: 0 -4px; padding: 6px 16px; }
@@ -407,6 +533,11 @@
     .ugh-menu { column-gap: 18px; }
     .ugh-nav .ugh-menu__item--accent > .ugh-menu__link { margin: 0; padding: 6px 12px; }
     .ugh-menu__link { font-size: 14px; }
+}
+
+/* 850–899px: раскрытые подменные телефон и почта шире исходных — запас за счёт логотипа */
+@media (max-width: 899px) {
+    .ugh-logo { width: 176px; }
 }
 
 /* ── мобильная шапка ─────────────────────────────────────────────────────── */
