@@ -36,13 +36,10 @@ add_action('wp_enqueue_scripts', static function (): void {
     }
 }, 0);
 
-// Шапка default (template-parts/header/header-site.php): CSS в <head> сразу
-// после ug-main и тем же якорем в конце <body> — перекрывает custom-css
-// Flatsome из theme_mods; JS — defer в подвале.
+// Шапка всех страниц, и business тоже (template-parts/header/header-site.php):
+// CSS в <head> сразу после ug-main и тем же якорем в конце <body> — перекрывает
+// custom-css Flatsome из theme_mods; JS — defer в подвале.
 add_action('wp_enqueue_scripts', static function (): void {
-    if (ug_header_variant() !== 'default') {
-        return;
-    }
     if (is_404()) {
         // 404.php без get_footer(): ни якоря в <body>, ни скриптов подвала —
         // CSS обычной ссылкой в <head>, JS туда же (defer)

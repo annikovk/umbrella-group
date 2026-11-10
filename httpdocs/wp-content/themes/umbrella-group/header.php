@@ -1,9 +1,9 @@
 <?php
 /**
  * Шапка всех страниц. Вариант 'business' (page-bussnise.php, страница 14148)
- * отличается счётчиками (template-parts/analytics.php), без CSS шапки
- * assets/css/header.css (inc/layout.php) и с партиалами шапки business
- * (template-parts/header/header-wrapper.php).
+ * отличается счётчиками (template-parts/analytics.php) и без CSS
+ * assets/css/header.css (inc/layout.php); сама шапка у всех одна —
+ * template-parts/header/header-site.php (header-wrapper.php).
  */
 $ug_variant = ug_header_variant();
 
