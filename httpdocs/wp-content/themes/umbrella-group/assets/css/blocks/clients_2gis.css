@@ -1,0 +1,251 @@
+/* [clients_2gis] — «Ещё больше отзывов о нас — в 2ГИС» на странице «Клиенты».
+   Фон и ширина — .clients-bottom из clients_tasks.css. Стоит первым под
+   плитками и, как [clients_tasks] до него, наезжает на их нижнее поле;
+   плашке «Не просто работаем…» под ним наезжать уже не на что */
+.clients-bottom--2gis {
+    margin-top: -60px;
+    padding-top: 30px;
+}
+
+.clients-bottom--2gis .clients-bottom__inner {
+    padding-bottom: 40px;
+}
+
+.clients-bottom--2gis + .clients-bottom--tasks {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.clients-2gis {
+    padding: 40px 44px 36px;
+    border: 1px solid #ebe8e9;
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(40, 20, 25, .035);
+    color: #1a1a1a;
+}
+
+/* Шапка: значок 2ГИС, заголовок, подзаголовок */
+.clients-2gis__head {
+    margin-bottom: 30px;
+}
+
+.clients-2gis__badge {
+    display: inline-block;
+    margin-bottom: 14px;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: #e8f6ea;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: .02em;
+    color: #1a9f37;
+}
+
+.clients-2gis__title {
+    margin: 0;
+    font-family: "PT Serif", sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: #1a1a1a;
+}
+
+.clients-2gis__lead {
+    margin: 10px 0 0;
+    font-size: 16px;
+    line-height: 1.45;
+    color: #666;
+}
+
+/* Звёзды отзыва — всегда пять жёлтых */
+.clients-2gis__stars {
+    display: inline-flex;
+    gap: 2px;
+    line-height: 0;
+    color: #ffb400;
+}
+
+.clients-2gis__stars svg {
+    flex-shrink: 0;
+    fill: currentColor;
+}
+
+/* Карточки отзывов */
+.clients-2gis__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.clients-2gis__card {
+    display: flex;
+    flex-direction: column;
+    padding: 24px 26px 20px;
+    border-radius: 16px;
+    background: #f7f5f6;
+}
+
+.clients-2gis__author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.clients-2gis__avatar {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #fde6e7;
+    font-size: 18px;
+    font-weight: 700;
+    color: #c8161d;
+}
+
+.clients-2gis__who {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    margin-right: auto;
+}
+
+.clients-2gis__name {
+    overflow: hidden;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.3;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.clients-2gis__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2px 8px;
+    margin-top: 3px;
+}
+
+.clients-2gis__date {
+    font-size: 13px;
+    white-space: nowrap;
+    line-height: 1.4;
+    color: #888;
+}
+
+.clients-2gis__text {
+    display: -webkit-box;
+    margin: 0;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 7;
+    font-size: 15px;
+    line-height: 1.55;
+    color: #333;
+}
+
+.clients-2gis__more {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 6px;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #c8161d;
+}
+
+.clients-2gis__more:hover {
+    color: #8b1a2b;
+}
+
+.clients-2gis__more svg,
+.clients-2gis__all svg {
+    transition: transform .2s;
+}
+
+.clients-2gis__more:hover svg,
+.clients-2gis__all:hover svg {
+    transform: translateX(4px);
+}
+
+.clients-2gis__office {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: 16px;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #888;
+}
+
+.clients-2gis__foot {
+    display: flex;
+    justify-content: center;
+    margin-top: 28px;
+}
+
+.clients-2gis__all {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 999px;
+    background: #c8161d;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #fff;
+    transition: background-color .2s;
+}
+
+.clients-2gis__all:hover {
+    background: #a51218;
+    color: #fff;
+}
+
+@media (max-width: 999px) {
+    .clients-2gis__grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 14px;
+    }
+}
+
+@media (max-width: 849px) {
+    .clients-bottom--2gis .clients-bottom__inner {
+        padding-bottom: 28px;
+    }
+
+    .clients-2gis {
+        padding: 28px 18px 24px;
+        border-radius: 16px;
+    }
+
+    .clients-2gis__head {
+        margin-bottom: 22px;
+    }
+
+    .clients-2gis__title {
+        font-size: 25px;
+    }
+
+    .clients-2gis__lead {
+        font-size: 15px;
+    }
+
+    .clients-2gis__card {
+        padding: 20px 18px 18px;
+    }
+
+    .clients-2gis__all {
+        justify-content: center;
+        width: 100%;
+    }
+}

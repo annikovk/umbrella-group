@@ -39,6 +39,7 @@ require get_theme_file_path() . '/template-parts/shortcodes/clients_hero.php';
 require get_theme_file_path() . '/template-parts/shortcodes/clients_tasks.php';
 require get_theme_file_path() . '/template-parts/shortcodes/clients_cases.php';
 require get_theme_file_path() . '/template-parts/shortcodes/contacts_page.php';
+require get_theme_file_path() . '/template-parts/shortcodes/clients_2gis.php';
 require get_theme_file_path() . '/template-parts/shortcodes/why_choose_us.php';
 require get_theme_file_path() . '/template-parts/shortcodes/new-main-first-screen.php';
 require get_theme_file_path() . '/template-parts/shortcodes/umbrella_footer.php';
