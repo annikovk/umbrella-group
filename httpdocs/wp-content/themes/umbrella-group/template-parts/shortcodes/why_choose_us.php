@@ -6,8 +6,21 @@ class why_choose_us
 
     public function generate_shortcode()
     {
-        if (get_the_ID() == 13514 || is_front_page() || (preg_match('/about\/$/', ug_request_path()))) {
+        $view = $this->atts['view'] ?? '';
+        // view="full" поставлен руками в контент страницы — показываем везде,
+        // в том числе на /about/. Без атрибута (блок 9156) и view="strip"
+        // (футер) — прежние исключения: промо, главная и /about/ со своими лаврами.
+        if ($view !== 'full' && (get_the_ID() == 13514 || is_front_page() || (preg_match('/about\/$/', ug_request_path())))) {
             return "";
+        }
+        if ($view === 'strip') {
+            return $this->strip();
+        }
+        if ($view === 'c2') {
+            return $this->cards_c2();
+        }
+        if ($view === 'b' || $view === 'c') {
+            return $this->cards($view);
         }
         $html = <<<EOHTML
         <noindex>
@@ -203,12 +216,138 @@ class why_choose_us
         return $html;
     }
 
+    /**
+     * Узкая полоса рейтингов для общего футера: только «Деловой квартал» по
+     * итогам 2025, источник в подписи, без сносок и вкладки сертификатов.
+     * Значки — те же лавры из медиатеки, перекрашенные маской в золото
+     * (сами файлы белые под тёмный фон моста).
+     */
+    private function strip()
+    {
+        $icon = function ($id) {
+            $url = esc_url(wp_get_attachment_url($id));
+            return '<span class="ug-rs__icon" aria-hidden="true" style="--ug-rs-icon:url(' . $url . ')"></span>';
+        };
+        $l1 = $icon(1862);
+        $l2 = $icon(1863);
+        $l4 = $icon(28244);
+        $l5 = $icon(30657);
+        return <<<EOHTML
+        <noindex>
+        <section class="ug-ratings-strip" aria-label="Рейтинги">
+          <div class="ug-rs__in">
+            <div class="ug-rs__lead">
+              {$l1}
+              <p class="ug-rs__text"><b class="ug-rs__place">1&nbsp;место</b>&nbsp;— <b>Налоговое право</b> и&nbsp;<b>Корпоративное право</b>
+                <span class="ug-rs__src">рейтинг журнала «Деловой квартал», итоги 2025&nbsp;г.</span></p>
+            </div>
+            <ul class="ug-rs__list">
+              <li>{$l2}<p class="ug-rs__text"><b>2&nbsp;место</b><span>Коммерческое и&nbsp;хозяйственное право</span></p></li>
+              <li>{$l4}<p class="ug-rs__text"><b>4&nbsp;место</b><span>Представительство в&nbsp;суде</span></p></li>
+              <li>{$l5}<p class="ug-rs__text"><b>5&nbsp;место</b><span>Интеллектуальное право</span></p></li>
+              <li class="ug-rs__more-li"><a class="ug-rs__more" href="/about/#awards">Все награды&nbsp;→</a></li>
+            </ul>
+            <a class="ug-rs__more ug-rs__more--end" href="/about/#awards">Все награды&nbsp;→</a>
+          </div>
+        </section>
+        </noindex>
+        EOHTML;
+    }
+
+    /**
+     * Пять мест «Делового квартала» по итогам 2025 одним рядом.
+     * view="b" — тёмная лента на затемнённом фото моста, белые лавры как есть,
+     * первые места — золотом и крупнее; view="c" — светлые карточки.
+     */
+    private function cards($view)
+    {
+        $items = [
+            [1862, 1, 'Налоговое право'],
+            [1862, 1, 'Корпоративное право'],
+            [1863, 2, 'Коммерческое и&nbsp;хозяйственное право'],
+            [28244, 4, 'Представительство в&nbsp;суде'],
+            [30657, 5, 'Интеллектуальное право'],
+        ];
+        $li = '';
+        foreach ($items as [$id, $place, $title]) {
+            $url = esc_url(wp_get_attachment_url($id));
+            $top = $place === 1 ? ' is-top' : '';
+            $li .= '<li class="ug-rc__item' . $top . '">'
+                . '<span class="ug-rc__icon" aria-hidden="true" style="--ug-rs-icon:url(' . $url . ')"></span>'
+                . '<p class="ug-rc__place">' . $place . '&nbsp;место</p>'
+                . '<p class="ug-rc__title">«' . $title . '»</p>'
+                . '</li>';
+        }
+        $bg = $view === 'b' ? ' style="--ug-rc-bg:url(' . esc_url(wp_get_attachment_image_url(9108, 'large')) . ')"' : '';
+        return <<<EOHTML
+        <noindex>
+        <section class="ug-rc ug-rc--{$view}" aria-label="Рейтинги"{$bg}>
+          <div class="ug-rc__in">
+            <div class="ug-rc__head">
+              <p class="ug-rc__h">Почему работать с&nbsp;нами надёжно и&nbsp;удобно</p>
+              <a class="ug-rc__more" href="/about/#awards">Все награды&nbsp;→</a>
+            </div>
+            <ul class="ug-rc__list">{$li}</ul>
+            <p class="ug-rc__src">По версии рейтинга журнала «Деловой квартал», итоги 2025&nbsp;г.</p>
+          </div>
+        </section>
+        </noindex>
+        EOHTML;
+    }
+
+    /**
+     * view="c2" — доработанный вариант C: первые места крупными тёмными
+     * карточками с золотой цифрой, источник бейджем у заголовка.
+     */
+    private function cards_c2()
+    {
+        $items = [
+            [1862, 1, 'Налоговое право'],
+            [1862, 1, 'Корпоративное право'],
+            [1863, 2, 'Коммерческое и&nbsp;хозяйственное право'],
+            [28244, 4, 'Представительство в&nbsp;суде'],
+            [30657, 5, 'Интеллектуальное право'],
+        ];
+        $blank = esc_url(get_theme_file_uri('assets/img/laurel-blank.svg'));
+        $li = '';
+        foreach ($items as [$id, $place, $title]) {
+            $url = esc_url(wp_get_attachment_url($id));
+            if ($place === 1) {
+                $li .= '<li class="ug-c2__item is-top">'
+                    . '<span class="ug-c2__laurel" aria-hidden="true" style="--ug-rs-icon:url(' . $blank . ')"></span>'
+                    . '<p class="ug-c2__num">1</p><p class="ug-c2__place">место</p>'
+                    . '<p class="ug-c2__title">«' . $title . '»</p></li>';
+            } else {
+                $li .= '<li class="ug-c2__item">'
+                    . '<span class="ug-c2__icon" aria-hidden="true" style="--ug-rs-icon:url(' . $url . ')"></span>'
+                    . '<p class="ug-c2__place"><b>' . $place . '</b> место</p>'
+                    . '<p class="ug-c2__title">«' . $title . '»</p></li>';
+            }
+        }
+        return <<<EOHTML
+        <noindex>
+        <section class="ug-c2" aria-label="Рейтинги">
+          <div class="ug-c2__in">
+            <div class="ug-c2__head">
+              <div>
+                <p class="ug-c2__h">Почему работать с&nbsp;нами <em>надёжно</em> и&nbsp;удобно</p>
+                <p class="ug-c2__badge"><span class="ug-c2__star" aria-hidden="true">★</span>Рейтинг журнала «Деловой квартал» · итоги 2025</p>
+              </div>
+              <a class="ug-c2__more" href="/about/#awards">Все награды&nbsp;→</a>
+            </div>
+            <ul class="ug-c2__list">{$li}</ul>
+          </div>
+        </section>
+        </noindex>
+        EOHTML;
+    }
+
 }
 
 function why_choose_us_shortcode($atts)
 {
     $shortcode = new why_choose_us();
-    $shortcode->atts = $atts;
+    $shortcode->atts = is_array($atts) ? $atts : [];
     return $shortcode->generate_shortcode();
 }
 

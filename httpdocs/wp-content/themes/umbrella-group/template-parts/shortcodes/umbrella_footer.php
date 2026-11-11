@@ -6,7 +6,9 @@ class umbrella_footer
 
     public function generate_shortcode()
     {
-        $why_choose_us = do_shortcode('[why_choose_us]');
+        // МАКЕТ: ?ug-rs=b|c|c2|strip переключает вариант блока рейтингов в футере.
+        $rs_view = isset($_GET['ug-rs']) && in_array($_GET['ug-rs'], ['b', 'c', 'c2', 'strip'], true) ? $_GET['ug-rs'] : 'strip';
+        $why_choose_us = do_shortcode('[why_choose_us view="' . $rs_view . '"]');
         // Иконки соцсетей — lossless webp тех же пикселей (было PNG 1024 px из
         // uploads, 300 КБ на четыре). width/height — пропорции исходника,
         // высоту задаёт CSS .int-logo (40px), width:auto — ширина по пропорции.

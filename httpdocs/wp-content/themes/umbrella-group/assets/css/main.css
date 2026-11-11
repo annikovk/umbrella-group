@@ -2010,3 +2010,297 @@ p.laurel-place {
     font-size: 24px;
     font-weight: bold;
 }
+
+/* ==== полоса рейтингов в футере: [why_choose_us view="strip"] ====
+   Одна строка на десктопе; на узких экранах — лидер сверху, остальные места
+   прокручиваются по горизонтали. Значки — маска по файлу лавра, цвет — фон. */
+.ug-ratings-strip {
+    background: #fff;
+    border-top: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
+    font-family: Inter, sans-serif;
+    color: #1a1a1a;
+}
+.ug-rs__in {
+    display: flex;
+    align-items: center;
+    max-width: 1230px;
+    margin: 0 auto;
+    padding: 18px 15px;
+    gap: 0;
+}
+.ug-ratings-strip p { margin: 0; padding: 0; }
+.ug-rs__icon {
+    flex: none;
+    display: block;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(160deg, #e2bd63 0%, #b8862b 55%, #8f6418 100%);
+    -webkit-mask: var(--ug-rs-icon) center / contain no-repeat;
+    mask: var(--ug-rs-icon) center / contain no-repeat;
+}
+.ug-rs__lead {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 0 1 auto;
+    min-width: 0;
+    padding-right: 22px;
+}
+.ug-rs__lead .ug-rs__icon { width: 56px; height: 56px; }
+.ug-rs__text {
+    font-size: 13px;
+    line-height: 1.35;
+}
+.ug-rs__lead .ug-rs__text { font-size: 16px; line-height: 1.3; }
+.ug-rs__place { color: #ec1c23; }
+.ug-rs__src {
+    display: block;
+    margin-top: 4px;
+    font-size: 12.5px;
+    color: #918b81;
+}
+.ug-rs__list {
+    display: flex;
+    list-style: none;
+    margin: 0 0 0 auto;
+    padding: 0;
+    flex: 0 1 auto;
+    min-width: 0;
+}
+.ug-rs__list li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 2px 16px;
+    border-left: 1px solid #e6e6e6;
+}
+.ug-rs__list .ug-rs__icon { width: 36px; height: 36px; }
+.ug-rs__list b { display: block; font-size: 14px; }
+.ug-rs__list span { display: block; color: #4a4a4a; }
+.ug-rs__more {
+    flex: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ec1c23;
+    white-space: nowrap;
+}
+.ug-rs__more--end {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    padding-left: 18px;
+    border-left: 1px solid #e6e6e6;
+}
+.ug-rs__more:hover { color: #1a1a1a; }
+.ug-rs__list .ug-rs__more-li { display: none; }
+
+@media (max-width: 1100px) {
+    .ug-rs__in { flex-wrap: wrap; padding: 14px 15px; row-gap: 12px; }
+    .ug-rs__lead { flex: 1 1 100%; padding-right: 0; }
+    .ug-rs__more--end { display: none; }
+    .ug-rs__list {
+        flex: 1 1 100%;
+        margin: 0 -15px;
+        padding: 0 15px;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        /* край подсказывает, что ряд прокручивается */
+        -webkit-mask: linear-gradient(90deg, #000 calc(100% - 28px), transparent);
+        mask: linear-gradient(90deg, #000 calc(100% - 28px), transparent);
+    }
+    .ug-rs__list::-webkit-scrollbar { display: none; }
+    .ug-rs__list li { flex: none; }
+    .ug-rs__list li:first-child { border-left: 0; padding-left: 0; }
+    .ug-rs__list span { max-width: 160px; }
+    .ug-rs__list .ug-rs__more-li { display: flex; padding-right: 28px; }
+}
+@media (max-width: 549px) {
+    .ug-rs__lead { gap: 10px; }
+    .ug-rs__lead .ug-rs__icon { width: 46px; height: 46px; }
+    .ug-rs__lead .ug-rs__text { font-size: 14.5px; }
+    .ug-rs__src { font-size: 11.5px; }
+    .ug-rs__list .ug-rs__icon { width: 32px; height: 32px; }
+    .ug-rs__list li { padding: 2px 12px; gap: 7px; }
+    .ug-rs__list b { font-size: 13.5px; }
+    .ug-rs__list span { max-width: 140px; font-size: 12px; }
+}
+/* ==== рейтинги в футере, варианты B и C: [why_choose_us view="b|c"] ====
+   Пять мест «Делового квартала» одним рядом; на узких экранах ряд листается. */
+.ug-rc { font-family: Inter, sans-serif; }
+.ug-rc p { margin: 0; padding: 0; }
+.ug-rc__in { max-width: 1230px; margin: 0 auto; padding: 44px 15px 26px; }
+.ug-rc__head { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; margin-bottom: 26px; }
+.ug-rc__h { font-family: "PT Serif Caption", "PT Serif", serif; font-weight: 700; font-size: 30px; line-height: 1.2; }
+.ug-rc__more { flex: none; font-size: 14px; font-weight: 600; color: #ec1c23; white-space: nowrap; }
+.ug-rc__more:hover { color: #1a1a1a; }
+.ug-rc__list { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; list-style: none; margin: 0; padding: 0; }
+.ug-rc__item { margin: 0; text-align: center; display: flex; flex-direction: column; align-items: center; }
+.ug-rc__icon { display: block; width: 84px; height: 84px; margin-bottom: 10px; }
+.ug-rc__place { font-size: 15px; font-weight: 700; line-height: 1.3; }
+.ug-rc__title { font-size: 14px; line-height: 1.35; margin-top: 4px !important; }
+.ug-rc__src { margin-top: 22px !important; font-size: 12.5px; text-align: center; }
+
+/* B — тёмная лента */
+.ug-rc--b {
+    color: #fff;
+    background: linear-gradient(rgba(14, 14, 18, .86), rgba(14, 14, 18, .9)), var(--ug-rc-bg) center 60% / cover no-repeat, #16161a;
+    border-top: 3px solid #ec1c23;
+}
+.ug-rc--b .ug-rc__h { color: #fff; }
+.ug-rc--b .ug-rc__head { margin-bottom: 30px; }
+.ug-rc--b .ug-rc__item:not(.is-top) .ug-rc__icon { margin-top: 20px; }
+.ug-rc--b .ug-rc__more { color: #fff; border-bottom: 1px solid #ec1c23; }
+.ug-rc--b .ug-rc__more:hover { color: #ec1c23; }
+.ug-rc--b .ug-rc__icon { background: var(--ug-rs-icon) center / contain no-repeat; opacity: .92; }
+.ug-rc--b .ug-rc__item.is-top .ug-rc__icon {
+    width: 104px; height: 104px; opacity: 1;
+    background: linear-gradient(160deg, #f3d88a 0%, #d4a640 50%, #a87a22 100%);
+    -webkit-mask: var(--ug-rs-icon) center / contain no-repeat;
+    mask: var(--ug-rs-icon) center / contain no-repeat;
+}
+.ug-rc--b .ug-rc__item.is-top .ug-rc__place { color: #e9c46a; font-size: 17px; }
+.ug-rc--b .ug-rc__title { color: rgba(255, 255, 255, .82); }
+.ug-rc--b .ug-rc__src { color: rgba(255, 255, 255, .5); }
+
+/* C — светлые карточки */
+.ug-rc--c { background: #f5f5f7; color: #1a1a1a; }
+.ug-rc--c .ug-rc__item {
+    background: #fff;
+    border-radius: 8px;
+    border-top: 3px solid #e6e6e6;
+    box-shadow: 0 4px 18px rgba(26, 26, 26, .07);
+    padding: 20px 14px 18px;
+}
+.ug-rc--c .ug-rc__item.is-top { border-top-color: #ec1c23; }
+.ug-rc--c .ug-rc__icon {
+    width: 76px; height: 76px;
+    background: linear-gradient(160deg, #e2bd63 0%, #b8862b 55%, #8f6418 100%);
+    -webkit-mask: var(--ug-rs-icon) center / contain no-repeat;
+    mask: var(--ug-rs-icon) center / contain no-repeat;
+}
+.ug-rc--c .ug-rc__item.is-top .ug-rc__place { color: #ec1c23; }
+.ug-rc--c .ug-rc__title { color: #4a4a4a; }
+.ug-rc--c .ug-rc__src { color: #918b81; }
+
+@media (max-width: 849px) {
+    .ug-rc__in { padding: 30px 15px 20px; }
+    .ug-rc__head { margin-bottom: 18px; }
+    .ug-rc__h { font-size: 22px; }
+    .ug-rc__list {
+        display: flex; gap: 12px;
+        overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 15px; scrollbar-width: none;
+        margin: 0 -15px; padding: 4px 15px 14px;
+    }
+    .ug-rc__list::-webkit-scrollbar { display: none; }
+    .ug-rc__item { flex: none; width: 150px; scroll-snap-align: start; }
+    .ug-rc__icon { width: 66px; height: 66px; }
+    .ug-rc--b .ug-rc__item.is-top .ug-rc__icon { width: 82px; height: 82px; }
+    .ug-rc--b .ug-rc__item:not(.is-top) .ug-rc__icon { margin-top: 16px; }
+    .ug-rc--c .ug-rc__icon { width: 60px; height: 60px; }
+    .ug-rc__title { font-size: 13px; }
+    .ug-rc__src { margin-top: 12px !important; font-size: 11.5px; }
+}
+@media (max-width: 549px) {
+    .ug-rc__head { flex-direction: column; gap: 6px; }
+}
+
+/* ==== рейтинги в футере, вариант C2: [why_choose_us view="c2"] ==== */
+.ug-c2 {
+    --ug-gold: linear-gradient(165deg, #fbe7a1 0%, #e7b94a 35%, #c48a1e 70%, #9a6510 100%);
+    font-family: Inter, sans-serif;
+    color: #1a1a1a;
+    background: linear-gradient(180deg, #fff8ea 0%, #ffffff 75%);
+    border-top: 1px solid #f0e2c4;
+}
+.ug-c2 p { margin: 0; padding: 0; }
+.ug-c2__in { max-width: 1230px; margin: 0 auto; padding: 34px 15px 34px; }
+.ug-c2__head { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 26px; }
+.ug-c2__h { font-family: "PT Serif Caption", "PT Serif", serif; font-weight: 700; font-size: 36px; line-height: 1.15; color: #1a1a1a; }
+.ug-c2__h em { font-style: normal; color: #ec1c23; }
+.ug-c2__badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 12px !important; padding: 6px 14px 6px 10px;
+    border: 1px solid #e3c47c; border-radius: 999px; background: #fff3d6;
+    font-size: 14px; font-weight: 600; color: #7a5410;
+}
+.ug-c2__star {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--ug-gold); color: #fff; font-size: 12px;
+}
+.ug-c2__more {
+    flex: none; padding: 10px 18px; border: 2px solid #ec1c23; border-radius: 6px;
+    font-size: 15px; font-weight: 700; color: #ec1c23; white-space: nowrap;
+    transition: background .15s, color .15s;
+}
+.ug-c2__more:hover { background: #ec1c23; color: #fff; }
+.ug-c2__list {
+    display: grid; grid-template-columns: 1.3fr 1.3fr 1fr 1fr 1fr; gap: 16px;
+    align-items: center; list-style: none; margin: 0; padding: 0;
+}
+.ug-c2__item {
+    position: relative; margin: 0; text-align: center;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: #fff; border: 1px solid #ead9b5; border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(122, 84, 16, .12);
+    padding: 18px 12px 18px; min-height: 176px;
+}
+.ug-c2__icon {
+    display: block; width: 74px; height: 74px; margin-bottom: 8px;
+    background: var(--ug-gold);
+    -webkit-mask: var(--ug-rs-icon) center / contain no-repeat;
+    mask: var(--ug-rs-icon) center / contain no-repeat;
+}
+.ug-c2__place { font-size: 16px; font-weight: 600; color: #4a4a4a; }
+.ug-c2__place b {
+    font-size: 30px; font-weight: 800; line-height: 1; vertical-align: -3px;
+    background: var(--ug-gold); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.ug-c2__title { margin-top: 6px !important; font-size: 14px; line-height: 1.35; font-weight: 600; color: #1a1a1a; }
+
+.ug-c2__item.is-top {
+    min-height: 226px; padding: 22px 16px;
+    background: radial-gradient(120% 90% at 50% 0%, #3a3a42 0%, #1d1d22 60%, #141418 100%);
+    border: 0; border-top: 4px solid #ec1c23;
+    box-shadow: 0 12px 30px rgba(20, 20, 24, .28);
+    overflow: hidden;
+}
+.ug-c2__laurel {
+    position: absolute; left: 50%; top: 4px; transform: translateX(-50%);
+    width: 170px; height: 170px; opacity: .6;
+    background: var(--ug-gold);
+    -webkit-mask: var(--ug-rs-icon) center / contain no-repeat;
+    mask: var(--ug-rs-icon) center / contain no-repeat;
+}
+.ug-c2__num {
+    position: relative; font-size: 92px; font-weight: 800; line-height: .95;
+    background: var(--ug-gold); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.ug-c2__item.is-top .ug-c2__place {
+    position: relative; color: #e7b94a; text-transform: uppercase; letter-spacing: .12em; font-size: 13px; font-weight: 700;
+}
+.ug-c2__item.is-top .ug-c2__title { position: relative; margin-top: 12px !important; font-size: 18px; font-weight: 700; color: #fff; }
+
+@media (max-width: 849px) {
+    .ug-c2__in { padding: 28px 15px 22px; }
+    .ug-c2__head { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+    .ug-c2__h { font-size: 25px; }
+    .ug-c2__badge { font-size: 12.5px; margin-top: 10px !important; }
+    .ug-c2__more { padding: 8px 14px; font-size: 14px; }
+    .ug-c2__list {
+        display: flex; gap: 12px; align-items: center;
+        overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 15px; scrollbar-width: none;
+        margin: 0 -15px; padding: 6px 15px 16px;
+    }
+    .ug-c2__list::-webkit-scrollbar { display: none; }
+    .ug-c2__item { flex: none; width: 144px; min-height: 160px; scroll-snap-align: start; }
+    .ug-c2__item.is-top { width: 158px; min-height: 200px; padding: 20px 10px; }
+    .ug-c2__num { font-size: 76px; }
+    .ug-c2__laurel { width: 132px; height: 132px; }
+    .ug-c2__icon { width: 62px; height: 62px; }
+    .ug-c2__title { font-size: 13px; }
+    .ug-c2__item.is-top .ug-c2__title { font-size: 16px; }
+}
