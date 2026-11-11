@@ -32,8 +32,18 @@ defined('ABSPATH') || exit;
 const UG_DOCS_FOLDER = [
     [
         'tab'   => 'Товарный знак',
-        'card'  => ['Товарный знак', 'Свидетельство о&nbsp;регистрации товарного знака Umbrella Group', 'cert'], // «Что хранится в папке»: заголовок, текст, иконка
-        'title' => 'Свидетельство на&nbsp;товарный знак UMBRELLA GROUP',
+        'card'  => ['Товарный знак', 'Свидетельство о&nbsp;регистрации товарного знака Umbrella Group', 'cert'], // «Что хранится в папке»: заголовок, текст, иконка — у первого листа группы
+        'title' => 'Свидетельство на&nbsp;товарный знак №&nbsp;1237218', // заявка 2025800192, приоритет 16.09.2025, действует до 16.09.2035
+        'date'  => '01 июля 2026',
+        'sheet' => '/wp-content/themes/umbrella-group/assets/docs/svidetelstvo-tz-1237218-768.jpg',
+        'w'     => 768,
+        'h'     => 1087,
+        'scan'  => '/wp-content/themes/umbrella-group/assets/docs/svidetelstvo-tz-1237218.jpg',
+        'pdf'   => '/wp-content/themes/umbrella-group/assets/docs/svidetelstvo-tz-1237218.pdf',
+    ],
+    [
+        'tab'   => 'Товарный знак',
+        'title' => 'Свидетельство на&nbsp;товарный знак №&nbsp;829357',
         'date'  => '20 сентября 2021',
         'sheet' => 'doc_tovarniy-znak-768x1086.jpg',
         'w'     => 768,
@@ -161,8 +171,8 @@ function ug_docs_folder_shortcode(): string
         }
 
         // Карточка «Что хранится в папке»: без JS — ссылка на скан, с JS — к листу в папке
-        [$cTitle, $cText, $cIcon] = $doc['card'];
-        $cards .= '<a class="docs-folder__card" href="' . $scan . '" target="_blank" rel="noopener" data-docs-card="' . $i . '">'
+        [$cTitle, $cText, $cIcon] = $doc['card'] ?? [null, null, null];
+        $cards .= $cTitle === null ? '' : '<a class="docs-folder__card" href="' . $scan . '" target="_blank" rel="noopener" data-docs-card="' . $i . '">'
             . '<span class="docs-folder__card-icon">' . ug_docs_icon($cIcon, 46) . '</span>'
             . '<span class="docs-folder__card-body"><b class="docs-folder__card-title">' . $cTitle . '</b>'
             . '<span class="docs-folder__card-text">' . $cText . '</span>'
