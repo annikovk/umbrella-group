@@ -13,19 +13,22 @@
 defined('ABSPATH') || exit;
 
 $ug_blog_url  = get_permalink((int) get_option('page_for_posts'));
-$ug_term      = is_category() ? get_queried_object() : null;
+$ug_term      = ug_blog_query_direction($GLOBALS['wp_query']);
 $ug_is_search = is_search();
 $ug_query     = get_search_query();
+$ug_base_url  = ug_blog_base_url($ug_term);
+$ug_found     = (int) $GLOBALS['wp_query']->found_posts;
 $ug_asc       = strtolower((string) get_query_var('order')) === 'asc';
 
-if ($ug_term) {
+if ($ug_is_search) {
+    $ug_h1   = 'Поиск по статьям';
+    $ug_where = $ug_term ? ' в направлении «' . $ug_term->name . '»' : '';
+    $ug_lead = $ug_found
+        ? sprintf('По запросу «%s»%s — %s', $ug_query, $ug_where, ug_blog_count($ug_found))
+        : sprintf('По запросу «%s»%s ничего не нашлось', $ug_query, $ug_where);
+} elseif ($ug_term) {
     $ug_h1   = $ug_term->name;
     $ug_lead = trim(wp_strip_all_tags(term_description($ug_term))) ?: 'Статьи блога Umbrella Group по направлению «' . $ug_term->name . '»';
-} elseif ($ug_is_search) {
-    $ug_h1   = 'Поиск по статьям';
-    $ug_lead = $GLOBALS['wp_query']->found_posts
-        ? sprintf('По запросу «%s» — %s', $ug_query, ug_blog_count($GLOBALS['wp_query']->found_posts))
-        : sprintf('По запросу «%s» ничего не нашлось', $ug_query);
 } else {
     $ug_h1   = UG_BLOG_TITLE;
     $ug_lead = UG_BLOG_LEAD;
@@ -39,7 +42,10 @@ $ug_crumbs = ['<a href="' . esc_url(home_url('/')) . '">Главная</a>'];
 if ($ug_term || $ug_is_search || is_paged()) {
     $ug_crumbs[] = '<a href="' . esc_url($ug_blog_url) . '">Блог</a>';
 }
-if ($ug_term) {
+if ($ug_term && $ug_is_search) {
+    $ug_crumbs[] = '<a href="' . esc_url($ug_base_url) . '">' . esc_html($ug_term->name) . '</a>';
+    $ug_crumbs[] = 'Поиск';
+} elseif ($ug_term) {
     $ug_crumbs[] = esc_html($ug_term->name);
 } elseif ($ug_is_search) {
     $ug_crumbs[] = 'Поиск';
@@ -62,12 +68,20 @@ do_action('flatsome_before_page'); ?>
                 <h1 class="blog-head__title"><?php echo esc_html($ug_h1); ?></h1>
                 <p class="blog-head__lead"><?php echo esc_html($ug_lead); ?></p>
             </div>
-            <form class="blog-search" role="search" method="get" action="<?php echo esc_url(home_url('/')); ?>">
+            <form class="blog-search" role="search" method="get" action="<?php echo esc_url(home_url('/')); ?>"
+                  data-base-url="<?php echo esc_url($ug_base_url); ?>">
                 <label class="screen-reader-text" for="blog-search-q">Поиск по статьям</label>
                 <input class="blog-search__input" id="blog-search-q" type="search" name="s"
                        value="<?php echo esc_attr($ug_query); ?>" placeholder="Поиск по статьям" autocomplete="off">
                 <input type="hidden" name="post_type" value="post">
+                <?php if ($ug_term) : ?>
+                    <input type="hidden" name="category_name" value="<?php echo esc_attr($ug_term->slug); ?>">
+                <?php endif; ?>
+                <?php if ($ug_asc) : ?>
+                    <input type="hidden" name="order" value="asc">
+                <?php endif; ?>
                 <button class="blog-search__btn" type="submit" aria-label="Найти"></button>
+                <button class="blog-search__clear" type="button" aria-label="Очистить поиск"<?php echo $ug_query === '' ? ' hidden' : ''; ?>></button>
             </form>
         </header>
 
@@ -96,10 +110,10 @@ do_action('flatsome_before_page'); ?>
                 })();
             </script>
 
-            <section class="blog-main">
+            <section class="blog-main" aria-live="polite">
                 <div class="blog-main__head">
                     <h2 class="blog-main__title"><?php echo $ug_is_search ? 'Найденные статьи' : 'Последние публикации'; ?></h2>
-                    <?php if (have_posts() && $GLOBALS['wp_query']->found_posts > 1) : ?>
+                    <?php if (have_posts() && $ug_found > 1) : ?>
                         <a class="blog-sort<?php echo $ug_asc ? ' is-asc' : ''; ?>" href="<?php echo esc_url($ug_sort_url); ?>" rel="nofollow"><?php echo $ug_asc ? 'Сначала старые' : 'Сначала новые'; ?></a>
                     <?php endif; ?>
                 </div>
@@ -113,7 +127,11 @@ do_action('flatsome_before_page'); ?>
                     <?php echo ug_blog_pagination(); ?>
                 <?php else : ?>
                     <div class="blog-empty">
-                        <p>Статей не нашлось. Попробуйте другой запрос или посмотрите <a href="<?php echo esc_url($ug_blog_url); ?>">все статьи</a>.</p>
+                        <p class="blog-empty__title">Статей не нашлось</p>
+                        <p class="blog-empty__text"><?php echo $ug_is_search
+                            ? 'По запросу «' . esc_html($ug_query) . '» в заголовках статей ничего нет. Попробуйте другое слово или его начало.'
+                            : 'В этом разделе пока нет статей.'; ?></p>
+                        <a class="blog-empty__link" href="<?php echo esc_url($ug_blog_url); ?>">Все статьи</a>
                     </div>
                 <?php endif; ?>
             </section>

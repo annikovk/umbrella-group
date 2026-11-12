@@ -46,17 +46,38 @@ function ug_blog_directions(): array
     return $dirs;
 }
 
-/** Текущая страница — одна из страниц блога: /blog/, направление или поиск по записям. */
+/** Направление запроса (дочерняя рубрика «Блога») или null. */
+function ug_blog_query_direction(WP_Query $q): ?WP_Term
+{
+    if (!$q->is_category()) {
+        return null;
+    }
+    $term = $q->get_queried_object();
+    return $term instanceof WP_Term && (int) $term->parent === UG_BLOG_ROOT_CAT ? $term : null;
+}
+
+/**
+ * Страница блога: /blog/, направление или поиск по записям
+ * (/?s=…&post_type=post, в направлении — ещё &category_name=<slug>).
+ */
+function ug_blog_query_is_blog(WP_Query $q): bool
+{
+    if ($q->is_search()) {
+        return (array) $q->get('post_type') === ['post']
+            && (!$q->is_category() || ug_blog_query_direction($q) !== null);
+    }
+    return $q->is_home() || ug_blog_query_direction($q) !== null;
+}
+
 function ug_is_blog_view(): bool
 {
-    if (is_home()) {
-        return true;
-    }
-    if (is_category()) {
-        $term = get_queried_object();
-        return $term instanceof WP_Term && (int) $term->parent === UG_BLOG_ROOT_CAT;
-    }
-    return is_search() && (array) get_query_var('post_type') === ['post'];
+    return ug_blog_query_is_blog($GLOBALS['wp_query']);
+}
+
+/** Адрес раздела без поиска: направление или /blog/. */
+function ug_blog_base_url(?WP_Term $dir): string
+{
+    return $dir ? get_category_link($dir) : get_permalink((int) get_option('page_for_posts'));
 }
 
 /** Направление записи для метки на карточке — первое по порядку из ug_blog_directions(). */
@@ -158,27 +179,53 @@ function ug_blog_pagination(): string
     return '<nav class="blog-pager" aria-label="Страницы блога">' . implode('', $links) . '</nav>';
 }
 
-/** Основной запрос страницы блога: /blog/, направление или поиск по записям (для pre_get_posts). */
+/** Основной запрос страницы блога (для pre_get_posts и posts_search). */
 function ug_blog_is_blog_query(WP_Query $q): bool
 {
-    if (is_admin() || !$q->is_main_query()) {
-        return false;
-    }
-    if ($q->is_home()) {
-        return true;
-    }
-    if ($q->is_category()) {
-        $term = $q->get_queried_object();
-        return $term instanceof WP_Term && (int) $term->parent === UG_BLOG_ROOT_CAT;
-    }
-    return $q->is_search() && (array) $q->get('post_type') === ['post'];
+    return !is_admin() && $q->is_main_query() && ug_blog_query_is_blog($q);
 }
 
 // По 6 статей на страницу только на страницах блога; общий posts_per_page (10) не трогаем.
+// Поиск по блогу — по дате, как список (не по релевантности), ?order=asc работает и в нём.
 add_action('pre_get_posts', function (WP_Query $q): void {
     if (ug_blog_is_blog_query($q)) {
         $q->set('posts_per_page', UG_BLOG_PER_PAGE);
+        if ($q->is_search()) {
+            $q->set('orderby', 'date');
+        }
     }
+});
+
+// Поиск по блогу — только по заголовкам: каждое слово запроса — подстрока
+// заголовка («бухгалт» находит «Бухгалтерия»). Регистр не важен: сравнивает
+// MySQL по collation колонки (на проде utf8mb4_unicode_ci). Общий поиск сайта
+// (/?s= без post_type=post) ищет, как раньше, по заголовку, отрывку и тексту.
+add_filter('posts_search', function (string $search, WP_Query $q): string {
+    if (!ug_blog_is_blog_query($q) || !$q->is_search()) {
+        return $search;
+    }
+    global $wpdb;
+    $where = [];
+    foreach ((array) $q->get('search_terms') as $term) {
+        $term = ltrim((string) $term, '-');
+        if ($term !== '') {
+            $where[] = $wpdb->prepare("{$wpdb->posts}.post_title LIKE %s", '%' . $wpdb->esc_like($term) . '%');
+        }
+    }
+    return $where ? ' AND (' . implode(' AND ', $where) . ') ' : $search;
+}, 10, 2);
+
+// Пустой запрос (/?s=&post_type=post, одни пробелы) — не поиск: на раздел без поиска.
+add_action('template_redirect', function (): void {
+    if (!isset($_GET['s']) || trim(wp_unslash((string) $_GET['s'])) !== '' || !ug_is_blog_view() || !is_search()) {
+        return;
+    }
+    $url = ug_blog_base_url(ug_blog_query_direction($GLOBALS['wp_query']));
+    if (strtolower((string) get_query_var('order')) === 'asc') {
+        $url = add_query_arg('order', 'asc', $url);
+    }
+    wp_safe_redirect($url, 302);
+    exit;
 });
 
 // Направления открыты для индексации. В AIOSEO Lite noindex у рубрик один на
@@ -186,7 +233,7 @@ add_action('pre_get_posts', function (WP_Query $q): void {
 // остаётся), правила для отдельной рубрики нет — поэтому фильтр. Страницы
 // 2, 3… не трогаем: их noindex, nofollow ставит AIOSEO, как у /blog/page/N/.
 add_filter('aioseo_robots_meta', function ($attributes) {
-    if (!is_array($attributes) || !is_category() || is_paged()) {
+    if (!is_array($attributes) || !is_category() || is_search() || is_paged()) {
         return $attributes;
     }
     $term = get_queried_object();
@@ -204,9 +251,14 @@ add_filter('search_template', function (string $template): string {
     return ug_is_blog_view() ? (locate_template('home.php') ?: $template) : $template;
 });
 
-// CSS страницы — в <head>, сразу после ug-main.
+// CSS страницы — в <head>, сразу после ug-main; живой поиск — в подвале.
 add_action('wp', function (): void {
     if (ug_is_blog_view()) {
         ug_head_style('assets/css/pages/blog.css');
+    }
+});
+add_action('wp_enqueue_scripts', function (): void {
+    if (ug_is_blog_view()) {
+        ug_enqueue_script('assets/js/pages/blog.js');
     }
 });
