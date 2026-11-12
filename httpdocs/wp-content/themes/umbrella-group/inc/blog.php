@@ -181,6 +181,21 @@ add_action('pre_get_posts', function (WP_Query $q): void {
     }
 });
 
+// Направления открыты для индексации. В AIOSEO Lite noindex у рубрик один на
+// всю таксономию (у «Новостей», «Полезного из блога», /category/blog/ он
+// остаётся), правила для отдельной рубрики нет — поэтому фильтр. Страницы
+// 2, 3… не трогаем: их noindex, nofollow ставит AIOSEO, как у /blog/page/N/.
+add_filter('aioseo_robots_meta', function ($attributes) {
+    if (!is_array($attributes) || !is_category() || is_paged()) {
+        return $attributes;
+    }
+    $term = get_queried_object();
+    if ($term instanceof WP_Term && (int) $term->parent === UG_BLOG_ROOT_CAT) {
+        unset($attributes['noindex']);
+    }
+    return $attributes;
+});
+
 // Направления и поиск по записям — тем же шаблоном, что и /blog/.
 add_filter('category_template', function (string $template): string {
     return ug_is_blog_view() ? (locate_template('home.php') ?: $template) : $template;
