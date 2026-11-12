@@ -1,0 +1,586 @@
+/* Блог /blog/, направления и поиск по статьям — home.php, inc/blog.php */
+
+.blog-page {
+    padding-bottom: 72px;
+}
+
+.blog-page__inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 28px 15px 0;
+}
+
+.blog-crumbs {
+    margin-bottom: 28px;
+    font-size: 12px;
+    font-weight: 300;
+    color: #1a1a1a;
+}
+
+.blog-crumbs a {
+    color: inherit;
+}
+
+.blog-crumbs a:hover {
+    color: #ec1c23;
+}
+
+.blog-crumbs__sep {
+    color: #ec1c23;
+}
+
+/* ── Шапка: h1 и подзаголовок слева, поиск справа ───────────────────────── */
+
+.blog-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 56px;
+}
+
+.blog-head__title {
+    margin: 0 0 14px;
+    font-family: "PT Serif", serif;
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 1.08;
+    color: #1a1a1a;
+}
+
+.blog-head__lead {
+    margin: 0;
+    font-size: 19px;
+    line-height: 1.45;
+    color: #555;
+}
+
+.blog-search {
+    position: relative;
+    flex: 0 0 320px;
+    margin: 0 0 10px;
+}
+
+.blog-search .blog-search__input {
+    width: 100%;
+    height: 48px;
+    margin: 0;
+    padding: 0 16px 0 48px;
+    border: 1px solid #d4d4d4;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow: none;
+    font-size: 15px;
+    color: #1a1a1a;
+    transition: border-color .2s;
+}
+
+.blog-search .blog-search__input::placeholder {
+    color: #8a8a8a;
+    opacity: 1;
+}
+
+.blog-search .blog-search__input:focus {
+    border-color: #ec1c23;
+    box-shadow: none;
+    outline: none;
+}
+
+/* Лупа — кнопка отправки поверх левого края поля */
+.blog-search .blog-search__btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 48px;
+    height: 48px;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='m15.5 15.5 5 5'/%3E%3C/svg%3E") center / 20px no-repeat;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+/* ── Две колонки ─────────────────────────────────────────────────────────── */
+
+.blog-layout {
+    display: grid;
+    grid-template-columns: 204px minmax(0, 1fr);
+    column-gap: 36px;
+    align-items: start;
+}
+
+.blog-side {
+    position: relative;
+    padding-right: 20px;
+}
+
+/* Тонкая вертикальная черта между колонками */
+.blog-side::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: -40px;
+    width: 1px;
+    background: #ececec;
+}
+
+.blog-nav__title,
+.blog-main__title {
+    margin: 0;
+    font-family: "PT Serif", serif;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.blog-nav__title {
+    margin-bottom: 18px;
+    font-size: 22px;
+    line-height: 1.3;
+}
+
+.blog-nav__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.blog-nav__list li {
+    margin: 0 0 2px;
+}
+
+.blog-nav__item {
+    display: block;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 15px;
+    line-height: 1.35;
+    color: #1a1a1a;
+    transition: background .2s, color .2s;
+}
+
+.blog-nav__item:hover {
+    color: #ec1c23;
+}
+
+.blog-nav__item.is-active {
+    background: #fdecec;
+    color: #ec1c23;
+}
+
+.blog-ask {
+    margin-top: 28px;
+    padding: 28px 0 0;
+    border-top: 1px solid #e3e3e3;
+}
+
+.blog-ask__text {
+    margin: 0 0 8px;
+    font-size: 15px;
+    color: #666;
+}
+
+.blog-ask__link {
+    font-size: 15px;
+    font-weight: 500;
+    color: #ec1c23;
+}
+
+.blog-ask__link::after {
+    content: ' →';
+}
+
+.blog-ask__link:hover {
+    color: #c9151b;
+}
+
+/* ── Список ──────────────────────────────────────────────────────────────── */
+
+.blog-main__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.blog-main__title {
+    font-size: 28px;
+    line-height: 1.25;
+}
+
+.blog-sort {
+    flex: none;
+    font-size: 15px;
+    color: #444;
+    white-space: nowrap;
+}
+
+.blog-sort::after {
+    content: ' ↓';
+}
+
+.blog-sort.is-asc::after {
+    content: ' ↑';
+}
+
+.blog-sort:hover {
+    color: #ec1c23;
+}
+
+.blog-card {
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.blog-card__link {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 20px 0;
+    color: #1a1a1a;
+}
+
+.blog-card__media {
+    position: relative;
+    flex: 0 0 216px;
+    aspect-ratio: 216 / 170;
+    overflow: hidden;
+    border-radius: 4px;
+    background: #f3f3f3;
+}
+
+.blog-card__img,
+.blog-card__ph {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.blog-card__img {
+    object-fit: cover;
+    transition: transform .3s;
+}
+
+/* Плейсхолдер без миниатюры: серый фон и знак логотипа */
+.blog-card__ph {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 225 225'%3E%3Cpath d='M0 0h45v113a67.5 67.5 0 0 0 135 0V45h-45v68a22.5 22.5 0 0 1-45 0V0h135v113A112.5 112.5 0 0 1 0 113Z' fill='%23e4e4e4'/%3E%3C/svg%3E") center / 56px no-repeat;
+}
+
+.blog-card__body {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.blog-card__cat {
+    margin-bottom: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #ec1c23;
+}
+
+.blog-card .blog-card__title {
+    margin: 0 0 8px;
+    font-family: Inter, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #1a1a1a;
+    transition: color .2s;
+}
+
+.blog-card .blog-card__title,
+.blog-card__excerpt {
+    max-width: 640px;
+}
+
+.blog-card__excerpt {
+    display: -webkit-box;
+    margin-bottom: 12px;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #555;
+}
+
+.blog-card__date {
+    font-size: 14px;
+    color: #8a8a8a;
+}
+
+.blog-card__arrow {
+    flex: 0 0 24px;
+    width: 24px;
+    height: 24px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ec1c23' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 12h18M14 5l7 7-7 7'/%3E%3C/svg%3E") center / 24px no-repeat;
+    transition: transform .2s;
+}
+
+.blog-card__link:hover .blog-card__title {
+    color: #ec1c23;
+}
+
+.blog-card__link:hover .blog-card__arrow {
+    transform: translateX(4px);
+}
+
+.blog-card__link:hover .blog-card__img {
+    transform: scale(1.03);
+}
+
+.blog-empty {
+    padding: 32px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+.blog-empty a {
+    color: #ec1c23;
+}
+
+/* ── Окно «Задать вопрос» (CF7 11210) ───────────────────────────────────
+   Заголовок формы «Задайте вопрос специалисту» подменён на «Задать вопрос»
+   (сама форма общая с /faq/ и не правится). Высота окна — по содержимому:
+   .lightbox-form в flatsome-legacy.css жёстко 630 px, и согласие внизу этой
+   формы вылезало за белую рамку. */
+
+.blog-ask-box .lightbox-form {
+    height: auto !important;
+    padding-bottom: 28px;
+}
+
+.blog-ask-box .leave-request-contact-form-header {
+    font-size: 0 !important;
+}
+
+.blog-ask-box .leave-request-contact-form-header::before {
+    content: 'Задать вопрос';
+    font-size: 24px;
+    line-height: 1.5;
+}
+
+/* ── Пагинация ───────────────────────────────────────────────────────────── */
+
+.blog-pager {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 36px;
+}
+
+.blog-pager .page-numbers {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 42px;
+    height: 42px;
+    padding: 0 10px;
+    border: 1px solid #e3e3e3;
+    border-radius: 6px;
+    font-size: 15px;
+    color: #1a1a1a;
+    transition: border-color .2s, color .2s;
+}
+
+.blog-pager a.page-numbers:hover {
+    border-color: #ec1c23;
+    color: #ec1c23;
+}
+
+.blog-pager .page-numbers.current {
+    border-color: #fdecec;
+    background: #fdecec;
+    color: #ec1c23;
+    font-weight: 600;
+}
+
+.blog-pager .page-numbers.dots {
+    border-color: transparent;
+}
+
+/* ── Планшет ─────────────────────────────────────────────────────────────── */
+
+@media (max-width: 1100px) {
+    .blog-head__title {
+        font-size: 46px;
+    }
+
+    .blog-search {
+        flex-basis: 280px;
+    }
+
+    .blog-card__media {
+        flex-basis: 180px;
+    }
+}
+
+/* ── Телефон: одна колонка, направления — лентой чипов ──────────────────── */
+
+@media (max-width: 849px) {
+    .blog-page {
+        padding-bottom: 48px;
+    }
+
+    .blog-page__inner {
+        padding-top: 18px;
+    }
+
+    .blog-crumbs {
+        margin-bottom: 18px;
+    }
+
+    .blog-head {
+        display: block;
+        margin-bottom: 24px;
+    }
+
+    .blog-head__title {
+        margin-bottom: 10px;
+        font-size: 36px;
+    }
+
+    .blog-head__lead {
+        margin-bottom: 20px;
+        font-size: 16px;
+    }
+
+    .blog-search {
+        margin: 0;
+    }
+
+    .blog-layout {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Боковая колонка распадается: направления — над списком, «Задать вопрос» — под ним */
+    .blog-side {
+        display: contents;
+    }
+
+    .blog-side::after {
+        display: none;
+    }
+
+    /* Ширина задана явно: без неё flex-элемент растягивается по ленте чипов
+       и прокрутки нет */
+    .blog-nav {
+        order: 1;
+        width: calc(100% + 30px);
+        min-width: 0;
+        margin: 0 -15px 24px;
+    }
+
+    .blog-main {
+        order: 2;
+    }
+
+    .blog-ask {
+        order: 3;
+        margin-top: 32px;
+        padding-top: 24px;
+    }
+
+    .blog-nav__title {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+    }
+
+    .blog-nav__list {
+        display: flex;
+        gap: 8px;
+        padding: 0 15px 4px;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .blog-nav__list::-webkit-scrollbar {
+        display: none;
+    }
+
+    .blog-nav__list li {
+        flex: none;
+        margin: 0;
+    }
+
+    .blog-nav__item {
+        padding: 8px 14px;
+        border: 1px solid #e3e3e3;
+        border-radius: 999px;
+        font-size: 14px;
+        white-space: nowrap;
+    }
+
+    .blog-nav__item.is-active {
+        border-color: #fdecec;
+    }
+
+    .blog-main__head {
+        flex-wrap: wrap;
+        row-gap: 4px;
+        padding-bottom: 14px;
+    }
+
+    .blog-main__title {
+        font-size: 19px;
+        white-space: nowrap;
+    }
+
+    .blog-sort {
+        font-size: 13px;
+    }
+
+    .blog-card__link {
+        align-items: flex-start;
+        gap: 14px;
+        padding: 16px 0;
+    }
+
+    .blog-card__media {
+        flex-basis: 104px;
+        aspect-ratio: 1;
+    }
+
+    .blog-card__ph {
+        background-size: 36px;
+    }
+
+    .blog-card__cat {
+        margin-bottom: 4px;
+        font-size: 12px;
+    }
+
+    .blog-card .blog-card__title {
+        margin-bottom: 6px;
+        font-size: 16px;
+        line-height: 1.3;
+    }
+
+    .blog-card__excerpt {
+        display: none;
+    }
+
+    .blog-card__date {
+        font-size: 13px;
+    }
+
+    .blog-card__arrow {
+        display: none;
+    }
+
+    .blog-pager .page-numbers {
+        min-width: 38px;
+        height: 38px;
+    }
+}
