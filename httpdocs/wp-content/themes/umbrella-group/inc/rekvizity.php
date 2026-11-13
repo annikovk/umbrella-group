@@ -137,6 +137,11 @@ function ug_rekv_render_org(array $org, bool $active): string
         $bank .= ug_rekv_field($org, $k, $copy);
     }
 
+    // Банковских реквизитов ещё нет — колонки нет вовсе, а не пустой заголовок.
+    $bank = $bank !== ''
+        ? '<div class="ugr-col"><h3 class="ugr-col__title">Банковские реквизиты</h3><dl class="ugr-list">' . $bank . '</dl></div>'
+        : '';
+
     $hidden  = $active ? '' : ' data-off';
     $copy_ic = ug_rekv_svg('copy');
     $card    = ug_rekv_card($org);
@@ -156,10 +161,7 @@ function ug_rekv_render_org(array $org, bool $active): string
                     <h3 class="ugr-col__title">Сведения об организации</h3>
                     {$ids}<dl class="ugr-list">{$info}</dl>
                 </div>
-                <div class="ugr-col">
-                    <h3 class="ugr-col__title">Банковские реквизиты</h3>
-                    <dl class="ugr-list">{$bank}</dl>
-                </div>
+                {$bank}
             </div>
         </section>
         HTML;
