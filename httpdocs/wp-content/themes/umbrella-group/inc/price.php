@@ -355,7 +355,7 @@ function ug_price_render_details(array $it, string $id): string
     }
     $head = $has_list ? 'Что входит' : 'Подробнее';
     $link = $it['url'] !== ''
-        ? '<a class="ugp-inc__link" href="' . esc_url($it['url']) . '">Страница услуги<span class="ugp-arr" aria-hidden="true">→</span></a>'
+        ? '<a class="ugp-inc__link" href="' . esc_url($it['url']) . '">Подробнее об услуге<span class="ugp-arr" aria-hidden="true">→</span></a>'
         : '';
     return '<div class="ugp-inc" id="' . esc_attr($id) . '"><p class="ugp-inc__h">' . $head . '</p>' . $html . $link . '</div>';
 }
