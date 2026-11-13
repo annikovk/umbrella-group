@@ -444,13 +444,12 @@ function ug_price_render_dir(array $d, bool $active): string
         foreach ($d['how'] as [$b, $s]) {
             $how .= '<li class="ugp-how__it"><b>' . esc_html($b) . '</b><span>' . esc_html($s) . '</span></li>';
         }
-        $how .= '</ol><p class="ugp-how__note">Нужна отдельная консультация или разовая задача? <a href="#ugp-form" data-option="' . esc_attr(UG_PRICE_OPT_OTHER) . '">Опишите её в заявке<span class="ugp-arr" aria-hidden="true">→</span></a></p></div>';
+        $how .= '</ol><p class="ugp-how__note">Нужна отдельная консультация или разовая задача? <a href="#ugp-form">Опишите её в заявке<span class="ugp-arr" aria-hidden="true">→</span></a></p></div>';
     }
 
     $cls     = 'ugp-dir' . ($active ? ' is-active' : '');
     $example = esc_attr($d['example']);
     $name    = esc_attr($d['name']);
-    $other   = esc_attr(UG_PRICE_OPT_OTHER);
     return <<<HTML
         <section class="{$cls}" id="{$id}" data-dir="{$id}" data-name="{$name}" data-pages="{$pages}" data-example="{$example}">
             {$anchor}
@@ -461,7 +460,7 @@ function ug_price_render_dir(array $d, bool $active): string
                 <div class="ugp-tbl__h" aria-hidden="true"><span></span><span>Услуга</span><span>Стоимость</span><span></span></div>
                 {$rows}
                 <nav class="ugp-pager" aria-label="Страницы направления «{$name}»"></nav>
-                <p class="ugp-notfound">Не нашли свою услугу? <a href="#ugp-form" data-option="{$other}">Опишите задачу — рассчитаем<span class="ugp-arr" aria-hidden="true">→</span></a></p>
+                <p class="ugp-notfound">Не нашли свою услугу? <a href="#ugp-form">Опишите задачу — рассчитаем<span class="ugp-arr" aria-hidden="true">→</span></a></p>
             </div>
             {$how}
         </section>
@@ -488,13 +487,24 @@ add_shortcode('ug_price_page', static function ($atts, $content = ''): string {
     }
 
     $form_id = (int) $atts['form'];
-    $form = $form_id && get_post_type($form_id) === 'wpcf7_contact_form'
+    $has_form = $form_id && get_post_type($form_id) === 'wpcf7_contact_form';
+    $form = $has_form
         ? do_shortcode('[contact-form-7 id="' . $form_id . '" html_class="ugp-cf7"]')
         : '<p>Позвоните нам — рассчитаем стоимость по телефону.</p>';
+    // Та же форма поп-апом (Flatsome lightbox, как «Задать вопрос» в блоге):
+    // её открывают «Рассчитать», «Помочь с выбором», «Не нашли свою услугу?».
+    // Ссылка-триггер нужна Flatsome: он вешает открытие на a[href="#ugp-calc"],
+    // а JS страницы щёлкает по ней, подставив услугу.
+    $popup = $has_form
+        ? do_shortcode('[lightbox id="ugp-calc" width="480px" padding="0px" class="ugp-pop"]'
+            . '<div class="ugp-pop__box ugp-cf7box"><p class="ugp-pop__title">Получите расчёт</p>'
+            . '<p class="ugp-pop__text">Уточним задачу и подготовим предложение для вашей компании.</p>'
+            . '[contact-form-7 id="' . $form_id . '" html_class="ugp-cf7"]</div>[/lightbox]')
+            . '<a class="ugp-pop__open" href="#ugp-calc" hidden aria-hidden="true" tabindex="-1"></a>'
+        : '';
 
     $h1   = esc_html($atts['title']);
     $lead = $atts['lead'] !== '' ? '<p class="ugp-head__lead">' . esc_html($atts['lead']) . '</p>' : '';
-    $help = esc_attr(UG_PRICE_OPT_HELP);
 
     return <<<HTML
         <div class="ugp" id="ugp">
@@ -522,7 +532,7 @@ add_shortcode('ug_price_page', static function ($atts, $content = ''): string {
                         </nav>
                         <div class="ugp-help">
                             <p class="ugp-help__text">Не знаете, что выбрать?</p>
-                            <a class="ugp-help__link" href="#ugp-form" data-option="{$help}">Помочь с выбором<span class="ugp-arr" aria-hidden="true">→</span></a>
+                            <a class="ugp-help__link" href="#ugp-form">Помочь с выбором<span class="ugp-arr" aria-hidden="true">→</span></a>
                         </div>
                     </aside>
                     <div class="ugp-main" aria-live="polite">
@@ -537,9 +547,10 @@ add_shortcode('ug_price_page', static function ($atts, $content = ''): string {
                         <p class="ugp-form__text">Расскажите, какая помощь нужна. Уточним задачу и подготовим предложение.</p>
                         <p class="ugp-form__tel contacts-text"><a href="tel:+73833731717">+7 (383) 373-17-17</a></p>
                     </div>
-                    <div class="ugp-form__box">{$form}</div>
+                    <div class="ugp-form__box ugp-cf7box">{$form}</div>
                 </section>
             </div>
+            {$popup}
         </div>
         HTML;
 });

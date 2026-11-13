@@ -5,7 +5,7 @@
  * старые якоря #section-… тоже работают), по 6 услуг на страницу с
  * пагинацией (data-p у строк и заголовков групп считает сервер),
  * «Подробнее» раскрывает «Что входит», поиск «Найти услугу» — по всем
- * направлениям сразу, «Рассчитать» подставляет услугу в форму и прокручивает к ней.
+ * направлениям сразу, «Рассчитать» открывает форму поп-апом (Flatsome lightbox #ugp-calc) с подставленной услугой.
  */
 (function () {
     'use strict';
@@ -181,7 +181,7 @@
         found.hidden = false;
         found.innerHTML = total
             ? 'По запросу «' + escapeHtml(q.trim()) + '» — ' + total + ' ' + plural(total)
-            : 'По запросу «' + escapeHtml(q.trim()) + '» ничего не нашлось. <a href="#ugp-form" data-option="Другая услуга">Опишите задачу — рассчитаем<span class="ugp-arr" aria-hidden="true">→</span></a>';
+            : 'По запросу «' + escapeHtml(q.trim()) + '» ничего не нашлось. <a href="#ugp-form">Опишите задачу — рассчитаем<span class="ugp-arr" aria-hidden="true">→</span></a>';
     }
 
     function resetSearch() {
@@ -203,34 +203,39 @@
         input.focus();
     });
 
-    // ── Форма ────────────────────────────────────────────────────────────
-    var form = document.getElementById('ugp-form');
-    var select = form ? form.querySelector('select[name="price-service"]') : null;
-    var task = form ? form.querySelector('textarea[name="price-task"]') : null;
+    // ── Форма: поп-ап #ugp-calc (та же CF7, что внизу) ───────────────────
+    var popup = document.getElementById('ugp-calc');
+    var opener = root.querySelector('.ugp-pop__open');
+    var select = popup ? popup.querySelector('select[name="price-service"]') : null;
+    var task = popup ? popup.querySelector('textarea[name="price-task"]') : null;
     var hint = null;
     var taskPlaceholder = task ? task.getAttribute('placeholder') : '';
+
+    Array.prototype.forEach.call(document.querySelectorAll('.ugp-cf7box select[name="price-service"]'), function (sel) {
+        sel.addEventListener('change', function () {
+            sel.classList.toggle('is-filled', sel.value !== '');
+            if (sel === select && hint) {
+                hint.hidden = true;
+            }
+        });
+    });
     if (select) {
         hint = document.createElement('p');
         hint.className = 'ugp-fld__hint';
         hint.hidden = true;
         select.closest('.wpcf7-form-control-wrap').insertAdjacentElement('afterend', hint);
-        select.addEventListener('change', function () {
-            select.classList.toggle('is-filled', select.value !== '');
-            hint.hidden = true;
-        });
     }
 
-    function fillForm(option, dirId) {
-        if (!select) {
-            return;
+    /** Подставить услугу (или сбросить выбор) и открыть поп-ап. */
+    function openCalc(option, dirId) {
+        if (!select || !opener) {
+            return false;
         }
-        var has = Array.prototype.some.call(select.options, function (o) {
+        var has = option !== '' && Array.prototype.some.call(select.options, function (o) {
             return o.value === option;
         });
-        if (has) {
-            select.value = option;
-        }
-        select.classList.toggle('is-filled', select.value !== '');
+        select.value = has ? option : '';
+        select.classList.toggle('is-filled', has);
         var dir = dirId ? byId(dirId) : null;
         if (has && dir) {
             hint.innerHTML = 'Подставили из таблицы · <b>' + escapeHtml(dir.getAttribute('data-name')) + '</b> — можно выбрать другую';
@@ -239,9 +244,22 @@
             hint.hidden = true;
         }
         if (task && !task.value) {
-            var ex = dir && dir.getAttribute('data-example');
+            var ex = has && dir && dir.getAttribute('data-example');
             task.setAttribute('placeholder', ex || taskPlaceholder);
         }
+        // после прошлой отправки в окне остаётся «Спасибо…» — убираем
+        var out = popup.querySelector('.wpcf7-response-output');
+        var wrap = popup.querySelector('.wpcf7-form');
+        if (wrap && wrap.getAttribute('data-status') === 'sent') {
+            wrap.setAttribute('data-status', 'init');
+            wrap.classList.remove('sent');
+            wrap.classList.add('init');
+            if (out) {
+                out.textContent = '';
+            }
+        }
+        opener.click();
+        return true;
     }
 
     // ── Клики ────────────────────────────────────────────────────────────
@@ -279,15 +297,9 @@
             return;
         }
         if (a.getAttribute('href') === '#ugp-form') {
-            e.preventDefault();
-            var dirEl = a.closest('.ugp-dir');
-            fillForm(a.getAttribute('data-option') || '', a.getAttribute('data-dir') || (dirEl ? dirEl.getAttribute('data-dir') : ''));
-            form.scrollIntoView({behavior: 'smooth', block: 'start'});
-            var focus = form.querySelector('input[name="price-contact"]');
-            if (focus) {
-                setTimeout(function () {
-                    focus.focus({preventScroll: true});
-                }, 600);
+            // без поп-апа (нет формы) — обычный переход к форме внизу
+            if (openCalc(a.getAttribute('data-option') || '', a.getAttribute('data-dir') || '')) {
+                e.preventDefault();
             }
         }
     });
