@@ -980,10 +980,16 @@
     font-size: 12px;
 }
 
+/* main.css держит ответ CF7 абсолютом поверх формы (top: 20px) — здесь он под кнопкой */
 .ugp-cf7box .wpcf7 form .wpcf7-response-output,
 .ugp-cf7box .custom-cf7-alert {
+    position: static;
+    z-index: auto;
     margin: 16px 0 0;
+    padding: 12px 14px !important;
+    border-radius: 5px;
     font-size: 14px;
+    line-height: 1.45;
 }
 
 /* ── Поп-ап «Получите расчёт» (Flatsome lightbox #ugp-calc) ─────────────── */

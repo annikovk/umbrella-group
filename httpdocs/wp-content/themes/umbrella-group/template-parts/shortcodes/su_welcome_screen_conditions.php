@@ -74,7 +74,7 @@ class SU_welcome_screen_conditions
                         Возможна оплата частями 
                         <span class="partial_payments_header_hint"> <img src="/wp-content/uploads/Help_Outline_Icon_18.png" alt="help icon"> 
                             <div class="partial_payments_header_tooltip">
-                                Предоплата 70 %, остальные 30 % оплачиваются после подписания акта о проделанных работах. Свяжитесь с нами и получите предложение!
+                                Возможна предоплата 70%, остальные 30% оплачиваются после подписания акта о проделанных работах. Уточните детали и условия у специалиста
                             </div> 
                         </span>
                     </div>

@@ -69,7 +69,7 @@ function get_partial_payment_note_for_prices_page()
                     Возможна оплата частями 
                     <span class="partial_payment_note_for_prices_page_hint"> <img src="/wp-content/uploads/Help_Outline_Icon_19.png" alt="help icon"> 
                         <div class="partial_payment_note_for_prices_page_tooltip">
-                            Предоплата 70 %, остальные 30 % оплачиваются после подписания акта о проделанных работах. Свяжитесь с нами и получите предложение!
+                            Возможна предоплата 70%, остальные 30% оплачиваются после подписания акта о проделанных работах. Уточните детали и условия у специалиста
                         </div> 
                     </span>
                 </span>

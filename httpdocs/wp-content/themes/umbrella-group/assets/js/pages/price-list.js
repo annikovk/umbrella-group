@@ -226,6 +226,40 @@
         select.closest('.wpcf7-form-control-wrap').insertAdjacentElement('afterend', hint);
     }
 
+    // reCAPTCHA v3 изредка отдаёт в браузере токен с ошибкой (siteverify:
+    // browser-error) — CF7 считает заявку спамом, письмо не уходит. Такую
+    // отправку повторяем один раз с новым токеном (wpcf7.submit обёрнут
+    // модулем reCAPTCHA: он сам запросит токен). Спам писем не шлёт, так что
+    // дубля заявки не будет.
+    document.addEventListener('wpcf7spam', function (e) {
+        var f = e.target;
+        if (!f || !f.closest || !f.closest('.ugp-cf7box') || f.getAttribute('data-ugp-retried') === '1') {
+            return;
+        }
+        f.setAttribute('data-ugp-retried', '1');
+        var out = f.querySelector('.wpcf7-response-output');
+        if (out) {
+            out.textContent = 'Отправляем ещё раз…';
+        }
+        setTimeout(function () {
+            if (window.wpcf7 && typeof window.wpcf7.submit === 'function') {
+                window.wpcf7.submit(f);
+            }
+        }, 800);
+    });
+    document.addEventListener('wpcf7mailsent', function (e) {
+        if (e.target && e.target.removeAttribute) {
+            e.target.removeAttribute('data-ugp-retried');
+            // CF7 очистил форму — подсказка «Подставили из таблицы» и подсветка выбора уже не к месту
+            Array.prototype.forEach.call(e.target.querySelectorAll('select.is-filled'), function (sel) {
+                sel.classList.remove('is-filled');
+            });
+            Array.prototype.forEach.call(e.target.querySelectorAll('.ugp-fld__hint'), function (h) {
+                h.hidden = true;
+            });
+        }
+    });
+
     /** Подставить услугу (или сбросить выбор) и открыть поп-ап. */
     function openCalc(option, dirId) {
         if (!select || !opener) {
