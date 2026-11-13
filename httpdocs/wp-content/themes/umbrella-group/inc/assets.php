@@ -121,18 +121,35 @@ function ug_enqueue_style(string $rel, array $deps = ['ug-main']): void
     }
 }
 
-/** CSS в <head> сразу после ug-main. Звать до wp_head:101 (хук wp, wp_enqueue_scripts). */
-function ug_head_style(string $rel): void
+/**
+ * CSS в <head> сразу после ug-main. Звать до wp_head:101 (хук wp, wp_enqueue_scripts).
+ * $tail = false — без второй копии в конце <body> (якорь каскада ниже): для
+ * CSS страниц, у которых нет инлайн-стилей в контенте, которые надо перебивать.
+ */
+function ug_head_style(string $rel, bool $tail = true): void
 {
     $handle = ug_register_style($rel);
     if ($handle === null) {
         return;
+    }
+    if (!$tail) {
+        ug_head_styles_no_tail($handle);
     }
     if (did_action('ug_head_styles_printed')) {
         wp_enqueue_style($handle);
         return;
     }
     ug_head_styles($handle);
+}
+
+/** Хэндлы CSS страниц без копии в конце <body> — см. ug_head_style(). */
+function ug_head_styles_no_tail(?string $add = null): array
+{
+    static $handles = [];
+    if ($add !== null && !in_array($add, $handles, true)) {
+        $handles[] = $add;
+    }
+    return $handles;
 }
 
 function ug_head_styles(?string $add = null): array
@@ -304,7 +321,7 @@ add_action('wp_footer', function (): void {
     $styles = wp_styles();
     foreach (ug_head_styles() as $handle) {
         $item = $styles->registered[$handle] ?? null;
-        if ($item === null) {
+        if ($item === null || in_array($handle, ug_head_styles_no_tail(), true)) {
             continue;
         }
         $href = $styles->_css_href((string) $item->src, $item->ver, $handle);
@@ -392,13 +409,14 @@ add_action('wp_enqueue_scripts', function (): void {
 
 /**
  * CSS и JS отдельных страниц (были в коллекторе по подстроке permalink):
- * страницы цен /price/… — pages/price.css + pages/price.js, вопросы /faq/
+ * страницы цен /price/… — pages/price.css + pages/price.js (кроме самой
+ * /price/ с [ug_price_page] — у неё свои, inc/price.php), вопросы /faq/
  * (архив и записи faq) — pages/faq.js. Скрипты страниц и общий main.js
  * исполнялись в конце <body> после всех скриптов — ставим их после flatsome-js.
  */
 add_action('wp_enqueue_scripts', function (): void {
     ug_enqueue_script('assets/js/main.js', ['jquery', 'flatsome-js']);
-    if (is_page() && str_contains((string) get_permalink(get_queried_object_id()), '/price/')) {
+    if (is_page() && str_contains((string) get_permalink(get_queried_object_id()), '/price/') && !ug_is_price_page()) {
         ug_head_style('assets/css/pages/price.css');
         ug_enqueue_script('assets/js/pages/price.js', ['jquery', 'flatsome-js']);
     }

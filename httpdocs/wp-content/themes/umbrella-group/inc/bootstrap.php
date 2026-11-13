@@ -37,3 +37,4 @@ require __DIR__ . '/snippets.php';
 require __DIR__ . '/cookie-notice.php';
 require __DIR__ . '/schema.php';
 require __DIR__ . '/blog.php';
+require __DIR__ . '/price.php';
