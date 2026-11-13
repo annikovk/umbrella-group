@@ -19,7 +19,7 @@ do_action('flatsome_before_page'); ?>
         <?php
         // Без шапки с хлебными крошками — разделы услуг (26, 28, 30, 32, 34,
         // 12792, 29220 «Интеллектуальное право») на первых двух уровнях вложенности, главная и страницы с
-        // [team_page], [about_hero], [clients_hero], [docs_folder], [contacts_page] и [ug_price_page] (/price/), а также /about/cases/ ([cases] рисует
+        // [team_page], [about_hero], [clients_hero], [docs_folder], [contacts_page], [ug_price_page] (/price/) и [ug_rekvizity] (/rekvizity/), а также /about/cases/ ([cases] рисует
         // ug_cases_hero()) — у них крошки и h1 в первом экране.
         $ug_sections = [26, 28, 32, 30, 34, 12792, 29220];
         $ug_parent   = (int) get_queried_object()->post_parent;
@@ -30,6 +30,7 @@ do_action('flatsome_before_page'); ?>
             || has_shortcode($ug_content, 'docs_folder')
             || has_shortcode($ug_content, 'contacts_page')
             || has_shortcode($ug_content, 'ug_price_page')
+            || has_shortcode($ug_content, 'ug_rekvizity')
             || str_contains(ug_request_path(), '/about/cases/');
 
         if (!$ug_own_hero && !in_array($ug_parent, $ug_sections, true) && !in_array($ug_grand, $ug_sections, true) && (!is_front_page() || is_paged())) {
