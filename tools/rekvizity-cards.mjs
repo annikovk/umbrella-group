@@ -6,6 +6,8 @@
  *     tools/rekvizity-cards.mjs --prod           # данные — page 27388 прода (ssh annikov.com)
  *     tools/rekvizity-cards.mjs content.txt      # данные — файл с контентом страницы
  *     tools/rekvizity-cards.mjs --out /tmp/x/    # куда писать (по умолчанию — в тему)
+ *     tools/rekvizity-cards.mjs --prod --add .local-dev/rekvizity-private.txt --out /tmp/x/
+ *                                                # + атрибуты из файла поверх (по id)
  *
  * Единственный источник реквизитов — шорткоды [ug_rekv_org …] в контенте
  * страницы (разметка — inc/rekvizity.php). Скрипт разбирает их, собирает
@@ -29,8 +31,21 @@
  * Карточка не для сайта (например, ИП Климова) — свой файл с [ug_rekv_org]
  * и --out вне темы, чтобы PDF не попал ни на сервер, ни в публичный репо.
  * `<поле>_label` меняет подпись строки (ogrn_label="ОГРНИП",
- * director_label="Директор") — так же, как шорткод на сайте. Только для PDF:
- * kind — надпись справа в шапке (по умолчанию «Карточка организации»).
+ * director_label="Директор") — так же, как шорткод на сайте.
+ *
+ * Только для PDF (страница их не выводит — ug_rekv_parse() берёт лишь свои
+ * поля): form (организационно-правовая форма), fact (фактический адрес),
+ * okved, okpo, tax (система налогообложения), director_basis («Устава»),
+ * director_phone/_email, accountant (главный бухгалтер) и accountant_phone/
+ * _email, contact_position/_phone/_email, bank_city; kind — надпись справа
+ * в шапке (по умолчанию «Карточка организации»). Телефон и почта — подстрокой
+ * под ФИО, основание — «действует на основании Устава».
+ *
+ * --add FILE (можно несколько раз): ещё [ug_rekv_org …], атрибуты сливаются
+ * с организацией того же id поверх контента, новые id добавляются в конец.
+ * Так в карточку попадают данные, которым не место в публичном контенте и
+ * репо (личные почты сотрудников, ИП Климов): они живут в .local-dev/
+ * (gitignore), а такой прогон — только с --out вне темы.
  *
  * ⚠️ Не печатай через `chrome --print-to-pdf` / `--screenshot` с
  * `--virtual-time-budget`: см. шапку tools/shot.mjs — хром не выходит.
@@ -54,26 +69,55 @@ const CONTACTS = [
   ["Сайт", "taxlab.ru"],
 ];
 
-// Порядок и подписи по умолчанию — как ug_rekv_fields() в inc/rekvizity.php (<поле>_label их меняет).
+// Подписи общих с сайтом полей — как ug_rekv_fields() в inc/rekvizity.php
+// (<поле>_label их меняет); остальные — только в PDF.
 const GROUPS = [
   ["Сведения об организации", [
+    ["form", "Правовая форма"],
     ["inn", "ИНН"], ["kpp", "КПП"], ["ogrn", "ОГРН"],
-    ["director", "Генеральный директор"], ["contact", "Контактное лицо"],
-    ["address", "Юридический адрес"], ["postal", "Почтовый адрес"],
+    ["address", "Юридический адрес"], ["fact", "Фактический адрес"], ["postal", "Почтовый адрес"],
+  ]],
+  ["Коды и налогообложение", [
+    ["okved", "ОКВЭД"], ["okpo", "ОКПО"], ["tax", "Система налогообложения"],
+  ]],
+  ["Руководство и контакты", [
+    ["director", "Генеральный директор"], ["accountant", "Главный бухгалтер"], ["contact", "Контактное лицо"],
   ]],
   ["Банковские реквизиты", [
-    ["bank", "Банк"], ["account", "Расчётный счёт"], ["corr", "Корреспондентский счёт"], ["bik", "БИК"],
+    ["bank", "Банк"], ["bank_city", "Город банка"], ["account", "Расчётный счёт"],
+    ["corr", "Корреспондентский счёт"], ["bik", "БИК"],
   ]],
 ];
+
+/** «Юридический адрес» + «Почтовый адрес» → «Юридический и почтовый адрес». */
+function joinLabels(labels) {
+  if (labels.length === 1) return labels[0];
+  const tail = labels[0].split(" ").pop();
+  if (!labels.every((l) => l.endsWith(` ${tail}`))) {
+    const rest = labels.slice(1).map((l) => l[0].toLowerCase() + l.slice(1));
+    return [labels[0], ...rest.slice(0, -1)].join(", ") + " и " + rest[rest.length - 1];
+  }
+  const heads = labels.map((l, i) => { const h = l.slice(0, -tail.length - 1); return i ? h.toLowerCase() : h; });
+  return `${heads.slice(0, -1).join(", ")} и ${heads[heads.length - 1]} ${tail}`;
+}
+
+/** Подстрока под ФИО: должность, основание, телефон, почта. */
+const sub = (org, k) => [
+  org[`${k}_position`],
+  org[`${k}_basis`] && `действует на основании ${org[`${k}_basis`]}`,
+  org[`${k}_phone`], org[`${k}_email`],
+].filter(Boolean).join(" · ");
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const die = (msg) => { process.stderr.write(`rekvizity-cards.mjs: ${msg}\n`); process.exit(1); };
 
 // ── аргументы и контент ──────────────────────────────────────────────────────
 let source = "local", file = null, outDir = join(THEME, "assets/docs");
+const adds = [];
 for (let i = 2; i < process.argv.length; i++) {
   const a = process.argv[i];
   if (a === "--prod") source = "prod";
+  else if (a === "--add") adds.push(process.argv[++i] || die("--add без значения"));
   else if (a === "--out") outDir = resolve(process.argv[++i] || die("--out без значения"));
   else if (!a.startsWith("--")) { source = "file"; file = a; }
   else die(`не понял аргумент «${a}»`);
@@ -96,14 +140,14 @@ const decode = (s) => s
   .replace(/&nbsp;/g, " ").replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n))).replace(/&amp;/g, "&");
 
 /** [ug_rekv_org …] → [{id, name, full, inn, …}] — как ug_rekv_parse(). */
-function parse(content) {
+function parse(content, partial = false) {
   const orgs = [];
   for (const m of content.matchAll(/\[ug_rekv_org\b([^\]]*)\]/gu)) {
     const org = {};
     for (const a of m[1].matchAll(/([a-z_]+)\s*=\s*"([^"]*)"/gu)) {
       org[a[1]] = decode(a[2]).replace(/<[^>]*>/g, "").replace(/\s+/gu, " ").trim();
     }
-    if (!org.name) continue;
+    if (!org.name && !(partial && org.id)) continue; // в --add дополнению хватает id
     org.id = (org.id || `org-${orgs.length + 1}`).toLowerCase().replace(/[^a-z0-9-]+/g, "-");
     orgs.push(org);
   }
@@ -116,8 +160,15 @@ const font = (fam, weight, f) => `@font-face{font-family:"${fam}";font-weight:${
 
 function html(org) {
   const groups = GROUPS.map(([title, fields]) => {
-    const rows = fields.filter(([k]) => org[k]).map(([k, label]) =>
-      `<tr><th>${esc(org[`${k}_label`] || label)}</th><td>${esc(org[k])}</td></tr>`).join("");
+    // Соседние строки с одинаковым значением (адреса) — одной строкой.
+    const list = [];
+    for (const [k, label] of fields.filter(([k]) => org[k])) {
+      const prev = list[list.length - 1], note = sub(org, k);
+      if (prev && !note && !prev.note && prev.value === org[k]) prev.labels.push(org[`${k}_label`] || label);
+      else list.push({ value: org[k], note, labels: [org[`${k}_label`] || label] });
+    }
+    const rows = list.map(({ value, note, labels }) =>
+      `<tr><th>${esc(joinLabels(labels))}</th><td>${esc(value)}${note ? `<small>${esc(note)}</small>` : ""}</td></tr>`).join("");
     return rows ? `<h2>${esc(title)}</h2><table>${rows}</table>` : "";
   }).join("");
   const contacts = CONTACTS.map(([k, v]) => `<span><i>${esc(k)}</i>${esc(v)}</span>`).join("");
@@ -130,19 +181,20 @@ ${font("PT Serif", 700, "pt-serif/PTSerif-Bold-cyrillic.woff2")}${font("PT Serif
 @page { size: A4; margin: 0; }
 * { box-sizing: border-box; }
 html, body { margin: 0; }
-body { font-family: "Inter", sans-serif; color: #1a1a1a; font-size: 10.5pt; line-height: 1.4; }
+body { font-family: "Inter", sans-serif; color: #1a1a1a; font-size: 9.5pt; line-height: 1.35; }
 .page { position: relative; width: 210mm; height: 297mm; padding: 16mm 18mm 0; overflow: hidden; }
 .top { display: flex; align-items: center; justify-content: space-between; padding-bottom: 7mm; border-bottom: 1.2pt solid #ec1c23; }
 .top img { display: block; height: 11mm; width: auto; }
 .top .kind { font-size: 9pt; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: #8a8a8a; }
-h1 { margin: 11mm 0 2mm; font-family: "PT Serif", serif; font-size: 24pt; font-weight: 700; line-height: 1.15; }
-.full { margin: 0 0 9mm; font-size: 11pt; color: #555; }
-h2 { margin: 7mm 0 2mm; font-family: "PT Serif", serif; font-size: 14pt; font-weight: 700; }
+h1 { margin: 8mm 0 1.5mm; font-family: "PT Serif", serif; font-size: 24pt; font-weight: 700; line-height: 1.15; }
+.full { margin: 0 0 4mm; font-size: 10.5pt; color: #555; }
+h2 { margin: 5mm 0 1.5mm; font-family: "PT Serif", serif; font-size: 12.5pt; font-weight: 700; }
 table { width: 100%; border-collapse: collapse; }
-th, td { padding: 2.6mm 0; border-bottom: .6pt solid #e3e3e3; text-align: left; vertical-align: top; }
+th, td { padding: 2mm 0; border-bottom: .6pt solid #e3e3e3; text-align: left; vertical-align: top; }
 tr:first-child th, tr:first-child td { border-top: .6pt solid #e3e3e3; }
 th { width: 58mm; padding-right: 6mm; font-weight: 400; color: #6b6b6b; }
 td { font-weight: 500; }
+td small { display: block; margin-top: .4mm; font-size: 8.5pt; font-weight: 400; color: #6b6b6b; }
 .foot { position: absolute; right: 18mm; bottom: 14mm; left: 18mm; display: flex; gap: 10mm; padding-top: 4mm; border-top: .6pt solid #e3e3e3; font-size: 9.5pt; }
 .foot i { display: block; font-style: normal; font-size: 8pt; color: #8a8a8a; }
 </style></head><body><div class="page">
@@ -198,6 +250,14 @@ function connect(proc) {
 
 async function main() {
   const orgs = parse(readContent());
+  for (const f of adds) {
+    for (const extra of parse(readFileSync(f, "utf8"), true)) {
+      const same = orgs.find((o) => o.id === extra.id);
+      if (same) Object.assign(same, extra);
+      else if (extra.name) orgs.push(extra);
+      else die(`${f}: нет организации с id «${extra.id}»`);
+    }
+  }
   if (!orgs.length) die(`в контенте нет [ug_rekv_org] (${source})`);
   if (!existsSync(LOGO)) die(`нет логотипа ${LOGO}`);
   mkdirSync(outDir, { recursive: true });
@@ -221,6 +281,11 @@ async function main() {
     await loaded;
     await call("Runtime.evaluate", { expression: "document.fonts.ready.then(() => document.fonts.size)", awaitPromise: true });
     await sleep(150);
+    // Всё должно влезть на один A4 над подвалом с контактами.
+    const fit = await call("Runtime.evaluate", { returnByValue: true, expression:
+      `(() => { const t = [...document.querySelectorAll(".page > :not(.foot)")].pop().getBoundingClientRect().bottom;
+        const f = document.querySelector(".foot").getBoundingClientRect().top; return Math.round(f - t); })()` });
+    if (fit.result.value < 8) die(`${org.id}: карточка не влезает на A4 (до подвала ${fit.result.value} px)`);
     const { data } = await call("Page.printToPDF", {
       printBackground: true, preferCSSPageSize: true,
       marginTop: 0, marginBottom: 0, marginLeft: 0, marginRight: 0,
