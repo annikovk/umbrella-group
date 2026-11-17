@@ -15,6 +15,10 @@
  * организация — один [ug_rekv_org], атрибут на строку; пустой атрибут — строки
  * нет. Порядок шорткодов — порядок вкладок, id — якорь вкладки (#akkura).
  * Кавычки внутри значений — только «ёлочки»: прямая " закрывает атрибут.
+ * `<поле>_label` меняет подпись строки у одной организации — на странице, в
+ * тексте «Скопировать реквизиты» и в PDF: director_label="Директор" (по
+ * умолчанию подписи из ug_rekv_fields()). tools/rekvizity-cards.mjs понимает
+ * тот же атрибут.
  *
  * Всё рисует [ug_rekvizity]: разбирает вложенные [ug_rekv_org] сам. Без JS
  * организации идут подряд; JS (assets/js/pages/rekvizity.js) делает вкладки,
@@ -30,7 +34,7 @@ declare(strict_types=1);
 
 defined('ABSPATH') || exit;
 
-/** Поля организации: атрибут => подпись (в карточке и в тексте для буфера). */
+/** Поля организации: атрибут => подпись по умолчанию (в карточке и в тексте для буфера; <поле>_label её меняет). */
 function ug_rekv_fields(): array
 {
     return [
@@ -65,7 +69,8 @@ function ug_rekv_parse(string $content): array
     if (!preg_match_all('/' . get_shortcode_regex(['ug_rekv_org']) . '/su', $content, $m, PREG_SET_ORDER)) {
         return $orgs;
     }
-    $keys = array_merge(['id', 'name', 'full'], array_keys(ug_rekv_fields()));
+    $fields = array_keys(ug_rekv_fields());
+    $keys   = array_merge(['id', 'name', 'full'], $fields, array_map(static fn ($k) => $k . '_label', $fields));
     foreach ($m as $x) {
         if ($x[1] === '[' && $x[6] === ']') {
             continue; // [[экранированный]]
@@ -93,7 +98,7 @@ function ug_rekv_field(array $org, string $key, bool $copy = false): string
     if ($value === '') {
         return '';
     }
-    $label = ug_rekv_fields()[$key];
+    $label = $org[$key . '_label'] ?: ug_rekv_fields()[$key];
     $btn = $copy
         ? '<button class="ugr-f__copy" type="button" data-copy="' . esc_attr($value) . '" aria-label="' . esc_attr('Скопировать: ' . $label) . '">'
             . ug_rekv_svg('copy') . ug_rekv_svg('check') . '<span class="ugr-f__tip" aria-hidden="true">Скопировано</span></button>'
