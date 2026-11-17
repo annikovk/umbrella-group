@@ -26,6 +26,12 @@
  * Новая организация — новый [ug_rekv_org] + прогон скрипта: без PDF у неё
  * просто не будет кнопки карточки.
  *
+ * Карточка не для сайта (например, ИП Климова) — свой файл с [ug_rekv_org]
+ * и --out вне темы, чтобы PDF не попал ни на сервер, ни в публичный репо.
+ * Только для PDF (шорткод на сайте их не знает): `<поле>_label` меняет
+ * подпись строки (ogrn_label="ОГРНИП"), kind — надпись справа в шапке
+ * (по умолчанию «Карточка организации»).
+ *
  * ⚠️ Не печатай через `chrome --print-to-pdf` / `--screenshot` с
  * `--virtual-time-budget`: см. шапку tools/shot.mjs — хром не выходит.
  */
@@ -111,7 +117,7 @@ const font = (fam, weight, f) => `@font-face{font-family:"${fam}";font-weight:${
 function html(org) {
   const groups = GROUPS.map(([title, fields]) => {
     const rows = fields.filter(([k]) => org[k]).map(([k, label]) =>
-      `<tr><th>${esc(label)}</th><td>${esc(org[k])}</td></tr>`).join("");
+      `<tr><th>${esc(org[`${k}_label`] || label)}</th><td>${esc(org[k])}</td></tr>`).join("");
     return rows ? `<h2>${esc(title)}</h2><table>${rows}</table>` : "";
   }).join("");
   const contacts = CONTACTS.map(([k, v]) => `<span><i>${esc(k)}</i>${esc(v)}</span>`).join("");
@@ -140,7 +146,7 @@ td { font-weight: 500; }
 .foot { position: absolute; right: 18mm; bottom: 14mm; left: 18mm; display: flex; gap: 10mm; padding-top: 4mm; border-top: .6pt solid #e3e3e3; font-size: 9.5pt; }
 .foot i { display: block; font-style: normal; font-size: 8pt; color: #8a8a8a; }
 </style></head><body><div class="page">
-<div class="top"><img src="${pathToFileURL(LOGO).href}" alt="Umbrella Group"><span class="kind">Карточка организации</span></div>
+<div class="top"><img src="${pathToFileURL(LOGO).href}" alt="Umbrella Group"><span class="kind">${esc(org.kind || "Карточка организации")}</span></div>
 <h1>${esc(org.name)}</h1>
 ${org.full ? `<p class="full">${esc(org.full)}</p>` : ""}
 ${groups}
