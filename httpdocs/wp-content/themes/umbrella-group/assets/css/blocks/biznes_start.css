@@ -1,33 +1,28 @@
 /* Блоки страницы «Бизнес-старт за один час» (template-parts/shortcodes/biznes_start.php).
    Стиль — как у [tz_packages]: PT Serif, красная черта над заголовком,
-   карточки с тонкой рамкой, красные кнопки. Первый экран — фон и шапка
-   [su_welcome_screen] (su-welcome-screen.css), карточка своя. */
+   карточки с тонкой рамкой, красные кнопки. Первый экран — стандартный
+   [su_welcome_screen], своих стилей у него нет. */
 
-.bs,
-.bs-hero {
+.bs {
     color: #1a1a1a;
 }
 
-.bs *,
-.bs-hero * {
+.bs * {
     box-sizing: border-box;
 }
 
-.bs p,
-.bs-hero p {
+.bs p {
     margin-bottom: 0;
 }
 
 .bs ul,
-.bs ol,
-.bs-hero ul {
+.bs ol {
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
-.bs li,
-.bs-hero li {
+.bs li {
     margin: 0;
 }
 
@@ -141,103 +136,6 @@
     color: #fff;
 }
 
-/* ── [bs_hero] ───────────────────────────────────────────────────────────── */
-
-.bs-hero .su_welcome_banner {
-    padding-bottom: 150px;
-}
-
-.bs-hero .su_welcome_banner_offer p.bs-hero__offer {
-    max-width: 820px;
-    padding-bottom: 40px;
-    font-size: 30px;
-    font-weight: 500;
-    line-height: 1.3;
-}
-
-.bs-hero__card {
-    position: relative;
-    z-index: 2;
-    max-width: 1200px;
-    margin: -120px auto 0;
-    padding: 44px 5% 48px;
-    background: #fff;
-    box-shadow: 0 9px 30px rgba(0, 0, 0, .28);
-}
-
-.bs-hero__sub {
-    max-width: 900px;
-    font-size: 19px;
-    line-height: 1.55;
-    color: #333;
-}
-
-.bs-hero__badges {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-    margin: 32px 0 !important;
-    padding: 32px 0 !important;
-    border-top: 1px solid #e5e5e5;
-    border-bottom: 1px solid #e5e5e5;
-}
-
-.bs-hero__badge {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    font-size: 16px;
-    line-height: 1.4;
-}
-
-.bs-hero__badge-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex: none;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: #ec1c23;
-    color: #fff;
-}
-
-.bs-hero__bottom {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    gap: 16px 40px;
-}
-
-.bs-hero__price {
-    display: flex;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 4px 12px;
-    font-size: 16px;
-}
-
-.bs-hero__price b {
-    font-family: "PT Serif", serif;
-    font-size: 40px;
-    line-height: 1;
-    color: #ec1c23;
-}
-
-.bs-hero__btns {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-}
-
-.bs-hero__note {
-    grid-column: 1 / -1;
-    max-width: 820px;
-    font-size: 14px;
-    line-height: 1.5;
-    color: #666;
-}
-
 /* ── [bs_for] ────────────────────────────────────────────────────────────── */
 
 .bs-for {
@@ -269,7 +167,6 @@
 
 .bs-for__title,
 .bs-gain__title,
-.bs-step__title,
 .bs-team__title {
     margin: 0 0 10px;
     font-family: "PT Serif", serif;
@@ -280,8 +177,7 @@
 }
 
 .bs-for__text,
-.bs-gain__text,
-.bs-step__text {
+.bs-gain__text {
     font-size: 16px;
     line-height: 1.55;
     color: #444;
@@ -320,10 +216,6 @@
     line-height: 1.55;
 }
 
-.bs-case__cta {
-    flex: none;
-}
-
 /* ── [bs_gains] ──────────────────────────────────────────────────────────── */
 
 .bs-gains {
@@ -341,6 +233,10 @@
 
 .bs-gain__title {
     font-size: 19px;
+}
+
+.bs--gains .bs-case {
+    margin-top: 16px;
 }
 
 /* ── [bs_docs] ───────────────────────────────────────────────────────────── */
@@ -396,43 +292,80 @@
     color: #ec1c23;
 }
 
-/* ── [bs_steps] ──────────────────────────────────────────────────────────── */
+/* ── [bs_steps] — инфографика ───────────────────────────────────────────── */
 
-.bs-steps {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-    counter-reset: bs-step;
-}
-
-.bs-step {
-    position: relative;
-    padding: 28px 24px;
-    border: 1px solid #e5e5e5;
-    border-radius: 8px;
-    background: #fff;
-}
-
-.bs-step__head {
+.bs-flow {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
+    gap: 8px;
+}
+
+.bs-flow__step {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.bs-flow__mark {
+    position: relative;
     margin-bottom: 20px;
 }
 
-.bs-step__num {
-    font-family: "PT Serif", serif;
-    font-size: 28px;
-    font-weight: 700;
+.bs-flow__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 88px;
+    height: 88px;
+    border: 2px solid #ec1c23;
+    border-radius: 50%;
+    background: #fff;
     color: #ec1c23;
 }
 
-.bs-step__title {
-    font-size: 19px;
+.bs-flow__num {
+    position: absolute;
+    top: -4px;
+    right: -6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #ec1c23;
+    font-family: "PT Serif", serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
 }
 
-.bs-step__text {
+.bs-flow__title {
+    margin: 0 0 6px;
+    font-family: "PT Serif", serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: #1a1a1a;
+}
+
+.bs-flow__text {
+    max-width: 230px;
+    margin: 0 auto !important;
     font-size: 15px;
+    line-height: 1.45;
+    color: #555;
+}
+
+.bs-flow__arrow {
+    flex: none;
+    display: flex;
+    align-items: center;
+    height: 88px;
+    color: #ec1c23;
 }
 
 /* ── [bs_team] ───────────────────────────────────────────────────────────── */
@@ -731,11 +664,6 @@
 /* ── адаптив ─────────────────────────────────────────────────────────────── */
 
 @media screen and (max-width: 1100px) {
-    .bs-hero__badges,
-    .bs-steps {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
     .bs-docs {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -765,68 +693,14 @@
         font-size: 16px;
     }
 
-    .bs-hero .su_welcome_banner {
-        padding-bottom: 32px;
-    }
-
-    .bs-hero .su_welcome_banner_offer p.bs-hero__offer {
-        padding-bottom: 0;
-        font-size: 20px;
-    }
-
-    .bs-hero__card {
-        margin: 0;
-        padding: 28px 15px 36px;
-        box-shadow: none;
-    }
-
-    .bs-hero__sub {
-        font-size: 16px;
-    }
-
-    .bs-hero__badges {
-        grid-template-columns: 1fr;
-        gap: 14px;
-        margin: 24px 0 !important;
-        padding: 24px 0 !important;
-    }
-
-    .bs-hero__badge {
-        align-items: center;
-    }
-
-    .bs-hero__badge-icon {
-        width: 40px;
-        height: 40px;
-    }
-
-    .bs-hero__badge-icon svg {
-        width: 22px;
-        height: 22px;
-    }
-
-    .bs-hero__bottom {
-        grid-template-columns: 1fr;
-    }
-
-    .bs-hero__btns {
-        flex-direction: column;
-    }
-
-    .bs-hero__btns .bs-btn {
-        width: 100%;
-    }
-
     .bs-for,
     .bs-gains,
     .bs-docs,
-    .bs-steps,
     .bs-team__cols {
         grid-template-columns: 1fr;
     }
 
     .bs-for__card,
-    .bs-step,
     .bs-team__col {
         padding: 22px 20px;
     }
@@ -847,7 +721,6 @@
         padding: 22px 20px;
     }
 
-    .bs-case__cta .bs-btn,
     .bs-center .bs-btn,
     .bs-price__foot .bs-btn {
         width: 100%;
@@ -855,6 +728,60 @@
 
     .bs-team__year b {
         font-size: 38px;
+    }
+
+    /* шаги — вертикально, стрелка вниз */
+    .bs-flow {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+    }
+
+    .bs-flow__step {
+        flex-direction: row;
+        align-items: center;
+        gap: 18px;
+        text-align: left;
+    }
+
+    .bs-flow__mark {
+        flex: none;
+        margin-bottom: 0;
+    }
+
+    .bs-flow__icon {
+        width: 64px;
+        height: 64px;
+    }
+
+    .bs-flow__icon svg {
+        width: 26px;
+        height: 26px;
+    }
+
+    .bs-flow__num {
+        width: 24px;
+        height: 24px;
+        font-size: 13px;
+    }
+
+    .bs-flow__title {
+        font-size: 18px;
+    }
+
+    .bs-flow__text {
+        max-width: none;
+        margin: 0 !important;
+    }
+
+    .bs-flow__arrow {
+        width: 64px;
+        height: 36px;
+        justify-content: center;
+    }
+
+    .bs-flow__arrow svg {
+        transform: rotate(90deg);
     }
 
     /* таблица сравнения — карточками */

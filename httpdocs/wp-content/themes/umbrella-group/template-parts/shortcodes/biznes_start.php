@@ -4,12 +4,13 @@
  * для начинающих предпринимателей
  * (/services/register-elimination/konsultaciya-dlya-nachinayushchih-predprinimatelej/):
  *
- *   [bs_hero]    — первый экран: крошки, h1 (заголовок страницы), оффер,
- *                  карточка с подзаголовком, четырьмя плашками, ценой и кнопками;
- *   [bs_for]     — «Эта консультация для вас, если вы…» + пример из практики;
- *   [bs_gains]   — что вы получаете (шесть пунктов);
+ * Первый экран — стандартный [su_welcome_screen button='consult'] +
+ * [su_welcome_screen_conditions] в контенте, как у соседних страниц раздела.
+ *
+ *   [bs_for]     — «Эта консультация для вас, если вы…» (три коротких карточки);
+ *   [bs_gains]   — что вы получаете (шесть пунктов) + пример из практики про РКН;
  *   [bs_docs]    — что остаётся у вас после консультации;
- *   [bs_steps]   — как проходит консультация;
+ *   [bs_steps]   — как проходит консультация (инфографика: четыре шага со стрелками);
  *   [bs_team]    — кто консультирует;
  *   [bs_compare] — пять визитов против одной консультации (таблица, на телефоне — карточки);
  *   [bs_price]   — цена и что в неё входит;
@@ -22,18 +23,14 @@
  * правятся здесь. Заявка — общие попапы: «Записаться» → #leave-request-contact-form-lightbox
  * (CF7 2886, стоит в «Footer Bottom» на каждой странице; заголовок попапа —
  * мета страницы umbrella_form_title), «Задать вопрос» → #ask-question-contact-form-lightbox
- * (CF7 9967, его лайтбокс выводит [bs_hero]). В письме обеих форм есть адрес
+ * (CF7 9967, лайтбокс стоит в конце контента). В письме обеих форм есть адрес
  * страницы ([_url]) — менеджер видит, откуда заявка. Сами формы не правились.
  */
 
 defined('ABSPATH') || exit;
 
 const UG_BS_FORM = '#leave-request-contact-form-lightbox';
-const UG_BS_ASK  = '#ask-question-contact-form-lightbox';
 const UG_BS_FORM_ID = 2886;
-const UG_BS_ASK_ID  = 9967;
-// фон первого экрана — то же вложение, что у соседних страниц раздела
-const UG_BS_HERO_BG = 301;
 
 /** Иконки — содержимое svg 24 × 24, обводка (как в tz_packages). */
 const UG_BS_ICONS = [
@@ -95,92 +92,25 @@ function ug_bs_section(string $id, string $mod, string $inner): string
     return '<section class="bs bs--' . $mod . '" id="' . $id . '"><div class="bs__inner">' . $inner . '</div></section>';
 }
 
-// ── [bs_hero] ───────────────────────────────────────────────────────────────
-
-const UG_BS_OFFER = 'Обратная сторона бизнеса: налоги, отчёты, договоры и регистрации — за одну консультацию';
-
-function ug_bs_hero_shortcode(): string
-{
-    ug_enqueue_style('/assets/css/blocks/su-welcome-screen.css');
-    ug_bs_assets();
-
-    $badges = [
-        ['users', 'Юрист и бухгалтер за одной часовой консультацией'],
-        ['award', 'Опыт от 15 лет у каждого эксперта'],
-        ['globe', 'В офисе или онлайн — работаем по всей России'],
-        ['doc', 'Договоры, календарь и памятки остаются у вас'],
-    ];
-    $list = '';
-    foreach ($badges as [$icon, $text]) {
-        $list .= '<li class="bs-hero__badge"><span class="bs-hero__badge-icon">' . ug_bs_icon($icon, 26) . '</span><span>' . ug_bs_t($text) . '</span></li>';
-    }
-
-    $breadcrumbs = umbrella_draw_header_with_breadcrumbs();
-    $background  = ug_eager_img(ug_hero_picture(UG_BS_HERO_BG));
-    $offer   = ug_bs_t(UG_BS_OFFER);
-    $sub     = ug_bs_t('Расскажите, чем планируете заниматься, а мы разберём, как правильно оформить работу: какие налоги платить, какие договоры использовать, как оформлять сотрудников, что и когда сдавать и какие обязательные регистрации пройти именно вашему бизнесу.');
-    $note    = ug_bs_t('Один час — и вы знаете, что требует государство от вашего бизнеса. Перезвоним и подберём удобное время и формат: приезжайте в офис или подключайтесь онлайн из любого города России.');
-    $btn     = ug_bs_btn('Записаться на консультацию');
-    $ask     = ug_bs_btn('Задать вопрос', UG_BS_ASK, 'ghost');
-    $lightbox = do_shortcode('[lightbox id="ask-question-contact-form-lightbox" width="400px" padding="0px"][contact-form-7 id="' . UG_BS_ASK_ID . '" title="Форма Задать вопрос"][/lightbox]');
-
-    return <<<EOHTML
-    <div class="su_welcome_screen bs-hero">
-        <div class="su_welcome_banner bs-hero__banner">
-            <div class="su_welcome_banner_content dark">
-                $breadcrumbs
-                <div class="su_welcome_banner_offer container">
-                    <p class="bs-hero__offer">$offer</p>
-                </div>
-            </div>
-            <div class="su_welcome_banner_background">$background</div>
-        </div>
-        <div class="bs-hero__card">
-            <p class="bs-hero__sub">$sub</p>
-            <ul class="bs-hero__badges">$list</ul>
-            <div class="bs-hero__bottom">
-                <p class="bs-hero__price"><span>Стоимость</span> <b>5&nbsp;000&nbsp;₽</b> <span>за&nbsp;консультацию</span></p>
-                <div class="bs-hero__btns">$btn$ask</div>
-                <p class="bs-hero__note">$note</p>
-            </div>
-        </div>
-        $lightbox
-    </div>
-    EOHTML;
-}
-
-add_shortcode('bs_hero', 'ug_bs_hero_shortcode');
-
-// Preload фона первого экрана — как у [su_welcome_screen] (inc/shortcodes.php).
-add_action('wp_head', static function (): void {
-    if (!is_singular() || !has_shortcode((string) get_post_field('post_content', get_queried_object_id()), 'bs_hero')) {
-        return;
-    }
-    echo ug_hero_preload(UG_BS_HERO_BG);
-}, 2);
-
 // ── [bs_for] ────────────────────────────────────────────────────────────────
 
 function ug_bs_for_shortcode(): string
 {
     ug_bs_assets();
     $cards = [
-        ['idea', 'Только планируете открыть ООО или ИП', 'Знаете свой продукт и своих клиентов, но не знаете, что открывать — ИП или ООО, какие коды ОКВЭД указать, какой налоговый режим выбрать и что подать вместе с регистрацией. Некоторые решения выгоднее принять ещё до регистрации: например, на УСН проще всего перейти сразу, а пропущенный срок означает работу на общей системе до конца года.'],
-        ['start', 'Уже зарегистрировались, но ещё не начали работать', 'Документы из налоговой на руках, а дальше непонятно, с чего начать: какой договор дать первому клиенту, как оформить первого сотрудника, какая отчётность появится уже в первом квартале. Разберёмся до того, как вопросы обернутся штрафами.'],
-        ['search', 'Уже работаете и хотите проверить, ничего ли не упустили', 'Бизнес идёт, но есть ощущение, что где-то остались пробелы. Обычно так и есть.'],
+        ['idea', 'Только планируете открыть ООО или ИП', 'Поможем выбрать ИП или ООО, коды ОКВЭД и налоговый режим — ещё до регистрации.'],
+        ['start', 'Уже зарегистрировались, но ещё не начали работать', 'Документы на руках, а с чего начать — непонятно. Разберём договоры, сотрудников и первую отчётность.'],
+        ['search', 'Уже работаете и хотите проверить, ничего ли не упустили', 'Бизнес идёт, но где-то остались пробелы. Обычно так и есть.'],
     ];
     $html = '';
     foreach ($cards as $i => [$icon, $title, $text]) {
         $html .= '<li class="bs-for__card"><div class="bs-for__top"><span class="bs-icon">' . ug_bs_icon($icon, 26) . '</span><span class="bs-for__num">' . sprintf('%02d', $i + 1) . '</span></div>'
             . '<h3 class="bs-for__title">' . ug_bs_t($title) . '</h3><p class="bs-for__text">' . ug_bs_t($text) . '</p></li>';
     }
-    $case = ug_bs_t('Компания работала третий месяц, когда пришла на консультацию. Выяснилось, что она не подала уведомление в Роскомнадзор об обработке персональных данных. Это обязанность почти каждого бизнеса, у которого есть сотрудники или клиенты-физлица. Без консультации владельцы так бы об этом и не узнали.');
-    $shield = ug_bs_icon('shield', 22);
 
     return ug_bs_section('bs-for', 'for', ug_bs_head('Эта консультация для вас, если вы…')
         . '<ol class="bs-for">' . $html . '</ol>'
-        . '<div class="bs-case"><div class="bs-case__body"><p class="bs-case__kicker">' . $shield . ' Пример из&nbsp;практики</p><p class="bs-case__text">' . $case . '</p></div>'
-        . '<div class="bs-case__cta">' . ug_bs_btn('Проверить свой бизнес') . '</div></div>');
+        . '<div class="bs-center">' . ug_bs_btn('Проверить свой бизнес') . '</div>');
 }
 
 add_shortcode('bs_for', 'ug_bs_for_shortcode');
@@ -203,8 +133,13 @@ function ug_bs_gains_shortcode(): string
         $html .= '<li class="bs-gain"><span class="bs-icon">' . ug_bs_icon($icon, 26) . '</span><div>'
             . '<h3 class="bs-gain__title">' . ug_bs_t($title) . '</h3><p class="bs-gain__text">' . ug_bs_t($text) . '</p></div></li>';
     }
+    // пример из практики — сразу после пункта про обязательные регистрации
+    $case = ug_bs_t('Компания работала третий месяц, когда пришла на консультацию. Выяснилось, что она не подала уведомление в Роскомнадзор об обработке персональных данных. Это обязанность почти каждого бизнеса, у которого есть сотрудники или клиенты-физлица. Без консультации владельцы так бы об этом и не узнали.');
+    $shield = ug_bs_icon('shield', 22);
+
     return ug_bs_section('chto-vhodit', 'gains', ug_bs_head('После консультации вы точно знаете, как работать по правилам')
-        . '<ol class="bs-gains">' . $html . '</ol>');
+        . '<ol class="bs-gains">' . $html . '</ol>'
+        . '<div class="bs-case"><div class="bs-case__body"><p class="bs-case__kicker">' . $shield . ' Пример из&nbsp;практики</p><p class="bs-case__text">' . $case . '</p></div></div>');
 }
 
 add_shortcode('bs_gains', 'ug_bs_gains_shortcode');
@@ -240,19 +175,24 @@ add_shortcode('bs_docs', 'ug_bs_docs_shortcode');
 function ug_bs_steps_shortcode(): string
 {
     ug_bs_assets();
+    // инфографика: [иконка, подпись, короткая строка]
     $steps = [
-        ['phone', 'Заявка', 'Оставляете телефон, перезваниваем и договариваемся о времени.'],
-        ['chat', 'Рассказываете о бизнесе', 'Чем занимаетесь или планируете заниматься, кто клиенты, будут ли сотрудники, есть ли помещение. Ничего готовить и присылать заранее не нужно — достаточно рассказать, чем планируете заниматься.'],
-        ['clock', 'Консультация — 1 час, в офисе или онлайн', 'Юрист и бухгалтер вместе разбирают налоги, договоры, сотрудников, отчётность и обязательные регистрации. Онлайн-формат работает так же полноценно, как встреча в офисе, поэтому к нам обращаются предприниматели со всей России.'],
-        ['doc', 'Документы', 'Договоры, календарь и памятки отдаём на встрече или присылаем на почту — как вам удобнее.'],
+        ['phone', 'Оставляете заявку', 'Перезваниваем и договариваемся о времени'],
+        ['chat', 'Рассказываете о бизнесе', 'Готовить заранее ничего не нужно'],
+        ['clock', 'Час с юристом и бухгалтером', 'В офисе или онлайн из любого города'],
+        ['doc', 'Получаете документы', 'На встрече или на почту'],
     ];
     $html = '';
+    $last = count($steps) - 1;
     foreach ($steps as $n => [$icon, $title, $text]) {
-        $html .= '<li class="bs-step"><div class="bs-step__head"><span class="bs-icon">' . ug_bs_icon($icon, 26) . '</span><span class="bs-step__num">' . sprintf('%02d', $n + 1) . '</span></div>'
-            . '<h3 class="bs-step__title">' . ug_bs_t($title) . '</h3><p class="bs-step__text">' . ug_bs_t($text) . '</p></li>';
+        $html .= '<li class="bs-flow__step"><div class="bs-flow__mark"><span class="bs-flow__icon">' . ug_bs_icon($icon, 30) . '</span><span class="bs-flow__num">' . ($n + 1) . '</span></div>'
+            . '<div class="bs-flow__body"><h3 class="bs-flow__title">' . ug_bs_t($title) . '</h3><p class="bs-flow__text">' . ug_bs_t($text) . '</p></div></li>';
+        if ($n < $last) {
+            $html .= '<li class="bs-flow__arrow" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" stroke-linecap="round" stroke-linejoin="round"/></svg></li>';
+        }
     }
     return ug_bs_section('kak-prohodit', 'steps', ug_bs_head('Как проходит консультация')
-        . '<ol class="bs-steps">' . $html . '</ol>'
+        . '<ol class="bs-flow">' . $html . '</ol>'
         . '<div class="bs-center">' . ug_bs_btn('Записаться на консультацию') . '</div>');
 }
 

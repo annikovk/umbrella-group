@@ -13,7 +13,7 @@ class SU_welcome_screen
     private $second_advantage;
     private $third_advantage;
     private $button_type;
-    private $button_variants = ['free_consulting', 'price_calc', 'ask_question'];
+    private $button_variants = ['free_consulting', 'price_calc', 'ask_question', 'consult'];
     private $phone='73833731717';
     private $phone_text;
     private $price;
@@ -78,6 +78,8 @@ class SU_welcome_screen
             'free_consulting' => '[button text="Бесплатная консультация" link="#leave-request-contact-form-lightbox"]',
             'price_calc' => '[button text="Расчёт стоимости" link="#calculate-price-contact-form-lightbox"]',
             'ask_question' => '[button text="Задать вопрос" link="#ask-question-contact-form-lightbox"]',
+            // «Записаться на консультацию» — общий попап CF7 2886 из «Footer Bottom», свой лайтбокс не нужен
+            'consult' => '[button text="Записаться на консультацию" link="#leave-request-contact-form-lightbox"]',
             default => '',
         };
     }
