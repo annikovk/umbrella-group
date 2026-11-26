@@ -14,7 +14,11 @@
  *   [bs_team]    — кто консультирует;
  *   [bs_compare] — пять визитов против одной консультации (таблица, на телефоне — карточки);
  *   [bs_price]   — цена и что в неё входит;
- *   [bs_form]    — финальный блок с формой заявки.
+ *   [bs_form]    — финальный блок с формой заявки;
+ *   [bs_reviews ids="…"] — отзывы клиентов в формате страницы «Клиенты»
+ *                  (карточки и окна отзыва ug_client_tiles_card, сниппет 1031,
+ *                  как [akciya_buh_reviews]); стоит вместо «Клиенты о нас» из
+ *                  подвала — тот на странице скрыт метой ug_hide_feedback.
  *
  * FAQ — обычный [accordion] в контенте страницы (секция «Частые вопросы»):
  * из него inc/schema.php собирает JSON-LD FAQPage.
@@ -315,3 +319,44 @@ function ug_bs_form_shortcode(): string
 }
 
 add_shortcode('bs_form', 'ug_bs_form_shortcode');
+
+// ── [bs_reviews] ────────────────────────────────────────────────────────────
+
+function ug_bs_reviews_shortcode($atts): string
+{
+    $atts = shortcode_atts(['ids' => ''], $atts, 'bs_reviews');
+    $ids = array_values(array_filter(array_map('intval', explode(',', (string) $atts['ids']))));
+    if (!$ids || !function_exists('ug_client_tiles_card')) {
+        return '';
+    }
+    $cards = '';
+    $dialogs = '';
+    foreach ($ids as $id) {
+        $post = get_post($id);
+        if (!$post || $post->post_type !== 'client' || $post->post_status !== 'publish') {
+            continue;
+        }
+        [$card, $dialog] = ug_client_tiles_card($post, [], ug_client_tiles_services($post));
+        $cards .= $card;
+        $dialogs .= $dialog;
+    }
+    if ($cards === '') {
+        return '';
+    }
+
+    ug_bs_assets();
+    ug_enqueue_style('assets/css/blocks/client_tiles.css');
+    ug_enqueue_script('assets/js/blocks/cases_tabs.js');
+    ug_enqueue_script('assets/js/blocks/client_tiles.js', [ug_style_handle('assets/js/blocks/cases_tabs.js')]);
+
+    $url = esc_url(home_url('/about/clients/'));
+    $arrow = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4.5 12h15M14 6.5l5.5 5.5-5.5 5.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    $zoom = $dialogs !== '' ? ug_client_review_zoom() : '';
+    $head = ug_bs_head('Отзывы клиентов', 'Компании, которые доверили нам регистрацию и корпоративные вопросы. Нажмите на карточку, чтобы прочитать отзыв и благодарственное письмо.');
+
+    return ug_bs_section('otzyvy', 'reviews', '<div class="bs-reviews__head">' . $head
+        . '<a class="bs-reviews__all" href="' . $url . '">Все клиенты' . $arrow . '</a></div>'
+        . '<div class="client-tiles__grid bs-reviews__grid">' . $cards . '</div>' . $dialogs . $zoom);
+}
+
+add_shortcode('bs_reviews', 'ug_bs_reviews_shortcode');
