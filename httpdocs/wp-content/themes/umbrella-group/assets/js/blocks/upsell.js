@@ -4,6 +4,8 @@ document.addEventListener('wpcf7mailsent', function (event) {
     // CF7 шлёт событие с <form>, а прячем её целиком — работаем с обёрткой .wpcf7
     const container = event.target.closest('.wpcf7') || event.target;
     if (!template) return;
+    // Формы со своим «спасибо» (лид-магнит чек-листов, inc/leadmagnet.php) — не трогаем.
+    if (container.closest('[data-no-upsell]')) return;
 
     // Форма в попапе: подменяем её подборкой прямо в этом попапе.
     if (container.closest('.lightbox-by-id, .mfp-content')) {

@@ -122,23 +122,60 @@ add_action('wp_enqueue_scripts', function (): void {
     // хэндл остаётся зависимостью wpcf7-recaptcha, но вместо <script src> —
     // заглушка, которая сама подгрузит api.js
     $item->src = false;
+    // Токен — не позже чем через WAIT мс, иначе пустая строка. CF7 отправляет
+    // форму только после grecaptcha.execute(): если reCAPTCHA не загрузилась
+    // (заблокированы google.com / gstatic.com, защита браузера) или execute()
+    // завис, форма «крутилась» вечно и не уходила (23.11, Яндекс Браузер на
+    // десктопе). Пустой токен сервер пропускает с пометкой — inc/cf7.php.
+    // Ошибка загрузки api.js (onerror) — пустой токен сразу.
+    // В JS нельзя знак процента: строка идёт через sprintf.
     $shim = <<<'JS'
 (function (w, d, src) {
-    var q = [], state = 0, ev = ['pointerdown', 'touchstart', 'keydown', 'focusin'];
+    var q = [], ev = ['pointerdown', 'touchstart', 'keydown', 'focusin'], WAIT = 7000;
+    // 0 — не грузили, 1 — грузится, 2 — готова, 3 — не загрузилась
+    var state = 0;
+    function guard(p) {
+        return new Promise(function (res) {
+            var done = false;
+            var t = setTimeout(function () { finish(''); }, WAIT);
+            function finish(v) {
+                if (done) return;
+                done = true;
+                clearTimeout(t);
+                res(typeof v === 'string' ? v : '');
+            }
+            p.then(finish, function () { finish(''); });
+        });
+    }
     // api.js дописывает настоящие ready/execute в этот же объект (проверено),
     // поэтому сверяем с сохранённой ссылкой, а не с stub.execute
     var stubExecute = function (k, o) {
+        if (state === 3) return Promise.resolve('');
         load();
-        return new Promise(function (res, rej) { q.push(['e', k, o, res, rej]); });
+        return guard(new Promise(function (res, rej) { q.push(['e', k, o, res, rej]); }));
     };
     var stub = {ready: function (cb) { q.push(['r', cb]); }, execute: stubExecute};
+    function fail() {
+        if (state === 2) return;
+        state = 3;
+        console.error('ug: grecaptcha не загрузилась — формы уйдут без токена');
+        q.splice(0).forEach(function (it) { if (it[0] === 'e') it[3](''); });
+    }
     function flush() {
         var g = w.grecaptcha;
-        if (!g || g.execute === stubExecute) { console.error('ug: grecaptcha не загрузилась'); return; }
+        if (!g || g.execute === stubExecute) { fail(); return; }
         state = 2;
+        var real = g.execute;
+        g.execute = function (k, o) {
+            try {
+                return guard(Promise.resolve(real.call(g, k, o)));
+            } catch (e) {
+                return Promise.resolve('');
+            }
+        };
         q.splice(0).forEach(function (it) {
             if (it[0] === 'r') g.ready(it[1]);
-            else g.ready(function () { g.execute(it[1], it[2]).then(it[3], it[4]); });
+            else g.ready(function () { real.call(g, it[1], it[2]).then(it[3], it[4]); });
         });
     }
     function load() {
@@ -148,8 +185,11 @@ add_action('wp_enqueue_scripts', function (): void {
         w.ugRecaptchaLoaded = flush;
         var s = d.createElement('script');
         s.async = true;
+        s.onerror = fail;
         s.src = src + (src.indexOf('?') < 0 ? '?' : '&') + 'onload=ugRecaptchaLoaded';
         d.head.appendChild(s);
+        // api.js загрузился, а его модуль с gstatic.com — нет: onload не будет
+        setTimeout(function () { if (state === 1) fail(); }, WAIT);
     }
     w.grecaptcha = stub;
     ev.forEach(function (e) { w.addEventListener(e, load, {capture: true, passive: true}); });
