@@ -230,16 +230,27 @@ add_action('template_redirect', function (): void {
 
 // Направления открыты для индексации. В AIOSEO Lite noindex у рубрик один на
 // всю таксономию (у «Новостей», «Полезного из блога», /category/blog/ он
-// остаётся), правила для отдельной рубрики нет — поэтому фильтр. Страницы
-// 2, 3… не трогаем: их noindex, nofollow ставит AIOSEO, как у /blog/page/N/.
+// остаётся), правила для отдельной рубрики нет — поэтому фильтр.
+// На страницах пагинации (2, 3…) убираем nofollow, чтобы роботы переходили
+// по ссылкам, но оставляем noindex, чтобы не индексировались дубли страниц.
 add_filter('aioseo_robots_meta', function ($attributes) {
-    if (!is_array($attributes) || !is_category() || is_search() || is_paged()) {
+    if (!is_array($attributes)) {
         return $attributes;
     }
-    $term = get_queried_object();
-    if ($term instanceof WP_Term && (int) $term->parent === UG_BLOG_ROOT_CAT) {
-        unset($attributes['noindex']);
+
+    // Убираем nofollow на страницах пагинации блога
+    if (is_paged() && ug_is_blog_view()) {
+        unset($attributes['nofollow']);
     }
+
+    // Открываем для индексации первые страницы направлений (дочерних рубрик Блога)
+    if (!is_paged() && is_category() && !is_search()) {
+        $term = get_queried_object();
+        if ($term instanceof WP_Term && (int) $term->parent === UG_BLOG_ROOT_CAT) {
+            unset($attributes['noindex']);
+        }
+    }
+
     return $attributes;
 });
 
