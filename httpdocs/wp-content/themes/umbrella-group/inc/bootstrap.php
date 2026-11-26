@@ -40,3 +40,4 @@ require __DIR__ . '/blog.php';
 require __DIR__ . '/price.php';
 require __DIR__ . '/rekvizity.php';
 require __DIR__ . '/leadmagnet.php';
+require __DIR__ . '/post-service-cta.php';

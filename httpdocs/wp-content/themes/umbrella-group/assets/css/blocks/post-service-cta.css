@@ -1,0 +1,166 @@
+/* Блок «Заказать услугу» в статье блога — inc/post-service-cta.php.
+   Стиль — как у [tz_packages] и окна допродажи: PT Serif, красная черта над
+   заголовком, тонкая рамка, красная кнопка и кнопка-контур. */
+
+.ug-pcta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px 32px;
+    margin: 40px 0 32px;
+    padding: 28px 32px;
+    border: 1px solid #e5e5e5;
+    border-left: 3px solid #ec1c23;
+    border-radius: 8px;
+    background: #fff;
+    color: #1a1a1a;
+}
+
+.ug-pcta * {
+    box-sizing: border-box;
+}
+
+.ug-pcta p {
+    margin: 0;
+}
+
+.ug-pcta__body {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.ug-pcta .ug-pcta__label {
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: #999;
+}
+
+.ug-pcta .ug-pcta__title {
+    font-family: "PT Serif", serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: #1a1a1a;
+}
+
+.ug-pcta__title a {
+    color: inherit;
+}
+
+.ug-pcta__title a:hover {
+    color: #ec1c23;
+}
+
+.ug-pcta .ug-pcta__price {
+    margin-top: 8px;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #ec1c23;
+}
+
+.ug-pcta .ug-pcta__text {
+    margin-top: 10px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #555;
+}
+
+.ug-pcta__actions {
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    gap: 10px;
+    width: 230px;
+}
+
+.ug-pcta__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 12px 20px;
+    border: 2px solid #ec1c23;
+    border-radius: 4px;
+    background: #ec1c23;
+    font-size: 16px;
+    line-height: 1.2;
+    color: #fff;
+    text-align: center;
+    transition: background .2s, color .2s, border-color .2s;
+}
+
+.ug-pcta__btn:hover,
+.ug-pcta__btn:focus {
+    border-color: #c9151b;
+    background: #c9151b;
+    color: #fff;
+}
+
+.ug-pcta__btn--ghost {
+    background: #fff;
+    color: #ec1c23;
+}
+
+.ug-pcta__btn--ghost:hover,
+.ug-pcta__btn--ghost:focus {
+    border-color: #ec1c23;
+    background: #ec1c23;
+    color: #fff;
+}
+
+/* Строка после вступления */
+.ug-pcta-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 10px;
+    margin: 8px 0 28px;
+    padding: 14px 18px;
+    border-left: 3px solid #ec1c23;
+    border-radius: 0 8px 8px 0;
+    background: #f9f9f9;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.ug-pcta-line__label {
+    color: #777;
+}
+
+.ug-pcta-line__link {
+    font-weight: 600;
+    color: #1a1a1a;
+    border-bottom: 1px solid rgba(236, 28, 35, .35);
+}
+
+.ug-pcta-line__link:hover {
+    color: #ec1c23;
+    border-bottom-color: #ec1c23;
+}
+
+.ug-pcta-line__price {
+    font-weight: 700;
+    color: #ec1c23;
+    white-space: nowrap;
+}
+
+@media (max-width: 849px) {
+    .ug-pcta {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 24px 20px;
+    }
+
+    .ug-pcta .ug-pcta__title {
+        font-size: 21px;
+    }
+
+    .ug-pcta__actions {
+        width: 100%;
+    }
+}
