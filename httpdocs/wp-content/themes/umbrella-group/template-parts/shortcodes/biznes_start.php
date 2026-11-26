@@ -14,7 +14,8 @@
  *   [bs_team]    — кто консультирует;
  *   [bs_compare] — пять визитов против одной консультации (таблица, на телефоне — карточки);
  *   [bs_price]   — цена и что в неё входит;
- *   [bs_form]    — финальный блок с формой заявки;
+ *   [bs_footer_form] — форма записи внизу (#forma) в разметке подвальной формы,
+ *                  ставится вместо неё метой ug_footer_contact;
  *   [bs_reviews ids="…"] — отзывы клиентов в формате страницы «Клиенты»
  *                  (карточки и окна отзыва ug_client_tiles_card, сниппет 1031,
  *                  как [akciya_buh_reviews]); стоит вместо «Клиенты о нас» из
@@ -34,7 +35,6 @@
 defined('ABSPATH') || exit;
 
 const UG_BS_FORM = '#leave-request-contact-form-lightbox';
-const UG_BS_FORM_ID = 2886;
 
 /** Иконки — содержимое svg 24 × 24, обводка (как в tz_packages). */
 const UG_BS_ICONS = [
@@ -295,30 +295,50 @@ function ug_bs_price_shortcode(): string
 
 add_shortcode('bs_price', 'ug_bs_price_shortcode');
 
-// ── [bs_form] ───────────────────────────────────────────────────────────────
+// ── [bs_footer_form] ────────────────────────────────────────────────────────
 
-function ug_bs_form_shortcode(): string
+/**
+ * Форма записи внизу страницы — в разметке подвальной формы «Бесплатная
+ * консультация специалиста» (umbrella_footer.php, секция contact-us), но со
+ * своими текстами и общей CF7 2886 (имя, телефон, e-mail). Ставится вместо
+ * подвальной метой страницы ug_footer_contact = [bs_footer_form]; якорь #forma.
+ */
+function ug_bs_footer_form_shortcode(): string
 {
     ug_bs_assets();
-    $text = ug_bs_t('Оставьте телефон: перезвоним, уточним пару деталей о вашем бизнесе и подберём время консультации — в офисе или онлайн, из любого города России.');
-    $form = do_shortcode('[contact-form-7 id="' . UG_BS_FORM_ID . '" html_class="bs-cf7"]');
     $title = ug_bs_t('Расскажите, чем планируете заниматься, — разберём остальное');
+    $text  = ug_bs_t('Оставьте телефон: перезвоним, уточним пару деталей о вашем бизнесе и подберём время консультации — в офисе или онлайн, из любого города России.');
 
-    return <<<EOHTML
-    <section class="bs bs--form" id="forma">
-        <div class="bs__inner bs-form">
-            <div class="bs-form__text">
-                <h2 class="bs-title">$title</h2>
-                <p class="bs-lead">$text</p>
-                <p class="bs-form__price"><b>5&nbsp;000&nbsp;₽</b> за&nbsp;консультацию · 1&nbsp;час · офис или онлайн</p>
-            </div>
-            <div class="bs-form__box">$form</div>
-        </div>
-    </section>
-    EOHTML;
+    return do_shortcode(<<<EOHTML
+        [section label="contact-us" padding="0px" class="footer-top-section bs-ff"]
+            [row style="collapse" padding="86px 0px 0px 0px"]
+                [col span__sm="12"]
+                    <div id="forma" class="bs-ff__anchor"></div>
+                    [row_inner width="full-width" h_align="center"]
+                        [col_inner span="4" span__sm="12" align="left"]
+                            <p class="footer-h2">$title</p>
+                            <p class="bs-ff__text">$text</p>
+                            <p class="bs-ff__price"><b>5&nbsp;000&nbsp;₽</b> за&nbsp;консультацию · 1&nbsp;час · офис или онлайн</p>
+                        [/col_inner]
+                        [col_inner span="4" span__sm="12" align="left" class="footer-form-column"]
+                            [contact-form-7 id="2886" html_class="bs-ff-cf7"]
+                        [/col_inner]
+                        [col_inner span="4" span__sm="12" padding="0px 0px 0px 70px" align="left"]
+                            <div class="footer-top-right hide-for-medium">
+                                <p>Оставьте заявку или звоните — <br />с 09:00 до 18:00 по Новосибирску:</p>
+                                <p class="footer-h3 sub-header"><a class="footer-a" href="tel: +73833731717">+7 (383) 373-17-17</a></p>
+                                <p>Круглосуточно на почту:</p>
+                                <p class="footer-h3 sub-header"><a class="footer-a" href="mailto:contact@taxlab.ru" > contact@taxlab.ru</a></p>
+                            </div>
+                        [/col_inner]
+                    [/row_inner]
+                [/col]
+            [/row]
+        [/section]
+        EOHTML);
 }
 
-add_shortcode('bs_form', 'ug_bs_form_shortcode');
+add_shortcode('bs_footer_form', 'ug_bs_footer_form_shortcode');
 
 // ── [bs_reviews] ────────────────────────────────────────────────────────────
 

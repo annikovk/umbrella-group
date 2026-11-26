@@ -11,11 +11,7 @@ class umbrella_footer
         // uploads, 300 КБ на четыре). width/height — пропорции исходника,
         // высоту задаёт CSS .int-logo (40px), width:auto — ширина по пропорции.
         $img = esc_url(get_theme_file_uri('assets/img')) . '/';
-        $html = <<<EOHTML
-            [section label="Feedback" padding="0px"]
-                [umbrella_feedback]
-            [/section]
-            $why_choose_us
+        $contact = <<<EOHTML
             [section label="contact-us" padding="0px" class="footer-top-section"]
                 [row style="collapse" padding="86px 0px 0px 0px"]
                     [col span__sm="12"]
@@ -38,6 +34,19 @@ class umbrella_footer
                     [/col]
                 [/row]
             [/section]
+        EOHTML;
+        // мета ug_footer_contact — шорткод своего блока формы вместо подвальной
+        // «Бесплатной консультации специалиста» (31577: [bs_footer_form])
+        $custom = is_singular() ? trim((string) get_post_meta(get_queried_object_id(), 'ug_footer_contact', true)) : '';
+        if ($custom !== '') {
+            $contact = $custom;
+        }
+        $html = <<<EOHTML
+            [section label="Feedback" padding="0px"]
+                [umbrella_feedback]
+            [/section]
+            $why_choose_us
+            $contact
             [section bg_color="#d7d7d7" dark="true" class="footer-bottom"]
                 [row style="collapse" padding="20px 0px 0px 0px"]
                     [col span__sm="12"]
